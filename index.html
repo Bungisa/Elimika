@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <title>Elimika • Tanzania Past Papers & Marking Schemes</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <style>
+    body { 
+      font-family: 'Plus Jakarta Sans', sans-serif; 
+      background-color: #f8fafc;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .hide-scrollbar::-webkit-scrollbar { display: none; }
+    .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    .paper-card { transition: transform 0.18s ease, box-shadow 0.18s ease; }
+    @media (hover: hover) {
+      .paper-card:hover { 
+        transform: translateY(-2px); 
+        box-shadow: 0 10px 25px -4px rgba(11, 36, 80, 0.08); 
+      }
+    }
+    .active-pill { 
+      background-color: #1d4ed8 !important; 
+      color: #ffffff !important; 
+      border-color: #1d4ed8 !important; 
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col text-slate-800 antialiased selection:bg-blue-100 selection:text-blue-900">
+
+  <!-- Top Announcement Bar -->
+  <aside class="bg-gradient-to-r from-blue-950 via-[#0b2450] to-indigo-950 text-white text-xs py-2 px-4 shadow-sm">
+    <div class="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-1.5 text-center sm:text-left">
+      <div class="flex items-center gap-2">
+        <span class="bg-emerald-500 text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider text-slate-950">100% Free</span>
+        <span class="text-slate-200">Ad-Free Revision &bull; 1-Click Direct Cloud Downloads</span>
+      </div>
+      <a href="https://chat.whatsapp.com/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-emerald-300 hover:text-white font-semibold transition">
+        <i data-lucide="message-circle" class="w-3.5 h-3.5"></i> Join Teachers & Students WhatsApp Group
+      </a>
+    </div>
+  </aside>
+
+  <!-- Clean Brand Header -->
+  <header class="bg-white border-b border-slate-200 sticky top-0 z-30 shadow-xs">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 py-3.5 flex items-center justify-between">
+      <a href="#" class="flex items-center gap-2.5 sm:gap-3">
+        <div class="w-10 h-10 bg-blue-700 text-white rounded-xl flex items-center justify-center shadow-md">
+          <i data-lucide="graduation-cap" class="w-6 h-6"></i>
+        </div>
+        <div>
+          <span class="text-xl sm:text-2xl font-black text-[#0b2450] tracking-tight block leading-none">ELIMIKA</span>
+          <span class="text-[10px] sm:text-xs text-blue-600 font-bold uppercase tracking-wider">Past Papers Hub</span>
+        </div>
+      </a>
+      <div class="flex items-center gap-2">
+        <span class="inline-flex items-center gap-1.5 text-[11px] sm:text-xs font-semibold bg-emerald-50 text-emerald-700 px-3 py-1.5 rounded-full border border-emerald-100">
+          <i data-lucide="zap" class="w-3.5 h-3.5 text-emerald-600"></i> <span class="hidden xs:inline">Direct Cloud Links</span>
+        </span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero, Search & Filters -->
+  <main class="flex-grow">
+    <section class="bg-gradient-to-b from-blue-50/80 via-blue-50/30 to-transparent py-8 sm:py-12 px-4 sm:px-6 border-b border-blue-100/60">
+      <div class="max-w-3xl mx-auto text-center">
+        <h1 class="text-2xl sm:text-4xl font-extrabold text-[#0b2450] tracking-tight leading-snug">
+          Download National Past Papers & Answers
+        </h1>
+        <p class="mt-2 text-slate-600 text-xs sm:text-base max-w-xl mx-auto">
+          Instant access to Form 1 to Form 6 past examination papers, regional mocks, and marking schemes.
+        </p>
+
+        <!-- Search Input & Subject Dropdown -->
+        <div class="mt-5 sm:mt-7 flex flex-col sm:flex-row gap-2.5 max-w-2xl mx-auto">
+          <div class="relative flex-grow">
+            <i data-lucide="search" class="w-5 h-5 text-slate-400 absolute left-4 top-3.5 pointer-events-none"></i>
+            <input 
+              id="searchInput" 
+              type="search" 
+              oninput="filterPapers()"
+              placeholder="Search by subject, year or exam (e.g. 2024, CSEE, Physics)..."
+              class="w-full pl-11 pr-4 py-3 bg-white border border-slate-300 rounded-2xl shadow-sm text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent transition"
+            >
+          </div>
+
+          <div class="relative sm:w-56 shrink-0">
+            <i data-lucide="layers" class="w-4 h-4 text-slate-400 absolute left-3.5 top-3.5 pointer-events-none"></i>
+            <select 
+              id="subjectFilter" 
+              onchange="filterPapers()"
+              class="w-full pl-10 pr-8 py-3 bg-white border border-slate-300 rounded-2xl shadow-sm text-sm sm:text-base text-slate-700 font-semibold focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent transition appearance-none cursor-pointer"
+            >
+              <option value="All">All Subjects</option>
+              <option value="Basic Mathematics">Basic Mathematics</option>
+              <option value="Physics">Physics</option>
+              <option value="Chemistry">Chemistry</option>
+              <option value="Biology">Biology</option>
+              <option value="English">English Language</option>
+              <option value="Kiswahili">Kiswahili</option>
+              <option value="Geography">Geography</option>
+              <option value="History">History</option>
+              <option value="Civics">Civics</option>
+              <option value="Book Keeping">Book Keeping</option>
+              <option value="Commerce">Commerce</option>
+            </select>
+            <i data-lucide="chevron-down" class="w-4 h-4 text-slate-400 absolute right-3.5 top-4 pointer-events-none"></i>
+          </div>
+        </div>
+
+        <!-- Class Level Buttons -->
+        <div class="mt-4 sm:mt-6 overflow-x-auto hide-scrollbar -mx-4 px-4 sm:mx-0 sm:px-0">
+          <div class="inline-flex sm:flex sm:flex-wrap items-center justify-start sm:justify-center gap-2 py-1" id="formFilters">
+            <button onclick="setFormFilter('All')" class="filter-btn active-pill whitespace-nowrap px-4 py-2 rounded-full text-xs font-bold border border-slate-200 bg-white text-slate-700 active:scale-95 transition">
+              All Levels
+            </button>
+            <button onclick="setFormFilter('Form 1')" class="filter-btn whitespace-nowrap px-4 py-2 rounded-full text-xs font-bold border border-slate-200 bg-white text-slate-700 active:scale-95 transition">
+              Form 1
+            </button>
+            <button onclick="setFormFilter('Form 2')" class="filter-btn whitespace-nowrap px-4 py-2 rounded-full text-xs font-bold border border-slate-200 bg-white text-slate-700 active:scale-95 transition">
+              Form 2 (FTNA)
+            </button>
+            <button onclick="setFormFilter('Form 3')" class="filter-btn whitespace-nowrap px-4 py-2 rounded-full text-xs font-bold border border-slate-200 bg-white text-slate-700 active:scale-95 transition">
+              Form 3
+            </button>
+            <button onclick="setFormFilter('Form 4')" class="filter-btn whitespace-nowrap px-4 py-2 rounded-full text-xs font-bold border border-slate-200 bg-white text-slate-700 active:scale-95 transition">
+              Form 4 (CSEE)
+            </button>
+            <button onclick="setFormFilter('Form 5')" class="filter-btn whitespace-nowrap px-4 py-2 rounded-full text-xs font-bold border border-slate-200 bg-white text-slate-700 active:scale-95 transition">
+              Form 5
+            </button>
+            <button onclick="setFormFilter('Form 6')" class="filter-btn whitespace-nowrap px-4 py-2 rounded-full text-xs font-bold border border-slate-200 bg-white text-slate-700 active:scale-95 transition">
+              Form 6 (ACSEE)
+            </button>
+          </div>
+        </div>
+
+        <!-- Exam Type Sub-filter -->
+        <div class="mt-3.5 flex justify-center items-center gap-2 text-xs font-semibold" id="examTypeFilters">
+          <button onclick="setExamType('All')" class="exam-type-btn text-blue-700 underline font-bold px-2 py-1">All Exams</button>
+          <span class="text-slate-300">|</span>
+          <button onclick="setExamType('NECTA')" class="exam-type-btn text-slate-500 hover:text-blue-700 px-2 py-1">NECTA Finals</button>
+          <span class="text-slate-300">|</span>
+          <button onclick="setExamType('Mock')" class="exam-type-btn text-slate-500 hover:text-blue-700 px-2 py-1">Regional Mocks</button>
+          <span class="text-slate-300">|</span>
+          <button onclick="setExamType('Series')" class="exam-type-btn text-slate-500 hover:text-blue-700 px-2 py-1">Series & Midterm</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Cards Section -->
+    <section class="max-w-6xl mx-auto px-4 sm:px-6 py-6 sm:py-8">
+      <div class="flex items-center justify-between mb-4">
+        <h2 class="text-xs sm:text-sm font-bold text-slate-500 uppercase tracking-wider">
+          Available Papers
+        </h2>
+        <span id="paperCount" class="text-xs font-semibold text-slate-500 bg-slate-100 px-2.5 py-0.5 rounded-full"></span>
+      </div>
+
+      <div id="papersGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"></div>
+
+      <div id="noResults" class="hidden text-center py-12 px-4 bg-white border border-dashed border-slate-300 rounded-2xl mt-4">
+        <i data-lucide="file-question" class="w-10 h-10 text-slate-400 mx-auto mb-2"></i>
+        <h3 class="text-base font-bold text-slate-700">No papers found</h3>
+        <p class="text-xs text-slate-500 mt-1">Try another keyword, change the subject filter, or choose "All Levels".</p>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-white border-t border-slate-200 py-6 text-center text-xs text-slate-500 mt-auto">
+    <div class="max-w-6xl mx-auto px-4 flex flex-col sm:flex-row justify-between items-center gap-2">
+      <div class="flex items-center gap-1.5 font-bold text-slate-700">
+        <span class="text-[#0b2450]">ELIMIKA</span> &bull; <span>All Rights Reserved</span>
+      </div>
+      <p class="text-slate-400">Direct Cloud Revision Platform for Secondary Schools</p>
+    </div>
+  </footer>
+
+  <script>
+    // Paste your Google Drive or Dropbox links directly in here!
+    function formatCloudUrl(url) {
+      if (!url) return '';
+      const driveMatch = url.match(/\/d\/([a-zA-Z0-9_-]+)/) || url.match(/id=([a-zA-Z0-9_-]+)/);
+      if (driveMatch) return `https://drive.google.com/uc?export=download&id=${driveMatch[1]}`;
+      if (url.includes('dropbox.com')) return url.replace('dl=0', 'dl=1');
+      return url;
+    }
+
+    // YOUR PAPERS DATABASE (Add new ones easily right here)
+    const rawPapers = [
+      {
+        title: "Form 4 Basic Mathematics CSEE 2024",
+        form: "Form 4",
+        subject: "Basic Mathematics",
+        year: "2024",
+        exam: "NECTA",
+        paperUrl: "",   // <-- Paste Question link here
+        answersUrl: ""  // <-- Paste Answers link here
+      },
+      {
+        title: "Form 4 Physics Pre-National Mock 2024",
+        form: "Form 4",
+        subject: "Physics",
+        year: "2024",
+        exam: "Mock",
+        paperUrl: "",
+        answersUrl: ""
+      },
+      {
+        title: "Form 2 FTNA Basic Mathematics 2023",
+        form: "Form 2",
+        subject: "Basic Mathematics",
+        year: "2023",
+        exam: "FTNA",
+        paperUrl: "",
+        answersUrl: ""
+      }
+    ];
+
+    const papersDatabase = rawPapers.map(p => ({
+      ...p,
+      paperUrl: formatCloudUrl(p.paperUrl),
+      answersUrl: formatCloudUrl(p.answersUrl)
+    }));
+
+    let selectedForm = 'All';
+    let selectedExamType = 'All';
+
+    function setFormFilter(formName) {
+      selectedForm = formName;
+      document.querySelectorAll('.filter-btn').forEach(btn => {
+        btn.classList.toggle('active-pill', btn.textContent.trim().startsWith(formName));
+      });
+      filterPapers();
+    }
+
+    function setExamType(type) {
+      selectedExamType = type;
+      document.querySelectorAll('.exam-type-btn').forEach(btn => {
+        const isActive = btn.textContent.includes(type) || (type === 'All' && btn.textContent.includes('All'));
+        btn.classList.toggle('text-blue-700', isActive);
+        btn.classList.toggle('underline', isActive);
+        btn.classList.toggle('font-bold', isActive);
+        btn.classList.toggle('text-slate-500', !isActive);
+      });
+      filterPapers();
+    }
+
+    function filterPapers() {
+      const query = document.getElementById('searchInput').value.trim().toLowerCase();
+      const subjectFilter = document.getElementById('subjectFilter').value;
+
+      const filtered = papersDatabase.filter(item => {
+        const matchesForm = (selectedForm === 'All') || (item.form.toLowerCase().includes(selectedForm.toLowerCase()));
+        const matchesSubject = (subjectFilter === 'All') || (item.subject.toLowerCase() === subjectFilter.toLowerCase());
+        const matchesExamType = (selectedExamType === 'All') || (item.exam.toLowerCase() === selectedExamType.toLowerCase());
+
+        const searchCorpus = `${item.title} ${item.subject} ${item.year} ${item.exam} ${item.form}`.toLowerCase();
+        const matchesQuery = !query || searchCorpus.includes(query);
+
+        return matchesForm && matchesSubject && matchesExamType && matchesQuery;
+      });
+
+      renderCards(filtered);
+    }
+
+    function renderCards(list) {
+      const container = document.getElementById('papersGrid');
+      const emptyState = document.getElementById('noResults');
+      const countEl = document.getElementById('paperCount');
+
+      countEl.textContent = `${list.length} papers`;
+
+      if (list.length === 0) {
+        container.innerHTML = '';
+        emptyState.classList.remove('hidden');
+        return;
+      }
+
+      emptyState.classList.add('hidden');
+      container.innerHTML = list.map(item => `
+        <div class="paper-card bg-white border border-slate-200/90 rounded-2xl p-4 flex flex-col justify-between shadow-xs">
+          <div>
+            <div class="flex items-center justify-between text-[11px] font-bold mb-2">
+              <span class="bg-blue-50 text-blue-700 px-2.5 py-0.5 rounded-md border border-blue-100">${item.exam}</span>
+              <div class="flex items-center gap-1.5">
+                ${item.answersUrl ? `<span class="bg-emerald-50 text-emerald-700 px-2 py-0.5 rounded text-[10px] font-bold border border-emerald-100">Answers Available</span>` : ''}
+                <span class="text-slate-400 font-semibold">${item.year}</span>
+              </div>
+            </div>
+            <h3 class="font-bold text-slate-800 text-sm sm:text-base leading-snug">${item.title}</h3>
+            <p class="text-xs text-slate-500 mt-1.5 flex items-center gap-1.5">
+              <span class="font-semibold text-blue-700 bg-blue-50/50 px-2 py-0.5 rounded border border-blue-100">${item.subject}</span>
+              <span class="text-slate-300">&bull;</span>
+              <span class="font-bold text-slate-700">${item.form}</span>
+            </p>
+          </div>
+
+          <div class="mt-4 pt-3 border-t border-slate-100 flex flex-col gap-2">
+            ${item.paperUrl 
+              ? `<a href="${item.paperUrl}" target="_blank" rel="noopener noreferrer" class="w-full inline-flex items-center justify-center gap-1.5 bg-blue-700 hover:bg-blue-800 active:bg-blue-900 text-white text-xs sm:text-sm font-bold py-2.5 px-3 rounded-xl transition shadow-xs">
+                  <i data-lucide="file-text" class="w-4 h-4"></i> Download Question Paper
+                </a>`
+              : `<button class="w-full bg-slate-100 text-slate-400 text-xs py-2 rounded-xl cursor-not-allowed">
+                  Paper Coming Soon
+                </button>`
+            }
+
+            ${item.answersUrl 
+              ? `<a href="${item.answersUrl}" target="_blank" rel="noopener noreferrer" class="w-full inline-flex items-center justify-center gap-1.5 bg-emerald-600 hover:bg-emerald-700 active:bg-emerald-800 text-white text-xs sm:text-sm font-bold py-2 px-3 rounded-xl transition shadow-xs">
+                  <i data-lucide="check-circle" class="w-4 h-4"></i> Download Marking Scheme
+                </a>`
+              : ''
+            }
+          </div>
+        </div>
+      `).join('');
+
+      lucide.createIcons();
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      filterPapers();
+      lucide.createIcons();
+    });
+  </script>
+</body>
+</html>
