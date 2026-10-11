@@ -8,10 +8,12 @@
   <meta name="description" content="Free, instant access to NECTA past papers, regional mocks, and worked marking schemes for Form 1 through Form 6 students in Tanzania.">
   <meta name="theme-color" content="#0b2450">
 
+  <!-- Inter / Plus Jakarta Sans fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
+  <!-- Tailwind CSS & Lucide Icons -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://unpkg.com/lucide@latest"></script>
 
@@ -191,10 +193,8 @@
   <script>
     document.getElementById('currentYear').textContent = new Date().getFullYear();
 
-    // Uses your exact spreadsheet ID through a reliable proxy to bypass Google's CORS block
-    const SHEET_ID = "1-7C_G-VAC2ICxuT3XwADzAluRoDvQyd04yS4BtSvXxM";
-    const TARGET_CSV = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:csv`;
-    const GOOGLE_SHEET_CSV_URL = `https://corsproxy.io/?url=${encodeURIComponent(TARGET_CSV)}`;
+    // Directly fetch from your published Google Sheet CSV
+    const GOOGLE_SHEET_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQDZewez-XWmoBXjDEh2l4bh6oelJwIqDbwVBKqF4tnHQMUoMDsL5sh599Ahg7nrMZIzBoJCNcdyphb/pub?gid=0&single=true&output=csv";
 
     function formatCloudUrl(url) {
       if (!url) return '';
@@ -211,7 +211,7 @@
     function parseCSV(text) {
       const p = '', row = [''];
       const ret = [row];
-      let i = 0, r = 0, s = !0, l;
+      let i = 0, r = 0, s = !0;
       for (let l of text) {
         if ('"' === l) {
           if (s && l === p) row[i] += l;
@@ -219,7 +219,7 @@
         } else if (',' === l && s) l = row[++i] = '';
         else if ('\n' === l && s) {
           if ('\r' === p) row[i] = row[i].slice(0, -1);
-          row = [l = ''];
+          row = [''];
           ret[++r] = row;
           i = 0;
         } else row[i] += l;
@@ -259,7 +259,7 @@
         filterPapers();
       } catch (err) {
         console.error('Error fetching sheet data:', err);
-        container.innerHTML = '<div class="col-span-full text-center py-10 text-rose-500 font-semibold text-sm">Could not load sheet data. Please make sure the sheet is shared as "Anyone with the link can view".</div>';
+        container.innerHTML = '<div class="col-span-full text-center py-10 text-rose-500 font-semibold text-sm">Could not load sheet data. Please check your sheet connection.</div>';
       }
     }
 
