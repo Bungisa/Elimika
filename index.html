@@ -193,9 +193,10 @@
   <script>
     document.getElementById('currentYear').textContent = new Date().getFullYear();
 
-    // Directly fetch from your published Google Sheet CSV
+    // The published Google Sheet CSV endpoint
     const GOOGLE_SHEET_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQDZewez-XWmoBXjDEh2l4bh6oelJwIqDbwVBKqF4tnHQMUoMDsL5sh599Ahg7nrMZIzBoJCNcdyphb/pub?gid=0&single=true&output=csv";
 
+    // Auto-formats Google Drive & Dropbox links into direct download links
     function formatCloudUrl(url) {
       if (!url) return '';
       const driveMatch = url.match(/\/d\/([a-zA-Z0-9_-]+)/) || url.match(/id=([a-zA-Z0-9_-]+)/);
@@ -208,6 +209,7 @@
       return url;
     }
 
+    // Comprehensive CSV parser
     function parseCSV(text) {
       const p = '', row = [''];
       const ret = [row];
@@ -232,13 +234,34 @@
     let selectedForm = 'All';
     let selectedExamType = 'All';
 
+    // Fetches sheet with automatic multi-proxy fallback to avoid browser CORS restrictions
+    async function fetchCSVWithFallback(targetUrl) {
+      const endpoints = [
+        `https://api.allorigins.win/raw?url=${encodeURIComponent(targetUrl)}`,
+        `https://corsproxy.io/?url=${encodeURIComponent(targetUrl)}`,
+        targetUrl // Direct fallback
+      ];
+
+      for (let url of endpoints) {
+        try {
+          const res = await fetch(url);
+          if (res.ok) {
+            const data = await res.text();
+            if (data && data.includes(',')) return data;
+          }
+        } catch (e) {
+          console.warn('Endpoint failed, trying next:', url, e);
+        }
+      }
+      throw new Error('All CSV endpoints failed.');
+    }
+
     async function loadPapersFromSheet() {
       const container = document.getElementById('papersGrid');
       container.innerHTML = '<div class="col-span-full text-center py-12 text-slate-400 font-semibold text-sm">Loading past papers...</div>';
 
       try {
-        const response = await fetch(GOOGLE_SHEET_CSV_URL);
-        const text = await response.text();
+        const text = await fetchCSVWithFallback(GOOGLE_SHEET_CSV_URL);
         const parsedRows = parseCSV(text).filter(r => r.length > 1 && r[0].trim() !== '');
 
         // Remove header row
