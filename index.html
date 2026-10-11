@@ -190,100 +190,59 @@
     </div>
   </footer>
 
+ 
   <script>
     document.getElementById('currentYear').textContent = new Date().getFullYear();
 
-    // The published Google Sheet CSV endpoint
-    const GOOGLE_SHEET_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQDZewez-XWmoBXjDEh2l4bh6oelJwIqDbwVBKqF4tnHQMUoMDsL5sh599Ahg7nrMZIzBoJCNcdyphb/pub?gid=0&single=true&output=csv";
+    const SHEET_ID = "1-7C_G-VAC2ICxuT3XwADzAluRoDvQyd04yS4BtSvXxM";
 
-    // Auto-formats Google Drive & Dropbox links into direct download links
     function formatCloudUrl(url) {
       if (!url) return '';
       const driveMatch = url.match(/\/d\/([a-zA-Z0-9_-]+)/) || url.match(/id=([a-zA-Z0-9_-]+)/);
-      if (driveMatch) {
-        return `https://drive.google.com/uc?export=download&id=${driveMatch[1]}`;
-      }
-      if (url.includes('dropbox.com')) {
-        return url.replace('dl=0', 'dl=1');
-      }
+      if (driveMatch) return `https://drive.google.com/uc?export=download&id=${driveMatch[1]}`;
+      if (url.includes('dropbox.com')) return url.replace('dl=0', 'dl=1');
       return url;
-    }
-
-    // Comprehensive CSV parser
-    function parseCSV(text) {
-      const p = '', row = [''];
-      const ret = [row];
-      let i = 0, r = 0, s = !0;
-      for (let l of text) {
-        if ('"' === l) {
-          if (s && l === p) row[i] += l;
-          s = !s;
-        } else if (',' === l && s) l = row[++i] = '';
-        else if ('\n' === l && s) {
-          if ('\r' === p) row[i] = row[i].slice(0, -1);
-          row = [''];
-          ret[++r] = row;
-          i = 0;
-        } else row[i] += l;
-        p = l;
-      }
-      return ret;
     }
 
     let papersDatabase = [];
     let selectedForm = 'All';
     let selectedExamType = 'All';
 
-    // Fetches sheet with automatic multi-proxy fallback to avoid browser CORS restrictions
-    async function fetchCSVWithFallback(targetUrl) {
-      const endpoints = [
-        `https://api.allorigins.win/raw?url=${encodeURIComponent(targetUrl)}`,
-        `https://corsproxy.io/?url=${encodeURIComponent(targetUrl)}`,
-        targetUrl // Direct fallback
-      ];
-
-      for (let url of endpoints) {
-        try {
-          const res = await fetch(url);
-          if (res.ok) {
-            const data = await res.text();
-            if (data && data.includes(',')) return data;
-          }
-        } catch (e) {
-          console.warn('Endpoint failed, trying next:', url, e);
-        }
-      }
-      throw new Error('All CSV endpoints failed.');
-    }
-
-    async function loadPapersFromSheet() {
-      const container = document.getElementById('papersGrid');
-      container.innerHTML = '<div class="col-span-full text-center py-12 text-slate-400 font-semibold text-sm">Loading past papers...</div>';
-
+    // Native Google Sheet Callback: completely bypasses CORS without third-party proxies
+    window.handleSheetResponse = function(json) {
       try {
-        const text = await fetchCSVWithFallback(GOOGLE_SHEET_CSV_URL);
-        const parsedRows = parseCSV(text).filter(r => r.length > 1 && r[0].trim() !== '');
-
-        // Remove header row
-        parsedRows.shift();
-
-        papersDatabase = parsedRows.map(cols => {
+        const rows = json.table.rows;
+        papersDatabase = rows.map(r => {
+          const c = r.c;
           return {
-            title: (cols[0] || '').trim(),
-            form: (cols[1] || 'Form 4').trim(),
-            subject: (cols[2] || 'Basic Mathematics').trim(),
-            year: (cols[3] || '').trim(),
-            exam: (cols[4] || 'NECTA').trim(),
-            paperUrl: formatCloudUrl((cols[5] || '').trim()),
-            answersUrl: formatCloudUrl((cols[6] || '').trim())
+            title: c[0] ? String(c[0].v).trim() : 'Past Paper',
+            form: c[1] ? String(c[1].v).trim() : 'Form 4',
+            subject: c[2] ? String(c[2].v).trim() : 'Basic Mathematics',
+            year: c[3] ? String(c[3].v).trim() : '',
+            exam: c[4] ? String(c[4].v).trim() : 'NECTA',
+            paperUrl: formatCloudUrl(c[5] ? String(c[5].v).trim() : ''),
+            answersUrl: formatCloudUrl(c[6] ? String(c[6].v).trim() : '')
           };
         });
 
         filterPapers();
       } catch (err) {
-        console.error('Error fetching sheet data:', err);
-        container.innerHTML = '<div class="col-span-full text-center py-10 text-rose-500 font-semibold text-sm">Could not load sheet data. Please check your sheet connection.</div>';
+        console.error('Error reading sheet JSON:', err);
+        document.getElementById('papersGrid').innerHTML = '<div class="col-span-full text-center py-10 text-rose-500 font-semibold text-sm">Failed to parse sheet data.</div>';
       }
+    };
+
+    function loadPapersFromSheet() {
+      const container = document.getElementById('papersGrid');
+      container.innerHTML = '<div class="col-span-full text-center py-12 text-slate-400 font-semibold text-sm">Loading past papers...</div>';
+
+      // Loads Google's native data feed directly as an executable script tag
+      const script = document.createElement('script');
+      script.src = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=responseHandler:handleSheetResponse`;
+      script.onerror = function() {
+        container.innerHTML = '<div class="col-span-full text-center py-10 text-rose-500 font-semibold text-sm">Could not connect to Google Sheets. Verify permissions are set to "Anyone with the link".</div>';
+      };
+      document.body.appendChild(script);
     }
 
     function setFormFilter(formName) {
