@@ -277,8 +277,8 @@
         const searchCorpus = `${item.title} ${item.subject} ${item.year} ${item.exam} ${item.form}`.toLowerCase();
         const matchesQuery = !query || searchCorpus.includes(query);
 
-        return matchesForm && matchesSubject && matchesExamType && matchesQuery;
-      });
+        const hasPaper = item.paperUrl && item.paperUrl.trim() !== "";
+        return matchesForm && matchesSubject && matchesExamType && matchesQuery && hasPaper;      });
 
       renderCards(filtered);
     }
