@@ -11,7 +11,7 @@
   <!-- Inter / Plus Jakarta Sans fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
 
   <!-- Tailwind CSS & Lucide Icons -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -66,9 +66,14 @@
           <span class="text-[10px] sm:text-xs text-blue-600 font-bold uppercase tracking-wider">Past Papers Hub</span>
         </div>
       </a>
-      <div class="flex items-center gap-2">
-        <span class="inline-flex items-center gap-1.5 text-[11px] sm:text-xs font-semibold bg-emerald-50 text-emerald-700 px-3 py-1.5 rounded-full border border-emerald-100">
-          <i data-lucide="zap" class="w-3.5 h-3.5 text-emerald-600"></i> <span class="hidden xs:inline">Direct Cloud Links</span>
+      <div class="flex items-center gap-2 sm:gap-3">
+        <!-- Bookmark / Saved Papers Toggle Button -->
+        <button onclick="toggleSavedFilter()" id="savedFilterBtn" class="inline-flex items-center gap-1.5 text-xs font-bold px-3 py-1.5 rounded-xl border border-slate-200 bg-slate-50 text-slate-700 hover:bg-slate-100 transition shadow-2xs">
+          <i data-lucide="bookmark" class="w-3.5 h-3.5 text-amber-500"></i>
+          <span>Saved (<span id="savedCount">0</span>)</span>
+        </button>
+        <span class="hidden sm:inline-flex items-center gap-1.5 text-xs font-semibold bg-emerald-50 text-emerald-700 px-3 py-1.5 rounded-full border border-emerald-100">
+          <i data-lucide="zap" class="w-3.5 h-3.5 text-emerald-600"></i> Direct Cloud Links
         </span>
       </div>
     </div>
@@ -99,7 +104,7 @@
             >
           </div>
 
-          <div class="relative sm:w-60 shrink-0">
+          <div class="relative sm:w-64 shrink-0">
             <i data-lucide="layers" class="w-4 h-4 text-slate-400 absolute left-3.5 top-3.5 pointer-events-none"></i>
             <select 
               id="subjectFilter" 
@@ -174,6 +179,29 @@
     </section>
   </main>
 
+  <!-- In-App Preview Modal -->
+  <div id="previewModal" class="fixed inset-0 z-50 hidden bg-slate-950/70 backdrop-blur-xs flex items-center justify-center p-2 sm:p-4">
+    <div class="bg-white w-full max-w-5xl h-[92vh] rounded-2xl sm:rounded-3xl shadow-2xl flex flex-col overflow-hidden border border-slate-200">
+      <div class="px-4 py-3 sm:px-5 sm:py-3.5 border-b border-slate-200 flex items-center justify-between bg-slate-50/80">
+        <div class="flex items-center gap-2.5 overflow-hidden">
+          <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 shrink-0"></span>
+          <h3 id="modalTitle" class="font-bold text-slate-800 text-xs sm:text-sm truncate">Preview Document</h3>
+        </div>
+        <div class="flex items-center gap-2 shrink-0">
+          <a id="modalExternalLink" href="#" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 text-xs font-bold text-blue-700 hover:text-blue-800 bg-blue-50 px-2.5 py-1.5 rounded-lg border border-blue-200 transition">
+            <i data-lucide="external-link" class="w-3.5 h-3.5"></i> <span class="hidden xs:inline">Open in Tab</span>
+          </a>
+          <button onclick="closePreviewModal()" class="w-8 h-8 rounded-lg bg-slate-200 hover:bg-slate-300 flex items-center justify-center text-slate-700 transition">
+            <i data-lucide="x" class="w-4 h-4"></i>
+          </button>
+        </div>
+      </div>
+      <div class="flex-grow bg-slate-100 relative">
+        <iframe id="modalFrame" src="" class="w-full h-full border-none" loading="lazy"></iframe>
+      </div>
+    </div>
+  </div>
+
   <!-- Footer -->
   <footer class="bg-white border-t border-slate-200 py-6 text-center text-xs text-slate-500 mt-auto">
     <div class="max-w-6xl mx-auto px-4 flex flex-col sm:flex-row justify-between items-center gap-2">
@@ -191,11 +219,11 @@
 
     // Standardized Exam Categories
     const EXAM_CATEGORIES = [
-      { id: 'NECTA', label: 'NECTA Finals', desc: 'National Examination Council Assessments', icon: 'award', color: 'blue' },
-      { id: 'Mock', label: 'Regional Mocks', desc: 'Joint Inter-School & Regional Mock Series', icon: 'file-text', color: 'indigo' },
-      { id: 'Pre-NECTA', label: 'Pre-NECTA Exams', desc: 'Preparatory Pre-National Examinations', icon: 'check-circle-2', color: 'amber' },
-      { id: 'Terminal', label: 'Terminal Assessments', desc: 'End of Term Evaluation Papers', icon: 'calendar', color: 'emerald' },
-      { id: 'Midterm', label: 'Midterm Tests', desc: 'Mid-Semester Class Assessment Tests', icon: 'clock', color: 'purple' }
+      { id: 'NECTA', label: 'NECTA Finals', desc: 'National Examination Council Assessments', icon: 'award' },
+      { id: 'Mock', label: 'Regional Mocks', desc: 'Joint Inter-School & Regional Mock Series', icon: 'file-text' },
+      { id: 'Pre-NECTA', label: 'Pre-NECTA Exams', desc: 'Preparatory Pre-National Examinations', icon: 'check-circle-2' },
+      { id: 'Terminal', label: 'Terminal Assessments', desc: 'End of Term Evaluation Papers', icon: 'calendar' },
+      { id: 'Midterm', label: 'Midterm Tests', desc: 'Mid-Semester Class Assessment Tests', icon: 'clock' }
     ];
 
     function formatCloudUrl(url) {
@@ -206,30 +234,110 @@
       return url;
     }
 
+    function formatPreviewUrl(url) {
+      if (!url) return '';
+      const driveMatch = url.match(/\/d\/([a-zA-Z0-9_-]+)/) || url.match(/id=([a-zA-Z0-9_-]+)/);
+      if (driveMatch) return `https://drive.google.com/file/d/${driveMatch[1]}/preview`;
+      return url;
+    }
+
     let papersDatabase = [];
     let selectedForm = 'All';
     let selectedExamCategory = null; // null = Category Grid view, string = Paper List view
+    let showSavedOnly = false;
+
+    // Saved papers in localStorage
+    function getSavedPaperIds() {
+      try {
+        return JSON.parse(localStorage.getItem('elimika_saved_papers')) || [];
+      } catch (e) {
+        return [];
+      }
+    }
+
+    function toggleSavePaper(id) {
+      let saved = getSavedPaperIds();
+      if (saved.includes(id)) {
+        saved = saved.filter(item => item !== id);
+      } else {
+        saved.push(id);
+      }
+      localStorage.setItem('elimika_saved_papers', JSON.stringify(saved));
+      updateSavedCount();
+      renderApp();
+    }
+
+    function updateSavedCount() {
+      const count = getSavedPaperIds().length;
+      const countEl = document.getElementById('savedCount');
+      if (countEl) countEl.textContent = count;
+    }
+
+    function toggleSavedFilter() {
+      showSavedOnly = !showSavedOnly;
+      const btn = document.getElementById('savedFilterBtn');
+      if (showSavedOnly) {
+        btn.classList.add('bg-amber-100', 'border-amber-300', 'text-amber-900');
+        btn.classList.remove('bg-slate-50', 'text-slate-700');
+      } else {
+        btn.classList.remove('bg-amber-100', 'border-amber-300', 'text-amber-900');
+        btn.classList.add('bg-slate-50', 'text-slate-700');
+      }
+      renderApp();
+    }
+
+    // Modal Handler
+    function openPreviewModal(url, title) {
+      const previewUrl = formatPreviewUrl(url);
+      document.getElementById('modalTitle').textContent = title || 'Document Preview';
+      document.getElementById('modalFrame').src = previewUrl;
+      document.getElementById('modalExternalLink').href = url;
+      document.getElementById('previewModal').classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+      lucide.createIcons();
+    }
+
+    function closePreviewModal() {
+      document.getElementById('previewModal').classList.add('hidden');
+      document.getElementById('modalFrame').src = '';
+      document.body.style.overflow = 'auto';
+    }
 
     // Native Google Sheet Callback: bypasses CORS proxies
     window.handleSheetResponse = function(json) {
       try {
         const rows = json.table.rows;
         papersDatabase = rows
-          .map(r => {
+          .map((r, index) => {
             const c = r.c;
+            const title = c[0] ? String(c[0].v).trim() : 'Past Paper';
+            const form = c[1] ? String(c[1].v).trim() : 'Form 4';
+            const subject = c[2] ? String(c[2].v).trim() : 'Basic Mathematics';
+            const year = c[3] ? String(c[3].v).trim() : '';
+            const exam = c[4] ? String(c[4].v).trim() : 'NECTA';
+            const rawPaperUrl = c[5] ? String(c[5].v).trim() : '';
+            const rawAnswersUrl = c[6] ? String(c[6].v).trim() : '';
+
+            // Unique ID derived from title, form, year and index
+            const id = `paper_${index}_${title.toLowerCase().replace(/[^a-z0-9]/g, '_')}`;
+
             return {
-              title: c[0] ? String(c[0].v).trim() : 'Past Paper',
-              form: c[1] ? String(c[1].v).trim() : 'Form 4',
-              subject: c[2] ? String(c[2].v).trim() : 'Basic Mathematics',
-              year: c[3] ? String(c[3].v).trim() : '',
-              exam: c[4] ? String(c[4].v).trim() : 'NECTA',
-              paperUrl: formatCloudUrl(c[5] ? String(c[5].v).trim() : ''),
-              answersUrl: formatCloudUrl(c[6] ? String(c[6].v).trim() : '')
+              id: id,
+              title: title,
+              form: form,
+              subject: subject,
+              year: year,
+              exam: exam,
+              rawPaperUrl: rawPaperUrl,
+              rawAnswersUrl: rawAnswersUrl,
+              paperUrl: formatCloudUrl(rawPaperUrl),
+              answersUrl: formatCloudUrl(rawAnswersUrl)
             };
           })
           // Only retain records that have an active paper link
           .filter(item => item.paperUrl && item.paperUrl.trim() !== "");
 
+        updateSavedCount();
         renderApp();
       } catch (err) {
         console.error('Error reading sheet JSON:', err);
@@ -252,6 +360,9 @@
     function setFormFilter(formName) {
       selectedForm = formName;
       selectedExamCategory = null; // Reset back to category selection view
+      showSavedOnly = false;
+      document.getElementById('savedFilterBtn').classList.remove('bg-amber-100', 'border-amber-300', 'text-amber-900');
+      document.getElementById('savedFilterBtn').classList.add('bg-slate-50', 'text-slate-700');
 
       document.querySelectorAll('.filter-btn').forEach(btn => {
         btn.classList.toggle('active-pill', btn.textContent.trim().startsWith(formName));
@@ -261,7 +372,7 @@
     }
 
     function handleSearchOrSubjectChange() {
-      // Direct search or filter automatically switches to active papers list view
+      showSavedOnly = false;
       renderApp();
     }
 
@@ -284,7 +395,17 @@
       const countEl = document.getElementById('paperCount');
       const sectionTitle = document.getElementById('sectionTitle');
 
-      // 1. Filter database based on current Form, Subject, and Search
+      // 1. Saved-Only view
+      if (showSavedOnly) {
+        const savedIds = getSavedPaperIds();
+        const savedPapers = papersDatabase.filter(p => savedIds.includes(p.id));
+        sectionTitle.textContent = `My Saved Papers (${savedPapers.length})`;
+        countEl.textContent = `${savedPapers.length} saved`;
+        renderPapersList(container, emptyState, savedPapers);
+        return;
+      }
+
+      // 2. Filter database based on current Form, Subject, and Search
       const matchesForm = (item) => (selectedForm === 'All') || (item.form.toLowerCase().includes(selectedForm.toLowerCase()));
       const matchesSubject = (item) => (subjectFilter === 'All') || (item.subject.toLowerCase() === subjectFilter.toLowerCase());
       const matchesQuery = (item) => {
@@ -295,8 +416,7 @@
 
       const filteredPapers = papersDatabase.filter(item => matchesForm(item) && matchesSubject(item) && matchesQuery(item));
 
-      // CASE A: User has entered a search query or chosen a specific subject
-      // In this mode, display matching paper cards directly across all categories.
+      // CASE A: User entered a search query or selected a specific subject
       if (query !== '' || subjectFilter !== 'All') {
         sectionTitle.textContent = `Search Results (${filteredPapers.length})`;
         countEl.textContent = `${filteredPapers.length} papers`;
@@ -304,7 +424,7 @@
         return;
       }
 
-      // CASE B: "All Levels" is chosen with no category drill-down
+      // CASE B: "All Levels" is selected
       if (selectedForm === 'All') {
         sectionTitle.textContent = `All Available Papers (${filteredPapers.length})`;
         countEl.textContent = `${filteredPapers.length} papers`;
@@ -312,15 +432,15 @@
         return;
       }
 
-      // CASE C: A specific form is selected (e.g. Form 2, Form 4)
+      // CASE C: A specific form is selected
       if (!selectedExamCategory) {
-        // VIEW LEVEL 1: Display Exam Category folders
+        // VIEW LEVEL 1: Category folder cards
         sectionTitle.textContent = `${selectedForm} Examination Categories`;
         countEl.textContent = `${filteredPapers.length} total papers`;
         emptyState.classList.add('hidden');
         renderCategoryCards(container, filteredPapers);
       } else {
-        // VIEW LEVEL 2: Display papers inside the selected category
+        // VIEW LEVEL 2: Papers within selected category
         const currentCategory = EXAM_CATEGORIES.find(c => c.id === selectedExamCategory) || { label: selectedExamCategory };
         const categoryPapers = filteredPapers.filter(item => {
           const examField = (item.exam || item.title || '').toLowerCase();
@@ -333,7 +453,7 @@
       }
     }
 
-    // Renders the 5 category cards (Folders)
+    // Renders the category folder cards
     function renderCategoryCards(container, papersInForm) {
       container.innerHTML = `
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4.5 my-2">
@@ -368,7 +488,7 @@
       lucide.createIcons();
     }
 
-    // Renders category papers with a "Back" button navigation bar
+    // Renders papers within category with breadcrumb back button
     function renderCategoryPapersWithHeader(container, emptyState, papers, category) {
       container.innerHTML = `
         <div class="mb-5 flex items-center justify-between bg-white border border-slate-200/90 rounded-2xl p-3 sm:p-4 shadow-xs">
@@ -413,6 +533,10 @@
     }
 
     function generateCardHTML(item) {
+      const savedIds = getSavedPaperIds();
+      const isSaved = savedIds.includes(item.id);
+      const encodedShareText = encodeURIComponent(`Check out the ${item.title} (${item.form}) past paper and solutions on Elimika: ${window.location.origin}`);
+
       return `
         <div class="paper-card bg-white border border-slate-200/90 rounded-2xl p-4 flex flex-col justify-between shadow-xs">
           <div>
@@ -421,6 +545,11 @@
               <div class="flex items-center gap-1.5">
                 ${item.answersUrl ? `<span class="bg-emerald-50 text-emerald-700 px-2 py-0.5 rounded text-[10px] font-bold border border-emerald-100">Answers Available</span>` : ''}
                 <span class="text-slate-400 font-semibold">${item.year}</span>
+                
+                <!-- Bookmark Icon -->
+                <button onclick="toggleSavePaper('${item.id}')" title="${isSaved ? 'Remove Bookmark' : 'Save Paper'}" class="p-1 rounded-md hover:bg-slate-100 text-slate-400 hover:text-amber-500 transition">
+                  <i data-lucide="bookmark" class="w-3.5 h-3.5 ${isSaved ? 'fill-amber-500 text-amber-500' : ''}"></i>
+                </button>
               </div>
             </div>
             <h3 class="font-bold text-slate-800 text-sm sm:text-base leading-snug">${item.title}</h3>
@@ -432,16 +561,36 @@
           </div>
 
           <div class="mt-4 pt-3 border-t border-slate-100 flex flex-col gap-2">
-            <a href="${item.paperUrl}" target="_blank" rel="noopener noreferrer" class="w-full inline-flex items-center justify-center gap-1.5 bg-blue-700 hover:bg-blue-800 active:bg-blue-900 text-white text-xs sm:text-sm font-bold py-2.5 px-3 rounded-xl transition shadow-xs">
-              <i data-lucide="file-text" class="w-4 h-4"></i> Download Question Paper
-            </a>
+            <!-- Question Paper: In-App Preview & Direct Download -->
+            <div class="flex gap-1.5">
+              <button onclick="openPreviewModal('${item.rawPaperUrl || item.paperUrl}', '${item.title.replace(/'/g, "\\'")}')" class="flex-grow inline-flex items-center justify-center gap-1.5 bg-blue-700 hover:bg-blue-800 active:bg-blue-900 text-white text-xs sm:text-sm font-bold py-2.5 px-3 rounded-xl transition shadow-2xs">
+                <i data-lucide="eye" class="w-3.5 h-3.5"></i> Preview Paper
+              </button>
+              <a href="${item.paperUrl}" target="_blank" rel="noopener noreferrer" download title="Direct Download" class="w-10 flex items-center justify-center bg-blue-50 hover:bg-blue-100 text-blue-700 rounded-xl border border-blue-200 transition">
+                <i data-lucide="download" class="w-4 h-4"></i>
+              </a>
+            </div>
 
+            <!-- Marking Scheme Action (if available) -->
             ${item.answersUrl 
-              ? `<a href="${item.answersUrl}" target="_blank" rel="noopener noreferrer" class="w-full inline-flex items-center justify-center gap-1.5 bg-emerald-600 hover:bg-emerald-700 active:bg-emerald-800 text-white text-xs sm:text-sm font-bold py-2.5 px-3 rounded-xl transition shadow-xs">
-                  <i data-lucide="check-circle" class="w-4 h-4"></i> Download Marking Scheme
-                </a>`
+              ? `<div class="flex gap-1.5">
+                  <button onclick="openPreviewModal('${item.rawAnswersUrl \vert{}\vert{} item.answersUrl}', '${item.title.replace(/'/g, "\\'")} - Marking Scheme')" class="flex-grow inline-flex items-center justify-center gap-1.5 bg-emerald-600 hover:bg-emerald-700 active:bg-emerald-800 text-white text-xs sm:text-sm font-bold py-2 px-3 rounded-xl transition shadow-2xs">
+                    <i data-lucide="check-circle" class="w-3.5 h-3.5"></i> Preview Answers
+                  </button>
+                  <a href="${item.answersUrl}" target="_blank" rel="noopener noreferrer" download title="Direct Download Scheme" class="w-9 flex items-center justify-center bg-emerald-50 hover:bg-emerald-100 text-emerald-700 rounded-xl border border-emerald-200 transition">
+                    <i data-lucide="download" class="w-3.5 h-3.5"></i>
+                  </a>
+                </div>`
               : ''
             }
+
+            <!-- Quick WhatsApp Share Row -->
+            <div class="pt-1 flex items-center justify-between text-[11px] text-slate-500">
+              <span class="font-medium">Share with classmates:</span>
+              <a href="https://api.whatsapp.com/send?text=${encodedShareText}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 text-emerald-600 hover:text-emerald-700 font-bold transition">
+                <i data-lucide="share-2" class="w-3 h-3"></i> WhatsApp
+              </a>
+            </div>
           </div>
         </div>
       `;
