@@ -127,13 +127,10 @@
         <!-- Class Form Tabs -->
         <div class="mt-4 sm:mt-6 overflow-x-auto hide-scrollbar -mx-4 px-4 sm:mx-0 sm:px-0">
           <div class="inline-flex sm:flex sm:flex-wrap items-center justify-start sm:justify-center gap-2 py-1" id="formFilters">
-            <button onclick="setFormFilter('All')" class="filter-btn active-pill whitespace-nowrap px-4 py-2 rounded-full text-xs font-bold border border-slate-200 bg-white text-slate-700 active:scale-95 transition">
-              All Levels
-            </button>
             <button onclick="setFormFilter('Form 1')" class="filter-btn whitespace-nowrap px-4 py-2 rounded-full text-xs font-bold border border-slate-200 bg-white text-slate-700 active:scale-95 transition">
               Form 1
             </button>
-            <button onclick="setFormFilter('Form 2')" class="filter-btn whitespace-nowrap px-4 py-2 rounded-full text-xs font-bold border border-slate-200 bg-white text-slate-700 active:scale-95 transition">
+            <button onclick="setFormFilter('Form 2')" class="filter-btn active-pill whitespace-nowrap px-4 py-2 rounded-full text-xs font-bold border border-slate-200 bg-white text-slate-700 active:scale-95 transition">
               Form 2 (FTNA)
             </button>
             <button onclick="setFormFilter('Form 3')" class="filter-btn whitespace-nowrap px-4 py-2 rounded-full text-xs font-bold border border-slate-200 bg-white text-slate-700 active:scale-95 transition">
@@ -219,7 +216,7 @@
     }
 
     let papersDatabase = [];
-    let selectedForm = 'All';
+    let selectedForm = 'Form 2'; // Defaults directly to Form 2 (FTNA)
     let selectedExamCategory = null; // null = Category Grid view, string = Paper List view
 
     // Native Google Sheet Callback: bypasses CORS proxies
@@ -296,7 +293,7 @@
       const sectionTitle = document.getElementById('sectionTitle');
 
       // 1. Filter database based on current Form, Subject, and Search
-      const matchesForm = (item) => (selectedForm === 'All') || (item.form.toLowerCase().includes(selectedForm.toLowerCase()));
+      const matchesForm = (item) => item.form && item.form.toLowerCase().includes(selectedForm.toLowerCase());
       const matchesSubject = (item) => (subjectFilter === 'All') || (item.subject.toLowerCase() === subjectFilter.toLowerCase());
       const matchesQuery = (item) => {
         if (!query) return true;
@@ -308,21 +305,13 @@
 
       // CASE A: User entered a search query or chosen a specific subject
       if (query !== '' || subjectFilter !== 'All') {
-        sectionTitle.textContent = `Search Results (${filteredPapers.length})`;
+        sectionTitle.textContent = `${selectedForm} Search Results (${filteredPapers.length})`;
         countEl.textContent = `${filteredPapers.length} papers`;
         renderPapersList(container, emptyState, filteredPapers);
         return;
       }
 
-      // CASE B: "All Levels" is chosen
-      if (selectedForm === 'All') {
-        sectionTitle.textContent = `All Available Papers (${filteredPapers.length})`;
-        countEl.textContent = `${filteredPapers.length} papers`;
-        renderPapersList(container, emptyState, filteredPapers);
-        return;
-      }
-
-      // CASE C: A specific form is selected (e.g. Form 1, Form 2, Form 3...)
+      // CASE B: Specific form is selected
       const availableCategories = getCategoriesForForm(selectedForm);
 
       if (!selectedExamCategory) {
@@ -407,7 +396,7 @@
       lucide.createIcons();
     }
 
-    // Direct grid of cards for Search, Filters, and "All Levels"
+    // Direct grid of cards for Search & Filter queries
     function renderPapersList(container, emptyState, list) {
       if (list.length === 0) {
         container.innerHTML = '';
@@ -449,7 +438,7 @@
             </a>
 
             ${item.answersUrl 
-              ? `<a href="${item.answersUrl}" target="_blank" rel="noopener noreferrer" class="w-full inline-flex items-center justify-center gap-1.5 bg-emerald-600 hover:bg-emerald-700 active:bg-emerald-800 text-white text-xs sm:text-sm font-bold py-2 px-3 rounded-xl transition shadow-xs">
+              ? `<a href="${item.answersUrl}" target="_blank" rel="noopener noreferrer" class="w-full inline-flex items-center justify-center gap-1.5 bg-emerald-600 hover:bg-emerald-700 active:bg-emerald-800 text-white text-xs sm:text-sm font-bold py-2.5 px-3 rounded-xl transition shadow-xs">
                   <i data-lucide="check-circle" class="w-4 h-4"></i> Download Marking Scheme
                 </a>`
               : ''
