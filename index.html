@@ -3,58 +3,92 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-  <title>Elimika - Tanzania Primary & Secondary Past Papers</title>
-  <meta name="description" content="Free access to NECTA past papers, PSLE, FTNA, CSEE, ACSEE, and marking schemes for Standard 1 through Form 6.">
+  <title>Elimika - Tanzania Primary &amp; Secondary Past Papers &amp; Marking Schemes</title>
+  
+  <meta name="description" content="Free revision papers and worked marking schemes for Tanzanian primary and secondary schools. Download Standard 1-7 and Form 1-6 NECTA, Mock, Terminal, and Midterm tests.">
+  <meta name="keywords" content="NECTA past papers, PSLE, FTNA, CSEE, ACSEE, Form 4 past papers, Form 2 exams, Standard 7 past papers, Tanzania secondary school notes, marking schemes">
+  <meta name="author" content="Elimika Education">
   <meta name="theme-color" content="#0b2450">
 
+  <!-- Open Graph / Social Meta -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Elimika - Tanzania Past Papers &amp; Solutions">
+  <meta property="og:description" content="Direct cloud downloads for NECTA exams, regional mocks, and marking schemes for Standard 1-7 &amp; Form 1-6.">
+  <meta property="og:image" content="https://elimika-pastpapers.vercel.app/og-preview.png">
+  <meta property="twitter:card" content="summary_large_image">
+
+  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
+  <!-- Tailwind CSS & Lucide Icons -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://unpkg.com/lucide@latest"></script>
 
   <style>
     body {
-      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
       background-color: #f8fafc;
       -webkit-tap-highlight-color: transparent;
     }
     .hide-scrollbar::-webkit-scrollbar { display: none; }
     .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-    .paper-card { transition: transform 0.18s ease, box-shadow 0.18s ease; }
+    
+    .paper-card { 
+      transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease; 
+    }
     @media (hover: hover) {
       .paper-card:hover {
         transform: translateY(-2px);
-        box-shadow: 0 10px 25px -4px rgba(11, 36, 80, 0.08);
+        box-shadow: 0 10px 20px -3px rgba(11, 36, 80, 0.08);
       }
     }
-    .active-section-tab { background-color: #0b2450 !important; color: #ffffff !important; }
-    .active-nav-btn { background-color: #1d4ed8 !important; color: #ffffff !important; border-color: #1d4ed8 !important; }
-    .active-chip { background-color: #1d4ed8 !important; color: #ffffff !important; border-color: #1d4ed8 !important; }
+    
+    .active-tier {
+      background-color: #0b2450 !important;
+      color: #ffffff !important;
+      box-shadow: 0 2px 4px rgba(11, 36, 80, 0.15);
+    }
+    .active-pill {
+      background-color: #1d4ed8 !important;
+      color: #ffffff !important;
+      border-color: #1d4ed8 !important;
+      box-shadow: 0 2px 4px rgba(29, 78, 216, 0.2);
+    }
+    .active-chip {
+      background-color: #1d4ed8 !important;
+      color: #ffffff !important;
+      border-color: #1d4ed8 !important;
+    }
   </style>
 </head>
 <body class="min-h-screen flex flex-col text-slate-800 antialiased selection:bg-blue-100 selection:text-blue-900">
 
+  <!-- Accessible Skip Link -->
+  <a href="#mainContent" class="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 bg-blue-700 text-white px-4 py-2 rounded-lg z-50">
+    Skip to main content
+  </a>
+
   <!-- Top Announcement Bar -->
-  <aside class="bg-gradient-to-r from-blue-950 via-[#0b2450] to-indigo-950 text-white text-xs py-2 px-4 shadow-sm">
+  <aside class="bg-gradient-to-r from-blue-950 via-[#0b2450] to-indigo-950 text-white text-xs py-2 px-4 shadow-sm" aria-label="Announcement">
     <div class="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-1.5 text-center sm:text-left">
       <div class="flex items-center gap-2">
         <span class="bg-emerald-500 text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider text-slate-950">100% Free</span>
         <span class="text-slate-200">Standard 1 to Form 6 &bull; Direct Cloud Downloads</span>
       </div>
-      <a href="https://chat.whatsapp.com/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-emerald-300 hover:text-white font-semibold transition">
-        <i data-lucide="message-circle" class="w-3.5 h-3.5"></i> Join Teachers & Students WhatsApp Group
+      <a href="https://chat.whatsapp.com/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-emerald-300 hover:text-white font-semibold transition" aria-label="Join WhatsApp Group for updates">
+        <i data-lucide="message-circle" class="w-3.5 h-3.5" aria-hidden="true"></i> Join Teachers &amp; Students WhatsApp Group
       </a>
     </div>
   </aside>
 
   <!-- Navigation / Brand Header -->
-  <header class="bg-white border-b border-slate-200 sticky top-0 z-30 shadow-xs">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 py-3.5 flex items-center justify-between">
-      <a href="/" class="flex items-center gap-2.5 sm:gap-3">
+  <header class="bg-white border-b border-slate-200 sticky top-0 z-30 shadow-sm">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 py-3 flex items-center justify-between">
+      <a href="/" class="flex items-center gap-2.5 sm:gap-3 focus:outline-none focus:ring-2 focus:ring-blue-600 rounded-xl p-1" aria-label="Elimika Home">
         <div class="w-10 h-10 bg-blue-700 text-white rounded-xl flex items-center justify-center shadow-md">
-          <i data-lucide="graduation-cap" class="w-6 h-6"></i>
+          <i data-lucide="graduation-cap" class="w-6 h-6" aria-hidden="true"></i>
         </div>
         <div>
           <span class="text-xl sm:text-2xl font-black text-[#0b2450] tracking-tight block leading-none">ELIMIKA</span>
@@ -63,53 +97,70 @@
       </a>
       <div class="flex items-center gap-2">
         <span class="inline-flex items-center gap-1.5 text-[11px] sm:text-xs font-semibold bg-emerald-50 text-emerald-700 px-3 py-1.5 rounded-full border border-emerald-100">
-          <i data-lucide="zap" class="w-3.5 h-3.5 text-emerald-600"></i> <span class="hidden xs:inline">Direct Cloud Links</span>
+          <i data-lucide="zap" class="w-3.5 h-3.5 text-emerald-600" aria-hidden="true"></i> <span class="hidden xs:inline">Direct Cloud Links</span>
         </span>
       </div>
     </div>
   </header>
 
   <!-- Main Content Area -->
-  <main class="flex-grow">
+  <main id="mainContent" class="flex-grow">
     <!-- Hero & Search Filters -->
     <section class="bg-gradient-to-b from-blue-50/80 via-blue-50/30 to-transparent py-8 sm:py-12 px-4 sm:px-6 border-b border-blue-100/60">
       <div class="max-w-3xl mx-auto text-center">
         <h1 class="text-2xl sm:text-4xl font-extrabold text-[#0b2450] tracking-tight leading-snug">
-          Download National Past Papers & Answers
+          Download National Past Papers &amp; Answers
         </h1>
         <p class="mt-2 text-slate-600 text-xs sm:text-base max-w-xl mx-auto">
-          Instant access to Standard 1 to Form 6 past examination papers and regional mocks.
+          Instant access to Standard 1 to Form 6 past examination papers, regional mocks, and marking schemes across Tanzania.
         </p>
 
-        <!-- Search Input -->
+        <!-- Global Search Input -->
         <div class="mt-5 sm:mt-6 max-w-xl mx-auto">
           <div class="relative flex-grow">
-            <i data-lucide="search" class="w-5 h-5 text-slate-400 absolute left-4 top-3.5 pointer-events-none"></i>
+            <label for="searchInput" class="sr-only">Search by subject, year or keyword</label>
+            <i data-lucide="search" class="w-5 h-5 text-slate-400 absolute left-4 top-3.5 pointer-events-none" aria-hidden="true"></i>
             <input 
               id="searchInput" 
               type="search" 
               oninput="handleSearchInput()"
-              placeholder="Search by paper title or keyword (e.g. 2026, PSLE, FTNA, Mathematics)..."
-              class="w-full pl-11 pr-4 py-3 bg-white border border-slate-300 rounded-2xl shadow-sm text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent transition"
+              placeholder="Search by title, subject, or year (e.g. 2026, FTNA, ICS)..."
+              class="w-full pl-11 pr-4 py-3 bg-white border border-slate-300 rounded-2xl shadow-sm text-sm sm:text-base text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent transition"
             >
           </div>
         </div>
 
-        <!-- Section Segment Switcher -->
-        <div class="mt-6 flex justify-center items-center gap-2">
-          <div class="inline-flex p-1 bg-slate-200/80 rounded-2xl border border-slate-300">
-            <button onclick="switchEducationTier('primary')" id="tierPrimaryBtn" class="px-5 py-2 rounded-xl text-xs sm:text-sm font-bold transition flex items-center gap-1.5 bg-white text-slate-800 shadow-xs">
-              <i data-lucide="book" class="w-4 h-4 text-blue-600"></i> Primary School (Std 1 - 7)
+        <!-- Section Segment Switcher: Primary vs Secondary -->
+        <div class="mt-6 flex justify-center items-center gap-2" role="tablist" aria-label="Education Levels">
+          <div class="inline-flex p-1 bg-slate-200/90 rounded-2xl border border-slate-300 shadow-inner">
+            <button 
+              type="button"
+              role="tab"
+              aria-selected="false"
+              aria-controls="levelTabsContainer"
+              onclick="switchEducationTier('primary')" 
+              id="tierPrimaryBtn" 
+              class="px-5 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition flex items-center gap-1.5 text-slate-700 hover:text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-600"
+            >
+              <i data-lucide="book" class="w-4 h-4 text-blue-600" aria-hidden="true"></i> Primary (Std 1 - 7)
             </button>
-            <button onclick="switchEducationTier('secondary')" id="tierSecondaryBtn" class="px-5 py-2 rounded-xl text-xs sm:text-sm font-bold transition flex items-center gap-1.5 active-section-tab">
-              <i data-lucide="award" class="w-4 h-4 text-amber-400"></i> Secondary School (Form 1 - 6)
+            <button 
+              type="button"
+              role="tab"
+              aria-selected="true"
+              aria-controls="levelTabsContainer"
+              onclick="switchEducationTier('secondary')" 
+              id="tierSecondaryBtn" 
+              class="px-5 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition flex items-center gap-1.5 active-tier focus:outline-none focus:ring-2 focus:ring-blue-600"
+            >
+              <i data-lucide="award" class="w-4 h-4 text-amber-400" aria-hidden="true"></i> Secondary (Form 1 - 6)
             </button>
           </div>
         </div>
 
         <!-- Step 1: Level Grade Tabs -->
         <div class="mt-4 sm:mt-5 overflow-x-auto hide-scrollbar -mx-4 px-4 sm:mx-0 sm:px-0">
-          <div class="inline-flex sm:flex sm:flex-wrap items-center justify-start sm:justify-center gap-2 py-1" id="levelTabsContainer">
+          <div class="inline-flex sm:flex sm:flex-wrap items-center justify-start sm:justify-center gap-2 py-1" id="levelTabsContainer" role="group" aria-label="Classes">
             <!-- Injected via JavaScript -->
           </div>
         </div>
@@ -123,13 +174,13 @@
       <div id="navigationControls" class="space-y-4 mb-6">
         
         <!-- Step 2: Year Selection -->
-        <div id="yearSection" class="bg-white border border-slate-200/90 rounded-2xl p-4 sm:p-5 shadow-xs">
+        <div id="yearSection" class="bg-white border border-slate-200 rounded-2xl p-4 sm:p-5 shadow-sm">
           <div class="flex items-center justify-between gap-4 mb-3">
             <div>
-              <h2 class="text-sm font-bold text-slate-900 flex items-center gap-2">
-                <i data-lucide="calendar" class="w-4 h-4 text-blue-600"></i> Step 2: Select Examination Year
+              <h2 class="text-xs sm:text-sm font-bold text-slate-900 flex items-center gap-2">
+                <i data-lucide="calendar" class="w-4 h-4 text-blue-600" aria-hidden="true"></i> Examination Year
               </h2>
-              <p class="text-xs text-slate-500 mt-0.5">Filter available papers by year</p>
+              <p class="text-[11px] sm:text-xs text-slate-500 mt-0.5">Filter by the year the paper was sat</p>
             </div>
             <span id="yearCount" class="text-xs font-semibold text-blue-700 bg-blue-50 border border-blue-100 px-3 py-1 rounded-full">0 Years</span>
           </div>
@@ -139,13 +190,13 @@
         </div>
 
         <!-- Step 3: Subject Selection -->
-        <div id="subjectSection" class="bg-white border border-slate-200/90 rounded-2xl p-4 sm:p-5 shadow-xs">
+        <div id="subjectSection" class="bg-white border border-slate-200 rounded-2xl p-4 sm:p-5 shadow-sm">
           <div class="flex items-center justify-between gap-4 mb-3">
             <div>
-              <h2 class="text-sm font-bold text-slate-900 flex items-center gap-2">
-                <i data-lucide="book-open" class="w-4 h-4 text-indigo-600"></i> Step 3: Select Subject
+              <h2 class="text-xs sm:text-sm font-bold text-slate-900 flex items-center gap-2">
+                <i data-lucide="book-open" class="w-4 h-4 text-indigo-600" aria-hidden="true"></i> Subject
               </h2>
-              <p class="text-xs text-slate-500 mt-0.5">Choose a subject to reveal available exam categories</p>
+              <p class="text-[11px] sm:text-xs text-slate-500 mt-0.5">Select a syllabus subject to view examination series</p>
             </div>
             <span id="subjectCount" class="text-xs font-semibold text-indigo-700 bg-indigo-50 border border-indigo-100 px-3 py-1 rounded-full">0 Subjects</span>
           </div>
@@ -156,23 +207,46 @@
 
       </div>
 
-      <!-- Breadcrumb & Results Status Header -->
-      <div id="resultsHeader" class="flex items-center justify-between mb-4 pt-4 border-t border-slate-200">
+      <!-- Results & Breadcrumb Bar -->
+      <div id="resultsHeader" class="flex items-center justify-between mb-4 pt-3 border-t border-slate-200">
         <h2 id="sectionTitle" class="text-xs sm:text-sm font-bold text-slate-700 uppercase tracking-wider">
           Exam Categories
         </h2>
-        <span id="paperCount" class="text-xs font-semibold text-slate-500 bg-slate-100 px-2.5 py-0.5 rounded-full">Loading...</span>
+        <span id="paperCount" class="text-xs font-semibold text-slate-600 bg-slate-100 px-2.5 py-1 rounded-full">Loading...</span>
       </div>
 
-      <!-- Main Dynamic View Container (Toggles between Step 4 Category Folders & Step 5 Final Papers) -->
-      <div id="mainDisplayArea"></div>
+      <!-- Main Dynamic View Container -->
+      <div id="mainDisplayArea" aria-live="polite">
+        <!-- Spinner placeholder -->
+        <div class="text-center py-16 bg-white border border-slate-200 rounded-2xl shadow-sm">
+          <div class="inline-block animate-spin rounded-full h-8 w-8 border-4 border-blue-600 border-t-transparent mb-3" role="status">
+            <span class="sr-only">Loading papers...</span>
+          </div>
+          <p class="text-sm font-semibold text-slate-600">Connecting to Elimika Cloud Database...</p>
+        </div>
+      </div>
 
-      <!-- No Results State -->
+      <!-- Empty Results State -->
       <div id="noResults" class="hidden text-center py-12 px-4 bg-white border border-dashed border-slate-300 rounded-2xl mt-4">
-        <i data-lucide="file-question" class="w-10 h-10 text-slate-400 mx-auto mb-2"></i>
-        <h3 class="text-base font-bold text-slate-700">No papers found</h3>
-        <p class="text-xs text-slate-500 mt-1">Try selecting a different year, subject, or exam type.</p>
+        <i data-lucide="file-question" class="w-10 h-10 text-slate-400 mx-auto mb-2" aria-hidden="true"></i>
+        <h3 class="text-base font-bold text-slate-700">No examination papers found</h3>
+        <p class="text-xs text-slate-500 mt-1 max-w-md mx-auto">
+          We could not find papers matching your current selection. Try selecting "All Years" or "All Subjects", or search with a different keyword.
+        </p>
       </div>
+
+      <!-- Network Failure State -->
+      <div id="networkErrorState" class="hidden text-center py-12 px-4 bg-rose-50/60 border border-rose-200 rounded-2xl mt-4">
+        <i data-lucide="alert-triangle" class="w-10 h-10 text-rose-500 mx-auto mb-2" aria-hidden="true"></i>
+        <h3 class="text-base font-bold text-rose-800">Connection to Database Timed Out</h3>
+        <p class="text-xs text-rose-600 mt-1 max-w-md mx-auto mb-4">
+          Could not load the latest past papers from Google Sheets. This may be due to poor connectivity or sheet permission settings.
+        </p>
+        <button onclick="loadPapersFromSheet(true)" class="inline-flex items-center gap-1.5 px-4 py-2 bg-rose-600 hover:bg-rose-700 text-white text-xs font-bold rounded-xl shadow-sm transition">
+          <i data-lucide="refresh-cw" class="w-3.5 h-3.5" aria-hidden="true"></i> Retry Loading
+        </button>
+      </div>
+
     </section>
   </main>
 
@@ -182,7 +256,7 @@
       <div class="flex items-center gap-1.5 font-bold text-slate-700">
         <span class="text-[#0b2450]">ELIMIKA</span> &bull; <span>&copy; <span id="currentYear"></span> All Rights Reserved</span>
       </div>
-      <p class="text-slate-400">Direct Cloud Revision Platform for Primary & Secondary Schools in Tanzania</p>
+      <p class="text-slate-400">Direct Cloud Revision Platform for Tanzanian Primary &amp; Secondary Schools</p>
     </div>
   </footer>
 
@@ -191,75 +265,251 @@
 
     const SHEET_ID = "1-7C_G-VAC2ICxuT3XwADzAluRoDvQyd04yS4BtSvXxM";
 
+    // Standardized Class Hierarchy
     const LEVELS_CONFIG = {
       primary: [
-        { id: 'Standard 1', label: 'Standard 1', short: 'Std 1' },
-        { id: 'Standard 2', label: 'Standard 2', short: 'Std 2' },
-        { id: 'Standard 3', label: 'Standard 3', short: 'Std 3' },
-        { id: 'Standard 4', label: 'Standard 4 (SFNA)', short: 'Std 4 (SFNA)' },
-        { id: 'Standard 5', label: 'Standard 5', short: 'Std 5' },
-        { id: 'Standard 6', label: 'Standard 6', short: 'Std 6' },
-        { id: 'Standard 7', label: 'Standard 7 (PSLE)', short: 'Std 7 (PSLE)' }
+        { id: 'Standard 1', label: 'Standard 1', short: 'Std 1', token: 'std1' },
+        { id: 'Standard 2', label: 'Standard 2', short: 'Std 2', token: 'std2' },
+        { id: 'Standard 3', label: 'Standard 3', short: 'Std 3', token: 'std3' },
+        { id: 'Standard 4', label: 'Standard 4 (SFNA)', short: 'Std 4 (SFNA)', token: 'std4' },
+        { id: 'Standard 5', label: 'Standard 5', short: 'Std 5', token: 'std5' },
+        { id: 'Standard 6', label: 'Standard 6', short: 'Std 6', token: 'std6' },
+        { id: 'Standard 7', label: 'Standard 7 (PSLE)', short: 'Std 7 (PSLE)', token: 'std7' }
       ],
       secondary: [
-        { id: 'Form 1', label: 'Form 1', short: 'Form 1' },
-        { id: 'Form 2', label: 'Form 2 (FTNA)', short: 'Form 2 (FTNA)' },
-        { id: 'Form 3', label: 'Form 3', short: 'Form 3' },
-        { id: 'Form 4', label: 'Form 4 (CSEE)', short: 'Form 4 (CSEE)' },
-        { id: 'Form 5', label: 'Form 5', short: 'Form 5' },
-        { id: 'Form 6', label: 'Form 6 (ACSEE)', short: 'Form 6 (ACSEE)' }
+        { id: 'Form 1', label: 'Form 1', short: 'Form 1', token: 'form1' },
+        { id: 'Form 2', label: 'Form 2 (FTNA)', short: 'Form 2 (FTNA)', token: 'form2' },
+        { id: 'Form 3', label: 'Form 3', short: 'Form 3', token: 'form3' },
+        { id: 'Form 4', label: 'Form 4 (CSEE)', short: 'Form 4 (CSEE)', token: 'form4' },
+        { id: 'Form 5', label: 'Form 5', short: 'Form 5', token: 'form5' },
+        { id: 'Form 6', label: 'Form 6 (ACSEE)', short: 'Form 6 (ACSEE)', token: 'form6' }
       ]
     };
 
-    // Master Exam Categories
+    // Master Exam Categories with Strict Word-Boundary Matchers
     const ALL_EXAM_CATEGORIES = [
-      { id: 'NECTA', label: 'NECTA Finals', desc: 'National Examination Council Assessments', icon: 'award' },
-      { id: 'Pre-NECTA', label: 'Pre-National Exams', desc: 'Preparatory Pre-National Examinations', icon: 'check-circle-2' },
-      { id: 'Mock', label: 'Regional & Joint Mocks', desc: 'Joint Inter-School & Regional Mock Series', icon: 'file-text' },
-      { id: 'Terminal', label: 'Terminal Assessments', desc: 'End of Term Evaluation Papers', icon: 'calendar' },
-      { id: 'Midterm', label: 'Midterm Tests', desc: 'Mid-Semester Class Assessment Tests', icon: 'clock' }
+      { 
+        id: 'Pre-NECTA', 
+        label: 'Pre-National Exams', 
+        desc: 'Preparatory Pre-National Examinations & Joint Tests', 
+        icon: 'check-circle-2',
+        regex: /\b(pre[- ]?necta|pre[- ]?national|pre[- ]?sfna|pre[- ]?psle|pre[- ]?ftna|pre[- ]?csee|pre[- ]?acsee)\b/i
+      },
+      { 
+        id: 'NECTA', 
+        label: 'NECTA Finals', 
+        desc: 'Official National Assessments (PSLE, SFNA, FTNA, CSEE, ACSEE)', 
+        icon: 'award',
+        // Matches NECTA or specific exams, but ignores if preceded by Pre-
+        regex: /(?<!pre[- ]?)\b(necta|psle|sfna|ftna|csee|acsee|national)\b/i
+      },
+      { 
+        id: 'Mock', 
+        label: 'Regional & Joint Mocks', 
+        desc: 'Joint Inter-School & Regional Mock Series', 
+        icon: 'file-text',
+        regex: /\b(mock|regional mock|joint mock|tahossa|cssc)\b/i
+      },
+      { 
+        id: 'Terminal', 
+        label: 'Terminal Assessments', 
+        desc: 'End of Term Assessment Papers', 
+        icon: 'calendar',
+        regex: /\b(terminal|annual|end of term|end term)\b/i
+      },
+      { 
+        id: 'Midterm', 
+        label: 'Midterm Tests', 
+        desc: 'Mid-Semester Class Assessment Tests', 
+        icon: 'clock',
+        regex: /\b(midterm|mid[- ]?term|monthly|progress test)\b/i
+      }
     ];
 
-    // Form 1, Form 3, and Form 5, as well as Std 1, 2, 3, 5, 6, do not have NECTA or Pre-NECTA
-    function getCategoriesForLevel(levelName) {
-      const nationalExamClasses = ['Standard 4', 'Standard 7', 'Form 2', 'Form 4', 'Form 6'];
-      const hasNationalExam = nationalExamClasses.some(l => levelName.toLowerCase().includes(l.toLowerCase()));
+    // Security: Escapes untrusted text to prevent XSS
+    function escapeHTML(str) {
+      if (!str) return '';
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+    }
 
-      if (!hasNationalExam) {
-        return ALL_EXAM_CATEGORIES.filter(cat => cat.id !== 'NECTA' && cat.id !== 'Pre-NECTA');
+    // Security: Validates and rewrites Cloud URLs strictly
+    function sanitizeCloudUrl(url) {
+      if (!url || typeof url !== 'string') return '';
+      const cleanUrl = url.trim();
+
+      // Only allow https:// URLs
+      if (!cleanUrl.startsWith('https://')) return '';
+
+      // Google Drive file transformation
+      const driveMatch = cleanUrl.match(/\/file\/d\/([a-zA-Z0-9_-]+)/) || 
+                         cleanUrl.match(/id=([a-zA-Z0-9_-]+)/);
+      if (driveMatch && cleanUrl.includes('drive.google.com')) {
+        return `https://drive.google.com/uc?export=download&id=${encodeURIComponent(driveMatch[1])}`;
+      }
+
+      // Dropbox direct download transformation
+      if (cleanUrl.includes('dropbox.com')) {
+        return cleanUrl.replace('dl=0', 'dl=1');
+      }
+
+      return cleanUrl;
+    }
+
+    // Normalizes class token for precise matching
+    function normalizeClassToken(str) {
+      if (!str) return '';
+      const s = String(str).toLowerCase().trim();
+      const numMatch = s.match(/\d+/);
+      const num = numMatch ? numMatch[0] : '';
+      if (s.includes('form') || s.startsWith('f')) return `form${num}`;
+      if (s.includes('std') || s.includes('standard') || s.startsWith('s')) return `std${num}`;
+      return s.replace(/\s+/g, '');
+    }
+
+    // Evaluates which category an exam belongs to with precedence to Pre-NECTA over NECTA
+    function matchExamCategory(examField, titleField) {
+      const combined = `${examField || ''} ${titleField || ''}`.toLowerCase();
+      for (const cat of ALL_EXAM_CATEGORIES) {
+        if (cat.regex.test(combined)) {
+          return cat.id;
+        }
+      }
+      return 'Mock'; // Safe default for unclassified tests
+    }
+
+    // Form 1, Form 3, Form 5, and Std 1, 2, 3, 5, 6 do not have NECTA/Pre-NECTA
+    function getCategoriesForLevel(levelId) {
+      const nationalClasses = ['Standard 4', 'Standard 7', 'Form 2', 'Form 4', 'Form 6'];
+      const hasNational = nationalClasses.some(l => levelId.toLowerCase() === l.toLowerCase());
+      if (!hasNational) {
+        return ALL_EXAM_CATEGORIES.filter(c => c.id !== 'NECTA' && c.id !== 'Pre-NECTA');
       }
       return ALL_EXAM_CATEGORIES;
     }
 
-    function formatCloudUrl(url) {
-      if (!url) return '';
-      const driveMatch = url.match(/\/d\/([a-zA-Z0-9_-]+)/) || url.match(/id=([a-zA-Z0-9_-]+)/);
-      if (driveMatch) return `https://drive.google.com/uc?export=download&id=${driveMatch[1]}`;
-      if (url.includes('dropbox.com')) return url.replace('dl=0', 'dl=1');
-      return url;
+    // State
+    let papersDatabase = [];
+    let currentTier = 'secondary';
+    let selectedForm = 'Form 2 (FTNA)';
+    let selectedYear = 'All';
+    let selectedSubject = 'All';
+    let selectedExamCategory = null;
+    let jsonpTimeoutHandle = null;
+
+    // Resilient Google Sheets JSONP loader with timeout
+    function loadPapersFromSheet(isRetry = false) {
+      const displayArea = document.getElementById('mainDisplayArea');
+      const errorArea = document.getElementById('networkErrorState');
+      const emptyArea = document.getElementById('noResults');
+
+      errorArea.classList.add('hidden');
+      emptyArea.classList.add('hidden');
+
+      if (isRetry) {
+        displayArea.innerHTML = `
+          <div class="text-center py-16 bg-white border border-slate-200 rounded-2xl shadow-sm">
+            <div class="inline-block animate-spin rounded-full h-8 w-8 border-4 border-blue-600 border-t-transparent mb-3" role="status"></div>
+            <p class="text-sm font-semibold text-slate-600">Reconnecting to database...</p>
+          </div>
+        `;
+      }
+
+      // Cleanup any previous script elements
+      const existingScript = document.getElementById('sheetJsonpScript');
+      if (existingScript) existingScript.remove();
+
+      if (jsonpTimeoutHandle) clearTimeout(jsonpTimeoutHandle);
+
+      jsonpTimeoutHandle = setTimeout(() => {
+        const activeScript = document.getElementById('sheetJsonpScript');
+        if (activeScript) activeScript.remove();
+        displayArea.innerHTML = '';
+        errorArea.classList.remove('hidden');
+      }, 10000); // 10 second timeout
+
+      const script = document.createElement('script');
+      script.id = 'sheetJsonpScript';
+      script.src = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=responseHandler:handleSheetResponse&headers=1`;
+      script.onerror = function() {
+        if (jsonpTimeoutHandle) clearTimeout(jsonpTimeoutHandle);
+        displayArea.innerHTML = '';
+        errorArea.classList.remove('hidden');
+      };
+      document.body.appendChild(script);
     }
 
-    let papersDatabase = [];
-    let currentTier = 'secondary'; 
-    let selectedForm = 'Form 2'; 
-    let selectedYear = 'All'; 
-    let selectedSubject = 'All'; 
-    let selectedExamCategory = null; // null = Show Exam Categories, string = Show Papers
+    // Callback execution
+    window.handleSheetResponse = function(json) {
+      if (jsonpTimeoutHandle) clearTimeout(jsonpTimeoutHandle);
+      const activeScript = document.getElementById('sheetJsonpScript');
+      if (activeScript) activeScript.remove();
+
+      try {
+        const rows = json.table.rows;
+        papersDatabase = rows
+          .map(r => {
+            const c = r.c;
+            const title = c[0] && c[0].v != null ? String(c[0].v).trim() : 'Past Paper';
+            const rawForm = c[1] && c[1].v != null ? String(c[1].v).trim() : '';
+            const rawSubject = c[2] && c[2].v != null ? String(c[2].v).trim() : 'General Studies';
+            const rawYear = c[3] && c[3].v != null ? String(c[3].v).trim() : '';
+            const rawExam = c[4] && c[4].v != null ? String(c[4].v).trim() : '';
+            const paperUrl = sanitizeCloudUrl(c[5] && c[5].v != null ? String(c[5].v).trim() : '');
+            const answersUrl = sanitizeCloudUrl(c[6] && c[6].v != null ? String(c[6].v).trim() : '');
+
+            // Subject alignment (Ensure Information and Computer Studies is consistent)
+            let subjectClean = rawSubject;
+            if (/^(computer science|cs)$/i.test(rawSubject)) {
+              subjectClean = 'Information and Computer Studies';
+            }
+
+            return {
+              title: title,
+              form: rawForm,
+              formToken: normalizeClassToken(rawForm),
+              subject: subjectClean,
+              year: rawYear,
+              exam: rawExam,
+              category: matchExamCategory(rawExam, title),
+              paperUrl: paperUrl,
+              answersUrl: answersUrl
+            };
+          })
+          // Keep only rows with a valid download link
+          .filter(item => item.paperUrl !== '');
+
+        renderLevelTabs();
+        populateDynamicFilters();
+        renderApp();
+      } catch (err) {
+        console.error('Error processing sheet data:', err);
+        document.getElementById('mainDisplayArea').innerHTML = '';
+        document.getElementById('networkErrorState').classList.remove('hidden');
+      }
+    };
 
     function switchEducationTier(tier) {
       currentTier = tier;
-
       const primBtn = document.getElementById('tierPrimaryBtn');
       const secBtn = document.getElementById('tierSecondaryBtn');
 
       if (tier === 'primary') {
-        primBtn.className = "px-5 py-2 rounded-xl text-xs sm:text-sm font-bold transition flex items-center gap-1.5 active-section-tab";
-        secBtn.className = "px-5 py-2 rounded-xl text-xs sm:text-sm font-bold transition flex items-center gap-1.5 bg-white text-slate-800 shadow-xs";
-        selectedForm = 'Standard 7'; 
+        primBtn.className = "px-5 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition flex items-center gap-1.5 active-tier focus:outline-none focus:ring-2 focus:ring-blue-600";
+        primBtn.setAttribute('aria-selected', 'true');
+        secBtn.className = "px-5 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition flex items-center gap-1.5 text-slate-700 hover:text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-600";
+        secBtn.setAttribute('aria-selected', 'false');
+        selectedForm = 'Standard 7 (PSLE)';
       } else {
-        secBtn.className = "px-5 py-2 rounded-xl text-xs sm:text-sm font-bold transition flex items-center gap-1.5 active-section-tab";
-        primBtn.className = "px-5 py-2 rounded-xl text-xs sm:text-sm font-bold transition flex items-center gap-1.5 bg-white text-slate-800 shadow-xs";
-        selectedForm = 'Form 2'; 
+        secBtn.className = "px-5 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition flex items-center gap-1.5 active-tier focus:outline-none focus:ring-2 focus:ring-blue-600";
+        secBtn.setAttribute('aria-selected', 'true');
+        primBtn.className = "px-5 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition flex items-center gap-1.5 text-slate-700 hover:text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-600";
+        primBtn.setAttribute('aria-selected', 'false');
+        selectedForm = 'Form 2 (FTNA)';
       }
 
       selectedYear = 'All';
@@ -276,106 +526,73 @@
       const levels = LEVELS_CONFIG[currentTier];
 
       container.innerHTML = levels.map(level => {
-        const isActive = level.id === selectedForm || selectedForm.startsWith(level.id);
+        const isSelected = selectedForm === level.id || selectedForm.startsWith(level.label) || selectedForm.startsWith(level.id);
         return `
-          <button onclick="setFormFilter('${level.id}')" class="filter-btn whitespace-nowrap px-4 py-2 rounded-full text-xs font-bold border border-slate-200 bg-white text-slate-700 active:scale-95 transition ${isActive ? 'active-nav-btn' : ''}">
-            ${level.label}
+          <button 
+            type="button"
+            onclick="setFormFilter('${escapeHTML(level.id)}')" 
+            class="filter-btn whitespace-nowrap px-4 py-2 rounded-full text-xs font-bold border border-slate-200 bg-white text-slate-700 active:scale-95 transition focus:outline-none focus:ring-2 focus:ring-blue-600 ${isSelected ? 'active-pill' : ''}">
+            ${escapeHTML(level.label)}
           </button>
         `;
       }).join('');
     }
 
-    window.handleSheetResponse = function(json) {
-      try {
-        const rows = json.table.rows;
-        papersDatabase = rows
-          .map(r => {
-            const c = r.c;
-            return {
-              title: c[0] ? String(c[0].v).trim() : 'Past Paper',
-              form: c[1] ? String(c[1].v).trim() : 'Form 2',
-              subject: c[2] ? String(c[2].v).trim() : 'Basic Mathematics',
-              year: c[3] ? String(c[3].v).trim() : '',
-              exam: c[4] ? String(c[4].v).trim() : 'NECTA',
-              paperUrl: formatCloudUrl(c[5] ? String(c[5].v).trim() : ''),
-              answersUrl: formatCloudUrl(c[6] ? String(c[6].v).trim() : '')
-            };
-          })
-          .filter(item => item.paperUrl && item.paperUrl.trim() !== "");
-
-        renderLevelTabs();
-        populateDynamicFilters();
-        renderApp();
-      } catch (err) {
-        console.error('Error reading sheet JSON:', err);
-        document.getElementById('mainDisplayArea').innerHTML = '<div class="col-span-full text-center py-10 text-rose-500 font-semibold text-sm">Failed to parse sheet data.</div>';
-      }
-    };
-
-    function loadPapersFromSheet() {
-      const container = document.getElementById('mainDisplayArea');
-      container.innerHTML = '<div class="col-span-full text-center py-12 text-slate-400 font-semibold text-sm">Loading past papers...</div>';
-
-      const script = document.createElement('script');
-      script.src = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=responseHandler:handleSheetResponse`;
-      script.onerror = function() {
-        container.innerHTML = '<div class="col-span-full text-center py-10 text-rose-500 font-semibold text-sm">Could not connect to Google Sheets. Verify permissions are set to "Anyone with the link".</div>';
-      };
-      document.body.appendChild(script);
-    }
-
     function getLevelPapers() {
-      const normalizedSelected = selectedForm.toLowerCase().replace('standard', 'std').replace(/\s+/g, '');
+      const activeLevelConfig = [...LEVELS_CONFIG.primary, ...LEVELS_CONFIG.secondary].find(
+        l => l.id === selectedForm || selectedForm.startsWith(l.id)
+      );
+      const targetToken = activeLevelConfig ? activeLevelConfig.token : normalizeClassToken(selectedForm);
+
       return papersDatabase.filter(item => {
-        if (!item.form) return false;
-        const normalizedItem = item.form.toLowerCase().replace('standard', 'std').replace(/\s+/g, '');
-        return normalizedItem.includes(normalizedSelected) || normalizedSelected.includes(normalizedItem);
+        if (!item.formToken) return false;
+        return item.formToken === targetToken;
       });
     }
 
     function populateDynamicFilters() {
       const levelPapers = getLevelPapers();
 
-      // 1. Populate Years
-      const years = Array.from(new Set(levelPapers.map(p => p.year).filter(Boolean))).sort((a, b) => b - a);
+      // 1. Unique Years
+      const years = Array.from(new Set(levelPapers.map(p => p.year).filter(y => y && y.length === 4))).sort((a, b) => b.localeCompare(a));
       const yearContainer = document.getElementById('yearChipsContainer');
       const yearCountEl = document.getElementById('yearCount');
       
       let yearHtml = `
-        <button onclick="handleYearChange('All')" class="year-chip whitespace-nowrap px-3 py-1.5 rounded-xl text-xs font-bold border border-slate-200 bg-white text-slate-700 hover:bg-slate-50 transition ${selectedYear === 'All' ? 'active-chip' : ''}">
+        <button type="button" onclick="handleYearChange('All')" class="year-chip whitespace-nowrap px-3 py-1.5 rounded-xl text-xs font-bold border border-slate-200 bg-white text-slate-700 hover:bg-slate-50 transition ${selectedYear === 'All' ? 'active-chip' : ''}">
           All Years
         </button>
       `;
       years.forEach(yr => {
         const isActive = selectedYear === yr ? 'active-chip' : '';
         yearHtml += `
-          <button onclick="handleYearChange('${yr}')" class="year-chip whitespace-nowrap px-3 py-1.5 rounded-xl text-xs font-bold border border-slate-200 bg-white text-slate-700 hover:bg-slate-50 transition ${isActive}">
-            ${yr}
+          <button type="button" onclick="handleYearChange('${escapeHTML(yr)}')" class="year-chip whitespace-nowrap px-3 py-1.5 rounded-xl text-xs font-bold border border-slate-200 bg-white text-slate-700 hover:bg-slate-50 transition ${isActive}">
+            ${escapeHTML(yr)}
           </button>
         `;
       });
       yearContainer.innerHTML = yearHtml;
       yearCountEl.textContent = `${years.length} ${years.length === 1 ? 'Year' : 'Years'}`;
 
-      // 2. Populate Subjects (scoped to selected year)
+      // 2. Unique Subjects
       const yearFilteredPapers = selectedYear === 'All' 
         ? levelPapers 
-        : levelPapers.filter(p => String(p.year) === String(selectedYear));
+        : levelPapers.filter(p => p.year === selectedYear);
         
       const subjects = Array.from(new Set(yearFilteredPapers.map(p => p.subject).filter(Boolean))).sort();
       const subjectContainer = document.getElementById('subjectChipsContainer');
       const subjectCountEl = document.getElementById('subjectCount');
       
       let subjectHtml = `
-        <button onclick="handleSubjectChange('All')" class="subject-chip whitespace-nowrap px-3 py-1.5 rounded-xl text-xs font-bold border border-slate-200 bg-white text-slate-700 hover:bg-slate-50 transition ${selectedSubject === 'All' ? 'active-chip' : ''}">
+        <button type="button" onclick="handleSubjectChange('All')" class="subject-chip whitespace-nowrap px-3 py-1.5 rounded-xl text-xs font-bold border border-slate-200 bg-white text-slate-700 hover:bg-slate-50 transition ${selectedSubject === 'All' ? 'active-chip' : ''}">
           All Subjects
         </button>
       `;
       subjects.forEach(sub => {
         const isActive = selectedSubject === sub ? 'active-chip' : '';
         subjectHtml += `
-          <button onclick="handleSubjectChange('${sub}')" class="subject-chip whitespace-nowrap px-3 py-1.5 rounded-xl text-xs font-bold border border-slate-200 bg-white text-slate-700 hover:bg-slate-50 transition ${isActive}">
-            ${sub}
+          <button type="button" onclick="handleSubjectChange('${escapeHTML(sub)}')" class="subject-chip whitespace-nowrap px-3 py-1.5 rounded-xl text-xs font-bold border border-slate-200 bg-white text-slate-700 hover:bg-slate-50 transition ${isActive}">
+            ${escapeHTML(sub)}
           </button>
         `;
       });
@@ -385,8 +602,8 @@
       lucide.createIcons();
     }
 
-    function setFormFilter(formName) {
-      selectedForm = formName;
+    function setFormFilter(formId) {
+      selectedForm = formId;
       selectedYear = 'All'; 
       selectedSubject = 'All'; 
       selectedExamCategory = null; 
@@ -407,13 +624,12 @@
 
     function handleSubjectChange(subject) {
       selectedSubject = subject;
-      selectedExamCategory = null; // reset category view when switching subject
+      selectedExamCategory = null;
 
-      // update chip styles
       document.querySelectorAll('.subject-chip').forEach(btn => {
         const isAll = subject === 'All' && btn.textContent.trim() === 'All Subjects';
-        const isSubject = btn.textContent.trim() === subject;
-        btn.classList.toggle('active-chip', isAll || isSubject);
+        const isCurrent = btn.textContent.trim() === subject;
+        btn.classList.toggle('active-chip', isAll || isCurrent);
       });
 
       renderApp();
@@ -422,7 +638,7 @@
     function selectExamCategory(categoryId) {
       selectedExamCategory = categoryId;
       renderApp();
-      window.scrollTo({ top: 420, behavior: 'smooth' });
+      window.scrollTo({ top: 380, behavior: 'smooth' });
     }
 
     function resetExamCategory() {
@@ -438,13 +654,15 @@
       const query = document.getElementById('searchInput').value.trim().toLowerCase();
       const container = document.getElementById('mainDisplayArea');
       const emptyState = document.getElementById('noResults');
+      const errorState = document.getElementById('networkErrorState');
       const countEl = document.getElementById('paperCount');
       const sectionTitle = document.getElementById('sectionTitle');
 
-      // Filter database
+      errorState.classList.add('hidden');
+
       const levelPapers = getLevelPapers();
 
-      const matchesYear = (item) => (selectedYear === 'All') || (String(item.year) === String(selectedYear));
+      const matchesYear = (item) => (selectedYear === 'All') || (item.year === selectedYear);
       const matchesSubject = (item) => (selectedSubject === 'All') || (item.subject.toLowerCase() === selectedSubject.toLowerCase());
       const matchesQuery = (item) => {
         if (!query) return true;
@@ -456,7 +674,7 @@
         matchesYear(item) && matchesSubject(item) && matchesQuery(item)
       );
 
-      // CASE A: User typed into the search bar -> Show direct matching cards
+      // CASE A: Search active -> direct paper results
       if (query !== '') {
         sectionTitle.textContent = `Search Results (${contextualPapers.length})`;
         countEl.textContent = `${contextualPapers.length} papers`;
@@ -464,58 +682,56 @@
         return;
       }
 
-      // CASE B: Drill-down Flow
+      // CASE B: Category Selection (Folder View)
       const allowedCategories = getCategoriesForLevel(selectedForm);
 
       if (!selectedExamCategory) {
-        // STEP 4: Render Exam Categories for this Level + Year + Subject
-        let titleContext = `${selectedForm} • Categories`;
-        if (selectedYear !== 'All') titleContext += ` (${selectedYear})`;
-        if (selectedSubject !== 'All') titleContext += ` • ${selectedSubject}`;
+        let titleContext = `${escapeHTML(selectedForm)} Exam Categories`;
+        if (selectedYear !== 'All') titleContext += ` (${escapeHTML(selectedYear)})`;
+        if (selectedSubject !== 'All') titleContext += ` &bull; ${escapeHTML(selectedSubject)}`;
         
-        sectionTitle.textContent = titleContext;
-        countEl.textContent = `${contextualPapers.length} total papers`;
+        sectionTitle.innerHTML = titleContext;
+        countEl.textContent = `${contextualPapers.length} papers available`;
         emptyState.classList.add('hidden');
         renderCategoryCards(container, contextualPapers, allowedCategories);
       } else {
-        // STEP 5: Render final papers inside the selected exam type
+        // CASE C: Specific Exam Category Papers
         const currentCategory = ALL_EXAM_CATEGORIES.find(c => c.id === selectedExamCategory) || { label: selectedExamCategory };
-        const finalPapers = contextualPapers.filter(item => {
-          const examField = (item.exam || item.title || '').toLowerCase();
-          return examField.includes(selectedExamCategory.toLowerCase());
-        });
+        const finalPapers = contextualPapers.filter(item => item.category === selectedExamCategory);
 
-        sectionTitle.textContent = `${selectedForm} • ${selectedSubject !== 'All' ? selectedSubject : 'All Subjects'} • ${currentCategory.label}`;
+        sectionTitle.innerHTML = `${escapeHTML(selectedForm)} &bull; ${escapeHTML(selectedSubject !== 'All' ? selectedSubject : 'All Subjects')} &bull; ${escapeHTML(currentCategory.label)}`;
         countEl.textContent = `${finalPapers.length} papers`;
         renderCategoryPapersWithHeader(container, emptyState, finalPapers, currentCategory);
       }
     }
 
-    // Step 4 Grid: Displays MOCK, NECTA, PRE-NECTA, etc.
     function renderCategoryCards(container, papersInContext, categoriesToDisplay) {
       container.innerHTML = `
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4.5 my-2">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 my-2">
           ${categoriesToDisplay.map(cat => {
-            const count = papersInContext.filter(item => {
-              const examField = (item.exam || item.title || '').toLowerCase();
-              return examField.includes(cat.id.toLowerCase());
-            }).length;
+            const count = papersInContext.filter(item => item.category === cat.id).length;
 
             return `
-              <div onclick="selectExamCategory('${cat.id}')" class="bg-white border border-slate-200/90 hover:border-blue-500 rounded-2xl p-5 shadow-xs hover:shadow-md transition cursor-pointer flex flex-col justify-between group">
+              <div 
+                tabindex="0"
+                role="button"
+                aria-label="View ${escapeHTML(cat.label)} papers,${count} available"
+                onkeydown="if(event.key==='Enter'||event.key===' ') selectExamCategory('${escapeHTML(cat.id)}')"
+                onclick="selectExamCategory('${escapeHTML(cat.id)}')" 
+                class="bg-white border border-slate-200 hover:border-blue-500 rounded-2xl p-5 shadow-sm hover:shadow-md transition cursor-pointer flex flex-col justify-between group focus:outline-none focus:ring-2 focus:ring-blue-600">
                 <div>
-                  <div class="w-11 h-11 rounded-xl bg-blue-50 text-blue-700 flex items-center justify-center mb-3.5 group-hover:bg-blue-600 group-hover:text-white transition">
-                    <i data-lucide="${cat.icon}" class="w-5 h-5"></i>
+                  <div class="w-11 h-11 rounded-xl bg-blue-50 text-blue-700 flex items-center justify-center mb-3.5 group-hover:bg-blue-600 group-hover:text-white transition" aria-hidden="true">
+                    <i data-lucide="${escapeHTML(cat.icon)}" class="w-5 h-5"></i>
                   </div>
-                  <h3 class="text-base font-bold text-slate-800 mb-1 group-hover:text-blue-700 transition">${cat.label}</h3>
-                  <p class="text-xs text-slate-500 leading-relaxed">${cat.desc}</p>
+                  <h3 class="text-base font-bold text-slate-800 mb-1 group-hover:text-blue-700 transition">${escapeHTML(cat.label)}</h3>
+                  <p class="text-xs text-slate-500 leading-relaxed">${escapeHTML(cat.desc)}</p>
                 </div>
                 <div class="mt-5 pt-3.5 border-t border-slate-100 flex items-center justify-between">
                   <span class="text-xs font-bold ${count > 0 ? 'text-blue-700 bg-blue-50' : 'text-slate-400 bg-slate-100'} px-2.5 py-0.5 rounded-full">
                     ${count}${count === 1 ? 'Paper' : 'Papers'}
                   </span>
                   <span class="text-xs font-bold text-blue-600 flex items-center gap-1 group-hover:translate-x-1 transition">
-                    Open Papers <i data-lucide="chevron-right" class="w-3.5 h-3.5"></i>
+                    Open Papers <i data-lucide="chevron-right" class="w-3.5 h-3.5" aria-hidden="true"></i>
                   </span>
                 </div>
               </div>
@@ -526,15 +742,17 @@
       lucide.createIcons();
     }
 
-    // Step 5: Displays the final papers with a "Back to Exam Types" button
     function renderCategoryPapersWithHeader(container, emptyState, papers, category) {
       container.innerHTML = `
-        <div class="mb-5 flex items-center justify-between bg-white border border-slate-200/90 rounded-2xl p-3 sm:p-4 shadow-xs">
+        <div class="mb-5 flex items-center justify-between bg-white border border-slate-200 rounded-2xl p-3 sm:p-4 shadow-sm">
           <div class="flex items-center gap-3">
-            <button onclick="resetExamCategory()" class="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-bold text-slate-700 bg-slate-100 hover:bg-slate-200 active:scale-95 rounded-xl transition">
-              <i data-lucide="arrow-left" class="w-4 h-4"></i> Back to Exam Types
+            <button 
+              type="button"
+              onclick="resetExamCategory()" 
+              class="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-bold text-slate-700 bg-slate-100 hover:bg-slate-200 active:scale-95 rounded-xl transition focus:outline-none focus:ring-2 focus:ring-blue-600">
+              <i data-lucide="arrow-left" class="w-4 h-4" aria-hidden="true"></i> Back to Categories
             </button>
-            <span class="text-xs sm:text-sm font-bold text-slate-800 hidden xs:inline">${selectedForm} &bull; ${category.label}</span>
+            <span class="text-xs sm:text-sm font-bold text-slate-800 hidden xs:inline">${escapeHTML(selectedForm)} &bull; ${escapeHTML(category.label)}</span>
           </div>
           <span class="text-xs font-semibold text-slate-500">${papers.length} Available</span>
         </div>
@@ -553,7 +771,6 @@
       lucide.createIcons();
     }
 
-    // Renders the list directly for search queries
     function renderPapersList(container, emptyState, list) {
       if (list.length === 0) {
         container.innerHTML = '';
@@ -571,37 +788,58 @@
     }
 
     function generateCardHTML(item) {
+      const shareUrl = encodeURIComponent(window.location.origin);
+      const shareText = encodeURIComponent(`Download ${item.title} (${item.form}) on Elimika:`);
+      const whatsappShareHref = `https://api.whatsapp.com/send?text=${shareText}%20${shareUrl}`;
+
       return `
-        <div class="paper-card bg-white border border-slate-200/90 rounded-2xl p-4 flex flex-col justify-between shadow-xs">
+        <article class="paper-card bg-white border border-slate-200 rounded-2xl p-4 flex flex-col justify-between shadow-sm">
           <div>
             <div class="flex items-center justify-between text-[11px] font-bold mb-2">
-              <span class="bg-blue-50 text-blue-700 px-2.5 py-0.5 rounded-md border border-blue-100">${item.exam}</span>
+              <span class="bg-blue-50 text-blue-700 px-2.5 py-0.5 rounded-md border border-blue-100">${escapeHTML(item.category)}</span>
               <div class="flex items-center gap-1.5">
                 ${item.answersUrl ? `<span class="bg-emerald-50 text-emerald-700 px-2 py-0.5 rounded text-[10px] font-bold border border-emerald-100">Answers Available</span>` : ''}
-                <span class="text-slate-400 font-semibold">${item.year}</span>
+                <span class="text-slate-400 font-semibold">${escapeHTML(item.year)}</span>
               </div>
             </div>
-            <h3 class="font-bold text-slate-800 text-sm sm:text-base leading-snug">${item.title}</h3>
+            <h3 class="font-bold text-slate-800 text-sm sm:text-base leading-snug">${escapeHTML(item.title)}</h3>
             <p class="text-xs text-slate-500 mt-1.5 flex items-center gap-1.5">
-              <span class="font-semibold text-blue-700 bg-blue-50/50 px-2 py-0.5 rounded border border-blue-100">${item.subject}</span>
-              <span class="text-slate-300">&bull;</span>
-              <span class="font-bold text-slate-700">${item.form}</span>
+              <span class="font-semibold text-blue-700 bg-blue-50/50 px-2 py-0.5 rounded border border-blue-100">${escapeHTML(item.subject)}</span>
+              <span class="text-slate-300" aria-hidden="true">&bull;</span>
+              <span class="font-bold text-slate-700">${escapeHTML(item.form)}</span>
             </p>
           </div>
 
           <div class="mt-4 pt-3 border-t border-slate-100 flex flex-col gap-2">
-            <a href="${item.paperUrl}" target="_blank" rel="noopener noreferrer" class="w-full inline-flex items-center justify-center gap-1.5 bg-blue-700 hover:bg-blue-800 active:bg-blue-900 text-white text-xs sm:text-sm font-bold py-2.5 px-3 rounded-xl transition shadow-xs">
-              <i data-lucide="file-text" class="w-4 h-4"></i> Download Question Paper
+            <a 
+              href="${escapeHTML(item.paperUrl)}" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              class="w-full inline-flex items-center justify-center gap-1.5 bg-blue-700 hover:bg-blue-800 active:bg-blue-900 text-white text-xs sm:text-sm font-bold py-2.5 px-3 rounded-xl transition shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-600">
+              <i data-lucide="file-text" class="w-4 h-4" aria-hidden="true"></i> Download Question Paper
             </a>
 
             ${item.answersUrl 
-              ? `<a href="${item.answersUrl}" target="_blank" rel="noopener noreferrer" class="w-full inline-flex items-center justify-center gap-1.5 bg-emerald-600 hover:bg-emerald-700 active:bg-emerald-800 text-white text-xs sm:text-sm font-bold py-2 px-3 rounded-xl transition shadow-xs">
-                  <i data-lucide="check-circle" class="w-4 h-4"></i> Download Marking Scheme
+              ? `<a 
+                  href="${escapeHTML(item.answersUrl)}" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  class="w-full inline-flex items-center justify-center gap-1.5 bg-emerald-600 hover:bg-emerald-700 active:bg-emerald-800 text-white text-xs sm:text-sm font-bold py-2 px-3 rounded-xl transition shadow-sm focus:outline-none focus:ring-2 focus:ring-emerald-600">
+                  <i data-lucide="check-circle" class="w-4 h-4" aria-hidden="true"></i> Download Marking Scheme
                 </a>`
-              : ''
+              : `<div class="text-center py-1 text-[11px] font-semibold text-slate-400 bg-slate-50 rounded-lg border border-slate-100">
+                  Marking scheme in preparation
+                </div>`
             }
+
+            <div class="pt-1 flex items-center justify-between text-[11px] text-slate-400">
+              <span>Verified Direct Link</span>
+              <a href="${whatsappShareHref}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 text-emerald-600 hover:text-emerald-700 font-bold transition">
+                <i data-lucide="share-2" class="w-3 h-3" aria-hidden="true"></i> Share
+              </a>
+            </div>
           </div>
-        </div>
+        </article>
       `;
     }
 
