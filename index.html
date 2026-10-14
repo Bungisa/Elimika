@@ -189,14 +189,26 @@
 
     const SHEET_ID = "1-7C_G-VAC2ICxuT3XwADzAluRoDvQyd04yS4BtSvXxM";
 
-    // Standardized Exam Categories
-    const EXAM_CATEGORIES = [
-      { id: 'NECTA', label: 'NECTA Finals', desc: 'National Examination Council Assessments', icon: 'award', color: 'blue' },
-      { id: 'Mock', label: 'Regional Mocks', desc: 'Joint Inter-School & Regional Mock Series', icon: 'file-text', color: 'indigo' },
-      { id: 'Pre-NECTA', label: 'Pre-NECTA Exams', desc: 'Preparatory Pre-National Examinations', icon: 'check-circle-2', color: 'amber' },
-      { id: 'Terminal', label: 'Terminal Assessments', desc: 'End of Term Evaluation Papers', icon: 'calendar', color: 'emerald' },
-      { id: 'Midterm', label: 'Midterm Tests', desc: 'Mid-Semester Class Assessment Tests', icon: 'clock', color: 'purple' }
+    // All Master Exam Categories
+    const ALL_EXAM_CATEGORIES = [
+      { id: 'NECTA', label: 'NECTA Finals', desc: 'National Examination Council Assessments', icon: 'award' },
+      { id: 'Pre-NECTA', label: 'Pre-NECTA Exams', desc: 'Preparatory Pre-National Examinations', icon: 'check-circle-2' },
+      { id: 'Mock', label: 'Regional Mocks', desc: 'Joint Inter-School & Regional Mock Series', icon: 'file-text' },
+      { id: 'Terminal', label: 'Terminal Assessments', desc: 'End of Term Evaluation Papers', icon: 'calendar' },
+      { id: 'Midterm', label: 'Midterm Tests', desc: 'Mid-Semester Class Assessment Tests', icon: 'clock' }
     ];
+
+    // Helper: Returns allowed categories based on the Form level
+    // Form 1, Form 3, and Form 5 DO NOT have national NECTA or Pre-NECTA exams
+    function getCategoriesForForm(formName) {
+      const nonExamForms = ['Form 1', 'Form 3', 'Form 5'];
+      const isNonExamClass = nonExamForms.some(f => formName.toLowerCase().includes(f.toLowerCase()));
+
+      if (isNonExamClass) {
+        return ALL_EXAM_CATEGORIES.filter(cat => cat.id !== 'NECTA' && cat.id !== 'Pre-NECTA');
+      }
+      return ALL_EXAM_CATEGORIES;
+    }
 
     function formatCloudUrl(url) {
       if (!url) return '';
@@ -261,7 +273,6 @@
     }
 
     function handleSearchOrSubjectChange() {
-      // Direct search or filter automatically switches to active papers list view
       renderApp();
     }
 
@@ -295,8 +306,7 @@
 
       const filteredPapers = papersDatabase.filter(item => matchesForm(item) && matchesSubject(item) && matchesQuery(item));
 
-      // CASE A: User has entered a search query or chosen a specific subject
-      // In this mode, display matching paper cards directly across all categories.
+      // CASE A: User entered a search query or chosen a specific subject
       if (query !== '' || subjectFilter !== 'All') {
         sectionTitle.textContent = `Search Results (${filteredPapers.length})`;
         countEl.textContent = `${filteredPapers.length} papers`;
@@ -304,7 +314,7 @@
         return;
       }
 
-      // CASE B: "All Levels" is chosen with no category drill-down
+      // CASE B: "All Levels" is chosen
       if (selectedForm === 'All') {
         sectionTitle.textContent = `All Available Papers (${filteredPapers.length})`;
         countEl.textContent = `${filteredPapers.length} papers`;
@@ -312,16 +322,18 @@
         return;
       }
 
-      // CASE C: A specific form is selected (e.g. Form 2, Form 4)
+      // CASE C: A specific form is selected (e.g. Form 1, Form 2, Form 3...)
+      const availableCategories = getCategoriesForForm(selectedForm);
+
       if (!selectedExamCategory) {
         // VIEW LEVEL 1: Display Exam Category folders
         sectionTitle.textContent = `${selectedForm} Examination Categories`;
         countEl.textContent = `${filteredPapers.length} total papers`;
         emptyState.classList.add('hidden');
-        renderCategoryCards(container, filteredPapers);
+        renderCategoryCards(container, filteredPapers, availableCategories);
       } else {
         // VIEW LEVEL 2: Display papers inside the selected category
-        const currentCategory = EXAM_CATEGORIES.find(c => c.id === selectedExamCategory) || { label: selectedExamCategory };
+        const currentCategory = ALL_EXAM_CATEGORIES.find(c => c.id === selectedExamCategory) || { label: selectedExamCategory };
         const categoryPapers = filteredPapers.filter(item => {
           const examField = (item.exam || item.title || '').toLowerCase();
           return examField.includes(selectedExamCategory.toLowerCase());
@@ -333,11 +345,11 @@
       }
     }
 
-    // Renders the 5 category cards (Folders)
-    function renderCategoryCards(container, papersInForm) {
+    // Renders category cards (Dynamically filters out NECTA & Pre-NECTA for Forms 1, 3, and 5)
+    function renderCategoryCards(container, papersInForm, categoriesToDisplay) {
       container.innerHTML = `
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4.5 my-2">
-          ${EXAM_CATEGORIES.map(cat => {
+          ${categoriesToDisplay.map(cat => {
             const count = papersInForm.filter(item => {
               const examField = (item.exam || item.title || '').toLowerCase();
               return examField.includes(cat.id.toLowerCase());
@@ -437,7 +449,7 @@
             </a>
 
             ${item.answersUrl 
-              ? `<a href="${item.answersUrl}" target="_blank" rel="noopener noreferrer" class="w-full inline-flex items-center justify-center gap-1.5 bg-emerald-600 hover:bg-emerald-700 active:bg-emerald-800 text-white text-xs sm:text-sm font-bold py-2.5 px-3 rounded-xl transition shadow-xs">
+              ? `<a href="${item.answersUrl}" target="_blank" rel="noopener noreferrer" class="w-full inline-flex items-center justify-center gap-1.5 bg-emerald-600 hover:bg-emerald-700 active:bg-emerald-800 text-white text-xs sm:text-sm font-bold py-2 px-3 rounded-xl transition shadow-xs">
                   <i data-lucide="check-circle" class="w-4 h-4"></i> Download Marking Scheme
                 </a>`
               : ''
