@@ -107,7 +107,7 @@
           </div>
         </div>
 
-        <!-- Level Grade Tabs -->
+        <!-- Step 1: Level Grade Tabs -->
         <div class="mt-4 sm:mt-5 overflow-x-auto hide-scrollbar -mx-4 px-4 sm:mx-0 sm:px-0">
           <div class="inline-flex sm:flex sm:flex-wrap items-center justify-start sm:justify-center gap-2 py-1" id="levelTabsContainer">
             <!-- Injected via JavaScript -->
@@ -116,18 +116,18 @@
       </div>
     </section>
 
-    <!-- Content Display Section -->
+    <!-- Main Navigation & Content Section -->
     <section class="max-w-6xl mx-auto px-4 sm:px-6 py-6 sm:py-8">
       
-      <!-- Navigational Filter Bars -->
+      <!-- Navigational Filter Bars (Step 2: Years & Step 3: Subjects) -->
       <div id="navigationControls" class="space-y-4 mb-6">
         
-        <!-- Step 1: Year Selection -->
+        <!-- Step 2: Year Selection -->
         <div id="yearSection" class="bg-white border border-slate-200/90 rounded-2xl p-4 sm:p-5 shadow-xs">
-          <div class="flex items-center justify-between gap-4 mb-3.5">
+          <div class="flex items-center justify-between gap-4 mb-3">
             <div>
               <h2 class="text-sm font-bold text-slate-900 flex items-center gap-2">
-                <i data-lucide="calendar" class="w-4 h-4 text-blue-600"></i> Select Examination Year
+                <i data-lucide="calendar" class="w-4 h-4 text-blue-600"></i> Step 2: Select Examination Year
               </h2>
               <p class="text-xs text-slate-500 mt-0.5">Filter available papers by year</p>
             </div>
@@ -138,14 +138,14 @@
           </div>
         </div>
 
-        <!-- Step 2: Subject Selection -->
+        <!-- Step 3: Subject Selection -->
         <div id="subjectSection" class="bg-white border border-slate-200/90 rounded-2xl p-4 sm:p-5 shadow-xs">
-          <div class="flex items-center justify-between gap-4 mb-3.5">
+          <div class="flex items-center justify-between gap-4 mb-3">
             <div>
               <h2 class="text-sm font-bold text-slate-900 flex items-center gap-2">
-                <i data-lucide="book-open" class="w-4 h-4 text-indigo-600"></i> Select Subject
+                <i data-lucide="book-open" class="w-4 h-4 text-indigo-600"></i> Step 3: Select Subject
               </h2>
-              <p class="text-xs text-slate-500 mt-0.5">Choose a subject to view specific papers</p>
+              <p class="text-xs text-slate-500 mt-0.5">Choose a subject to reveal available exam categories</p>
             </div>
             <span id="subjectCount" class="text-xs font-semibold text-indigo-700 bg-indigo-50 border border-indigo-100 px-3 py-1 rounded-full">0 Subjects</span>
           </div>
@@ -156,22 +156,22 @@
 
       </div>
 
-      <!-- Results Header -->
+      <!-- Breadcrumb & Results Status Header -->
       <div id="resultsHeader" class="flex items-center justify-between mb-4 pt-4 border-t border-slate-200">
-        <h2 id="sectionTitle" class="text-xs sm:text-sm font-bold text-slate-500 uppercase tracking-wider">
-          Available Papers
+        <h2 id="sectionTitle" class="text-xs sm:text-sm font-bold text-slate-700 uppercase tracking-wider">
+          Exam Categories
         </h2>
         <span id="paperCount" class="text-xs font-semibold text-slate-500 bg-slate-100 px-2.5 py-0.5 rounded-full">Loading...</span>
       </div>
 
-      <!-- Main Dynamic View Container -->
+      <!-- Main Dynamic View Container (Toggles between Step 4 Category Folders & Step 5 Final Papers) -->
       <div id="mainDisplayArea"></div>
 
       <!-- No Results State -->
       <div id="noResults" class="hidden text-center py-12 px-4 bg-white border border-dashed border-slate-300 rounded-2xl mt-4">
         <i data-lucide="file-question" class="w-10 h-10 text-slate-400 mx-auto mb-2"></i>
         <h3 class="text-base font-bold text-slate-700">No papers found</h3>
-        <p class="text-xs text-slate-500 mt-1">Try selecting a different year or subject to view available materials.</p>
+        <p class="text-xs text-slate-500 mt-1">Try selecting a different year, subject, or exam type.</p>
       </div>
     </section>
   </main>
@@ -211,6 +211,26 @@
       ]
     };
 
+    // Master Exam Categories
+    const ALL_EXAM_CATEGORIES = [
+      { id: 'NECTA', label: 'NECTA Finals', desc: 'National Examination Council Assessments', icon: 'award' },
+      { id: 'Pre-NECTA', label: 'Pre-National Exams', desc: 'Preparatory Pre-National Examinations', icon: 'check-circle-2' },
+      { id: 'Mock', label: 'Regional & Joint Mocks', desc: 'Joint Inter-School & Regional Mock Series', icon: 'file-text' },
+      { id: 'Terminal', label: 'Terminal Assessments', desc: 'End of Term Evaluation Papers', icon: 'calendar' },
+      { id: 'Midterm', label: 'Midterm Tests', desc: 'Mid-Semester Class Assessment Tests', icon: 'clock' }
+    ];
+
+    // Form 1, Form 3, and Form 5, as well as Std 1, 2, 3, 5, 6, do not have NECTA or Pre-NECTA
+    function getCategoriesForLevel(levelName) {
+      const nationalExamClasses = ['Standard 4', 'Standard 7', 'Form 2', 'Form 4', 'Form 6'];
+      const hasNationalExam = nationalExamClasses.some(l => levelName.toLowerCase().includes(l.toLowerCase()));
+
+      if (!hasNationalExam) {
+        return ALL_EXAM_CATEGORIES.filter(cat => cat.id !== 'NECTA' && cat.id !== 'Pre-NECTA');
+      }
+      return ALL_EXAM_CATEGORIES;
+    }
+
     function formatCloudUrl(url) {
       if (!url) return '';
       const driveMatch = url.match(/\/d\/([a-zA-Z0-9_-]+)/) || url.match(/id=([a-zA-Z0-9_-]+)/);
@@ -224,6 +244,7 @@
     let selectedForm = 'Form 2'; 
     let selectedYear = 'All'; 
     let selectedSubject = 'All'; 
+    let selectedExamCategory = null; // null = Show Exam Categories, string = Show Papers
 
     function switchEducationTier(tier) {
       currentTier = tier;
@@ -243,6 +264,7 @@
 
       selectedYear = 'All';
       selectedSubject = 'All';
+      selectedExamCategory = null;
 
       renderLevelTabs();
       populateDynamicFilters();
@@ -335,7 +357,7 @@
       yearContainer.innerHTML = yearHtml;
       yearCountEl.textContent = `${years.length} ${years.length === 1 ? 'Year' : 'Years'}`;
 
-      // 2. Populate Subjects (filtered by selected year)
+      // 2. Populate Subjects (scoped to selected year)
       const yearFilteredPapers = selectedYear === 'All' 
         ? levelPapers 
         : levelPapers.filter(p => String(p.year) === String(selectedYear));
@@ -367,6 +389,7 @@
       selectedForm = formName;
       selectedYear = 'All'; 
       selectedSubject = 'All'; 
+      selectedExamCategory = null; 
 
       renderLevelTabs();
       populateDynamicFilters();
@@ -375,7 +398,8 @@
 
     function handleYearChange(year) {
       selectedYear = year;
-      selectedSubject = 'All'; // reset subject when year changes
+      selectedSubject = 'All'; 
+      selectedExamCategory = null; 
 
       populateDynamicFilters();
       renderApp();
@@ -383,6 +407,26 @@
 
     function handleSubjectChange(subject) {
       selectedSubject = subject;
+      selectedExamCategory = null; // reset category view when switching subject
+
+      // update chip styles
+      document.querySelectorAll('.subject-chip').forEach(btn => {
+        const isAll = subject === 'All' && btn.textContent.trim() === 'All Subjects';
+        const isSubject = btn.textContent.trim() === subject;
+        btn.classList.toggle('active-chip', isAll || isSubject);
+      });
+
+      renderApp();
+    }
+
+    function selectExamCategory(categoryId) {
+      selectedExamCategory = categoryId;
+      renderApp();
+      window.scrollTo({ top: 420, behavior: 'smooth' });
+    }
+
+    function resetExamCategory() {
+      selectedExamCategory = null;
       renderApp();
     }
 
@@ -397,12 +441,6 @@
       const countEl = document.getElementById('paperCount');
       const sectionTitle = document.getElementById('sectionTitle');
 
-      // Update section header
-      let titleText = `${selectedForm} Past Papers`;
-      if (selectedSubject !== 'All') titleText += ` • ${selectedSubject}`;
-      if (selectedYear !== 'All') titleText += ` • ${selectedYear}`;
-      sectionTitle.textContent = titleText;
-
       // Filter database
       const levelPapers = getLevelPapers();
 
@@ -414,23 +452,121 @@
         return corpus.includes(query);
       };
 
-      const filteredPapers = levelPapers.filter(item => 
+      const contextualPapers = levelPapers.filter(item => 
         matchesYear(item) && matchesSubject(item) && matchesQuery(item)
       );
 
-      countEl.textContent = `${filteredPapers.length} ${filteredPapers.length === 1 ? 'Paper' : 'Papers'}`;
+      // CASE A: User typed into the search bar -> Show direct matching cards
+      if (query !== '') {
+        sectionTitle.textContent = `Search Results (${contextualPapers.length})`;
+        countEl.textContent = `${contextualPapers.length} papers`;
+        renderPapersList(container, emptyState, contextualPapers);
+        return;
+      }
 
-      if (filteredPapers.length === 0) {
-        container.innerHTML = '';
+      // CASE B: Drill-down Flow
+      const allowedCategories = getCategoriesForLevel(selectedForm);
+
+      if (!selectedExamCategory) {
+        // STEP 4: Render Exam Categories for this Level + Year + Subject
+        let titleContext = `${selectedForm} • Categories`;
+        if (selectedYear !== 'All') titleContext += ` (${selectedYear})`;
+        if (selectedSubject !== 'All') titleContext += ` • ${selectedSubject}`;
+        
+        sectionTitle.textContent = titleContext;
+        countEl.textContent = `${contextualPapers.length} total papers`;
+        emptyState.classList.add('hidden');
+        renderCategoryCards(container, contextualPapers, allowedCategories);
+      } else {
+        // STEP 5: Render final papers inside the selected exam type
+        const currentCategory = ALL_EXAM_CATEGORIES.find(c => c.id === selectedExamCategory) || { label: selectedExamCategory };
+        const finalPapers = contextualPapers.filter(item => {
+          const examField = (item.exam || item.title || '').toLowerCase();
+          return examField.includes(selectedExamCategory.toLowerCase());
+        });
+
+        sectionTitle.textContent = `${selectedForm} • ${selectedSubject !== 'All' ? selectedSubject : 'All Subjects'} • ${currentCategory.label}`;
+        countEl.textContent = `${finalPapers.length} papers`;
+        renderCategoryPapersWithHeader(container, emptyState, finalPapers, currentCategory);
+      }
+    }
+
+    // Step 4 Grid: Displays MOCK, NECTA, PRE-NECTA, etc.
+    function renderCategoryCards(container, papersInContext, categoriesToDisplay) {
+      container.innerHTML = `
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4.5 my-2">
+          ${categoriesToDisplay.map(cat => {
+            const count = papersInContext.filter(item => {
+              const examField = (item.exam || item.title || '').toLowerCase();
+              return examField.includes(cat.id.toLowerCase());
+            }).length;
+
+            return `
+              <div onclick="selectExamCategory('${cat.id}')" class="bg-white border border-slate-200/90 hover:border-blue-500 rounded-2xl p-5 shadow-xs hover:shadow-md transition cursor-pointer flex flex-col justify-between group">
+                <div>
+                  <div class="w-11 h-11 rounded-xl bg-blue-50 text-blue-700 flex items-center justify-center mb-3.5 group-hover:bg-blue-600 group-hover:text-white transition">
+                    <i data-lucide="${cat.icon}" class="w-5 h-5"></i>
+                  </div>
+                  <h3 class="text-base font-bold text-slate-800 mb-1 group-hover:text-blue-700 transition">${cat.label}</h3>
+                  <p class="text-xs text-slate-500 leading-relaxed">${cat.desc}</p>
+                </div>
+                <div class="mt-5 pt-3.5 border-t border-slate-100 flex items-center justify-between">
+                  <span class="text-xs font-bold ${count > 0 ? 'text-blue-700 bg-blue-50' : 'text-slate-400 bg-slate-100'} px-2.5 py-0.5 rounded-full">
+                    ${count}${count === 1 ? 'Paper' : 'Papers'}
+                  </span>
+                  <span class="text-xs font-bold text-blue-600 flex items-center gap-1 group-hover:translate-x-1 transition">
+                    Open Papers <i data-lucide="chevron-right" class="w-3.5 h-3.5"></i>
+                  </span>
+                </div>
+              </div>
+            `;
+          }).join('')}
+        </div>
+      `;
+      lucide.createIcons();
+    }
+
+    // Step 5: Displays the final papers with a "Back to Exam Types" button
+    function renderCategoryPapersWithHeader(container, emptyState, papers, category) {
+      container.innerHTML = `
+        <div class="mb-5 flex items-center justify-between bg-white border border-slate-200/90 rounded-2xl p-3 sm:p-4 shadow-xs">
+          <div class="flex items-center gap-3">
+            <button onclick="resetExamCategory()" class="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-bold text-slate-700 bg-slate-100 hover:bg-slate-200 active:scale-95 rounded-xl transition">
+              <i data-lucide="arrow-left" class="w-4 h-4"></i> Back to Exam Types
+            </button>
+            <span class="text-xs sm:text-sm font-bold text-slate-800 hidden xs:inline">${selectedForm} &bull; ${category.label}</span>
+          </div>
+          <span class="text-xs font-semibold text-slate-500">${papers.length} Available</span>
+        </div>
+        <div id="categoryPapersGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"></div>
+      `;
+
+      const grid = document.getElementById('categoryPapersGrid');
+      if (papers.length === 0) {
+        grid.innerHTML = '';
         emptyState.classList.remove('hidden');
       } else {
         emptyState.classList.add('hidden');
-        container.innerHTML = `
-          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            ${filteredPapers.map(item => generateCardHTML(item)).join('')}
-          </div>
-        `;
+        grid.innerHTML = papers.map(item => generateCardHTML(item)).join('');
       }
+
+      lucide.createIcons();
+    }
+
+    // Renders the list directly for search queries
+    function renderPapersList(container, emptyState, list) {
+      if (list.length === 0) {
+        container.innerHTML = '';
+        emptyState.classList.remove('hidden');
+        return;
+      }
+
+      emptyState.classList.add('hidden');
+      container.innerHTML = `
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          ${list.map(item => generateCardHTML(item)).join('')}
+        </div>
+      `;
       lucide.createIcons();
     }
 
