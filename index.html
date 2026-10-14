@@ -5,15 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
   <!-- SEO & Social Meta Tags -->
-  <title>Elimika | Tanzania Past Papers (Standard 1–7 & Form 1–6)</title>
-  <meta name="description" content="Access free Tanzanian past examination papers and marking schemes for Standard 1–7 and Form 1–6. Covering NECTA, Pre-NECTA, Mocks, Terminal and Midterm examinations." />
-  <meta name="keywords" content="Elimika, NECTA past papers, CSEE, ACSEE, FTNA, Standard 7, Form 4 past papers, marking schemes, Tanzania education" />
+  <title>Elimika | Tanzania Past Examination Papers & Marking Schemes</title>
+  <meta name="description" content="Access Tanzanian past examination papers and marking schemes for Standard 1–7 and Form 1–6. Covering NECTA, Pre-NECTA, Mock, Terminal, and Midterm examinations." />
+  <meta name="keywords" content="Elimika, past papers Tanzania, NECTA past papers, CSEE, ACSEE, FTNA, PSLE, Standard 7, Form 4, Form 6, marking schemes" />
   <meta name="author" content="Elimika Educational Hub" />
   <meta name="robots" content="index, follow" />
 
-  <!-- Open Graph / Facebook -->
+  <!-- Open Graph / Social Sharing -->
   <meta property="og:type" content="website" />
-  <meta property="og:title" content="Elimika | Tanzania Past Papers Archive" />
+  <meta property="og:title" content="Elimika | Tanzania Past Papers & Solutions" />
   <meta property="og:description" content="Download NECTA, Mock, Terminal, and Midterm past papers with marking schemes for Primary and Secondary schools." />
   
   <!-- Tailwind CSS CDN -->
@@ -47,7 +47,7 @@
   <script src="https://unpkg.com/lucide@latest"></script>
 
   <style>
-    /* Prevent layout shift during icon hydration */
+    /* Layout stabilization during icon hydration */
     [data-lucide] {
       width: 1.25rem;
       height: 1.25rem;
@@ -67,10 +67,10 @@
     }
   </style>
 </head>
-<body class="bg-slate-50 text-slate-800 font-sans antialiased min-h-screen flex flex-direction-column flex-col selection:bg-brand-500 selection:text-white">
+<body class="bg-slate-50 text-slate-800 font-sans antialiased min-h-screen flex flex-col selection:bg-brand-500 selection:text-white">
 
   <!-- ========================================== -->
-  <!-- 1. TOP ANNOUNCEMENT & NAVIGATION           -->
+  <!-- 1. TOP NAVIGATION                          -->
   <!-- ========================================== -->
   <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-sm transition-all">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -78,7 +78,7 @@
         
         <!-- Brand Logo -->
         <a href="#home" class="flex items-center gap-3 group focus:outline-none focus:ring-2 focus:ring-brand-600 rounded-lg p-1">
-          <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-brand-800 to-brand-600 flex items-center justify-center text-white shadow-md shadow-brand-500/20 group-hover:scale-105 transition-transform">
+          <div class="w-10 h-10 rounded-xl bg-brand-700 flex items-center justify-center text-white shadow-md shadow-brand-500/20 group-hover:bg-brand-800 transition-colors">
             <i data-lucide="graduation-cap" class="w-6 h-6"></i>
           </div>
           <div>
@@ -91,20 +91,20 @@
 
         <!-- Desktop Navigation -->
         <nav class="hidden md:flex items-center gap-6" aria-label="Main Navigation">
-          <a href="#levels" class="text-sm font-semibold text-slate-600 hover:text-brand-600 transition-colors">Class Levels</a>
+          <a href="#levels" class="text-sm font-semibold text-slate-600 hover:text-brand-600 transition-colors">Classes</a>
           <a href="#categories" class="text-sm font-semibold text-slate-600 hover:text-brand-600 transition-colors">Exam Types</a>
-          <a href="#directory" class="text-sm font-semibold text-slate-600 hover:text-brand-600 transition-colors">Paper Archive</a>
+          <a href="#directory" class="text-sm font-semibold text-slate-600 hover:text-brand-600 transition-colors">Paper Directory</a>
           <a href="#about" class="text-sm font-semibold text-slate-600 hover:text-brand-600 transition-colors">About</a>
         </nav>
 
-        <!-- Action Buttons -->
+        <!-- Right Side Quick Action -->
         <div class="flex items-center gap-3">
           <a href="#directory" class="hidden sm:inline-flex items-center gap-2 bg-brand-50 hover:bg-brand-100 text-brand-700 font-semibold px-4 py-2 rounded-lg text-sm transition-colors border border-brand-200">
             <i data-lucide="search" class="w-4 h-4"></i>
-            Search Papers
+            Find Papers
           </a>
 
-          <!-- Mobile Menu Button -->
+          <!-- Mobile Menu Hamburger -->
           <button id="mobileMenuBtn" type="button" aria-expanded="false" aria-controls="mobileMenu" class="md:hidden p-2 rounded-lg text-slate-600 hover:text-slate-900 hover:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-brand-500" aria-label="Toggle Navigation Menu">
             <i data-lucide="menu" id="menuOpenIcon" class="w-6 h-6"></i>
             <i data-lucide="x" id="menuCloseIcon" class="w-6 h-6 hidden"></i>
@@ -113,11 +113,11 @@
       </div>
     </div>
 
-    <!-- Mobile Drawer -->
+    <!-- Mobile Navigation Drawer -->
     <div id="mobileMenu" class="hidden md:hidden border-b border-slate-200 bg-white px-4 pt-3 pb-6 space-y-3">
-      <a href="#levels" class="block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-slate-50 hover:text-brand-600 mobile-nav-link">Class Levels (Std 1–7, Form 1–6)</a>
-      <a href="#categories" class="block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-slate-50 hover:text-brand-600 mobile-nav-link">Examinations (NECTA, Mock, etc.)</a>
-      <a href="#directory" class="block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-slate-50 hover:text-brand-600 mobile-nav-link">Past Papers Archive</a>
+      <a href="#levels" class="block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-slate-50 hover:text-brand-600 mobile-nav-link">Class Levels (Std 1–7 & Form 1–6)</a>
+      <a href="#categories" class="block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-slate-50 hover:text-brand-600 mobile-nav-link">Exam Categories (NECTA, Mock, etc.)</a>
+      <a href="#directory" class="block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-slate-50 hover:text-brand-600 mobile-nav-link">Past Papers Directory</a>
       <a href="#about" class="block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-slate-50 hover:text-brand-600 mobile-nav-link">About Elimika</a>
     </div>
   </header>
@@ -131,28 +131,26 @@
         
         <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-brand-50 border border-brand-200 text-brand-700 text-xs sm:text-sm font-semibold mb-6">
           <span class="flex h-2 w-2 rounded-full bg-brand-600 animate-pulse"></span>
-          Direct Syllabus Revision Portal • 2026 Catalog
+          Tanzania Curriculum Revision Portal
         </div>
 
         <h1 class="text-3xl sm:text-5xl lg:text-6xl font-black text-slate-900 tracking-tight leading-[1.15] mb-6">
           Find Past Papers.<br>
-          <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-700 via-brand-600 to-blue-500">
-            Revise with Marking Schemes.
-          </span>
+          <span class="text-brand-700">Study with Marking Schemes.</span>
         </h1>
 
         <p class="text-base sm:text-lg text-slate-600 mb-8 leading-relaxed">
-          Free, structured access to official examination papers and verified answers for Primary (<strong class="text-slate-800">Standard 1–7</strong>) and Secondary (<strong class="text-slate-800">Form 1–6</strong>) Tanzanian curricula.
+          Open access to past examination questions and solutions for Primary (<strong class="text-slate-800">Standard 1–7</strong>) and Secondary (<strong class="text-slate-800">Form 1–6</strong>) students across Tanzania.
         </p>
 
-        <!-- Quick Jump Search Bar in Hero -->
+        <!-- Hero Quick Search Input -->
         <div class="max-w-2xl mx-auto bg-white p-2 rounded-2xl shadow-xl shadow-slate-200/50 border border-slate-200 flex flex-col sm:flex-row gap-2">
           <div class="relative flex-grow flex items-center">
             <i data-lucide="search" class="w-5 h-5 text-slate-400 absolute left-4 pointer-events-none"></i>
             <input 
               type="text" 
               id="heroQuickSearch" 
-              placeholder="Search by subject or year (e.g. Basic Mathematics 2025)..." 
+              placeholder="Search by subject, form, or year (e.g. Kiswahili Form 4)..." 
               class="w-full pl-11 pr-4 py-3 bg-transparent text-sm sm:text-base text-slate-800 placeholder-slate-400 focus:outline-none"
               aria-label="Quick search past papers"
             />
@@ -162,16 +160,16 @@
             onclick="triggerHeroSearch()" 
             class="bg-brand-600 hover:bg-brand-700 text-white font-semibold px-6 py-3 rounded-xl text-sm sm:text-base transition-colors shadow-md shadow-brand-600/20 flex items-center justify-center gap-2"
           >
-            Find Papers
+            Search Papers
             <i data-lucide="arrow-right" class="w-4 h-4"></i>
           </button>
         </div>
 
-        <!-- Quick Badges -->
-        <div class="mt-8 flex flex-wrap justify-center items-center gap-2 sm:gap-4 text-xs font-semibold text-slate-500">
-          <span class="flex items-center gap-1.5"><i data-lucide="check-circle" class="w-4 h-4 text-accent-600"></i> NECTA Certified</span>
-          <span class="flex items-center gap-1.5"><i data-lucide="check-circle" class="w-4 h-4 text-accent-600"></i> Official Marking Schemes</span>
-          <span class="flex items-center gap-1.5"><i data-lucide="check-circle" class="w-4 h-4 text-accent-600"></i> Cloud Storage PDF Previews</span>
+        <!-- Practical Overview Features -->
+        <div class="mt-8 flex flex-wrap justify-center items-center gap-3 sm:gap-6 text-xs font-semibold text-slate-500">
+          <span class="flex items-center gap-1.5"><i data-lucide="check-circle" class="w-4 h-4 text-emerald-600"></i> Standard 1 to Form 6</span>
+          <span class="flex items-center gap-1.5"><i data-lucide="check-circle" class="w-4 h-4 text-emerald-600"></i> Question Papers & Answers</span>
+          <span class="flex items-center gap-1.5"><i data-lucide="check-circle" class="w-4 h-4 text-emerald-600"></i> Google Drive & Dropbox PDF Links</span>
         </div>
 
       </div>
@@ -183,54 +181,43 @@
   <!-- ========================================== -->
   <section id="levels" class="py-14 bg-white border-b border-slate-200">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
-        <div>
-          <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">Browse by Class Level</h2>
-          <p class="text-slate-500 text-sm sm:text-base mt-1">Select your standard or form to isolate corresponding examination sets.</p>
-        </div>
-        <div class="flex items-center gap-2">
-          <span class="text-xs font-bold text-slate-400 uppercase tracking-wider">Fast Navigation</span>
-        </div>
+      <div class="mb-8">
+        <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">Browse by Class Level</h2>
+        <p class="text-slate-500 text-sm sm:text-base mt-1">Select an educational level to filter past papers immediately.</p>
       </div>
 
-      <!-- Secondary Levels (Form 1–6) -->
+      <!-- Secondary Education (Form 1–6) -->
       <h3 class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-3 flex items-center gap-2">
         <i data-lucide="book-open" class="w-4 h-4"></i> Secondary Education (O-Level & A-Level)
       </h3>
       <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 mb-8">
         <button onclick="quickFilterByClass('Form 1')" class="group p-4 bg-slate-50 hover:bg-brand-50 border border-slate-200 hover:border-brand-300 rounded-xl text-left transition-all">
-          <div class="text-xs font-semibold text-slate-400 group-hover:text-brand-600">Lower Sec</div>
+          <div class="text-xs font-semibold text-slate-400 group-hover:text-brand-600">Lower Secondary</div>
           <div class="text-base font-bold text-slate-900 group-hover:text-brand-700">Form 1</div>
-          <div class="text-[11px] text-slate-500 mt-1">Orientation & Midterms</div>
         </button>
         <button onclick="quickFilterByClass('Form 2')" class="group p-4 bg-slate-50 hover:bg-brand-50 border border-slate-200 hover:border-brand-300 rounded-xl text-left transition-all">
           <div class="text-xs font-semibold text-slate-400 group-hover:text-brand-600">FTNA Level</div>
           <div class="text-base font-bold text-slate-900 group-hover:text-brand-700">Form 2</div>
-          <div class="text-[11px] text-slate-500 mt-1">National Assessment</div>
         </button>
         <button onclick="quickFilterByClass('Form 3')" class="group p-4 bg-slate-50 hover:bg-brand-50 border border-slate-200 hover:border-brand-300 rounded-xl text-left transition-all">
-          <div class="text-xs font-semibold text-slate-400 group-hover:text-brand-600">Senior Sec</div>
+          <div class="text-xs font-semibold text-slate-400 group-hover:text-brand-600">Senior Secondary</div>
           <div class="text-base font-bold text-slate-900 group-hover:text-brand-700">Form 3</div>
-          <div class="text-[11px] text-slate-500 mt-1">Terminal & Mocks</div>
         </button>
-        <button onclick="quickFilterByClass('Form 4')" class="group p-4 bg-brand-50/60 hover:bg-brand-100/60 border border-brand-200 hover:border-brand-400 rounded-xl text-left transition-all ring-1 ring-brand-500/10">
+        <button onclick="quickFilterByClass('Form 4')" class="group p-4 bg-brand-50/70 hover:bg-brand-100/70 border border-brand-200 hover:border-brand-400 rounded-xl text-left transition-all">
           <div class="text-xs font-bold text-brand-600">CSEE Level</div>
           <div class="text-base font-extrabold text-brand-900">Form 4</div>
-          <div class="text-[11px] text-brand-700 mt-1">National Exams</div>
         </button>
         <button onclick="quickFilterByClass('Form 5')" class="group p-4 bg-slate-50 hover:bg-brand-50 border border-slate-200 hover:border-brand-300 rounded-xl text-left transition-all">
-          <div class="text-xs font-semibold text-slate-400 group-hover:text-brand-600">High School</div>
+          <div class="text-xs font-semibold text-slate-400 group-hover:text-brand-600">Advanced Level</div>
           <div class="text-base font-bold text-slate-900 group-hover:text-brand-700">Form 5</div>
-          <div class="text-[11px] text-slate-500 mt-1">Advanced Level</div>
         </button>
-        <button onclick="quickFilterByClass('Form 6')" class="group p-4 bg-brand-50/60 hover:bg-brand-100/60 border border-brand-200 hover:border-brand-400 rounded-xl text-left transition-all ring-1 ring-brand-500/10">
+        <button onclick="quickFilterByClass('Form 6')" class="group p-4 bg-brand-50/70 hover:bg-brand-100/70 border border-brand-200 hover:border-brand-400 rounded-xl text-left transition-all">
           <div class="text-xs font-bold text-brand-600">ACSEE Level</div>
           <div class="text-base font-extrabold text-brand-900">Form 6</div>
-          <div class="text-[11px] text-brand-700 mt-1">Advanced Finals</div>
         </button>
       </div>
 
-      <!-- Primary Levels (Standard 1–7) -->
+      <!-- Primary Education (Standard 1–7) -->
       <h3 class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-3 flex items-center gap-2">
         <i data-lucide="backpack" class="w-4 h-4"></i> Primary Education (Standard 1 to 7)
       </h3>
@@ -261,7 +248,7 @@
         </button>
         <button onclick="quickFilterByClass('Standard 7')" class="p-3 bg-brand-50 hover:bg-brand-100 border border-brand-200 rounded-lg text-center transition-colors">
           <span class="block text-sm font-extrabold text-brand-900">Std 7</span>
-          <span class="text-[10px] text-brand-600 font-bold">PSLE Finals</span>
+          <span class="text-[10px] text-brand-600 font-bold">PSLE Exam</span>
         </button>
       </div>
 
@@ -275,7 +262,7 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="mb-6">
         <h2 class="text-xl sm:text-2xl font-black text-slate-900">Examination Categories</h2>
-        <p class="text-slate-500 text-sm">Filter papers according to official examination benchmarks.</p>
+        <p class="text-slate-500 text-sm">Target your preparation by official exam format.</p>
       </div>
 
       <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
@@ -297,7 +284,7 @@
           </div>
           <div>
             <div class="text-sm font-bold text-slate-900">Pre-NECTA</div>
-            <div class="text-[11px] text-slate-400">Regional Preparations</div>
+            <div class="text-[11px] text-slate-400">Preparatory Papers</div>
           </div>
         </button>
 
@@ -308,7 +295,7 @@
           </div>
           <div>
             <div class="text-sm font-bold text-slate-900">Mock</div>
-            <div class="text-[11px] text-slate-400">Joint Mock Exams</div>
+            <div class="text-[11px] text-slate-400">Regional Trials</div>
           </div>
         </button>
 
@@ -319,7 +306,7 @@
           </div>
           <div>
             <div class="text-sm font-bold text-slate-900">Terminal</div>
-            <div class="text-[11px] text-slate-400">End of Term Tests</div>
+            <div class="text-[11px] text-slate-400">End-of-Term Exams</div>
           </div>
         </button>
 
@@ -338,26 +325,26 @@
   </section>
 
   <!-- ========================================== -->
-  <!-- 5. MAIN FILTER CONTROLS & PAPERS DIRECTORY -->
+  <!-- 5. FILTER CONTROLS & PAPERS DIRECTORY      -->
   <!-- ========================================== -->
   <main id="directory" class="flex-grow py-12">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       
-      <!-- Section Title & Database Status -->
+      <!-- Section Title & Live Status Indicator -->
       <div class="flex flex-col md:flex-row md:items-center justify-between pb-6 mb-6 border-b border-slate-200 gap-4">
         <div>
           <h2 class="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">Examination Archive</h2>
-          <p class="text-slate-500 text-sm mt-1">Multi-filter past papers by class, subject, category, and academic year.</p>
+          <p class="text-slate-500 text-sm mt-1">Multi-filter past papers by class level, subject, category, and academic year.</p>
         </div>
         
-        <!-- Live Status Pill -->
+        <!-- Live Connection Status -->
         <div id="dataStatusIndicator" class="inline-flex items-center gap-2 self-start md:self-auto text-xs px-3 py-1.5 rounded-full font-medium bg-slate-100 text-slate-600">
-          <span class="w-2 h-2 rounded-full bg-slate-400"></span>
-          Initializing Archive...
+          <span class="w-2 h-2 rounded-full bg-slate-400 animate-pulse"></span>
+          Checking database...
         </div>
       </div>
 
-      <!-- Filter Panel Container -->
+      <!-- Filter Controls Panel -->
       <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-200 mb-8">
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
           
@@ -367,7 +354,7 @@
             <div class="relative">
               <select id="filterClass" class="w-full bg-slate-50 hover:bg-slate-100 border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm font-medium text-slate-800 focus:outline-none focus:ring-2 focus:ring-brand-500 transition-colors cursor-pointer appearance-none">
                 <option value="ALL">All Levels (Std 1–7 & Form 1–6)</option>
-                <optgroup label="Secondary (Form)">
+                <optgroup label="Secondary Education">
                   <option value="Form 1">Form 1</option>
                   <option value="Form 2">Form 2</option>
                   <option value="Form 3">Form 3</option>
@@ -375,7 +362,7 @@
                   <option value="Form 5">Form 5</option>
                   <option value="Form 6">Form 6</option>
                 </optgroup>
-                <optgroup label="Primary (Standard)">
+                <optgroup label="Primary Education">
                   <option value="Standard 1">Standard 1</option>
                   <option value="Standard 2">Standard 2</option>
                   <option value="Standard 3">Standard 3</option>
@@ -395,11 +382,11 @@
             <div class="relative">
               <select id="filterCategory" class="w-full bg-slate-50 hover:bg-slate-100 border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm font-medium text-slate-800 focus:outline-none focus:ring-2 focus:ring-brand-500 transition-colors cursor-pointer appearance-none">
                 <option value="ALL">All Categories</option>
-                <option value="NECTA">NECTA (Official Finals)</option>
+                <option value="NECTA">NECTA</option>
                 <option value="Pre-NECTA">Pre-NECTA</option>
-                <option value="Mock">Mock Examinations</option>
-                <option value="Terminal">Terminal Exams</option>
-                <option value="Midterm">Midterm Exams</option>
+                <option value="Mock">Mock</option>
+                <option value="Terminal">Terminal</option>
+                <option value="Midterm">Midterm</option>
               </select>
               <i data-lucide="chevron-down" class="w-4 h-4 text-slate-400 absolute right-3 top-3 pointer-events-none"></i>
             </div>
@@ -411,7 +398,7 @@
             <div class="relative">
               <select id="filterSubject" class="w-full bg-slate-50 hover:bg-slate-100 border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm font-medium text-slate-800 focus:outline-none focus:ring-2 focus:ring-brand-500 transition-colors cursor-pointer appearance-none">
                 <option value="ALL">All Subjects</option>
-                <!-- Populated dynamically via JS -->
+                <!-- Dynamically populated from actual sheet data -->
               </select>
               <i data-lucide="chevron-down" class="w-4 h-4 text-slate-400 absolute right-3 top-3 pointer-events-none"></i>
             </div>
@@ -423,7 +410,7 @@
             <div class="relative">
               <select id="filterYear" class="w-full bg-slate-50 hover:bg-slate-100 border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm font-medium text-slate-800 focus:outline-none focus:ring-2 focus:ring-brand-500 transition-colors cursor-pointer appearance-none">
                 <option value="ALL">All Years</option>
-                <!-- Populated dynamically via JS -->
+                <!-- Dynamically populated from actual sheet data -->
               </select>
               <i data-lucide="chevron-down" class="w-4 h-4 text-slate-400 absolute right-3 top-3 pointer-events-none"></i>
             </div>
@@ -431,12 +418,12 @@
 
           <!-- Keyword Search -->
           <div>
-            <label for="filterQuery" class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1.5">Search Query</label>
+            <label for="filterQuery" class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1.5">Search Keywords</label>
             <div class="relative">
               <input 
                 type="text" 
                 id="filterQuery" 
-                placeholder="Title keywords..." 
+                placeholder="Title, subject, year..." 
                 class="w-full bg-slate-50 border border-slate-200 rounded-xl pl-9 pr-3.5 py-2.5 text-sm text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-brand-500"
               />
               <i data-lucide="search" class="w-4 h-4 text-slate-400 absolute left-3 top-3 pointer-events-none"></i>
@@ -445,15 +432,15 @@
 
         </div>
 
-        <!-- Filter Sub-bar: Active Chips & Reset -->
+        <!-- Filter Sub-bar: Status Count & Reset -->
         <div class="mt-4 pt-4 border-t border-slate-100 flex flex-wrap items-center justify-between gap-3">
           <div id="filterCountSummary" class="text-xs font-semibold text-slate-500">
-            Showing available records...
+            Awaiting papers...
           </div>
           <button 
             type="button" 
             onclick="resetAllFilters()" 
-            class="text-xs font-bold text-slate-500 hover:text-brand-600 flex items-center gap-1.5 py-1 px-2 rounded-md hover:bg-slate-100 transition-colors"
+            class="text-xs font-bold text-slate-500 hover:text-brand-600 flex items-center gap-1.5 py-1 px-2.5 rounded-md hover:bg-slate-100 transition-colors"
           >
             <i data-lucide="rotate-ccw" class="w-3.5 h-3.5"></i>
             Reset All Filters
@@ -461,23 +448,27 @@
         </div>
       </div>
 
-      <!-- Network Error & Retry Banner (Hidden by default) -->
+      <!-- Network Error & Retry Banner (Hidden by default; NO fake data fallback) -->
       <div id="networkErrorBanner" class="hidden mb-8 p-6 bg-rose-50 border border-rose-200 rounded-2xl text-center">
-        <i data-lucide="alert-triangle" class="w-8 h-8 text-rose-500 mx-auto mb-2"></i>
-        <h3 class="text-base font-bold text-rose-900 mb-1">Failed to Connect to Google Sheets Database</h3>
-        <p id="networkErrorMessage" class="text-sm text-rose-700 max-w-lg mx-auto mb-4">The Google Sheet may be offline, rate-limited, or not published as a public CSV.</p>
-        <button onclick="fetchSheetData()" class="bg-rose-600 hover:bg-rose-700 text-white font-semibold text-xs sm:text-sm px-5 py-2.5 rounded-xl transition-colors inline-flex items-center gap-2">
+        <div class="w-12 h-12 bg-rose-100 text-rose-600 rounded-full flex items-center justify-center mx-auto mb-3">
+          <i data-lucide="alert-triangle" class="w-6 h-6"></i>
+        </div>
+        <h3 class="text-base font-bold text-rose-900 mb-1">Unable to Load Papers from Google Sheets</h3>
+        <p id="networkErrorMessage" class="text-sm text-rose-700 max-w-lg mx-auto mb-4">
+          Please check your internet connection or ensure your Google Sheet permissions are set to "Anyone with the link can view".
+        </p>
+        <button onclick="fetchSheetData()" class="bg-rose-600 hover:bg-rose-700 text-white font-semibold text-xs sm:text-sm px-5 py-2.5 rounded-xl transition-colors inline-flex items-center gap-2 shadow-sm">
           <i data-lucide="refresh-cw" class="w-4 h-4"></i>
           Retry Connection
         </button>
       </div>
 
-      <!-- Cards Grid -->
+      <!-- Examination Papers Grid -->
       <div id="papersGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         <!-- Rendered dynamically -->
       </div>
 
-      <!-- Pagination Controls -->
+      <!-- Pagination Container -->
       <div id="paginationContainer" class="mt-12 flex flex-col sm:flex-row items-center justify-between gap-4 border-t border-slate-200 pt-6 hidden">
         <div class="text-xs sm:text-sm text-slate-500">
           Showing <span id="pageRangeStart" class="font-bold text-slate-800">1</span> to <span id="pageRangeEnd" class="font-bold text-slate-800">12</span> of <span id="pageTotalCount" class="font-bold text-slate-800">0</span> papers
@@ -488,7 +479,7 @@
             Previous
           </button>
           <div id="pageNumberBadges" class="flex items-center gap-1">
-            <!-- Numerical buttons rendered via JS -->
+            <!-- Page number buttons populated via JS -->
           </div>
           <button id="nextPageBtn" onclick="changePage(1)" class="p-2 sm:px-3 sm:py-2 border border-slate-200 rounded-lg text-slate-600 hover:bg-slate-100 disabled:opacity-40 disabled:cursor-not-allowed text-xs sm:text-sm font-semibold flex items-center gap-1.5 transition-colors">
             Next
@@ -501,7 +492,7 @@
   </main>
 
   <!-- ========================================== -->
-  <!-- 6. DOCUMENT VIEWER MODAL                   -->
+  <!-- 6. DOCUMENT VIEWER MODAL WITH FALLBACK     -->
   <!-- ========================================== -->
   <div id="docViewerModal" class="fixed inset-0 z-50 bg-slate-900/70 backdrop-blur-sm hidden items-center justify-center p-3 sm:p-6" role="dialog" aria-modal="true" aria-labelledby="modalPaperTitle">
     <div class="bg-white rounded-2xl shadow-2xl max-w-5xl w-full max-h-[92vh] flex flex-col overflow-hidden border border-slate-200">
@@ -509,13 +500,13 @@
       <!-- Modal Header -->
       <div class="px-6 py-4 bg-slate-50 border-b border-slate-200 flex items-center justify-between">
         <div class="pr-4">
-          <span id="modalMetaBadge" class="text-[10px] font-extrabold uppercase tracking-wider px-2 py-0.5 rounded bg-brand-100 text-brand-800 mb-1 inline-block">NECTA • 2026</span>
+          <span id="modalMetaBadge" class="text-[10px] font-extrabold uppercase tracking-wider px-2 py-0.5 rounded bg-brand-100 text-brand-800 mb-1 inline-block">NECTA</span>
           <h3 id="modalPaperTitle" class="text-base sm:text-lg font-bold text-slate-900 line-clamp-1">Paper Preview</h3>
         </div>
         <div class="flex items-center gap-2">
           <a id="modalExternalDownloadBtn" href="#" target="_blank" rel="noopener noreferrer" class="hidden sm:inline-flex items-center gap-1.5 bg-brand-600 hover:bg-brand-700 text-white text-xs font-semibold px-3 py-1.5 rounded-lg transition-colors">
             <i data-lucide="download" class="w-3.5 h-3.5"></i>
-            Download
+            Download Original
           </a>
           <button onclick="closeViewerModal()" class="p-2 text-slate-400 hover:text-slate-700 rounded-lg hover:bg-slate-200/60 transition-colors" aria-label="Close Preview Modal">
             <i data-lucide="x" class="w-5 h-5"></i>
@@ -523,19 +514,29 @@
         </div>
       </div>
 
+      <!-- Preview Notice / Fallback Bar -->
+      <div class="bg-amber-50 px-6 py-2.5 border-b border-amber-200 flex flex-wrap items-center justify-between text-xs text-amber-900 gap-2">
+        <span>If the preview does not display due to browser security or Google Drive permissions:</span>
+        <div class="flex items-center gap-3">
+          <a id="modalOpenDirectBtn" href="#" target="_blank" rel="noopener noreferrer" class="font-bold underline hover:text-amber-800 flex items-center gap-1">
+            <i data-lucide="external-link" class="w-3.5 h-3.5"></i> Open in New Tab
+          </a>
+        </div>
+      </div>
+
       <!-- Modal Body (Iframe) -->
       <div class="flex-grow bg-slate-100 relative min-h-[380px] sm:min-h-[500px]">
         <div id="modalLoadingSpinner" class="absolute inset-0 flex flex-col items-center justify-center bg-white z-10">
           <div class="w-8 h-8 border-3 border-brand-200 border-t-brand-600 rounded-full animate-spin mb-3"></div>
-          <p class="text-xs font-semibold text-slate-500">Streaming document from secure cloud...</p>
+          <p class="text-xs font-semibold text-slate-500">Loading document preview...</p>
         </div>
-        <iframe id="docViewerIframe" class="w-full h-full border-0" title="Examination Paper Viewer" sandbox="allow-scripts allow-same-origin allow-popups" src="about:blank"></iframe>
+        <iframe id="docViewerIframe" class="w-full h-full border-0" title="Past Examination Paper Document" sandbox="allow-scripts allow-same-origin allow-popups" src="about:blank"></iframe>
       </div>
 
       <!-- Modal Footer -->
       <div class="px-6 py-3 bg-white border-t border-slate-200 flex items-center justify-between text-xs text-slate-500">
-        <span>Hosted via Google Drive / Dropbox CDN</span>
-        <button onclick="closeViewerModal()" class="text-slate-600 font-bold hover:text-slate-900">Close Window</button>
+        <span>Document loaded via direct cloud link</span>
+        <button onclick="closeViewerModal()" class="text-slate-700 font-bold hover:text-slate-900">Close Preview</button>
       </div>
     </div>
   </div>
@@ -546,25 +547,25 @@
   <section id="about" class="py-16 bg-white border-t border-slate-200">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="max-w-3xl mx-auto text-center">
-        <h2 class="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight mb-4">About Elimika Educational Repository</h2>
+        <h2 class="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight mb-4">About Elimika Repository</h2>
         <p class="text-slate-600 text-sm sm:text-base leading-relaxed mb-8">
-          Elimika is a dedicated non-profit educational index developed to provide equal, open-access study materials for learners across the United Republic of Tanzania. Our servers index verified examination papers and official marking guides for both basic primary education and advanced secondary levels without advertising barriers or subscription walls.
+          Elimika is a free, non-profit educational index developed to provide equal revision materials for primary and secondary learners across Tanzania. This site indexes past examination questions and marking guides to assist candidates preparing for national and regional assessments.
         </p>
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 text-left">
           <div class="p-5 bg-slate-50 rounded-xl border border-slate-200">
-            <i data-lucide="shield-check" class="w-6 h-6 text-brand-600 mb-2"></i>
-            <h4 class="font-bold text-slate-900 text-sm mb-1">Authentic Records</h4>
-            <p class="text-xs text-slate-500">Every cataloged question paper matches official NECTA or regional coordination standards.</p>
+            <i data-lucide="book-open" class="w-6 h-6 text-brand-600 mb-2"></i>
+            <h4 class="font-bold text-slate-900 text-sm mb-1">Standard 1 to Form 6</h4>
+            <p class="text-xs text-slate-500">Structured by educational level to help primary pupils and secondary students find relevant papers.</p>
           </div>
           <div class="p-5 bg-slate-50 rounded-xl border border-slate-200">
             <i data-lucide="database" class="w-6 h-6 text-emerald-600 mb-2"></i>
-            <h4 class="font-bold text-slate-900 text-sm mb-1">Google Sheets Engine</h4>
-            <p class="text-xs text-slate-500">Zero backend bloat. Paper inventories update dynamically as new records are posted to Google Sheets.</p>
+            <h4 class="font-bold text-slate-900 text-sm mb-1">Direct Google Sheets</h4>
+            <p class="text-xs text-slate-500">Records are read live from Google Sheets, ensuring real-time catalog updates without backend downtime.</p>
           </div>
           <div class="p-5 bg-slate-50 rounded-xl border border-slate-200">
             <i data-lucide="smartphone" class="w-6 h-6 text-indigo-600 mb-2"></i>
-            <h4 class="font-bold text-slate-900 text-sm mb-1">Low Bandwidth Ready</h4>
-            <p class="text-xs text-slate-500">Lightweight design optimized for low-speed 3G mobile connections in remote learning centers.</p>
+            <h4 class="font-bold text-slate-900 text-sm mb-1">Mobile Friendly</h4>
+            <p class="text-xs text-slate-500">Optimized for lightweight loading on mobile devices and 3G/4G connections across Tanzania.</p>
           </div>
         </div>
       </div>
@@ -578,21 +579,19 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-10">
         
-        <!-- Brand Info -->
         <div class="md:col-span-2">
           <div class="flex items-center gap-2 text-white font-black text-xl mb-3">
             <i data-lucide="graduation-cap" class="w-6 h-6 text-brand-500"></i>
             ELIMIKA TANZANIA
           </div>
-          <p class="text-xs text-slate-400 max-w-sm mb-4">
-            Educational past papers, national assessment revisions, and marking schemes for Standard 1–7 & Form 1–6.
+          <p class="text-xs text-slate-400 max-w-sm mb-4 leading-relaxed">
+            Educational past papers, regional trials, and marking schemes for Standard 1–7 and Form 1–6.
           </p>
           <div class="text-[11px] text-slate-500">
-            Powered by static JAMstack architecture on Vercel & Google Cloud Storage.
+            Static frontend hosted on Vercel. Database powered by Google Sheets.
           </div>
         </div>
 
-        <!-- Secondary Categories -->
         <div>
           <h4 class="text-white text-xs font-bold uppercase tracking-wider mb-3">Secondary Forms</h4>
           <ul class="space-y-1.5 text-xs">
@@ -604,22 +603,24 @@
           </ul>
         </div>
 
-        <!-- Primary Categories -->
         <div>
-          <h4 class="text-white text-xs font-bold uppercase tracking-wider mb-3">Primary Standards</h4>
+          <h4 class="text-white text-xs font-bold uppercase tracking-wider mb-3">Exam Categories</h4>
           <ul class="space-y-1.5 text-xs">
-            <li><button onclick="quickFilterByClass('Standard 4')" class="hover:text-white transition-colors">Standard 4 Assessment</button></li>
-            <li><button onclick="quickFilterByClass('Standard 7')" class="hover:text-white transition-colors">Standard 7 (PSLE)</button></li>
-            <li><button onclick="quickFilterByCategory('NECTA')" class="hover:text-white transition-colors">NECTA Archives</button></li>
-            <li><button onclick="quickFilterByCategory('Mock')" class="hover:text-white transition-colors">Regional Mocks</button></li>
+            <li><button onclick="quickFilterByCategory('NECTA')" class="hover:text-white transition-colors">NECTA Papers</button></li>
+            <li><button onclick="quickFilterByCategory('Pre-NECTA')" class="hover:text-white transition-colors">Pre-NECTA Papers</button></li>
+            <li><button onclick="quickFilterByCategory('Mock')" class="hover:text-white transition-colors">Regional Mock Papers</button></li>
+            <li><button onclick="quickFilterByCategory('Terminal')" class="hover:text-white transition-colors">Terminal Exams</button></li>
+            <li><button onclick="quickFilterByCategory('Midterm')" class="hover:text-white transition-colors">Midterm Exams</button></li>
           </ul>
         </div>
 
       </div>
 
       <div class="pt-8 border-t border-slate-800 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500 gap-3">
-        <div>&copy; 2026 Elimika Tanzania. All educational past paper copyrights belong to their respective exam bodies (NECTA / Regional Education Directorates).</div>
-        <div class="flex items-center gap-4">
+        <div>
+          &copy; 2026 Elimika. Independent revision archive. Past examination questions belong to their respective examining authorities and educational directorates.
+        </div>
+        <div>
           <a href="#home" class="hover:text-slate-300">Back to Top</a>
         </div>
       </div>
@@ -632,13 +633,9 @@
   <script>
     /**
      * CONFIGURATION
-     * 1. In Google Sheets: File -> Share -> Publish to Web -> Link -> Entire Document -> Comma-separated values (.csv)
-     * 2. Paste that published URL into GOOGLE_SHEET_CSV_URL.
+     * Using your exact Google Sheet ID: 1-7C_G-VAC2ICxuT3XwADzAluRoDvQyd04yS4BtSvXxM
      */
     const CONFIG = {
-      // Current live Google Sheet ID for Elimika:
-      GOOGLE_SHEET_CSV_URL: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQ4jL7E6tU5eI_YOUR_PUBLISHED_ID/pub?gid=0&single=true&output=csv',
-      // Fallback alternative URL pattern if using public sheet ID directly:
       SHEET_ID: '1-7C_G-VAC2ICxuT3XwADzAluRoDvQyd04yS4BtSvXxM',
       ITEMS_PER_PAGE: 12,
       SEARCH_DEBOUNCE_MS: 250
@@ -650,7 +647,9 @@
     let currentPage = 1;
     let searchDebounceTimer = null;
 
-    // Helper: HTML Escaper to prevent DOM-based XSS attacks from Google Sheets content
+    /**
+     * Safe HTML entity encoder for text values
+     */
     function escapeHtml(str) {
       if (!str) return '';
       return String(str)
@@ -661,60 +660,63 @@
         .replace(/'/g, '&#39;');
     }
 
-    // Helper: Safe URL sanitization & Cloud Embed Transforms
+    /**
+     * Protocol validator: strictly allows only HTTP and HTTPS
+     */
     function sanitizeUrl(rawUrl) {
       if (!rawUrl) return null;
       const clean = rawUrl.trim();
-      // Ensure only HTTP or HTTPS protocols are accepted
       if (!/^https?:\/\//i.test(clean)) return null;
       return clean;
     }
 
-    // Helper: Transform cloud URLs to proper inline preview / embed targets
+    /**
+     * Extract Google Drive ID safely handling /file/d/, id= params, and query strings
+     */
+    function extractGoogleDriveId(url) {
+      if (!url.includes('drive.google.com')) return null;
+      
+      const fileMatch = url.match(/\/file\/d\/([a-zA-Z0-9_-]+)/);
+      if (fileMatch && fileMatch[1]) return fileMatch[1];
+      
+      const idMatch = url.match(/[?&]id=([a-zA-Z0-9_-]+)/);
+      if (idMatch && idMatch[1]) return idMatch[1];
+      
+      return null;
+    }
+
+    /**
+     * Convert Google Drive and Dropbox URLs into safe embed preview targets
+     */
     function getPreviewUrl(rawUrl) {
       const safe = sanitizeUrl(rawUrl);
       if (!safe) return null;
 
-      // Google Drive Transformation
-      if (safe.includes('drive.google.com')) {
-        // Match standard file ID
-        const match = safe.match(/\/file\/d\/([a-zA-Z0-9_-]+)/);
-        if (match && match[1]) {
-          return `https://drive.google.com/file/d/${match[1]}/preview`;
-        }
-        // Match query param id
-        const idMatch = safe.match(/[?&]id=([a-zA-Z0-9_-]+)/);
-        if (idMatch && idMatch[1]) {
-          return `https://drive.google.com/file/d/${idMatch[1]}/preview`;
-        }
+      const driveId = extractGoogleDriveId(safe);
+      if (driveId) {
+        return `https://drive.google.com/file/d/${driveId}/preview`;
       }
 
-      // Dropbox Transformation
       if (safe.includes('dropbox.com')) {
+        // Swap dl=0 to raw=1 for inline streaming
         return safe.replace(/[?&]dl=0/, '?raw=1');
       }
 
       return safe;
     }
 
-    // Helper: Transform cloud URLs to direct download links
+    /**
+     * Convert Google Drive and Dropbox URLs into direct download targets
+     */
     function getDirectDownloadUrl(rawUrl) {
       const safe = sanitizeUrl(rawUrl);
       if (!safe) return '#';
 
-      // Google Drive Direct Download
-      if (safe.includes('drive.google.com')) {
-        const match = safe.match(/\/file\/d\/([a-zA-Z0-9_-]+)/);
-        if (match && match[1]) {
-          return `https://drive.google.com/uc?export=download&id=${match[1]}`;
-        }
-        const idMatch = safe.match(/[?&]id=([a-zA-Z0-9_-]+)/);
-        if (idMatch && idMatch[1]) {
-          return `https://drive.google.com/uc?export=download&id=${idMatch[1]}`;
-        }
+      const driveId = extractGoogleDriveId(safe);
+      if (driveId) {
+        return `https://drive.google.com/uc?export=download&id=${driveId}`;
       }
 
-      // Dropbox Direct Download
       if (safe.includes('dropbox.com')) {
         return safe.replace(/[?&]dl=0/, '?dl=1');
       }
@@ -722,68 +724,100 @@
       return safe;
     }
 
-    // RFC 4180 Compliant CSV Line Parser
-    function parseCSVLine(line) {
-      const result = [];
-      let current = '';
+    /**
+     * State Machine CSV Parser (RFC 4180 Compliant)
+     * Correctly handles quoted fields, escaped double quotes (""),
+     * commas inside quotes, and embedded newlines.
+     */
+    function parseCSV(text) {
+      const rows = [];
+      let currentRow = [];
+      let currentField = '';
       let inQuotes = false;
       
-      for (let i = 0; i < line.length; i++) {
-        const char = line[i];
-        const nextChar = line[i + 1];
-
-        if (char === '"') {
-          if (inQuotes && nextChar === '"') {
-            current += '"';
+      // Normalize line breaks
+      const cleanText = text.replace(/\r\n/g, '\n').replace(/\r/g, '\n');
+      
+      for (let i = 0; i < cleanText.length; i++) {
+        const char = cleanText[i];
+        const nextChar = cleanText[i + 1];
+        
+        if (inQuotes) {
+          if (char === '"' && nextChar === '"') {
+            currentField += '"';
             i++; // skip escaped quote
+          } else if (char === '"') {
+            inQuotes = false;
           } else {
-            inQuotes = !inQuotes;
+            currentField += char;
           }
-        } else if (char === ',' && !inQuotes) {
-          result.push(current.trim());
-          current = '';
         } else {
-          current += char;
+          if (char === '"') {
+            inQuotes = true;
+          } else if (char === ',') {
+            currentRow.push(currentField.trim());
+            currentField = '';
+          } else if (char === '\n') {
+            currentRow.push(currentField.trim());
+            if (currentRow.some(field => field.length > 0)) {
+              rows.push(currentRow);
+            }
+            currentRow = [];
+            currentField = '';
+          } else {
+            currentField += char;
+          }
         }
       }
-      result.push(current.trim());
-      return result;
+      
+      // Flush residual field/row
+      if (currentField.length > 0 || currentRow.length > 0) {
+        currentRow.push(currentField.trim());
+        if (currentRow.some(field => field.length > 0)) {
+          rows.push(currentRow);
+        }
+      }
+      
+      return rows;
     }
 
-    // Parse entire CSV string into clean objects
-    function parseCSV(csvText) {
-      const lines = csvText.split(/\r?\n/).filter(line => line.trim().length > 0);
-      if (lines.length < 2) return [];
+    /**
+     * Transform raw CSV rows into validated past paper objects
+     * Required Schema:
+     * Col 0 (A): Title
+     * Col 1 (B): Form/Standard
+     * Col 2 (C): Subject
+     * Col 3 (D): Year
+     * Col 4 (E): Exam Category
+     * Col 5 (F): Question Paper URL
+     * Col 6 (G): Marking Scheme URL
+     */
+    function processParsedRows(rows) {
+      if (rows.length < 2) return [];
 
       const records = [];
-      // Expected Schema:
-      // Col 0: Title
-      // Col 1: Form / Standard
-      // Col 2: Subject
-      // Col 3: Year
-      // Col 4: Examination Category
-      // Col 5: Question Paper URL
-      // Col 6: Marking Scheme URL
-      
-      for (let i = 1; i < lines.length; i++) {
-        const cols = parseCSVLine(lines[i]);
-        if (cols.length < 3) continue; // Skip malformed rows
+      // Row 0 is the header; start processing at row 1
+      for (let i = 1; i < rows.length; i++) {
+        const cols = rows[i];
+        
+        const title = (cols[0] || '').trim();
+        const form = (cols[1] || '').trim();
+        const subject = (cols[2] || '').trim();
+        const year = (cols[3] || '').trim();
+        const category = (cols[4] || '').trim();
+        const paperUrl = (cols[5] || '').trim();
+        const answersUrl = (cols[6] || '').trim();
 
-        const title = cols[0] || 'Untitled Paper';
-        const form = cols[1] || 'General';
-        const subject = cols[2] || 'General Studies';
-        const year = cols[3] || 'Unknown Year';
-        const category = cols[4] || 'NECTA';
-        const paperUrl = cols[5] || '';
-        const answersUrl = cols[6] || '';
+        // Must have at least a Title or Subject to be considered a valid entry
+        if (!title && !subject) continue;
 
         records.push({
-          id: `paper-${i}`,
-          title: title,
-          form: form,
-          subject: subject,
-          year: year,
-          category: category,
+          id: `paper-row-${i}`,
+          title: title || `${form} ${subject} (${year})`,
+          form: form || 'General',
+          subject: subject || 'General',
+          year: year || 'N/A',
+          category: category || 'Other',
           paperUrl: sanitizeUrl(paperUrl),
           answersUrl: sanitizeUrl(answersUrl)
         });
@@ -791,61 +825,70 @@
       return records;
     }
 
-    // Fetch Google Sheet Data with Fallback
+    /**
+     * Fetch Sheet Data from Google Sheets using public CSV endpoints
+     */
     async function fetchSheetData() {
       const statusEl = document.getElementById('dataStatusIndicator');
       const errorBanner = document.getElementById('networkErrorBanner');
       const grid = document.getElementById('papersGrid');
 
-      // Show Skeleton Loading State
       renderSkeletons();
       statusEl.innerHTML = `<span class="w-2 h-2 rounded-full bg-amber-500 animate-ping"></span> Connecting...`;
       errorBanner.classList.add('hidden');
 
-      // Primary URL (Publish to web CSV) & Secondary Fallback (direct gviz CSV export)
+      // Primary gviz CSV endpoint + direct export CSV fallback
       const urlsToTry = [
-        CONFIG.GOOGLE_SHEET_CSV_URL,
-        `https://docs.google.com/spreadsheets/d/${CONFIG.SHEET_ID}/gviz/tq?tqx=out:csv`
+        `https://docs.google.com/spreadsheets/d/${CONFIG.SHEET_ID}/gviz/tq?tqx=out:csv`,
+        `https://docs.google.com/spreadsheets/d/${CONFIG.SHEET_ID}/export?format=csv`
       ];
 
-      let csvData = null;
-      let lastError = null;
+      let csvText = null;
+      let fetchError = null;
 
       for (const url of urlsToTry) {
-        if (!url || url.includes('YOUR_PUBLISHED_ID')) continue;
         try {
           const res = await fetch(url, { cache: 'no-cache' });
           if (res.ok) {
-            csvData = await res.text();
-            if (csvData && csvData.length > 30) {
+            const text = await res.text();
+            // Verify content is not an HTML login/error screen from Google
+            if (text && !text.includes('<!DOCTYPE html>') && text.length > 20) {
+              csvText = text;
               break;
             }
           }
         } catch (err) {
-          lastError = err;
+          fetchError = err;
         }
       }
 
-      if (!csvData) {
-        // If live fetch failed, display sample data and warning banner
-        console.warn('Google Sheets live fetch unsuccessful, loading initial archive data.', lastError);
+      if (!csvText) {
+        console.error('Elimika could not fetch Google Sheets data:', fetchError);
+        statusEl.innerHTML = `<span class="w-2 h-2 rounded-full bg-rose-500"></span> Disconnected`;
+        grid.innerHTML = '';
         errorBanner.classList.remove('hidden');
-        document.getElementById('networkErrorMessage').textContent = 
-          'Unable to reach live spreadsheet. Showing local catalog. Ensure the spreadsheet is Published to the Web as CSV.';
-        
-        allPapers = getSampleData();
-        statusEl.innerHTML = `<span class="w-2 h-2 rounded-full bg-amber-500"></span> Offline Mode`;
-      } else {
-        allPapers = parseCSV(csvData);
-        statusEl.innerHTML = `<span class="w-2 h-2 rounded-full bg-emerald-500"></span> ${allPapers.length} Records Connected`;
+        document.getElementById('filterCountSummary').textContent = 'Database offline';
+        return;
       }
 
-      populateFilterOptions();
-      applyFilters();
+      try {
+        const rawRows = parseCSV(csvText);
+        allPapers = processParsedRows(rawRows);
+
+        statusEl.innerHTML = `<span class="w-2 h-2 rounded-full bg-emerald-500"></span> ${allPapers.length} Papers Loaded`;
+        populateFilterDropdowns();
+        applyFilters();
+      } catch (parseErr) {
+        console.error('Error parsing sheet records:', parseErr);
+        statusEl.innerHTML = `<span class="w-2 h-2 rounded-full bg-rose-500"></span> Parsing Error`;
+        errorBanner.classList.remove('hidden');
+      }
     }
 
-    // Populate Dynamic Filter Selects (Subjects & Years)
-    function populateFilterOptions() {
+    /**
+     * Populate Subject and Year dropdown options dynamically from actual data
+     */
+    function populateFilterDropdowns() {
       const subjectSelect = document.getElementById('filterSubject');
       const yearSelect = document.getElementById('filterYear');
 
@@ -853,56 +896,64 @@
       const years = new Set();
 
       allPapers.forEach(p => {
-        if (p.subject && p.subject.trim()) subjects.add(p.subject.trim());
-        if (p.year && p.year.trim()) years.add(p.year.trim());
+        if (p.subject && p.subject !== 'General') subjects.add(p.subject);
+        if (p.year && p.year !== 'N/A') years.add(p.year);
       });
 
       // Sort subjects alphabetically
       const sortedSubjects = Array.from(subjects).sort();
       subjectSelect.innerHTML = '<option value="ALL">All Subjects</option>';
       sortedSubjects.forEach(s => {
-        subjectSelect.innerHTML += `<option value="${escapeHtml(s)}">${escapeHtml(s)}</option>`;
+        const opt = document.createElement('option');
+        opt.value = s;
+        opt.textContent = s;
+        subjectSelect.appendChild(opt);
       });
 
-      // Sort years descending (newest first)
+      // Sort years descending
       const sortedYears = Array.from(years).sort((a, b) => b.localeCompare(a));
       yearSelect.innerHTML = '<option value="ALL">All Years</option>';
       sortedYears.forEach(y => {
-        yearSelect.innerHTML += `<option value="${escapeHtml(y)}">${escapeHtml(y)}</option>`;
+        const opt = document.createElement('option');
+        opt.value = y;
+        opt.textContent = y;
+        yearSelect.appendChild(opt);
       });
     }
 
-    // Main Compound Filter Logic
+    /**
+     * Strict Compound Filtering Logic
+     */
     function applyFilters() {
-      const selectedClass = document.getElementById('filterClass').value;
-      const selectedCategory = document.getElementById('filterCategory').value;
-      const selectedSubject = document.getElementById('filterSubject').value;
-      const selectedYear = document.getElementById('filterYear').value;
+      const selectedClass = document.getElementById('filterClass').value.trim();
+      const selectedCategory = document.getElementById('filterCategory').value.trim();
+      const selectedSubject = document.getElementById('filterSubject').value.trim();
+      const selectedYear = document.getElementById('filterYear').value.trim();
       const searchQuery = document.getElementById('filterQuery').value.toLowerCase().trim();
 
       filteredPapers = allPapers.filter(paper => {
         // 1. Strict Class Level Matching
         let matchClass = true;
         if (selectedClass !== 'ALL') {
-          matchClass = paper.form.trim().toLowerCase() === selectedClass.trim().toLowerCase();
+          matchClass = paper.form.toLowerCase() === selectedClass.toLowerCase();
         }
 
-        // 2. Strict Exam Category Matching (Accurate NECTA vs Pre-NECTA distinction)
+        // 2. Strict Exam Category Matching
         let matchCategory = true;
         if (selectedCategory !== 'ALL') {
-          matchCategory = paper.category.trim().toLowerCase() === selectedCategory.trim().toLowerCase();
+          matchCategory = paper.category.toLowerCase() === selectedCategory.toLowerCase();
         }
 
         // 3. Subject Matching
         let matchSubject = true;
         if (selectedSubject !== 'ALL') {
-          matchSubject = paper.subject.trim().toLowerCase() === selectedSubject.trim().toLowerCase();
+          matchSubject = paper.subject.toLowerCase() === selectedSubject.toLowerCase();
         }
 
         // 4. Year Matching
         let matchYear = true;
         if (selectedYear !== 'ALL') {
-          matchYear = paper.year.trim() === selectedYear.trim();
+          matchYear = paper.year.toLowerCase() === selectedYear.toLowerCase();
         }
 
         // 5. Query Search Matching
@@ -915,13 +966,14 @@
         return matchClass && matchCategory && matchSubject && matchYear && matchQuery;
       });
 
-      // Reset to page 1 on filter modification
       currentPage = 1;
       renderCurrentPage();
       updateSummaryCount();
     }
 
-    // Render Cards for Current Pagination View
+    /**
+     * Render the paginated subset of filtered papers
+     */
     function renderCurrentPage() {
       const grid = document.getElementById('papersGrid');
       const pagination = document.getElementById('paginationContainer');
@@ -934,7 +986,7 @@
               <i data-lucide="file-question" class="w-8 h-8"></i>
             </div>
             <h4 class="text-lg font-bold text-slate-800 mb-1">No Past Papers Matched Your Filters</h4>
-            <p class="text-sm text-slate-500 max-w-md mx-auto mb-6">Try selecting 'All Levels' or clearing your search term to see more examination resources.</p>
+            <p class="text-sm text-slate-500 max-w-md mx-auto mb-6">Try selecting 'All Levels' or resetting your search keywords to view other papers.</p>
             <button onclick="resetAllFilters()" class="inline-flex items-center gap-2 bg-brand-600 hover:bg-brand-700 text-white font-semibold text-xs px-4 py-2.5 rounded-xl transition-colors">
               <i data-lucide="rotate-ccw" class="w-3.5 h-3.5"></i>
               Reset All Filters
@@ -945,7 +997,6 @@
         return;
       }
 
-      // Calculate slice boundaries
       const total = filteredPapers.length;
       const startIndex = (currentPage - 1) * CONFIG.ITEMS_PER_PAGE;
       const endIndex = Math.min(startIndex + CONFIG.ITEMS_PER_PAGE, total);
@@ -953,12 +1004,13 @@
 
       let html = '';
       pageItems.forEach(p => {
-        // Category Badge Color
+        // Tag Styles
         let categoryStyle = 'bg-blue-50 text-blue-700 border-blue-200';
-        if (p.category.toLowerCase().includes('pre')) categoryStyle = 'bg-indigo-50 text-indigo-700 border-indigo-200';
-        if (p.category.toLowerCase().includes('mock')) categoryStyle = 'bg-emerald-50 text-emerald-700 border-emerald-200';
-        if (p.category.toLowerCase().includes('terminal')) categoryStyle = 'bg-amber-50 text-amber-700 border-amber-200';
-        if (p.category.toLowerCase().includes('mid')) categoryStyle = 'bg-rose-50 text-rose-700 border-rose-200';
+        const catLower = p.category.toLowerCase();
+        if (catLower.includes('pre')) categoryStyle = 'bg-indigo-50 text-indigo-700 border-indigo-200';
+        else if (catLower.includes('mock')) categoryStyle = 'bg-emerald-50 text-emerald-700 border-emerald-200';
+        else if (catLower.includes('terminal')) categoryStyle = 'bg-amber-50 text-amber-700 border-amber-200';
+        else if (catLower.includes('mid')) categoryStyle = 'bg-rose-50 text-rose-700 border-rose-200';
 
         const hasPaper = Boolean(p.paperUrl);
         const hasAnswers = Boolean(p.answersUrl);
@@ -966,7 +1018,6 @@
         html += `
           <article class="bg-white rounded-2xl border border-slate-200 p-5 flex flex-col justify-between hover:border-brand-300 hover:shadow-lg hover:shadow-slate-200/50 transition-all duration-200">
             <div>
-              <!-- Header Badges -->
               <div class="flex items-center justify-between gap-2 mb-3">
                 <span class="text-[11px] font-extrabold uppercase tracking-wider px-2.5 py-0.5 rounded-md border ${categoryStyle}">
                   ${escapeHtml(p.category)}
@@ -976,12 +1027,10 @@
                 </span>
               </div>
 
-              <!-- Title -->
-              <h3 class="text-base font-bold text-slate-900 leading-snug mb-2 line-clamp-2">
+              <h3 class="text-base font-bold text-slate-900 leading-snug mb-3 line-clamp-2">
                 ${escapeHtml(p.title)}
               </h3>
 
-              <!-- Metadata List -->
               <div class="space-y-1.5 mb-5 text-xs text-slate-600 bg-slate-50 p-3 rounded-xl border border-slate-100">
                 <div class="flex justify-between">
                   <span class="text-slate-400">Class Level:</span>
@@ -994,9 +1043,7 @@
               </div>
             </div>
 
-            <!-- Action Buttons -->
             <div class="space-y-2 pt-2 border-t border-slate-100">
-              <!-- Question Paper Actions -->
               <div class="flex items-center gap-2">
                 ${hasPaper ? `
                   <button 
@@ -1004,7 +1051,7 @@
                     class="flex-1 bg-brand-50 hover:bg-brand-100 text-brand-700 text-xs font-bold py-2 px-3 rounded-lg flex items-center justify-center gap-1.5 transition-colors border border-brand-200"
                   >
                     <i data-lucide="eye" class="w-3.5 h-3.5"></i>
-                    Preview Paper
+                    View Paper
                   </button>
                   <a 
                     href="${escapeHtml(getDirectDownloadUrl(p.paperUrl))}" 
@@ -1019,12 +1066,11 @@
                   </a>
                 ` : `
                   <span class="text-[11px] text-slate-400 italic py-2 flex items-center gap-1">
-                    <i data-lucide="clock" class="w-3.5 h-3.5"></i> Paper Pending Upload
+                    <i data-lucide="clock" class="w-3.5 h-3.5"></i> Paper pending upload
                   </span>
                 `}
               </div>
 
-              <!-- Marking Scheme / Solutions Action -->
               <div>
                 ${hasAnswers ? `
                   <button 
@@ -1046,11 +1092,12 @@
       grid.innerHTML = html;
       lucide.createIcons();
 
-      // Render Pagination
       renderPaginationControls(total, startIndex, endIndex);
     }
 
-    // Pagination Calculation & Controls
+    /**
+     * Render Pagination numbers & state
+     */
     function renderPaginationControls(total, start, end) {
       const container = document.getElementById('paginationContainer');
       if (total <= CONFIG.ITEMS_PER_PAGE) {
@@ -1071,7 +1118,6 @@
       badgesContainer.innerHTML = '';
 
       for (let i = 1; i <= totalPages; i++) {
-        // Show boundary pages and current window
         if (i === 1 || i === totalPages || (i >= currentPage - 1 && i <= currentPage + 1)) {
           const btn = document.createElement('button');
           btn.className = `w-8 h-8 rounded-lg text-xs font-bold transition-colors ${
@@ -1098,10 +1144,12 @@
 
     function updateSummaryCount() {
       const summaryEl = document.getElementById('filterCountSummary');
-      summaryEl.textContent = `Found ${filteredPapers.length} examination paper${filteredPapers.length === 1 ? '' : 's'}`;
+      summaryEl.textContent = `Showing ${filteredPapers.length} examination paper${filteredPapers.length === 1 ? '' : 's'}`;
     }
 
-    // Skeleton Loaders
+    /**
+     * Skeleton Card Renderers
+     */
     function renderSkeletons() {
       const grid = document.getElementById('papersGrid');
       let html = '';
@@ -1112,7 +1160,7 @@
               <div class="h-4 w-16 bg-slate-200 rounded"></div>
               <div class="h-4 w-10 bg-slate-200 rounded"></div>
             </div>
-            <div class="h-6 w-3/4 bg-slate-200 rounded"></div>
+            <div class="h-5 w-3/4 bg-slate-200 rounded"></div>
             <div class="h-16 bg-slate-100 rounded-xl"></div>
             <div class="h-9 bg-slate-200 rounded-lg"></div>
           </div>
@@ -1121,17 +1169,22 @@
       grid.innerHTML = html;
     }
 
-    // Reset All Filters
+    /**
+     * Reset Filters
+     */
     function resetAllFilters() {
       document.getElementById('filterClass').value = 'ALL';
       document.getElementById('filterCategory').value = 'ALL';
       document.getElementById('filterSubject').value = 'ALL';
       document.getElementById('filterYear').value = 'ALL';
       document.getElementById('filterQuery').value = '';
+      document.getElementById('heroQuickSearch').value = '';
       applyFilters();
     }
 
-    // Quick Filter Shortcuts from Home Cards
+    /**
+     * Quick filter buttons from Homepage
+     */
     function quickFilterByClass(formName) {
       resetAllFilters();
       const select = document.getElementById('filterClass');
@@ -1155,7 +1208,9 @@
       document.getElementById('directory').scrollIntoView({ behavior: 'smooth' });
     }
 
-    // Modal Viewer Handling
+    /**
+     * Modal Viewer Controls
+     */
     function openViewer(paperId, type) {
       const paper = allPapers.find(p => p.id === paperId);
       if (!paper) return;
@@ -1164,8 +1219,8 @@
       const previewUrl = getPreviewUrl(rawUrl);
       const downloadUrl = getDirectDownloadUrl(rawUrl);
 
-      if (!previewUrl) {
-        alert('This document link is not yet configured with a valid cloud file.');
+      if (!rawUrl || !previewUrl) {
+        alert('This document does not have a valid link attached.');
         return;
       }
 
@@ -1175,10 +1230,12 @@
       const title = document.getElementById('modalPaperTitle');
       const meta = document.getElementById('modalMetaBadge');
       const dlBtn = document.getElementById('modalExternalDownloadBtn');
+      const openDirectBtn = document.getElementById('modalOpenDirectBtn');
 
       title.textContent = (type === 'answers') ? `${paper.title} (Marking Scheme)` : paper.title;
       meta.textContent = `${paper.category} • ${paper.form} • ${paper.year}`;
       dlBtn.href = downloadUrl;
+      openDirectBtn.href = rawUrl;
 
       spinner.style.display = 'flex';
       iframe.src = previewUrl;
@@ -1199,17 +1256,15 @@
       modal.classList.remove('flex');
     }
 
-    // Modal click backdrop close
     document.getElementById('docViewerModal').addEventListener('click', (e) => {
       if (e.target.id === 'docViewerModal') closeViewerModal();
     });
 
-    // Close on ESC key
     window.addEventListener('keydown', (e) => {
       if (e.key === 'Escape') closeViewerModal();
     });
 
-    // Event Listeners for Filters
+    // Event Listeners for Filter Inputs
     document.getElementById('filterClass').addEventListener('change', applyFilters);
     document.getElementById('filterCategory').addEventListener('change', applyFilters);
     document.getElementById('filterSubject').addEventListener('change', applyFilters);
@@ -1221,7 +1276,6 @@
       searchDebounceTimer = setTimeout(applyFilters, CONFIG.SEARCH_DEBOUNCE_MS);
     });
 
-    // Enter key on Hero search input
     document.getElementById('heroQuickSearch').addEventListener('keydown', (e) => {
       if (e.key === 'Enter') triggerHeroSearch();
     });
@@ -1249,77 +1303,11 @@
       });
     });
 
-    // Initializer
+    // Initialize on DOM Ready
     document.addEventListener('DOMContentLoaded', () => {
       lucide.createIcons();
       fetchSheetData();
     });
-
-    // Offline / Demo Fallback Catalog (Used if Google Sheets network fails)
-    function getSampleData() {
-      return [
-        {
-          id: 'sample-1',
-          title: 'Form 4 Basic Mathematics CSEE 2026',
-          form: 'Form 4',
-          subject: 'Basic Mathematics',
-          year: '2026',
-          category: 'NECTA',
-          paperUrl: 'https://drive.google.com/file/d/1YzJrJhluBVSPALrz3iZLgVxGLFGTlqB5/view',
-          answersUrl: 'https://drive.google.com/file/d/1hblqzTn6CQcYOOt-AaY5Mcy26SseVoDA/view'
-        },
-        {
-          id: 'sample-2',
-          title: 'Form 2 Basic Mathematics FTNA 2025',
-          form: 'Form 2',
-          subject: 'Basic Mathematics',
-          year: '2025',
-          category: 'NECTA',
-          paperUrl: 'https://drive.google.com/file/d/1YzJrJhluBVSPALrz3iZLgVxGLFGTlqB5/view',
-          answersUrl: 'https://drive.google.com/file/d/1hblqzTn6CQcYOOt-AaY5Mcy26SseVoDA/view'
-        },
-        {
-          id: 'sample-3',
-          title: 'Form 2 Physics FTNA 2025',
-          form: 'Form 2',
-          subject: 'Physics',
-          year: '2025',
-          category: 'NECTA',
-          paperUrl: 'https://drive.google.com/file/d/1Ei2yObZZOif_hXQRL7gWrbIcGn73uYej/view',
-          answersUrl: 'https://drive.google.com/file/d/1mFdYALMNOSpC6wg_AdKCToj2W8PrrxMi/view'
-        },
-        {
-          id: 'sample-4',
-          title: 'Form 2 Kiswahili FTNA 2026',
-          form: 'Form 2',
-          subject: 'Kiswahili',
-          year: '2026',
-          category: 'NECTA',
-          paperUrl: 'https://drive.google.com/file/d/1Os_JqflqbuYpcVvM_0gnt1-iSaIE82W8/view',
-          answersUrl: 'https://drive.google.com/file/d/1y6GTyihS7yx-PO3ZemramFhJLx8BOQez/view'
-        },
-        {
-          id: 'sample-5',
-          title: 'Standard 7 Mathematics PSLE 2025',
-          form: 'Standard 7',
-          subject: 'Mathematics',
-          year: '2025',
-          category: 'NECTA',
-          paperUrl: '',
-          answersUrl: ''
-        },
-        {
-          id: 'sample-6',
-          title: 'Form 4 Physics Mock 2026',
-          form: 'Form 4',
-          subject: 'Physics',
-          year: '2026',
-          category: 'Mock',
-          paperUrl: 'https://drive.google.com/file/d/1FI1Yc_AewUYgeVtlWio0mwXDgJgM3kjg/view',
-          answersUrl: ''
-        }
-      ];
-    }
   </script>
 </body>
 </html>
