@@ -37,6 +37,11 @@
       color: #ffffff !important;
       border-color: #1d4ed8 !important;
     }
+    .active-chip {
+      background-color: #1d4ed8 !important;
+      color: #ffffff !important;
+      border-color: #1d4ed8 !important;
+    }
   </style>
 </head>
 <body class="min-h-screen flex flex-col text-slate-800 antialiased selection:bg-blue-100 selection:text-blue-900">
@@ -86,46 +91,22 @@
           Instant access to Form 1 to Form 6 past examination papers, regional mocks, and marking schemes.
         </p>
 
-        <!-- Search Input & Subject Select -->
-        <div class="mt-5 sm:mt-7 flex flex-col sm:flex-row gap-2.5 max-w-2xl mx-auto">
+        <!-- Search Input -->
+        <div class="mt-5 sm:mt-7 max-w-xl mx-auto">
           <div class="relative flex-grow">
             <i data-lucide="search" class="w-5 h-5 text-slate-400 absolute left-4 top-3.5 pointer-events-none"></i>
             <input 
               id="searchInput" 
               type="search" 
-              oninput="handleSearchOrSubjectChange()"
-              placeholder="Search by subject, year or exam (e.g. 2026, FTNA, ICS)..."
+              oninput="handleSearchInput()"
+              placeholder="Search by paper title or keyword (e.g. 2026, FTNA, ICS)..."
               class="w-full pl-11 pr-4 py-3 bg-white border border-slate-300 rounded-2xl shadow-sm text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent transition"
             >
           </div>
-
-          <div class="relative sm:w-60 shrink-0">
-            <i data-lucide="layers" class="w-4 h-4 text-slate-400 absolute left-3.5 top-3.5 pointer-events-none"></i>
-            <select 
-              id="subjectFilter" 
-              onchange="handleSearchOrSubjectChange()"
-              class="w-full pl-10 pr-8 py-3 bg-white border border-slate-300 rounded-2xl shadow-sm text-sm sm:text-base text-slate-700 font-semibold focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent transition appearance-none cursor-pointer"
-            >
-              <option value="All">All Subjects</option>
-              <option value="Basic Mathematics">Basic Mathematics</option>
-              <option value="Physics">Physics</option>
-              <option value="Chemistry">Chemistry</option>
-              <option value="Biology">Biology</option>
-              <option value="Information and Computer Studies">Information & Computer Studies (ICS)</option>
-              <option value="English">English Language</option>
-              <option value="Kiswahili">Kiswahili</option>
-              <option value="Geography">Geography</option>
-              <option value="History">History</option>
-              <option value="Civics">Civics</option>
-              <option value="Book Keeping">Book Keeping</option>
-              <option value="Commerce">Commerce</option>
-            </select>
-            <i data-lucide="chevron-down" class="w-4 h-4 text-slate-400 absolute right-3.5 top-4 pointer-events-none"></i>
-          </div>
         </div>
 
-        <!-- Class Form Tabs -->
-        <div class="mt-4 sm:mt-6 overflow-x-auto hide-scrollbar -mx-4 px-4 sm:mx-0 sm:px-0">
+        <!-- Class Form Tabs (Form 1 to Form 6) -->
+        <div class="mt-5 sm:mt-7 overflow-x-auto hide-scrollbar -mx-4 px-4 sm:mx-0 sm:px-0">
           <div class="inline-flex sm:flex sm:flex-wrap items-center justify-start sm:justify-center gap-2 py-1" id="formFilters">
             <button onclick="setFormFilter('Form 1')" class="filter-btn whitespace-nowrap px-4 py-2 rounded-full text-xs font-bold border border-slate-200 bg-white text-slate-700 active:scale-95 transition">
               Form 1
@@ -153,11 +134,49 @@
 
     <!-- Content Display Section -->
     <section class="max-w-6xl mx-auto px-4 sm:px-6 py-6 sm:py-8">
-      <div id="sectionHeader" class="flex items-center justify-between mb-4">
-        <h2 id="sectionTitle" class="text-xs sm:text-sm font-bold text-slate-500 uppercase tracking-wider">
-          Available Categories & Papers
-        </h2>
-        <span id="paperCount" class="text-xs font-semibold text-slate-500 bg-slate-100 px-2.5 py-0.5 rounded-full">Loading...</span>
+      
+      <!-- Sub-Filter Bar (Subject & Year Controls) -->
+      <div id="subFilterBar" class="bg-white border border-slate-200/90 rounded-2xl p-4 sm:p-5 mb-6 shadow-xs">
+        <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 pb-3.5 border-b border-slate-100">
+          <div>
+            <h2 id="sectionTitle" class="text-sm sm:text-base font-bold text-slate-900 flex items-center gap-2">
+              <span>Form 2 (FTNA)</span>
+            </h2>
+            <p id="sectionSubtitle" class="text-xs text-slate-500 mt-0.5">Filter subjects and examination years below</p>
+          </div>
+          <span id="paperCount" class="text-xs font-semibold text-blue-700 bg-blue-50 border border-blue-100 px-3 py-1 rounded-full">Loading...</span>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4">
+          <!-- Subject Select Dropdown -->
+          <div>
+            <label class="block text-[11px] font-bold text-slate-600 uppercase tracking-wider mb-1.5 flex items-center gap-1.5">
+              <i data-lucide="book-open" class="w-3.5 h-3.5 text-blue-600"></i> Subject
+            </label>
+            <div class="relative">
+              <select 
+                id="subjectSelect" 
+                onchange="handleSubjectChange(this.value)"
+                class="w-full pl-3.5 pr-8 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs sm:text-sm font-semibold text-slate-800 focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent transition appearance-none cursor-pointer"
+              >
+                <option value="All">All Subjects</option>
+              </select>
+              <i data-lucide="chevron-down" class="w-4 h-4 text-slate-400 absolute right-3 top-3 pointer-events-none"></i>
+            </div>
+          </div>
+
+          <!-- Year Horizontal Pill Filter -->
+          <div>
+            <label class="block text-[11px] font-bold text-slate-600 uppercase tracking-wider mb-1.5 flex items-center gap-1.5">
+              <i data-lucide="calendar" class="w-3.5 h-3.5 text-blue-600"></i> Exam Year
+            </label>
+            <div id="yearChipsContainer" class="flex items-center gap-1.5 overflow-x-auto hide-scrollbar py-0.5">
+              <button onclick="handleYearChange('All')" class="year-chip active-chip px-3 py-1.5 rounded-xl text-xs font-bold border border-slate-200 bg-white text-slate-700 hover:bg-slate-50 transition">
+                All Years
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
 
       <!-- Main Dynamic View Container -->
@@ -166,7 +185,7 @@
       <div id="noResults" class="hidden text-center py-12 px-4 bg-white border border-dashed border-slate-300 rounded-2xl mt-4">
         <i data-lucide="file-question" class="w-10 h-10 text-slate-400 mx-auto mb-2"></i>
         <h3 class="text-base font-bold text-slate-700">No papers found</h3>
-        <p class="text-xs text-slate-500 mt-1">Try another keyword, select another subject, or switch levels.</p>
+        <p class="text-xs text-slate-500 mt-1">Try resetting the subject or year filter for this level.</p>
       </div>
     </section>
   </main>
@@ -195,8 +214,7 @@
       { id: 'Midterm', label: 'Midterm Tests', desc: 'Mid-Semester Class Assessment Tests', icon: 'clock' }
     ];
 
-    // Helper: Returns allowed categories based on the Form level
-    // Form 1, Form 3, and Form 5 DO NOT have national NECTA or Pre-NECTA exams
+    // Helper: Form 1, Form 3, and Form 5 do not have NECTA or Pre-NECTA national assessments
     function getCategoriesForForm(formName) {
       const nonExamForms = ['Form 1', 'Form 3', 'Form 5'];
       const isNonExamClass = nonExamForms.some(f => formName.toLowerCase().includes(f.toLowerCase()));
@@ -216,8 +234,10 @@
     }
 
     let papersDatabase = [];
-    let selectedForm = 'Form 2'; // Defaults directly to Form 2 (FTNA)
-    let selectedExamCategory = null; // null = Category Grid view, string = Paper List view
+    let selectedForm = 'Form 2'; 
+    let selectedSubject = 'All';
+    let selectedYear = 'All';
+    let selectedExamCategory = null; 
 
     // Native Google Sheet Callback: bypasses CORS proxies
     window.handleSheetResponse = function(json) {
@@ -236,9 +256,9 @@
               answersUrl: formatCloudUrl(c[6] ? String(c[6].v).trim() : '')
             };
           })
-          // Only retain records that have an active paper link
           .filter(item => item.paperUrl && item.paperUrl.trim() !== "");
 
+        populateLevelFilters();
         renderApp();
       } catch (err) {
         console.error('Error reading sheet JSON:', err);
@@ -258,25 +278,82 @@
       document.body.appendChild(script);
     }
 
+    // Populates dynamic Subject dropdown & Year chips for the current Form
+    function populateLevelFilters() {
+      const levelPapers = papersDatabase.filter(item => 
+        item.form && item.form.toLowerCase().includes(selectedForm.toLowerCase())
+      );
+
+      // 1. Populate Subject Dropdown
+      const subjects = Array.from(new Set(levelPapers.map(p => p.subject).filter(Boolean))).sort();
+      const subjectSelect = document.getElementById('subjectSelect');
+      
+      let subjectOptions = '<option value="All">All Subjects</option>';
+      subjects.forEach(sub => {
+        const isSelected = sub.toLowerCase() === selectedSubject.toLowerCase() ? 'selected' : '';
+        subjectOptions += `<option value="${sub}" ${isSelected}>${sub}</option>`;
+      });
+      subjectSelect.innerHTML = subjectOptions;
+
+      // 2. Populate Year Chips
+      const years = Array.from(new Set(levelPapers.map(p => p.year).filter(Boolean))).sort((a, b) => b - a);
+      const yearContainer = document.getElementById('yearChipsContainer');
+      
+      let yearHtml = `
+        <button onclick="handleYearChange('All')" class="year-chip whitespace-nowrap px-3 py-1.5 rounded-xl text-xs font-bold border border-slate-200 bg-white text-slate-700 hover:bg-slate-50 transition ${selectedYear === 'All' ? 'active-chip' : ''}">
+          All Years
+        </button>
+      `;
+      years.forEach(yr => {
+        const isActive = selectedYear === yr ? 'active-chip' : '';
+        yearHtml += `
+          <button onclick="handleYearChange('${yr}')" class="year-chip whitespace-nowrap px-3 py-1.5 rounded-xl text-xs font-bold border border-slate-200 bg-white text-slate-700 hover:bg-slate-50 transition ${isActive}">
+            ${yr}
+          </button>
+        `;
+      });
+      yearContainer.innerHTML = yearHtml;
+
+      lucide.createIcons();
+    }
+
     function setFormFilter(formName) {
       selectedForm = formName;
-      selectedExamCategory = null; // Reset back to category selection view
+      selectedSubject = 'All'; // reset subject when changing class
+      selectedYear = 'All';    // reset year when changing class
+      selectedExamCategory = null; 
 
       document.querySelectorAll('.filter-btn').forEach(btn => {
         btn.classList.toggle('active-pill', btn.textContent.trim().startsWith(formName));
       });
 
+      populateLevelFilters();
       renderApp();
     }
 
-    function handleSearchOrSubjectChange() {
+    function handleSubjectChange(subject) {
+      selectedSubject = subject;
+      renderApp();
+    }
+
+    function handleYearChange(year) {
+      selectedYear = year;
+      document.querySelectorAll('.year-chip').forEach(btn => {
+        const isAll = year === 'All' && btn.textContent.trim() === 'All Years';
+        const isYear = btn.textContent.trim() === year;
+        btn.classList.toggle('active-chip', isAll || isYear);
+      });
+      renderApp();
+    }
+
+    function handleSearchInput() {
       renderApp();
     }
 
     function selectCategory(categoryId) {
       selectedExamCategory = categoryId;
       renderApp();
-      window.scrollTo({ top: 320, behavior: 'smooth' });
+      window.scrollTo({ top: 380, behavior: 'smooth' });
     }
 
     function resetCategory() {
@@ -286,55 +363,63 @@
 
     function renderApp() {
       const query = document.getElementById('searchInput').value.trim().toLowerCase();
-      const subjectFilter = document.getElementById('subjectFilter').value;
       const container = document.getElementById('mainDisplayArea');
       const emptyState = document.getElementById('noResults');
       const countEl = document.getElementById('paperCount');
       const sectionTitle = document.getElementById('sectionTitle');
+      const sectionSubtitle = document.getElementById('sectionSubtitle');
 
-      // 1. Filter database based on current Form, Subject, and Search
+      sectionTitle.textContent = `${selectedForm} Past Papers & Schemes`;
+
+      // Filter database based on Level, Subject, Year, and Search
       const matchesForm = (item) => item.form && item.form.toLowerCase().includes(selectedForm.toLowerCase());
-      const matchesSubject = (item) => (subjectFilter === 'All') || (item.subject.toLowerCase() === subjectFilter.toLowerCase());
+      const matchesSubject = (item) => (selectedSubject === 'All') || (item.subject.toLowerCase() === selectedSubject.toLowerCase());
+      const matchesYear = (item) => (selectedYear === 'All') || (String(item.year) === String(selectedYear));
       const matchesQuery = (item) => {
         if (!query) return true;
         const corpus = `${item.title} ${item.subject} ${item.year} ${item.exam} ${item.form}`.toLowerCase();
         return corpus.includes(query);
       };
 
-      const filteredPapers = papersDatabase.filter(item => matchesForm(item) && matchesSubject(item) && matchesQuery(item));
+      const filteredPapers = papersDatabase.filter(item => 
+        matchesForm(item) && matchesSubject(item) && matchesYear(item) && matchesQuery(item)
+      );
 
-      // CASE A: User entered a search query or chosen a specific subject
-      if (query !== '' || subjectFilter !== 'All') {
-        sectionTitle.textContent = `${selectedForm} Search Results (${filteredPapers.length})`;
-        countEl.textContent = `${filteredPapers.length} papers`;
+      countEl.textContent = `${filteredPapers.length} ${filteredPapers.length === 1 ? 'Paper' : 'Papers'}`;
+
+      // Update Subtitle context
+      let contextParts = [];
+      if (selectedSubject !== 'All') contextParts.push(`Subject: ${selectedSubject}`);
+      if (selectedYear !== 'All') contextParts.push(`Year: ${selectedYear}`);
+      if (query) contextParts.push(`Search: "${query}"`);
+      sectionSubtitle.textContent = contextParts.length > 0 ? contextParts.join(' • ') : `Viewing all available resources for ${selectedForm}`;
+
+      // If user typed a search or filtered specific subject/year, show matching paper cards directly
+      if (query !== '' || selectedSubject !== 'All' || selectedYear !== 'All') {
         renderPapersList(container, emptyState, filteredPapers);
         return;
       }
 
-      // CASE B: Specific form is selected
+      // Default Drill-Down flow
       const availableCategories = getCategoriesForForm(selectedForm);
 
       if (!selectedExamCategory) {
-        // VIEW LEVEL 1: Display Exam Category folders
-        sectionTitle.textContent = `${selectedForm} Examination Categories`;
-        countEl.textContent = `${filteredPapers.length} total papers`;
+        // VIEW LEVEL 1: Exam Category cards
         emptyState.classList.add('hidden');
         renderCategoryCards(container, filteredPapers, availableCategories);
       } else {
-        // VIEW LEVEL 2: Display papers inside the selected category
+        // VIEW LEVEL 2: Papers inside selected category
         const currentCategory = ALL_EXAM_CATEGORIES.find(c => c.id === selectedExamCategory) || { label: selectedExamCategory };
         const categoryPapers = filteredPapers.filter(item => {
           const examField = (item.exam || item.title || '').toLowerCase();
           return examField.includes(selectedExamCategory.toLowerCase());
         });
 
-        sectionTitle.textContent = `${selectedForm} &bull; ${currentCategory.label}`;
-        countEl.textContent = `${categoryPapers.length} papers`;
         renderCategoryPapersWithHeader(container, emptyState, categoryPapers, currentCategory);
       }
     }
 
-    // Renders category cards (Dynamically filters out NECTA & Pre-NECTA for Forms 1, 3, and 5)
+    // Renders the category cards
     function renderCategoryCards(container, papersInForm, categoriesToDisplay) {
       container.innerHTML = `
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4.5 my-2">
@@ -369,7 +454,7 @@
       lucide.createIcons();
     }
 
-    // Renders category papers with a "Back" button navigation bar
+    // Renders papers within category with back button
     function renderCategoryPapersWithHeader(container, emptyState, papers, category) {
       container.innerHTML = `
         <div class="mb-5 flex items-center justify-between bg-white border border-slate-200/90 rounded-2xl p-3 sm:p-4 shadow-xs">
@@ -396,7 +481,7 @@
       lucide.createIcons();
     }
 
-    // Direct grid of cards for Search & Filter queries
+    // Direct grid of cards
     function renderPapersList(container, emptyState, list) {
       if (list.length === 0) {
         container.innerHTML = '';
@@ -438,7 +523,7 @@
             </a>
 
             ${item.answersUrl 
-              ? `<a href="${item.answersUrl}" target="_blank" rel="noopener noreferrer" class="w-full inline-flex items-center justify-center gap-1.5 bg-emerald-600 hover:bg-emerald-700 active:bg-emerald-800 text-white text-xs sm:text-sm font-bold py-2.5 px-3 rounded-xl transition shadow-xs">
+              ? `<a href="${item.answersUrl}" target="_blank" rel="noopener noreferrer" class="w-full inline-flex items-center justify-center gap-1.5 bg-emerald-600 hover:bg-emerald-700 active:bg-emerald-800 text-white text-xs sm:text-sm font-bold py-2 px-3 rounded-xl transition shadow-xs">
                   <i data-lucide="check-circle" class="w-4 h-4"></i> Download Marking Scheme
                 </a>`
               : ''
