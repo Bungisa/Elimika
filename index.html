@@ -8,9 +8,9 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="default" />
   <meta name="apple-mobile-web-app-title" content="Elimika" />
   
-  <title>Elimika | Tanzania Past Examination Papers & Marking Schemes</title>
-  <meta name="description" content="Simple, fast access to Tanzanian past examination papers and marking schemes for Standard 1–7 and Form 1–6." />
-  <meta name="keywords" content="Elimika, past papers Tanzania, NECTA, CSEE, ACSEE, FTNA, PSLE, Standard 7, Form 4, marking schemes, mitihani iliyopita" />
+  <title>Elimika | Tanzania Past Papers & TIE New Syllabus Books (Std 1–7 & Form 1–6)</title>
+  <meta name="description" content="Simple, fast access to Tanzanian past examination papers, marking schemes, and TIE New Syllabus textbooks (Mtaala Mpya) for Standard 1–7 and Form 1–6." />
+  <meta name="keywords" content="Elimika, past papers Tanzania, TIE books new syllabus, vitabu vya TIE mtaala mpya, NECTA, CSEE, ACSEE, FTNA, PSLE, Standard 7, Form 4, marking schemes" />
   <meta name="robots" content="index, follow" />
 
   <!-- Tailwind CSS CDN -->
@@ -103,7 +103,7 @@
               ELIMIKA<span class="text-brand-600">.</span>
             </span>
             <span id="navTagline" class="text-[10px] sm:text-[11px] tracking-wider font-bold uppercase text-slate-500 block mt-0.5">
-              Mitihani • Past Papers
+              Mitihani &amp; Vitabu vya TIE
             </span>
           </div>
         </button>
@@ -144,17 +144,49 @@
   </header>
 
   <!-- ========================================== -->
-  <!-- 2. HERO & VOICE + TEXT SEARCH              -->
+  <!-- 2. HERO, MODE SWITCHER & VOICE/TEXT SEARCH -->
   <!-- ========================================== -->
   <section id="homeHero" class="pt-5 pb-6 bg-white border-b-2 border-slate-200">
     <div class="max-w-3xl mx-auto px-4 text-center">
       
       <h1 id="heroTitle" class="text-2xl sm:text-4xl font-black text-slate-900 tracking-tight leading-snug mb-1.5">
-        Find Past Papers in <span class="text-brand-600">3 Easy Taps</span>
+        Past Papers &amp; <span class="text-emerald-700">TIE Books</span> in <span class="text-brand-600">3 Easy Taps</span>
       </h1>
       <p id="heroSubtitle" class="text-xs sm:text-base font-medium text-slate-600 mb-4">
-        1. Tap your Class &rarr; 2. Tap your Subject &rarr; 3. Download Paper
+        1. Tap your Class &rarr; 2. Tap your Subject &rarr; 3. Read or Download
       </p>
+
+      <!-- ==================================================== -->
+      <!-- NEW FEATURE: 1-TAP MODE SWITCHER (PAPERS VS BOOKS)   -->
+      <!-- ==================================================== -->
+      <div class="max-w-xl mx-auto mb-4 bg-slate-100 p-1.5 rounded-2xl border-2 border-slate-300 grid grid-cols-2 gap-1.5 shadow-inner">
+        <button 
+          id="modeTabPapers" 
+          onclick="setResourceMode('papers')"
+          class="py-3 px-3 rounded-xl font-black text-xs sm:text-sm flex items-center justify-center gap-2 transition-all bg-brand-600 text-white shadow-md"
+        >
+          <span class="text-base sm:text-lg">📝</span>
+          <div class="text-left leading-tight">
+            <span id="modePapersTitle" class="block">Past Papers</span>
+            <span id="modePapersSub" class="text-[10px] font-bold opacity-90 block">Mitihani Iliyopita</span>
+          </div>
+        </button>
+
+        <button 
+          id="modeTabBooks" 
+          onclick="setResourceMode('books')"
+          class="py-3 px-3 rounded-xl font-black text-xs sm:text-sm flex items-center justify-center gap-2 transition-all bg-white text-slate-800 hover:bg-emerald-50 border border-slate-200"
+        >
+          <span class="text-base sm:text-lg">📚</span>
+          <div class="text-left leading-tight">
+            <div class="flex items-center gap-1">
+              <span id="modeBooksTitle">TIE Books</span>
+              <span class="bg-amber-400 text-slate-950 text-[9px] font-black uppercase px-1.5 py-0.2 rounded">NEW</span>
+            </div>
+            <span id="modeBooksSub" class="text-[10px] text-emerald-700 font-extrabold block">Mtaala Mpya (All Levels)</span>
+          </div>
+        </button>
+      </div>
 
       <!-- High-Contrast Search Bar with Feature A: Voice Search Button -->
       <div class="relative max-w-xl mx-auto">
@@ -163,9 +195,9 @@
           <input 
             type="text" 
             id="smartSearchInput" 
-            placeholder="Type or tap Mic 🎤 (e.g. Form 4 Math)..." 
+            placeholder="Type or tap Mic 🎤 (e.g. Form 1 Business Studies)..." 
             class="w-full text-sm sm:text-base font-semibold bg-transparent text-slate-900 placeholder-slate-500 focus:outline-none py-1.5"
-            aria-label="Direct search for examination papers"
+            aria-label="Direct search for examination papers or TIE books"
           />
           <button 
             id="clearSearchBtn" 
@@ -191,7 +223,7 @@
         <!-- Voice Listening Active Status Banner -->
         <div id="voiceListeningBanner" class="hidden mt-2.5 p-3 rounded-xl bg-rose-50 border-2 border-rose-300 text-rose-900 text-xs sm:text-sm font-extrabold flex items-center justify-center gap-2">
           <span class="w-3 h-3 rounded-full bg-rose-600 animate-ping"></span>
-          <span id="voiceListeningText">Listening... Speak now (e.g., "Form 4 Mathematics")</span>
+          <span id="voiceListeningText">Listening... Speak now (e.g., "Form 1 Historia ya Tanzania")</span>
         </div>
       </div>
 
@@ -203,6 +235,37 @@
   <!-- ========================================== -->
   <main id="browserApp" class="flex-grow py-5 sm:py-8">
     <div class="max-w-4xl mx-auto px-4 sm:px-6">
+
+      <!-- Active Mode Indicator Banner (When in TIE Books Mode) -->
+      <div id="tieModeNoticeBanner" class="hidden mb-5 p-4 rounded-2xl bg-emerald-900 text-white border-2 border-emerald-600 shadow-md flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+        <div class="flex items-center gap-3">
+          <div class="w-11 h-11 rounded-2xl bg-amber-400 text-slate-950 font-black text-2xl flex items-center justify-center shrink-0">
+            📚
+          </div>
+          <div>
+            <div class="flex items-center gap-2">
+              <span class="text-[10px] font-black uppercase tracking-wider bg-emerald-700 text-emerald-100 px-2 py-0.5 rounded">
+                TIE • Mtaala Mpya 2024–2026
+              </span>
+            </div>
+            <h2 id="tieBannerTitle" class="text-sm sm:text-base font-black leading-snug mt-0.5">
+              TIE Textbooks &amp; New Syllabus Guides (All Levels)
+            </h2>
+            <p id="tieBannerSub" class="text-xs text-emerald-100 font-medium">
+              Includes new compulsory subjects: Historia ya Tanzania na Maadili, Business Studies &amp; Computer Science.
+            </p>
+          </div>
+        </div>
+        <a 
+          href="https://ol.tie.go.tz" 
+          target="_blank" 
+          rel="noopener noreferrer"
+          class="px-3.5 py-2.5 bg-white hover:bg-emerald-50 text-emerald-950 font-black text-xs rounded-xl shrink-0 inline-flex items-center justify-center gap-1.5 shadow-sm"
+        >
+          <span>🌐 TIE Official Library</span>
+          <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+        </a>
+      </div>
 
       <!-- Visual Step Progress Bar -->
       <nav id="stepBreadcrumbs" class="grid grid-cols-3 gap-2 mb-6" aria-label="Step Progress">
@@ -229,7 +292,7 @@
         </div>
         <h3 id="errTitle" class="text-lg font-black text-rose-900 mb-1">Internet Connection Problem</h3>
         <p id="errDesc" class="text-sm text-rose-800 max-w-md mx-auto mb-4">
-          We could not load the examination papers. Please check if your mobile data (MBs) is turned on and tap the button below.
+          We could not load live updates from Google Sheets. You can still browse TIE New Syllabus Books or tap below to retry.
         </p>
         <button onclick="fetchSheetData()" class="bg-rose-600 hover:bg-rose-700 active:scale-95 text-white font-extrabold text-sm px-6 py-3.5 rounded-xl transition-all inline-flex items-center gap-2 shadow-md">
           <i data-lucide="refresh-cw" class="w-5 h-5"></i>
@@ -242,7 +305,7 @@
       <!-- ============================================== -->
       <section id="step1View" class="space-y-6">
 
-        <!-- Feature B: "Remember My Class" 1-Tap Return Banner (Hidden until user selects a class once) -->
+        <!-- Feature B: "Remember My Class" 1-Tap Return Banner -->
         <div id="savedClassBanner" class="hidden bg-emerald-600 text-white p-4 sm:p-5 rounded-3xl shadow-md border-2 border-emerald-700">
           <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
             <div class="flex items-center gap-3.5">
@@ -258,28 +321,36 @@
                 </h2>
               </div>
             </div>
-            <button 
-              id="savedClassContinueBtn"
-              onclick="continueWithSavedClass()" 
-              class="w-full sm:w-auto px-5 py-3.5 bg-white hover:bg-emerald-50 active:scale-95 text-emerald-900 font-black text-sm sm:text-base rounded-2xl shadow-md flex items-center justify-center gap-2 transition-all shrink-0"
-            >
-              <span id="savedClassBtnText">Open Subjects Now</span>
-              <span>&rarr;</span>
-            </button>
+            <div class="flex flex-wrap items-center gap-2">
+              <button 
+                onclick="continueWithSavedClass('papers')" 
+                class="flex-1 sm:flex-none px-4 py-3 bg-white hover:bg-emerald-50 active:scale-95 text-emerald-950 font-black text-xs sm:text-sm rounded-2xl shadow-md flex items-center justify-center gap-1.5 transition-all"
+              >
+                <span>📝</span>
+                <span id="savedClassBtnText">Past Papers</span>
+              </button>
+              <button 
+                onclick="continueWithSavedClass('books')" 
+                class="flex-1 sm:flex-none px-4 py-3 bg-amber-400 hover:bg-amber-300 active:scale-95 text-slate-950 font-black text-xs sm:text-sm rounded-2xl shadow-md flex items-center justify-center gap-1.5 transition-all"
+              >
+                <span>📚</span>
+                <span id="savedClassBooksBtnText">TIE Books</span>
+              </button>
+            </div>
           </div>
         </div>
 
-        <!-- Feature C: "Recently Opened Papers" on Home Screen (Helps users who lose files in Downloads) -->
+        <!-- Feature C: "Recently Opened Papers & Books" on Home Screen -->
         <div id="recentPapersSection" class="hidden bg-white p-4 sm:p-5 rounded-3xl border-2 border-amber-300 shadow-sm">
           <div class="flex items-center justify-between gap-2 mb-3 pb-2.5 border-b border-slate-100">
             <div class="flex items-center gap-2">
               <span class="text-xl">🕘</span>
               <div>
                 <h3 id="recentPapersTitle" class="text-sm sm:text-base font-black text-slate-900 leading-tight">
-                  Recently Opened Papers
+                  Recently Opened Papers &amp; Books
                 </h3>
                 <p id="recentPapersSub" class="text-xs font-semibold text-slate-500">
-                  Tap any paper below to open it again immediately
+                  Tap any item below to open it again immediately
                 </p>
               </div>
             </div>
@@ -293,32 +364,42 @@
         </div>
 
         <!-- Step 1 Instruction Header -->
-        <div class="bg-brand-50 border-2 border-brand-200 rounded-2xl p-4 flex items-center gap-3">
-          <div class="w-10 h-10 rounded-xl bg-brand-600 text-white font-black flex items-center justify-center text-lg shrink-0">
-            1
+        <div id="step1BannerBox" class="bg-brand-50 border-2 border-brand-200 rounded-2xl p-4 flex items-center justify-between gap-3 flex-wrap">
+          <div class="flex items-center gap-3">
+            <div id="step1NumberBadge" class="w-10 h-10 rounded-xl bg-brand-600 text-white font-black flex items-center justify-center text-lg shrink-0">
+              1
+            </div>
+            <div>
+              <h2 id="step1InstructionTitle" class="text-base sm:text-lg font-black text-brand-900 leading-snug">
+                STEP 1: Tap Your Class Below
+              </h2>
+              <p id="step1InstructionSub" class="text-xs sm:text-sm font-medium text-brand-800">
+                Gusa darasa au kidato unachotafuta hapa chini
+              </p>
+            </div>
           </div>
-          <div>
-            <h2 id="step1InstructionTitle" class="text-base sm:text-lg font-black text-brand-900 leading-snug">
-              STEP 1: Tap Your Class Below
-            </h2>
-            <p id="step1InstructionSub" class="text-xs sm:text-sm font-medium text-brand-800">
-              Gusa darasa au kidato unachotafuta hapa chini
-            </p>
-          </div>
+          <span id="step1ActiveModePill" class="px-3 py-1.5 rounded-xl text-xs font-black bg-brand-600 text-white">
+            📝 Mode: Past Papers
+          </span>
         </div>
 
         <!-- Secondary Education (Form 1–6) -->
         <div class="bg-white p-4 sm:p-6 rounded-3xl border-2 border-slate-200 shadow-sm">
-          <div class="flex items-center gap-2.5 mb-4 pb-3 border-b border-slate-100">
-            <span class="text-2xl">🎓</span>
-            <div>
-              <h3 id="secHeaderTitle" class="text-base sm:text-lg font-black text-slate-900 leading-tight">
-                Secondary School (Form 1 – 6)
-              </h3>
-              <p id="secHeaderSub" class="text-xs font-semibold text-slate-500">
-                Shule ya Sekondari (Kidato cha Kwanza hadi cha Sita)
-              </p>
+          <div class="flex items-center justify-between gap-2.5 mb-4 pb-3 border-b border-slate-100 flex-wrap">
+            <div class="flex items-center gap-2.5">
+              <span class="text-2xl">🎓</span>
+              <div>
+                <h3 id="secHeaderTitle" class="text-base sm:text-lg font-black text-slate-900 leading-tight">
+                  Secondary School (Form 1 – 6)
+                </h3>
+                <p id="secHeaderSub" class="text-xs font-semibold text-slate-500">
+                  Shule ya Sekondari • TIE New Syllabus &amp; NECTA Past Papers
+                </p>
+              </div>
             </div>
+            <span class="text-[11px] font-black bg-emerald-50 text-emerald-800 border border-emerald-200 px-2.5 py-1 rounded-lg">
+              📚 Mtaala Mpya Included
+            </span>
           </div>
 
           <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3.5">
@@ -328,7 +409,7 @@
                 <span class="w-12 h-12 rounded-xl bg-slate-200 group-hover:bg-brand-600 group-hover:text-white text-slate-800 font-black text-xl flex items-center justify-center transition-colors shrink-0">F1</span>
                 <div>
                   <span class="block text-lg font-black text-slate-900">Form 1</span>
-                  <span class="text-xs font-semibold text-slate-600" data-i18n="f1_sub">Kidato cha 1</span>
+                  <span class="text-xs font-semibold text-emerald-700">✨ New Syllabus + Papers</span>
                 </div>
               </div>
               <span class="px-3 py-1.5 rounded-lg bg-white border border-slate-300 text-xs font-extrabold text-brand-700 group-hover:bg-brand-600 group-hover:text-white transition-colors" data-i18n="open_btn">Open &rarr;</span>
@@ -340,7 +421,7 @@
                 <span class="w-12 h-12 rounded-xl bg-brand-600 text-white font-black text-xl flex items-center justify-center shrink-0">F2</span>
                 <div>
                   <span class="block text-lg font-black text-slate-900">Form 2</span>
-                  <span class="text-xs font-extrabold text-brand-700" data-i18n="f2_sub">Kidato cha 2 (FTNA)</span>
+                  <span class="text-xs font-extrabold text-brand-700" data-i18n="f2_sub">Kidato cha 2 (FTNA &amp; TIE)</span>
                 </div>
               </div>
               <span class="px-3 py-1.5 rounded-lg bg-white border border-brand-300 text-xs font-extrabold text-brand-700 group-hover:bg-brand-600 group-hover:text-white transition-colors" data-i18n="open_btn">Open &rarr;</span>
@@ -352,7 +433,7 @@
                 <span class="w-12 h-12 rounded-xl bg-slate-200 group-hover:bg-brand-600 group-hover:text-white text-slate-800 font-black text-xl flex items-center justify-center transition-colors shrink-0">F3</span>
                 <div>
                   <span class="block text-lg font-black text-slate-900">Form 3</span>
-                  <span class="text-xs font-semibold text-slate-600" data-i18n="f3_sub">Kidato cha 3</span>
+                  <span class="text-xs font-semibold text-emerald-700">✨ New Syllabus + Papers</span>
                 </div>
               </div>
               <span class="px-3 py-1.5 rounded-lg bg-white border border-slate-300 text-xs font-extrabold text-brand-700 group-hover:bg-brand-600 group-hover:text-white transition-colors" data-i18n="open_btn">Open &rarr;</span>
@@ -364,7 +445,7 @@
                 <span class="w-12 h-12 rounded-xl bg-brand-700 text-white font-black text-xl flex items-center justify-center shrink-0">F4</span>
                 <div>
                   <span class="block text-lg font-black text-brand-900">Form 4</span>
-                  <span class="text-xs font-extrabold text-brand-700" data-i18n="f4_sub">Kidato cha 4 (NECTA CSEE)</span>
+                  <span class="text-xs font-extrabold text-brand-700" data-i18n="f4_sub">Kidato cha 4 (CSEE &amp; TIE)</span>
                 </div>
               </div>
               <span class="px-3 py-1.5 rounded-lg bg-brand-600 text-white text-xs font-extrabold group-hover:bg-brand-800 transition-colors" data-i18n="open_btn">Open &rarr;</span>
@@ -376,7 +457,7 @@
                 <span class="w-12 h-12 rounded-xl bg-slate-200 group-hover:bg-brand-600 group-hover:text-white text-slate-800 font-black text-xl flex items-center justify-center transition-colors shrink-0">F5</span>
                 <div>
                   <span class="block text-lg font-black text-slate-900">Form 5</span>
-                  <span class="text-xs font-semibold text-slate-600" data-i18n="f5_sub">Kidato cha 5 (A-Level)</span>
+                  <span class="text-xs font-semibold text-emerald-700">✨ A-Level New Syllabus</span>
                 </div>
               </div>
               <span class="px-3 py-1.5 rounded-lg bg-white border border-slate-300 text-xs font-extrabold text-brand-700 group-hover:bg-brand-600 group-hover:text-white transition-colors" data-i18n="open_btn">Open &rarr;</span>
@@ -388,7 +469,7 @@
                 <span class="w-12 h-12 rounded-xl bg-brand-700 text-white font-black text-xl flex items-center justify-center shrink-0">F6</span>
                 <div>
                   <span class="block text-lg font-black text-brand-900">Form 6</span>
-                  <span class="text-xs font-extrabold text-brand-700" data-i18n="f6_sub">Kidato cha 6 (NECTA ACSEE)</span>
+                  <span class="text-xs font-extrabold text-brand-700" data-i18n="f6_sub">Kidato cha 6 (ACSEE &amp; TIE)</span>
                 </div>
               </div>
               <span class="px-3 py-1.5 rounded-lg bg-brand-600 text-white text-xs font-extrabold group-hover:bg-brand-800 transition-colors" data-i18n="open_btn">Open &rarr;</span>
@@ -398,16 +479,21 @@
 
         <!-- Primary Education (Standard 1–7) -->
         <div class="bg-white p-4 sm:p-6 rounded-3xl border-2 border-slate-200 shadow-sm">
-          <div class="flex items-center gap-2.5 mb-4 pb-3 border-b border-slate-100">
-            <span class="text-2xl">🎒</span>
-            <div>
-              <h3 id="priHeaderTitle" class="text-base sm:text-lg font-black text-slate-900 leading-tight">
-                Primary School (Standard 1 – 7)
-              </h3>
-              <p id="priHeaderSub" class="text-xs font-semibold text-slate-500">
-                Shule ya Msingi (Darasa la Kwanza hadi la Saba)
-              </p>
+          <div class="flex items-center justify-between gap-2.5 mb-4 pb-3 border-b border-slate-100 flex-wrap">
+            <div class="flex items-center gap-2.5">
+              <span class="text-2xl">🎒</span>
+              <div>
+                <h3 id="priHeaderTitle" class="text-base sm:text-lg font-black text-slate-900 leading-tight">
+                  Primary School (Standard 1 – 7)
+                </h3>
+                <p id="priHeaderSub" class="text-xs font-semibold text-slate-500">
+                  Shule ya Msingi (Darasa la 1 hadi la 7) • Vitabu vya TIE &amp; Mitihani
+                </p>
+              </div>
             </div>
+            <span class="text-[11px] font-black bg-emerald-50 text-emerald-800 border border-emerald-200 px-2.5 py-1 rounded-lg">
+              📚 Mtaala Mpya Included
+            </span>
           </div>
 
           <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
@@ -416,7 +502,7 @@
                 <span class="w-10 h-10 rounded-xl bg-slate-200 font-black text-slate-800 flex items-center justify-center text-base">1</span>
                 <div>
                   <span class="block font-black text-slate-900 text-base">Standard 1</span>
-                  <span class="text-xs font-semibold text-slate-500">Darasa la 1</span>
+                  <span class="text-xs font-semibold text-emerald-700">Darasa la 1 • TIE Mpya</span>
                 </div>
               </div>
               <span class="text-xs font-extrabold text-emerald-700 bg-white px-2.5 py-1 rounded-lg border border-slate-200" data-i18n="open_btn">Open &rarr;</span>
@@ -427,7 +513,7 @@
                 <span class="w-10 h-10 rounded-xl bg-slate-200 font-black text-slate-800 flex items-center justify-center text-base">2</span>
                 <div>
                   <span class="block font-black text-slate-900 text-base">Standard 2</span>
-                  <span class="text-xs font-semibold text-slate-500">Darasa la 2</span>
+                  <span class="text-xs font-semibold text-emerald-700">Darasa la 2 • TIE Mpya</span>
                 </div>
               </div>
               <span class="text-xs font-extrabold text-emerald-700 bg-white px-2.5 py-1 rounded-lg border border-slate-200" data-i18n="open_btn">Open &rarr;</span>
@@ -438,7 +524,7 @@
                 <span class="w-10 h-10 rounded-xl bg-slate-200 font-black text-slate-800 flex items-center justify-center text-base">3</span>
                 <div>
                   <span class="block font-black text-slate-900 text-base">Standard 3</span>
-                  <span class="text-xs font-semibold text-slate-500">Darasa la 3</span>
+                  <span class="text-xs font-semibold text-emerald-700">Darasa la 3 • TIE Mpya</span>
                 </div>
               </div>
               <span class="text-xs font-extrabold text-emerald-700 bg-white px-2.5 py-1 rounded-lg border border-slate-200" data-i18n="open_btn">Open &rarr;</span>
@@ -449,7 +535,7 @@
                 <span class="w-10 h-10 rounded-xl bg-amber-600 text-white font-black flex items-center justify-center text-base">4</span>
                 <div>
                   <span class="block font-black text-slate-900 text-base">Standard 4</span>
-                  <span class="text-xs font-extrabold text-amber-800">Darasa la 4 (SFNA)</span>
+                  <span class="text-xs font-extrabold text-amber-800">Darasa la 4 (SFNA &amp; TIE)</span>
                 </div>
               </div>
               <span class="text-xs font-extrabold text-amber-900 bg-white px-2.5 py-1 rounded-lg border border-amber-300" data-i18n="open_btn">Open &rarr;</span>
@@ -460,7 +546,7 @@
                 <span class="w-10 h-10 rounded-xl bg-slate-200 font-black text-slate-800 flex items-center justify-center text-base">5</span>
                 <div>
                   <span class="block font-black text-slate-900 text-base">Standard 5</span>
-                  <span class="text-xs font-semibold text-slate-500">Darasa la 5</span>
+                  <span class="text-xs font-semibold text-emerald-700">Darasa la 5 • TIE Mpya</span>
                 </div>
               </div>
               <span class="text-xs font-extrabold text-emerald-700 bg-white px-2.5 py-1 rounded-lg border border-slate-200" data-i18n="open_btn">Open &rarr;</span>
@@ -471,7 +557,7 @@
                 <span class="w-10 h-10 rounded-xl bg-slate-200 font-black text-slate-800 flex items-center justify-center text-base">6</span>
                 <div>
                   <span class="block font-black text-slate-900 text-base">Standard 6</span>
-                  <span class="text-xs font-semibold text-slate-500">Darasa la 6</span>
+                  <span class="text-xs font-semibold text-emerald-700">Darasa la 6 • TIE Mpya</span>
                 </div>
               </div>
               <span class="text-xs font-extrabold text-emerald-700 bg-white px-2.5 py-1 rounded-lg border border-slate-200" data-i18n="open_btn">Open &rarr;</span>
@@ -481,8 +567,8 @@
               <div class="flex items-center gap-3.5">
                 <span class="w-12 h-12 rounded-xl bg-emerald-700 text-white font-black flex items-center justify-center text-xl">7</span>
                 <div>
-                  <span class="block font-black text-emerald-950 text-lg">Standard 7 (PSLE National Exams)</span>
-                  <span class="text-xs font-extrabold text-emerald-800">Darasa la 7 — Mtihani wa Taifa wa Kumaliza Elimu ya Msingi</span>
+                  <span class="block font-black text-emerald-950 text-lg">Standard 7 (PSLE National Exams &amp; TIE Books)</span>
+                  <span class="text-xs font-extrabold text-emerald-800">Darasa la 7 — Mitihani ya Taifa &amp; Vitabu vya TIE</span>
                 </div>
               </div>
               <span class="text-xs font-extrabold bg-emerald-700 text-white px-3.5 py-2 rounded-xl shrink-0" data-i18n="open_btn">Open &rarr;</span>
@@ -523,26 +609,43 @@
           </div>
         </div>
         
-        <!-- Big Back Button + Clear Step Header -->
-        <div class="bg-white p-4 sm:p-5 rounded-2xl border-2 border-slate-200 shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-          <div class="flex items-center gap-3">
-            <div class="w-10 h-10 rounded-xl bg-brand-600 text-white font-black flex items-center justify-center text-lg shrink-0">
-              2
+        <!-- Big Back Button + Clear Step Header + Quick Mode Switch -->
+        <div class="bg-white p-4 sm:p-5 rounded-2xl border-2 border-slate-200 shadow-sm space-y-3">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+            <div class="flex items-center gap-3">
+              <div id="step2NumberBadge" class="w-10 h-10 rounded-xl bg-brand-600 text-white font-black flex items-center justify-center text-lg shrink-0">
+                2
+              </div>
+              <div>
+                <h2 class="text-lg sm:text-xl font-black text-slate-900">
+                  <span id="step2TitlePrefix">STEP 2: Tap a Subject for</span> <span id="step2CurrentClass" class="text-brand-600 underline decoration-2">Form 4</span>
+                </h2>
+                <p id="step2SubText" class="text-xs sm:text-sm font-medium text-slate-600">
+                  Gusa somo unalotaka kuona mitihani au vitabu vyake
+                </p>
+              </div>
             </div>
-            <div>
-              <h2 class="text-lg sm:text-xl font-black text-slate-900">
-                <span id="step2TitlePrefix">STEP 2: Tap a Subject for</span> <span id="step2CurrentClass" class="text-brand-600 underline decoration-2">Form 4</span>
-              </h2>
-              <p id="step2SubText" class="text-xs sm:text-sm font-medium text-slate-600">
-                Gusa somo unalotaka kuona mitihani yake
-              </p>
-            </div>
+
+            <button onclick="goToStep(1)" class="w-full sm:w-auto px-4 py-3 bg-slate-100 hover:bg-slate-200 active:bg-slate-300 text-slate-800 font-extrabold text-xs sm:text-sm rounded-xl border-2 border-slate-300 flex items-center justify-center gap-2 transition-colors">
+              <i data-lucide="arrow-left" class="w-4 h-4"></i>
+              <span id="backToClassesText">Change Class (Badili Darasa)</span>
+            </button>
           </div>
 
-          <button onclick="goToStep(1)" class="w-full sm:w-auto px-4 py-3 bg-slate-100 hover:bg-slate-200 active:bg-slate-300 text-slate-800 font-extrabold text-xs sm:text-sm rounded-xl border-2 border-slate-300 flex items-center justify-center gap-2 transition-colors">
-            <i data-lucide="arrow-left" class="w-4 h-4"></i>
-            <span id="backToClassesText">Change Class (Badili Darasa)</span>
-          </button>
+          <!-- Instant Toggle inside Step 2 between Past Papers and TIE New Syllabus Books -->
+          <div class="pt-3 border-t border-slate-100 flex flex-wrap items-center justify-between gap-2">
+            <span id="step2ModeHint" class="text-xs font-extrabold text-slate-600">
+              Currently viewing:
+            </span>
+            <div class="flex items-center gap-2 w-full sm:w-auto">
+              <button onclick="setResourceMode('papers')" id="step2BtnPapers" class="flex-1 sm:flex-none px-3.5 py-2 rounded-xl font-extrabold text-xs border-2 transition-all">
+                📝 Past Papers
+              </button>
+              <button onclick="setResourceMode('books')" id="step2BtnBooks" class="flex-1 sm:flex-none px-3.5 py-2 rounded-xl font-extrabold text-xs border-2 transition-all">
+                📚 TIE Books (New Syllabus)
+              </button>
+            </div>
+          </div>
         </div>
 
         <!-- Subjects Grid (Populated dynamically with subject icons) -->
@@ -550,23 +653,23 @@
           <!-- Dynamically inserted -->
         </div>
 
-        <!-- Feature H: Request Missing Paper Prompt in Step 2 -->
+        <!-- Feature H: Request Missing Paper / Book Prompt in Step 2 -->
         <div class="bg-white p-4 sm:p-5 rounded-2xl border-2 border-dashed border-slate-300 flex flex-col sm:flex-row items-center justify-between gap-3 text-center sm:text-left">
           <div class="flex flex-col sm:flex-row items-center gap-3">
             <span class="text-2xl">🙋‍♂️</span>
             <div>
-              <h4 id="reqStep2Title" class="text-sm sm:text-base font-black text-slate-900">Missing a subject or past paper?</h4>
-              <p id="reqStep2Sub" class="text-xs text-slate-600">Tell us which paper you need and we will upload it for you.</p>
+              <h4 id="reqStep2Title" class="text-sm sm:text-base font-black text-slate-900">Missing a subject, past paper, or TIE book?</h4>
+              <p id="reqStep2Sub" class="text-xs text-slate-600">Tell us which paper or textbook you need and we will upload it for you.</p>
             </div>
           </div>
           <button onclick="openRequestPaperModal()" class="w-full sm:w-auto px-4 py-3 bg-amber-500 hover:bg-amber-600 text-slate-950 font-black text-xs sm:text-sm rounded-xl shadow-sm shrink-0">
-            <span id="reqStep2Btn">Request a Paper (Omba Mtihani)</span>
+            <span id="reqStep2Btn">Request Paper / Book</span>
           </button>
         </div>
       </section>
 
       <!-- ============================================== -->
-      <!-- VIEW 3: STEP 3 / SEARCH RESULTS - PAPERS LIST  -->
+      <!-- VIEW 3: STEP 3 / SEARCH RESULTS - PAPERS/BOOKS -->
       <!-- ============================================== -->
       <section id="step3View" class="hidden space-y-5">
         
@@ -574,12 +677,12 @@
         <div class="bg-white p-4 sm:p-5 rounded-2xl border-2 border-slate-200 shadow-sm space-y-4">
           <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
             <div class="flex items-center gap-3">
-              <div class="w-10 h-10 rounded-xl bg-brand-600 text-white font-black flex items-center justify-center text-lg shrink-0">
+              <div id="step3NumberBadge" class="w-10 h-10 rounded-xl bg-brand-600 text-white font-black flex items-center justify-center text-lg shrink-0">
                 3
               </div>
               <div>
                 <h2 id="step3Title" class="text-lg sm:text-xl font-black text-slate-900 leading-snug">
-                  Available Papers
+                  Available Resources
                 </h2>
                 <div id="step3Subtitle" class="text-xs sm:text-sm font-bold text-emerald-700">Showing all records</div>
               </div>
@@ -591,8 +694,19 @@
             </button>
           </div>
 
-          <!-- Quick Exam Category Filter Chips -->
-          <div class="pt-3 border-t border-slate-100">
+          <!-- 1-Tap Cross-Switch Banner inside Step 3 (Jump between Subject's Papers and Subject's TIE Book!) -->
+          <div id="step3CrossSwitchBar" class="p-3 rounded-xl bg-emerald-50 border-2 border-emerald-200 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+            <div class="text-xs sm:text-sm font-extrabold text-emerald-950 flex items-center gap-2">
+              <span id="crossSwitchIcon" class="text-lg">📚</span>
+              <span id="crossSwitchPrompt">Want the TIE New Syllabus Textbook for this subject?</span>
+            </div>
+            <button onclick="toggleModeInsideStep3()" id="crossSwitchBtn" class="px-4 py-2 bg-emerald-700 hover:bg-emerald-800 text-white font-black text-xs rounded-xl shrink-0 shadow-sm">
+              Open TIE Book (Mtaala Mpya) &rarr;
+            </button>
+          </div>
+
+          <!-- Quick Exam Category Filter Chips (Shown in Past Papers Mode) -->
+          <div id="examCategoryFilterBox" class="pt-3 border-t border-slate-100">
             <span id="filterLabelText" class="block text-xs font-extrabold uppercase tracking-wider text-slate-500 mb-2">
               1. Filter by Exam Type (Chuja Aina ya Mtihani):
             </span>
@@ -615,7 +729,28 @@
             </div>
           </div>
 
-          <!-- Feature F: Dynamic Year Filter Buttons (2026, 2025, 2024, 2023...) -->
+          <!-- Quick TIE Book Filter Chips (Shown in TIE Books Mode) -->
+          <div id="bookCategoryFilterBox" class="hidden pt-3 border-t border-slate-100">
+            <span id="bookFilterLabelText" class="block text-xs font-extrabold uppercase tracking-wider text-slate-500 mb-2">
+              Filter TIE Curriculum Material (Chuja Aina ya Kitabu):
+            </span>
+            <div class="flex flex-wrap items-center gap-2">
+              <button onclick="filterBookEditionTag('ALL')" data-bookcat="ALL" class="book-chip px-3.5 py-2 text-xs sm:text-sm font-extrabold rounded-xl bg-emerald-700 text-white border-2 border-emerald-700 shadow-sm">
+                All TIE Books (Vyote)
+              </button>
+              <button onclick="filterBookEditionTag('New Syllabus')" data-bookcat="New Syllabus" class="book-chip px-3.5 py-2 text-xs sm:text-sm font-bold rounded-xl bg-slate-100 text-slate-700 border-2 border-slate-200 hover:bg-slate-200">
+                ✨ New Syllabus (Mtaala Mpya)
+              </button>
+              <button onclick="filterBookEditionTag('Student Book')" data-bookcat="Student Book" class="book-chip px-3.5 py-2 text-xs sm:text-sm font-bold rounded-xl bg-slate-100 text-slate-700 border-2 border-slate-200 hover:bg-slate-200">
+                📘 Student's Book
+              </button>
+              <button onclick="filterBookEditionTag('Syllabus')" data-bookcat="Syllabus" class="book-chip px-3.5 py-2 text-xs sm:text-sm font-bold rounded-xl bg-slate-100 text-slate-700 border-2 border-slate-200 hover:bg-slate-200">
+                📑 Syllabus &amp; Teacher's Guide
+              </button>
+            </div>
+          </div>
+
+          <!-- Feature F: Dynamic Year Filter Buttons -->
           <div id="yearFilterContainer" class="pt-3 border-t border-slate-100">
             <span id="yearFilterLabelText" class="block text-xs font-extrabold uppercase tracking-wider text-slate-500 mb-2">
               2. Filter by Year (Chuja Mwaka):
@@ -626,7 +761,7 @@
           </div>
         </div>
 
-        <!-- Papers List -->
+        <!-- Papers / Books List -->
         <div id="papersResultsGrid" class="space-y-4">
           <!-- Dynamically inserted -->
         </div>
@@ -642,17 +777,17 @@
           </button>
         </div>
 
-        <!-- Feature H: Request a Missing Paper Card at bottom of Step 3 -->
+        <!-- Feature H: Request a Missing Paper / TIE Book Card at bottom of Step 3 -->
         <div class="bg-amber-50 p-4 sm:p-5 rounded-2xl border-2 border-amber-300 flex flex-col sm:flex-row items-center justify-between gap-3 text-center sm:text-left">
           <div class="flex flex-col sm:flex-row items-center gap-3">
             <span class="text-2xl">🙋‍♂️</span>
             <div>
-              <h4 id="reqStep3Title" class="text-sm sm:text-base font-black text-amber-950">Didn't find the year or paper you wanted?</h4>
+              <h4 id="reqStep3Title" class="text-sm sm:text-base font-black text-amber-950">Didn't find the paper or TIE textbook you wanted?</h4>
               <p id="reqStep3Sub" class="text-xs font-medium text-amber-900">Tap here to request it directly on WhatsApp.</p>
             </div>
           </div>
           <button onclick="openRequestPaperModal()" class="w-full sm:w-auto px-5 py-3 bg-amber-600 hover:bg-amber-700 text-white font-black text-xs sm:text-sm rounded-xl shadow-sm shrink-0">
-            <span id="reqStep3Btn">Request Missing Paper &rarr;</span>
+            <span id="reqStep3Btn">Request Paper / TIE Book &rarr;</span>
           </button>
         </div>
 
@@ -671,7 +806,7 @@
           0
         </span>
         <div class="min-w-0">
-          <div id="printBasketTitle" class="text-xs sm:text-sm font-black truncate">Papers in Print List</div>
+          <div id="printBasketTitle" class="text-xs sm:text-sm font-black truncate">Items in Print List</div>
           <div id="printBasketSub" class="text-[11px] text-emerald-300 font-semibold truncate">Send all at once to Stationery</div>
         </div>
       </div>
@@ -711,15 +846,15 @@
       <!-- Modal Top Header -->
       <div class="px-3.5 py-2.5 bg-slate-100 border-b border-slate-200 flex items-center justify-between gap-2">
         <div class="min-w-0">
-          <span id="modalMetaBadge" class="text-[10px] font-extrabold uppercase tracking-wider px-2 py-0.5 rounded bg-brand-100 text-brand-800 inline-block">Paper</span>
-          <h3 id="modalPaperTitle" class="text-xs sm:text-base font-black text-slate-900 truncate">Paper Preview</h3>
+          <span id="modalMetaBadge" class="text-[10px] font-extrabold uppercase tracking-wider px-2 py-0.5 rounded bg-brand-100 text-brand-800 inline-block">Document</span>
+          <h3 id="modalPaperTitle" class="text-xs sm:text-base font-black text-slate-900 truncate">Document Preview</h3>
         </div>
         <button onclick="closeViewerModal()" class="px-3 py-2 bg-rose-600 hover:bg-rose-700 text-white font-extrabold text-xs rounded-xl flex items-center gap-1 shrink-0 shadow-sm" aria-label="Close Preview Modal">
           <span>✕ CLOSE (FUNGA)</span>
         </button>
       </div>
 
-      <!-- Feature D: 1-Tap Switcher between Questions & Answers inside the Viewer -->
+      <!-- Feature D: 1-Tap Switcher between Primary Doc (Questions / Student Book) & Secondary Doc (Answers / Syllabus) -->
       <div class="bg-slate-900 p-2 border-b border-slate-700">
         <div class="grid grid-cols-2 gap-2 max-w-lg mx-auto">
           <button 
@@ -756,7 +891,7 @@
           <p class="text-sm font-extrabold text-slate-800">Opening document...</p>
           <p class="text-xs text-slate-500 mt-1">Inafungua, tafadhali subiri kidogo...</p>
         </div>
-        <iframe id="docViewerIframe" class="w-full h-full border-0" title="Examination Paper Document" sandbox="allow-scripts allow-same-origin allow-popups" src="about:blank"></iframe>
+        <iframe id="docViewerIframe" class="w-full h-full border-0" title="Examination or Textbook Document" sandbox="allow-scripts allow-same-origin allow-popups" src="about:blank"></iframe>
       </div>
 
       <!-- Modal Footer -->
@@ -772,34 +907,42 @@
   </div>
 
   <!-- ========================================== -->
-  <!-- FEATURE H: REQUEST A MISSING PAPER MODAL   -->
+  <!-- FEATURE H: REQUEST A MISSING PAPER / BOOK  -->
   <!-- ========================================== -->
   <div id="requestPaperModal" class="fixed inset-0 z-50 bg-slate-900/80 backdrop-blur-sm hidden items-center justify-center p-4" role="dialog" aria-modal="true">
     <div class="bg-white rounded-3xl shadow-2xl max-w-md w-full p-5 sm:p-6 border-2 border-slate-300 space-y-4">
       <div class="flex items-center justify-between border-b border-slate-100 pb-3">
         <div class="flex items-center gap-2.5">
           <span class="text-2xl">🙋‍♂️</span>
-          <h3 id="reqModalHeader" class="text-base sm:text-lg font-black text-slate-900">Request a Missing Paper</h3>
+          <h3 id="reqModalHeader" class="text-base sm:text-lg font-black text-slate-900">Request a Paper or TIE Book</h3>
         </div>
         <button onclick="closeRequestPaperModal()" class="px-3 py-1.5 bg-slate-100 hover:bg-slate-200 rounded-xl font-black text-xs text-slate-700">✕</button>
       </div>
 
       <p id="reqModalDesc" class="text-xs sm:text-sm text-slate-600 font-medium">
-        Fill in the paper you need below. We will prioritize uploading it to Elimika!
+        Fill in the Past Paper or TIE New Syllabus Textbook you need below. We will send you the direct PDF or upload it right away!
       </p>
 
       <div class="space-y-3">
         <div>
+          <label class="block text-xs font-extrabold text-slate-700 mb-1">Type / Aina</label>
+          <select id="reqInputType" class="w-full px-3.5 py-2.5 rounded-xl border-2 border-slate-300 font-bold text-sm bg-white">
+            <option value="TIE New Syllabus Textbook (Kitabu cha TIE Mtaala Mpya)">📚 TIE Textbook (New Syllabus / Mtaala Mpya)</option>
+            <option value="Past Examination Paper (Mtihani Uliopita)">📝 Past Examination Paper (Mtihani)</option>
+            <option value="TIE Syllabus / Teacher Guide (Muhtasari)">📑 TIE Syllabus / Teacher's Guide</option>
+          </select>
+        </div>
+        <div>
           <label class="block text-xs font-extrabold text-slate-700 mb-1">Class / Darasa</label>
-          <input id="reqInputClass" type="text" placeholder="e.g. Form 4 or Standard 7" class="w-full px-3.5 py-2.5 rounded-xl border-2 border-slate-300 font-bold text-sm" />
+          <input id="reqInputClass" type="text" placeholder="e.g. Form 1, Form 4, or Standard 3" class="w-full px-3.5 py-2.5 rounded-xl border-2 border-slate-300 font-bold text-sm" />
         </div>
         <div>
           <label class="block text-xs font-extrabold text-slate-700 mb-1">Subject / Somo</label>
-          <input id="reqInputSubject" type="text" placeholder="e.g. Mathematics / Biology" class="w-full px-3.5 py-2.5 rounded-xl border-2 border-slate-300 font-bold text-sm" />
+          <input id="reqInputSubject" type="text" placeholder="e.g. Historia ya Tanzania na Maadili / Business Studies" class="w-full px-3.5 py-2.5 rounded-xl border-2 border-slate-300 font-bold text-sm" />
         </div>
         <div>
-          <label class="block text-xs font-extrabold text-slate-700 mb-1">Year & Exam Type / Mwaka</label>
-          <input id="reqInputYear" type="text" placeholder="e.g. 2024 NECTA or Mock" class="w-full px-3.5 py-2.5 rounded-xl border-2 border-slate-300 font-bold text-sm" />
+          <label class="block text-xs font-extrabold text-slate-700 mb-1">Edition or Year / Mwaka</label>
+          <input id="reqInputYear" type="text" placeholder="e.g. New Syllabus 2025 or NECTA 2024" class="w-full px-3.5 py-2.5 rounded-xl border-2 border-slate-300 font-bold text-sm" />
         </div>
       </div>
 
@@ -834,7 +977,7 @@
         </div>
         <div class="p-3.5 rounded-2xl bg-emerald-50 border border-emerald-200">
           <div class="font-black text-emerald-900 mb-1">2. Tap "Add to Home screen" (Weka Kwenye Skrini)</div>
-          <p>Elimika will appear on your phone just like WhatsApp so you can open it anytime with 1 tap!</p>
+          <p>Elimika will appear on your phone just like WhatsApp so you can open Past Papers &amp; TIE Books anytime with 1 tap!</p>
         </div>
       </div>
 
@@ -850,7 +993,7 @@
   <footer class="bg-slate-900 text-slate-400 py-8 border-t border-slate-800 text-xs text-center mt-auto">
     <div class="max-w-5xl mx-auto px-4 space-y-2">
       <div class="font-black text-white text-sm tracking-wide">ELIMIKA TANZANIA</div>
-      <p>Free past examination papers and marking schemes for Standard 1–7 and Form 1–6.</p>
+      <p>Free Past Examination Papers, Marking Schemes &amp; TIE New Syllabus Books (Standard 1–7 and Form 1–6).</p>
       <p class="text-[11px] text-slate-500">Designed for fast loading on any mobile phone in Tanzania.</p>
     </div>
   </footer>
@@ -861,109 +1004,353 @@
   <script>
     const CONFIG = {
       SHEET_ID: '1-7C_G-VAC2ICxuT3XwADzAluRoDvQyd04yS4BtSvXxM',
-      CACHE_KEY: 'elimika_papers_cache_v3',
+      CACHE_KEY: 'elimika_papers_cache_v4',
       LANG_KEY: 'elimika_preferred_lang',
       LAST_CLASS_KEY: 'elimika_last_selected_class',
-      RECENT_PAPERS_KEY: 'elimika_recent_papers_v1',
-      PRINT_BASKET_KEY: 'elimika_print_basket_v1',
+      RECENT_PAPERS_KEY: 'elimika_recent_papers_v2',
+      PRINT_BASKET_KEY: 'elimika_print_basket_v2',
       ITEMS_PER_PAGE: 10,
       SEARCH_DEBOUNCE_MS: 200
     };
+
+    // ============================================================================
+    // COMPLETE TIE NEW SYLLABUS CATALOG (ALL LEVELS: STANDARD 1–7 & FORM 1–6)
+    // Automatically merges with any custom "TIE Book" rows added in Google Sheets!
+    // ============================================================================
+    const TIE_CURRICULUM_MATRIX = {
+      'Standard 1': [
+        { sub: 'Kusoma (Reading)', sw: 'Kusoma — Kitabu cha Mwanafunzi', newSyl: true, year: '2024/2025' },
+        { sub: 'Kuandika (Writing)', sw: 'Kuandika — Kitabu cha Mwanafunzi', newSyl: true, year: '2024/2025' },
+        { sub: 'Kuhesabu (Arithmetic)', sw: 'Kuhesabu — Kitabu cha Mwanafunzi', newSyl: true, year: '2024/2025' },
+        { sub: 'Historia ya Tanzania na Maadili', sw: 'Historia ya Tanzania na Maadili (Mtaala Mpya)', newSyl: true, year: '2024/2025' },
+        { sub: 'Kutunza Afya na Mazingira', sw: 'Kutunza Afya na Mazingira — Mtaala Mpya', newSyl: true, year: '2024/2025' },
+        { sub: 'Kucheza na Sanaa (Sports & Arts)', sw: 'Kucheza na Sanaa — Kitabu cha Mwanafunzi', newSyl: true, year: '2024/2025' },
+        { sub: 'English (Early Literacy)', sw: 'English Standard 1 — Pupil\'s Book', newSyl: true, year: '2024/2025' }
+      ],
+      'Standard 2': [
+        { sub: 'Kusoma (Reading)', sw: 'Kusoma Darasa la 2 — Kitabu cha Mwanafunzi', newSyl: true, year: '2024/2025' },
+        { sub: 'Kuandika (Writing)', sw: 'Kuandika Darasa la 2 — Kitabu cha Mwanafunzi', newSyl: true, year: '2024/2025' },
+        { sub: 'Kuhesabu (Arithmetic)', sw: 'Kuhesabu Darasa la 2 — Kitabu cha Mwanafunzi', newSyl: true, year: '2024/2025' },
+        { sub: 'Historia ya Tanzania na Maadili', sw: 'Historia ya Tanzania na Maadili Darasa la 2', newSyl: true, year: '2024/2025' },
+        { sub: 'Kutunza Afya na Mazingira', sw: 'Kutunza Afya na Mazingira Darasa la 2', newSyl: true, year: '2024/2025' },
+        { sub: 'Kucheza na Sanaa (Sports & Arts)', sw: 'Kucheza na Sanaa Darasa la 2', newSyl: true, year: '2024/2025' },
+        { sub: 'English Language', sw: 'English Standard 2 — Pupil\'s Book', newSyl: true, year: '2024/2025' }
+      ],
+      'Standard 3': [
+        { sub: 'Mathematics (Hisabati)', sw: 'Hisabati / Mathematics Standard 3 (Mtaala Mpya)', newSyl: true, year: '2024/2025' },
+        { sub: 'Science (Sayansi)', sw: 'Sayansi / Science Standard 3 (Mtaala Mpya)', newSyl: true, year: '2024/2025' },
+        { sub: 'Historia ya Tanzania na Maadili', sw: 'Historia ya Tanzania na Maadili Darasa la 3 (Somo Jipya)', newSyl: true, year: '2024/2025' },
+        { sub: 'Geography & Environment (Jiografia na Mazingira)', sw: 'Jiografia na Mazingira Darasa la 3 (Mtaala Mpya)', newSyl: true, year: '2024/2025' },
+        { sub: 'Kiswahili', sw: 'Kiswahili Darasa la 3 — Kitabu cha Mwanafunzi', newSyl: true, year: '2024/2025' },
+        { sub: 'English Language', sw: 'English Language Standard 3 — Pupil\'s Book', newSyl: true, year: '2024/2025' },
+        { sub: 'Arts & Sports (Sanaa na Michezo)', sw: 'Sanaa na Michezo Darasa la 3 (Mtaala Mpya)', newSyl: true, year: '2024/2025' },
+        { sub: 'French / Arabic (Lugha za Kigeni)', sw: 'French & Arabic Standard 3 — TIE Book', newSyl: true, year: '2024/2025' }
+      ],
+      'Standard 4': [
+        { sub: 'Mathematics (Hisabati)', sw: 'Hisabati / Mathematics Standard 4 (Mtaala Mpya)', newSyl: true, year: '2025/2026' },
+        { sub: 'Science (Sayansi)', sw: 'Sayansi / Science Standard 4 (Mtaala Mpya)', newSyl: true, year: '2025/2026' },
+        { sub: 'Historia ya Tanzania na Maadili', sw: 'Historia ya Tanzania na Maadili Darasa la 4', newSyl: true, year: '2025/2026' },
+        { sub: 'Geography & Environment (Jiografia na Mazingira)', sw: 'Jiografia na Mazingira Darasa la 4', newSyl: true, year: '2025/2026' },
+        { sub: 'Kiswahili', sw: 'Kiswahili Darasa la 4 — Kitabu cha Mwanafunzi', newSyl: true, year: '2025/2026' },
+        { sub: 'English Language', sw: 'English Standard 4 — Pupil\'s Book', newSyl: true, year: '2025/2026' },
+        { sub: 'Arts & Sports (Sanaa na Michezo)', sw: 'Sanaa na Michezo Darasa la 4', newSyl: true, year: '2025/2026' },
+        { sub: 'Civic and Moral Education (Uraia na Maadili)', sw: 'Uraia na Maadili / Civic & Moral Std 4', newSyl: false, year: '2023/2024' },
+        { sub: 'Social Studies (Maarifa ya Jamii)', sw: 'Maarifa ya Jamii / Social Studies Std 4', newSyl: false, year: '2023/2024' }
+      ],
+      'Standard 5': [
+        { sub: 'Mathematics (Hisabati)', sw: 'Hisabati / Mathematics Standard 5 (TIE)', newSyl: true, year: '2025/2026' },
+        { sub: 'Science and Technology (Sayansi na Teknolojia)', sw: 'Sayansi na Teknolojia / Science Std 5', newSyl: true, year: '2025/2026' },
+        { sub: 'Historia ya Tanzania na Maadili', sw: 'Historia ya Tanzania na Maadili Darasa la 5', newSyl: true, year: '2025/2026' },
+        { sub: 'Geography & Environment (Jiografia na Mazingira)', sw: 'Jiografia na Mazingira Darasa la 5', newSyl: true, year: '2025/2026' },
+        { sub: 'Kiswahili', sw: 'Kiswahili Darasa la 5 — Kitabu cha Mwanafunzi', newSyl: true, year: '2025/2026' },
+        { sub: 'English Language', sw: 'English Standard 5 — Pupil\'s Book', newSyl: true, year: '2025/2026' },
+        { sub: 'Civic and Moral Education (Uraia na Maadili)', sw: 'Uraia na Maadili / Civic & Moral Std 5', newSyl: false, year: '2023/2024' },
+        { sub: 'Social Studies (Maarifa ya Jamii)', sw: 'Maarifa ya Jamii / Social Studies Std 5', newSyl: false, year: '2023/2024' },
+        { sub: 'Vocational Skills (Stadi za Kazi)', sw: 'Stadi za Kazi / Vocational Skills Std 5', newSyl: true, year: '2025/2026' }
+      ],
+      'Standard 6': [
+        { sub: 'Mathematics (Hisabati)', sw: 'Hisabati / Mathematics Standard 6 (TIE)', newSyl: true, year: '2025/2026' },
+        { sub: 'Science and Technology (Sayansi na Teknolojia)', sw: 'Sayansi na Teknolojia / Science Std 6', newSyl: true, year: '2025/2026' },
+        { sub: 'Historia ya Tanzania na Maadili', sw: 'Historia ya Tanzania na Maadili Darasa la 6', newSyl: true, year: '2025/2026' },
+        { sub: 'Geography & Environment (Jiografia na Mazingira)', sw: 'Jiografia na Mazingira Darasa la 6', newSyl: true, year: '2025/2026' },
+        { sub: 'Kiswahili', sw: 'Kiswahili Darasa la 6 — Kitabu cha Mwanafunzi', newSyl: true, year: '2025/2026' },
+        { sub: 'English Language', sw: 'English Standard 6 — Pupil\'s Book', newSyl: true, year: '2025/2026' },
+        { sub: 'Civic and Moral Education (Uraia na Maadili)', sw: 'Uraia na Maadili / Civic & Moral Std 6', newSyl: false, year: '2024' },
+        { sub: 'Social Studies (Maarifa ya Jamii)', sw: 'Maarifa ya Jamii / Social Studies Std 6', newSyl: false, year: '2024' },
+        { sub: 'Vocational Skills (Stadi za Kazi)', sw: 'Stadi za Kazi / Vocational Skills Std 6', newSyl: true, year: '2025/2026' }
+      ],
+      'Standard 7': [
+        { sub: 'Mathematics (Hisabati)', sw: 'Hisabati / Mathematics Standard 7 — TIE Revision & Textbook', newSyl: true, year: '2025/2026' },
+        { sub: 'Science and Technology (Sayansi na Teknolojia)', sw: 'Sayansi na Teknolojia / Science Std 7 — TIE Book', newSyl: true, year: '2025/2026' },
+        { sub: 'Historia ya Tanzania na Maadili', sw: 'Historia ya Tanzania na Maadili Darasa la 7', newSyl: true, year: '2025/2026' },
+        { sub: 'Kiswahili', sw: 'Kiswahili Darasa la 7 — Kitabu cha Mwanafunzi (TIE)', newSyl: true, year: '2025/2026' },
+        { sub: 'English Language', sw: 'English Standard 7 — Pupil\'s Book (TIE)', newSyl: true, year: '2025/2026' },
+        { sub: 'Social Studies (Maarifa ya Jamii)', sw: 'Maarifa ya Jamii / Social Studies Std 7 (TIE)', newSyl: false, year: '2024/2025' },
+        { sub: 'Civic and Moral Education (Uraia na Maadili)', sw: 'Uraia na Maadili / Civic & Moral Std 7 (TIE)', newSyl: false, year: '2024/2025' },
+        { sub: 'Vocational Skills (Stadi za Kazi)', sw: 'Stadi za Kazi / Vocational Skills Std 7 (TIE)', newSyl: false, year: '2024/2025' }
+      ],
+      'Form 1': [
+        { sub: 'Business Studies (Elimu ya Biashara)', sw: 'Business Studies Form 1 — TIE New Compulsory Subject', newSyl: true, year: '2024/2025' },
+        { sub: 'Historia ya Tanzania na Maadili', sw: 'Historia ya Tanzania na Maadili Kidato cha 1 (Somo la Lazima)', newSyl: true, year: '2024/2025' },
+        { sub: 'Mathematics', sw: 'Basic Mathematics Form 1 — TIE New Syllabus Textbook', newSyl: true, year: '2024/2025' },
+        { sub: 'English Language', sw: 'English Language Form 1 — TIE New Syllabus Textbook', newSyl: true, year: '2024/2025' },
+        { sub: 'Kiswahili', sw: 'Kiswahili Kidato cha 1 — Kitabu cha Mwanafunzi (Mtaala Mpya)', newSyl: true, year: '2024/2025' },
+        { sub: 'Biology', sw: 'Biology Form 1 — TIE New Syllabus Student\'s Book', newSyl: true, year: '2024/2025' },
+        { sub: 'Chemistry', sw: 'Chemistry Form 1 — TIE New Syllabus Student\'s Book', newSyl: true, year: '2024/2025' },
+        { sub: 'Physics', sw: 'Physics Form 1 — TIE New Syllabus Student\'s Book', newSyl: true, year: '2024/2025' },
+        { sub: 'Geography', sw: 'Geography Form 1 — TIE New Syllabus Student\'s Book', newSyl: true, year: '2024/2025' },
+        { sub: 'History', sw: 'History Form 1 — TIE New Syllabus Student\'s Book', newSyl: true, year: '2024/2025' },
+        { sub: 'Computer Science', sw: 'Computer Science Form 1 — TIE New Syllabus Book', newSyl: true, year: '2024/2025' },
+        { sub: 'Book-Keeping & Accountancy', sw: 'Book-Keeping / Accountancy Form 1 — TIE Book', newSyl: true, year: '2024/2025' },
+        { sub: 'Agriculture', sw: 'Agriculture Form 1 — TIE New Syllabus Student\'s Book', newSyl: true, year: '2024/2025' },
+        { sub: 'Civics', sw: 'Civics Form 1 — TIE Student\'s Book', newSyl: false, year: '2023/2024' }
+      ],
+      'Form 2': [
+        { sub: 'Business Studies (Elimu ya Biashara)', sw: 'Business Studies Form 2 — TIE New Syllabus Textbook', newSyl: true, year: '2025/2026' },
+        { sub: 'Historia ya Tanzania na Maadili', sw: 'Historia ya Tanzania na Maadili Kidato cha 2 (Mtaala Mpya)', newSyl: true, year: '2025/2026' },
+        { sub: 'Mathematics', sw: 'Basic Mathematics Form 2 — TIE New Syllabus Textbook', newSyl: true, year: '2025/2026' },
+        { sub: 'English Language', sw: 'English Language Form 2 — TIE New Syllabus Textbook', newSyl: true, year: '2025/2026' },
+        { sub: 'Kiswahili', sw: 'Kiswahili Kidato cha 2 — Kitabu cha Mwanafunzi (TIE)', newSyl: true, year: '2025/2026' },
+        { sub: 'Biology', sw: 'Biology Form 2 — TIE New Syllabus Student\'s Book', newSyl: true, year: '2025/2026' },
+        { sub: 'Chemistry', sw: 'Chemistry Form 2 — TIE New Syllabus Student\'s Book', newSyl: true, year: '2025/2026' },
+        { sub: 'Physics', sw: 'Physics Form 2 — TIE New Syllabus Student\'s Book', newSyl: true, year: '2025/2026' },
+        { sub: 'Geography', sw: 'Geography Form 2 — TIE New Syllabus Student\'s Book', newSyl: true, year: '2025/2026' },
+        { sub: 'History', sw: 'History Form 2 — TIE New Syllabus Student\'s Book', newSyl: true, year: '2025/2026' },
+        { sub: 'Computer Science', sw: 'Computer Science Form 2 — TIE New Syllabus Book', newSyl: true, year: '2025/2026' },
+        { sub: 'Civics', sw: 'Civics Form 2 — TIE Student\'s Book', newSyl: false, year: '2024' },
+        { sub: 'Commerce & Book-Keeping', sw: 'Commerce & Book-Keeping Form 2 — TIE Book', newSyl: false, year: '2024' }
+      ],
+      'Form 3': [
+        { sub: 'Business Studies (Elimu ya Biashara)', sw: 'Business Studies Form 3 — TIE New Syllabus Book', newSyl: true, year: '2025/2026' },
+        { sub: 'Historia ya Tanzania na Maadili', sw: 'Historia ya Tanzania na Maadili Kidato cha 3 (Mtaala Mpya)', newSyl: true, year: '2025/2026' },
+        { sub: 'Mathematics', sw: 'Basic Mathematics Form 3 — TIE Student\'s Book', newSyl: true, year: '2025/2026' },
+        { sub: 'English Language', sw: 'English Language Form 3 — TIE Student\'s Book', newSyl: true, year: '2025/2026' },
+        { sub: 'Kiswahili', sw: 'Kiswahili Kidato cha 3 — Kitabu cha Mwanafunzi (TIE)', newSyl: true, year: '2025/2026' },
+        { sub: 'Biology', sw: 'Biology Form 3 — TIE Student\'s Book', newSyl: true, year: '2025/2026' },
+        { sub: 'Chemistry', sw: 'Chemistry Form 3 — TIE Student\'s Book', newSyl: true, year: '2025/2026' },
+        { sub: 'Physics', sw: 'Physics Form 3 — TIE Student\'s Book', newSyl: true, year: '2025/2026' },
+        { sub: 'Geography', sw: 'Geography Form 3 — TIE Student\'s Book', newSyl: true, year: '2025/2026' },
+        { sub: 'History', sw: 'History Form 3 — TIE Student\'s Book', newSyl: true, year: '2025/2026' },
+        { sub: 'Computer Science', sw: 'Computer Science / ICS Form 3 — TIE Book', newSyl: true, year: '2025/2026' },
+        { sub: 'Civics', sw: 'Civics Form 3 — TIE Student\'s Book', newSyl: false, year: '2024' },
+        { sub: 'Commerce & Book-Keeping', sw: 'Commerce & Book-Keeping Form 3 — TIE Book', newSyl: false, year: '2024' },
+        { sub: 'Literature in English', sw: 'Literature in English Form 3 & 4 — TIE Book', newSyl: true, year: '2025/2026' }
+      ],
+      'Form 4': [
+        { sub: 'Mathematics', sw: 'Basic Mathematics Form 4 — TIE Student\'s Book & Syllabus', newSyl: true, year: '2025/2026' },
+        { sub: 'Biology', sw: 'Biology Form 4 — TIE Student\'s Book & Practical Guide', newSyl: true, year: '2025/2026' },
+        { sub: 'Chemistry', sw: 'Chemistry Form 4 — TIE Student\'s Book & Practicals', newSyl: true, year: '2025/2026' },
+        { sub: 'Physics', sw: 'Physics Form 4 — TIE Student\'s Book & Practicals', newSyl: true, year: '2025/2026' },
+        { sub: 'English Language', sw: 'English Language Form 4 — TIE Student\'s Book', newSyl: true, year: '2025/2026' },
+        { sub: 'Kiswahili', sw: 'Kiswahili Kidato cha 4 — Kitabu cha Mwanafunzi (TIE)', newSyl: true, year: '2025/2026' },
+        { sub: 'Geography', sw: 'Geography Form 4 — TIE Student\'s Book', newSyl: true, year: '2025/2026' },
+        { sub: 'History', sw: 'History Form 4 — TIE Student\'s Book', newSyl: true, year: '2025/2026' },
+        { sub: 'Historia ya Tanzania na Maadili', sw: 'Historia ya Tanzania na Maadili Kidato cha 4 (Mtaala Mpya)', newSyl: true, year: '2025/2026' },
+        { sub: 'Business Studies (Elimu ya Biashara)', sw: 'Business Studies Form 4 — TIE New Syllabus Book', newSyl: true, year: '2025/2026' },
+        { sub: 'Civics', sw: 'Civics Form 4 — TIE Student\'s Book', newSyl: false, year: '2024/2025' },
+        { sub: 'Computer Science', sw: 'Computer Science / ICS Form 4 — TIE Book', newSyl: true, year: '2025/2026' },
+        { sub: 'Commerce & Book-Keeping', sw: 'Commerce & Book-Keeping Form 4 — TIE Book', newSyl: false, year: '2024/2025' },
+        { sub: 'Agriculture', sw: 'Agriculture Form 4 — TIE Student\'s Book', newSyl: true, year: '2025/2026' }
+      ],
+      'Form 5': [
+        { sub: 'Academic Communication', sw: 'Academic Communication Form 5 — TIE New A-Level Compulsory Subject', newSyl: true, year: '2024/2025' },
+        { sub: 'Historia ya Tanzania na Maadili (A-Level)', sw: 'Historia ya Tanzania na Maadili Kidato cha 5 (Mtaala Mpya)', newSyl: true, year: '2024/2025' },
+        { sub: 'Advanced Mathematics', sw: 'Advanced Mathematics Form 5 — TIE New Syllabus Book', newSyl: true, year: '2024/2025' },
+        { sub: 'Basic Applied Mathematics (BAM)', sw: 'Basic Applied Mathematics (BAM) Form 5 — TIE New Syllabus', newSyl: true, year: '2024/2025' },
+        { sub: 'Physics (A-Level)', sw: 'Physics Form 5 — TIE Advanced Level Student\'s Book', newSyl: true, year: '2024/2025' },
+        { sub: 'Chemistry (A-Level)', sw: 'Chemistry Form 5 — TIE Advanced Level Student\'s Book', newSyl: true, year: '2024/2025' },
+        { sub: 'Biology (A-Level)', sw: 'Biology Form 5 — TIE Advanced Level Student\'s Book', newSyl: true, year: '2024/2025' },
+        { sub: 'Geography (A-Level)', sw: 'Geography Form 5 — TIE Advanced Level Student\'s Book', newSyl: true, year: '2024/2025' },
+        { sub: 'History (A-Level)', sw: 'History Form 5 — TIE Advanced Level Student\'s Book', newSyl: true, year: '2024/2025' },
+        { sub: 'Economics', sw: 'Economics Form 5 — TIE Advanced Level Student\'s Book', newSyl: true, year: '2024/2025' },
+        { sub: 'Accountancy & Commerce', sw: 'Accountancy & Commerce Form 5 — TIE New Syllabus Book', newSyl: true, year: '2024/2025' },
+        { sub: 'Computer Science (A-Level)', sw: 'Computer Science Form 5 — TIE Advanced Level Book', newSyl: true, year: '2024/2025' },
+        { sub: 'Kiswahili (Kidato cha 5)', sw: 'Kiswahili Kidato cha 5 — TIE Kitabu cha Mwanafunzi', newSyl: true, year: '2024/2025' },
+        { sub: 'English Language & Literature (A-Level)', sw: 'English Language Form 5 — TIE Advanced Level Book', newSyl: true, year: '2024/2025' },
+        { sub: 'General Studies', sw: 'General Studies Form 5 & 6 — TIE Student\'s Book', newSyl: false, year: '2023/2024' }
+      ],
+      'Form 6': [
+        { sub: 'Academic Communication', sw: 'Academic Communication Form 6 — TIE New A-Level Compulsory Subject', newSyl: true, year: '2025/2026' },
+        { sub: 'Historia ya Tanzania na Maadili (A-Level)', sw: 'Historia ya Tanzania na Maadili Kidato cha 6 (Mtaala Mpya)', newSyl: true, year: '2025/2026' },
+        { sub: 'Advanced Mathematics', sw: 'Advanced Mathematics Form 6 — TIE New Syllabus Book', newSyl: true, year: '2025/2026' },
+        { sub: 'Basic Applied Mathematics (BAM)', sw: 'Basic Applied Mathematics (BAM) Form 6 — TIE Book', newSyl: true, year: '2025/2026' },
+        { sub: 'Physics (A-Level)', sw: 'Physics Form 6 — TIE Advanced Level Student\'s Book', newSyl: true, year: '2025/2026' },
+        { sub: 'Chemistry (A-Level)', sw: 'Chemistry Form 6 — TIE Advanced Level Student\'s Book', newSyl: true, year: '2025/2026' },
+        { sub: 'Biology (A-Level)', sw: 'Biology Form 6 — TIE Advanced Level Student\'s Book', newSyl: true, year: '2025/2026' },
+        { sub: 'Geography (A-Level)', sw: 'Geography Form 6 — TIE Advanced Level Student\'s Book', newSyl: true, year: '2025/2026' },
+        { sub: 'History (A-Level)', sw: 'History Form 6 — TIE Advanced Level Student\'s Book', newSyl: true, year: '2025/2026' },
+        { sub: 'Economics', sw: 'Economics Form 6 — TIE Advanced Level Student\'s Book', newSyl: true, year: '2025/2026' },
+        { sub: 'Accountancy & Commerce', sw: 'Accountancy & Commerce Form 6 — TIE Book', newSyl: true, year: '2025/2026' },
+        { sub: 'Computer Science (A-Level)', sw: 'Computer Science Form 6 — TIE Advanced Level Book', newSyl: true, year: '2025/2026' },
+        { sub: 'Kiswahili (Kidato cha 6)', sw: 'Kiswahili Kidato cha 6 — TIE Kitabu cha Mwanafunzi', newSyl: true, year: '2025/2026' },
+        { sub: 'English Language & Literature (A-Level)', sw: 'English Language Form 6 — TIE Advanced Level Book', newSyl: true, year: '2025/2026' },
+        { sub: 'General Studies', sw: 'General Studies Form 6 — TIE Student\'s Book', newSyl: false, year: '2024/2025' }
+      ]
+    };
+
+    // Build Default TIE Books Array from the Curriculum Matrix
+    function buildDefaultTieBooks() {
+      const list = [];
+      let counter = 1;
+      Object.keys(TIE_CURRICULUM_MATRIX).forEach(className => {
+        const subjects = TIE_CURRICULUM_MATRIX[className];
+        subjects.forEach(item => {
+          // 1. Student's Textbook (Kitabu cha Mwanafunzi)
+          list.push({
+            id: `tie-book-${counter++}`,
+            isBook: true,
+            isNewSyllabus: item.newSyl,
+            bookType: 'Student Book',
+            title: `${className} ${item.sub} — TIE Student's Textbook (Kitabu cha Mwanafunzi)`,
+            subtitleSw: item.sw,
+            form: className,
+            subject: item.sub,
+            year: item.year,
+            category: item.newSyl ? 'TIE New Syllabus (Mtaala Mpya)' : 'TIE Standard Book',
+            paperUrl: 'https://ol.tie.go.tz',
+            answersUrl: 'https://www.tie.go.tz/pages/syllabuses',
+            customUploaded: false
+          });
+
+          // 2. Official TIE New Syllabus & Teacher's Guide (Muhtasari na Mwongozo wa Mwalimu)
+          list.push({
+            id: `tie-syl-${counter++}`,
+            isBook: true,
+            isNewSyllabus: item.newSyl,
+            bookType: 'Syllabus',
+            title: `${className} ${item.sub} — Official TIE Syllabus & Teacher's Guide (Muhtasari Mpya)`,
+            subtitleSw: `Muhtasari na Mwongozo wa Mwalimu — ${item.sub} (${className})`,
+            form: className,
+            subject: item.sub,
+            year: item.year,
+            category: 'Syllabus & Teacher Guide',
+            paperUrl: 'https://www.tie.go.tz/pages/syllabuses',
+            answersUrl: 'https://ol.tie.go.tz',
+            customUploaded: false
+          });
+        });
+      });
+      return list;
+    }
 
     // Bilingual Dictionary (English & Kiswahili)
     const I18N = {
       en: {
         toggleBtn: 'Kiswahili',
         installApp: 'Install App',
-        heroTitle: 'Find Past Papers in <span class="text-brand-600">3 Easy Taps</span>',
-        heroSub: '1. Tap your Class → 2. Tap your Subject → 3. Download Paper',
-        searchPlaceholder: 'Type or tap Mic 🎤 (e.g. Form 4 Math)...',
+        heroTitle: 'Past Papers &amp; <span class="text-emerald-700">TIE Books</span> in <span class="text-brand-600">3 Easy Taps</span>',
+        heroSub: '1. Tap your Class → 2. Tap your Subject → 3. Read or Download',
+        modePapersTitle: 'Past Papers',
+        modePapersSub: 'Mitihani Iliyopita',
+        modeBooksTitle: 'TIE Books',
+        modeBooksSub: 'Mtaala Mpya (All Levels)',
+        searchPlaceholder: 'Type or tap Mic 🎤 (e.g. Form 1 Business Studies)...',
         voiceBtn: 'Voice',
-        voiceListening: 'Listening... Speak now (e.g. "Form 4 Mathematics")',
+        voiceListening: 'Listening... Speak now (e.g. "Form 1 Business Studies")',
         crumb1: 'Choose Class',
         crumb2: 'Pick Subject',
-        crumb3: 'Get Papers',
+        crumb3Papers: 'Get Papers',
+        crumb3Books: 'TIE Books',
         savedClassPrefix: 'Continue with',
-        savedClassBtn: 'Open Subjects Now',
-        recentPapersTitle: 'Recently Opened Papers',
-        recentPapersSub: 'Tap any paper below to open it again immediately',
-        step1Title: 'STEP 1: Tap Your Class Below',
+        savedClassBtn: 'Past Papers',
+        savedClassBooksBtn: 'TIE Books',
+        recentPapersTitle: 'Recently Opened Papers & Books',
+        recentPapersSub: 'Tap any item below to open it again immediately',
+        step1TitlePapers: 'STEP 1: Tap Your Class for Past Papers',
+        step1TitleBooks: 'STEP 1: Tap Your Class for TIE Books (New Syllabus)',
         step1Sub: 'Gusa darasa au kidato unachotafuta hapa chini',
-        step2Prefix: 'STEP 2: Tap a Subject for',
-        step2Sub: 'Select any subject below to view its past papers',
+        step2PrefixPapers: 'STEP 2: Past Paper Subjects for',
+        step2PrefixBooks: 'STEP 2: TIE New Syllabus Subjects for',
+        step2SubPapers: 'Select any subject below to view its past papers',
+        step2SubBooks: 'Select any subject below to get its TIE Textbook & New Syllabus',
         backToClasses: 'Change Class',
         backToSubjects: 'Change Subject',
         filterLabel: '1. Filter by Exam Type:',
-        yearFilterLabel: '2. Filter by Year:',
+        yearFilterLabel: '2. Filter by Year / Edition:',
         allYears: 'All Years',
         readPaper: 'Read Questions',
+        readBook: 'Open TIE Book',
         downloadPdf: 'Download PDF',
         viewAnswers: 'Answers (Marking Scheme)',
+        viewSyllabus: 'Open Syllabus / Guide',
         shareWhatsapp: 'Send to WhatsApp',
         addPrint: '➕ Print List',
         inPrintList: '✓ In Print List',
         loadingSubjects: 'Loading subjects, please wait...',
         noSubjectsTitle: 'No papers uploaded yet for',
-        noSubjectsSub: 'Please check back soon or request this paper below.',
+        noSubjectsSub: 'You can switch to TIE Books (New Syllabus) for this class or request a paper below.',
         chooseAnotherClass: 'Choose Another Class',
         papersAvailable: 'papers available',
         paperAvailable: 'paper available',
+        booksAvailable: 'TIE books & guides',
         mobileBack: 'Go Back',
         mobileHome: 'Start Over',
-        reqStep2Title: 'Missing a subject or past paper?',
-        reqStep2Sub: 'Tell us which paper you need and we will upload it for you.',
-        reqStep2Btn: 'Request a Paper (Omba Mtihani)',
-        reqStep3Title: 'Didn\'t find the year or paper you wanted?',
-        reqStep3Sub: 'Tap here to request it directly on WhatsApp.',
-        reqStep3Btn: 'Request Missing Paper →',
-        basketTitle: 'Papers in Print List',
+        reqStep2Title: 'Missing a subject, past paper, or TIE book?',
+        reqStep2Sub: 'Tell us which paper or textbook you need and we will upload it for you.',
+        reqStep2Btn: 'Request Paper / Book',
+        reqStep3Title: 'Didn\'t find the paper or TIE textbook you wanted?',
+        reqStep3Sub: 'Tap here to request the direct PDF on WhatsApp.',
+        reqStep3Btn: 'Request Paper / TIE Book →',
+        basketTitle: 'Items in Print List',
         basketSub: 'Send all at once to Stationery via WhatsApp'
       },
       sw: {
         toggleBtn: 'English',
         installApp: 'Weka App',
-        heroTitle: 'Pata Mitihani kwa <span class="text-brand-600">Hatua 3 Rahisi</span>',
-        heroSub: '1. Chagua Darasa → 2. Chagua Somo → 3. Pakua Mtihani',
-        searchPlaceholder: 'Andika au gusa Sauti 🎤 (mf: Form 4 Math)...',
+        heroTitle: 'Mitihani &amp; <span class="text-emerald-700">Vitabu vya TIE</span> kwa <span class="text-brand-600">Hatua 3</span>',
+        heroSub: '1. Chagua Darasa → 2. Chagua Somo → 3. Soma au Pakua',
+        modePapersTitle: 'Mitihani Iliyopita',
+        modePapersSub: 'Past Papers & Majibu',
+        modeBooksTitle: 'Vitabu vya TIE',
+        modeBooksSub: 'Mtaala Mpya (Ngazi Zote)',
+        searchPlaceholder: 'Andika au gusa Sauti 🎤 (mf: Form 1 Historia ya Tanzania)...',
         voiceBtn: 'Sauti',
-        voiceListening: 'Inasikiliza... Sema sasa (mfano: "Kidato cha Nne Hisabati")',
+        voiceListening: 'Inasikiliza... Sema sasa (mfano: "Kidato cha Kwanza Elimu ya Biashara")',
         crumb1: 'Chagua Darasa',
         crumb2: 'Chagua Somo',
-        crumb3: 'Pakua Mitihani',
+        crumb3Papers: 'Pakua Mitihani',
+        crumb3Books: 'Vitabu vya TIE',
         savedClassPrefix: 'Endelea na',
-        savedClassBtn: 'Fungua Masomo Sasa',
-        recentPapersTitle: 'Mitihani Uliyofungua Hivi Karibuni',
-        recentPapersSub: 'Gusa mtihani wowote hapa chini kuufungua tena',
-        step1Title: 'HATUA YA 1: Gusa Darasa Lako Hapa Chini',
+        savedClassBtn: 'Mitihani',
+        savedClassBooksBtn: 'Vitabu vya TIE',
+        recentPapersTitle: 'Mitihani na Vitabu Ulivyofungua Hivi Karibuni',
+        recentPapersSub: 'Gusa chochote hapa chini kukifungua tena haraka',
+        step1TitlePapers: 'HATUA YA 1: Gusa Darasa Kupata Mitihani',
+        step1TitleBooks: 'HATUA YA 1: Gusa Darasa Kupata Vitabu vya TIE (Mtaala Mpya)',
         step1Sub: 'Chagua Shule ya Sekondari (Form 1–6) au Msingi (Std 1–7)',
-        step2Prefix: 'HATUA YA 2: Chagua Somo la',
-        step2Sub: 'Gusa somo lolote hapa chini kuona mitihani yake',
+        step2PrefixPapers: 'HATUA YA 2: Masomo ya Mitihani kwa',
+        step2PrefixBooks: 'HATUA YA 2: Masomo ya Vitabu vya TIE (Mtaala Mpya) —',
+        step2SubPapers: 'Gusa somo lolote hapa chini kuona mitihani yake',
+        step2SubBooks: 'Gusa somo lolote kupata Kitabu cha Mwanafunzi na Muhtasari Mpya wa TIE',
         backToClasses: 'Badili Darasa',
         backToSubjects: 'Rudi Kwenye Masomo',
         filterLabel: '1. Chuja Aina ya Mtihani:',
-        yearFilterLabel: '2. Chuja Mwaka wa Mtihani:',
+        yearFilterLabel: '2. Chuja Mwaka / Toleo:',
         allYears: 'Miaka Yote',
         readPaper: 'Soma Maswali',
+        readBook: 'Fungua Kitabu cha TIE',
         downloadPdf: 'Pakua PDF',
         viewAnswers: 'Majibu (Marking Scheme)',
+        viewSyllabus: 'Muhtasari / Mwongozo',
         shareWhatsapp: 'Tuma WhatsApp',
         addPrint: '➕ Orodha ya Kuprint',
         inPrintList: '✓ Ipo Kwenye Orodha',
         loadingSubjects: 'Inapakua masomo, tafadhali subiri kidogo...',
         noSubjectsTitle: 'Bado hakuna mitihani iliyowekwa kwa',
-        noSubjectsSub: 'Tafadhali jaribu darasa jingine au omba mtihani huo hapa chini.',
+        noSubjectsSub: 'Unaweza kufungua Vitabu vya TIE (Mtaala Mpya) vya darasa hili au kuomba mtihani hapa chini.',
         chooseAnotherClass: 'Chagua Darasa Jingine',
         papersAvailable: 'mitihani ipo',
         paperAvailable: 'mtihani upo',
+        booksAvailable: 'vitabu & mihtasari ya TIE',
         mobileBack: 'Rudi Nyuma',
         mobileHome: 'Anza Upya',
-        reqStep2Title: 'Hujapata somo au mtihani unaotafuta?',
-        reqStep2Sub: 'Tuambie mtihani unaohitaji na tutauweka haraka.',
-        reqStep2Btn: 'Omba Mtihani Huo Hapa',
-        reqStep3Title: 'Hujapata mwaka au mtihani unaoutafuta?',
-        reqStep3Sub: 'Bonyeza hapa kuomba mtihani huo kupitia WhatsApp.',
-        reqStep3Btn: 'Omba Mtihani Usiopo →',
-        basketTitle: 'Mitihani Kwenye Orodha ya Kuprint',
+        reqStep2Title: 'Hujapata somo, mtihani au kitabu cha TIE unachotafuta?',
+        reqStep2Sub: 'Tuambie kitabu au mtihani unaohitaji na tutakutumia haraka.',
+        reqStep2Btn: 'Omba Mtihani / Kitabu',
+        reqStep3Title: 'Hujapata mtihani au Kitabu cha TIE unachotafuta?',
+        reqStep3Sub: 'Bonyeza hapa kuomba PDF yake moja kwa moja kupitia WhatsApp.',
+        reqStep3Btn: 'Omba Mtihani / Kitabu cha TIE →',
+        basketTitle: ' Kwenye Orodha ya Kuprint',
         basketSub: 'Tuma yote kwa pamoja kwenda Stationery (WhatsApp)'
       }
     };
@@ -971,20 +1358,21 @@
     // Visual Icon Helper so low-literacy users can recognize subjects by icon
     function getSubjectIcon(subjectName) {
       const s = (subjectName || '').toLowerCase();
-      if (s.includes('math') || s.includes('hisabati')) return '📐';
-      if (s.includes('biol') || s.includes('baiolojia')) return '🌿';
+      if (s.includes('math') || s.includes('hisabati') || s.includes('kuhesabu') || s.includes('bam')) return '📐';
+      if (s.includes('business') || s.includes('biashara') || s.includes('comm') || s.includes('book') || s.includes('account') || s.includes('econ')) return '📊';
+      if (s.includes('historia ya tanzania') || s.includes('maadili')) return '🇹🇿';
+      if (s.includes('biol') || s.includes('baiolojia') || s.includes('afya')) return '🌿';
       if (s.includes('chem') || s.includes('kemia')) return '🧪';
       if (s.includes('phys') || s.includes('fizikia')) return '⚡';
-      if (s.includes('geog') || s.includes('jiografia')) return '🌍';
+      if (s.includes('geog') || s.includes('jiografia') || s.includes('mazingira')) return '🌍';
       if (s.includes('hist')) return '📜';
-      if (s.includes('civ') || s.includes('uraia') || s.includes('general studies')) return '⚖️';
-      if (s.includes('kisw')) return '🗣️';
-      if (s.includes('engl')) return '📖';
+      if (s.includes('civ') || s.includes('uraia') || s.includes('general studies') || s.includes('communication')) return '⚖️';
+      if (s.includes('kisw') || s.includes('kusoma') || s.includes('kuandika')) return '🗣️';
+      if (s.includes('engl') || s.includes('literature')) return '📖';
       if (s.includes('comp') || s.includes('ict') || s.includes('tehama')) return '💻';
-      if (s.includes('comm') || s.includes('book') || s.includes('account') || s.includes('econ') || s.includes('biashara')) return '📊';
       if (s.includes('scien') || s.includes('sayansi')) return '🔬';
       if (s.includes('agric') || s.includes('kilimo')) return '🌾';
-      if (s.includes('bible') || s.includes('islam') || s.includes('dini')) return '🕌';
+      if (s.includes('sanaa') || s.includes('michezo') || s.includes('arts') || s.includes('kucheza') || s.includes('stadi')) return '🎨';
       if (s.includes('french') || s.includes('arabic') || s.includes('chinese')) return '🌐';
       return '📘';
     }
@@ -1016,6 +1404,8 @@
 
     // Application State
     let allPapers = [];
+    let sheetTieBooks = [];
+    let defaultTieBooks = buildDefaultTieBooks();
     let isLoadingData = true;
     let currentLang = localStorage.getItem(CONFIG.LANG_KEY) || 'en';
     let recentPaperIds = [];
@@ -1023,10 +1413,12 @@
     let deferredInstallPrompt = null;
 
     let state = {
-      step: 1,                 // 1 = Class, 2 = Subject, 3 = Papers
+      resourceMode: 'papers',  // 'papers' (Mitihani) or 'books' (Vitabu vya TIE Mtaala Mpya)
+      step: 1,                 // 1 = Class, 2 = Subject, 3 = Results
       selectedClass: '',
       selectedSubject: '',
       selectedCategory: 'ALL',
+      selectedBookCategory: 'ALL',
       selectedYear: 'ALL',
       searchQuery: '',
       page: 1,
@@ -1040,6 +1432,139 @@
 
     function t(key) {
       return (I18N[currentLang] && I18N[currentLang][key]) || I18N.en[key] || key;
+    }
+
+    // Get combined list of all TIE books (merging custom sheet uploads with the complete built-in matrix)
+    function getAllTieBooks() {
+      const combined = [...sheetTieBooks];
+      defaultTieBooks.forEach(defBook => {
+        // Check if admin uploaded a direct PDF for this same class, subject, and bookType in the Google Sheet
+        const hasSheetOverride = sheetTieBooks.some(sb =>
+          normalizeClassName(sb.form) === normalizeClassName(defBook.form) &&
+          sb.subject.toLowerCase().includes(defBook.subject.split('(')[0].trim().toLowerCase())
+        );
+        if (!hasSheetOverride) {
+          combined.push(defBook);
+        }
+      });
+      return combined;
+    }
+
+    // Find any item (Paper or TIE Book) by ID
+    function findItemById(id) {
+      return allPapers.find(p => p.id === id) || getAllTieBooks().find(b => b.id === id);
+    }
+
+    // Switch between Past Papers ('papers') and TIE Books New Syllabus ('books')
+    function setResourceMode(mode) {
+      state.resourceMode = mode;
+      state.page = 1;
+      state.selectedCategory = 'ALL';
+      state.selectedBookCategory = 'ALL';
+      state.selectedYear = 'ALL';
+
+      updateModeSwitcherUI();
+
+      if (state.step === 2) {
+        renderSubjectsForClass();
+      } else if (state.step === 3) {
+        renderPapersList();
+      }
+
+      const msg = mode === 'books'
+        ? (currentLang === 'sw' ? '📚 Umechagua: Vitabu vya TIE (Mtaala Mpya)' : '📚 Switched to: TIE Books (New Syllabus)')
+        : (currentLang === 'sw' ? '📝 Umechagua: Mitihani Iliyopita (Past Papers)' : '📝 Switched to: Past Examination Papers');
+      showToast(msg, mode === 'books' ? '📚' : '📝');
+    }
+
+    // Toggle between a Subject's Past Papers and its TIE Book right inside Step 3
+    function toggleModeInsideStep3() {
+      const targetMode = state.resourceMode === 'papers' ? 'books' : 'papers';
+      state.resourceMode = targetMode;
+      state.page = 1;
+      state.selectedCategory = 'ALL';
+      state.selectedBookCategory = 'ALL';
+      state.selectedYear = 'ALL';
+      updateModeSwitcherUI();
+
+      // If switching to books or papers and the exact subject name differs slightly, match best subject or keep class
+      const targetList = targetMode === 'books' ? getAllTieBooks() : allPapers;
+      const normClass = normalizeClassName(state.selectedClass);
+      const classItems = targetList.filter(i => normalizeClassName(i.form) === normClass);
+
+      if (state.selectedSubject) {
+        const subKey = state.selectedSubject.split('(')[0].trim().toLowerCase();
+        const matchingItem = classItems.find(i =>
+          i.subject.toLowerCase().includes(subKey) ||
+          subKey.includes(i.subject.split('(')[0].trim().toLowerCase())
+        );
+        if (matchingItem) {
+          state.selectedSubject = matchingItem.subject;
+        } else if (targetMode === 'books' || classItems.length === 0) {
+          // If no exact match in Step 3, let user pick from Step 2 subjects for that class
+          goToStep(2);
+          return;
+        }
+      }
+      renderPapersList();
+    }
+
+    function updateModeSwitcherUI() {
+      const isBooks = state.resourceMode === 'books';
+      const tabPapers = document.getElementById('modeTabPapers');
+      const tabBooks = document.getElementById('modeTabBooks');
+      const tieBanner = document.getElementById('tieModeNoticeBanner');
+      const step1Box = document.getElementById('step1BannerBox');
+      const step1Badge = document.getElementById('step1NumberBadge');
+      const step1Pill = document.getElementById('step1ActiveModePill');
+
+      if (isBooks) {
+        tabBooks.className = "py-3 px-3 rounded-xl font-black text-xs sm:text-sm flex items-center justify-center gap-2 transition-all bg-emerald-700 text-white shadow-md";
+        tabPapers.className = "py-3 px-3 rounded-xl font-black text-xs sm:text-sm flex items-center justify-center gap-2 transition-all bg-white text-slate-800 hover:bg-brand-50 border border-slate-200";
+        tieBanner.classList.remove('hidden');
+
+        step1Box.className = "bg-emerald-50 border-2 border-emerald-300 rounded-2xl p-4 flex items-center justify-between gap-3 flex-wrap";
+        step1Badge.className = "w-10 h-10 rounded-xl bg-emerald-700 text-white font-black flex items-center justify-center text-lg shrink-0";
+        step1Pill.className = "px-3 py-1.5 rounded-xl text-xs font-black bg-emerald-700 text-white";
+        step1Pill.textContent = currentLang === 'sw' ? '📚 Vitabu vya TIE (Mtaala Mpya)' : '📚 Mode: TIE Books (New Syllabus)';
+        document.getElementById('step1InstructionTitle').textContent = t('step1TitleBooks');
+      } else {
+        tabPapers.className = "py-3 px-3 rounded-xl font-black text-xs sm:text-sm flex items-center justify-center gap-2 transition-all bg-brand-600 text-white shadow-md";
+        tabBooks.className = "py-3 px-3 rounded-xl font-black text-xs sm:text-sm flex items-center justify-center gap-2 transition-all bg-white text-slate-800 hover:bg-emerald-50 border border-slate-200";
+        tieBanner.classList.add('hidden');
+
+        step1Box.className = "bg-brand-50 border-2 border-brand-200 rounded-2xl p-4 flex items-center justify-between gap-3 flex-wrap";
+        step1Badge.className = "w-10 h-10 rounded-xl bg-brand-600 text-white font-black flex items-center justify-center text-lg shrink-0";
+        step1Pill.className = "px-3 py-1.5 rounded-xl text-xs font-black bg-brand-600 text-white";
+        step1Pill.textContent = currentLang === 'sw' ? '📝 Mitihani Iliyopita' : '📝 Mode: Past Papers';
+        document.getElementById('step1InstructionTitle').textContent = t('step1TitlePapers');
+      }
+
+      // Update Step 2 inner toggle buttons
+      const s2Papers = document.getElementById('step2BtnPapers');
+      const s2Books = document.getElementById('step2BtnBooks');
+      if (s2Papers && s2Books) {
+        s2Papers.className = !isBooks
+          ? "flex-1 sm:flex-none px-3.5 py-2 rounded-xl font-extrabold text-xs border-2 bg-brand-600 text-white border-brand-600 shadow-sm"
+          : "flex-1 sm:flex-none px-3.5 py-2 rounded-xl font-bold text-xs border-2 bg-slate-50 text-slate-700 border-slate-300 hover:bg-slate-100";
+        s2Books.className = isBooks
+          ? "flex-1 sm:flex-none px-3.5 py-2 rounded-xl font-extrabold text-xs border-2 bg-emerald-700 text-white border-emerald-700 shadow-sm"
+          : "flex-1 sm:flex-none px-3.5 py-2 rounded-xl font-bold text-xs border-2 bg-slate-50 text-slate-700 border-slate-300 hover:bg-slate-100";
+      }
+
+      document.getElementById('step2TitlePrefix').textContent = isBooks ? t('step2PrefixBooks') : t('step2PrefixPapers');
+      document.getElementById('step2SubText').textContent = isBooks ? t('step2SubBooks') : t('step2SubPapers');
+
+      // Step 3 Filter Visibility
+      const examFilterBox = document.getElementById('examCategoryFilterBox');
+      const bookFilterBox = document.getElementById('bookCategoryFilterBox');
+      if (isBooks) {
+        examFilterBox.classList.add('hidden');
+        bookFilterBox.classList.remove('hidden');
+      } else {
+        examFilterBox.classList.remove('hidden');
+        bookFilterBox.classList.add('hidden');
+      }
     }
 
     // Custom Toast Notification (replaces alert/confirm)
@@ -1072,19 +1597,22 @@
       document.getElementById('installAppLabel').textContent = t('installApp');
       document.getElementById('heroTitle').innerHTML = t('heroTitle');
       document.getElementById('heroSubtitle').textContent = t('heroSub');
+      document.getElementById('modePapersTitle').textContent = t('modePapersTitle');
+      document.getElementById('modePapersSub').textContent = t('modePapersSub');
+      document.getElementById('modeBooksTitle').textContent = t('modeBooksTitle');
+      document.getElementById('modeBooksSub').textContent = t('modeBooksSub');
+
       document.getElementById('smartSearchInput').placeholder = t('searchPlaceholder');
       document.getElementById('voiceBtnLabel').textContent = t('voiceBtn');
       document.getElementById('voiceListeningText').textContent = t('voiceListening');
 
       document.getElementById('savedClassPrefix').textContent = t('savedClassPrefix');
       document.getElementById('savedClassBtnText').textContent = t('savedClassBtn');
+      document.getElementById('savedClassBooksBtnText').textContent = t('savedClassBooksBtn');
       document.getElementById('recentPapersTitle').textContent = t('recentPapersTitle');
       document.getElementById('recentPapersSub').textContent = t('recentPapersSub');
 
-      document.getElementById('step1InstructionTitle').textContent = t('step1Title');
       document.getElementById('step1InstructionSub').textContent = t('step1Sub');
-      document.getElementById('step2TitlePrefix').textContent = t('step2Prefix');
-      document.getElementById('step2SubText').textContent = t('step2Sub');
       document.getElementById('backToClassesText').textContent = t('backToClasses');
       document.getElementById('backToSubjectsText').textContent = t('backToSubjects');
       document.getElementById('filterLabelText').textContent = t('filterLabel');
@@ -1102,13 +1630,14 @@
       document.getElementById('printBasketTitle').textContent = t('basketTitle');
       document.getElementById('printBasketSub').textContent = t('basketSub');
 
+      updateModeSwitcherUI();
       renderSavedClassBanner();
       renderRecentPapersSection();
 
       if (state.step === 1) {
         document.getElementById('crumbStep1Label').textContent = t('crumb1');
         document.getElementById('crumbStep2Label').textContent = t('crumb2');
-        document.getElementById('crumbStep3Label').textContent = t('crumb3');
+        document.getElementById('crumbStep3Label').textContent = state.resourceMode === 'books' ? t('crumb3Books') : t('crumb3Papers');
       } else if (state.step === 2) {
         renderNectaCountdown(state.selectedClass);
         renderSubjectsForClass();
@@ -1120,7 +1649,6 @@
     // Feature A: Voice Search ("Tafuta kwa Sauti")
     function normalizeVoiceTranscript(transcript) {
       let text = (transcript || '').toLowerCase().trim();
-      // Convert common Swahili & English spoken class phrases into standard search tokens
       const replacements = [
         [/kidato cha kwanza|form one/g, 'form 1'],
         [/kidato cha pili|form two/g, 'form 2'],
@@ -1136,12 +1664,14 @@
         [/darasa la sita|standard six/g, 'standard 6'],
         [/darasa la saba|standard seven/g, 'standard 7'],
         [/hisabati/g, 'mathematics'],
+        [/elimu ya biashara/g, 'business studies'],
         [/baiolojia/g, 'biology'],
         [/kemia/g, 'chemistry'],
         [/fizikia/g, 'physics'],
         [/jiografia/g, 'geography'],
         [/uraia/g, 'civics'],
-        [/sayansi/g, 'science']
+        [/sayansi/g, 'science'],
+        [/kitabu|vitabu/g, 'tie']
       ];
       replacements.forEach(([regex, rep]) => {
         text = text.replace(regex, rep);
@@ -1228,14 +1758,18 @@
       banner.classList.remove('hidden');
     }
 
-    function continueWithSavedClass() {
+    function continueWithSavedClass(targetMode) {
       const saved = localStorage.getItem(CONFIG.LAST_CLASS_KEY);
       if (saved) {
+        if (targetMode) {
+          state.resourceMode = targetMode;
+          updateModeSwitcherUI();
+        }
         selectClass(saved);
       }
     }
 
-    // Feature C: "Recently Opened Papers"
+    // Feature C: "Recently Opened Papers & TIE Books"
     function loadRecentPapers() {
       try {
         const raw = localStorage.getItem(CONFIG.RECENT_PAPERS_KEY);
@@ -1265,13 +1799,13 @@
     function renderRecentPapersSection() {
       const section = document.getElementById('recentPapersSection');
       const listEl = document.getElementById('recentPapersList');
-      if (!recentPaperIds.length || !allPapers.length) {
+      if (!recentPaperIds.length) {
         section.classList.add('hidden');
         return;
       }
 
       const items = recentPaperIds
-        .map(id => allPapers.find(p => p.id === id))
+        .map(id => findItemById(id))
         .filter(Boolean);
 
       if (items.length === 0) {
@@ -1283,21 +1817,17 @@
       let html = '';
       items.forEach(p => {
         const icon = getSubjectIcon(p.subject);
+        const typeBadge = p.isBook ? '📚 TIE' : '📝 Paper';
         html += `
           <div class="p-3 rounded-2xl bg-amber-50/60 border-2 border-amber-200 flex items-center justify-between gap-2">
             <div class="min-w-0">
-              <div class="text-[11px] font-extrabold text-amber-900">${icon} ${escapeHtml(p.form)} • ${escapeHtml(p.year)}</div>
+              <div class="text-[11px] font-extrabold text-amber-900">${icon} ${typeBadge} • ${escapeHtml(p.form)} • ${escapeHtml(p.year)}</div>
               <div class="text-xs sm:text-sm font-black text-slate-900 truncate">${escapeHtml(p.title)}</div>
             </div>
             <div class="flex items-center gap-1.5 shrink-0">
-              <button onclick="openViewer('${p.id}', 'paper')" class="px-3 py-2 bg-brand-600 hover:bg-brand-700 text-white font-extrabold text-xs rounded-xl">
+              <button onclick="openViewer('${p.id}', 'paper')" class="px-3 py-2 ${p.isBook ? 'bg-emerald-700 hover:bg-emerald-800' : 'bg-brand-600 hover:bg-brand-700'} text-white font-extrabold text-xs rounded-xl">
                 📖 Open
               </button>
-              ${p.answersUrl ? `
-                <button onclick="openViewer('${p.id}', 'answers')" class="px-2.5 py-2 bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold text-xs rounded-xl" title="Answers">
-                  ✅
-                </button>
-              ` : ''}
             </div>
           </div>
         `;
@@ -1305,7 +1835,7 @@
       listEl.innerHTML = html;
     }
 
-    // Feature E: "Stationery Print Basket"
+    // Feature E: "Stationery Print Basket" (Works for both Past Papers and TIE Books!)
     function loadPrintBasket() {
       try {
         const raw = localStorage.getItem(CONFIG.PRINT_BASKET_KEY);
@@ -1367,19 +1897,20 @@
     }
 
     function sendPrintBasketToWhatsApp() {
-      const papers = printBasketIds
-        .map(id => allPapers.find(p => p.id === id))
+      const items = printBasketIds
+        .map(id => findItemById(id))
         .filter(Boolean);
 
-      if (papers.length === 0) return;
+      if (items.length === 0) return;
 
-      let msg = `*🖨️ ELIMIKA STATIONERY PRINT LIST (${papers.length} PAPERS)*\n`;
-      msg += `Tafadhali naomba uniprintie mitihani ifuatayo:\n\n`;
-      papers.forEach((p, idx) => {
+      let msg = `*🖨️ ELIMIKA STATIONERY PRINT LIST (${items.length} ITEMS)*\n`;
+      msg += `Tafadhali naomba uniprintie mitihani / vitabu vifuatavyo:\n\n`;
+      items.forEach((p, idx) => {
         const dl = getDirectDownloadUrl(p.paperUrl || '');
-        msg += `${idx + 1}. *${p.title}* (${p.form} • ${p.subject} • ${p.year})\n`;
-        msg += `   📄 Maswali: ${dl}\n`;
-        if (p.answersUrl) {
+        const label = p.isBook ? '📚 Kitabu cha TIE' : '📄 Mtihani';
+        msg += `${idx + 1}. *${p.title}* (${p.form} • ${p.subject})\n`;
+        msg += `   ${label}: ${dl}\n`;
+        if (p.answersUrl && !p.isBook) {
           msg += `   ✅ Majibu: ${getDirectDownloadUrl(p.answersUrl)}\n`;
         }
         msg += `\n`;
@@ -1392,9 +1923,12 @@
     // Feature I: National Exam Countdown Banner (NECTA Timer)
     function renderNectaCountdown(className) {
       const banner = document.getElementById('nectaCountdownBanner');
+      if (state.resourceMode === 'books') {
+        banner.classList.add('hidden');
+        return;
+      }
       const norm = normalizeClassName(className);
 
-      // Approximate typical NECTA examination months in Tanzania (Month is 0-indexed: 8=Sept, 9=Oct, 10=Nov, 4=May)
       const schedules = {
         'standard 7': {
           month: 8, day: 10,
@@ -1534,10 +2068,12 @@
       return rows;
     }
 
-    // Map rows to schema
+    // Map rows to schema: automatically detects whether a row is a Past Paper or a TIE Book!
     function processParsedRows(rows) {
-      if (rows.length < 2) return [];
-      const records = [];
+      if (rows.length < 2) return { papers: [], books: [] };
+      const papers = [];
+      const books = [];
+
       for (let i = 1; i < rows.length; i++) {
         const cols = rows[i];
         const title = (cols[0] || '').trim();
@@ -1550,18 +2086,33 @@
 
         if (!title && !subject) continue;
 
-        records.push({
-          id: `p-${i}`,
+        const catLower = category.toLowerCase();
+        const titleLower = title.toLowerCase();
+        const isTieBookRow = catLower.includes('tie') || catLower.includes('book') || catLower.includes('kitabu') || catLower.includes('syllabus') || catLower.includes('mtaala') || titleLower.includes('tie book');
+
+        const record = {
+          id: isTieBookRow ? `sheet-book-${i}` : `p-${i}`,
+          isBook: isTieBookRow,
+          isNewSyllabus: true,
+          bookType: catLower.includes('syllabus') ? 'Syllabus' : 'Student Book',
           title: title || `${form} ${subject} ${year}`,
+          subtitleSw: `${subject} (${form}) — Kitabu cha TIE`,
           form: form || 'General',
           subject: subject || 'General',
-          year: year || 'N/A',
-          category: category || 'Other',
+          year: year || '2025/2026',
+          category: category || (isTieBookRow ? 'TIE New Syllabus (Mtaala Mpya)' : 'Other'),
           paperUrl: sanitizeUrl(paperUrl),
-          answersUrl: sanitizeUrl(answersUrl)
-        });
+          answersUrl: sanitizeUrl(answersUrl),
+          customUploaded: true
+        };
+
+        if (isTieBookRow) {
+          books.push(record);
+        } else {
+          papers.push(record);
+        }
       }
-      return records;
+      return { papers, books };
     }
 
     // Load cached papers first for 0.0s instant response on slow connections
@@ -1570,8 +2121,9 @@
         const cached = localStorage.getItem(CONFIG.CACHE_KEY);
         if (cached) {
           const parsed = JSON.parse(cached);
-          if (Array.isArray(parsed) && parsed.length > 0) {
-            allPapers = parsed;
+          if (parsed && Array.isArray(parsed.papers)) {
+            allPapers = parsed.papers;
+            sheetTieBooks = parsed.books || [];
             isLoadingData = false;
           }
         }
@@ -1612,9 +2164,9 @@
 
       if (!csvText) {
         if (allPapers.length > 0) {
-          statusEl.innerHTML = `<span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span><span>${allPapers.length} Papers (Offline Ready)</span>`;
+          statusEl.innerHTML = `<span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span><span>${allPapers.length} Papers + TIE Books</span>`;
         } else {
-          statusEl.innerHTML = `<span class="w-2.5 h-2.5 rounded-full bg-rose-500"></span><span>Offline</span>`;
+          statusEl.innerHTML = `<span class="w-2.5 h-2.5 rounded-full bg-amber-500"></span><span>TIE Books Ready</span>`;
           banner.classList.remove('hidden');
         }
         refreshCurrentStepView();
@@ -1623,14 +2175,18 @@
 
       try {
         const raw = parseCSV(csvText);
-        const freshPapers = processParsedRows(raw);
-        if (freshPapers.length > 0) {
-          allPapers = freshPapers;
+        const processed = processParsedRows(raw);
+        if (processed.papers.length > 0 || processed.books.length > 0) {
+          allPapers = processed.papers;
+          sheetTieBooks = processed.books;
           try {
-            localStorage.setItem(CONFIG.CACHE_KEY, JSON.stringify(allPapers));
+            localStorage.setItem(CONFIG.CACHE_KEY, JSON.stringify({
+              papers: allPapers,
+              books: sheetTieBooks
+            }));
           } catch (e) {}
         }
-        statusEl.innerHTML = `<span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span><span>${allPapers.length} Papers Ready</span>`;
+        statusEl.innerHTML = `<span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span><span>${allPapers.length} Papers + TIE Books</span>`;
         refreshCurrentStepView();
       } catch (err) {
         if (allPapers.length === 0) banner.classList.remove('hidden');
@@ -1650,6 +2206,7 @@
       try {
         window.history.pushState({
           step: state.step,
+          resourceMode: state.resourceMode,
           selectedClass: state.selectedClass,
           selectedSubject: state.selectedSubject,
           searchQuery: state.searchQuery,
@@ -1664,9 +2221,11 @@
         return;
       }
       if (event.state && event.state.step) {
+        state.resourceMode = event.state.resourceMode || state.resourceMode;
         state.selectedClass = event.state.selectedClass || '';
         state.selectedSubject = event.state.selectedSubject || '';
         state.searchQuery = event.state.searchQuery || '';
+        updateModeSwitcherUI();
         goToStep(event.state.step, true);
       } else {
         goToStep(1, true);
@@ -1702,9 +2261,13 @@
       step2.classList.add('hidden');
       step3.classList.add('hidden');
 
+      const isBooks = state.resourceMode === 'books';
+      const activeColor = isBooks ? 'bg-emerald-700 border-emerald-700' : 'bg-brand-600 border-brand-600';
+      const doneColor = isBooks ? 'bg-emerald-50 border-emerald-300 text-emerald-950' : 'bg-brand-50 border-brand-300 text-brand-900';
+
       const inactiveCrumbClass = "flex flex-col sm:flex-row items-center justify-center gap-1 sm:gap-2 p-2.5 sm:py-3 rounded-xl bg-white border-2 border-slate-200 text-slate-500 font-bold text-xs sm:text-sm disabled:opacity-50 transition-all text-center";
-      const doneCrumbClass = "flex flex-col sm:flex-row items-center justify-center gap-1 sm:gap-2 p-2.5 sm:py-3 rounded-xl bg-brand-50 border-2 border-brand-300 text-brand-900 font-extrabold text-xs sm:text-sm transition-all text-center";
-      const activeCrumbClass = "flex flex-col sm:flex-row items-center justify-center gap-1 sm:gap-2 p-2.5 sm:py-3 rounded-xl bg-brand-600 border-2 border-brand-600 text-white font-extrabold text-xs sm:text-sm shadow-md transition-all text-center";
+      const doneCrumbClass = `flex flex-col sm:flex-row items-center justify-center gap-1 sm:gap-2 p-2.5 sm:py-3 rounded-xl border-2 font-extrabold text-xs sm:text-sm transition-all text-center ${doneColor}`;
+      const activeCrumbClass = `flex flex-col sm:flex-row items-center justify-center gap-1 sm:gap-2 p-2.5 sm:py-3 rounded-xl border-2 text-white font-extrabold text-xs sm:text-sm shadow-md transition-all text-center ${activeColor}`;
 
       if (stepNum === 1) {
         step1.classList.remove('hidden');
@@ -1716,7 +2279,7 @@
         crumb3.disabled = true;
         document.getElementById('crumbStep1Label').textContent = t('crumb1');
         document.getElementById('crumbStep2Label').textContent = t('crumb2');
-        document.getElementById('crumbStep3Label').textContent = t('crumb3');
+        document.getElementById('crumbStep3Label').textContent = isBooks ? t('crumb3Books') : t('crumb3Papers');
         renderSavedClassBanner();
         renderRecentPapersSection();
       } else if (stepNum === 2) {
@@ -1729,6 +2292,7 @@
         crumb3.disabled = true;
         document.getElementById('crumbStep1Label').textContent = state.selectedClass || t('crumb1');
         document.getElementById('crumbStep2Label').textContent = t('crumb2');
+        document.getElementById('crumbStep3Label').textContent = isBooks ? t('crumb3Books') : t('crumb3Papers');
         renderNectaCountdown(state.selectedClass);
         renderSubjectsForClass();
       } else if (stepNum === 3) {
@@ -1739,7 +2303,7 @@
         crumb3.className = activeCrumbClass;
         crumb2.disabled = !state.selectedClass;
         crumb3.disabled = false;
-        document.getElementById('crumbStep3Label').textContent = state.selectedSubject || t('crumb3');
+        document.getElementById('crumbStep3Label').textContent = state.selectedSubject || (isBooks ? t('crumb3Books') : t('crumb3Papers'));
         renderPapersList();
       }
 
@@ -1758,11 +2322,12 @@
       goToStep(2);
     }
 
-    // Tap 2: Render Subjects available for selected class
+    // Tap 2: Render Subjects available for selected class (Adapts to Past Papers Mode or TIE Books Mode!)
     function renderSubjectsForClass() {
       const container = document.getElementById('subjectsListGrid');
-      
-      if (isLoadingData && allPapers.length === 0) {
+      const isBooks = state.resourceMode === 'books';
+
+      if (!isBooks && isLoadingData && allPapers.length === 0) {
         container.innerHTML = `
           <div class="col-span-full py-12 text-center bg-white rounded-2xl border-2 border-slate-200 p-6">
             <div class="w-10 h-10 border-4 border-brand-200 border-t-brand-600 rounded-full animate-spin mx-auto mb-3"></div>
@@ -1773,23 +2338,29 @@
       }
 
       const targetNorm = normalizeClassName(state.selectedClass);
-      const classPapers = allPapers.filter(p => normalizeClassName(p.form) === targetNorm);
+      const sourceDataset = isBooks ? getAllTieBooks() : allPapers;
+      const classItems = sourceDataset.filter(p => normalizeClassName(p.form) === targetNorm);
 
       const subjectCounts = {};
-      classPapers.forEach(p => {
+      const subjectNewSylFlag = {};
+      classItems.forEach(p => {
         const s = p.subject.trim();
         subjectCounts[s] = (subjectCounts[s] || 0) + 1;
+        if (p.isNewSyllabus) subjectNewSylFlag[s] = true;
       });
 
       const subjects = Object.keys(subjectCounts).sort();
 
       if (subjects.length === 0) {
         container.innerHTML = `
-          <div class="col-span-full py-12 text-center bg-white rounded-2xl border-2 border-slate-200 p-6">
+          <div class="col-span-full py-10 text-center bg-white rounded-2xl border-2 border-slate-200 p-6">
             <div class="text-4xl mb-2">📂</div>
             <h4 class="font-black text-slate-900 text-base">${escapeHtml(t('noSubjectsTitle'))} ${escapeHtml(state.selectedClass)}</h4>
             <p class="text-xs sm:text-sm text-slate-600 mt-1 mb-5">${escapeHtml(t('noSubjectsSub'))}</p>
             <div class="flex flex-wrap items-center justify-center gap-2.5">
+              <button onclick="setResourceMode('books')" class="px-5 py-3 bg-emerald-700 hover:bg-emerald-800 text-white font-black text-xs sm:text-sm rounded-xl shadow-sm">
+                📚 Open ${escapeHtml(state.selectedClass)} TIE Books (New Syllabus) &rarr;
+              </button>
               <button onclick="goToStep(1)" class="px-5 py-3 bg-brand-600 text-white font-extrabold text-xs sm:text-sm rounded-xl shadow-sm">
                 &larr; ${escapeHtml(t('chooseAnotherClass'))}
               </button>
@@ -1806,22 +2377,28 @@
       subjects.forEach(sub => {
         const count = subjectCounts[sub];
         const icon = getSubjectIcon(sub);
-        const countLabel = count === 1 ? t('paperAvailable') : t('papersAvailable');
+        const countLabel = isBooks
+          ? t('booksAvailable')
+          : (count === 1 ? t('paperAvailable') : t('papersAvailable'));
+        const isNewSyl = subjectNewSylFlag[sub];
 
         html += `
-          <button onclick="selectSubject('${escapeHtml(sub.replace(/'/g, "\\'"))}')" class="p-4 bg-white hover:bg-brand-50 active:bg-brand-100 border-2 border-slate-300 hover:border-brand-600 rounded-2xl text-left transition-all shadow-sm flex items-center justify-between group min-h-[76px]">
+          <button onclick="selectSubject('${escapeHtml(sub.replace(/'/g, "\\'"))}')" class="p-4 bg-white ${isBooks ? 'hover:bg-emerald-50 border-slate-300 hover:border-emerald-600' : 'hover:bg-brand-50 border-slate-300 hover:border-brand-600'} border-2 rounded-2xl text-left transition-all shadow-sm flex items-center justify-between group min-h-[80px]">
             <div class="flex items-center gap-3.5 pr-2">
-              <span class="w-12 h-12 rounded-2xl bg-brand-50 border border-brand-200 flex items-center justify-center text-2xl shrink-0">
+              <span class="w-12 h-12 rounded-2xl ${isBooks ? 'bg-emerald-50 border-emerald-200' : 'bg-brand-50 border-brand-200'} border flex items-center justify-center text-2xl shrink-0">
                 ${icon}
               </span>
               <div>
-                <span class="block text-base sm:text-lg font-black text-slate-900 group-hover:text-brand-700 leading-snug">${escapeHtml(sub)}</span>
-                <span class="inline-block mt-0.5 text-xs font-extrabold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-md border border-emerald-200">
+                <div class="flex flex-wrap items-center gap-1.5">
+                  <span class="text-base sm:text-lg font-black text-slate-900 ${isBooks ? 'group-hover:text-emerald-800' : 'group-hover:text-brand-700'} leading-snug">${escapeHtml(sub)}</span>
+                  ${isBooks && isNewSyl ? `<span class="text-[10px] font-black uppercase bg-amber-400 text-slate-950 px-2 py-0.5 rounded-md">✨ Mtaala Mpya</span>` : ''}
+                </div>
+                <span class="inline-block mt-1 text-xs font-extrabold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-md border border-emerald-200">
                   ${count} ${escapeHtml(countLabel)}
                 </span>
               </div>
             </div>
-            <span class="px-3 py-2 rounded-xl bg-slate-100 group-hover:bg-brand-600 group-hover:text-white text-slate-700 font-extrabold text-xs shrink-0 transition-colors">
+            <span class="px-3 py-2 rounded-xl bg-slate-100 ${isBooks ? 'group-hover:bg-emerald-700' : 'group-hover:bg-brand-600'} group-hover:text-white text-slate-700 font-extrabold text-xs shrink-0 transition-colors">
               Open &rarr;
             </span>
           </button>
@@ -1836,9 +2413,11 @@
     function selectSubject(subjectName) {
       state.selectedSubject = subjectName;
       state.selectedCategory = 'ALL';
+      state.selectedBookCategory = 'ALL';
       state.selectedYear = 'ALL';
       state.page = 1;
       resetCategoryChipStyles('ALL');
+      resetBookChipStyles('ALL');
       goToStep(3);
     }
 
@@ -1853,10 +2432,28 @@
       });
     }
 
+    function resetBookChipStyles(activeBookCat) {
+      document.querySelectorAll('.book-chip').forEach(btn => {
+        const btnCat = btn.getAttribute('data-bookcat');
+        if (btnCat === activeBookCat) {
+          btn.className = "book-chip px-3.5 py-2 text-xs sm:text-sm font-extrabold rounded-xl bg-emerald-700 text-white border-2 border-emerald-700 shadow-sm";
+        } else {
+          btn.className = "book-chip px-3.5 py-2 text-xs sm:text-sm font-bold rounded-xl bg-slate-100 text-slate-700 border-2 border-slate-200 hover:bg-slate-200";
+        }
+      });
+    }
+
     function filterCategoryTag(cat) {
       state.selectedCategory = cat;
       state.page = 1;
       resetCategoryChipStyles(cat);
+      renderPapersList();
+    }
+
+    function filterBookEditionTag(bookCat) {
+      state.selectedBookCategory = bookCat;
+      state.page = 1;
+      resetBookChipStyles(bookCat);
       renderPapersList();
     }
 
@@ -1893,24 +2490,53 @@
       container.innerHTML = html;
     }
 
-    // Share Single Paper via WhatsApp
+    // Share Single Paper or TIE Book via WhatsApp
     function shareOnWhatsApp(paperId) {
-      const p = allPapers.find(item => item.id === paperId);
+      const p = findItemById(paperId);
       if (!p) return;
       const link = p.paperUrl || window.location.href;
-      const message = `*${p.title}* (${p.form} • ${p.subject} • ${p.year})\nPakua / Fungua Mtihani hapa: ${link}`;
+      const typeLabel = p.isBook ? '📚 KITABU CHA TIE (MTAALA MPYA)' : '📝 MTIHANI (PAST PAPER)';
+      const message = `*${typeLabel}*\n*${p.title}* (${p.form} • ${p.subject} • ${p.year})\nFungua / Pakua hapa: ${link}`;
       const waUrl = `https://wa.me/?text=${encodeURIComponent(message)}`;
       window.open(waUrl, '_blank', 'noopener,noreferrer');
     }
 
-    // Render the final papers cards
+    // Render the final Papers or TIE Books cards in Step 3
     function renderPapersList() {
       const listContainer = document.getElementById('papersResultsGrid');
       const titleEl = document.getElementById('step3Title');
       const subtitleEl = document.getElementById('step3Subtitle');
       const paginationWrap = document.getElementById('paginationWrap');
+      const crossSwitchBar = document.getElementById('step3CrossSwitchBar');
+      const isBooks = state.resourceMode === 'books';
 
-      if (isLoadingData && allPapers.length === 0) {
+      // Update Cross-Switch Bar in Step 3
+      if (state.searchQuery.trim().length > 0) {
+        crossSwitchBar.classList.add('hidden');
+      } else {
+        crossSwitchBar.classList.remove('hidden');
+        if (isBooks) {
+          crossSwitchBar.className = "p-3 rounded-xl bg-brand-50 border-2 border-brand-200 flex flex-col sm:flex-row sm:items-center justify-between gap-2";
+          document.getElementById('crossSwitchIcon').textContent = '📝';
+          document.getElementById('crossSwitchPrompt').textContent = currentLang === 'sw'
+            ? `Unataka kufanya mazoezi ya Mitihani ya ${state.selectedClass} ${state.selectedSubject}?`
+            : `Want to practice Past Exam Papers for ${state.selectedClass} ${state.selectedSubject}?`;
+          const btn = document.getElementById('crossSwitchBtn');
+          btn.className = "px-4 py-2 bg-brand-600 hover:bg-brand-700 text-white font-black text-xs rounded-xl shrink-0 shadow-sm";
+          btn.textContent = currentLang === 'sw' ? 'Fungua Mitihani (Past Papers) →' : 'Practice Past Papers →';
+        } else {
+          crossSwitchBar.className = "p-3 rounded-xl bg-emerald-50 border-2 border-emerald-200 flex flex-col sm:flex-row sm:items-center justify-between gap-2";
+          document.getElementById('crossSwitchIcon').textContent = '📚';
+          document.getElementById('crossSwitchPrompt').textContent = currentLang === 'sw'
+            ? `Unataka kusoma Kitabu cha TIE (Mtaala Mpya) cha ${state.selectedClass} ${state.selectedSubject}?`
+            : `Need the TIE New Syllabus Textbook for ${state.selectedClass} ${state.selectedSubject}?`;
+          const btn = document.getElementById('crossSwitchBtn');
+          btn.className = "px-4 py-2 bg-emerald-700 hover:bg-emerald-800 text-white font-black text-xs rounded-xl shrink-0 shadow-sm";
+          btn.textContent = currentLang === 'sw' ? 'Fungua Kitabu cha TIE (Mtaala Mpya) →' : 'Open TIE Book (New Syllabus) →';
+        }
+      }
+
+      if (!isBooks && isLoadingData && allPapers.length === 0) {
         listContainer.innerHTML = `
           <div class="py-12 text-center bg-white rounded-2xl border-2 border-slate-200 p-6">
             <div class="w-10 h-10 border-4 border-brand-200 border-t-brand-600 rounded-full animate-spin mx-auto mb-3"></div>
@@ -1922,56 +2548,70 @@
 
       let baseMatches = [];
 
+      // When user searches via text or voice, search BOTH Past Papers and TIE New Syllabus Books!
       if (state.searchQuery.trim().length > 0) {
         const tokens = state.searchQuery.toLowerCase().split(/\s+/).filter(Boolean);
         titleEl.textContent = `Search: "${state.searchQuery}"`;
         document.getElementById('backToSubjectsBtn').classList.add('hidden');
 
-        baseMatches = allPapers.filter(p => {
-          const hay = `${p.title} ${p.subject} ${p.form} ${normalizeClassName(p.form)} ${p.year} ${p.category}`.toLowerCase();
+        const combinedPool = isBooks ? [...getAllTieBooks(), ...allPapers] : [...allPapers, ...getAllTieBooks()];
+        baseMatches = combinedPool.filter(p => {
+          const hay = `${p.title} ${p.subtitleSw || ''} ${p.subject} ${p.form} ${normalizeClassName(p.form)} ${p.year} ${p.category}`.toLowerCase();
           return tokens.every(tok => hay.includes(tok));
         });
       } else {
         const icon = getSubjectIcon(state.selectedSubject);
-        titleEl.textContent = `${icon} ${state.selectedClass} • ${state.selectedSubject}`;
+        const modePrefix = isBooks ? '📚 TIE' : '📝';
+        titleEl.textContent = `${modePrefix} ${icon} ${state.selectedClass} • ${state.selectedSubject}`;
         document.getElementById('backToSubjectsBtn').classList.remove('hidden');
 
         const targetNorm = normalizeClassName(state.selectedClass);
-        baseMatches = allPapers.filter(p => {
+        const activePool = isBooks ? getAllTieBooks() : allPapers;
+        baseMatches = activePool.filter(p => {
           const matchClass = normalizeClassName(p.form) === targetNorm;
           const matchSub = p.subject.toLowerCase() === state.selectedSubject.toLowerCase();
           return matchClass && matchSub;
         });
       }
 
-      // Populate dynamic year pills from the available papers in this subject/search
+      // Populate dynamic year pills
       renderYearFilterPills(baseMatches);
 
-      // Apply Category and Year filters
+      // Apply Category / Book Edition & Year filters
       const matches = baseMatches.filter(p => {
-        const matchCat = (state.selectedCategory === 'ALL') || (p.category.toLowerCase().includes(state.selectedCategory.toLowerCase()));
         const matchYear = (state.selectedYear === 'ALL') || (p.year.trim() === state.selectedYear);
-        return matchCat && matchYear;
+        if (isBooks && state.searchQuery.trim().length === 0) {
+          let matchBookCat = true;
+          if (state.selectedBookCategory === 'New Syllabus') matchBookCat = Boolean(p.isNewSyllabus);
+          else if (state.selectedBookCategory === 'Student Book') matchBookCat = (p.bookType === 'Student Book');
+          else if (state.selectedBookCategory === 'Syllabus') matchBookCat = (p.bookType === 'Syllabus');
+          return matchBookCat && matchYear;
+        } else {
+          const matchCat = (state.selectedCategory === 'ALL') || (p.category.toLowerCase().includes(state.selectedCategory.toLowerCase()));
+          return matchCat && matchYear;
+        }
       });
 
       // Sort newest year first
       matches.sort((a, b) => (b.year || '').localeCompare(a.year || ''));
 
-      subtitleEl.textContent = `${matches.length} ${matches.length === 1 ? t('paperAvailable') : t('papersAvailable')}`;
+      subtitleEl.textContent = isBooks
+        ? `${matches.length} ${t('booksAvailable')}`
+        : `${matches.length} ${matches.length === 1 ? t('paperAvailable') : t('papersAvailable')}`;
 
       if (matches.length === 0) {
         paginationWrap.classList.add('hidden');
         listContainer.innerHTML = `
           <div class="py-12 text-center bg-white rounded-2xl border-2 border-slate-200 p-6">
             <div class="text-4xl mb-2">🔍</div>
-            <h4 class="font-black text-slate-900 text-base">No examination papers found in this filter</h4>
-            <p class="text-xs sm:text-sm text-slate-600 mt-1 mb-4">Tap below to reset filters or request this paper.</p>
+            <h4 class="font-black text-slate-900 text-base">No items found in this filter</h4>
+            <p class="text-xs sm:text-sm text-slate-600 mt-1 mb-4">Tap below to reset filters or request this paper/book.</p>
             <div class="flex flex-wrap items-center justify-center gap-2.5">
               <button onclick="resetAllStep3Filters()" class="px-5 py-3 bg-brand-600 text-white font-extrabold text-xs sm:text-sm rounded-xl">
-                Show All Papers (Onyesha Zote)
+                Show All (Onyesha Zote)
               </button>
               <button onclick="openRequestPaperModal()" class="px-5 py-3 bg-amber-500 text-slate-950 font-black text-xs sm:text-sm rounded-xl">
-                🙋‍♂️ Request Paper
+                🙋‍♂️ Request Paper / TIE Book
               </button>
             </div>
           </div>
@@ -1990,57 +2630,117 @@
         const hasAnswers = Boolean(p.answersUrl);
         const inPrintList = printBasketIds.includes(p.id);
 
-        html += `
-          <article class="bg-white p-4 sm:p-5 rounded-2xl border-2 border-slate-300 shadow-sm hover:border-brand-500 transition-all">
-            <div class="flex items-start justify-between gap-3 mb-3">
-              <div>
-                <div class="flex flex-wrap items-center gap-2 mb-1.5">
-                  <span class="text-xs font-black uppercase px-2.5 py-0.5 rounded-md bg-brand-100 text-brand-900 border border-brand-300">
-                    ${escapeHtml(p.category)}
-                  </span>
-                  <span class="text-xs font-black px-2.5 py-0.5 rounded-md bg-slate-100 text-slate-800 border border-slate-300">
-                    📅 ${escapeHtml(p.year)}
-                  </span>
-                  <span class="text-xs font-bold text-slate-600">• ${escapeHtml(p.form)}</span>
+        if (p.isBook) {
+          // RENDER TIE NEW SYLLABUS BOOK CARD
+          const isDirectPdf = p.customUploaded || (p.paperUrl && !p.paperUrl.includes('ol.tie.go.tz') && !p.paperUrl.includes('tie.go.tz/pages'));
+          html += `
+            <article class="bg-white p-4 sm:p-5 rounded-2xl border-2 border-emerald-400 shadow-sm hover:border-emerald-600 transition-all">
+              <div class="flex items-start justify-between gap-3 mb-3">
+                <div>
+                  <div class="flex flex-wrap items-center gap-2 mb-1.5">
+                    <span class="text-xs font-black uppercase px-2.5 py-0.5 rounded-md bg-emerald-700 text-white">
+                      📚 ${escapeHtml(p.category)}
+                    </span>
+                    ${p.isNewSyllabus ? `
+                      <span class="text-xs font-black uppercase px-2.5 py-0.5 rounded-md bg-amber-400 text-slate-950">
+                        ✨ Mtaala Mpya
+                      </span>
+                    ` : ''}
+                    <span class="text-xs font-black px-2.5 py-0.5 rounded-md bg-slate-100 text-slate-800 border border-slate-300">
+                      📅 ${escapeHtml(p.year)}
+                    </span>
+                    <span class="text-xs font-bold text-slate-600">• ${escapeHtml(p.form)}</span>
+                  </div>
+                  <h3 class="text-base sm:text-lg font-black text-slate-900 leading-snug">${escapeHtml(p.title)}</h3>
+                  ${p.subtitleSw ? `<p class="text-xs font-bold text-emerald-800 mt-1">🇹🇿 ${escapeHtml(p.subtitleSw)}</p>` : ''}
                 </div>
-                <h3 class="text-base sm:text-lg font-black text-slate-900 leading-snug">${escapeHtml(p.title)}</h3>
               </div>
-            </div>
 
-            <!-- Big, High-Contrast Buttons Designed for Easy Tapping -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-2.5 pt-3 border-t-2 border-slate-100">
-              ${hasPaper ? `
-                <button onclick="openViewer('${p.id}', 'paper')" class="min-h-[48px] px-3.5 py-2.5 bg-brand-600 hover:bg-brand-700 active:bg-brand-800 text-white text-xs sm:text-sm font-extrabold rounded-xl flex items-center justify-center gap-2 shadow-sm transition-colors">
-                  <i data-lucide="book-open" class="w-4 h-4 shrink-0"></i>
-                  <span>${escapeHtml(t('readPaper'))}</span>
-                </button>
-
-                <a href="${escapeHtml(getDirectDownloadUrl(p.paperUrl))}" onclick="recordRecentPaper('${p.id}')" target="_blank" rel="noopener noreferrer" download class="min-h-[48px] px-3.5 py-2.5 bg-slate-100 hover:bg-slate-200 active:bg-slate-300 text-slate-900 border-2 border-slate-300 text-xs sm:text-sm font-extrabold rounded-xl flex items-center justify-center gap-2 transition-colors">
-                  <i data-lucide="download" class="w-4 h-4 shrink-0"></i>
-                  <span>${escapeHtml(t('downloadPdf'))}</span>
-                </a>
+              <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-2.5 pt-3 border-t-2 border-slate-100">
+                ${isDirectPdf ? `
+                  <button onclick="openViewer('${p.id}', 'paper')" class="min-h-[48px] px-3.5 py-2.5 bg-emerald-700 hover:bg-emerald-800 text-white text-xs sm:text-sm font-extrabold rounded-xl flex items-center justify-center gap-2 shadow-sm transition-colors">
+                    <i data-lucide="book-open" class="w-4 h-4 shrink-0"></i>
+                    <span>${escapeHtml(t('readBook'))}</span>
+                  </button>
+                  <a href="${escapeHtml(getDirectDownloadUrl(p.paperUrl))}" onclick="recordRecentPaper('${p.id}')" target="_blank" rel="noopener noreferrer" download class="min-h-[48px] px-3.5 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-900 border-2 border-slate-300 text-xs sm:text-sm font-extrabold rounded-xl flex items-center justify-center gap-2 transition-colors">
+                    <i data-lucide="download" class="w-4 h-4 shrink-0"></i>
+                    <span>${escapeHtml(t('downloadPdf'))}</span>
+                  </a>
+                ` : `
+                  <a href="https://ol.tie.go.tz" onclick="recordRecentPaper('${p.id}')" target="_blank" rel="noopener noreferrer" class="min-h-[48px] px-3.5 py-2.5 bg-emerald-700 hover:bg-emerald-800 text-white text-xs sm:text-sm font-extrabold rounded-xl flex items-center justify-center gap-2 shadow-sm transition-colors">
+                    <i data-lucide="book-open" class="w-4 h-4 shrink-0"></i>
+                    <span>${escapeHtml(t('readBook'))} (TIE Portal)</span>
+                  </a>
+                  <button onclick="requestSpecificBook('${p.id}')" class="min-h-[48px] px-3.5 py-2.5 bg-amber-100 hover:bg-amber-200 text-amber-950 border-2 border-amber-400 text-xs sm:text-sm font-extrabold rounded-xl flex items-center justify-center gap-1.5 transition-colors">
+                    <span>📥 Get Direct PDF on WhatsApp</span>
+                  </button>
+                `}
 
                 <button onclick="shareOnWhatsApp('${p.id}')" class="min-h-[48px] px-3.5 py-2.5 bg-emerald-50 hover:bg-emerald-100 text-emerald-900 border-2 border-emerald-300 text-xs sm:text-sm font-extrabold rounded-xl flex items-center justify-center gap-2 transition-colors">
                   <i data-lucide="share-2" class="w-4 h-4 text-emerald-700 shrink-0"></i>
                   <span>${escapeHtml(t('shareWhatsapp'))}</span>
                 </button>
 
-                <button onclick="togglePrintBasket('${p.id}')" class="min-h-[48px] px-3.5 py-2.5 ${inPrintList ? 'bg-slate-900 text-white border-slate-900' : 'bg-amber-50 hover:bg-amber-100 text-amber-950 border-amber-300'} border-2 text-xs sm:text-sm font-extrabold rounded-xl flex items-center justify-center gap-1.5 transition-colors">
+                <button onclick="togglePrintBasket('${p.id}')" class="min-h-[48px] px-3.5 py-2.5 ${inPrintList ? 'bg-slate-900 text-white border-slate-900' : 'bg-slate-100 hover:bg-slate-200 text-slate-800 border-slate-300'} border-2 text-xs sm:text-sm font-extrabold rounded-xl flex items-center justify-center gap-1.5 transition-colors">
                   <span>${escapeHtml(inPrintList ? t('inPrintList') : t('addPrint'))}</span>
                 </button>
-              ` : `
-                <span class="col-span-full text-xs font-bold text-slate-400 italic py-2">Paper file pending upload</span>
-              `}
+              </div>
+            </article>
+          `;
+        } else {
+          // RENDER PAST PAPER CARD
+          html += `
+            <article class="bg-white p-4 sm:p-5 rounded-2xl border-2 border-slate-300 shadow-sm hover:border-brand-500 transition-all">
+              <div class="flex items-start justify-between gap-3 mb-3">
+                <div>
+                  <div class="flex flex-wrap items-center gap-2 mb-1.5">
+                    <span class="text-xs font-black uppercase px-2.5 py-0.5 rounded-md bg-brand-100 text-brand-900 border border-brand-300">
+                      ${escapeHtml(p.category)}
+                    </span>
+                    <span class="text-xs font-black px-2.5 py-0.5 rounded-md bg-slate-100 text-slate-800 border border-slate-300">
+                      📅 ${escapeHtml(p.year)}
+                    </span>
+                    <span class="text-xs font-bold text-slate-600">• ${escapeHtml(p.form)}</span>
+                  </div>
+                  <h3 class="text-base sm:text-lg font-black text-slate-900 leading-snug">${escapeHtml(p.title)}</h3>
+                </div>
+              </div>
 
-              ${hasAnswers ? `
-                <button onclick="openViewer('${p.id}', 'answers')" class="sm:col-span-2 md:col-span-4 min-h-[48px] px-4 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white text-xs sm:text-sm font-extrabold rounded-xl flex items-center justify-center gap-2 shadow-sm transition-colors">
-                  <i data-lucide="check-circle-2" class="w-4 h-4 shrink-0"></i>
-                  <span>✅ ${escapeHtml(t('viewAnswers'))}</span>
-                </button>
-              ` : ''}
-            </div>
-          </article>
-        `;
+              <!-- Big, High-Contrast Buttons Designed for Easy Tapping -->
+              <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-2.5 pt-3 border-t-2 border-slate-100">
+                ${hasPaper ? `
+                  <button onclick="openViewer('${p.id}', 'paper')" class="min-h-[48px] px-3.5 py-2.5 bg-brand-600 hover:bg-brand-700 active:bg-brand-800 text-white text-xs sm:text-sm font-extrabold rounded-xl flex items-center justify-center gap-2 shadow-sm transition-colors">
+                    <i data-lucide="book-open" class="w-4 h-4 shrink-0"></i>
+                    <span>${escapeHtml(t('readPaper'))}</span>
+                  </button>
+
+                  <a href="${escapeHtml(getDirectDownloadUrl(p.paperUrl))}" onclick="recordRecentPaper('${p.id}')" target="_blank" rel="noopener noreferrer" download class="min-h-[48px] px-3.5 py-2.5 bg-slate-100 hover:bg-slate-200 active:bg-slate-300 text-slate-900 border-2 border-slate-300 text-xs sm:text-sm font-extrabold rounded-xl flex items-center justify-center gap-2 transition-colors">
+                    <i data-lucide="download" class="w-4 h-4 shrink-0"></i>
+                    <span>${escapeHtml(t('downloadPdf'))}</span>
+                  </a>
+
+                  <button onclick="shareOnWhatsApp('${p.id}')" class="min-h-[48px] px-3.5 py-2.5 bg-emerald-50 hover:bg-emerald-100 text-emerald-900 border-2 border-emerald-300 text-xs sm:text-sm font-extrabold rounded-xl flex items-center justify-center gap-2 transition-colors">
+                    <i data-lucide="share-2" class="w-4 h-4 text-emerald-700 shrink-0"></i>
+                    <span>${escapeHtml(t('shareWhatsapp'))}</span>
+                  </a>
+
+                  <button onclick="togglePrintBasket('${p.id}')" class="min-h-[48px] px-3.5 py-2.5 ${inPrintList ? 'bg-slate-900 text-white border-slate-900' : 'bg-amber-50 hover:bg-amber-100 text-amber-950 border-amber-300'} border-2 text-xs sm:text-sm font-extrabold rounded-xl flex items-center justify-center gap-1.5 transition-colors">
+                    <span>${escapeHtml(inPrintList ? t('inPrintList') : t('addPrint'))}</span>
+                  </button>
+                ` : `
+                  <span class="col-span-full text-xs font-bold text-slate-400 italic py-2">Paper file pending upload</span>
+                `}
+
+                ${hasAnswers ? `
+                  <button onclick="openViewer('${p.id}', 'answers')" class="sm:col-span-2 md:col-span-4 min-h-[48px] px-4 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white text-xs sm:text-sm font-extrabold rounded-xl flex items-center justify-center gap-2 shadow-sm transition-colors">
+                    <i data-lucide="check-circle-2" class="w-4 h-4 shrink-0"></i>
+                    <span>✅ ${escapeHtml(t('viewAnswers'))}</span>
+                  </button>
+                ` : ''}
+              </div>
+            </article>
+          `;
+        }
       });
 
       listContainer.innerHTML = html;
@@ -2057,11 +2757,25 @@
       }
     }
 
+    function requestSpecificBook(bookId) {
+      const b = findItemById(bookId);
+      if (!b) return;
+      document.getElementById('reqInputType').value = "TIE New Syllabus Textbook (Kitabu cha TIE Mtaala Mpya)";
+      document.getElementById('reqInputClass').value = b.form || '';
+      document.getElementById('reqInputSubject').value = b.subject || '';
+      document.getElementById('reqInputYear').value = b.year || 'New Syllabus 2025/2026';
+      const modal = document.getElementById('requestPaperModal');
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    }
+
     function resetAllStep3Filters() {
       state.selectedCategory = 'ALL';
+      state.selectedBookCategory = 'ALL';
       state.selectedYear = 'ALL';
       state.page = 1;
       resetCategoryChipStyles('ALL');
+      resetBookChipStyles('ALL');
       renderPapersList();
     }
 
@@ -2086,6 +2800,7 @@
       searchTimer = setTimeout(() => {
         state.searchQuery = val;
         state.selectedCategory = 'ALL';
+        state.selectedBookCategory = 'ALL';
         state.selectedYear = 'ALL';
         state.page = 1;
         if (val.trim().length > 0) {
@@ -2114,9 +2829,9 @@
       goToStep(1);
     }
 
-    // Feature D: Modal Viewer with 1-Tap Switch between Questions & Answers
+    // Feature D: Modal Viewer with 1-Tap Switch between Questions & Answers (or Book & Syllabus)
     function openViewer(paperId, type) {
-      const p = allPapers.find(item => item.id === paperId);
+      const p = findItemById(paperId);
       if (!p) return;
 
       const rawUrl = (type === 'answers') ? p.answersUrl : p.paperUrl;
@@ -2150,20 +2865,20 @@
 
     function switchViewerMode(targetMode) {
       if (!state.activePaperId) return;
-      const p = allPapers.find(item => item.id === state.activePaperId);
+      const p = findItemById(state.activePaperId);
       if (!p) return;
 
       if (targetMode === 'answers' && !p.answersUrl) {
         showToast(
           currentLang === 'sw'
             ? 'Majibu (Marking Scheme) ya mtihani huu bado hayajawekwa.'
-            : 'Marking Scheme (Answers) is not available for this paper yet.',
+            : 'Marking Scheme (Answers) is not available for this item yet.',
           'ℹ️'
         );
         return;
       }
       if (targetMode === 'paper' && !p.paperUrl) {
-        showToast('Question paper link is unavailable.', 'ℹ️');
+        showToast('Primary document link is unavailable.', 'ℹ️');
         return;
       }
 
@@ -2185,6 +2900,11 @@
 
       const qBtn = document.getElementById('modalSwitchQuestionsBtn');
       const aBtn = document.getElementById('modalSwitchAnswersBtn');
+      const qText = document.getElementById('modalSwitchQText');
+      const aText = document.getElementById('modalSwitchAText');
+
+      qText.textContent = p.isBook ? 'Student Book (Kitabu)' : 'Questions (Maswali)';
+      aText.textContent = p.isBook ? 'Syllabus / Guide' : 'Answers (Majibu)';
 
       if (type === 'paper') {
         qBtn.className = "py-2 px-3 rounded-xl font-black text-xs sm:text-sm flex items-center justify-center gap-1.5 bg-brand-600 text-white shadow-sm";
@@ -2196,7 +2916,7 @@
         aBtn.className = "py-2 px-3 rounded-xl font-black text-xs sm:text-sm flex items-center justify-center gap-1.5 bg-emerald-600 text-white shadow-sm";
       }
 
-      title.textContent = (type === 'answers') ? `✅ ${p.title} (Answers)` : `📖 ${p.title}`;
+      title.textContent = (type === 'answers') ? `✅ ${p.title}` : `📖 ${p.title}`;
       badge.textContent = `${p.form} • ${p.category} • ${p.year}`;
       direct.href = rawUrl;
       dlBtn.href = downloadUrl;
@@ -2219,11 +2939,16 @@
       }
     }
 
-    // Feature H: Request a Missing Paper Modal
+    // Feature H: Request a Missing Paper or TIE Book Modal
     function openRequestPaperModal() {
+      document.getElementById('reqInputType').value = state.resourceMode === 'books'
+        ? "TIE New Syllabus Textbook (Kitabu cha TIE Mtaala Mpya)"
+        : "Past Examination Paper (Mtihani Uliopita)";
       document.getElementById('reqInputClass').value = state.selectedClass || '';
       document.getElementById('reqInputSubject').value = state.selectedSubject || state.searchQuery || '';
-      document.getElementById('reqInputYear').value = state.selectedYear !== 'ALL' ? state.selectedYear : '';
+      document.getElementById('reqInputYear').value = state.selectedYear !== 'ALL'
+        ? state.selectedYear
+        : (state.resourceMode === 'books' ? 'New Syllabus 2025/2026' : '');
       const modal = document.getElementById('requestPaperModal');
       modal.classList.remove('hidden');
       modal.classList.add('flex');
@@ -2236,11 +2961,12 @@
     }
 
     function submitPaperRequestWhatsApp() {
+      const reqType = document.getElementById('reqInputType').value;
       const cls = document.getElementById('reqInputClass').value.trim() || 'Any Class';
       const sub = document.getElementById('reqInputSubject').value.trim() || 'Any Subject';
-      const yr = document.getElementById('reqInputYear').value.trim() || 'Recent Years';
+      const yr = document.getElementById('reqInputYear').value.trim() || 'New Syllabus / Recent';
 
-      const msg = `*🙋‍♂️ ELIMIKA PAPER REQUEST (OMBI LA MTIHANI)*\nHabari Elimika, naomba mweke mtihani ufuatao:\n• *Darasa / Class:* ${cls}\n• *Somo / Subject:* ${sub}\n• *Mwaka / Year:* ${yr}\nAsante!`;
+      const msg = `*🙋‍♂️ ELIMIKA REQUEST (OMBI LA KITABU AU MTIHANI)*\nHabari Elimika, naomba mnisaidie kupata:\n• *Aina / Type:* ${reqType}\n• *Darasa / Class:* ${cls}\n• *Somo / Subject:* ${sub}\n• *Mwaka / Toleo:* ${yr}\nAsante!`;
       const waUrl = `https://wa.me/?text=${encodeURIComponent(msg)}`;
       window.open(waUrl, '_blank', 'noopener,noreferrer');
       closeRequestPaperModal();
@@ -2249,7 +2975,7 @@
     // Feature G: Install App (PWA Support + Visual Guide Fallback)
     function setupPWA() {
       const manifest = {
-        name: "Elimika Past Papers Tanzania",
+        name: "Elimika Past Papers & TIE Books Tanzania",
         short_name: "Elimika",
         start_url: window.location.href,
         display: "standalone",
