@@ -900,6 +900,234 @@
       }
     ];
 
+    function escapeHtml(str) {
+      if (str === null || str === undefined) return '';
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+    }
+
+    function showToastNotification(message) {
+      const toast = document.getElementById('toastNotification');
+      if (!toast) return;
+      toast.textContent = message;
+      toast.classList.remove('hidden');
+      clearTimeout(window._toastTimer);
+      window._toastTimer = setTimeout(() => {
+        toast.classList.add('hidden');
+      }, 3200);
+    }
+
+    function sanitizeUrl(rawUrl) {
+      if (!rawUrl) return null;
+      const clean = String(rawUrl).trim();
+      return /^https?:\/\//i.test(clean) ? clean : null;
+    }
+
+    function extractGoogleDriveId(url) {
+      if (!url || !url.includes('drive.google.com')) return null;
+      const match = url.match(/\/file\/d\/([a-zA-Z0-9_-]+)/) || url.match(/[?&]id=([a-zA-Z0-9_-]+)/);
+      return match ? match[1] : null;
+    }
+
+    function getPreviewUrl(rawUrl) {
+      const safe = sanitizeUrl(rawUrl);
+      if (!safe) return null;
+      const driveId = extractGoogleDriveId(safe);
+      if (driveId) return `https://drive.google.com/file/d/${driveId}/preview`;
+      if (safe.includes('dropbox.com')) return safe.replace(/[?&]dl=0/, '?raw=1');
+      return safe;
+    }
+
+    function getDirectDownloadUrl(rawUrl) {
+      const safe = sanitizeUrl(rawUrl);
+      if (!safe) return '#';
+      const driveId = extractGoogleDriveId(safe);
+      if (driveId) return `https://drive.google.com/uc?export=download&id=${driveId}`;
+      if (safe.includes('dropbox.com')) return safe.replace(/[?&]dl=0/, '?dl=1');
+      return safe;
+    }
+
+    function getSubjectIcon(subject) {
+      const s = (subject || '').toLowerCase();
+      if (s.includes('math') || s.includes('hisabati') || s.includes('kuhesabu')) return '📐';
+      if (s.includes('physic')) return '⚡';
+      if (s.includes('chemi')) return '🧪';
+      if (s.includes('biolog') || s.includes('sayansi') || s.includes('afya')) return '🧬';
+      if (s.includes('geograph') || s.includes('jiografia') || s.includes('jamii')) return '🌍';
+      if (s.includes('histor')) return '🏛️';
+      if (s.includes('civic') || s.includes('uraia') || s.includes('general studies')) return '⚖️';
+      if (s.includes('english') || s.includes('literature') || s.includes('kusoma') || s.includes('kuandika') || s.includes('communication')) return '📖';
+      if (s.includes('kiswahili')) return '🗣️';
+      if (s.includes('computer') || s.includes('ict') || s.includes('teknolojia')) return '💻';
+      if (s.includes('commerce') || s.includes('business') || s.includes('book') || s.includes('account') || s.includes('econom')) return '📊';
+      if (s.includes('agricultur')) return '🌾';
+      return '📘';
+    }
+
+    function normalizeClassName(rawForm) {
+      const f = (rawForm || '').trim();
+      const lower = f.toLowerCase();
+      if (/^(form\s*1|form\s*i|form\s*one|f1)$/i.test(lower)) return 'Form 1';
+      if (/^(form\s*2|form\s*ii|form\s*two|f2)$/i.test(lower)) return 'Form 2';
+      if (/^(form\s*3|form\s*iii|form\s*three|f3)$/i.test(lower)) return 'Form 3';
+      if (/^(form\s*4|form\s*iv|form\s*four|f4)$/i.test(lower)) return 'Form 4';
+      if (/^(form\s*5|form\s*v|form\s*five|f5)$/i.test(lower)) return 'Form 5';
+      if (/^(form\s*6|form\s*vi|form\s*six|f6)$/i.test(lower)) return 'Form 6';
+      if (/^(std\s*1|standard\s*1|standard\s*i|darasa\s*la\s*1)$/i.test(lower)) return 'Standard 1';
+      if (/^(std\s*2|standard\s*2|standard\s*ii|darasa\s*la\s*2)$/i.test(lower)) return 'Standard 2';
+      if (/^(std\s*3|standard\s*3|standard\s*iii|darasa\s*la\s*3)$/i.test(lower)) return 'Standard 3';
+      if (/^(std\s*4|standard\s*4|standard\s*iv|darasa\s*la\s*4)$/i.test(lower)) return 'Standard 4';
+      if (/^(std\s*5|standard\s*5|standard\s*v|darasa\s*la\s*5)$/i.test(lower)) return 'Standard 5';
+      if (/^(std\s*6|standard\s*6|standard\s*vi|darasa\s*la\s*6)$/i.test(lower)) return 'Standard 6';
+      if (/^(std\s*7|standard\s*7|standard\s*vii|darasa\s*la\s*7)$/i.test(lower)) return 'Standard 7';
+      return f || 'Form 4';
+    }
+
+    function parseCSV(text) {
+      const rows = [];
+      let currentRow = [];
+      let currentField = '';
+      let inQuotes = false;
+      const cleanText = String(text || '').replace(/\r\n/g, '\n').replace(/\r/g, '\n');
+
+      for (let i = 0; i < cleanText.length; i++) {
+        const char = cleanText[i];
+        const nextChar = cleanText[i + 1];
+
+        if (inQuotes) {
+          if (char === '"' && nextChar === '"') {
+            currentField += '"';
+            i++;
+          } else if (char === '"') {
+            inQuotes = false;
+          } else {
+            currentField += char;
+          }
+        } else {
+          if (char === '"') {
+            inQuotes = true;
+          } else if (char === ',') {
+            currentRow.push(currentField.trim());
+            currentField = '';
+          } else if (char === '\n') {
+            currentRow.push(currentField.trim());
+            if (currentRow.some(f => f.length > 0)) rows.push(currentRow);
+            currentRow = [];
+            currentField = '';
+          } else {
+            currentField += char;
+          }
+        }
+      }
+      if (currentField.length > 0 || currentRow.length > 0) {
+        currentRow.push(currentField.trim());
+        if (currentRow.some(f => f.length > 0)) rows.push(currentRow);
+      }
+      return rows;
+    }
+
+    function processParsedRows(rows) {
+      const records = [];
+      const seenBooks = new Set();
+
+      if (Array.isArray(rows) && rows.length >= 2) {
+        for (let i = 1; i < rows.length; i++) {
+          const cols = rows[i];
+          const rawTitle = (cols[0] || '').trim();
+          const rawForm = (cols[1] || '').trim();
+          const rawSubject = (cols[2] || '').trim();
+          const rawYear = (cols[3] || '').trim();
+          const rawCat = (cols[4] || '').trim();
+          const paperUrl = sanitizeUrl(cols[5] || '');
+          const answersUrl = sanitizeUrl(cols[6] || '');
+
+          if (!rawTitle && !rawSubject) continue;
+
+          const form = normalizeClassName(rawForm);
+          const subject = rawSubject || 'General';
+          const year = rawYear || '2025';
+          const category = rawCat || 'NECTA';
+          const catLower = `${category} ${rawTitle}`.toLowerCase();
+
+          const isSyllabus = catLower.includes('syllabus') || catLower.includes('muhtasari');
+          const isBook = !isSyllabus && (catLower.includes('book') || catLower.includes('kitabu') || catLower.includes('textbook') || catLower.includes('tie'));
+
+          if (isBook) {
+            seenBooks.add(`${form.toLowerCase()}__${subject.toLowerCase()}`);
+          }
+
+          records.push({
+            id: `sheet-${i}`,
+            title: rawTitle || `${form} ${subject} (${year})`,
+            form,
+            subject,
+            year,
+            category: isSyllabus ? 'TIE Syllabus' : (isBook ? 'TIE Book' : category),
+            paperUrl,
+            answersUrl,
+            isBook,
+            isSyllabus
+          });
+        }
+      }
+
+      // Populate default TIE Curriculum Textbooks for all classes & subjects if not already in the Sheet
+      Object.entries(TIE_CURRICULUM_SUBJECTS).forEach(([cls, subjects]) => {
+        subjects.forEach((sub, idx) => {
+          const key = `${cls.toLowerCase()}__${sub.toLowerCase()}`;
+          if (!seenBooks.has(key)) {
+            records.push({
+              id: `tie-book-${cls.replace(/\s+/g, '')}-${idx}`,
+              title: `${cls} ${sub} — Official TIE Student's Book`,
+              form: cls,
+              subject: sub,
+              year: '2025',
+              category: 'TIE Book',
+              paperUrl: null,
+              answersUrl: null,
+              isBook: true,
+              isSyllabus: false
+            });
+          }
+        });
+      });
+
+      return records;
+    }
+
+    function getUploadedSyllabusContext(cls, subject) {
+      const cleanCls = normalizeClassName(cls || 'Form 3');
+      const cleanSub = (subject || 'Basic Mathematics').trim();
+
+      const uploadedSyllabuses = allPapers.filter(p => {
+        if (!p.isSyllabus) return false;
+        const subMatch = p.subject.toLowerCase().includes(cleanSub.toLowerCase()) || cleanSub.toLowerCase().includes(p.subject.toLowerCase());
+        return subMatch;
+      });
+
+      let syllabusTopics = [];
+      const subjectKey = Object.keys(TIE_SYLLABUS_COMPETENCES).find(
+        k => k.toLowerCase() === cleanSub.toLowerCase() || cleanSub.toLowerCase().includes(k.toLowerCase())
+      );
+      if (subjectKey && TIE_SYLLABUS_COMPETENCES[subjectKey]) {
+        const classMap = TIE_SYLLABUS_COMPETENCES[subjectKey];
+        if (classMap[cleanCls]) {
+          syllabusTopics = classMap[cleanCls];
+        } else {
+          syllabusTopics = Object.values(classMap).flat().slice(0, 6);
+        }
+      }
+
+      return {
+        uploadedSyllabuses,
+        syllabusTopics
+      };
+    }
+
     function triggerDirectDownloadUrl(rawUrl, filename) {
       const dlUrl = getDirectDownloadUrl(rawUrl);
       if (!dlUrl || dlUrl === '#') {
@@ -915,6 +1143,45 @@
       a.click();
       document.body.removeChild(a);
     }
+
+    async function fetchSheetData() {
+      const statusEl = document.getElementById('dataStatusIndicator');
+      const banner = document.getElementById('networkErrorBanner');
+      if (banner) banner.classList.add('hidden');
+      if (statusEl) {
+        statusEl.innerHTML = `<span class="w-2 h-2 rounded-full bg-amber-500 animate-pulse"></span><span>Syncing...</span>`;
+      }
+
+      // Load cached records immediately so the page never feels slow
+      try {
+        const cached = localStorage.getItem('elimika_papers_cache_v3');
+        if (cached) {
+          const parsedCache = JSON.parse(cached);
+          if (Array.isArray(parsedCache) && parsedCache.length > 0) {
+            allPapers = parsedCache;
+            refreshCurrentViews();
+          }
+        }
+      } catch (e) {}
+
+      const endpoints = [
+        `https://docs.google.com/spreadsheets/d/${CONFIG.SHEET_ID}/gviz/tq?tqx=out:csv`,
+        `https://docs.google.com/spreadsheets/d/${CONFIG.SHEET_ID}/export?format=csv`
+      ];
+
+      let csvText = null;
+      for (const url of endpoints) {
+        try {
+          const res = await fetch(url, { cache: 'no-cache' });
+          if (res.ok) {
+            const text = await res.text();
+            if (text && !text.includes('<!DOCTYPE html>') && text.length > 20) {
+              csvText = text;
+              break;
+            }
+          }
+        } catch (e) {}
+      }
 
       isLoadingData = false;
 
@@ -934,7 +1201,7 @@
         }
         refreshCurrentViews();
       } catch (err) {
-        banner.classList.remove('hidden');
+        if (banner) banner.classList.remove('hidden');
       }
     }
 
