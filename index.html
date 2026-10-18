@@ -324,13 +324,14 @@
     </div>
   </main>
 
+  <!-- DEDICATED TIE BOOKS PAGE -->
   <div id="dedicatedBooksPage" class="hidden flex-grow bg-slate-50 min-h-screen pb-24">
     <div class="bg-gradient-to-r from-emerald-600 via-emerald-500 to-teal-500 border-b-2 border-emerald-700 shadow-sm">
       <div class="max-w-5xl mx-auto px-4 sm:px-6 py-6">
         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div class="space-y-1">
             <div class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-slate-950 text-emerald-300 text-[11px] font-black uppercase tracking-wider">
-              <span>🇹🇿</span> Official TIE Textbooks Page (New Curriculum)
+              <span>🇹🇿</span> Official TIE Textbooks Page
             </div>
             <h1 class="text-2xl sm:text-3xl font-black text-white tracking-tight">
               TIE Textbooks (Standard 1–7 &amp; Form 1–6)
@@ -359,7 +360,6 @@
 
     <div class="max-w-5xl mx-auto px-4 sm:px-6 py-6 space-y-6">
       <div class="bg-white p-4 sm:p-5 rounded-3xl border-2 border-emerald-300 shadow-sm space-y-4">
-        <!-- Level Filter Tabs -->
         <div class="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3">
           <div class="flex flex-wrap items-center gap-2">
             <button onclick="setBooksPageLevel('ALL')" id="bookTabALL" class="px-4 py-2.5 rounded-xl font-black text-xs sm:text-sm bg-emerald-600 text-white shadow-sm">
@@ -381,14 +381,13 @@
               type="text"
               id="booksPageSearchInput"
               oninput="renderDedicatedBooksList()"
-              placeholder="Search textbook or subject (e.g. Form 1 Biology)..."
+              placeholder="Search textbook or subject..."
               class="w-full pl-9 pr-4 py-2.5 rounded-xl border-2 border-slate-200 focus:border-emerald-600 focus:outline-none text-xs sm:text-sm font-bold bg-slate-50"
             />
             <i data-lucide="search" class="w-4 h-4 text-slate-400 absolute left-3 top-3"></i>
           </div>
         </div>
 
-        <!-- Quick Class Selector Pills -->
         <div id="booksClassPillsRow" class="flex flex-wrap items-center gap-1.5 pt-2 border-t border-slate-100"></div>
 
         <div class="flex flex-wrap items-center justify-between gap-2 text-xs font-bold text-slate-500 pt-2 border-t border-slate-100">
@@ -403,7 +402,7 @@
     </div>
   </div>
 
-  <!-- Dedicated Syllabus Page -->
+  <!-- DEDICATED SYLLABUS PAGE -->
   <div id="dedicatedSyllabusPage" class="hidden flex-grow bg-slate-50 min-h-screen pb-24">
     <div class="bg-gradient-to-r from-amber-500 via-amber-400 to-yellow-400 border-b-2 border-amber-600 shadow-sm">
       <div class="max-w-5xl mx-auto px-4 sm:px-6 py-6">
@@ -545,18 +544,18 @@
         <div class="flex items-center gap-2.5 min-w-0">
           <div class="w-9 h-9 rounded-xl bg-white/15 flex items-center justify-center text-lg shrink-0">🤖</div>
           <div class="min-w-0">
-            <h3 class="text-sm sm:text-base font-black truncate">Moha AI (Intelligent TIE &amp; NECTA Assistant)</h3>
+            <h3 class="text-sm sm:text-base font-black truncate">Moha AI (Official TIE &amp; NECTA Assistant)</h3>
             <p id="mwalimuContextSubtitle" class="text-[11px] text-violet-200 truncate">Instant responses • Self-Learning Memory • Lesson Plans &amp; Schemes</p>
           </div>
         </div>
         <div class="flex items-center gap-1.5 shrink-0">
-          <button onclick="toggleMohaLearnPanel()" class="px-2.5 py-1.5 bg-emerald-400 hover:bg-emerald-300 text-slate-950 font-black text-xs rounded-xl flex items-center gap-1" title="Teach Moha AI new notes, topics, or solutions">
+          <button onclick="toggleMohaLearnPanel()" class="px-2.5 py-1.5 bg-emerald-400 hover:bg-emerald-300 text-slate-950 font-black text-xs rounded-xl flex items-center gap-1" title="Teach Moha AI new notes or solutions">
             <span>🧠</span> <span class="hidden sm:inline">Teach AI</span> <span id="mohaMemoryCountBadge" class="px-1.5 py-0.2 bg-slate-950 text-emerald-300 rounded-full text-[10px]">0</span>
           </button>
           <button onclick="toggleTeacherStudioPanel()" class="px-2.5 py-1.5 bg-amber-400 hover:bg-amber-300 text-slate-950 font-black text-xs rounded-xl flex items-center gap-1">
             <span>⚙️</span> <span class="hidden sm:inline">Teacher Form</span>
           </button>
-          <button onclick="toggleMohaApiKeyPanel()" class="px-2.5 py-1.5 bg-violet-800 hover:bg-violet-900 text-amber-300 font-black text-xs rounded-xl" title="Optional Gemini API Key">
+          <button onclick="toggleMohaApiKeyPanel()" class="px-2.5 py-1.5 bg-violet-800 hover:bg-violet-900 text-amber-300 font-black text-xs rounded-xl" title="Gemini API Key">
             🔑
           </button>
           <button onclick="clearMwalimuChat()" class="px-2.5 py-1.5 bg-violet-800 hover:bg-violet-900 text-white font-bold text-xs rounded-xl" title="Clear Chat">🗑️</button>
@@ -567,11 +566,11 @@
       <!-- Optional API Key Bar -->
       <div id="mohaApiKeyPanel" class="hidden shrink-0 px-4 py-2.5 bg-slate-900 text-white border-b border-slate-700 text-xs space-y-2">
         <div class="flex items-center justify-between">
-          <span class="font-bold text-amber-300">🔑 Optional Cloud Gemini API Key (Saved privately in your browser only):</span>
+          <span class="font-bold text-amber-300">🔑 Gemini API Key (Saved privately in browser):</span>
           <button onclick="toggleMohaApiKeyPanel()" class="text-slate-400 hover:text-white font-bold">Close ✕</button>
         </div>
         <div class="flex items-center gap-2">
-          <input type="password" id="customGeminiKeyInput" placeholder="Paste standard Google AI Studio Key (AIzaSy...) if desired..." class="flex-1 px-3 py-1.5 rounded-lg bg-slate-800 border border-slate-600 text-white text-xs focus:outline-none" />
+          <input type="password" id="customGeminiKeyInput" placeholder="Paste Google AI Studio Key (AIzaSy...) here..." class="flex-1 px-3 py-1.5 rounded-lg bg-slate-800 border border-slate-600 text-white text-xs focus:outline-none" />
           <button onclick="saveCustomGeminiKey()" class="px-3 py-1.5 bg-emerald-500 hover:bg-emerald-600 text-slate-950 font-black rounded-lg">Save Key</button>
         </div>
       </div>
@@ -583,11 +582,11 @@
           <button onclick="toggleMohaLearnPanel()" class="text-slate-500 hover:text-slate-900 font-bold">Hide ▲</button>
         </div>
         <p class="text-[11px] font-semibold text-emerald-900">
-          Teach Moha AI any new syllabus topic, formula, marking scheme, or custom school rule. Or type <code class="bg-white px-1.5 py-0.5 rounded border border-emerald-300">learn: Topic = Explanation</code> directly in chat!
+          Teach Moha AI any new syllabus topic, formula, or marking scheme. Type <code class="bg-white px-1.5 py-0.5 rounded border border-emerald-300">learn: Topic = Explanation</code> in chat!
         </p>
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-2">
-          <input type="text" id="learnTopicInput" placeholder="Topic / Question / Keyword (e.g. Ohm's Law)" class="px-3 py-2 rounded-xl border border-emerald-300 font-bold bg-white" />
-          <input type="text" id="learnAnswerInput" placeholder="Knowledge / Solution / Syllabus Competence to remember..." class="sm:col-span-2 px-3 py-2 rounded-xl border border-emerald-300 font-semibold bg-white" />
+          <input type="text" id="learnTopicInput" placeholder="Topic / Question (e.g. Ohm's Law)" class="px-3 py-2 rounded-xl border border-emerald-300 font-bold bg-white" />
+          <input type="text" id="learnAnswerInput" placeholder="Knowledge / Solution to remember..." class="sm:col-span-2 px-3 py-2 rounded-xl border border-emerald-300 font-semibold bg-white" />
         </div>
         <div class="flex items-center justify-between gap-2">
           <button onclick="saveLearnedKnowledgeFromForm()" class="px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white font-black rounded-xl shadow-sm">
@@ -597,7 +596,7 @@
         </div>
       </div>
 
-      <!-- 2. Always-Visible Pinned Action Bar (Lesson Plan, Scheme, Marking Scheme, Log Book, Notes, Quiz) -->
+      <!-- 2. Always-Visible Pinned Action Bar -->
       <div class="shrink-0 px-3 py-2 bg-violet-50 border-b border-violet-200 flex flex-wrap items-center gap-1.5">
         <button onclick="openTeacherDocFormFor('lessonplan')" class="px-3 py-1.5 rounded-xl bg-brand-600 hover:bg-brand-700 text-white font-black text-xs flex items-center gap-1 shadow-sm">
           <span>📋</span> <span>4-Stage Lesson Plan</span>
@@ -618,74 +617,73 @@
           📝 Topic Summary
         </button>
         <button onclick="sendQuickMwalimuPrompt('questions')" class="px-2.5 py-1.5 rounded-xl bg-white hover:bg-violet-100 text-violet-900 border border-violet-200 font-bold text-xs">
-          ❓ 5 Practice Qs + Marking
+          ❓ Practice Qs + Marking
         </button>
         <button onclick="startAiQuiz()" class="px-2.5 py-1.5 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 font-black text-xs">
           🎯 Start Quiz
         </button>
       </div>
 
-      <!-- 3. Collapsible Teacher Details Form (Asks Teacher Before Generating) -->
+      <!-- 3. Collapsible Teacher Details Form -->
       <div id="teacherStudioPanel" class="hidden shrink-0 bg-amber-50/90 border-b-2 border-amber-300 p-3 sm:p-4 max-h-[46vh] overflow-y-auto space-y-3 text-xs">
         <div class="flex items-center justify-between">
-          <span class="font-black text-slate-900 uppercase tracking-wide">📋 Fill Teacher, Syllabus Topic &amp; Exam Details First:</span>
+          <span class="font-black text-slate-900 uppercase tracking-wide">📋 Fill Teacher &amp; Topic Details First:</span>
           <button onclick="toggleTeacherStudioPanel()" class="text-slate-500 hover:text-slate-900 font-bold">Hide ▲</button>
         </div>
         <div id="teacherSyllabusSyncBadge" class="p-2 rounded-xl bg-emerald-50 border border-emerald-300 text-emerald-950 font-bold text-[11px]">
-          🔗 Integrated with uploaded Google Sheet Syllabuses &amp; TIE Curriculum
+          🔗 Integrated with TIE Competence-Based Curriculum &amp; Google Sheet Syllabuses
         </div>
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
           <div>
             <label class="font-bold text-slate-700 block mb-0.5">School Name *</label>
-            <input type="text" id="tsSchool" placeholder="e.g. Kipingo Secondary School" class="w-full px-2.5 py-1.5 rounded-lg border border-slate-300 font-semibold" />
+            <input type="text" id="tsSchool" placeholder="e.g. Kipingo Secondary School" class="w-full px-2.5 py-1.5 rounded-lg border border-slate-300 font-semibold bg-white" />
           </div>
           <div>
             <label class="font-bold text-slate-700 block mb-0.5">Teacher's Name *</label>
-            <input type="text" id="tsTeacher" placeholder="e.g. John Elia Njukula" class="w-full px-2.5 py-1.5 rounded-lg border border-slate-300 font-semibold" />
+            <input type="text" id="tsTeacher" placeholder="e.g. John Elia Njukula" class="w-full px-2.5 py-1.5 rounded-lg border border-slate-300 font-semibold bg-white" />
           </div>
           <div>
             <label class="font-bold text-slate-700 block mb-0.5">Date *</label>
-            <input type="date" id="tsDate" class="w-full px-2.5 py-1.5 rounded-lg border border-slate-300 font-semibold" />
+            <input type="date" id="tsDate" class="w-full px-2.5 py-1.5 rounded-lg border border-slate-300 font-semibold bg-white" />
           </div>
           <div>
             <label class="font-bold text-slate-700 block mb-0.5">Class / Form *</label>
-            <input type="text" id="tsClass" placeholder="e.g. Form 1 or Form 4" class="w-full px-2.5 py-1.5 rounded-lg border border-slate-300 font-semibold" />
+            <input type="text" id="tsClass" placeholder="e.g. Form 1 or Form 4" class="w-full px-2.5 py-1.5 rounded-lg border border-slate-300 font-semibold bg-white" />
           </div>
           <div>
             <label class="font-bold text-slate-700 block mb-0.5">Subject *</label>
-            <input type="text" id="tsSubject" placeholder="e.g. Basic Mathematics" class="w-full px-2.5 py-1.5 rounded-lg border border-slate-300 font-semibold" />
+            <input type="text" id="tsSubject" placeholder="e.g. Basic Mathematics" class="w-full px-2.5 py-1.5 rounded-lg border border-slate-300 font-semibold bg-white" />
           </div>
           <div>
             <label class="font-bold text-slate-700 block mb-0.5">Time / Duration</label>
-            <input type="text" id="tsDuration" value="80 Minutes" class="w-full px-2.5 py-1.5 rounded-lg border border-slate-300 font-semibold" />
+            <input type="text" id="tsDuration" value="80 Minutes" class="w-full px-2.5 py-1.5 rounded-lg border border-slate-300 font-semibold bg-white" />
           </div>
           <div class="sm:col-span-2">
             <label class="font-bold text-slate-700 block mb-0.5">Main Topic / Competence *</label>
-            <input type="text" id="tsTopic" placeholder="e.g. Numbers / Rational & Irrational Numbers" class="w-full px-2.5 py-1.5 rounded-lg border border-slate-300 font-semibold" />
+            <input type="text" id="tsTopic" placeholder="e.g. Numbers / Rational & Irrational Numbers" class="w-full px-2.5 py-1.5 rounded-lg border border-slate-300 font-semibold bg-white" />
           </div>
           <div>
             <label class="font-bold text-slate-700 block mb-0.5">Sub-Topic / Specific Activity *</label>
-            <input type="text" id="tsSubTopic" placeholder="e.g. Basic operations on rational numbers" class="w-full px-2.5 py-1.5 rounded-lg border border-slate-300 font-semibold" />
+            <input type="text" id="tsSubTopic" placeholder="e.g. Basic operations on rational numbers" class="w-full px-2.5 py-1.5 rounded-lg border border-slate-300 font-semibold bg-white" />
           </div>
         </div>
 
-        <!-- Attendance Inputs for Lesson Plan -->
         <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 pt-1">
           <div>
             <label class="font-bold text-slate-600 block">Registered Girls</label>
-            <input type="number" id="tsRegG" value="25" class="w-full px-2 py-1 rounded border border-slate-300 font-bold" />
+            <input type="number" id="tsRegG" value="25" class="w-full px-2 py-1 rounded border border-slate-300 font-bold bg-white" />
           </div>
           <div>
             <label class="font-bold text-slate-600 block">Registered Boys</label>
-            <input type="number" id="tsRegB" value="25" class="w-full px-2 py-1 rounded border border-slate-300 font-bold" />
+            <input type="number" id="tsRegB" value="25" class="w-full px-2 py-1 rounded border border-slate-300 font-bold bg-white" />
           </div>
           <div>
             <label class="font-bold text-slate-600 block">Present Girls</label>
-            <input type="number" id="tsPresG" value="24" class="w-full px-2 py-1 rounded border border-slate-300 font-bold" />
+            <input type="number" id="tsPresG" value="24" class="w-full px-2 py-1 rounded border border-slate-300 font-bold bg-white" />
           </div>
           <div>
             <label class="font-bold text-slate-600 block">Present Boys</label>
-            <input type="number" id="tsPresB" value="24" class="w-full px-2 py-1 rounded border border-slate-300 font-bold" />
+            <input type="number" id="tsPresB" value="24" class="w-full px-2 py-1 rounded border border-slate-300 font-bold bg-white" />
           </div>
         </div>
 
@@ -729,7 +727,7 @@
           type="text"
           id="mwalimuUserInput"
           onkeydown="if(event.key==='Enter') sendMwalimuMessage()"
-          placeholder="Ask Moha AI any question, topic, calculation, or type 'learn: topic = notes'..."
+          placeholder="Ask Moha AI any question, calculation, or type 'learn: topic = notes'..."
           class="flex-1 px-3.5 py-2.5 rounded-xl border-2 border-slate-200 focus:border-violet-600 focus:outline-none text-xs sm:text-sm font-semibold"
         />
         <button onclick="sendMwalimuMessage()" class="px-4 py-2.5 bg-violet-600 hover:bg-violet-700 text-white font-black text-xs sm:text-sm rounded-xl shrink-0">
@@ -819,84 +817,29 @@
         'Form 2': ['1.0 Static Electricity & Current Electricity (Ohm Law)', '2.0 Magnetism & Earth Magnetic Field', '3.0 Forces in Equilibrium (Moments, Center of Gravity) & Simple Machines', '4.0 Motion in a Straight Line (Newton Laws of Motion)', '5.0 Temperature and Sustainable Energy Sources'],
         'Form 3': ['1.0 Applications of Vectors & Friction', '2.0 Light (Reflection & Refraction at Curved Mirrors and Lenses, Optical Instruments)', '3.0 Thermal Expansion, Transfer of Thermal Energy & Measurement of Heat', '4.0 Vapour, Humidity and Current Electricity (EMF, Internal Resistance)'],
         'Form 4': ['1.0 Waves & Sound Waves, Electromagnetic Spectrum', '2.0 Electromagnetism (Induction, Transformers)', '3.0 Radioactivity (Alpha, Beta, Gamma, Half-Life)', '4.0 Thermionic Emission & Electronics (Semiconductors, Diodes, Transistors)', '5.0 Elementary Astronomy & Geophysics']
-      },
-      'Geography': {
-        'Form 1': ['1.0 Concept of Geography & The Solar System', '2.0 Major Features of the Earth Surface', '3.0 Weather and Climate', '4.0 Map Work'],
-        'Form 2': ['1.0 Human Activities & Agriculture', '2.0 Water Management for Economic Development', '3.0 Sustainable Use of Forest Resources & Mining', '4.0 Tourism, Manufacturing Industry, Power/Energy & Transport'],
-        'Form 3': ['1.0 Structure of the Earth, Internal & External Forces', '2.0 Soil', '3.0 Elementary Surveying', '4.0 Map Reading and Map Interpretation', '5.0 Photograph Reading and Interpretation', '6.0 Application of Simple Statistics'],
-        'Form 4': ['1.0 Introduction to Research', '2.0 Climate and Natural Regions of the World', '3.0 Human Population and Settlements', '4.0 Environmental Issues and Management']
-      },
-      'History': {
-        'Form 1': ['1.0 Meaning, Importance & Sources of History', '2.0 Evolution of Man, Technology and Environment', '3.0 Development of Economic Activities and Social-Political Systems in Pre-Colonial Africa'],
-        'Form 2': ['1.0 Interactions Among the People of Africa', '2.0 Socio-Economic Development and Production in Pre-Colonial Africa', '3.0 Africa and the External World (Early Contacts & Slave Trade)', '4.0 Industrial Capitalism'],
-        'Form 3': ['1.0 Scramble for and Partition of Africa (Berlin Conference 1884-1885)', '2.0 Establishment of Colonial Rule & African Reactions (Maji Maji, Nandi, Samori Toure)', '3.0 Colonial Administrative Systems (Direct, Indirect, Assimilation)', '4.0 Colonial Economy and Colonial Social Services'],
-        'Form 4': ['1.0 Crises in the Capitalist System (WWI, Great Depression, WWII)', '2.0 Nationalism and Decolonisation in Africa', '3.0 Changes in Political, Social and Economic Policies in Africa After Independence', '4.0 Africa in International Affairs (AU, UN, EAC, SADC)']
-      },
-      'Civics': {
-        'Form 1': ['1.0 Our Nation (Components, National Symbols, Festivals)', '2.0 Promotion of Life Skills', '3.0 Human Rights & Responsible Citizenship', '4.0 Work, Family Life, and Road Safety Education'],
-        'Form 2': ['1.0 Government of Tanzania (Constitution, Local & Central Government, Union Affairs)', '2.0 Democracy and Democratic Elections', '3.0 Gender'],
-        'Form 3': ['1.0 Promotion of Life Skills (Leadership, Teamwork, Self-Worth)', '2.0 Economic and Social Development', '3.0 Poverty Eradication in Tanzania'],
-        'Form 4': ['1.0 Culture (Cultural Values, Customs, Positive & Negative Practices)', '2.0 Globalization (Opportunities, Challenges & Impact on Tanzania)']
-      },
-      'English Language': {
-        'Form 1': ['1.0 Listening & Speaking in Various Contexts', '2.0 Reading Comprehension & Dictionary Use', '3.0 Grammar: Tenses, Parts of Speech & Sentence Construction', '4.0 Writing Personal Letters & Short Compositions'],
-        'Form 2': ['1.0 Expressing Opinions, Debates & Dialogues', '2.0 Active & Passive Voice, Conditional Sentences', '3.0 Reading & Analyzing Simple Literary Works', '4.0 Writing Formal Invitations & Friendly Letters'],
-        'Form 3': ['1.0 Direct & Indirect (Reported) Speech', '2.0 Reading & Literary Analysis (Novels, Plays, Poetry - Themes, Characterisation, Figures of Speech)', '3.0 Essay Writing (Descriptive, Narrative, Expository, Argumentative)'],
-        'Form 4': ['1.0 Advanced Literary Appreciation (Plays, Novels, Poetry)', '2.0 Writing Official/Business Letters, CV/Resume, Speeches & Reports', '3.0 Comprehensive Grammar &Cloze Passages']
       }
     };
 
-    // Deep Academic Knowledge Base for Instant Intelligent Answers
     const MOHA_BUILTIN_KNOWLEDGE = [
       {
         keywords: ['photosynthesis', 'nutrition in plants', 'chlorophyll'],
         title: 'Photosynthesis (Biology — Form 2 Nutrition in Plants)',
-        content: `**Definition:** Photosynthesis is the biochemical process by which green plants, algae, and certain bacteria manufacture organic food (glucose) from carbon dioxide and water in the presence of sunlight energy trapped by chlorophyll.\n\n**Balanced Chemical Equation:**\n$$6\\text{CO}_2 + 6\\text{H}_2\\text{O} \\xrightarrow{\\text{Sunlight / Chlorophyll}} \\text{C}_6\\text{H}_{12}\\text{O}_6 + 6\\text{O}_2$$\n\n**Stages of Photosynthesis:**\n1. **Light Reaction (Photolysis - occurs in Grana):** Sunlight splits water molecules ($2\\text{H}_2\\text{O} \\rightarrow 4\\text{H}^+ + \\text{O}_2 + 4e^-$) and forms ATP.\n2. **Dark Reaction (Calvin Cycle - occurs in Stroma):** Hydrogen ions reduce carbon dioxide ($\\text{CO}_2$) to form glucose ($\\text{C}_6\\text{H}_{12}\\text{O}_6$).\n\n**Adaptations of a Leaf for Photosynthesis (NECTA Marking Points - 02 Marks @):**\n• Broad, flat lamina to provide a large surface area for trapping sunlight and $\\text{CO}_2$ diffusion.\n• Numerous stomata on the epidermis for efficient gaseous exchange.\n• Palisade mesophyll cells packed with chloroplasts near the upper surface.\n• Network of veins (xylem and phloem) to transport water to cells and translocate manufactured food.`
+        content: `**Definition:** Photosynthesis is the biochemical process by which green plants manufacture organic food (glucose) from carbon dioxide and water in the presence of sunlight energy trapped by chlorophyll.\n\n**Balanced Chemical Equation:**\n$$6\\text{CO}_2 + 6\\text{H}_2\\text{O} \\xrightarrow{\\text{Sunlight / Chlorophyll}} \\text{C}_6\\text{H}_{12}\\text{O}_6 + 6\\text{O}_2$$\n\n**Stages of Photosynthesis:**\n1. **Light Reaction (Photolysis - Grana):** Splits water molecules ($2\\text{H}_2\\text{O} \\rightarrow 4\\text{H}^+ + \\text{O}_2 + 4e^-$) and forms ATP.\n2. **Dark Reaction (Calvin Cycle - Stroma):** Reduces $\\text{CO}_2$ to form glucose.\n\n**Leaf Adaptations (NECTA Points - 02 Marks @):**\n• Broad, flat lamina for large surface area.\n• Numerous stomata for gaseous exchange.\n• Palisade mesophyll cells packed with chloroplasts.`
       },
       {
-        keywords: ['ohm', 'resistance', 'current electricity', 'voltage', 'resistor'],
+        keywords: ['ohm', 'resistance', 'current electricity', 'voltage'],
         title: "Ohm's Law & Current Electricity (Physics — Form 2)",
-        content: `**Ohm's Law:** States that *"The electric current ($I$) flowing through a metallic conductor is directly proportional to the potential difference ($V$) across its ends, provided temperature and other physical conditions remain constant."*\n\n**Mathematical Formula:**\n$$V = I \\times R \\quad \\Rightarrow \\quad I = \\frac{V}{R} \\quad \\Rightarrow \\quad R = \\frac{V}{I}$$\n\n**Resistors in Circuits:**\n• **Series Connection:** $R_{\\text{total}} = R_1 + R_2 + R_3$ (Same current flows through each resistor).\n• **Parallel Connection:** $\\frac{1}{R_{\\text{total}}} = \\frac{1}{R_1} + \\frac{1}{R_2} + \\frac{1}{R_3}$ (Same voltage across each branch).\n\n**Factors Affecting Resistance of a Conductor ($R = \\rho \\frac{L}{A}$):**\n1. **Length ($L$):** Resistance is directly proportional to length ($R \\propto L$).\n2. **Cross-sectional Area ($A$):** Resistance is inversely proportional to area ($R \\propto \\frac{1}{A}$).\n3. **Temperature:** Increasing temperature increases resistance in pure metals.\n4. **Nature of Material (Resistivity $\\rho$).**`
+        content: `**Ohm's Law:** States that electric current ($I$) through a metallic conductor is directly proportional to the potential difference ($V$) across its ends, provided temperature remains constant.\n\n$$V = I \\times R \\quad \\Rightarrow \\quad I = \\frac{V}{R}$$\n\n**Resistors:**\n• **Series:** $R_{\\text{total}} = R_1 + R_2 + R_3$\n• **Parallel:** $\\frac{1}{R_{\\text{total}}} = \\frac{1}{R_1} + \\frac{1}{R_2}$`
       },
       {
-        keywords: ['archimedes', 'flotation', 'upthrust', 'buoyancy', 'apparent weight'],
-        title: 'Archimedes Principle & Law of Flotation (Physics — Form 1)',
-        content: `**1. Archimedes' Principle:**\nStates that *"When a body is partially or totally immersed in a fluid, it experiences an upthrust equal to the weight of the fluid displaced."*\n$$\\text{Upthrust } (U) = \\text{Real Weight in Air } (W_a) - \\text{Apparent Weight in Fluid } (W_f)$$\n$$\\text{Relative Density (R.D)} = \\frac{\\text{Weight in Air}}{\\text{Upthrust in Water}} = \\frac{W_a}{W_a - W_w}$$\n\n**2. Law of Flotation:**\nStates that *"A floating body displaces its own weight of the fluid in which it floats."*\n• Applications: Hydrometers, ships, submarines, and hot-air balloons.`
+        keywords: ['archimedes', 'flotation', 'upthrust', 'buoyancy'],
+        title: "Archimedes' Principle & Law of Flotation (Physics — Form 1)",
+        content: `**1. Archimedes' Principle:** Upthrust experienced by an immersed body equals the weight of the fluid displaced.\n$$\\text{Upthrust } (U) = \\text{Real Weight } (W_a) - \\text{Apparent Weight } (W_f)$$\n\n**2. Law of Flotation:** A floating body displaces its own weight of the fluid in which it floats.`
       },
       {
-        keywords: ['newton', 'laws of motion', 'momentum', 'impulse', 'inertia'],
-        title: "Newton's Laws of Motion & Linear Momentum (Physics — Form 2)",
-        content: `**1. Newton's First Law (Law of Inertia):** A body remains in its state of rest or uniform motion in a straight line unless acted upon by an external resultant force.\n\n**2. Newton's Second Law:** The rate of change of linear momentum of a body is directly proportional to the applied force and takes place in the direction of the force:\n$$F = \\frac{mv - mu}{t} = ma$$\n• **Impulse ($J$):** $F \\times t = mv - mu$ (SI unit: $\\text{Ns}$ or $\\text{kg m/s}$).\n\n**3. Newton's Third Law:** To every action, there is an equal and opposite reaction.`
-      },
-      {
-        keywords: ['mole', 'molarity', 'titration', 'avogadro', 'volumetric'],
+        keywords: ['mole', 'molarity', 'titration', 'avogadro'],
         title: 'The Mole Concept & Volumetric Analysis (Chemistry — Form 3)',
-        content: `**Key Formulas in Mole Concept & Titration:**\n1. **Number of Moles ($n$):**\n$$n = \\frac{\\text{Mass }(m)}{\\text{Molar Mass }(M_r)} = \\frac{\\text{Number of Particles }(N)}{L_A (6.02 \\times 10^{23})} = \\frac{\\text{Volume of Gas at STP}}{22.4\\text{ dm}^3}$$\n2. **Molarity ($M$):** Concentration in $\\text{mol/dm}^3$:\n$$\\text{Molarity} = \\frac{\\text{Concentration in g/dm}^3}{\\text{Molar Mass }(M_r)}$$\n3. **Titration Equation:**\n$$\\frac{M_A V_A}{M_B V_B} = \\frac{n_A}{n_B}$$\n• **Indicators:** Methyl Orange (Yellow in base, Pink/Red in acid); Phenolphthalein (Pink in base, Colourless in acid).`
-      },
-      {
-        keywords: ['quadratic', 'factorisation', 'completing the square', 'discriminant'],
-        title: 'Quadratic Equations (Basic Mathematics — Form 2)',
-        content: `**Standard Quadratic Form:** $ax^2 + bx + c = 0$ (where $a \\neq 0$).\n\n**General Quadratic Formula:**\n$$x = \\frac{-b \\pm \\sqrt{b^2 - 4ac}}{2a}$$\n\n**Nature of Roots (Discriminant $\\Delta = b^2 - 4ac$):**\n• If $b^2 - 4ac > 0$: Two distinct real roots.\n• If $b^2 - 4ac = 0$: Two equal (repeated) real roots.\n• If $b^2 - 4ac < 0$: No real roots (complex roots).`
-      },
-      {
-        keywords: ['sequence', 'series', 'arithmetic progression', 'geometric progression', 'compound interest'],
-        title: 'Sequences & Series — AP and GP (Basic Mathematics — Form 3)',
-        content: `**1. Arithmetic Progression (AP):**\n• $n^{\\text{th}}$ Term: $A_n = A_1 + (n - 1)d$\n• Sum of first $n$ terms: $S_n = \\frac{n}{2}[2A_1 + (n - 1)d] = \\frac{n}{2}(A_1 + A_n)$\n\n**2. Geometric Progression (GP):**\n• $n^{\\text{th}}$ Term: $G_n = G_1 r^{n-1}$\n• Sum of first $n$ terms: $S_n = \\frac{G_1(r^n - 1)}{r - 1}$ (for $r > 1$) or $S_n = \\frac{G_1(1 - r^n)}{1 - r}$ (for $r < 1$)\n\n**3. Compound Interest:** $A = P\\left(1 + \\frac{R}{100}\\right)^n$`
-      },
-      {
-        keywords: ['matrix', 'matrices', 'determinant', 'inverse', 'cramer'],
-        title: '2×2 Matrices & Linear Transformations (Basic Mathematics — Form 4)',
-        content: `Given matrix $A = \\begin{pmatrix} a & b \\\\ c & d \\end{pmatrix}$:\n\n**1. Determinant ($|A|$ or $\\det(A)$):**\n$$|A| = ad - bc$$\n*(If $|A| = 0$, the matrix is **singular** and has no inverse).* \n\n**2. Inverse of Matrix ($A^{-1}$):**\n$$A^{-1} = \\frac{1}{ad - bc} \\begin{pmatrix} d & -b \\\\ -c & a \\end{pmatrix}$$`
-      },
-      {
-        keywords: ['cell', 'prokaryotic', 'eukaryotic', 'mitochondria', 'nucleus', 'organelle'],
-        title: 'Cell Structure & Organization (Biology — Form 1)',
-        content: `**The Cell:** The basic structural and functional unit of all living organisms.\n\n**Functions of Major Cell Organelles:**\n• **Nucleus:** Controls all cell activities and stores genetic material (DNA).\n• **Mitochondria:** Site of aerobic respiration to release energy (ATP) — *"Powerhouse of the cell"*.\n• **Chloroplast (Plant cells only):** Contains chlorophyll to trap sunlight for photosynthesis.\n• **Cell Membrane:** Selectively permeable membrane that regulates movement of substances in and out of the cell.\n• **Cell Wall (Plants):** Rigid cellulose layer providing mechanical support and fixed shape.`
-      },
-      {
-        keywords: ['maji maji', 'scramble', 'berlin conference', 'colonial', 'nationalism', 'nyerere'],
-        title: 'African History & Colonial Resistance (History — Form 3 & 4)',
-        content: `**Key NECTA History Themes (15-Mark Essay Guide):**\n\n**1. Berlin Conference (1884–1885):** Chaired by Otto von Bismarck.\n• *Principles:* Effective occupation, freedom of navigation on Niger/Congo rivers, abolition of slave trade, notification of territorial claims.\n\n**2. Causes of Maji Maji War (1905–1907) led by Kinjekitile Ngwale:**\n• Compulsory cotton cultivation scheme in southern Tanganyika.\n• Heavy taxation (hut tax) and brutal collection methods by Akidas and Jumbes.\n• Forced labour and land alienation.\n• Disrespect of African cultural and religious beliefs by German colonial rule.`
+        content: `**Key Formulas:**\n1. $n = \\frac{\\text{Mass }(m)}{\\text{Molar Mass }(M_r)} = \\frac{\\text{Number of Particles }}{6.02 \\times 10^{23}}$\n2. $\\text{Molarity} = \\frac{\\text{Concentration in g/dm}^3}{M_r}$\n3. $\\frac{M_A V_A}{M_B V_B} = \\frac{n_A}{n_B}$`
       }
     ];
 
@@ -938,7 +881,6 @@
       if (!safe) return null;
       const driveId = extractGoogleDriveId(safe);
       if (driveId) return `https://drive.google.com/file/d/${driveId}/preview`;
-      if (safe.includes('dropbox.com')) return safe.replace(/[?&]dl=0/, '?raw=1');
       return safe;
     }
 
@@ -947,24 +889,20 @@
       if (!safe) return '#';
       const driveId = extractGoogleDriveId(safe);
       if (driveId) return `https://drive.google.com/uc?export=download&id=${driveId}`;
-      if (safe.includes('dropbox.com')) return safe.replace(/[?&]dl=0/, '?dl=1');
       return safe;
     }
 
     function getSubjectIcon(subject) {
       const s = (subject || '').toLowerCase();
-      if (s.includes('math') || s.includes('hisabati') || s.includes('kuhesabu')) return '📐';
+      if (s.includes('math') || s.includes('hisabati')) return '📐';
       if (s.includes('physic')) return '⚡';
       if (s.includes('chemi')) return '🧪';
-      if (s.includes('biolog') || s.includes('sayansi') || s.includes('afya')) return '🧬';
-      if (s.includes('geograph') || s.includes('jiografia') || s.includes('jamii')) return '🌍';
+      if (s.includes('biolog') || s.includes('sayansi')) return '🧬';
+      if (s.includes('geograph') || s.includes('jiografia')) return '🌍';
       if (s.includes('histor')) return '🏛️';
-      if (s.includes('civic') || s.includes('uraia') || s.includes('general studies')) return '⚖️';
-      if (s.includes('english') || s.includes('literature') || s.includes('kusoma') || s.includes('kuandika') || s.includes('communication')) return '📖';
+      if (s.includes('civic') || s.includes('uraia')) return '⚖️';
+      if (s.includes('english') || s.includes('literature')) return '📖';
       if (s.includes('kiswahili')) return '🗣️';
-      if (s.includes('computer') || s.includes('ict') || s.includes('teknolojia')) return '💻';
-      if (s.includes('commerce') || s.includes('business') || s.includes('book') || s.includes('account') || s.includes('econom')) return '📊';
-      if (s.includes('agricultur')) return '🌾';
       return '📘';
     }
 
@@ -977,13 +915,13 @@
       if (/^(form\s*4|form\s*iv|form\s*four|f4)$/i.test(lower)) return 'Form 4';
       if (/^(form\s*5|form\s*v|form\s*five|f5)$/i.test(lower)) return 'Form 5';
       if (/^(form\s*6|form\s*vi|form\s*six|f6)$/i.test(lower)) return 'Form 6';
-      if (/^(std\s*1|standard\s*1|standard\s*i|darasa\s*la\s*1)$/i.test(lower)) return 'Standard 1';
-      if (/^(std\s*2|standard\s*2|standard\s*ii|darasa\s*la\s*2)$/i.test(lower)) return 'Standard 2';
-      if (/^(std\s*3|standard\s*3|standard\s*iii|darasa\s*la\s*3)$/i.test(lower)) return 'Standard 3';
-      if (/^(std\s*4|standard\s*4|standard\s*iv|darasa\s*la\s*4)$/i.test(lower)) return 'Standard 4';
-      if (/^(std\s*5|standard\s*5|standard\s*v|darasa\s*la\s*5)$/i.test(lower)) return 'Standard 5';
-      if (/^(std\s*6|standard\s*6|standard\s*vi|darasa\s*la\s*6)$/i.test(lower)) return 'Standard 6';
-      if (/^(std\s*7|standard\s*7|standard\s*vii|darasa\s*la\s*7)$/i.test(lower)) return 'Standard 7';
+      if (/^(std\s*1|standard\s*1|standard\s*i)$/i.test(lower)) return 'Standard 1';
+      if (/^(std\s*2|standard\s*2|standard\s*ii)$/i.test(lower)) return 'Standard 2';
+      if (/^(std\s*3|standard\s*3|standard\s*iii)$/i.test(lower)) return 'Standard 3';
+      if (/^(std\s*4|standard\s*4|standard\s*iv)$/i.test(lower)) return 'Standard 4';
+      if (/^(std\s*5|standard\s*5|standard\s*v)$/i.test(lower)) return 'Standard 5';
+      if (/^(std\s*6|standard\s*6|standard\s*vi)$/i.test(lower)) return 'Standard 6';
+      if (/^(std\s*7|standard\s*7|standard\s*vii)$/i.test(lower)) return 'Standard 7';
       return f || 'Form 4';
     }
 
@@ -1075,7 +1013,6 @@
         }
       }
 
-      // Populate default TIE Curriculum Textbooks for all classes & subjects if not already in the Sheet
       Object.entries(TIE_CURRICULUM_SUBJECTS).forEach(([cls, subjects]) => {
         subjects.forEach((sub, idx) => {
           const key = `${cls.toLowerCase()}__${sub.toLowerCase()}`;
@@ -1105,8 +1042,7 @@
 
       const uploadedSyllabuses = allPapers.filter(p => {
         if (!p.isSyllabus) return false;
-        const subMatch = p.subject.toLowerCase().includes(cleanSub.toLowerCase()) || cleanSub.toLowerCase().includes(p.subject.toLowerCase());
-        return subMatch;
+        return p.subject.toLowerCase().includes(cleanSub.toLowerCase()) || cleanSub.toLowerCase().includes(p.subject.toLowerCase());
       });
 
       let syllabusTopics = [];
@@ -1122,10 +1058,7 @@
         }
       }
 
-      return {
-        uploadedSyllabuses,
-        syllabusTopics
-      };
+      return { uploadedSyllabuses, syllabusTopics };
     }
 
     function triggerDirectDownloadUrl(rawUrl, filename) {
@@ -1152,7 +1085,6 @@
         statusEl.innerHTML = `<span class="w-2 h-2 rounded-full bg-amber-500 animate-pulse"></span><span>Syncing...</span>`;
       }
 
-      // Load cached records immediately so the page never feels slow
       try {
         const cached = localStorage.getItem('elimika_papers_cache_v3');
         if (cached) {
@@ -1242,10 +1174,6 @@
       if (state.step === 3) renderPapersList();
     }
 
-    function toggleModeInsideStep3() {
-      openBooksPage(true, state.selectedClass, state.selectedSubject);
-    }
-
     function openBooksPage(pushHist = true, filterClass = '', filterSubject = '') {
       state.resourceMode = 'books';
       document.getElementById('home').classList.add('hidden');
@@ -1317,7 +1245,6 @@
       const q = (document.getElementById('booksPageSearchInput')?.value || '').trim().toLowerCase();
       if (!grid) return;
 
-      // Determine classes to show in the class filter row based on level
       let levelClasses = [];
       if (booksPageLevel === 'Primary') {
         levelClasses = ['Standard 1', 'Standard 2', 'Standard 3', 'Standard 4', 'Standard 5', 'Standard 6', 'Standard 7'];
@@ -1345,21 +1272,17 @@
         return true;
       });
 
-      // Sort so books that already have Google Drive links appear at the top
       books.sort((a, b) => (b.paperUrl ? 1 : 0) - (a.paperUrl ? 1 : 0));
-
       const linkedCount = books.filter(b => Boolean(b.paperUrl)).length;
-      if (badge) {
-        badge.textContent = `Showing ${books.length} TIE Books (${linkedCount} with live Google Drive PDF links)`;
-      }
+      if (badge) badge.textContent = `Showing ${books.length} TIE Books (${linkedCount} with Google Drive PDF links)`;
 
       if (books.length === 0) {
         grid.innerHTML = `
           <div class="col-span-full py-12 text-center bg-white rounded-3xl border-2 border-slate-200 p-6 space-y-3">
             <div class="text-4xl">📚</div>
-            <h3 class="text-base font-black text-slate-900">No Textbooks Found for This Search</h3>
+            <h3 class="text-base font-black text-slate-900">No Textbooks Found</h3>
             <button onclick="document.getElementById('booksPageSearchInput').value=''; setBooksPageLevel('ALL');" class="px-4 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-black text-xs rounded-xl">
-              Show All TIE Textbooks
+              Show All Textbooks
             </button>
           </div>
         `;
@@ -1397,7 +1320,7 @@
                   ⏳ Add Google Drive Link in Sheet (Category: TIE Book)
                 </span>
               `}
-              <button onclick="openMwalimuModal('${escapeHtml(p.form)}', '${escapeHtml(p.subject)}')" class="px-3 py-2.5 bg-violet-50 hover:bg-violet-100 text-violet-900 border border-violet-200 text-xs font-black rounded-xl" title="Prepare Lesson Plan or Summary with Moha AI">
+              <button onclick="openMwalimuModal('${escapeHtml(p.form)}', '${escapeHtml(p.subject)}')" class="px-3 py-2.5 bg-violet-50 hover:bg-violet-100 text-violet-900 border border-violet-200 text-xs font-black rounded-xl" title="Prepare Lesson Plan">
                 🤖 Moha AI
               </button>
             </div>
@@ -1453,9 +1376,9 @@
     function matchesSyllabusTier(formStr, tier) {
       if (tier === 'ALL') return true;
       const f = (formStr || '').toLowerCase();
-      if (tier === 'Primary') return f.includes('primary') || f.includes('std') || f.includes('standard') || f.includes('darasa');
-      if (tier === 'Secondary') return f.includes('secondary') || f.includes('form 1') || f.includes('form 2') || f.includes('form 3') || f.includes('form 4') || f.includes('1-4') || f.includes('i-iv');
-      if (tier === 'Advanced') return f.includes('advanced') || f.includes('form 5') || f.includes('form 6') || f.includes('5-6') || f.includes('v-vi');
+      if (tier === 'Primary') return f.includes('primary') || f.includes('std') || f.includes('standard');
+      if (tier === 'Secondary') return f.includes('secondary') || f.includes('form 1') || f.includes('form 2') || f.includes('form 3') || f.includes('form 4');
+      if (tier === 'Advanced') return f.includes('advanced') || f.includes('form 5') || f.includes('form 6');
       return true;
     }
 
@@ -1479,7 +1402,7 @@
           <div class="col-span-full py-12 text-center bg-white rounded-3xl border-2 border-slate-200 p-6 space-y-3">
             <div class="text-4xl">📜</div>
             <h3 class="text-base font-black text-slate-900">Syllabuses Will Appear Here Once Uploaded to Your Google Sheet</h3>
-            <p class="text-xs text-slate-500 max-w-md mx-auto">Add rows to your Google Sheet with Category set to <strong>TIE Syllabus</strong> and your Google Drive link, or ask Moha AI below for any subject's syllabus competences.</p>
+            <p class="text-xs text-slate-500 max-w-md mx-auto">Add rows to your Google Sheet with Category set to <strong>TIE Syllabus</strong> and your Google Drive link.</p>
             <button onclick="openMwalimuModal('Form 1-4', 'Basic Mathematics')" class="px-4 py-2.5 bg-violet-600 hover:bg-violet-700 text-white font-black text-xs rounded-xl">
               🤖 Ask Moha AI for Subject Syllabus Topics
             </button>
@@ -1745,7 +1668,6 @@
         });
       }
 
-      // Populate Dynamic Year Pills
       const years = [...new Set(baseMatches.map(p => p.year).filter(y => y && y !== 'N/A'))].sort((a, b) => b.localeCompare(a));
       if (yearRow) {
         if (years.length > 1) {
@@ -1818,7 +1740,7 @@
                 <button onclick="openViewer('${p.id}', 'answers')" class="px-3.5 py-2.5 bg-emerald-50 hover:bg-emerald-100 text-emerald-900 border border-emerald-300 text-xs font-black rounded-xl flex items-center gap-1.5">
                   ✅ Marking Scheme (Answers)
                 </button>
-                <button onclick="triggerDirectDownloadUrl('${escapeHtml(p.answersUrl)}', '${escapeHtml(p.title)}_Answers.pdf')" class="px-3 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-black rounded-xl">
+                <button onclick="triggerDirectDownloadUrl('${escapeHtml(p.answersUrl)}', '${escapeHtml(p.title)}_Answers.pdf')" class="px-3.5 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-black rounded-xl">
                   ⬇️ Download Answers
                 </button>
               ` : ''}
@@ -1891,16 +1813,7 @@
       goToStep(1);
     }
 
-    function applyLanguageUI() {
-      const heroTitle = document.getElementById('heroTitleText');
-      if (heroTitle) {
-        heroTitle.innerHTML = 'Select Class &amp; Subject for <span class="text-brand-600">Past Papers, TIE Books &amp; Syllabus</span>';
-      }
-      const searchInput = document.getElementById('smartSearchInput');
-      if (searchInput) {
-        searchInput.placeholder = 'Search directly (e.g. Form 4 Math 2024)...';
-      }
-    }
+    function applyLanguageUI() {}
 
     function startVoiceSearch() {
       const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
@@ -1959,12 +1872,8 @@
       if (p.paperUrl && p.answersUrl) {
         switchWrap.classList.remove('hidden');
         switchWrap.classList.add('flex');
-        btnQ.className = type === 'paper'
-          ? 'px-2.5 py-1 text-xs font-black rounded-lg bg-white text-slate-900'
-          : 'px-2.5 py-1 text-xs font-black rounded-lg text-slate-600';
-        btnA.className = type === 'answers'
-          ? 'px-2.5 py-1 text-xs font-black rounded-lg bg-white text-slate-900'
-          : 'px-2.5 py-1 text-xs font-black rounded-lg text-slate-600';
+        btnQ.className = type === 'paper' ? 'px-2.5 py-1 text-xs font-black rounded-lg bg-white text-slate-900' : 'px-2.5 py-1 text-xs font-black rounded-lg text-slate-600';
+        btnA.className = type === 'answers' ? 'px-2.5 py-1 text-xs font-black rounded-lg bg-white text-slate-900' : 'px-2.5 py-1 text-xs font-black rounded-lg text-slate-600';
       } else {
         switchWrap.classList.add('hidden');
         switchWrap.classList.remove('flex');
@@ -2029,16 +1938,12 @@
       window.open(`https://wa.me/?text=${text}`, '_blank');
     }
 
-    // No hardcoded secret key in source code so GitHub Secret Scanning never blocks your push!
-    const apiKey = "";
     let mwalimuMessages = [];
     let mwalimuActiveClass = 'Form 3';
     let mwalimuActiveSubject = 'Basic Mathematics';
     let mwalimuPendingImage = null;
-    let lastRequestedDocMeta = null;
     let currentQuizItems = [];
 
-    // Self-Learning Memory Functions (Persisted in localStorage)
     function getMohaLearnedMemory() {
       try {
         return JSON.parse(localStorage.getItem('elimika_moha_learned_v1') || '[]');
@@ -2067,9 +1972,7 @@
       if (badge) badge.textContent = String(list.length);
       const preview = document.getElementById('learnedItemsPreview');
       if (preview) {
-        preview.textContent = list.length > 0
-          ? `${list.length} custom topic(s) learned: ${list.slice(0, 3).map(i => i.topic).join(', ')}`
-          : '0 custom topics saved yet';
+        preview.textContent = list.length > 0 ? `${list.length} custom topic(s) saved` : '0 custom topics saved';
       }
     }
 
@@ -2083,19 +1986,19 @@
       const t = document.getElementById('learnTopicInput').value.trim();
       const a = document.getElementById('learnAnswerInput').value.trim();
       if (!t || !a) {
-        showToastNotification('Please enter both a Topic/Keyword and the Knowledge/Solution to learn.');
+        showToastNotification('Please enter both Topic and Knowledge.');
         return;
       }
       saveMohaLearnedItem(t, a);
       document.getElementById('learnTopicInput').value = '';
       document.getElementById('learnAnswerInput').value = '';
       document.getElementById('mohaLearnPanel').classList.add('hidden');
-      showToastNotification(`🧠 Moha AI learned "${t}" permanently!`);
+      showToastNotification(`🧠 Moha AI learned "${t}"!`);
 
       mwalimuMessages.push({
         id: `ai-learn-${Date.now()}`,
         role: 'ai',
-        text: `🧠 **New Knowledge Learned & Saved to Memory!**\n• **Topic / Keyword:** ${t}\n• **Knowledge Stored:** ${a}\n\nWhenever anyone asks about **${t}**, I will recall this immediately and integrate it into answers, Lesson Plans, and Marking Schemes.`
+        text: `🧠 **New Knowledge Saved to Memory!**\n• **Topic:** ${t}\n• **Knowledge:** ${a}`
       });
       renderMwalimuChat();
     }
@@ -2118,30 +2021,16 @@
       document.getElementById('tsSubject').value = mwalimuActiveSubject;
       updateMohaMemoryBadge();
 
-      const syncBadge = document.getElementById('teacherSyllabusSyncBadge');
-      if (syncBadge) {
-        if (sylCount > 0) {
-          syncBadge.innerHTML = `✅ <strong>Live Google Sheet Syllabus Active:</strong> Found ${sylCount} uploaded syllabus record(s) for ${escapeHtml(mwalimuActiveSubject)}. Moha AI will use them for Lesson Plans, Schemes &amp; Marking Schemes.`;
-        } else if (sylCtx.syllabusTopics.length > 0) {
-          syncBadge.innerHTML = `📜 <strong>TIE Syllabus Topics Ready (${escapeHtml(mwalimuActiveClass)} ${escapeHtml(mwalimuActiveSubject)}):</strong> ${escapeHtml(sylCtx.syllabusTopics.join(' • '))}`;
-        } else {
-          syncBadge.innerHTML = `🔗 Integrated with uploaded Google Sheet Syllabuses &amp; TIE Competence-Based Curriculum.`;
-        }
-      }
-
       const dateInput = document.getElementById('tsDate');
       if (dateInput && !dateInput.value) {
         dateInput.value = new Date().toISOString().split('T')[0];
       }
 
       if (mwalimuMessages.length === 0) {
-        const topicsPreview = sylCtx.syllabusTopics.length > 0
-          ? `\n\n📜 **Official TIE Syllabus Competences (${mwalimuActiveClass} ${mwalimuActiveSubject}):**\n• ${sylCtx.syllabusTopics.join('\n• ')}`
-          : '';
         mwalimuMessages.push({
           id: 'msg-welcome',
           role: 'ai',
-          text: `Hello! I am **Moha AI** 🇹🇿 (**${mwalimuActiveClass} • ${mwalimuActiveSubject}**).\nI respond **instantly** and integrate your uploaded Google Sheet Syllabuses, TIE Curriculum, and self-learning memory.${topicsPreview}\n\n• **For Teachers:** Click **📋 4-Stage Lesson Plan**, **📅 PO-RALG Scheme (2026)**, **✅ Marking Scheme**, or **📖 Subject Log Book** above, fill in the teacher details, and download the **PDF** directly.\n• **Teach Me New Content:** Click **🧠 Teach AI** at the top (or type \`learn: Topic = Explanation\` in chat) to teach me new notes, formulas, or exam solutions!\n• **Ask Anything:** Type any question, math expression, or topic below for an instant explanation.`
+          text: `Hello! I am **Moha AI** 🇹🇿 (**${mwalimuActiveClass} • ${mwalimuActiveSubject}**).\nI am ready to help you with instant answers, NECTA Marking Schemes, 4-Stage Lesson Plans, and 2026 PO-RALG Schemes of Work.\n\n• Click **📋 4-Stage Lesson Plan**, **📅 PO-RALG Scheme (2026)**, or **✅ Marking Scheme** above, fill in the teacher details, and download your **PDF** directly.`
         });
       }
 
@@ -2170,7 +2059,7 @@
       const panel = document.getElementById('teacherStudioPanel');
       panel.classList.remove('hidden');
       document.getElementById('tsSchool').focus();
-      showToastNotification('Please fill in the Teacher, School, and Topic details, then click Generate.');
+      showToastNotification('Please fill in School Name, Teacher Name, and Topic details, then click Generate.');
     }
 
     function toggleMohaApiKeyPanel() {
@@ -2184,10 +2073,10 @@
       const val = document.getElementById('customGeminiKeyInput').value.trim();
       if (val) {
         localStorage.setItem('elimika_custom_gemini_key', val);
-        showToastNotification('✅ Gemini API Key saved in browser!');
+        showToastNotification('✅ Gemini API Key saved!');
       } else {
         localStorage.removeItem('elimika_custom_gemini_key');
-        showToastNotification('Using Instant Moha Intelligent Engine.');
+        showToastNotification('Using local engine.');
       }
       document.getElementById('mohaApiKeyPanel').classList.add('hidden');
     }
@@ -2197,7 +2086,6 @@
         const k = localStorage.getItem('elimika_custom_gemini_key');
         if (k && k.trim().length > 10) return k.trim();
       } catch (e) {}
-      if (apiKey && apiKey.trim().length > 5) return apiKey.trim();
       return '';
     }
 
@@ -2215,22 +2103,7 @@
       const presG = parseInt(document.getElementById('tsPresG').value || '24', 10);
       const presB = parseInt(document.getElementById('tsPresB').value || '24', 10);
 
-      return {
-        school,
-        teacher,
-        date,
-        cls,
-        subject,
-        duration,
-        topic,
-        subTopic,
-        regG,
-        regB,
-        regTotal: regG + regB,
-        presG,
-        presB,
-        presTotal: presG + presB
-      };
+      return { school, teacher, date, cls, subject, duration, topic, subTopic, regG, regB, regTotal: regG + regB, presG, presB, presTotal: presG + presB };
     }
 
     function submitTeacherStudioDoc(type) {
@@ -2241,7 +2114,6 @@
       }
       if (!meta.subTopic) meta.subTopic = meta.topic;
       document.getElementById('teacherStudioPanel').classList.add('hidden');
-      lastRequestedDocMeta = { ...meta, docType: type };
 
       const docLabels = {
         lessonplan: '4-Stage TIE Lesson Plan',
@@ -2254,7 +2126,7 @@
       mwalimuMessages.push({
         id: `user-${Date.now()}`,
         role: 'user',
-        text: `Generate official ${docLabels[type] || 'Teaching Document'} for ${meta.cls} ${meta.subject} — Topic: ${meta.topic} (${meta.subTopic}), Teacher: ${meta.teacher}, School: ${meta.school}, Date: ${meta.date}`
+        text: `Generate official ${docLabels[type] || 'Teaching Document'} for ${meta.cls} ${meta.subject} — Topic: ${meta.topic}, Teacher: ${meta.teacher}, School: ${meta.school}`
       });
       mwalimuMessages.push({
         id: `ai-${Date.now() + 1}`,
@@ -2275,97 +2147,65 @@
       const dateStr = escapeHtml(m.date || new Date().toISOString().split('T')[0]);
       const duration = escapeHtml(m.duration || '80 Minutes');
 
-      const sylCtx = getUploadedSyllabusContext(m.cls, m.subject);
-      const uploadedSylTitle = sylCtx.uploadedSyllabuses[0]?.title || `Official TIE ${cls} ${subject} Syllabus`;
-
       if (type === 'markingscheme') {
         return `<div class="official-tie-doc">
           <div style="text-align:center; font-weight:900; font-size:13px; margin-bottom:8px; text-transform:uppercase;">
-            THE UNITED REPUBLIC OF TANZANIA — NATIONAL EXAMINATIONS COUNCIL (NECTA) FORMAT<br/>
+            THE UNITED REPUBLIC OF TANZANIA — NATIONAL EXAMINATIONS COUNCIL (NECTA)<br/>
             ${school} — OFFICIAL MARKING SCHEME (${cls.toUpperCase()} ${subject.toUpperCase()})
           </div>
           <table>
             <tr>
               <td><strong>Subject:</strong> ${subject}</td>
-              <td><strong>Class / Level:</strong> ${cls}</td>
+              <td><strong>Class:</strong> ${cls}</td>
               <td><strong>Date:</strong> ${dateStr}</td>
             </tr>
             <tr>
-              <td><strong>Main Topic (Syllabus):</strong> ${topic}</td>
+              <td><strong>Main Topic:</strong> ${topic}</td>
               <td><strong>Sub-Topic:</strong> ${subTopic}</td>
-              <td><strong>Examiner / Teacher:</strong> ${teacher}</td>
-            </tr>
-            <tr>
-              <td colspan="3"><strong>Syllabus Reference:</strong> ${escapeHtml(uploadedSylTitle)}</td>
+              <td><strong>Examiner:</strong> ${teacher}</td>
             </tr>
           </table>
           <table>
             <thead>
               <tr>
                 <th style="width:10%;">QN NO.</th>
-                <th style="width:32%;">QUESTION / ASSESSMENT ITEM</th>
-                <th style="width:43%;">MODEL ANSWER / SCORING RUBRIC (SOLUTIONS)</th>
-                <th style="width:15%;">MARKS ALLOCATION</th>
+                <th style="width:32%;">ASSESSMENT ITEM</th>
+                <th style="width:43%;">MODEL ANSWER &amp; SCORING RUBRIC</th>
+                <th style="width:15%;">MARKS</th>
               </tr>
             </thead>
             <tbody>
               <tr>
                 <td><strong>1 (a)</strong></td>
-                <td>Define the key terms and state the fundamental principle of <strong>${subTopic}</strong> under <strong>${topic}</strong>.</td>
-                <td>
-                  • Clear scientific/academic definition of <strong>${subTopic}</strong> = 02 Marks<br/>
-                  • Correct statement of governing principle/law with appropriate SI units or terminology = 02 Marks<br/>
-                  • One relevant real-life example in Tanzania = 01 Mark
-                </td>
+                <td>Define key terms and state governing principles of <strong>${subTopic}</strong>.</td>
+                <td>• Clear definition of ${subTopic} = 02 Marks<br/>• Correct governing formula or principle = 02 Marks<br/>• One real-life application = 01 Mark</td>
                 <td><strong>05 Marks</strong></td>
               </tr>
               <tr>
                 <td><strong>1 (b)</strong></td>
-                <td>Explain three (3) major factors or procedures involved in <strong>${subTopic}</strong>.</td>
-                <td>
-                  • Factor/Procedure 1 stated and explained clearly = 02 Marks<br/>
-                  • Factor/Procedure 2 stated and explained clearly = 02 Marks<br/>
-                  • Factor/Procedure 3 stated and explained clearly = 02 Marks
-                </td>
+                <td>Explain three major factors or procedures in <strong>${subTopic}</strong>.</td>
+                <td>• Factor/Procedure 1 = 02 Marks<br/>• Factor/Procedure 2 = 02 Marks<br/>• Factor/Procedure 3 = 02 Marks</td>
                 <td><strong>06 Marks</strong></td>
               </tr>
               <tr>
-                <td><strong>2 (a)</strong></td>
-                <td>Solve a structured problem / practical application on <strong>${subTopic}</strong> (${topic}).</td>
-                <td>
-                  • Extracting given data / identifying required variables = 01 Mark<br/>
-                  • Writing the correct formula / method = 02 Marks<br/>
-                  • Correct substitution and step-by-step calculation = 03 Marks<br/>
-                  • Correct final answer with proper units/conclusion = 02 Marks
-                </td>
+                <td><strong>2</strong></td>
+                <td>Solve structured problem and calculate required parameters for <strong>${subTopic}</strong>.</td>
+                <td>• Extracting given data = 01 Mark<br/>• Appropriate formula/method = 02 Marks<br/>• Substitution &amp; calculation = 03 Marks<br/>• Final answer with SI units = 02 Marks</td>
                 <td><strong>08 Marks</strong></td>
               </tr>
               <tr>
-                <td><strong>2 (b)</strong></td>
-                <td>Distinguish between the core concepts of <strong>${topic}</strong> and state two real-life applications.</td>
-                <td>
-                  • Two clear contrasting points in a table = 04 Marks (02 @)<br/>
-                  • Two real-world applications in daily life = 02 Marks (01 @)
-                </td>
-                <td><strong>06 Marks</strong></td>
-              </tr>
-              <tr>
                 <td><strong>3</strong></td>
-                <td>Essay / Comprehensive Analysis: Evaluate the importance of <strong>${topic} (${subTopic})</strong> in socio-economic and technological development in Tanzania.</td>
-                <td>
-                  • <strong>Introduction:</strong> Meaning of ${subTopic} &amp; context = 02 Marks<br/>
-                  • <strong>Main Body:</strong> Any five (5) well-explained points with vivid examples (5 × 2.5 Marks) = 12.5 Marks<br/>
-                  • <strong>Conclusion:</strong> Summary &amp; recommendation = 0.5 Mark
-                </td>
+                <td>Essay / Comprehensive Analysis: Evaluate the importance of <strong>${topic}</strong> in socio-economic development in Tanzania.</td>
+                <td>• Introduction = 02 Marks<br/>• 5 Well-explained main points (5 × 2.5) = 12.5 Marks<br/>• Conclusion = 0.5 Mark</td>
                 <td><strong>15 Marks</strong></td>
               </tr>
             </tbody>
           </table>
           <table>
             <tr>
-              <td><strong>TOTAL MARKS: 40 MARKS</strong></td>
+              <td><strong>TOTAL MARKS: 34 MARKS</strong></td>
               <td><strong>Verified By Teacher:</strong> ${teacher}</td>
-              <td><strong>Academic Master Sign:</strong> __________________</td>
+              <td><strong>Academic Sign:</strong> __________________</td>
             </tr>
           </table>
         </div>`;
@@ -2374,16 +2214,16 @@
       if (type === 'lessonplan') {
         return `<div class="official-tie-doc">
           <div style="text-align:center; font-weight:900; font-size:13px; margin-bottom:8px; text-transform:uppercase;">
-            THE UNITED REPUBLIC OF TANZANIA — PRESIDENT'S OFFICE (PO-RALG)<br/>
-            TANZANIA INSTITUTE OF EDUCATION (TIE) COMPETENCE-BASED LESSON PLAN
+            PRESIDENT'S OFFICE (PO-RALG) — TANZANIA INSTITUTE OF EDUCATION (TIE)<br/>
+            COMPETENCE-BASED LESSON PLAN
           </div>
           <table>
             <tr>
-              <td><strong>Name of School:</strong> ${school}</td>
-              <td><strong>Teacher's Name:</strong> ${teacher}</td>
+              <td><strong>School:</strong> ${school}</td>
+              <td><strong>Teacher:</strong> ${teacher}</td>
             </tr>
             <tr>
-              <td><strong>Form / Class:</strong> ${cls}</td>
+              <td><strong>Class:</strong> ${cls}</td>
               <td><strong>Subject:</strong> ${subject}</td>
             </tr>
             <tr>
@@ -2393,7 +2233,7 @@
           </table>
           <table>
             <thead>
-              <tr><th colspan="6" style="text-align:center;">NUMBER OF STUDENTS</th></tr>
+              <tr><th colspan="6" style="text-align:center;">STUDENT ATTENDANCE</th></tr>
               <tr>
                 <th colspan="3" style="text-align:center;">REGISTERED</th>
                 <th colspan="3" style="text-align:center;">PRESENT</th>
@@ -2411,19 +2251,16 @@
             </tbody>
           </table>
           <table>
-            <tr><td style="width:28%;"><strong>Main Competence:</strong></td><td>Demonstrate mastery of ${subject} concepts in ${topic}</td></tr>
-            <tr><td><strong>Specific Competence:</strong></td><td>Use knowledge and skills of ${topic} (${subTopic}) in different real-life contexts</td></tr>
-            <tr><td><strong>Main Activity:</strong></td><td>Explore and analyse principles of ${topic}</td></tr>
-            <tr><td><strong>Specific Activity:</strong></td><td>Perform guided and practical tasks on ${subTopic}</td></tr>
-            <tr><td><strong>Teaching &amp; Learning Resources:</strong></td><td>TIE ${cls} ${subject} Textbook, Wall Charts, Real Objects, Past NECTA Papers</td></tr>
-            <tr><td><strong>References:</strong></td><td>Tanzania Institute of Education (TIE). (2023). <em>${subject} for ${cls} Student's Book</em> &amp; <em>${escapeHtml(uploadedSylTitle)}</em>. Dar es Salaam: TIE.</td></tr>
+            <tr><td style="width:28%;"><strong>Main Competence:</strong></td><td>Demonstrate mastery of ${subject} in ${topic}</td></tr>
+            <tr><td><strong>Specific Competence:</strong></td><td>Use knowledge of ${topic} (${subTopic}) in various contexts</td></tr>
+            <tr><td><strong>Teaching Resources:</strong></td><td>TIE ${cls} ${subject} Student's Book, Charts, Real Objects</td></tr>
           </table>
           <div style="font-weight:900; font-size:11px; margin:6px 0 4px 0; text-transform:uppercase;">Teaching and Learning Process</div>
           <table>
             <thead>
               <tr>
                 <th style="width:16%;">Stages</th>
-                <th style="width:10%;">Time (Minutes)</th>
+                <th style="width:10%;">Time</th>
                 <th style="width:26%;">Teaching Activities</th>
                 <th style="width:26%;">Learning Activities</th>
                 <th style="width:22%;">Assessment Criteria</th>
@@ -2433,36 +2270,36 @@
               <tr>
                 <td><strong>Introduction</strong></td>
                 <td>10 Mins</td>
-                <td>Guide students through brainstorming questions or a KWL chart to connect their prior knowledge to <strong>${subTopic}</strong> and identify any misconceptions.</td>
-                <td>Respond to questions, share prior real-life experiences related to <strong>${subTopic}</strong>, and link past concepts to the new lesson.</td>
-                <td>Prior knowledge and meaning of ${subTopic} are clearly stated.</td>
+                <td>Guide students through brainstorming questions to connect prior knowledge to <strong>${subTopic}</strong>.</td>
+                <td>Respond to questions and share prior experiences related to <strong>${subTopic}</strong>.</td>
+                <td>Prior knowledge of ${subTopic} is stated.</td>
               </tr>
               <tr>
                 <td><strong>Competence Development</strong></td>
                 <td>35 Mins</td>
-                <td>Organize students in groups and provide learning materials/textbooks to investigate, discuss, and demonstrate procedures on <strong>${subTopic}</strong>.</td>
-                <td>Collaborate in groups to read texts, observe charts, discuss steps on <strong>${subTopic}</strong>, and present group findings to the class.</td>
-                <td>Principles and worked examples of ${subTopic} are accurately demonstrated.</td>
+                <td>Organize students in groups to investigate, discuss, and demonstrate procedures on <strong>${subTopic}</strong>.</td>
+                <td>Collaborate in groups to read texts, discuss steps, and present findings.</td>
+                <td>Worked examples of ${subTopic} are demonstrated.</td>
               </tr>
               <tr>
                 <td><strong>Design</strong></td>
                 <td>20 Mins</td>
-                <td>Guide students to apply the acquired knowledge and skills of <strong>${subTopic}</strong> to design models or solve real-life challenges.</td>
-                <td>Use acquired skills to formulate and solve practical real-life problems involving <strong>${subTopic}</strong>.</td>
-                <td>Real-life problems related to ${subTopic} are correctly solved.</td>
+                <td>Guide students to apply acquired knowledge of <strong>${subTopic}</strong> to solve real-life challenges.</td>
+                <td>Solve practical problems involving <strong>${subTopic}</strong>.</td>
+                <td>Real-life problems are solved.</td>
               </tr>
               <tr>
                 <td><strong>Realisation</strong></td>
                 <td>15 Mins</td>
-                <td>Administer short assessment tasks and peer-assessment questions on <strong>${subTopic}</strong>; observe pupils and collect evidence of understanding.</td>
-                <td>Complete individual exercises, assess peers' work to identify learning gaps, and summarize key points.</td>
-                <td>Exercise questions on ${subTopic} are accurately answered.</td>
+                <td>Administer short assessment tasks and evaluate student understanding.</td>
+                <td>Complete individual exercises and assess peers' work.</td>
+                <td>Exercise questions are answered.</td>
               </tr>
             </tbody>
           </table>
           <table>
             <tr>
-              <td><strong>Remarks:</strong> The lesson on <em>${subTopic}</em> was well understood by ${m.presTotal} present students based on the assessment criteria. Remedial practice will be given to a few learners before the next lesson.</td>
+              <td><strong>Remarks:</strong> The lesson on <em>${subTopic}</em> was successfully understood by ${m.presTotal} students. Remedial practice will be provided.</td>
             </tr>
           </table>
         </div>`;
@@ -2472,13 +2309,12 @@
         const showOrientation = isFormOneClass(m.cls);
         return `<div class="official-tie-doc" data-orientation="landscape">
           <div style="text-align:center; font-weight:900; font-size:13px; margin-bottom:6px; text-transform:uppercase;">
-            PRESIDENT'S OFFICE — REGIONAL ADMINISTRATION AND LOCAL GOVERNMENT (PO-RALG)<br/>
-            SCHEME OF WORK - 2026
+            PRESIDENT'S OFFICE — PO-RALG SCHEME OF WORK - 2026
           </div>
           <table>
             <tr>
-              <td><strong>TEACHER'S NAME:</strong> ${teacher}</td>
-              <td><strong>SCHOOL'S NAME:</strong> ${school}</td>
+              <td><strong>TEACHER:</strong> ${teacher}</td>
+              <td><strong>SCHOOL:</strong> ${school}</td>
               <td><strong>SUBJECT:</strong> ${subject.toUpperCase()}</td>
             </tr>
             <tr>
@@ -2497,9 +2333,9 @@
                 <th>MONTH</th>
                 <th>WEEK</th>
                 <th>PERIODS</th>
-                <th>TEACHING AND LEARNING METHODS</th>
-                <th>TEACHING AND LEARNING RESOURCES</th>
-                <th>ASSESSMENT TOOLS</th>
+                <th>METHODS</th>
+                <th>RESOURCES</th>
+                <th>ASSESSMENT</th>
                 <th>REFERENCES</th>
                 <th>REMARK</th>
               </tr>
@@ -2507,49 +2343,34 @@
             <tbody>
               ${showOrientation ? `<tr><td colspan="12" style="text-align:center; font-weight:800; background:#fef3c7;">Registration &amp; Orientation course 13/01/2026 - 28/02/2026</td></tr>` : ''}
               <tr>
-                <td>1.0 Demonstrate mastery of ${subject} concepts in ${topic}</td>
-                <td>1.1 Use concepts of ${topic} in different contexts</td>
-                <td>(a) Explain the basic concepts of ${topic} (${subTopic})</td>
-                <td>To guide students to describe the meaning, branches, and importance of ${topic} (${subTopic})</td>
+                <td>1.0 Master concepts in ${topic}</td>
+                <td>1.1 Use concepts of ${topic}</td>
+                <td>(a) Explain basic concepts of ${topic} (${subTopic})</td>
+                <td>Guide students to discuss meaning and importance</td>
                 <td>${showOrientation ? 'MARCH' : 'JANUARY'}</td>
                 <td>1st &amp; 2nd</td>
                 <td>6</td>
-                <td>Presentations, Group Discussions, Practical work, Guided Discovery</td>
-                <td>Charts, Real life objects, Flashcards, Educational models</td>
-                <td>Oral Questions, Exercises, Quizzes, Home works</td>
-                <td>TIE (2023), <em>${subject} for ${cls}</em>, TIE-DSM.</td>
+                <td>Presentations, Discussion</td>
+                <td>Charts, Real objects</td>
+                <td>Oral Qs, Exercises</td>
+                <td>TIE (2023)</td>
                 <td></td>
               </tr>
               <tr>
-                <td>1.0 Demonstrate mastery of ${subject} concepts in ${topic}</td>
-                <td>1.1 Use concepts of ${topic} in different contexts</td>
-                <td>(b) Perform operations and practical tasks on ${subTopic}</td>
-                <td>To demonstrate step-by-step operations on ${subTopic} and guide students to solve practical problems</td>
+                <td>1.0 Master concepts in ${topic}</td>
+                <td>1.1 Use concepts of ${topic}</td>
+                <td>(b) Perform tasks on ${subTopic}</td>
+                <td>Demonstrate operations and solve problems</td>
                 <td>${showOrientation ? 'MARCH' : 'FEBRUARY'}</td>
                 <td>3rd &amp; 4th</td>
                 <td>6</td>
-                <td>Problem solving, Practical work, Demonstration, Project works</td>
-                <td>Wall charts, Manila sheets, Past examination papers</td>
-                <td>Oral Questions, Exercises, Quizzes, Home works</td>
-                <td>TIE (2023), <em>${subject} for ${cls}</em>, TIE-DSM.</td>
+                <td>Problem solving</td>
+                <td>Calculators, Charts</td>
+                <td>Quizzes, Homework</td>
+                <td>TIE (2023)</td>
                 <td></td>
               </tr>
-              <tr><td colspan="12" style="text-align:center; font-weight:800; background:#f1f5f9;">MID-TERM ASSESSMENT &amp; MID-TERM BREAK (27/03/2026 – 08/04/2026)</td></tr>
-              <tr>
-                <td>2.0 Apply principles of ${topic} in real-life situations</td>
-                <td>2.1 Solve real-world problems involving ${subTopic}</td>
-                <td>(c) Describe and apply ${subTopic} in daily life situations</td>
-                <td>To guide students to discuss and solve real-life word problems related to ${subTopic}</td>
-                <td>APRIL &amp; MAY</td>
-                <td>2nd – 4th</td>
-                <td>8</td>
-                <td>Presentations, Problem solving, Field visits, Project works</td>
-                <td>Charts of real-life scenarios, Real objects, Models</td>
-                <td>Oral Questions, Exercises, Quizzes, Home works</td>
-                <td>TIE (2023), <em>${subject} for ${cls}</em>, TIE-DSM.</td>
-                <td></td>
-              </tr>
-              <tr><td colspan="12" style="text-align:center; font-weight:800; background:#e2e8f0;">TERMINAL ASSESSMENT &amp; FIRST-TERM BREAK (05/06/2026 – 06/07/2026)</td></tr>
+              <tr><td colspan="12" style="text-align:center; font-weight:800; background:#f1f5f9;">MID-TERM ASSESSMENT &amp; BREAK</td></tr>
             </tbody>
           </table>
         </div>`;
@@ -2557,12 +2378,11 @@
 
       return `<div class="official-tie-doc">
         <div style="text-align:center; font-weight:900; font-size:13px; margin-bottom:8px; text-transform:uppercase;">
-          PRESIDENT'S OFFICE — REGIONAL ADMINISTRATION AND LOCAL GOVERNMENT (PO-RALG)<br/>
-          OFFICIAL SUBJECT LOG BOOK — ${school}
+          PRESIDENT'S OFFICE (PO-RALG) — SUBJECT LOG BOOK — ${school}
         </div>
         <table>
           <tr>
-            <td><strong>Teacher's Name:</strong> ${teacher}</td>
+            <td><strong>Teacher:</strong> ${teacher}</td>
             <td><strong>Class:</strong> ${cls}</td>
             <td><strong>Subject:</strong> ${subject}</td>
           </tr>
@@ -2570,12 +2390,12 @@
         <table>
           <thead>
             <tr>
-              <th>DATE / WEEK</th>
-              <th>MAIN TOPIC / COMPETENCE</th>
-              <th>SUB-TOPIC / SPECIFIC ACTIVITY</th>
+              <th>DATE</th>
+              <th>MAIN TOPIC</th>
+              <th>SUB-TOPIC</th>
               <th>PERIODS</th>
-              <th>TEACHER'S COMMENT &amp; SIGN</th>
-              <th>HEAD OF DEPT REMARKS</th>
+              <th>TEACHER'S COMMENT</th>
+              <th>HOD REMARKS</th>
             </tr>
           </thead>
           <tbody>
@@ -2584,7 +2404,7 @@
               <td>${topic}</td>
               <td>${subTopic}</td>
               <td>3</td>
-              <td>Taught as planned (${teacher})</td>
+              <td>Taught successfully (${teacher})</td>
               <td>Checked &amp; Verified</td>
             </tr>
           </tbody>
@@ -2596,33 +2416,26 @@
       const cleanInput = (userText || '').trim();
       const lower = cleanInput.toLowerCase();
 
-      // Always initialize syllabus context so topicsList & sheetSylNote are NEVER undefined
       const sylCtx = getUploadedSyllabusContext(cls, subject);
       const topicsList = sylCtx.syllabusTopics.length > 0
         ? sylCtx.syllabusTopics.map(t => `• ${t}`).join('\n')
-        : `• 1.0 Core Principles and Concepts of ${subject}\n• 2.0 Practical & Experimental Applications in ${subject}\n• 3.0 Problem Solving and Real-Life Applications in ${subject}`;
-      const sheetSylNote = sylCtx.uploadedSyllabuses.length > 0
-        ? `\n\n✅ **Linked Google Sheet Syllabus(es):**\n${sylCtx.uploadedSyllabuses.map(s => `• ${s.title} (${s.form})`).join('\n')}`
-        : '';
+        : `• 1.0 Core Principles and Concepts of ${subject}\n• 2.0 Practical Applications in ${subject}\n• 3.0 Problem Solving and Real-Life Applications`;
 
-      // 1. Check if the user is teaching Moha AI via chat ("learn: Topic = Explanation" or "remember:")
       const learnMatch = cleanInput.match(/^(?:learn|teach|remember)\s*:\s*([^=:-]+)[=:-](.+)$/i);
       if (learnMatch) {
         const learnedTopic = learnMatch[1].trim();
         const learnedContent = learnMatch[2].trim();
         saveMohaLearnedItem(learnedTopic, learnedContent);
-        return `🧠 **Knowledge Learned & Saved Permanently!**\n\n• **Topic / Keyword:** ${learnedTopic}\n• **Stored Explanation:** ${learnedContent}\n\nI have added this to my permanent memory and will use it whenever you ask about **${learnedTopic}**.`;
+        return `🧠 **Knowledge Saved Permanently!**\n\n• **Topic:** ${learnedTopic}\n• **Knowledge:** ${learnedContent}\n\nI will recall this whenever you ask about **${learnedTopic}**.`;
       }
 
-      // 2. Check Moha AI's Self-Learned Memory First
       const learnedList = getMohaLearnedMemory();
       for (const item of learnedList) {
         if (lower.includes(item.topic.toLowerCase()) || item.topic.toLowerCase().includes(lower)) {
-          return `🧠 **Moha AI (From Learned Memory — ${item.topic}):**\n\n${item.content}\n\n*(Learned on ${item.timestamp} for ${item.cls} ${item.subject})*`;
+          return `🧠 **Moha AI (Learned Memory — ${item.topic}):**\n\n${item.content}\n\n*(Saved on ${item.timestamp})*`;
         }
       }
 
-      // 3. Check if user typed a direct arithmetic / mathematical calculation (e.g. "25 * 44" or "solve 2x + 6 = 14")
       const linearEqMatch = cleanInput.match(/solve\s+([+-]?\d*)x\s*([+-]\s*\d+)\s*=\s*([+-]?\d+)/i);
       if (linearEqMatch) {
         const a = parseFloat(linearEqMatch[1] || '1');
@@ -2631,35 +2444,19 @@
         if (a !== 0) {
           const rhs = c - b;
           const xVal = rhs / a;
-          return `📐 **Step-by-Step Algebraic Solution:**\n\nGiven equation:\n$$${a}x ${b >= 0 ? '+ ' + b : '- ' + Math.abs(b)} = ${c}$$\n• **Step 1:** Subtract $${b}$ from both sides:\n$$${a}x = ${c} - (${b}) = ${rhs}$$\n• **Step 2:** Divide both sides by $${a}$:\n$$x = \\frac{${rhs}}{${a}} = ${Number.isInteger(xVal) ? xVal : xVal.toFixed(4)}$$`;
+          return `📐 **Step-by-Step Solution:**\n\nGiven equation:\n$$${a}x ${b >= 0 ? '+ ' + b : '- ' + Math.abs(b)} = ${c}$$\n• **Step 1:** $${a}x = ${c} - (${b}) = ${rhs}$\n• **Step 2:** $x = \\frac{${rhs}}{${a}} = ${xVal}$`;
         }
       }
 
-      // 4. Earth as a Sphere / Great Circle / Tetrahedron / Attached Photo Solver
-      if (
-        lower.includes('meridian') ||
-        lower.includes('longitude') ||
-        lower.includes('aeroplane') ||
-        lower.includes('rome') ||
-        lower.includes('great circle') ||
-        lower.includes('tetrahedron') ||
-        lower.includes('solve this attached') ||
-        lower.includes('photo')
-      ) {
-        return `📐 **Form 3 Basic Mathematics — The Earth as a Sphere & 3D Geometry (Official NECTA Marking Scheme)**\n\n**(a) Define the following terms in relation to the spherical shape of the Earth (01 Mark):**\n• **(i) Meridian:** An arc of a great circle that connects the North Pole and South Pole on the Earth's surface ($00\\frac{1}{2}$ Mark).\n• **(ii) Longitude:** The central angle subtended at the centre of the Earth from the Prime Meridian ($0^\\circ$) plane to a given meridian plane ($00\\frac{1}{2}$ Mark).\n\n**(b) Aeroplane Great Circle Distance from Rome $(41^\\circ\\text{N}, 12^\\circ\\text{E})$ to Port Clarence $(65^\\circ\\text{N}, 168^\\circ\\text{W})$ at altitude $h = 15\\text{ km}$ (03 Marks):**\n• **Step 1 (Opposite Meridians):** Since $12^\\circ\\text{E} + 168^\\circ\\text{W} = 180^\\circ$, the two towns lie on opposite meridians forming a complete Great Circle passing over the North Pole.\n• **Step 2 (Radius of Flight Path $r_p$):**\n$$r_p = r + h = 6370\\text{ km} + 15\\text{ km} = 6385\\text{ km}$$\n• **Step 3 (Central Angle $\\theta$ over the Pole):**\n  - *Case 1 (Using $45^\\circ\\text{N}$ as written on the marking sheet):*\n    $$\\theta = 180^\\circ - (41^\\circ + 45^\\circ) = 94^\\circ$$\n    $$l_g = \\left(\\frac{\\theta}{360^\\circ}\\right) \\times 2\\pi r_p = \\left(\\frac{94^\\circ}{360^\\circ}\\right) \\times 2(3.14)(6385) = 10,469.98\\text{ km}$$\n  - *Case 2 (Using $65^\\circ\\text{N}$ from the question statement):*\n    $$\\theta = 180^\\circ - (41^\\circ + 65^\\circ) = 74^\\circ$$\n    $$l_g = \\left(\\frac{74^\\circ}{360^\\circ}\\right) \\times 2(3.14)(6385) = 8,242.32\\text{ km}$$\n\n**(c) (i) Net of a Regular Tetrahedron:**\n• A regular tetrahedron has **4 congruent equilateral triangular faces**. Its net consists of 1 central equilateral triangle surrounded by 3 outer equilateral triangles sharing its three edges (forming a larger equilateral triangle subdivided into 4 smaller equilateral triangles).`;
-      }
-
-      // 5. Check Built-in Deep Subject Knowledge Base
       for (const entry of MOHA_BUILTIN_KNOWLEDGE) {
         if (entry.keywords.some(kw => lower.includes(kw))) {
-          return `📘 **${entry.title}**\n\n${entry.content}\n\n💡 *Need a Lesson Plan or Marking Scheme on this topic? Click **📋 4-Stage Lesson Plan** or **✅ Marking Scheme** at the top!*`;
+          return `📘 **${entry.title}**\n\n${entry.content}\n\n💡 *Need a Lesson Plan or Marking Scheme? Click **📋 4-Stage Lesson Plan** or **✅ Marking Scheme** above!*`;
         }
       }
 
-      // 6. Marking Scheme request
       if (lower.includes('marking scheme') || lower.includes('rubric')) {
         return buildInstantOfficialDocument('markingscheme', {
-          school: 'ELIMIKA TANZANIA SECONDARY SCHOOL',
+          school: 'ELIMIKA SECONDARY SCHOOL',
           teacher: 'SUBJECT EXAMINER',
           cls,
           subject,
@@ -2669,50 +2466,37 @@
         });
       }
 
-      // 7. Syllabus request
       if (lower.includes('syllabus') || lower.includes('competence') || lower.includes('topics')) {
-        return `📜 **Official TIE Syllabus Overview — ${cls} ${subject}**\n\n**Main Competences & Topics:**\n${topicsList}${sheetSylNote}\n\n💡 **Teacher Tip:** Click **📋 4-Stage Lesson Plan**, **📅 PO-RALG Scheme (2026)**, or **✅ Marking Scheme** above to generate an official document for any of these topics and download it as a PDF!`;
+        return `📜 **Official TIE Syllabus Overview — ${cls} ${subject}**\n\n**Main Competences & Topics:**\n${topicsList}\n\n💡 *Click **📋 4-Stage Lesson Plan** or **📅 PO-RALG Scheme (2026)** above to generate official documents.*`;
       }
 
-      // 8. Topic Summary / Revision Notes request
-      if (lower.includes('summary') || lower.includes('notes') || lower.includes('revision')) {
-        return `📚 **${cls} ${subject} — TIE Competence-Based Revision Summary**\n\n**1. Official Syllabus Competences Covered (${cls}):**\n${topicsList}\n\n**2. NECTA Examination & Marking Guide Structure:**\n• **Section A (Objective Items - 16 Marks):** Multiple-choice and matching items (1 Mark each).\n• **Section B (Short Answer / Structured - 54 Marks):** 6 structured questions (9 Marks each). Always show **Formula (01 Mark)**, **Substitution (02 Marks)**, and **Final Answer with SI Units (01 Mark)**.\n• **Section C (Essay / Comprehensive Problems - 30 Marks):** 2 questions answered (15 Marks each: Introduction = 2 Marks, 5–6 Main Points = 12 Marks, Conclusion = 1 Mark).`;
-      }
-
-      // 9. Practice Questions + Marking Scheme request
-      if (lower.includes('practice') || lower.includes('questions') || lower.includes('exam')) {
-        return `❓ **5 NECTA Practice Questions & Marking Scheme — ${cls} ${subject}**\n\n**Syllabus Topics Covered (${cls}):**\n${topicsList}\n\n**Q1.** Define the key terms in the first competence of **${cls} ${subject}** and give two real-life examples. *(03 Marks: 01 Mark definition, 02 Marks examples)*\n**Q2.** Explain four major factors affecting key processes studied in **${cls} ${subject}**. *(08 Marks: 02 Marks @ point)*\n**Q3.** Solve a structured problem from **${cls} ${subject}** showing the governing formula, substitution, and SI units. *(06 Marks)*\n**Q4.** Distinguish between the primary concepts covered in Term 1 and Term 2 of **${cls} ${subject}**. *(04 Marks)*\n**Q5.** Write a comprehensive essay evaluating five ways **${subject}** contributes to scientific and socio-economic development in Tanzania. *(15 Marks: Intro 02, Body 5×2.5=12.5, Conclusion 0.5)*`;
-      }
-
-      // 10. Intelligent Topic-Specific Breakdown for Any User Query
-      return `📘 **Moha AI Academic Guide — ${cls} ${subject}**\n**Topic / Query:** *"${cleanInput}"*\n\n**1. Core Concept & Curriculum Alignment:**\nIn the official Tanzania Institute of Education (TIE) Competence-Based Curriculum for **${cls} ${subject}**, **"${cleanInput}"** relates to building practical analytical and problem-solving skills across these syllabus competences:\n${topicsList}${sheetSylNote}\n\n**2. Key NECTA Examination Points for "${cleanInput}":**\n• **Definition & Principle (02 Marks):** Always begin by stating the clear scientific or academic definition and any governing equation or law.\n• **Worked Procedure / Explanation (05 Marks):** Break your points into numbered paragraphs or clear calculation steps with proper units.\n• **Real-Life Application in Tanzania (03 Marks):** Connect the concept to industrial, environmental, or daily-life applications.\n\n💡 **Want to teach me specific notes on "${cleanInput}"?** Click **🧠 Teach AI** at the top (or type \`learn: ${cleanInput} = your notes\`) and I will remember it permanently!`;
+      return `📘 **Moha AI Assistant — ${cls} ${subject}**\n**Query:** *"${cleanInput}"*\n\n**1. TIE Curriculum Alignment:**\nIn the official Tanzania Institute of Education (TIE) Curriculum for **${cls} ${subject}**, this relates to:\n${topicsList}\n\n**2. NECTA Exam Guidelines:**\n• State the definition and governing formula clearly.\n• Show step-by-step calculations with proper SI units.\n• Apply concepts to real-life Tanzanian context.\n\n💡 *Type \`learn: Topic = Explanation\` to teach me new notes!*`;
     }
 
-    async function callGeminiWithRetry(payload) {
-      const currentKey = getActiveApiKey();
-      // Only call Google's Gemini endpoint if a valid standard Google AI Studio key (starts with AIza) is saved
-      if (!currentKey || !currentKey.startsWith('AIza')) {
-        throw new Error('INSTANT_LOCAL_ENGINE');
+    async function callGeminiApi(payload) {
+      const key = getActiveApiKey();
+      if (!key) throw new Error('NO_API_KEY');
+
+      const endpoints = [
+        `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${encodeURIComponent(key)}`,
+        `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${encodeURIComponent(key)}`
+      ];
+
+      for (const ep of endpoints) {
+        try {
+          const res = await fetch(ep, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+          });
+          if (res.ok) {
+            const data = await res.json();
+            const text = data?.candidates?.[0]?.content?.parts?.[0]?.text;
+            if (text) return text;
+          }
+        } catch (e) {}
       }
-      const controller = new AbortController();
-      const timeoutId = setTimeout(() => controller.abort(), 3500);
-      try {
-        const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${encodeURIComponent(currentKey)}`;
-        const response = await fetch(endpoint, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(payload),
-          signal: controller.signal
-        });
-        clearTimeout(timeoutId);
-        if (response.ok) {
-          const data = await response.json();
-          if (data?.candidates?.[0]?.content?.parts?.[0]?.text) return data;
-        }
-      } catch (err) {
-        clearTimeout(timeoutId);
-      }
-      throw new Error('FALLBACK_TO_LOCAL_ENGINE');
+      throw new Error('API_CALL_FAILED');
     }
 
     function sendQuickMwalimuPrompt(kind) {
@@ -2722,7 +2506,7 @@
       if (kind === 'syllabus') {
         input.value = `Show me the official TIE Syllabus topics and competences for ${mwalimuActiveClass} ${mwalimuActiveSubject}.`;
       } else if (kind === 'summary') {
-        input.value = `Give me a clear TIE revision summary and key formulas for ${mwalimuActiveClass} ${mwalimuActiveSubject}.`;
+        input.value = `Give me a TIE revision summary and key formulas for ${mwalimuActiveClass} ${mwalimuActiveSubject}.`;
       } else {
         input.value = `Give me 5 important NECTA practice questions and their Marking Scheme for ${mwalimuActiveClass} ${mwalimuActiveSubject}.`;
       }
@@ -2738,7 +2522,6 @@
       document.getElementById('mwalimuQuizContainer').classList.add('hidden');
       document.getElementById('mwalimuChatContainer').classList.remove('hidden');
 
-      // If teacher types "lesson plan" or "scheme of work" without filling form first, open the form immediately!
       const lower = userText.toLowerCase();
       if ((lower.includes('lesson plan') || lower.includes('scheme of work')) && !lower.includes('school:')) {
         inputEl.value = '';
@@ -2747,61 +2530,42 @@
         mwalimuMessages.push({
           id: `ai-${Date.now() + 1}`,
           role: 'ai',
-          text: `Please fill in the **📋 Teacher, Syllabus Topic & Exam Details** form that just opened above (**School Name, Teacher's Name, Class, Subject, Main Topic, Sub-Topic, and Date**) and click **⚡ Generate** to get your complete official table ready for direct PDF download!`
+          text: `Please fill in the **Teacher Details** form above (**School Name, Teacher's Name, Class, Subject, Main Topic, Sub-Topic**) and click **Generate** to create your official document.`
         });
         renderMwalimuChat();
         return;
       }
 
-      const displayPrompt = userText || '📷 Solve this attached question step-by-step and show the Marking Scheme.';
+      const displayPrompt = userText || 'Solve this question step-by-step and show the Marking Scheme.';
       inputEl.value = '';
       clearMwalimuImage();
 
       mwalimuMessages.push({ id: `user-${Date.now()}`, role: 'user', text: displayPrompt });
 
-      // If no external AIza key is configured, respond in 0.01 seconds with zero network wait!
-      const currentKey = getActiveApiKey();
-      if (!currentKey || !currentKey.startsWith('AIza')) {
-        const instantReply = generateSmartTutorReply(displayPrompt, mwalimuActiveClass, mwalimuActiveSubject);
-        mwalimuMessages.push({ id: `ai-${Date.now() + 1}`, role: 'ai', text: instantReply });
-        renderMwalimuChat();
-        return;
-      }
-
       const loadingId = `load-${Date.now()}`;
       mwalimuMessages.push({ id: loadingId, role: 'ai', loading: true, text: 'Moha AI is thinking...' });
       renderMwalimuChat();
 
-      const sylCtx = getUploadedSyllabusContext(mwalimuActiveClass, mwalimuActiveSubject);
-      const learnedFacts = getMohaLearnedMemory().slice(0, 15).map(i => `${i.topic}: ${i.content}`).join(' | ');
-      const syllabusSystemNote = [
-        `You are Moha AI, an intelligent Tanzanian TIE Curriculum & NECTA Examiner assistant for ${mwalimuActiveClass} ${mwalimuActiveSubject}. Respond strictly in clear English.`,
-        `Official TIE Syllabus Competences for ${mwalimuActiveClass} ${mwalimuActiveSubject}: ${sylCtx.syllabusTopics.join('; ') || 'Standard TIE Competence-Based Curriculum'}.`,
-        `Uploaded Google Sheet Syllabuses: ${sylCtx.uploadedSyllabuses.map(s => s.title + ' (' + s.form + ')').join(', ') || 'Integrated TIE Syllabus'}.`,
-        `Custom Learned Memory: ${learnedFacts || 'None'}.`,
-        `Help teachers prepare 4-Stage TIE Lesson Plans (Introduction, Competence Development, Design, Realisation), 2026 PO-RALG Schemes of Work (Note: Registration & Orientation is ONLY for Form 1), and detailed NECTA Marking Schemes with mark allocations. Use LaTeX ($...$ or $$...$$) for mathematical formulas.`
-      ].join(' ');
+      let reply = '';
+      const apiKey = getActiveApiKey();
 
-      const parts = [{ text: displayPrompt }];
-      if (attachedImg) {
-        parts.push({ inlineData: { mimeType: attachedImg.mimeType, data: attachedImg.base64Data } });
-      }
-
-      const payload = {
-        contents: [{ role: 'user', parts }],
-        systemInstruction: {
-          parts: [{ text: syllabusSystemNote }]
+      if (apiKey) {
+        const sylCtx = getUploadedSyllabusContext(mwalimuActiveClass, mwalimuActiveSubject);
+        const systemPrompt = `You are Moha AI, an expert Tanzanian TIE Curriculum & NECTA Examiner assistant for ${mwalimuActiveClass} ${mwalimuActiveSubject}. Official TIE topics: ${sylCtx.syllabusTopics.join('; ')}. Answer accurately in English using LaTeX ($...$) for math.`;
+        const parts = [{ text: displayPrompt }];
+        if (attachedImg) {
+          parts.push({ inlineData: { mimeType: attachedImg.mimeType, data: attachedImg.base64Data } });
         }
-      };
-
-      try {
-        const res = await callGeminiWithRetry(payload);
-        const reply = res?.candidates?.[0]?.content?.parts?.[0]?.text || generateSmartTutorReply(displayPrompt, mwalimuActiveClass, mwalimuActiveSubject);
-        mwalimuMessages = mwalimuMessages.map(m => m.id === loadingId ? { id: `ai-${Date.now()}`, role: 'ai', text: reply } : m);
-      } catch (e) {
-        const fallback = generateSmartTutorReply(displayPrompt, mwalimuActiveClass, mwalimuActiveSubject);
-        mwalimuMessages = mwalimuMessages.map(m => m.id === loadingId ? { id: `ai-${Date.now()}`, role: 'ai', text: fallback } : m);
+        try {
+          reply = await callGeminiApi({ contents: [{ role: 'user', parts }], systemInstruction: { parts: [{ text: systemPrompt }] } });
+        } catch (e) {
+          reply = generateSmartTutorReply(displayPrompt, mwalimuActiveClass, mwalimuActiveSubject);
+        }
+      } else {
+        reply = generateSmartTutorReply(displayPrompt, mwalimuActiveClass, mwalimuActiveSubject);
       }
+
+      mwalimuMessages = mwalimuMessages.map(m => m.id === loadingId ? { id: `ai-${Date.now()}`, role: 'ai', text: reply } : m);
       renderMwalimuChat();
     }
 
@@ -2836,15 +2600,9 @@
               ${!m.loading ? `
                 <div class="flex flex-wrap items-center justify-between gap-2 pt-2 border-t border-slate-100">
                   <div class="flex flex-wrap items-center gap-1.5">
-                    <button onclick="speakMwalimuText('${m.id}')" id="tts-btn-${m.id}" class="px-3 py-1.5 rounded-xl bg-violet-50 hover:bg-violet-100 text-violet-900 font-black text-xs flex items-center gap-1">
-                      🔊 Listen
-                    </button>
-                    <button onclick="downloadMwalimuDocPdf('${m.id}', 'portrait')" class="px-3 py-1.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-black text-xs flex items-center gap-1">
-                      ⬇️ Download PDF (Portrait)
-                    </button>
-                    <button onclick="downloadMwalimuDocPdf('${m.id}', 'landscape')" class="px-3 py-1.5 rounded-xl bg-brand-600 hover:bg-brand-700 text-white font-black text-xs flex items-center gap-1">
-                      ⬇️ Download PDF (Landscape)
-                    </button>
+                    <button onclick="speakMwalimuText('${m.id}')" class="px-3 py-1.5 rounded-xl bg-violet-50 hover:bg-violet-100 text-violet-900 font-black text-xs">🔊 Listen</button>
+                    <button onclick="downloadMwalimuDocPdf('${m.id}', 'portrait')" class="px-3 py-1.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-black text-xs">⬇️ PDF (Portrait)</button>
+                    <button onclick="downloadMwalimuDocPdf('${m.id}', 'landscape')" class="px-3 py-1.5 rounded-xl bg-brand-600 hover:bg-brand-700 text-white font-black text-xs">⬇️ PDF (Landscape)</button>
                   </div>
                   <span class="text-[10px] font-black uppercase tracking-wider text-violet-700">MOHA AI 🇹🇿</span>
                 </div>
@@ -2882,7 +2640,7 @@
     function downloadMwalimuDocPdf(msgId, orientation = 'portrait') {
       const target = document.getElementById(`msg-body-${msgId}`);
       if (!target) return;
-      showToastNotification('⏳ Generating and downloading your PDF...');
+      showToastNotification('⏳ Generating PDF...');
       const opt = {
         margin: 8,
         filename: `${mwalimuActiveClass}_${mwalimuActiveSubject}_Moha_AI.pdf`.replace(/\s+/g, '_'),
@@ -2935,38 +2693,20 @@
           question: `Which curriculum approach is officially used by TIE for ${cls} ${sub} in Tanzania?`,
           options: ["Competence-Based Curriculum (CBC)", "Content-Only Memorization", "Foreign Non-Structured System", "Optional Assessment Only"],
           correctIndex: 0,
-          explanation: "Tanzania Institute of Education (TIE) uses the Competence-Based Curriculum (CBC) focusing on practical skills, knowledge, and attitudes."
+          explanation: "Tanzania Institute of Education (TIE) uses the Competence-Based Curriculum (CBC)."
         },
         {
-          question: `In the official 4-stage TIE Lesson Plan for ${sub}, which stage activates students' prior knowledge?`,
+          question: `In the official 4-stage TIE Lesson Plan for ${sub}, which stage activates prior knowledge?`,
           options: ["Realisation", "Design", "Introduction", "Competence Development"],
           correctIndex: 2,
-          explanation: "The Introduction stage connects learners' prior experiences to the target competence."
-        },
-        {
-          question: `During which stage of the TIE Lesson Plan do students work in groups to investigate and build concrete understanding of ${sub}?`,
-          options: ["Competence Development", "Introduction", "Remarks", "Attendance"],
-          correctIndex: 0,
-          explanation: "Competence Development provides concrete hands-on learning activities and discussions."
-        },
-        {
-          question: `Which stage of the lesson plan guides learners to apply acquired ${sub} skills to solve real-life problems?`,
-          options: ["Introduction", "Design", "Registration", "Orientation"],
-          correctIndex: 1,
-          explanation: "The Design stage enables students to apply acquired competences in real-life contexts."
-        },
-        {
-          question: `What is the primary focus of the 'Realisation' stage in a ${cls} ${sub} lesson?`,
-          options: ["Formative assessment and self/peer evaluation", "Taking attendance only", "Cleaning the classroom", "Closing the school term"],
-          correctIndex: 0,
-          explanation: "Realisation focuses on assessing student achievement against the assessment criteria."
+          explanation: "The Introduction stage connects prior student experiences to the new lesson."
         }
       ];
 
       quizC.innerHTML = `
         <div class="flex items-center justify-between bg-white p-3 rounded-2xl border-2 border-violet-200">
-          <div class="font-black text-xs sm:text-sm text-violet-950">🎯 ${escapeHtml(cls)} • ${escapeHtml(sub)} Practice Quiz</div>
-          <button onclick="document.getElementById('mwalimuQuizContainer').classList.add('hidden'); document.getElementById('mwalimuChatContainer').classList.remove('hidden');" class="px-3 py-1 bg-slate-100 hover:bg-slate-200 text-xs font-black rounded-lg">← Back to Chat</button>
+          <div class="font-black text-xs sm:text-sm text-violet-950">🎯 ${escapeHtml(cls)} • ${escapeHtml(sub)} Quiz</div>
+          <button onclick="document.getElementById('mwalimuQuizContainer').classList.add('hidden'); document.getElementById('mwalimuChatContainer').classList.remove('hidden');" class="px-3 py-1 bg-slate-100 hover:bg-slate-200 text-xs font-black rounded-lg">← Back</button>
         </div>
         ${currentQuizItems.map((q, qIdx) => `
           <div class="bg-white p-4 rounded-2xl border-2 border-slate-200 space-y-2.5">
