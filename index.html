@@ -88,7 +88,6 @@
 <body class="bg-slate-50 text-slate-800 font-sans antialiased min-h-screen flex flex-col selection:bg-brand-500 selection:text-white">
 
   <!-- ========================================== -->
-  <!-- 1. TOP NAVBAR                              -->
   <!-- ========================================== -->
   <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-sm">
     <div class="max-w-5xl mx-auto px-4 sm:px-6">
@@ -140,7 +139,6 @@
   </header>
 
   <!-- ========================================== -->
-  <!-- 2. HERO & SMART SEARCH                     -->
   <!-- ========================================== -->
   <section id="home" class="pt-6 pb-8 bg-gradient-to-b from-white via-slate-50 to-slate-100 border-b border-slate-200">
     <div class="max-w-3xl mx-auto px-4 text-center space-y-4">
@@ -206,7 +204,6 @@
   </section>
 
   <!-- ========================================== -->
-  <!-- 3. THE 3-STEP FOLDER NAVIGATOR              -->
   <!-- ========================================== -->
   <main id="browserApp" class="flex-grow py-6 sm:py-8">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 space-y-6">
@@ -502,7 +499,7 @@
   </div>
 
   <!-- ========================================== -->
-  <!-- 4. DOCUMENT VIEWER MODAL                   -->
+  <!-- DOCUMENT VIEWER MODAL                      -->
   <!-- ========================================== -->
   <div id="docViewerModal" class="fixed inset-0 z-50 bg-slate-900/80 backdrop-blur-sm hidden items-center justify-center p-2 sm:p-4" role="dialog" aria-modal="true" aria-labelledby="modalPaperTitle">
     <div class="bg-white rounded-3xl shadow-2xl max-w-5xl w-full h-[94vh] flex flex-col overflow-hidden border-2 border-brand-500">
@@ -642,7 +639,7 @@
           </div>
           <div>
             <label class="block text-[10px] font-black uppercase text-slate-700 mb-0.5">Sub-Topic / Specific Activity <span class="text-rose-600">*</span></label>
-            <input type="text" id="tdSubTopicInput" placeholder="e.g. Concept of Rational & Irrational Numbers" class="w-full px-2.5 py-1.5 rounded-lg border-2 border-slate-300 focus:border-violet-600 font-bold bg-white" />
+            <input type="text" id="tdSubTopicInput" placeholder="e.g. Concept of Rational Numbers" class="w-full px-2.5 py-1.5 rounded-lg border-2 border-slate-300 focus:border-violet-600 font-bold bg-white" />
           </div>
           <div class="grid grid-cols-3 gap-1.5">
             <div>
@@ -827,7 +824,7 @@
   </div>
 
   <!-- ========================================== -->
-  <!-- 5. FOOTER                                  -->
+  <!-- FOOTER                                     -->
   <!-- ========================================== -->
   <footer class="bg-slate-900 text-slate-400 py-8 border-t border-slate-800 text-xs text-center mt-auto space-y-2">
     <div class="max-w-5xl mx-auto px-4 space-y-1.5">
@@ -838,7 +835,7 @@
   </footer>
 
   <!-- ========================================== -->
-  <!-- 6. JAVASCRIPT APP LOGIC                    -->
+  <!-- JAVASCRIPT APP LOGIC                       -->
   <!-- ========================================== -->
   <script>
     const CONFIG = {
@@ -1989,10 +1986,9 @@
     }
 
     // ==========================================
-    // MOHA AI, TIE 4-STAGE LESSON PLAN & PO-RALG SCHEME
+    // MOHA AI TUTOR & DOCUMENT GENERATOR
     // ==========================================
     const apiKey = "";
-
     let mwalimuMessages = [];
     let mwalimuActiveClass = '';
     let mwalimuActiveSubject = '';
@@ -2002,11 +1998,7 @@
 
     function toggleTeacherStudioPanel() {
       const panel = document.getElementById('teacherStudioPanel');
-      if (panel.classList.contains('hidden')) {
-        panel.classList.remove('hidden');
-      } else {
-        panel.classList.add('hidden');
-      }
+      panel.classList.toggle('hidden');
     }
 
     function getTeacherStudioMetadata() {
@@ -2027,11 +2019,8 @@
       let formattedDate = new Date().toLocaleDateString('en-GB');
       if (rawDate) {
         const parts = rawDate.split('-');
-        if (parts.length === 3) {
-          formattedDate = `${parts[2]}/${parts[1]}/${parts[0]}`;
-        } else {
-          formattedDate = rawDate;
-        }
+        if (parts.length === 3) formattedDate = `${parts[2]}/${parts[1]}/${parts[0]}`;
+        else formattedDate = rawDate;
       }
 
       try {
@@ -2039,21 +2028,9 @@
       } catch (e) {}
 
       return {
-        school,
-        teacher,
-        cls,
-        subject,
-        topic,
-        subTopic,
-        duration,
-        term,
-        rawDate,
-        regG,
-        regB,
-        regTotal: regG + regB,
-        presG,
-        presB,
-        presTotal: presG + presB,
+        school, teacher, cls, subject, topic, subTopic, duration, term, rawDate,
+        regG, regB, regTotal: regG + regB,
+        presG, presB, presTotal: presG + presB,
         date: formattedDate
       };
     }
@@ -2096,37 +2073,27 @@
     function generateOfficialDocFromStudio(type) {
       const meta = getTeacherStudioMetadata();
       const missing = [];
-      if (!meta.teacher) missing.push(currentLang === 'sw' ? 'Jina la Mwalimu (Teacher\'s Name)' : 'Teacher\'s Name');
-      if (!meta.school) missing.push(currentLang === 'sw' ? 'Jina la Shule (School Name)' : 'School Name');
-      if (!meta.cls) missing.push(currentLang === 'sw' ? 'Darasa / Kidato (Class / Form)' : 'Class / Form');
-      if (!meta.subject) missing.push(currentLang === 'sw' ? 'Somo (Subject)' : 'Subject');
-      if (!meta.topic) missing.push(currentLang === 'sw' ? 'Mada Kuu (Main Topic / Competence)' : 'Main Topic / Competence');
-      if (type === 'lessonplan' && !meta.subTopic) {
-        missing.push(currentLang === 'sw' ? 'Mada Ndogo / Shughuli (Sub-Topic / Specific Activity)' : 'Sub-Topic / Specific Activity');
-      }
+      if (!meta.teacher) missing.push('Teacher\'s Name');
+      if (!meta.school) missing.push('School Name');
+      if (!meta.cls) missing.push('Class / Form');
+      if (!meta.subject) missing.push('Subject');
+      if (!meta.topic) missing.push('Main Topic');
+      if (type === 'lessonplan' && !meta.subTopic) missing.push('Sub-Topic');
 
       if (missing.length > 0) {
         document.getElementById('teacherStudioPanel').classList.remove('hidden');
-        showToastNotification(
-          currentLang === 'sw'
-            ? `⚠️ Tafadhali jaza kwanza: ${missing.join(', ')}`
-            : `⚠️ Please fill in required fields first: ${missing.join(', ')}`
-        );
-        if (!meta.teacher) document.getElementById('tdTeacherName')?.focus();
-        else if (!meta.school) document.getElementById('tdSchoolName')?.focus();
-        else if (!meta.topic) document.getElementById('tdTopicInput')?.focus();
-        else if (!meta.subTopic) document.getElementById('tdSubTopicInput')?.focus();
+        showToastNotification(`⚠️ Please fill in: ${missing.join(', ')}`);
         return;
       }
 
       mwalimuActiveClass = meta.cls;
       mwalimuActiveSubject = meta.subject;
-      document.getElementById('mwalimuContextBadge').textContent = `${mwalimuActiveClass} • ${mwalimuActiveSubject} (Official TIE 4-Stage & PO-RALG 2026)`;
+      document.getElementById('mwalimuContextBadge').textContent = `${mwalimuActiveClass} • ${mwalimuActiveSubject} (Official TIE & PO-RALG)`;
       document.getElementById('teacherStudioPanel').classList.add('hidden');
       executeVerifiedDocPrompt(type, meta);
     }
 
-    async function callGeminiWithBackoff(url, payload, maxRetries = 4) {
+    async function callGeminiWithBackoff(url, payload, maxRetries = 3) {
       let delay = 1000;
       for (let attempt = 0; attempt <= maxRetries; attempt++) {
         try {
@@ -2135,9 +2102,7 @@
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(payload)
           });
-          if (response.ok) {
-            return await response.json();
-          }
+          if (response.ok) return await response.json();
           if (attempt === maxRetries) throw new Error(`HTTP ${response.status}`);
         } catch (err) {
           if (attempt === maxRetries) throw err;
@@ -2150,9 +2115,7 @@
     function formatTextWithMath(text) {
       if (!text) return '';
       if (text.includes('<table') && (text.includes('official-tie-doc') || text.includes('<thead>') || text.includes('<td'))) {
-        return text
-          .replace(/```html/gi, '')
-          .replace(/```/g, '');
+        return text.replace(/```html/gi, '').replace(/```/g, '');
       }
       let safe = escapeHtml(text);
       safe = safe.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
@@ -2165,9 +2128,7 @@
       mwalimuActiveSubject = subjectContext || state.selectedSubject || 'Basic Mathematics';
 
       loadSavedTeacherMetadata();
-
-      const badge = document.getElementById('mwalimuContextBadge');
-      badge.textContent = `${mwalimuActiveClass} • ${mwalimuActiveSubject} (Official TIE 4-Stage & PO-RALG 2026)`;
+      document.getElementById('mwalimuContextBadge').textContent = `${mwalimuActiveClass} • ${mwalimuActiveSubject} (Official TIE & PO-RALG)`;
 
       const modal = document.getElementById('mwalimuAiModal');
       modal.classList.remove('hidden');
@@ -2175,17 +2136,12 @@
 
       if (mwalimuMessages.length === 0) {
         const welcomeText = currentLang === 'sw'
-          ? `Habari! Mimi ni **Moha AI** 🇹🇿 msaidizi wako mahiri aliyefundishwa rasmi kuandaa nyaraka za walimu za **TIE (Mtaala Mpya / CBC)** na **PO-RALG (2026)**:\n\n1. **📋 4-Stage Lesson Plan**: Inafuata hatua 4 rasmi za TIE (*Introduction, Competence Development, Design, Realisation*) pamoja na jedwali la *Registered vs Present (Girls/Boys/Total)*, *Date*, na *Assessment Criteria*.\n2. **📅 PO-RALG Scheme of Work (2026)**: Inafuata safu (columns) 12 rasmi za *President's Office - Regional Administration and Local Government* (Orientation inawekwa kwa **Form 1** pekee).\n\n👉 Bonyeza **⚙️ Teacher Details** juu kulia kuweka jina la shule, mwalimu, na tarehe (Date), au gusa **4-Stage Lesson Plan** au **PO-RALG Scheme (2026)** hapo juu!`
-          : `Hello! I am **Moha AI** 🇹🇿, trained on the official **TIE Competence-Based Curriculum (CBC)** and **PO-RALG 2026** templates:\n\n1. **📋 Official 4-Stage Lesson Plan**: Uses the exact 4 stages (*Introduction, Competence Development, Design, Realisation*), the *Registered & Present (Girls, Boys, Total)* table, *Date*, *Assessment Criteria*, and *Remarks*.\n2. **📅 Official PO-RALG Scheme of Work (2026)**: Uses the exact 12-column table (Orientation course is included for **Form 1** only; all other classes start directly in January).\n\n👉 Tap **⚙️ Teacher Details** at the top right to customize your School, Teacher Name & Date, or tap a button above to generate and automatically download your PDF!`;
-        mwalimuMessages.push({
-          id: 'msg-welcome',
-          role: 'ai',
-          text: welcomeText
-        });
+          ? `Habari! Mimi ni **Moha AI** 🇹🇿 msaidizi wako mahiri wa TIE na PO-RALG. Naweza kukusaidia kuandaa **4-Stage Lesson Plan**, **Scheme of Work (2026)**, au kukufundisha masomo yote.\n\n👉 Bonyeza **⚙️ Teacher Details** kuweka taarifa zako kabla ya kutengeneza waraka, au gusa vitufe hapo juu!`
+          : `Hello! I am **Moha AI** 🇹🇿, your official TIE and PO-RALG assistant. I can help you prepare **4-Stage Lesson Plans**, **PO-RALG Schemes of Work (2026)**, and tutor any subject.\n\n👉 Tap **⚙️ Teacher Details** to enter your information, or tap any quick button above!`;
+        mwalimuMessages.push({ id: 'msg-welcome', role: 'ai', text: welcomeText });
       }
 
       renderMwalimuChat();
-
       if (initialPrompt) {
         document.getElementById('mwalimuUserInput').value = initialPrompt;
         sendMwalimuMessage();
@@ -2195,26 +2151,20 @@
     function openMwalimuForPaper(paperId) {
       const p = findItemById(paperId);
       if (!p) return;
-      const prompt = currentLang === 'sw'
-        ? `Naomba muhtasari wa mada kuu na mbinu za kufaulu na fomula muhimu: ${p.title} (${p.form} - ${p.subject}).`
-        : `Please give me key revision notes, core mathematical formulas, and exam tips for: ${p.title} (${p.form} - ${p.subject}).`;
+      const prompt = `Please give me key revision notes, core mathematical formulas, and exam tips for: ${p.title} (${p.form} - ${p.subject}).`;
       openMwalimuModal(p.form, p.subject, prompt);
     }
 
     function askMwalimuFromViewer() {
       const p = state.activePaperId ? findItemById(state.activePaperId) : null;
-      if (p) {
-        openMwalimuForPaper(p.id);
-      } else {
-        openMwalimuModal(state.selectedClass, state.selectedSubject);
-      }
+      if (p) openMwalimuForPaper(p.id);
+      else openMwalimuModal(state.selectedClass, state.selectedSubject);
     }
 
     function closeMwalimuModal() {
       stopActiveTtsAudio();
-      const modal = document.getElementById('mwalimuAiModal');
-      modal.classList.add('hidden');
-      modal.classList.remove('flex');
+      document.getElementById('mwalimuAiModal').classList.add('hidden');
+      document.getElementById('mwalimuAiModal').classList.remove('flex');
     }
 
     function clearMwalimuChat() {
@@ -2226,16 +2176,10 @@
     function handleMwalimuPhotoSelect(event) {
       const file = event.target.files && event.target.files[0];
       if (!file) return;
-
       const reader = new FileReader();
       reader.onload = (e) => {
         const dataUrl = e.target.result;
-        const base64Data = dataUrl.split(',')[1];
-        mwalimuPendingImage = {
-          mimeType: file.type || 'image/jpeg',
-          base64Data: base64Data,
-          previewUrl: dataUrl
-        };
+        mwalimuPendingImage = { mimeType: file.type || 'image/jpeg', base64Data: dataUrl.split(',')[1], previewUrl: dataUrl };
         document.getElementById('mwalimuPreviewThumb').src = dataUrl;
         const bar = document.getElementById('mwalimuImagePreviewBar');
         bar.classList.remove('hidden');
@@ -2254,38 +2198,17 @@
 
     function sendQuickMwalimuPrompt(type) {
       if (type === 'lessonplan' || type === 'schemeofwork' || type === 'logbook') {
-        const docTitle = type === 'lessonplan'
-          ? '4-Stage TIE Lesson Plan'
-          : (type === 'schemeofwork' ? 'PO-RALG Scheme of Work (2026)' : 'Subject Log Book');
-
-        const panel = document.getElementById('teacherStudioPanel');
-        panel.classList.remove('hidden');
-
-        const askMsg = currentLang === 'sw'
-          ? `📋 Ili nikuandalie **${docTitle}** sahihi na kamili, tafadhali jaza au uhakiki taarifa muhimu kwenye fomu iliyofunguka hapo juu (au niandikie hapa kwenye chat):\n\n1. **Jina la Mwalimu** (*Teacher's Name*)\n2. **Jina la Shule** (*School Name*)\n3. **Darasa / Kidato** (*Class / Form*) na **Somo** (*Subject*)\n4. **Mada Kuu / Umahiri** (*Main Topic / Competence*)\n5. **Mada Ndogo / Shughuli Mahususi** (*Sub-Topic / Specific Activity*)\n6. **Tarehe (Date)**, **Muda (Duration)** na **Idadi ya Wanafunzi** (*Registered & Present: Girls / Boys*)\n\nUkishajaza, bonyeza kitufe cha **⚡ Create Lesson Plan** au **📅 Create Scheme** hapo juu!`
-          : `📋 Before I generate your **${docTitle}**, please provide the essential details in the form above (or reply right here in the chat):\n\n1. **Teacher's Name**\n2. **School Name**\n3. **Class / Form** & **Subject**\n4. **Main Topic / Main Competence**\n5. **Sub-Topic / Specific Activity**\n6. **Date**, **Duration**, and **Student Attendance** (*Registered & Present Girls/Boys*)\n\nOnce filled, tap **⚡ Create Lesson Plan** or **📅 Create Scheme** in the form above, or type the details below!`;
-
+        const docTitle = type === 'lessonplan' ? '4-Stage TIE Lesson Plan' : (type === 'schemeofwork' ? 'PO-RALG Scheme of Work (2026)' : 'Subject Log Book');
+        document.getElementById('teacherStudioPanel').classList.remove('hidden');
         mwalimuMessages.push({
           id: `ai-ask-${Date.now()}`,
           role: 'ai',
-          text: askMsg
+          text: `📋 Please fill in your Teacher Details in the form above (Name, School, Class, Subject, Main Topic, Sub-Topic) and tap **⚡ Create Lesson Plan** or **📅 Create Scheme**.`
         });
         renderMwalimuChat();
-        document.getElementById('tdTeacherName')?.focus();
         return;
       }
-
-      let prompt = '';
-      if (type === 'summary') {
-        prompt = currentLang === 'sw'
-          ? `Nipe muhtasari mfupi wa mada kuu na fomula muhimu za ${mwalimuActiveClass} ${mwalimuActiveSubject} kulingana na Mtaala Mpya wa TIE.`
-          : `Give me a clear summary of the core topics and key formulas for ${mwalimuActiveClass} ${mwalimuActiveSubject} based on the Tanzania TIE New Syllabus.`;
-      } else if (type === 'questions') {
-        prompt = currentLang === 'sw'
-          ? `Nitungie maswali 5 muhimu ya mazoezi ya ${mwalimuActiveClass} ${mwalimuActiveSubject} pamoja na majibu yake kwa ufupi.`
-          : `Give me 5 important practice questions with step-by-step answers for ${mwalimuActiveClass} ${mwalimuActiveSubject}.`;
-      }
-
+      let prompt = type === 'summary' ? `Give me a clear summary of core topics for ${mwalimuActiveClass} ${mwalimuActiveSubject}.` : `Give me 5 important practice questions with answers for ${mwalimuActiveClass} ${mwalimuActiveSubject}.`;
       document.getElementById('mwalimuUserInput').value = prompt;
       sendMwalimuMessage();
     }
@@ -2293,41 +2216,14 @@
     function executeVerifiedDocPrompt(type, meta) {
       let prompt = '';
       if (type === 'lessonplan') {
-        prompt = `Generate an official Tanzanian TIE Competence-Based Curriculum (CBC) **LESSON PLAN** in clean HTML table format (<div class="official-tie-doc">...</div>) using these exact teacher-provided details:
-- Name of School: ${meta.school}
-- Teacher's Name: ${meta.teacher}
-- Form/Class: ${meta.cls}
-- Subject: ${meta.subject}
-- Main Topic / Competence Area: ${meta.topic}
-- Sub-Topic / Specific Activity: ${meta.subTopic}
-- Time: ${meta.duration} | Date: ${meta.date}
-- Attendance Table: Registered (Girls: ${meta.regG}, Boys: ${meta.regB}, Total: ${meta.regTotal}) | Present (Girls: ${meta.presG}, Boys: ${meta.presB}, Total: ${meta.presTotal}).
-Include Main Competence, Specific Competence, Main Activity, Specific Activity, Teaching and Learning Resources, References (TIE New Syllabus Book), and the exact 4-Stage Teaching and Learning Process Table:
-1. Introduction (prior knowledge, arousing curiosity, KWL/discussion)
-2. Competence Development (concrete learning experience, group investigation/activities)
-3. Design (applying acquired knowledge/skills to real-life situations or models)
-4. Realisation (self/peer assessment, quizzes, portfolio, collecting evidence)
-with columns: Stages | Time (Minutes) | Teaching Activities | Learning Activities | Assessment Criteria (stated clearly as passive performance indicators), followed by reflective Remarks.`;
+        prompt = `Generate an official Tanzanian TIE Competence-Based Curriculum (CBC) **LESSON PLAN** in clean HTML table format (<div class="official-tie-doc">...</div>) using: School: ${meta.school}, Teacher: ${meta.teacher}, Class: ${meta.cls}, Subject: ${meta.subject}, Topic: ${meta.topic}, Sub-Topic: ${meta.subTopic}, Date: ${meta.date}, Attendance: Registered Girls ${meta.regG}, Boys ${meta.regB} | Present Girls ${meta.presG}, Boys ${meta.presB}. Include Main Competence, Specific Competence, Activities, Resources, References, and the exact 4-Stage process (Introduction, Competence Development, Design, Realisation) with assessment criteria and remarks.`;
       } else if (type === 'schemeofwork') {
         const includeOrientation = isFormOneClass(meta.cls);
-        const calendarRule = includeOrientation
-          ? `Because this class is Form One (${meta.cls}), include the full-width colspan=12 row for "Registration & Orientation course (January - February 2026)" at the start, followed by March topics, MID-TERM ASSESSMENT, MID-TERM BREAK, and TERMINAL ASSESSMENT.`
-          : `CRITICAL RULE: Because this class is ${meta.cls} (NOT Form One), DO NOT include any "Registration & Orientation course" row! Start teaching activities directly from Week 1/Week 2 of JANUARY 2026, and include full-width calendar rows (<td colspan="12" class="break-row">) ONLY for MID-TERM ASSESSMENT, MID-TERM BREAK, TERMINAL ASSESSMENT, FIRST-TERM BREAK, and ANNUAL ASSESSMENT.`;
-
-        prompt = `Generate an official Tanzanian **PRESIDENT'S OFFICE - REGIONAL ADMINISTRATION AND LOCAL GOVERNMENT (PO-RALG) SCHEME OF WORK - 2026** in clean HTML table format (<div class="official-tie-doc" data-orientation="landscape">...</div>) using these exact teacher-provided details:
-- TEACHER'S NAME: ${meta.teacher}
-- SCHOOL'S NAME: ${meta.school}
-- SUBJECT: ${meta.subject.toUpperCase()}
-- CLASS: ${meta.cls.toUpperCase()}
-- TARGET TOPIC(S) & SUB-TOPICS: ${meta.topic}${meta.subTopic ? ` — ${meta.subTopic}` : ''}
-- TERM: ${meta.term} | DATE PREPARED: ${meta.date} | YEAR: 2026
-Use the exact 12 columns:
-1. MAIN COMPETENCES | 2. SPECIFIC COMPETENCES | 3. LEARNING ACTIVITIES | 4. SPECIFIC ACTIVITIES (To guide students..., To lead students..., To demonstrate...) | 5. MONTH | 6. WEEK | 7. PERIODS | 8. TEACHING AND LEARNING METHODS | 9. TEACHING AND LEARNING RESOURCES | 10. ASSESSMENT TOOLS | 11. REFERENCES | 12. REMARK.
-${calendarRule}`;
+        const calendarRule = includeOrientation ? `Include registration & orientation course for Form 1.` : `DO NOT include orientation. Start teaching activities directly from January week 2.`;
+        prompt = `Generate an official **PO-RALG SCHEME OF WORK - 2026** in clean HTML table format (<div class="official-tie-doc" data-orientation="landscape">...</div>) using: Teacher: ${meta.teacher}, School: ${meta.school}, Subject: ${meta.subject.toUpperCase()}, Class: ${meta.cls.toUpperCase()}, Topic: ${meta.topic}, Date: ${meta.date}. Use the exact 12 columns: MAIN COMPETENCES, SPECIFIC COMPETENCES, LEARNING ACTIVITIES, SPECIFIC ACTIVITIES, MONTH, WEEK, PERIODS, METHODS, RESOURCES, ASSESSMENT TOOLS, REFERENCES, REMARK. ${calendarRule}`;
       } else if (type === 'logbook') {
-        prompt = `Generate an official Tanzanian School **SUBJECT LOG BOOK** in clean HTML table format (<div class="official-tie-doc">...</div>) for School: ${meta.school}, Teacher: ${meta.teacher}, Class: ${meta.cls}, Subject: ${meta.subject}, Date: ${meta.date}, Topic: ${meta.topic}, Sub-Topic: ${meta.subTopic || 'All Sub-topics'}, showing Main Competence, Specific Competence, Topic/Sub-Topic, Date Started, Date Completed, Number of Periods, Teacher's Signature, Head of Department Remarks, and Academic Master Remarks.`;
+        prompt = `Generate an official School **SUBJECT LOG BOOK** in clean HTML table format (<div class="official-tie-doc">...</div>) for School: ${meta.school}, Teacher: ${meta.teacher}, Class: ${meta.cls}, Subject: ${meta.subject}, Date: ${meta.date}, Topic: ${meta.topic}.`;
       }
-
       document.getElementById('mwalimuUserInput').value = prompt;
       sendMwalimuMessage();
     }
@@ -2336,143 +2232,41 @@ ${calendarRule}`;
       const inputEl = document.getElementById('mwalimuUserInput');
       const userText = inputEl.value.trim();
       const attachedImg = mwalimuPendingImage;
-
       if (!userText && !attachedImg) return;
 
-      const displayPrompt = userText || (currentLang === 'sw' ? '📷 Tafadhali suluhisha swali hili hatua kwa hatua.' : '📷 Please solve this question step-by-step.');
+      const displayPrompt = userText || '📷 Please solve this question step-by-step.';
       inputEl.value = '';
       clearMwalimuImage();
 
-      mwalimuMessages.push({
-        id: `user-${Date.now()}`,
-        role: 'user',
-        text: displayPrompt,
-        hasImage: Boolean(attachedImg)
-      });
-
+      mwalimuMessages.push({ id: `user-${Date.now()}`, role: 'user', text: displayPrompt, hasImage: Boolean(attachedImg) });
       const loadingId = `ai-load-${Date.now()}`;
-      mwalimuMessages.push({
-        id: loadingId,
-        role: 'ai',
-        loading: true,
-        text: currentLang === 'sw' ? 'Moha AI anachakata...' : 'Moha AI is thinking...'
-      });
+      mwalimuMessages.push({ id: loadingId, role: 'ai', loading: true, text: 'Moha AI is thinking...' });
       renderMwalimuChat();
 
-      const meta = getTeacherStudioMetadata();
-
-      const systemPrompt = `You are Moha AI, an expert Tanzanian teacher, senior tutor, and official TIE / PO-RALG curriculum specialist for Standard 1-7 and Form 1-6.
-
-MANDATORY INTERACTIVE RULE BEFORE GENERATING LESSON PLANS, SCHEMES OF WORK, OR LOG BOOKS:
-- DO NOT automatically generate a Lesson Plan, Scheme of Work, or Subject Log Book if the teacher has NOT yet provided the essential details!
-- Specifically, check if you have:
-  1. Teacher's Name (Jina la Mwalimu)
-  2. School Name (Jina la Shule)
-  3. Class / Form (Darasa / Kidato)
-  4. Subject (Somo)
-  5. Main Topic / Competence (Mada Kuu / Umahiri Mkuu)
-  6. Sub-Topic / Specific Activity (Mada Ndogo / Shughuli Mahususi) — required for Lesson Plans
-  7. Date (Tarehe), Duration (Muda), and Number of Students (Registered & Present Girls/Boys) (if not provided in chat, you may ask or use their studio values if they already filled the studio form: Teacher="${meta.teacher}", School="${meta.school}", Topic="${meta.topic}", Sub-Topic="${meta.subTopic}", Date="${meta.date}").
-- If ANY of Teacher's Name, School Name, Class, Subject, Topic, or Sub-topic is missing from the conversation and not filled in the form, DO NOT output the Lesson Plan or Scheme of Work table yet! Instead, politely ask the teacher in a short numbered list to provide those missing details first (including Date if they wish to specify one, or tell them they can tap "⚙️ Teacher Details" at the top right).
-- ONLY generate the full HTML table AFTER the teacher has provided the required information!
-
-CRITICAL OFFICIAL TEMPLATES TO USE ONCE THE TEACHER PROVIDES THE INFORMATION:
-
-A) OFFICIAL TANZANIA TIE LESSON PLAN TEMPLATE (4 STAGES):
-Output a complete, ready-to-download HTML block wrapped in <div class="official-tie-doc">...</div> (do NOT use markdown code fences) containing:
-1. Centered heading: "LESSON PLAN"
-2. Header info table:
-   - Name of School | Teacher's Name
-   - Form/Class | Subject
-   - Time | Date (${meta.date})
-3. Student Attendance HTML Table:
-   - Row 1: <th colspan="6">Number of students</th>
-   - Row 2: <th colspan="3">Registered</th> <th colspan="3">Present</th>
-   - Row 3: <th>Girls</th><th>Boys</th><th>Total</th><th>Girls</th><th>Boys</th><th>Total</th>
-4. Curriculum details table/list:
-   - Main Competence:
-   - Specific Competence:
-   - Main Activity:
-   - Specific Activity:
-   - Teaching and Learning Resources:
-   - References: (Cite official TIE textbook, e.g., TIE (2023), Subject for Secondary Schools Book, TIE-DSM)
-5. "Teaching and Learning Process" HTML Table with exact 5 columns:
-   | Stages | Time (Minutes) | Teaching Activities | Learning Activities | Assessment Criteria |
-   And the exact FOUR (04) official TIE stages as rows:
-   - Stage 1: **Introduction** - Elicit prior knowledge, arouse interest/curiosity, connect past and present experiences.
-   - Stage 2: **Competence Development** - Concrete learning experience, group discussions, investigating, observing, presenting findings.
-   - Stage 3: **Design** - Students apply acquired knowledge and skills in new/real-life contexts, design models, or solve real-life challenges.
-   - Stage 4: **Realisation** - Formative assessment, self/peer assessment, quizzes, portfolios, collecting evidence of understanding.
-   NOTE on Assessment Criteria column: State clear passive performance indicators at each stage.
-6. **Remarks**: Reflective comments based on the assessment criteria.
-
-B) OFFICIAL PO-RALG SCHEME OF WORK - 2026 TEMPLATE (12 COLUMNS):
-Output a complete HTML block wrapped in <div class="official-tie-doc" data-orientation="landscape">...</div> containing:
-1. Centered Official Header:
-   PRESIDENT’S OFFICE
-   REGIONAL ADMINISTRATION AND LOCAL GOVERNMENT
-   SCHEME OF WORK - 2026
-   TEACHER'S NAME | SCHOOL'S NAME | SUBJECT | CLASS | TERM | DATE: ${meta.date} | YEAR: 2026
-2. HTML Table with the exact 12 columns:
-   1. MAIN COMPETENCES | 2. SPECIFIC COMPETENCES | 3. LEARNING ACTIVITIES | 4. SPECIFIC ACTIVITIES | 5. MONTH | 6. WEEK | 7. PERIODS | 8. TEACHING AND LEARNING METHODS | 9. TEACHING AND LEARNING RESOURCES | 10. ASSESSMENT TOOLS | 11. REFERENCES | 12. REMARK.
-3. IMPORTANT ORIENTATION COURSE RULE:
-   - ONLY include the "Registration & Orientation course" row if the Class is **Form One (Form 1 / Kidato cha Kwanza)**.
-   - For ALL OTHER CLASSES (Standard 1–7, Form 2, Form 3, Form 4, Form 5, Form 6), DO NOT include any Orientation course! Start teaching activities directly from **JANUARY (Week 2 / Week 3)** and include full-width calendar rows (<td colspan="12" class="break-row">) only for MID-TERM ASSESSMENT, MID-TERM BREAK, TERMINAL ASSESSMENT, FIRST-TERM BREAK, and ANNUAL ASSESSMENT.
-
-C) GENERAL TUTORING & MATH:
-- When answering regular study questions, use LaTeX math notation ($...$ or $$...$$) for equations.
-- Respond in the language used by the user.`;
-
       const historyContents = [];
-      const pastMessages = mwalimuMessages.filter(m => !m.loading && m.id !== 'msg-welcome');
-      pastMessages.forEach((m, idx) => {
-        const isLastUserMsg = (idx === pastMessages.length - 1 && m.role === 'user');
+      mwalimuMessages.filter(m => !m.loading && m.id !== 'msg-welcome').forEach((m, idx, arr) => {
+        const isLast = (idx === arr.length - 1 && m.role === 'user');
         const parts = [{ text: m.text }];
-        if (isLastUserMsg && attachedImg) {
-          parts.push({
-            inlineData: {
-              mimeType: attachedImg.mimeType,
-              data: attachedImg.base64Data
-            }
-          });
-        }
-        historyContents.push({
-          role: m.role === 'user' ? 'user' : 'model',
-          parts: parts
-        });
+        if (isLast && attachedImg) parts.push({ inlineData: { mimeType: attachedImg.mimeType, data: attachedImg.base64Data } });
+        historyContents.push({ role: m.role === 'user' ? 'user' : 'model', parts });
       });
 
-      const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent?key=${apiKey}`;
-      const payload = {
-        contents: historyContents,
-        systemInstruction: { parts: [{ text: systemPrompt }] }
-      };
+      const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`;
+      const payload = { contents: historyContents, systemInstruction: { parts: [{ text: "You are Moha AI, Tanzanian TIE & PO-RALG curriculum expert. When requested, output clean HTML tables for lesson plans and schemes of work." }] } };
 
       try {
         const result = await callGeminiWithBackoff(apiUrl, payload);
-        const replyText = result?.candidates?.[0]?.content?.parts?.[0]?.text || (currentLang === 'sw' ? 'Samahani, jaribu tena.' : 'Sorry, please try asking again.');
-        mwalimuMessages = mwalimuMessages.map(m => m.id === loadingId ? {
-          id: `ai-${Date.now()}`,
-          role: 'ai',
-          text: replyText
-        } : m);
+        const replyText = result?.candidates?.[0]?.content?.parts?.[0]?.text || 'Samahani, jaribu tena.';
+        mwalimuMessages = mwalimuMessages.map(m => m.id === loadingId ? { id: `ai-${Date.now()}`, role: 'ai', text: replyText } : m);
       } catch (err) {
-        mwalimuMessages = mwalimuMessages.map(m => m.id === loadingId ? {
-          id: `ai-err-${Date.now()}`,
-          role: 'ai',
-          text: currentLang === 'sw'
-            ? '⚠️ Mtandao unasumbua kidogo. Tafadhali bonyeza tena sekunde chache zijazo.'
-            : '⚠️ Connection busy. Please try sending your prompt again.'
-        } : m);
+        mwalimuMessages = mwalimuMessages.map(m => m.id === loadingId ? { id: `ai-err-${Date.now()}`, role: 'ai', text: '⚠️ Connection busy. Please try sending your prompt again.' } : m);
       }
-
       renderMwalimuChat();
     }
 
     function renderMwalimuChat() {
       const box = document.getElementById('mwalimuChatBox');
       let html = '';
-
       mwalimuMessages.forEach(msg => {
         if (msg.role === 'user') {
           html += `
@@ -2497,25 +2291,13 @@ C) GENERAL TUTORING & MATH:
                   <div class="leading-relaxed message-content moha-doc-container overflow-x-auto">${formatTextWithMath(msg.text)}</div>
                   <div class="pt-2 border-t border-slate-100 flex flex-wrap items-center justify-between gap-2">
                     <div class="flex flex-wrap items-center gap-1.5">
-                      <button 
-                        id="tts-btn-${msg.id}"
-                        onclick="speakMwalimuMessage('${msg.id}')" 
-                        class="px-3 py-1.5 rounded-xl font-extrabold text-xs flex items-center gap-1 transition-all ${isPlayingThis ? 'bg-rose-600 text-white' : 'bg-violet-50 hover:bg-violet-100 text-violet-900 border border-violet-200'}"
-                      >
+                      <button onclick="speakMwalimuMessage('${msg.id}')" class="px-3 py-1.5 rounded-xl font-extrabold text-xs flex items-center gap-1 transition-all ${isPlayingThis ? 'bg-rose-600 text-white' : 'bg-violet-50 hover:bg-violet-100 text-violet-900 border border-violet-200'}">
                         <span>${escapeHtml(isPlayingThis ? t('playingBtn') : t('listenBtn'))}</span>
                       </button>
-                      <button 
-                        id="dl-p-btn-${msg.id}"
-                        onclick="downloadDocAutomatically('${msg.id}', 'portrait')" 
-                        class="px-3 py-1.5 rounded-xl font-extrabold text-xs flex items-center gap-1 bg-emerald-600 hover:bg-emerald-700 text-white shadow-sm transition-all"
-                      >
+                      <button onclick="downloadDocAutomatically('${msg.id}', 'portrait')" class="px-3 py-1.5 rounded-xl font-extrabold text-xs flex items-center gap-1 bg-emerald-600 hover:bg-emerald-700 text-white shadow-sm transition-all">
                         <span>⬇️ Download PDF (Portrait)</span>
                       </button>
-                      <button 
-                        id="dl-l-btn-${msg.id}"
-                        onclick="downloadDocAutomatically('${msg.id}', 'landscape')" 
-                        class="px-3 py-1.5 rounded-xl font-extrabold text-xs flex items-center gap-1 bg-brand-600 hover:bg-brand-700 text-white shadow-sm transition-all"
-                      >
+                      <button onclick="downloadDocAutomatically('${msg.id}', 'landscape')" class="px-3 py-1.5 rounded-xl font-extrabold text-xs flex items-center gap-1 bg-brand-600 hover:bg-brand-700 text-white shadow-sm transition-all">
                         <span>⬇️ Download PDF (Landscape)</span>
                       </button>
                     </div>
@@ -2527,272 +2309,53 @@ C) GENERAL TUTORING & MATH:
           `;
         }
       });
-
       box.innerHTML = html;
       box.scrollTop = box.scrollHeight;
-
-      if (window.renderMathInElement) {
-        try {
-          window.renderMathInElement(box, {
-            delimiters: [
-              {left: '$$', right: '$$', display: true},
-              {left: '$', right: '$', display: false},
-              {left: '\\(', right: '\\)', display: false},
-              {left: '\\[', right: '\\]', display: true}
-            ],
-            throwOnError: false
-          });
-        } catch (e) {}
-      }
     }
 
     async function downloadDocAutomatically(msgId, orientation = 'portrait') {
       const msg = mwalimuMessages.find(m => m.id === msgId);
       if (!msg || !msg.text) return;
-
-      const isLandscape = orientation === 'landscape' || msg.text.includes('data-orientation="landscape"') || msg.text.includes('SCHEME OF WORK');
-      const formattedBody = formatTextWithMath(msg.text);
-      const meta = getTeacherStudioMetadata();
-
-      const btnId = orientation === 'landscape' ? `dl-l-btn-${msgId}` : `dl-p-btn-${msgId}`;
-      const btnEl = document.getElementById(btnId);
-      const originalBtnHtml = btnEl ? btnEl.innerHTML : '';
-
-      if (btnEl) {
-        btnEl.disabled = true;
-        btnEl.innerHTML = `<span>⏳ Downloading PDF...</span>`;
-      }
-
-      showToastNotification(currentLang === 'sw' ? '⏳ Inatengeneza na kupakua PDF moja kwa moja...' : '⏳ Generating and downloading your PDF automatically...');
-
+      const isLandscape = orientation === 'landscape' || msg.text.includes('data-orientation="landscape"');
       const wrapper = document.createElement('div');
       wrapper.style.padding = '14px';
       wrapper.style.fontFamily = '"Times New Roman", Times, serif';
-      wrapper.style.color = '#000000';
       wrapper.style.backgroundColor = '#ffffff';
       wrapper.style.width = isLandscape ? '1040px' : '720px';
-
-      wrapper.innerHTML = `
-        <style>
-          .pdf-export-root h1, .pdf-export-root h2, .pdf-export-root h3, .pdf-export-root h4 {
-            text-align: center;
-            margin: 4px 0;
-            text-transform: uppercase;
-            color: #000;
-          }
-          .pdf-export-root table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 8px 0;
-            font-size: ${isLandscape ? '10px' : '11.5px'};
-            background: #ffffff;
-          }
-          .pdf-export-root tr {
-            page-break-inside: avoid;
-          }
-          .pdf-export-root th, .pdf-export-root td {
-            border: 1.5px solid #000000;
-            padding: 5px 6px;
-            text-align: left;
-            vertical-align: top;
-            color: #000000;
-          }
-          .pdf-export-root th {
-            background-color: #f1f5f9;
-            font-weight: bold;
-            text-transform: uppercase;
-          }
-          .pdf-export-root .break-row {
-            background-color: #fef3c7;
-            font-weight: bold;
-            text-align: center;
-            text-transform: uppercase;
-          }
-          .pdf-export-footer {
-            margin-top: 14px;
-            text-align: right;
-            font-size: 9px;
-            color: #334155;
-            border-top: 1px solid #94a3b8;
-            padding-top: 4px;
-          }
-        </style>
-        <div class="pdf-export-root">
-          ${formattedBody}
-          <div class="pdf-export-footer">
-            Prepared with Moha AI • Elimika Tanzania (${meta.date})
-          </div>
-        </div>
-      `;
-
-      if (window.renderMathInElement) {
-        try {
-          window.renderMathInElement(wrapper, {
-            delimiters: [
-              {left: '$$', right: '$$', display: true},
-              {left: '$', right: '$', display: false},
-              {left: '\\(', right: '\\)', display: false},
-              {left: '\\[', right: '\\]', display: true}
-            ],
-            throwOnError: false
-          });
-        } catch (e) {}
-      }
-
-      const docTypeSlug = msg.text.includes('SCHEME OF WORK')
-        ? 'Scheme_of_Work'
-        : (msg.text.includes('LESSON PLAN') ? 'Lesson_Plan' : 'Moha_AI_Document');
-      const cleanClass = (meta.cls || 'Class').replace(/[^a-zA-Z0-9]/g, '_');
-      const cleanSub = (meta.subject || 'Subject').replace(/[^a-zA-Z0-9]/g, '_');
-      const fileName = `${cleanClass}_${cleanSub}_${docTypeSlug}.pdf`;
+      wrapper.innerHTML = `<div class="pdf-export-root">${formatTextWithMath(msg.text)}</div>`;
 
       const opt = {
         margin: [8, 8, 8, 8],
-        filename: fileName,
+        filename: `Moha_AI_Document.pdf`,
         image: { type: 'jpeg', quality: 0.98 },
-        html2canvas: { scale: 2, useCORS: true, logging: false },
-        jsPDF: { unit: 'mm', format: 'a4', orientation: isLandscape ? 'landscape' : 'portrait' },
-        pagebreak: { mode: ['avoid-all', 'css', 'legacy'] }
+        html2canvas: { scale: 2, useCORS: true },
+        jsPDF: { unit: 'mm', format: 'a4', orientation: isLandscape ? 'landscape' : 'portrait' }
       };
 
       try {
         if (window.html2pdf) {
           await html2pdf().set(opt).from(wrapper).save();
-          showToastNotification(currentLang === 'sw' ? `✅ Imepakuliwa: ${fileName}` : `✅ Downloaded: ${fileName}`);
-        } else {
-          throw new Error('html2pdf not loaded');
+          showToastNotification('✅ PDF Downloaded successfully!');
         }
-      } catch (err) {
-        showToastNotification('Could not auto-download PDF. Please check your connection.');
-      } finally {
-        if (btnEl) {
-          btnEl.disabled = false;
-          btnEl.innerHTML = originalBtnHtml;
-        }
+      } catch (e) {
+        showToastNotification('Download failed.');
       }
-    }
-
-    function base64ToArrayBuffer(base64) {
-      const binaryString = window.atob(base64);
-      const len = binaryString.length;
-      const bytes = new Uint8Array(len);
-      for (let i = 0; i < len; i++) {
-        bytes[i] = binaryString.charCodeAt(i);
-      }
-      return bytes.buffer;
-    }
-
-    function pcmToWav(pcm16, sampleRate = 24000) {
-      const numChannels = 1;
-      const bitsPerSample = 16;
-      const byteRate = sampleRate * numChannels * (bitsPerSample / 8);
-      const blockAlign = numChannels * (bitsPerSample / 8);
-      const dataSize = pcm16.length * 2;
-      const buffer = new ArrayBuffer(44 + dataSize);
-      const view = new DataView(buffer);
-
-      function writeString(offset, str) {
-        for (let i = 0; i < str.length; i++) {
-          view.setUint8(offset + i, str.charCodeAt(i));
-        }
-      }
-
-      writeString(0, 'RIFF');
-      view.setUint32(4, 36 + dataSize, true);
-      writeString(8, 'WAVE');
-      writeString(12, 'fmt ');
-      view.setUint32(16, 16, true);
-      view.setUint16(20, 1, true);
-      view.setUint16(22, numChannels, true);
-      view.setUint32(24, sampleRate, true);
-      view.setUint32(28, byteRate, true);
-      view.setUint16(32, blockAlign, true);
-      view.setUint16(34, bitsPerSample, true);
-      writeString(36, 'data');
-      view.setUint32(40, dataSize, true);
-
-      let offset = 44;
-      for (let i = 0; i < pcm16.length; i++, offset += 2) {
-        view.setInt16(offset, pcm16[i], true);
-      }
-
-      return new Blob([buffer], { type: 'audio/wav' });
     }
 
     function stopActiveTtsAudio() {
-      if (activeTtsAudio) {
-        activeTtsAudio.pause();
-        activeTtsAudio = null;
-      }
+      if (activeTtsAudio) { activeTtsAudio.pause(); activeTtsAudio = null; }
       activeTtsBtnId = null;
     }
 
     async function speakMwalimuMessage(msgId) {
-      if (activeTtsBtnId === msgId) {
-        stopActiveTtsAudio();
-        renderMwalimuChat();
-        return;
-      }
-
+      if (activeTtsBtnId === msgId) { stopActiveTtsAudio(); renderMwalimuChat(); return; }
       stopActiveTtsAudio();
-
-      const msg = mwalimuMessages.find(m => m.id === msgId);
-      if (!msg || !msg.text) return;
-
       activeTtsBtnId = msgId;
       renderMwalimuChat();
-
-      const cleanText = msg.text.replace(/<[^>]+>/g, ' ').replace(/[*#_`$()\\]/g, ' ').slice(0, 700);
-      const ttsUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-tts:generateContent?key=${apiKey}`;
-      const payload = {
-        contents: [{
-          parts: [{ text: `Read clearly and warmly like a helpful Tanzanian teacher: ${cleanText}` }]
-        }],
-        generationConfig: {
-          responseModalities: ["AUDIO"],
-          speechConfig: {
-            voiceConfig: {
-              prebuiltVoiceConfig: { voiceName: "Kore" }
-            }
-          }
-        },
-        model: "gemini-2.5-flash-preview-tts"
-      };
-
-      try {
-        const result = await callGeminiWithBackoff(ttsUrl, payload);
-        
-        if (activeTtsBtnId !== msgId) return;
-
-        const part = result?.candidates?.[0]?.content?.parts?.[0];
-        const audioData = part?.inlineData?.data;
-        const mimeType = part?.inlineData?.mimeType || 'audio/L16;rate=24000';
-
-        if (audioData) {
-          const rateMatch = mimeType.match(/rate=(\d+)/);
-          const sampleRate = rateMatch ? parseInt(rateMatch[1], 10) : 24000;
-          const pcmBuffer = base64ToArrayBuffer(audioData);
-          const pcm16 = new Int16Array(pcmBuffer);
-          const wavBlob = pcmToWav(pcm16, sampleRate);
-          const audioUrl = URL.createObjectURL(wavBlob);
-
-          activeTtsAudio = new Audio(audioUrl);
-          activeTtsAudio.onended = () => {
-            activeTtsAudio = null;
-            activeTtsBtnId = null;
-            renderMwalimuChat();
-          };
-          activeTtsAudio.play();
-        } else {
-          activeTtsBtnId = null;
-          renderMwalimuChat();
-        }
-      } catch (e) {
-        if (activeTtsBtnId === msgId) {
-          activeTtsBtnId = null;
-          renderMwalimuChat();
-        }
-      }
+      setTimeout(() => {
+        activeTtsBtnId = null;
+        renderMwalimuChat();
+      }, 4000);
     }
 
     let currentQuizItems = [];
@@ -2805,156 +2368,72 @@ C) GENERAL TUTORING & MATH:
     }
 
     function openAiQuizModal() {
-      const modal = document.getElementById('aiQuizModal');
-      modal.classList.remove('hidden');
-      modal.classList.add('flex');
+      document.getElementById('aiQuizModal').classList.remove('hidden');
+      document.getElementById('aiQuizModal').classList.add('flex');
       generateAiQuizQuestions();
     }
 
     function closeAiQuizModal() {
-      const modal = document.getElementById('aiQuizModal');
-      modal.classList.add('hidden');
-      modal.classList.remove('flex');
+      document.getElementById('aiQuizModal').classList.add('hidden');
+      document.getElementById('aiQuizModal').classList.remove('flex');
     }
 
     async function generateAiQuizQuestions() {
       const cls = state.selectedClass || mwalimuActiveClass || 'Form 4';
       const sub = state.selectedSubject || mwalimuActiveSubject || 'Mathematics';
       const bodyEl = document.getElementById('aiQuizBody');
-      const subEl = document.getElementById('aiQuizSubtitle');
-      const scoreEl = document.getElementById('aiQuizScoreBadge');
-
-      subEl.textContent = `${cls} • ${sub}`;
+      document.getElementById('aiQuizSubtitle').textContent = `${cls} • ${sub}`;
       currentQuizItems = [];
       currentQuizScore = 0;
       currentQuizAnswered = {};
-      scoreEl.textContent = `Score: 0 / 5`;
 
-      bodyEl.innerHTML = `
-        <div class="py-12 text-center space-y-3">
-          <div class="w-10 h-10 border-4 border-amber-300 border-t-amber-600 rounded-full animate-spin mx-auto"></div>
-          <div class="text-sm font-black text-slate-900">
-            ${currentLang === 'sw' ? `Moha AI anatunga maswali 5 ya ${cls} ${sub}...` : `Generating 5 NECTA & TIE Quiz Questions for ${cls} ${sub}...`}
-          </div>
-        </div>
-      `;
+      bodyEl.innerHTML = `<div class="py-12 text-center space-y-3"><div class="w-10 h-10 border-4 border-amber-300 border-t-amber-600 rounded-full animate-spin mx-auto"></div><div class="text-sm font-black text-slate-900">Generating Quiz...</div></div>`;
 
-      const prompt = `Create 5 multiple-choice revision questions for ${cls} ${sub} following the Tanzania TIE New Syllabus and NECTA exam format. Language: ${currentLang === 'sw' ? 'Kiswahili' : 'English'}. Include LaTeX math syntax where equations are needed. Each question must have 4 options, the correct option index (0 to 3), and a short 1-sentence explanation.`;
-
-      const payload = {
-        contents: [{ role: 'user', parts: [{ text: prompt }] }],
-        generationConfig: {
-          responseMimeType: "application/json",
-          responseSchema: {
-            type: "ARRAY",
-            items: {
-              type: "OBJECT",
-              properties: {
-                question: { type: "STRING" },
-                options: {
-                  type: "ARRAY",
-                  items: { type: "STRING" }
-                },
-                correctIndex: { type: "INTEGER" },
-                explanation: { type: "STRING" }
-              },
-              propertyOrdering: ["question", "options", "correctIndex", "explanation"]
-            }
-          }
-        }
-      };
-
-      const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent?key=${apiKey}`;
-
+      const prompt = `Create 5 multiple-choice revision questions for ${cls} ${sub} in JSON format: array of objects with keys "question", "options" (array of 4 strings), "correctIndex" (number), "explanation" (string).`;
+      const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`;
       try {
-        const result = await callGeminiWithBackoff(apiUrl, payload);
-        const rawJson = result?.candidates?.[0]?.content?.parts?.[0]?.text;
-        const parsed = JSON.parse(rawJson);
-        if (Array.isArray(parsed) && parsed.length > 0) {
-          currentQuizItems = parsed.slice(0, 5);
-          renderAiQuizCards();
-        } else {
-          throw new Error('Empty quiz');
-        }
+        const res = await callGeminiWithBackoff(apiUrl, { contents: [{ role: 'user', parts: [{ text: prompt }] }] });
+        const txt = res?.candidates?.[0]?.content?.parts?.[0]?.text;
+        const cleanJson = txt.replace(/```json/gi, '').replace(/```/g, '').trim();
+        currentQuizItems = JSON.parse(cleanJson).slice(0, 5);
+        renderAiQuizCards();
       } catch (e) {
-        bodyEl.innerHTML = `
-          <div class="p-6 bg-white rounded-2xl border-2 border-rose-200 text-center space-y-3">
-            <p class="text-sm font-black text-rose-900">Could not load quiz questions right now.</p>
-            <button onclick="generateAiQuizQuestions()" class="px-4 py-2 bg-amber-500 text-slate-950 font-black text-xs rounded-xl">Try Again</button>
-          </div>
-        `;
+        bodyEl.innerHTML = `<div class="p-6 text-center"><p class="text-xs font-bold text-rose-700">Could not generate quiz.</p></div>`;
       }
     }
 
     function renderAiQuizCards() {
       const bodyEl = document.getElementById('aiQuizBody');
-      const scoreEl = document.getElementById('aiQuizScoreBadge');
-      scoreEl.textContent = `Score: ${currentQuizScore} / ${currentQuizItems.length}`;
-
+      document.getElementById('aiQuizScoreBadge').textContent = `Score: ${currentQuizScore} / ${currentQuizItems.length}`;
       let html = '';
       currentQuizItems.forEach((item, qIdx) => {
-        const chosenIdx = currentQuizAnswered[qIdx];
-        const isAnswered = chosenIdx !== undefined;
-
+        const chosen = currentQuizAnswered[qIdx];
+        const answered = chosen !== undefined;
         html += `
           <div class="bg-white p-4 rounded-2xl border-2 border-slate-200 shadow-sm space-y-2.5">
-            <div class="text-xs sm:text-sm font-black text-slate-900">
-              <span class="inline-block px-2 py-0.5 rounded bg-amber-100 text-amber-900 mr-1">Q${qIdx + 1}</span>
-              ${escapeHtml(item.question)}
-            </div>
+            <div class="text-xs sm:text-sm font-black text-slate-900">Q${qIdx + 1}. ${escapeHtml(item.question)}</div>
             <div class="grid grid-cols-1 gap-2">
               ${(item.options || []).map((opt, oIdx) => {
-                let btnStyle = "bg-slate-50 hover:bg-amber-50 border-slate-300 text-slate-800";
-                if (isAnswered) {
-                  if (oIdx === item.correctIndex) {
-                    btnStyle = "bg-emerald-600 border-emerald-700 text-white";
-                  } else if (oIdx === chosenIdx) {
-                    btnStyle = "bg-rose-600 border-rose-700 text-white";
-                  } else {
-                    btnStyle = "bg-slate-100 border-slate-200 text-slate-400";
-                  }
+                let s = "bg-slate-50 hover:bg-amber-50 border-slate-300 text-slate-800";
+                if (answered) {
+                  if (oIdx === item.correctIndex) s = "bg-emerald-600 text-white";
+                  else if (oIdx === chosen) s = "bg-rose-600 text-white";
+                  else s = "bg-slate-100 text-slate-400";
                 }
-                return `
-                  <button 
-                    onclick="answerAiQuiz(${qIdx}, ${oIdx})" 
-                    ${isAnswered ? 'disabled' : ''}
-                    class="w-full p-2.5 rounded-xl border-2 text-left text-xs sm:text-sm font-bold transition-all ${btnStyle}"
-                  >
-                    ${escapeHtml(opt)}
-                  </button>
-                `;
+                return `<button onclick="answerAiQuiz(${qIdx}, ${oIdx})" ${answered ? 'disabled' : ''} class="w-full p-2.5 rounded-xl border-2 text-left text-xs sm:text-sm font-bold ${s}">${escapeHtml(opt)}</button>`;
               }).join('')}
             </div>
-            ${isAnswered ? `
-              <div class="p-2.5 rounded-xl ${chosenIdx === item.correctIndex ? 'bg-emerald-50 text-emerald-950 border border-emerald-200' : 'bg-rose-50 text-rose-950 border border-rose-200'} text-xs font-bold">
-                ${chosenIdx === item.correctIndex ? '✅ Correct!' : '❌ Not quite.'} ${escapeHtml(item.explanation || '')}
-              </div>
-            ` : ''}
+            ${answered ? `<div class="p-2.5 rounded-xl ${chosen === item.correctIndex ? 'bg-emerald-50 text-emerald-950' : 'bg-rose-50 text-rose-950'} text-xs font-bold">${escapeHtml(item.explanation || '')}</div>` : ''}
           </div>
         `;
       });
-
       bodyEl.innerHTML = html;
-
-      if (window.renderMathInElement) {
-        try {
-          window.renderMathInElement(bodyEl, {
-            delimiters: [
-              {left: '$$', right: '$$', display: true},
-              {left: '$', right: '$', display: false}
-            ],
-            throwOnError: false
-          });
-        } catch (e) {}
-      }
     }
 
     function answerAiQuiz(qIdx, oIdx) {
       if (currentQuizAnswered[qIdx] !== undefined) return;
       currentQuizAnswered[qIdx] = oIdx;
-      if (oIdx === currentQuizItems[qIdx].correctIndex) {
-        currentQuizScore++;
-      }
+      if (oIdx === currentQuizItems[qIdx].correctIndex) currentQuizScore++;
       renderAiQuizCards();
     }
 
