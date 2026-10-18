@@ -76,19 +76,10 @@
       text-transform: uppercase;
       font-size: 10px;
     }
-    .moha-doc-container .break-row {
-      background-color: #fef3c7;
-      font-weight: 800;
-      text-align: center;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-    }
   </style>
 </head>
 <body class="bg-slate-50 text-slate-800 font-sans antialiased min-h-screen flex flex-col selection:bg-brand-500 selection:text-white">
 
-  <!-- ========================================== -->
-  <!-- ========================================== -->
   <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-sm">
     <div class="max-w-5xl mx-auto px-4 sm:px-6">
       <div class="flex items-center justify-between h-16 sm:h-20">
@@ -138,8 +129,6 @@
     </div>
   </header>
 
-  <!-- ========================================== -->
-  <!-- ========================================== -->
   <section id="home" class="pt-6 pb-8 bg-gradient-to-b from-white via-slate-50 to-slate-100 border-b border-slate-200">
     <div class="max-w-3xl mx-auto px-4 text-center space-y-4">
       
@@ -175,13 +164,11 @@
             id="smartSearchInput" 
             placeholder="Search subject or class (e.g. Form 4 Math)..." 
             class="w-full text-sm sm:text-base bg-transparent text-slate-800 placeholder-slate-400 focus:outline-none font-semibold"
-            aria-label="Direct search for examination papers"
           />
           <button 
             onclick="startVoiceSearch()" 
             id="voiceSearchBtn"
             class="p-2 ml-1 rounded-xl bg-violet-50 hover:bg-violet-100 text-violet-700 border border-violet-200 flex items-center gap-1 shrink-0 transition-all"
-            title="Tafuta kwa Sauti (Voice Search)"
           >
             <span>🎤</span>
             <span id="voiceBtnLabel" class="hidden sm:inline text-xs font-bold">Voice</span>
@@ -190,26 +177,22 @@
             id="clearSearchBtn" 
             onclick="clearSmartSearch()" 
             class="hidden text-slate-400 hover:text-slate-600 p-1 ml-1"
-            title="Clear search"
           >
             <i data-lucide="x" class="w-4 h-4"></i>
           </button>
         </div>
       </div>
 
-      <!-- Remember My Class Quick Access Bar -->
       <div id="quickAccessBannerContainer" class="flex flex-wrap items-center justify-center gap-2 pt-1"></div>
 
     </div>
   </section>
 
-  <!-- ========================================== -->
-  <!-- ========================================== -->
   <main id="browserApp" class="flex-grow py-6 sm:py-8">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 space-y-6">
 
       <!-- Breadcrumbs Progress Indicator -->
-      <nav id="stepBreadcrumbs" class="flex items-center gap-2 text-xs sm:text-sm font-semibold text-slate-500 overflow-x-auto pb-2" aria-label="Step Navigation">
+      <nav id="stepBreadcrumbs" class="flex items-center gap-2 text-xs sm:text-sm font-semibold text-slate-500 overflow-x-auto pb-2">
         <button onclick="goToStep(1)" id="crumbStep1" class="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-brand-600 text-white font-bold transition-all shrink-0">
           <span id="crumb1Label">1. Class Level</span>
         </button>
@@ -231,119 +214,71 @@
           <i data-lucide="alert-triangle" class="w-6 h-6"></i>
         </div>
         <h3 class="text-base font-bold text-rose-900 mb-1">Failed to Load Examination Data</h3>
-        <p class="text-xs sm:text-sm text-rose-700 max-w-md mx-auto mb-4">
-          Please verify your internet connection or confirm the Google Sheet is published to the web.
-        </p>
+        <p class="text-xs sm:text-sm text-rose-700 max-w-md mx-auto mb-4">Please verify your internet connection or Google Sheet publication status.</p>
         <button onclick="fetchSheetData()" class="bg-rose-600 hover:bg-rose-700 text-white font-bold text-xs px-4 py-2.5 rounded-xl transition-colors inline-flex items-center gap-2">
-          <i data-lucide="refresh-cw" class="w-4 h-4"></i>
-          Retry Connection
+          <i data-lucide="refresh-cw" class="w-4 h-4"></i> Retry Connection
         </button>
       </div>
 
-      <!-- ============================================== -->
-      <!-- VIEW 1: STEP 1 - CHOOSE CLASS                 -->
-      <!-- ============================================== -->
+      <!-- VIEW 1: STEP 1 - CHOOSE CLASS -->
       <section id="step1View" class="space-y-6">
         <div>
           <h2 id="step1Title" class="text-lg sm:text-xl font-extrabold text-slate-900">Step 1: Choose Your Class Level</h2>
           <p id="step1Sub" class="text-xs sm:text-sm text-slate-500">Tap your Form or Standard to view available subjects and resources.</p>
         </div>
 
-        <!-- Secondary Education (Form 1–6) -->
         <div class="space-y-3">
           <h3 class="text-xs font-black uppercase tracking-wider text-slate-400 flex items-center gap-1.5">
             <i data-lucide="book-open" class="w-4 h-4"></i> Secondary School (Form 1 to 6)
           </h3>
           <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
             <button onclick="selectClass('Form 1')" class="p-4 bg-white hover:bg-brand-50 active:bg-brand-100 border-2 border-slate-200 hover:border-brand-400 rounded-2xl text-left transition-all shadow-sm flex items-center justify-between">
-              <div>
-                <span class="block text-base font-extrabold text-slate-900">Form 1</span>
-                <span class="text-xs text-slate-500 font-semibold">TIE Books &amp; Exams</span>
-              </div>
+              <div><span class="block text-base font-extrabold text-slate-900">Form 1</span><span class="text-xs text-slate-500 font-semibold">TIE Books &amp; Exams</span></div>
               <i data-lucide="chevron-right" class="w-5 h-5 text-slate-300"></i>
             </button>
-
             <button onclick="selectClass('Form 2')" class="p-4 bg-white hover:bg-brand-50 active:bg-brand-100 border-2 border-slate-200 hover:border-brand-400 rounded-2xl text-left transition-all shadow-sm flex items-center justify-between">
-              <div>
-                <span class="block text-base font-extrabold text-slate-900">Form 2</span>
-                <span class="text-xs text-brand-600 font-bold">FTNA Assessment</span>
-              </div>
+              <div><span class="block text-base font-extrabold text-slate-900">Form 2</span><span class="text-xs text-brand-600 font-bold">FTNA Assessment</span></div>
               <i data-lucide="chevron-right" class="w-5 h-5 text-slate-300"></i>
             </button>
-
             <button onclick="selectClass('Form 3')" class="p-4 bg-white hover:bg-brand-50 active:bg-brand-100 border-2 border-slate-200 hover:border-brand-400 rounded-2xl text-left transition-all shadow-sm flex items-center justify-between">
-              <div>
-                <span class="block text-base font-extrabold text-slate-900">Form 3</span>
-                <span class="text-xs text-slate-500 font-semibold">Senior Secondary</span>
-              </div>
+              <div><span class="block text-base font-extrabold text-slate-900">Form 3</span><span class="text-xs text-slate-500 font-semibold">Senior Secondary</span></div>
               <i data-lucide="chevron-right" class="w-5 h-5 text-slate-300"></i>
             </button>
-
             <button onclick="selectClass('Form 4')" class="p-4 bg-brand-50/80 hover:bg-brand-100 active:bg-brand-200 border-2 border-brand-300 rounded-2xl text-left transition-all shadow-sm flex items-center justify-between">
-              <div>
-                <span class="block text-base font-extrabold text-brand-900">Form 4</span>
-                <span class="text-xs text-brand-700 font-extrabold">CSEE National Finals</span>
-              </div>
+              <div><span class="block text-base font-extrabold text-brand-900">Form 4</span><span class="text-xs text-brand-700 font-extrabold">CSEE National Finals</span></div>
               <i data-lucide="chevron-right" class="w-5 h-5 text-brand-500"></i>
             </button>
-
             <button onclick="selectClass('Form 5')" class="p-4 bg-white hover:bg-brand-50 active:bg-brand-100 border-2 border-slate-200 hover:border-brand-400 rounded-2xl text-left transition-all shadow-sm flex items-center justify-between">
-              <div>
-                <span class="block text-base font-extrabold text-slate-900">Form 5</span>
-                <span class="text-xs text-slate-500 font-semibold">Advanced Level</span>
-              </div>
+              <div><span class="block text-base font-extrabold text-slate-900">Form 5</span><span class="text-xs text-slate-500 font-semibold">Advanced Level</span></div>
               <i data-lucide="chevron-right" class="w-5 h-5 text-slate-300"></i>
             </button>
-
             <button onclick="selectClass('Form 6')" class="p-4 bg-brand-50/80 hover:bg-brand-100 active:bg-brand-200 border-2 border-brand-300 rounded-2xl text-left transition-all shadow-sm flex items-center justify-between">
-              <div>
-                <span class="block text-base font-extrabold text-brand-900">Form 6</span>
-                <span class="text-xs text-brand-700 font-extrabold">ACSEE National Finals</span>
-              </div>
+              <div><span class="block text-base font-extrabold text-brand-900">Form 6</span><span class="text-xs text-brand-700 font-extrabold">ACSEE National Finals</span></div>
               <i data-lucide="chevron-right" class="w-5 h-5 text-brand-500"></i>
             </button>
           </div>
         </div>
 
-        <!-- Primary Education (Standard 1–7) -->
         <div class="space-y-3">
           <h3 class="text-xs font-black uppercase tracking-wider text-slate-400 flex items-center gap-1.5">
             <i data-lucide="backpack" class="w-4 h-4"></i> Primary School (Standard 1 to 7)
           </h3>
           <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
-            <button onclick="selectClass('Standard 1')" class="p-3 bg-white hover:bg-slate-100 border-2 border-slate-200 rounded-xl text-center font-bold text-slate-800">
-              Std 1
-            </button>
-            <button onclick="selectClass('Standard 2')" class="p-3 bg-white hover:bg-slate-100 border-2 border-slate-200 rounded-xl text-center font-bold text-slate-800">
-              Std 2
-            </button>
-            <button onclick="selectClass('Standard 3')" class="p-3 bg-white hover:bg-slate-100 border-2 border-slate-200 rounded-xl text-center font-bold text-slate-800">
-              Std 3
-            </button>
-            <button onclick="selectClass('Standard 4')" class="p-3 bg-white hover:bg-slate-100 border-2 border-slate-200 rounded-xl text-center font-bold text-amber-800 bg-amber-50/50">
-              Std 4 (Assessment)
-            </button>
-            <button onclick="selectClass('Standard 5')" class="p-3 bg-white hover:bg-slate-100 border-2 border-slate-200 rounded-xl text-center font-bold text-slate-800">
-              Std 5
-            </button>
-            <button onclick="selectClass('Standard 6')" class="p-3 bg-white hover:bg-slate-100 border-2 border-slate-200 rounded-xl text-center font-bold text-slate-800">
-              Std 6
-            </button>
-            <button onclick="selectClass('Standard 7')" class="col-span-2 sm:col-span-2 p-3 bg-brand-50 hover:bg-brand-100 border-2 border-brand-300 rounded-xl text-center font-black text-brand-900">
-              Standard 7 (PSLE Finals)
-            </button>
+            <button onclick="selectClass('Standard 1')" class="p-3 bg-white hover:bg-slate-100 border-2 border-slate-200 rounded-xl text-center font-bold text-slate-800">Std 1</button>
+            <button onclick="selectClass('Standard 2')" class="p-3 bg-white hover:bg-slate-100 border-2 border-slate-200 rounded-xl text-center font-bold text-slate-800">Std 2</button>
+            <button onclick="selectClass('Standard 3')" class="p-3 bg-white hover:bg-slate-100 border-2 border-slate-200 rounded-xl text-center font-bold text-slate-800">Std 3</button>
+            <button onclick="selectClass('Standard 4')" class="p-3 bg-white hover:bg-slate-100 border-2 border-slate-200 rounded-xl text-center font-bold text-amber-800 bg-amber-50/50">Std 4 (Assessment)</button>
+            <button onclick="selectClass('Standard 5')" class="p-3 bg-white hover:bg-slate-100 border-2 border-slate-200 rounded-xl text-center font-bold text-slate-800">Std 5</button>
+            <button onclick="selectClass('Standard 6')" class="p-3 bg-white hover:bg-slate-100 border-2 border-slate-200 rounded-xl text-center font-bold text-slate-800">Std 6</button>
+            <button onclick="selectClass('Standard 7')" class="col-span-2 sm:col-span-2 p-3 bg-brand-50 hover:bg-brand-100 border-2 border-brand-300 rounded-xl text-center font-black text-brand-900">Standard 7 (PSLE Finals)</button>
           </div>
         </div>
 
-        <!-- Recently Opened Papers Section -->
         <div id="recentPapersSection" class="hidden pt-4 border-t border-slate-200 space-y-3">
-          <h3 id="recentPapersHeading" class="text-xs font-black uppercase tracking-wider text-slate-500">
-            🕘 Recently Opened Resources
-          </h3>
+          <h3 id="recentPapersHeading" class="text-xs font-black uppercase tracking-wider text-slate-500">🕘 Recently Opened Resources</h3>
           <div id="recentPapersGrid" class="grid grid-cols-1 sm:grid-cols-2 gap-2.5"></div>
         </div>
 
-        <!-- Request Missing Paper & Install PWA Banners -->
         <div class="pt-4 grid grid-cols-1 sm:grid-cols-2 gap-3">
           <button onclick="openRequestPaperModal()" class="p-4 bg-white hover:bg-slate-50 border-2 border-slate-200 rounded-2xl flex items-center justify-between text-left shadow-sm">
             <div class="flex items-center gap-3">
@@ -369,9 +304,7 @@
         </div>
       </section>
 
-      <!-- ============================================== -->
-      <!-- VIEW 2: STEP 2 - CHOOSE SUBJECT               -->
-      <!-- ============================================== -->
+      <!-- VIEW 2: STEP 2 - CHOOSE SUBJECT -->
       <section id="step2View" class="hidden space-y-4">
         <div class="bg-white p-4 rounded-2xl border-2 border-slate-200 shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-3">
           <div class="flex items-center gap-2.5">
@@ -385,31 +318,18 @@
           </div>
 
           <div class="flex flex-wrap items-center gap-1.5">
-            <button onclick="setResourceMode('papers')" id="step2BtnPapers" class="px-3 py-2 rounded-xl font-extrabold text-xs border-2 transition-all">
-              📝 Papers
-            </button>
-            <button onclick="setResourceMode('books')" id="step2BtnBooks" class="px-3 py-2 rounded-xl font-extrabold text-xs border-2 transition-all">
-              📚 TIE Books
-            </button>
-            <button onclick="setResourceMode('syllabus')" id="step2BtnSyllabus" class="px-3 py-2 rounded-xl font-extrabold text-xs border-2 transition-all">
-              📜 Syllabus
-            </button>
-            <button onclick="openMwalimuModal(state.selectedClass, '')" class="px-3 py-2 rounded-xl font-black text-xs bg-violet-600 hover:bg-violet-700 text-white border-2 border-violet-700 transition-all shrink-0">
-              🤖 Moha AI
-            </button>
+            <button onclick="setResourceMode('papers')" id="step2BtnPapers" class="px-3 py-2 rounded-xl font-extrabold text-xs border-2 transition-all">📝 Papers</button>
+            <button onclick="setResourceMode('books')" id="step2BtnBooks" class="px-3 py-2 rounded-xl font-extrabold text-xs border-2 transition-all">📚 TIE Books</button>
+            <button onclick="setResourceMode('syllabus')" id="step2BtnSyllabus" class="px-3 py-2 rounded-xl font-extrabold text-xs border-2 transition-all">📜 Syllabus</button>
+            <button onclick="openMwalimuModal(state.selectedClass, '')" class="px-3 py-2 rounded-xl font-black text-xs bg-violet-600 hover:bg-violet-700 text-white border-2 border-violet-700 transition-all shrink-0">🤖 Moha AI</button>
           </div>
         </div>
 
-        <!-- Subjects Grid -->
         <div id="subjectsListGrid" class="grid grid-cols-1 sm:grid-cols-2 gap-3"></div>
       </section>
 
-      <!-- ============================================== -->
-      <!-- VIEW 3: STEP 3 - PAPERS/BOOKS/SYLLABUS LIST   -->
-      <!-- ============================================== -->
+      <!-- VIEW 3: STEP 3 - PAPERS/BOOKS/SYLLABUS LIST -->
       <section id="step3View" class="hidden space-y-4">
-        
-        <!-- Header & Quick Filters -->
         <div class="bg-white p-4 rounded-2xl border-2 border-slate-200 shadow-sm space-y-3">
           <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
             <div class="flex items-center gap-2.5">
@@ -418,29 +338,22 @@
                 <span id="backToSubjectsText">Subjects</span>
               </button>
               <div>
-                <h2 id="step3Title" class="text-base sm:text-lg font-black text-slate-900 leading-snug">
-                  Available Resources
-                </h2>
+                <h2 id="step3Title" class="text-base sm:text-lg font-black text-slate-900 leading-snug">Available Resources</h2>
                 <div id="step3Subtitle" class="text-xs font-bold text-emerald-700"></div>
               </div>
             </div>
 
             <div class="flex flex-wrap items-center gap-1.5">
               <button onclick="openAiQuizModal()" id="step3QuizBtn" class="px-3 py-2 bg-amber-500 hover:bg-amber-600 text-slate-950 font-black text-xs rounded-xl shrink-0 shadow-sm flex items-center gap-1">
-                <span>🎯</span>
-                <span id="step3QuizBtnLabel">AI Quiz</span>
+                <span>🎯</span> <span id="step3QuizBtnLabel">AI Quiz</span>
               </button>
               <button onclick="openMwalimuModal(state.selectedClass, state.selectedSubject)" id="step3TutorBtn" class="px-3 py-2 bg-violet-600 hover:bg-violet-700 text-white font-black text-xs rounded-xl shrink-0 shadow-sm flex items-center gap-1">
-                <span>🤖</span>
-                <span id="step3TutorBtnLabel">Ask Moha AI</span>
+                <span>🤖</span> <span id="step3TutorBtnLabel">Ask Moha AI</span>
               </button>
-              <button onclick="toggleModeInsideStep3()" id="crossSwitchBtn" class="px-3 py-2 bg-emerald-700 hover:bg-emerald-800 text-white font-black text-xs rounded-xl shrink-0 shadow-sm">
-                📚 Switch
-              </button>
+              <button onclick="toggleModeInsideStep3()" id="crossSwitchBtn" class="px-3 py-2 bg-emerald-700 hover:bg-emerald-800 text-white font-black text-xs rounded-xl shrink-0 shadow-sm">📚 Switch</button>
             </div>
           </div>
 
-          <!-- Syllabus Level Filter Bar -->
           <div id="syllabusLevelFiltersBar" class="hidden flex items-center gap-1.5 pt-2 border-t border-slate-100 overflow-x-auto">
             <span class="text-xs font-bold text-slate-500 shrink-0">Level:</span>
             <button onclick="filterSyllabusTier('ALL')" class="syl-tier-btn active-tier px-3 py-1.5 text-xs font-extrabold rounded-xl bg-amber-500 text-slate-950 shadow-sm">All Levels</button>
@@ -449,10 +362,8 @@
             <button onclick="filterSyllabusTier('Advanced')" class="syl-tier-btn px-3 py-1.5 text-xs font-extrabold rounded-xl bg-slate-100 text-slate-700 hover:bg-slate-200">Advanced (Form 5–6)</button>
           </div>
 
-          <!-- Year Filter Pills -->
           <div id="yearFiltersBar" class="hidden flex items-center gap-1.5 overflow-x-auto pt-2 border-t border-slate-100"></div>
 
-          <!-- Quick Exam Category Filter Chips -->
           <div id="categoryFiltersBar" class="flex flex-wrap items-center gap-1.5 pt-2 border-t border-slate-100">
             <button onclick="filterCategoryTag('ALL')" class="cat-chip active-chip px-3 py-1.5 text-xs font-extrabold rounded-xl bg-brand-600 text-white shadow-sm">All</button>
             <button onclick="filterCategoryTag('NECTA')" class="cat-chip px-3 py-1.5 text-xs font-extrabold rounded-xl bg-slate-100 text-slate-700 hover:bg-slate-200">NECTA</button>
@@ -462,24 +373,19 @@
           </div>
         </div>
 
-        <!-- Papers / Books / Syllabus List -->
         <div id="papersResultsGrid" class="space-y-3"></div>
 
-        <!-- Pagination -->
         <div id="paginationWrap" class="flex items-center justify-between bg-white p-3 rounded-2xl border-2 border-slate-200 hidden">
           <button id="prevBtn" onclick="changeResultsPage(-1)" class="px-3.5 py-2 text-xs font-black border-2 border-slate-200 rounded-xl text-slate-700 hover:bg-slate-100 disabled:opacity-40">Previous</button>
           <span id="pageIndicator" class="text-xs font-bold text-slate-600">Page 1 of 1</span>
           <button id="nextBtn" onclick="changeResultsPage(1)" class="px-3.5 py-2 text-xs font-black border-2 border-slate-200 rounded-xl text-slate-700 hover:bg-slate-100 disabled:opacity-40">Next</button>
         </div>
-
       </section>
 
     </div>
   </main>
 
-  <!-- ========================================== -->
-  <!-- FLOATING STATIONERY PRINT BASKET BAR       -->
-  <!-- ========================================== -->
+  <!-- FLOATING STATIONERY PRINT BASKET BAR -->
   <div id="printBasketFloatingBar" class="fixed bottom-4 left-1/2 -translate-x-1/2 z-40 hidden max-w-lg w-[94%] bg-slate-900 text-white px-4 py-3 rounded-2xl shadow-2xl border-2 border-emerald-500 flex items-center justify-between gap-3">
     <div class="flex items-center gap-2.5 min-w-0">
       <span class="w-9 h-9 rounded-xl bg-emerald-500 text-slate-950 font-black flex items-center justify-center text-sm shrink-0" id="printBasketCount">0</span>
@@ -492,24 +398,17 @@
       <button onclick="sendPrintBasketWhatsApp()" class="px-3.5 py-2 bg-emerald-600 hover:bg-emerald-500 text-white font-black text-xs rounded-xl shadow-sm flex items-center gap-1">
         <span>💬 WhatsApp</span>
       </button>
-      <button onclick="clearPrintBasket()" class="p-2 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-xl text-xs font-bold" title="Clear">
-        ✕
-      </button>
+      <button onclick="clearPrintBasket()" class="p-2 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-xl text-xs font-bold" title="Clear">✕</button>
     </div>
   </div>
 
-  <!-- ========================================== -->
-  <!-- DOCUMENT VIEWER MODAL                      -->
-  <!-- ========================================== -->
+  <!-- DOCUMENT VIEWER MODAL -->
   <div id="docViewerModal" class="fixed inset-0 z-50 bg-slate-900/80 backdrop-blur-sm hidden items-center justify-center p-2 sm:p-4" role="dialog" aria-modal="true" aria-labelledby="modalPaperTitle">
     <div class="bg-white rounded-3xl shadow-2xl max-w-5xl w-full h-[94vh] flex flex-col overflow-hidden border-2 border-brand-500">
-      
-      <!-- Modal Header -->
       <div class="px-4 py-3 bg-slate-900 text-white flex items-center justify-between gap-2">
         <div class="min-w-0 pr-2">
           <div class="flex items-center gap-2 mb-0.5">
             <span id="modalMetaBadge" class="text-[10px] font-black uppercase tracking-wider px-2 py-0.5 rounded bg-brand-500 text-white">Paper</span>
-            <!-- Q vs A Toggle Inside Viewer -->
             <div id="viewerQaToggleWrap" class="hidden items-center gap-1 bg-slate-800 p-0.5 rounded-lg border border-slate-700">
               <button onclick="switchViewerTab('paper')" id="viewerTabPaperBtn" class="px-2.5 py-1 text-[11px] font-black rounded bg-brand-600 text-white">📖 Maswali</button>
               <button onclick="switchViewerTab('answers')" id="viewerTabAnswersBtn" class="px-2.5 py-1 text-[11px] font-black rounded text-slate-300 hover:text-white">✅ Majibu</button>
@@ -521,13 +420,10 @@
           <a id="modalDirectLink" href="#" target="_blank" rel="noopener noreferrer" class="hidden sm:inline-flex px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-bold rounded-xl items-center gap-1">
             <i data-lucide="external-link" class="w-3.5 h-3.5"></i> Open Full
           </a>
-          <button onclick="closeViewerModal()" class="px-3.5 py-1.5 bg-rose-600 hover:bg-rose-700 text-white font-black text-xs rounded-xl">
-            ✕ CLOSE
-          </button>
+          <button onclick="closeViewerModal()" class="px-3.5 py-1.5 bg-rose-600 hover:bg-rose-700 text-white font-black text-xs rounded-xl">✕ CLOSE</button>
         </div>
       </div>
 
-      <!-- Modal Body (Iframe) -->
       <div class="flex-grow bg-slate-100 relative">
         <div id="modalSpinner" class="absolute inset-0 flex flex-col items-center justify-center bg-white z-10">
           <div class="w-8 h-8 border-3 border-brand-200 border-t-brand-600 rounded-full animate-spin mb-2"></div>
@@ -536,31 +432,24 @@
         <iframe id="docViewerIframe" class="w-full h-full border-0" title="Examination Paper Document" sandbox="allow-scripts allow-same-origin allow-popups" src="about:blank"></iframe>
       </div>
 
-      <!-- Modal Footer -->
       <div class="px-3.5 py-2.5 bg-white border-t-2 border-slate-200 flex flex-wrap items-center justify-between gap-2">
         <button id="modalDownloadActionBtn" onclick="triggerDirectDownloadFromModal()" class="flex-1 sm:flex-none inline-flex items-center justify-center gap-2 bg-brand-600 hover:bg-brand-700 text-white font-extrabold text-xs sm:text-sm px-4 py-2.5 rounded-xl shadow-sm">
           <i data-lucide="download" class="w-4 h-4"></i> <span>⬇️ Direct Download PDF</span>
         </button>
         <div class="flex items-center gap-1.5">
           <button onclick="askMwalimuFromViewer()" class="px-3.5 py-2.5 bg-violet-600 hover:bg-violet-700 text-white font-extrabold text-xs sm:text-sm rounded-xl shadow-sm flex items-center gap-1">
-            <span>🤖</span>
-            <span id="modalAskAiLabel">Ask Moha AI</span>
+            <span>🤖</span> <span id="modalAskAiLabel">Ask Moha AI</span>
           </button>
-          <button onclick="togglePrintBasketFromModal()" id="modalPrintBasketBtn" class="px-3.5 py-2.5 bg-emerald-50 hover:bg-emerald-100 text-emerald-900 border-2 border-emerald-300 font-extrabold text-xs sm:text-sm rounded-xl">
-            ➕ Print
-          </button>
+          <button onclick="togglePrintBasketFromModal()" id="modalPrintBasketBtn" class="px-3.5 py-2.5 bg-emerald-50 hover:bg-emerald-100 text-emerald-900 border-2 border-emerald-300 font-extrabold text-xs sm:text-sm rounded-xl">➕ Print</button>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- ========================================== -->
-  <!-- MOHA AI TUTOR & LESSON PLANNER MODAL       -->
-  <!-- ========================================== -->
+  <!-- MOHA AI TUTOR MODAL -->
   <div id="mwalimuAiModal" class="fixed inset-0 z-50 bg-slate-900/80 backdrop-blur-sm hidden items-center justify-center p-2 sm:p-4" role="dialog" aria-modal="true" aria-labelledby="mwalimuModalTitle">
     <div class="bg-white rounded-3xl shadow-2xl max-w-4xl w-full h-[95vh] sm:h-[90vh] flex flex-col overflow-hidden border-2 border-violet-300">
       
-      <!-- Top Header -->
       <div class="shrink-0 px-4 py-3 bg-violet-700 text-white flex items-center justify-between gap-2">
         <div class="flex items-center gap-2.5 min-w-0">
           <span class="w-9 h-9 rounded-2xl bg-white/15 flex items-center justify-center text-xl shrink-0">🤖</span>
@@ -573,12 +462,8 @@
           <button onclick="toggleTeacherStudioPanel()" id="toggleStudioBtn" class="px-2.5 py-1.5 bg-amber-400 hover:bg-amber-300 text-slate-950 font-black text-xs rounded-xl flex items-center gap-1 shadow-sm">
             <span>⚙️</span> <span class="hidden sm:inline">Teacher Details</span>
           </button>
-          <button onclick="clearMwalimuChat()" class="px-2.5 py-1.5 bg-violet-800 hover:bg-violet-900 text-violet-100 font-bold text-xs rounded-xl" title="Clear chat">
-            🗑️
-          </button>
-          <button onclick="closeMwalimuModal()" class="px-3 py-1.5 bg-rose-600 hover:bg-rose-700 text-white font-black text-xs rounded-xl">
-            ✕ CLOSE
-          </button>
+          <button onclick="clearMwalimuChat()" class="px-2.5 py-1.5 bg-violet-800 hover:bg-violet-900 text-violet-100 font-bold text-xs rounded-xl" title="Clear chat">🗑️</button>
+          <button onclick="closeMwalimuModal()" class="px-3 py-1.5 bg-rose-600 hover:bg-rose-700 text-white font-black text-xs rounded-xl">✕ CLOSE</button>
         </div>
       </div>
 
@@ -604,11 +489,11 @@
         </button>
       </div>
 
-      <!-- Collapsible Teacher Document Studio Form -->
+      <!-- Teacher Studio Panel -->
       <div id="teacherStudioPanel" class="hidden shrink-0 max-h-[42vh] overflow-y-auto bg-slate-100 border-b-2 border-slate-300 p-3 sm:p-4 space-y-3 text-xs">
         <div class="flex items-center justify-between">
           <span id="studioPanelHeading" class="font-black text-slate-900 uppercase tracking-wider flex items-center gap-1.5">
-            📋 Step 1: Enter Teacher &amp; Lesson Details Before Generating
+            📋 Enter Teacher &amp; Lesson Details Before Generating
           </span>
           <button onclick="toggleTeacherStudioPanel()" class="px-2 py-0.5 bg-slate-200 hover:bg-slate-300 rounded text-slate-800 font-bold">Hide ▲</button>
         </div>
@@ -624,11 +509,11 @@
           <div class="grid grid-cols-2 gap-1.5">
             <div>
               <label class="block text-[10px] font-black uppercase text-slate-700 mb-0.5">Class / Form <span class="text-rose-600">*</span></label>
-              <input type="text" id="tdClassInput" placeholder="e.g. Form 2" class="w-full px-2.5 py-1.5 rounded-lg border-2 border-slate-300 focus:border-violet-600 font-bold bg-white" />
+              <input type="text" id="tdClassInput" placeholder="e.g. Form 1" class="w-full px-2.5 py-1.5 rounded-lg border-2 border-slate-300 focus:border-violet-600 font-bold bg-white" />
             </div>
             <div>
               <label class="block text-[10px] font-black uppercase text-slate-700 mb-0.5">Subject <span class="text-rose-600">*</span></label>
-              <input type="text" id="tdSubjectInput" placeholder="e.g. Biology" class="w-full px-2.5 py-1.5 rounded-lg border-2 border-slate-300 focus:border-violet-600 font-bold bg-white" />
+              <input type="text" id="tdSubjectInput" placeholder="e.g. Basic Mathematics" class="w-full px-2.5 py-1.5 rounded-lg border-2 border-slate-300 focus:border-violet-600 font-bold bg-white" />
             </div>
           </div>
         </div>
@@ -657,32 +542,14 @@
           </div>
         </div>
         <div class="grid grid-cols-2 sm:grid-cols-7 gap-2 pt-1">
-          <div>
-            <label class="block text-[10px] font-bold text-slate-600">Reg. Girls</label>
-            <input type="number" id="tdRegGirls" value="25" class="w-full px-2 py-1 rounded-lg border border-slate-300 font-bold bg-white" />
-          </div>
-          <div>
-            <label class="block text-[10px] font-bold text-slate-600">Reg. Boys</label>
-            <input type="number" id="tdRegBoys" value="25" class="w-full px-2 py-1 rounded-lg border border-slate-300 font-bold bg-white" />
-          </div>
-          <div>
-            <label class="block text-[10px] font-bold text-slate-600">Pres. Girls</label>
-            <input type="number" id="tdPresGirls" value="24" class="w-full px-2 py-1 rounded-lg border border-slate-300 font-bold bg-white" />
-          </div>
-          <div>
-            <label class="block text-[10px] font-bold text-slate-600">Pres. Boys</label>
-            <input type="number" id="tdPresBoys" value="24" class="w-full px-2 py-1 rounded-lg border border-slate-300 font-bold bg-white" />
-          </div>
+          <div><label class="block text-[10px] font-bold text-slate-600">Reg. Girls</label><input type="number" id="tdRegGirls" value="25" class="w-full px-2 py-1 rounded-lg border border-slate-300 font-bold bg-white" /></div>
+          <div><label class="block text-[10px] font-bold text-slate-600">Reg. Boys</label><input type="number" id="tdRegBoys" value="25" class="w-full px-2 py-1 rounded-lg border border-slate-300 font-bold bg-white" /></div>
+          <div><label class="block text-[10px] font-bold text-slate-600">Pres. Girls</label><input type="number" id="tdPresGirls" value="24" class="w-full px-2 py-1 rounded-lg border border-slate-300 font-bold bg-white" /></div>
+          <div><label class="block text-[10px] font-bold text-slate-600">Pres. Boys</label><input type="number" id="tdPresBoys" value="24" class="w-full px-2 py-1 rounded-lg border border-slate-300 font-bold bg-white" /></div>
           <div class="col-span-2 sm:col-span-3 flex flex-wrap items-end gap-1.5">
-            <button onclick="generateOfficialDocFromStudio('lessonplan')" class="flex-1 py-2 px-2 bg-brand-600 hover:bg-brand-700 text-white font-black rounded-lg shadow-sm">
-              ⚡ Create Lesson Plan
-            </button>
-            <button onclick="generateOfficialDocFromStudio('schemeofwork')" class="flex-1 py-2 px-2 bg-emerald-700 hover:bg-emerald-800 text-white font-black rounded-lg shadow-sm">
-              📅 Create Scheme
-            </button>
-            <button onclick="generateOfficialDocFromStudio('logbook')" class="py-2 px-2.5 bg-slate-800 hover:bg-slate-900 text-white font-black rounded-lg shadow-sm">
-              📖 Log Book
-            </button>
+            <button onclick="generateOfficialDocFromStudio('lessonplan')" class="flex-1 py-2 px-2 bg-brand-600 hover:bg-brand-700 text-white font-black rounded-lg shadow-sm">⚡ Create Lesson Plan</button>
+            <button onclick="generateOfficialDocFromStudio('schemeofwork')" class="flex-1 py-2 px-2 bg-emerald-700 hover:bg-emerald-800 text-white font-black rounded-lg shadow-sm">📅 Create Scheme</button>
+            <button onclick="generateOfficialDocFromStudio('logbook')" class="py-2 px-2.5 bg-slate-800 hover:bg-slate-900 text-white font-black rounded-lg shadow-sm">📖 Log Book</button>
           </div>
         </div>
       </div>
@@ -703,44 +570,19 @@
       <div class="shrink-0 p-3 bg-white border-t-2 border-slate-200">
         <input type="file" id="mwalimuPhotoInput" accept="image/*" class="hidden" onchange="handleMwalimuPhotoSelect(event)" />
         <div class="flex items-center gap-1.5">
-          <button 
-            onclick="document.getElementById('mwalimuPhotoInput').click()" 
-            type="button"
-            class="px-3 py-2.5 bg-slate-100 hover:bg-violet-100 text-slate-800 border-2 border-slate-300 rounded-xl font-extrabold text-xs flex items-center gap-1 shrink-0"
-            title="Upload or Snap a Photo of an Exam Question"
-          >
-            <span>📷</span>
-            <span id="mwalimuPhotoBtnLabel" class="hidden sm:inline">Photo</span>
+          <button onclick="document.getElementById('mwalimuPhotoInput').click()" type="button" class="px-3 py-2.5 bg-slate-100 hover:bg-violet-100 text-slate-800 border-2 border-slate-300 rounded-xl font-extrabold text-xs flex items-center gap-1 shrink-0" title="Upload or Snap a Photo">
+            <span>📷</span> <span class="hidden sm:inline">Photo</span>
           </button>
-
-          <input 
-            id="mwalimuUserInput" 
-            type="text" 
-            placeholder="Ask Moha AI any question or request a 4-Stage Lesson Plan / 2026 Scheme..." 
-            class="w-full px-3.5 py-2.5 rounded-xl border-2 border-slate-300 focus:border-violet-600 focus:outline-none text-sm font-semibold"
-            onkeydown="if(event.key==='Enter') sendMwalimuMessage()"
-          />
-
-          <button 
-            onclick="sendMwalimuMessage()" 
-            id="mwalimuSendBtn"
-            class="px-4 py-2.5 bg-violet-600 hover:bg-violet-700 active:scale-95 text-white font-black text-xs sm:text-sm rounded-xl shrink-0 shadow-sm"
-          >
-            Send &rarr;
-          </button>
+          <input id="mwalimuUserInput" type="text" placeholder="Ask Moha AI any question or request a Lesson Plan / Scheme..." class="w-full px-3.5 py-2.5 rounded-xl border-2 border-slate-300 focus:border-violet-600 focus:outline-none text-sm font-semibold" onkeydown="if(event.key==='Enter') sendMwalimuMessage()" />
+          <button onclick="sendMwalimuMessage()" id="mwalimuSendBtn" class="px-4 py-2.5 bg-violet-600 hover:bg-violet-700 active:scale-95 text-white font-black text-xs sm:text-sm rounded-xl shrink-0 shadow-sm">Send &rarr;</button>
         </div>
       </div>
-
     </div>
   </div>
 
-  <!-- ========================================== -->
-  <!-- 1-TAP AI QUIZ GENERATOR MODAL              -->
-  <!-- ========================================== -->
+  <!-- AI QUIZ MODAL -->
   <div id="aiQuizModal" class="fixed inset-0 z-50 bg-slate-900/80 backdrop-blur-sm hidden items-center justify-center p-2 sm:p-4" role="dialog" aria-modal="true" aria-labelledby="aiQuizModalTitle">
     <div class="bg-white rounded-3xl shadow-2xl max-w-xl w-full max-h-[92vh] flex flex-col overflow-hidden border-2 border-amber-400">
-      
-      <!-- Quiz Header -->
       <div class="px-4 py-3 bg-slate-900 text-white flex items-center justify-between gap-2">
         <div class="flex items-center gap-2 min-w-0">
           <span class="text-xl">🎯</span>
@@ -749,51 +591,32 @@
             <p id="aiQuizSubtitle" class="text-[11px] text-amber-300 font-bold truncate">5 Multiple-Choice Questions</p>
           </div>
         </div>
-        <button onclick="closeAiQuizModal()" class="px-3 py-1.5 bg-rose-600 hover:bg-rose-700 text-white font-black text-xs rounded-xl shrink-0">
-          ✕ CLOSE
-        </button>
+        <button onclick="closeAiQuizModal()" class="px-3 py-1.5 bg-rose-600 hover:bg-rose-700 text-white font-black text-xs rounded-xl shrink-0">✕ CLOSE</button>
       </div>
 
-      <!-- Quiz Body -->
       <div id="aiQuizBody" class="flex-grow p-4 overflow-y-auto space-y-4 bg-slate-50"></div>
 
-      <!-- Quiz Footer -->
       <div class="px-4 py-3 bg-white border-t-2 border-slate-200 flex items-center justify-between gap-2">
         <span id="aiQuizScoreBadge" class="text-xs sm:text-sm font-black text-slate-800">Score: 0 / 5</span>
         <div class="flex items-center gap-2">
-          <button onclick="generateAiQuizQuestions()" class="px-4 py-2 bg-amber-500 hover:bg-amber-600 text-slate-950 font-black text-xs rounded-xl shadow-sm">
-            🔄 New Quiz
-          </button>
-          <button onclick="closeAiQuizModal()" class="px-3.5 py-2 bg-slate-100 hover:bg-slate-200 text-slate-800 font-extrabold text-xs rounded-xl">
-            Done
-          </button>
+          <button onclick="generateAiQuizQuestions()" class="px-4 py-2 bg-amber-500 hover:bg-amber-600 text-slate-950 font-black text-xs rounded-xl shadow-sm">🔄 New Quiz</button>
+          <button onclick="closeAiQuizModal()" class="px-3.5 py-2 bg-slate-100 hover:bg-slate-200 text-slate-800 font-extrabold text-xs rounded-xl">Done</button>
         </div>
       </div>
-
     </div>
   </div>
 
-  <!-- ========================================== -->
-  <!-- REQUEST MISSING PAPER MODAL                -->
-  <!-- ========================================== -->
+  <!-- REQUEST MISSING PAPER MODAL -->
   <div id="requestPaperModal" class="fixed inset-0 z-50 bg-slate-900/80 backdrop-blur-sm hidden items-center justify-center p-4">
     <div class="bg-white rounded-3xl shadow-2xl max-w-md w-full p-6 space-y-4 border-2 border-violet-200">
       <div class="flex items-center justify-between">
-        <h3 class="text-base font-black text-slate-900" id="reqModalHeading">Omba Mtihani / Kitabu</h3>
+        <h3 class="text-base font-black text-slate-900">Omba Mtihani / Kitabu</h3>
         <button onclick="closeRequestPaperModal()" class="p-1 text-slate-400 hover:text-slate-700">✕</button>
       </div>
-      <p class="text-xs text-slate-600 font-semibold" id="reqModalSub">
-        Hujapata mtihani au kitabu unachokitafuta? Jaza maelezo hapa chini utume kwa WhatsApp yetu ya msaada:
-      </p>
+      <p class="text-xs text-slate-600 font-semibold">Hujapata mtihani au kitabu unachokitafuta? Jaza maelezo hapa chini utume kwa WhatsApp yetu:</p>
       <div class="space-y-3">
-        <div>
-          <label class="block text-[11px] font-black uppercase text-slate-500 mb-1">Darasa / Class</label>
-          <input type="text" id="reqFormInput" placeholder="mf. Form 4 au Std 7" class="w-full px-3.5 py-2 rounded-xl border-2 border-slate-200 text-xs font-bold focus:border-brand-600 focus:outline-none" />
-        </div>
-        <div>
-          <label class="block text-[11px] font-black uppercase text-slate-500 mb-1">Somo &amp; Mwaka / Subject &amp; Year</label>
-          <input type="text" id="reqSubjectInput" placeholder="mf. Physics 2023 au TIE Biology Book" class="w-full px-3.5 py-2 rounded-xl border-2 border-slate-200 text-xs font-bold focus:border-brand-600 focus:outline-none" />
-        </div>
+        <div><label class="block text-[11px] font-black uppercase text-slate-500 mb-1">Darasa / Class</label><input type="text" id="reqFormInput" placeholder="mf. Form 4 au Std 7" class="w-full px-3.5 py-2 rounded-xl border-2 border-slate-200 text-xs font-bold focus:border-brand-600 focus:outline-none" /></div>
+        <div><label class="block text-[11px] font-black uppercase text-slate-500 mb-1">Somo / Subject &amp; Year</label><input type="text" id="reqSubjectInput" placeholder="mf. Physics 2023 au TIE Biology Book" class="w-full px-3.5 py-2 rounded-xl border-2 border-slate-200 text-xs font-bold focus:border-brand-600 focus:outline-none" /></div>
       </div>
       <button onclick="submitPaperRequestWhatsApp()" class="w-full py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-black text-xs rounded-xl shadow-md flex items-center justify-center gap-2">
         <span>💬 Tuma Ombi kupitia WhatsApp</span>
@@ -801,9 +624,7 @@
     </div>
   </div>
 
-  <!-- ========================================== -->
-  <!-- INSTALL APP GUIDE MODAL                    -->
-  <!-- ========================================== -->
+  <!-- INSTALL GUIDE MODAL -->
   <div id="installGuideModal" class="fixed inset-0 z-50 bg-slate-900/80 backdrop-blur-sm hidden items-center justify-center p-4">
     <div class="bg-white rounded-3xl shadow-2xl max-w-md w-full p-6 space-y-4 border-2 border-emerald-300">
       <div class="flex items-center justify-between">
@@ -811,32 +632,21 @@
         <button onclick="closeInstallGuideModal()" class="p-1 text-slate-400 hover:text-slate-700">✕</button>
       </div>
       <div class="space-y-3 text-xs font-medium text-slate-700 leading-relaxed">
-        <p>Unaweza kuweka alama ya Elimika kwenye simu yako ya Android au iPhone kama App halisi kwa kugusa nukta tatu (<span class="font-bold">⋮</span>) juu kulia kwenye browser ya Chrome au Safari, kisha uchague:</p>
-        <div class="p-3 bg-emerald-50 rounded-xl border border-emerald-200 font-bold text-emerald-900">
-          📌 &ldquo;Add to Home Screen&rdquo; au &ldquo;Weka kwenye Home Screen&rdquo;
-        </div>
-        <p>Hii itakuwezesha kufungua mitihani na TIE books kwa sekunde moja bila kuandika link tena!</p>
+        <p>Gusa nukta tatu (<span class="font-bold">⋮</span>) juu kulia kwenye browser yako, kisha uchague:</p>
+        <div class="p-3 bg-emerald-50 rounded-xl border border-emerald-200 font-bold text-emerald-900">📌 &ldquo;Add to Home Screen&rdquo;</div>
       </div>
-      <button onclick="closeInstallGuideModal()" class="w-full py-3 bg-brand-600 text-white font-black text-xs rounded-xl">
-        Sawa, Nimwelewa
-      </button>
+      <button onclick="closeInstallGuideModal()" class="w-full py-3 bg-brand-600 text-white font-black text-xs rounded-xl">Sawa, Nimwelewa</button>
     </div>
   </div>
 
-  <!-- ========================================== -->
-  <!-- FOOTER                                     -->
-  <!-- ========================================== -->
   <footer class="bg-slate-900 text-slate-400 py-8 border-t border-slate-800 text-xs text-center mt-auto space-y-2">
     <div class="max-w-5xl mx-auto px-4 space-y-1.5">
       <div class="font-black text-white text-sm tracking-wide">ELIMIKA TANZANIA 🇹🇿</div>
-      <p>Independent revision repository for Standard 1–7 and Form 1–6 (NECTA, TIE Books &amp; Official Syllabuses).</p>
+      <p>Independent revision repository for Standard 1–7 and Form 1–6 (NECTA, TIE Books &amp; Syllabuses).</p>
       <p class="text-[11px] text-slate-500">Powered by Google Sheets &amp; Moha AI.</p>
     </div>
   </footer>
 
-  <!-- ========================================== -->
-  <!-- JAVASCRIPT APP LOGIC                       -->
-  <!-- ========================================== -->
   <script>
     const CONFIG = {
       SHEET_ID: '1-7C_G-VAC2ICxuT3XwADzAluRoDvQyd04yS4BtSvXxM',
@@ -866,14 +676,12 @@
     const TRANSLATIONS = {
       en: {
         toggleBtn: 'Kiswahili',
-        installApp: 'Install App',
         heroTitle: 'Choose <span class="text-brand-600">Past Papers</span>, <span class="text-emerald-700">TIE Books</span> or <span class="text-amber-600">Syllabus</span>',
         modePapersTitle: 'Past Papers',
         modeBooksTitle: 'TIE Books',
         modeSyllabusTitle: 'Syllabus (All Subjects)',
         searchPlaceholder: 'Search subject, book, or syllabus...',
         voiceBtn: 'Voice',
-        voiceListening: 'Listening... Speak now',
         crumb1: 'Class Level',
         crumb2: 'Subject',
         crumb3Papers: 'Papers',
@@ -895,10 +703,6 @@
         downloadAnswers: 'Download Answers PDF',
         addPrint: '➕ Print',
         inPrintList: '✓ In Print List',
-        noSubjectsTitle: 'No resources cataloged yet for',
-        chooseAnotherClass: 'Choose Another Class',
-        papersAvailable: 'papers available',
-        bookPending: 'Download AI Study Guide PDF',
         basketTitle: 'Print List',
         basketSub: 'Send to Stationery via WhatsApp',
         aiTutorBtn: 'Ask Moha AI',
@@ -910,21 +714,18 @@
         chipScheme: 'PO-RALG Scheme (2026)',
         chipLogbook: 'Subject Log Book',
         chipQuiz: 'Start Quiz',
-        mwalimuPlaceholder: 'Ask Moha AI any question or request a 4-Stage Lesson Plan / 2026 Scheme...',
+        mwalimuPlaceholder: 'Ask Moha AI any question or request a Lesson Plan / Scheme...',
         listenBtn: '🔊 Listen',
-        loadingAudioBtn: '⏳ Loading Audio...',
         playingBtn: '⏹️ Stop Audio'
       },
       sw: {
         toggleBtn: 'English',
-        installApp: 'Weka App',
         heroTitle: 'Chagua <span class="text-brand-600">Mitihani</span>, <span class="text-emerald-700">Vitabu vya TIE</span> au <span class="text-amber-600">Syllabus</span>',
         modePapersTitle: 'Mitihani (Papers)',
         modeBooksTitle: 'Vitabu vya TIE',
         modeSyllabusTitle: 'Syllabus (Mihtasari)',
         searchPlaceholder: 'Tafuta somo, kitabu au syllabus...',
         voiceBtn: 'Sauti',
-        voiceListening: 'Inasikiliza... Sema sasa',
         crumb1: 'Darasa',
         crumb2: 'Somo',
         crumb3Papers: 'Mitihani',
@@ -946,10 +747,6 @@
         downloadAnswers: 'Pakua Majibu (PDF)',
         addPrint: '➕ Print',
         inPrintList: '✓ Kwenye Print',
-        noSubjectsTitle: 'Bado hakuna kumbukumbu za',
-        chooseAnotherClass: 'Chagua Darasa Jingine',
-        papersAvailable: 'mitihani',
-        bookPending: 'Pakua Muhtasari wa Somo (PDF)',
         basketTitle: 'Orodha ya Kuprint',
         basketSub: 'Tuma Stationery kwa WhatsApp',
         aiTutorBtn: 'Uliza Moha AI',
@@ -961,9 +758,8 @@
         chipScheme: 'Scheme of Work (2026)',
         chipLogbook: 'Log Book',
         chipQuiz: 'Anza Quiz',
-        mwalimuPlaceholder: 'Uliza Moha AI swali au omba Lesson Plan ya Hatua 4 / Scheme 2026...',
+        mwalimuPlaceholder: 'Uliza Moha AI swali au omba Lesson Plan / Scheme...',
         listenBtn: '🔊 Sikiliza',
-        loadingAudioBtn: '⏳ Inapakia Sauti...',
         playingBtn: '⏹️ Simamisha'
       }
     };
@@ -989,14 +785,6 @@
       document.getElementById('voiceBtnLabel').textContent = t('voiceBtn');
       document.getElementById('crumb1Label').textContent = `1. ${t('crumb1')}`;
       document.getElementById('step1Title').textContent = currentLang === 'sw' ? 'Hatua ya 1: Chagua Darasa Lako' : 'Step 1: Choose Your Class Level';
-      document.getElementById('step1Sub').textContent = currentLang === 'sw' ? 'Gusa darasa lako kuona Mitihani, Vitabu vya TIE na Syllabus.' : 'Tap your Form or Standard to view available resources.';
-      document.getElementById('reqBannerTitle').textContent = currentLang === 'sw' ? 'Hujapata mtihani au kitabu?' : 'Missing a paper or book?';
-      document.getElementById('reqBannerSub').textContent = currentLang === 'sw' ? 'Omba kupitia WhatsApp' : 'Request on WhatsApp instantly';
-      document.getElementById('installBannerTitle').textContent = currentLang === 'sw' ? 'Weka Elimika App' : 'Install Elimika App';
-      document.getElementById('installBannerSub').textContent = currentLang === 'sw' ? 'Fungua kwa urahisi wakati wowote' : 'Access offline with 1 tap';
-      document.getElementById('backToClassesText').textContent = t('backToClasses');
-      document.getElementById('backToSubjectsText').textContent = t('backToSubjects');
-      document.getElementById('step3QuizBtnLabel').textContent = t('aiQuizBtn');
       document.getElementById('crumbStep2Label').textContent = `2. ${state.selectedSubject || t('crumb2')}`;
       const crumb3ModeText = state.resourceMode === 'books' ? t('crumb3Books') : (state.resourceMode === 'syllabus' ? t('crumb3Syllabus') : t('crumb3Papers'));
       document.getElementById('crumbStep3Label').textContent = `3. ${crumb3ModeText}`;
@@ -1007,18 +795,6 @@
       if (tutorLbl) tutorLbl.textContent = t('aiTutorBtn');
       const quizLbl = document.getElementById('step3QuizBtnLabel');
       if (quizLbl) quizLbl.textContent = t('aiQuizBtn');
-      const cLP = document.getElementById('chipLessonPlanLabel');
-      if (cLP) cLP.textContent = t('chipLessonPlan');
-      const cSch = document.getElementById('chipSchemeLabel');
-      if (cSch) cSch.textContent = t('chipScheme');
-      const cLog = document.getElementById('chipLogbookLabel');
-      if (cLog) cLog.textContent = t('chipLogbook');
-      const cSum = document.getElementById('chipSummaryLabel');
-      if (cSum) cSum.textContent = t('chipSummary');
-      const cQ = document.getElementById('chipQuestionsLabel');
-      if (cQ) cQ.textContent = t('chipQuestions');
-      const cQuiz = document.getElementById('chipQuizLabel');
-      if (cQuiz) cQuiz.textContent = t('chipQuiz');
       const mwInput = document.getElementById('mwalimuUserInput');
       if (mwInput) mwInput.placeholder = t('mwalimuPlaceholder');
 
@@ -1031,6 +807,17 @@
     function setResourceMode(mode) {
       state.resourceMode = mode;
       updateModeSwitcherUI();
+      
+      // If user clicks Syllabus mode, jump directly to Step 3 with All Syllabuses without requiring class/subject selection!
+      if (mode === 'syllabus') {
+        state.selectedClass = 'All Classes';
+        state.selectedSubject = 'All Subjects';
+        state.selectedSyllabusTier = 'ALL';
+        state.page = 1;
+        goToStep(3);
+        return;
+      }
+
       if (state.step === 2) renderSubjectsForClass();
       if (state.step === 3) renderPapersList();
     }
@@ -1042,7 +829,6 @@
       const pBtn2 = document.getElementById('step2BtnPapers');
       const bBtn2 = document.getElementById('step2BtnBooks');
       const sBtn2 = document.getElementById('step2BtnSyllabus');
-      const crossBtn = document.getElementById('crossSwitchBtn');
 
       const inactiveHero = "px-3.5 sm:px-4 py-2 rounded-xl font-black text-xs sm:text-sm border-2 border-slate-200 bg-white text-slate-700 hover:bg-slate-50 transition-all flex items-center gap-1.5";
       const inactiveStep2 = "px-3 py-2 rounded-xl font-extrabold text-xs border-2 border-slate-200 bg-white text-slate-700 transition-all";
@@ -1054,31 +840,16 @@
       if (pBtn2) pBtn2.className = state.resourceMode === 'papers' ? "px-3 py-2 rounded-xl font-extrabold text-xs border-2 border-brand-600 bg-brand-600 text-white transition-all" : inactiveStep2;
       if (bBtn2) bBtn2.className = state.resourceMode === 'books' ? "px-3 py-2 rounded-xl font-extrabold text-xs border-2 border-emerald-600 bg-emerald-600 text-white transition-all" : inactiveStep2;
       if (sBtn2) sBtn2.className = state.resourceMode === 'syllabus' ? "px-3 py-2 rounded-xl font-extrabold text-xs border-2 border-amber-500 bg-amber-500 text-slate-950 transition-all" : inactiveStep2;
-
-      if (crossBtn) {
-        if (state.resourceMode === 'papers') {
-          crossBtn.textContent = currentLang === 'sw' ? '📜 Angalia Syllabus' : '📜 View Syllabus';
-          crossBtn.className = "px-3 py-2 bg-amber-500 hover:bg-amber-600 text-slate-950 font-black text-xs rounded-xl shrink-0 shadow-sm";
-        } else if (state.resourceMode === 'syllabus') {
-          crossBtn.textContent = currentLang === 'sw' ? '📚 Angalia Vitabu vya TIE' : '📚 View TIE Books';
-          crossBtn.className = "px-3 py-2 bg-emerald-700 hover:bg-emerald-800 text-white font-black text-xs rounded-xl shrink-0 shadow-sm";
-        } else {
-          crossBtn.textContent = currentLang === 'sw' ? '📝 Angalia Mitihani' : '📝 View Papers';
-          crossBtn.className = "px-3 py-2 bg-brand-600 hover:bg-brand-700 text-white font-black text-xs rounded-xl shrink-0 shadow-sm";
-        }
-      }
     }
 
     function toggleModeInsideStep3() {
       if (state.resourceMode === 'papers') {
-        state.resourceMode = 'syllabus';
+        setResourceMode('syllabus');
       } else if (state.resourceMode === 'syllabus') {
-        state.resourceMode = 'books';
+        setResourceMode('books');
       } else {
-        state.resourceMode = 'papers';
+        setResourceMode('papers');
       }
-      updateModeSwitcherUI();
-      renderPapersList();
     }
 
     function escapeHtml(str) {
@@ -1134,9 +905,7 @@
       a.style.display = 'none';
       document.body.appendChild(a);
       a.click();
-      setTimeout(() => {
-        if (a.parentNode) document.body.removeChild(a);
-      }, 1500);
+      setTimeout(() => { if (a.parentNode) document.body.removeChild(a); }, 1500);
     }
 
     function triggerDirectDownloadFromModal() {
@@ -1193,19 +962,19 @@
     function normalizeClassName(rawForm) {
       if (!rawForm) return 'General';
       const f = rawForm.trim().toLowerCase();
-      if (f.includes('form 1') || f.includes('kidato cha 1') || f === 'f1') return 'Form 1';
-      if (f.includes('form 2') || f.includes('kidato cha 2') || f === 'f2') return 'Form 2';
-      if (f.includes('form 3') || f.includes('kidato cha 3') || f === 'f3') return 'Form 3';
-      if (f.includes('form 4') || f.includes('kidato cha 4') || f === 'f4') return 'Form 4';
-      if (f.includes('form 5') || f.includes('kidato cha 5') || f === 'f5') return 'Form 5';
-      if (f.includes('form 6') || f.includes('kidato cha 6') || f === 'f6') return 'Form 6';
-      if (f.includes('std 1') || f.includes('darasa la 1') || f === 's1') return 'Standard 1';
-      if (f.includes('std 2') || f.includes('darasa la 2') || f === 's2') return 'Standard 2';
-      if (f.includes('std 3') || f.includes('darasa la 3') || f === 's3') return 'Standard 3';
-      if (f.includes('std 4') || f.includes('darasa la 4') || f === 's4') return 'Standard 4';
-      if (f.includes('std 5') || f.includes('darasa la 5') || f === 's5') return 'Standard 5';
-      if (f.includes('std 6') || f.includes('darasa la 6') || f === 's6') return 'Standard 6';
-      if (f.includes('std 7') || f.includes('darasa la 7') || f === 's7') return 'Standard 7';
+      if (f.includes('form 1') || f === 'f1') return 'Form 1';
+      if (f.includes('form 2') || f === 'f2') return 'Form 2';
+      if (f.includes('form 3') || f === 'f3') return 'Form 3';
+      if (f.includes('form 4') || f === 'f4') return 'Form 4';
+      if (f.includes('form 5') || f === 'f5') return 'Form 5';
+      if (f.includes('form 6') || f === 'f6') return 'Form 6';
+      if (f.includes('std 1') || f === 's1') return 'Standard 1';
+      if (f.includes('std 2') || f === 's2') return 'Standard 2';
+      if (f.includes('std 3') || f === 's3') return 'Standard 3';
+      if (f.includes('std 4') || f === 's4') return 'Standard 4';
+      if (f.includes('std 5') || f === 's5') return 'Standard 5';
+      if (f.includes('std 6') || f === 's6') return 'Standard 6';
+      if (f.includes('std 7') || f === 's7') return 'Standard 7';
       return rawForm.trim();
     }
 
@@ -1275,11 +1044,8 @@
           localStorage.setItem('elimika_papers_cache_v5', JSON.stringify(allPapers));
         } else {
           const cached = localStorage.getItem('elimika_papers_cache_v5');
-          if (cached) {
-            allPapers = JSON.parse(cached);
-          } else {
-            allPapers = processParsedRows([]);
-          }
+          if (cached) allPapers = JSON.parse(cached);
+          else allPapers = processParsedRows([]);
         }
         statusEl.innerHTML = `<span class="w-2 h-2 rounded-full bg-emerald-500"></span><span>${allPapers.length} Records Live</span>`;
       } catch (err) {
@@ -1302,19 +1068,12 @@
       const container = document.getElementById('quickAccessBannerContainer');
       if (!container) return;
       let savedClass = '';
-      try {
-        savedClass = localStorage.getItem('elimika_saved_class') || '';
-      } catch (e) {}
-
-      if (!savedClass) {
-        container.innerHTML = '';
-        return;
-      }
+      try { savedClass = localStorage.getItem('elimika_saved_class') || ''; } catch (e) {}
+      if (!savedClass) { container.innerHTML = ''; return; }
 
       container.innerHTML = `
         <button onclick="selectClass('${escapeHtml(savedClass)}')" class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-black text-xs sm:text-sm shadow-sm transition-all active:scale-95">
-          <span>📌</span>
-          <span>${escapeHtml(t('savedClassPrefix'))} ${escapeHtml(savedClass)} &rarr;</span>
+          <span>📌</span><span>${escapeHtml(t('savedClassPrefix'))} ${escapeHtml(savedClass)} &rarr;</span>
         </button>
       `;
     }
@@ -1338,17 +1097,11 @@
       if (!section || !grid) return;
 
       if (heading) heading.textContent = t('recentPapersTitle');
-
       let recentIds = [];
-      try {
-        recentIds = JSON.parse(localStorage.getItem('elimika_recent_papers') || '[]');
-      } catch (e) {}
+      try { recentIds = JSON.parse(localStorage.getItem('elimika_recent_papers') || '[]'); } catch (e) {}
 
       const items = recentIds.map(id => findItemById(id)).filter(Boolean);
-      if (items.length === 0) {
-        section.classList.add('hidden');
-        return;
-      }
+      if (items.length === 0) { section.classList.add('hidden'); return; }
 
       section.classList.remove('hidden');
       grid.innerHTML = items.map(p => `
@@ -1357,9 +1110,7 @@
             <span class="text-[10px] font-black uppercase text-brand-600 block">${escapeHtml(p.form)} • ${escapeHtml(p.category)}</span>
             <h4 class="text-xs font-extrabold text-slate-900 truncate">${escapeHtml(p.title)}</h4>
           </div>
-          <button onclick="triggerDirectDownloadUrl('${escapeHtml(p.paperUrl || p.answersUrl)}', '${escapeHtml(p.title.replace(/[^a-zA-Z0-9]/g, '_'))}.pdf')" class="px-2.5 py-1.5 bg-brand-600 hover:bg-brand-700 text-white font-black text-[11px] rounded-lg shrink-0">
-            ⬇️ PDF
-          </button>
+          <button onclick="triggerDirectDownloadUrl('${escapeHtml(p.paperUrl || p.answersUrl)}', '${escapeHtml(p.title.replace(/[^a-zA-Z0-9]/g, '_'))}.pdf')" class="px-2.5 py-1.5 bg-brand-600 hover:bg-brand-700 text-white font-black text-[11px] rounded-lg shrink-0">⬇️ PDF</button>
         </div>
       `).join('');
     }
@@ -1372,21 +1123,16 @@
       const clearBtn = document.getElementById('clearSearchBtn');
       if (clearBtn) clearBtn.classList.add('hidden');
 
-      try {
-        localStorage.setItem('elimika_saved_class', className);
-      } catch (e) {}
-
+      try { localStorage.setItem('elimika_saved_class', className); } catch (e) {}
       renderSavedClassBanner();
       goToStep(2);
     }
 
     function goToStep(stepNum) {
       state.step = stepNum;
-
       const step1 = document.getElementById('step1View');
       const step2 = document.getElementById('step2View');
       const step3 = document.getElementById('step3View');
-
       const crumb1 = document.getElementById('crumbStep1');
       const crumb2 = document.getElementById('crumbStep2');
       const crumb3 = document.getElementById('crumbStep3');
@@ -1395,46 +1141,34 @@
       step2.classList.add('hidden');
       step3.classList.add('hidden');
 
-      const activeCrumbClass = "flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-brand-600 text-white font-bold transition-all shrink-0";
-      const doneCrumbClass = "flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-brand-100 text-brand-800 font-bold transition-all shrink-0";
-      const disabledCrumbClass = "flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-100 text-slate-400 disabled:opacity-60 transition-all shrink-0";
+      const activeCrumb = "flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-brand-600 text-white font-bold transition-all shrink-0";
+      const doneCrumb = "flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-brand-100 text-brand-800 font-bold transition-all shrink-0";
+      const disabledCrumb = "flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-100 text-slate-400 disabled:opacity-60 transition-all shrink-0";
 
       if (stepNum === 1) {
         step1.classList.remove('hidden');
-        crumb1.className = activeCrumbClass;
-        crumb2.className = disabledCrumbClass;
-        crumb3.className = disabledCrumbClass;
-        crumb2.disabled = true;
-        crumb3.disabled = true;
-        document.getElementById('crumbStep2Label').textContent = `2. ${t('crumb2')}`;
+        crumb1.className = activeCrumb; crumb2.className = disabledCrumb; crumb3.className = disabledCrumb;
+        crumb2.disabled = true; crumb3.disabled = true;
       } else if (stepNum === 2) {
         step2.classList.remove('hidden');
-        crumb1.className = doneCrumbClass;
-        crumb2.className = activeCrumbClass;
-        crumb3.className = disabledCrumbClass;
-        crumb2.disabled = false;
-        crumb3.disabled = true;
+        crumb1.className = doneCrumb; crumb2.className = activeCrumb; crumb3.className = disabledCrumb;
+        crumb2.disabled = false; crumb3.disabled = true;
         document.getElementById('step2CurrentClass').textContent = state.selectedClass;
-        const prefixKey = state.resourceMode === 'books' ? 'step2PrefixBooks' : (state.resourceMode === 'syllabus' ? 'step2PrefixSyllabus' : 'step2PrefixPapers');
+        const prefixKey = state.resourceMode === 'books' ? 'step2PrefixBooks' : 'step2PrefixPapers';
         document.getElementById('step2TitlePrefix').textContent = t(prefixKey);
         document.getElementById('crumbStep2Label').textContent = `2. ${state.selectedClass}`;
         renderSubjectsForClass();
       } else if (stepNum === 3) {
         step3.classList.remove('hidden');
-        crumb1.className = doneCrumbClass;
-        crumb2.className = doneCrumbClass;
-        crumb3.className = activeCrumbClass;
-        crumb2.disabled = !state.selectedClass;
-        crumb3.disabled = false;
+        crumb1.className = doneCrumb; crumb2.className = doneCrumb; crumb3.className = activeCrumb;
+        crumb2.disabled = false; crumb3.disabled = false;
         const crumb3ModeText = state.resourceMode === 'books' ? t('crumb3Books') : (state.resourceMode === 'syllabus' ? t('crumb3Syllabus') : t('crumb3Papers'));
         document.getElementById('crumbStep3Label').textContent = `3. ${state.selectedSubject || crumb3ModeText}`;
         renderPapersList();
       }
 
       const appEl = document.getElementById('browserApp');
-      if (appEl) {
-        window.scrollTo({ top: appEl.offsetTop - 20, behavior: 'smooth' });
-      }
+      if (appEl) window.scrollTo({ top: appEl.offsetTop - 20, behavior: 'smooth' });
     }
 
     function matchesCurrentMode(item) {
@@ -1445,68 +1179,43 @@
 
     function renderSubjectsForClass() {
       const container = document.getElementById('subjectsListGrid');
-      
-      let matching = [];
-      if (state.resourceMode === 'syllabus') {
-        matching = allPapers.filter(p => p.isSyllabus);
-      } else {
-        matching = allPapers.filter(p => p.form.toLowerCase() === state.selectedClass.toLowerCase() && matchesCurrentMode(p));
-      }
+      let matching = allPapers.filter(p => p.form.toLowerCase() === state.selectedClass.toLowerCase() && matchesCurrentMode(p));
 
       const subjectCounts = {};
       matching.forEach(p => {
         const s = p.subject.trim();
         subjectCounts[s] = (subjectCounts[s] || 0) + 1;
       });
-
       const subjects = Object.keys(subjectCounts).sort();
 
       if (subjects.length === 0) {
         container.innerHTML = `
           <div class="col-span-full py-12 text-center bg-white rounded-3xl border-2 border-slate-200 p-6 space-y-3">
             <i data-lucide="folder-open" class="w-10 h-10 text-slate-300 mx-auto"></i>
-            <h4 class="font-black text-slate-800">${escapeHtml(t('noSubjectsTitle'))} ${escapeHtml(state.selectedClass)}</h4>
-            <button onclick="goToStep(1)" class="px-4 py-2 bg-brand-600 text-white font-black text-xs rounded-xl">${escapeHtml(t('chooseAnotherClass'))}</button>
+            <h4 class="font-black text-slate-800">${escapeHtml(t('noSubjectsTitle') || 'No records found for')} ${escapeHtml(state.selectedClass)}</h4>
+            <button onclick="goToStep(1)" class="px-4 py-2 bg-brand-600 text-white font-black text-xs rounded-xl">Choose Another Class</button>
           </div>
         `;
         lucide.createIcons();
         return;
       }
 
-      const subjectIcons = {
-        'Mathematics': '📐', 'Advanced Mathematics': '📐', 'Basic Applied Mathematics': '📐', 'Hisabati': '📐',
-        'Biology': '🌿', 'Chemistry': '🧪', 'Physics': '⚡',
-        'Geography': '🌍', 'Jiografia na Mazingira': '🌍', 'History': '📜', 'Historia ya Tanzania na Maadili': '🇹🇿',
-        'English Language': '📖', 'Literature in English': '🎭', 'Academic Communication': '🗣️',
-        'Kiswahili': '🗣️', 'Civics': '⚖️', 'Uraia na Maadili': '⚖️',
-        'General Science': '🔬', 'Sayansi na Teknolojia': '🔬',
-        'Book Keeping': '📊', 'Accountancy': '📊', 'Business Studies': '💼', 'Commerce': '💼', 'Economics': '📈',
-        'Computer Science': '💻', 'Agriculture': '🌾'
-      };
-
       let html = '';
       subjects.forEach(sub => {
         const count = subjectCounts[sub];
-        const fallbackIcon = state.resourceMode === 'books' ? '📚' : (state.resourceMode === 'syllabus' ? '📜' : '📝');
-        const icon = subjectIcons[sub] || fallbackIcon;
-        const countLabel = state.resourceMode === 'books'
-          ? 'TIE Book PDF'
-          : (state.resourceMode === 'syllabus' ? 'TIE Syllabus PDF' : `${count} ${t('papersAvailable')}`);
-
         html += `
           <button onclick="selectSubject('${escapeHtml(sub)}')" class="p-4 bg-white hover:bg-brand-50 active:bg-brand-100 border-2 border-slate-200 hover:border-brand-400 rounded-2xl text-left transition-all shadow-sm flex items-center justify-between group">
             <div class="flex items-center gap-3 min-w-0 pr-2">
-              <span class="w-10 h-10 rounded-xl bg-slate-100 group-hover:bg-brand-100 flex items-center justify-center text-xl shrink-0">${icon}</span>
+              <span class="w-10 h-10 rounded-xl bg-slate-100 group-hover:bg-brand-100 flex items-center justify-center text-xl shrink-0">📚</span>
               <div class="min-w-0">
                 <span class="block text-sm font-black text-slate-900 group-hover:text-brand-700 truncate">${escapeHtml(sub)}</span>
-                <span class="text-xs font-bold text-slate-500">${escapeHtml(countLabel)}</span>
+                <span class="text-xs font-bold text-slate-500">${count} items</span>
               </div>
             </div>
             <i data-lucide="chevron-right" class="w-5 h-5 text-slate-300 group-hover:text-brand-500 shrink-0"></i>
           </button>
         `;
       });
-
       container.innerHTML = html;
       lucide.createIcons();
     }
@@ -1523,7 +1232,6 @@
     function filterCategoryTag(cat) {
       state.selectedCategory = cat;
       state.page = 1;
-      
       document.querySelectorAll('.cat-chip').forEach(btn => {
         if (btn.textContent.trim() === cat || (cat === 'ALL' && btn.textContent.trim() === 'All')) {
           btn.className = "cat-chip px-3 py-1.5 text-xs font-extrabold rounded-xl bg-brand-600 text-white shadow-sm";
@@ -1531,7 +1239,6 @@
           btn.className = "cat-chip px-3 py-1.5 text-xs font-extrabold rounded-xl bg-slate-100 text-slate-700 hover:bg-slate-200";
         }
       });
-
       renderPapersList();
     }
 
@@ -1544,7 +1251,6 @@
     function filterSyllabusTier(tier) {
       state.selectedSyllabusTier = tier;
       state.page = 1;
-
       document.querySelectorAll('.syl-tier-btn').forEach(btn => {
         if (btn.textContent.toLowerCase().includes(tier.toLowerCase()) || (tier === 'ALL' && btn.textContent.includes('All'))) {
           btn.className = "syl-tier-btn active-tier px-3 py-1.5 text-xs font-extrabold rounded-xl bg-amber-500 text-slate-950 shadow-sm";
@@ -1552,7 +1258,6 @@
           btn.className = "syl-tier-btn px-3 py-1.5 text-xs font-extrabold rounded-xl bg-slate-100 text-slate-700 hover:bg-slate-200";
         }
       });
-
       renderPapersList();
     }
 
@@ -1571,61 +1276,33 @@
         const q = state.searchQuery.toLowerCase();
         titleEl.textContent = `Search: "${state.searchQuery}"`;
         document.getElementById('backToSubjectsBtn').classList.add('hidden');
-        catBar.classList.add('hidden');
-        yearBar.classList.add('hidden');
-        if (sylTierBar) sylTierBar.classList.add('hidden');
+        catBar.classList.add('hidden'); yearBar.classList.add('hidden'); if (sylTierBar) sylTierBar.classList.add('hidden');
+        matches = allPapers.filter(p => `${p.title} ${p.subject} ${p.form} ${p.year} ${p.category}`.toLowerCase().includes(q));
+      } else if (state.resourceMode === 'syllabus') {
+        titleEl.textContent = `Official TIE Syllabuses (Mihtasari)`;
+        document.getElementById('backToSubjectsBtn').classList.add('hidden');
+        catBar.classList.add('hidden'); yearBar.classList.add('hidden');
+        if (sylTierBar) sylTierBar.classList.remove('hidden');
 
         matches = allPapers.filter(p => {
-          const hay = `${p.title} ${p.subject} ${p.form} ${p.year} ${p.category}`.toLowerCase();
-          return hay.includes(q);
+          if (!p.isSyllabus) return false;
+          if (state.selectedSyllabusTier === 'ALL') return true;
+          return p.form.toLowerCase().includes(state.selectedSyllabusTier.toLowerCase());
         });
       } else {
-        const modeTitleLabel = state.resourceMode === 'books' ? 'TIE Books' : (state.resourceMode === 'syllabus' ? 'TIE Syllabus' : 'Papers');
+        const modeTitleLabel = state.resourceMode === 'books' ? 'TIE Books' : 'Papers';
         titleEl.textContent = `${state.selectedClass} • ${state.selectedSubject} (${modeTitleLabel})`;
         document.getElementById('backToSubjectsBtn').classList.remove('hidden');
-        
-        if (state.resourceMode === 'syllabus') {
-          catBar.classList.add('hidden');
-          if (sylTierBar) sylTierBar.classList.remove('hidden');
-        } else if (state.resourceMode === 'books') {
-          catBar.classList.add('hidden');
-          if (sylTierBar) sylTierBar.classList.add('hidden');
-        } else {
-          catBar.classList.remove('hidden');
-          if (sylTierBar) sylTierBar.classList.add('hidden');
-        }
+        catBar.classList.remove('hidden'); if (sylTierBar) sylTierBar.classList.add('hidden');
 
         matches = allPapers.filter(p => {
           const matchSub = p.subject.toLowerCase() === state.selectedSubject.toLowerCase();
           const matchMode = matchesCurrentMode(p);
-
-          if (state.resourceMode === 'syllabus') {
-            const matchTier = (state.selectedSyllabusTier === 'ALL') || (p.form.toLowerCase().includes(state.selectedSyllabusTier.toLowerCase()));
-            return matchSub && matchMode && matchTier;
-          } else {
-            const matchClass = p.form.toLowerCase() === state.selectedClass.toLowerCase();
-            const matchCat = (state.selectedCategory === 'ALL') || (p.category.toLowerCase() === state.selectedCategory.toLowerCase());
-            const matchYear = (state.selectedYear === 'ALL') || (p.year === state.selectedYear);
-            return matchClass && matchSub && matchMode && matchCat && matchYear;
-          }
+          const matchClass = p.form.toLowerCase() === state.selectedClass.toLowerCase();
+          const matchCat = (state.selectedCategory === 'ALL') || (p.category.toLowerCase() === state.selectedCategory.toLowerCase());
+          const matchYear = (state.selectedYear === 'ALL') || (p.year === state.selectedYear);
+          return matchClass && matchSub && matchMode && matchCat && matchYear;
         });
-
-        const yearsSet = new Set(['ALL']);
-        if (state.resourceMode === 'papers') {
-          allPapers.filter(p => p.form.toLowerCase() === state.selectedClass.toLowerCase() && p.subject.toLowerCase() === state.selectedSubject.toLowerCase() && matchesCurrentMode(p))
-            .forEach(p => { if (p.year && p.year !== 'N/A') yearsSet.add(p.year); });
-        }
-
-        if (yearsSet.size > 2 && state.resourceMode === 'papers') {
-          yearBar.classList.remove('hidden');
-          let yHtml = `<button onclick="filterYearPill('ALL')" class="px-2.5 py-1 text-[11px] font-black rounded-lg ${state.selectedYear === 'ALL' ? 'bg-brand-600 text-white' : 'bg-slate-100 text-slate-700'}">All Years</button>`;
-          Array.from(yearsSet).filter(y => y !== 'ALL').sort().reverse().forEach(y => {
-            yHtml += `<button onclick="filterYearPill('${y}')" class="px-2.5 py-1 text-[11px] font-black rounded-lg ${state.selectedYear === y ? 'bg-brand-600 text-white' : 'bg-slate-100 text-slate-700'}">${y}</button>`;
-          });
-          yearBar.innerHTML = yHtml;
-        } else {
-          yearBar.classList.add('hidden');
-        }
       }
 
       matches.sort((a, b) => (b.year || '').localeCompare(a.year || ''));
@@ -1655,18 +1332,14 @@
         const hasPaper = Boolean(p.paperUrl);
         const hasAnswers = Boolean(p.answersUrl);
         const inBasket = isItemInPrintBasket(p.id);
-        const badgeStyle = p.isSyllabus
-          ? 'bg-amber-100 text-amber-950 border border-amber-300'
-          : (p.isBook ? 'bg-emerald-100 text-emerald-900 border border-emerald-300' : 'bg-blue-100 text-blue-900 border border-blue-200');
+        const badgeStyle = p.isSyllabus ? 'bg-amber-100 text-amber-950 border border-amber-300' : (p.isBook ? 'bg-emerald-100 text-emerald-900 border border-emerald-300' : 'bg-blue-100 text-blue-900 border border-blue-200');
 
         html += `
           <article class="bg-white p-4 sm:p-5 rounded-2xl border-2 border-slate-200 shadow-sm hover:border-brand-400 transition-all space-y-3">
             <div class="flex items-start justify-between gap-3">
               <div class="space-y-1">
                 <div class="flex items-center gap-2">
-                  <span class="text-[10px] font-black uppercase px-2 py-0.5 rounded ${badgeStyle}">
-                    ${escapeHtml(p.category)}
-                  </span>
+                  <span class="text-[10px] font-black uppercase px-2 py-0.5 rounded ${badgeStyle}">${escapeHtml(p.category)}</span>
                   <span class="text-xs font-bold text-slate-500">${escapeHtml(p.year)}</span>
                   <span class="text-xs font-semibold text-slate-400">• ${escapeHtml(p.form)}</span>
                 </div>
@@ -1678,33 +1351,26 @@
               ${hasPaper ? `
                 <button onclick="triggerDirectDownloadUrl('${escapeHtml(p.paperUrl)}', '${escapeHtml(p.title.replace(/[^a-zA-Z0-9]/g, '_'))}.pdf')" class="flex-1 min-h-[44px] px-4 py-2 bg-brand-600 hover:bg-brand-700 text-white text-xs font-black rounded-xl flex items-center justify-center gap-1.5 shadow-sm transition-all">
                   <i data-lucide="download" class="w-4 h-4 shrink-0"></i>
-                  <span>⬇️ ${escapeHtml(p.isSyllabus ? t('downloadSyllabusPdf') : (p.isBook ? t('bookPending') : t('downloadPdf')))}</span>
+                  <span>⬇️ ${escapeHtml(p.isSyllabus ? 'Direct Download Syllabus PDF' : (p.isBook ? 'Download AI Study Guide PDF' : 'Direct Download PDF'))}</span>
                 </button>
                 <button onclick="openViewer('${p.id}', 'paper')" class="min-h-[44px] px-3.5 py-2 bg-brand-50 hover:bg-brand-100 text-brand-700 text-xs font-extrabold rounded-xl flex items-center justify-center gap-1.5 transition-all">
                   <i data-lucide="eye" class="w-4 h-4 shrink-0"></i>
-                  <span>${escapeHtml(p.isSyllabus ? t('readSyllabus') : (p.isBook ? t('readBook') : t('readPaper')))}</span>
+                  <span>Preview</span>
                 </button>
-              ` : `
-                <span class="text-xs text-slate-400 italic">Google Drive PDF link pending upload</span>
-              `}
+              ` : `<span class="text-xs text-slate-400 italic">File link pending upload</span>`}
 
               ${hasAnswers && !p.isBook && !p.isSyllabus ? `
                 <button onclick="triggerDirectDownloadUrl('${escapeHtml(p.answersUrl)}', '${escapeHtml(p.title.replace(/[^a-zA-Z0-9]/g, '_'))}_Answers.pdf')" class="min-h-[44px] px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-extrabold rounded-xl flex items-center justify-center gap-1.5 shadow-sm">
-                  <i data-lucide="download" class="w-4 h-4 shrink-0"></i>
-                  <span>⬇️ ${escapeHtml(t('downloadAnswers'))}</span>
-                </button>
-                <button onclick="openViewer('${p.id}', 'answers')" class="min-h-[44px] px-3.5 py-2 bg-emerald-50 hover:bg-emerald-100 text-emerald-900 border border-emerald-300 text-xs font-extrabold rounded-xl flex items-center justify-center gap-1.5">
-                  <i data-lucide="check-circle-2" class="w-4 h-4 shrink-0"></i>
-                  <span>✅ ${escapeHtml(t('viewAnswers'))}</span>
+                  <span>⬇️ Answers PDF</span>
                 </button>
               ` : ''}
 
               <button onclick="openMwalimuForPaper('${p.id}')" class="min-h-[44px] px-3.5 py-2 bg-violet-50 hover:bg-violet-100 text-violet-900 border-2 border-violet-300 text-xs font-extrabold rounded-xl flex items-center justify-center gap-1.5">
-                <span>${escapeHtml(t('aiExplainBtn'))}</span>
+                <span>🤖 Study Notes</span>
               </button>
 
               <button onclick="togglePrintBasketItem('${p.id}')" class="min-h-[44px] px-3.5 py-2 ${inBasket ? 'bg-emerald-600 text-white' : 'bg-slate-50 hover:bg-slate-100 text-slate-700 border-2 border-slate-300'} text-xs font-extrabold rounded-xl transition-all">
-                ${inBasket ? t('inPrintList') : t('addPrint')}
+                ${inBasket ? '✓ In Print' : '➕ Print'}
               </button>
             </div>
           </article>
@@ -1746,17 +1412,14 @@
 
     function startVoiceSearch() {
       if (!('webkitSpeechRecognition' in window) && !('SpeechRecognition' in window)) {
-        showToastNotification('Voice search is not supported on this browser. Please type your search.');
+        showToastNotification('Voice search not supported on this browser.');
         return;
       }
       const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
       const recognition = new SpeechRecognition();
       recognition.lang = currentLang === 'sw' ? 'sw-TZ' : 'en-US';
-      recognition.interimResults = false;
-
       const inputEl = document.getElementById('smartSearchInput');
-      inputEl.placeholder = t('voiceListening');
-
+      inputEl.placeholder = 'Listening... Speak now';
       recognition.onresult = (event) => {
         const text = event.results[0][0].transcript;
         inputEl.value = text;
@@ -1764,8 +1427,6 @@
         document.getElementById('clearSearchBtn').classList.remove('hidden');
         goToStep(3);
       };
-
-      recognition.onerror = () => { inputEl.placeholder = t('searchPlaceholder'); };
       recognition.onend = () => { inputEl.placeholder = t('searchPlaceholder'); };
       recognition.start();
     }
@@ -1773,22 +1434,13 @@
     document.getElementById('smartSearchInput').addEventListener('input', (e) => {
       const val = e.target.value;
       const clearBtn = document.getElementById('clearSearchBtn');
-
-      if (val.trim().length > 0) {
-        clearBtn.classList.remove('hidden');
-      } else {
-        clearBtn.classList.add('hidden');
-      }
-
+      if (val.trim().length > 0) clearBtn.classList.remove('hidden'); else clearBtn.classList.add('hidden');
       clearTimeout(searchTimer);
       searchTimer = setTimeout(() => {
         state.searchQuery = val;
         state.page = 1;
-        if (val.trim().length > 0) {
-          goToStep(3);
-        } else {
-          goToStep(state.selectedClass ? 2 : 1);
-        }
+        if (val.trim().length > 0) goToStep(3);
+        else goToStep(state.selectedClass ? 2 : 1);
       }, CONFIG.SEARCH_DEBOUNCE_MS);
     });
 
@@ -1800,51 +1452,33 @@
     }
 
     function resetToStep1() {
-      state.selectedClass = '';
-      state.selectedSubject = '';
-      state.searchQuery = '';
+      state.selectedClass = ''; state.selectedSubject = ''; state.searchQuery = '';
       document.getElementById('smartSearchInput').value = '';
       document.getElementById('clearSearchBtn').classList.add('hidden');
       goToStep(1);
     }
 
     let printBasket = [];
-
     function loadPrintBasket() {
-      try {
-        const saved = localStorage.getItem('elimika_print_basket');
-        if (saved) printBasket = JSON.parse(saved);
-      } catch (e) {}
+      try { const saved = localStorage.getItem('elimika_print_basket'); if (saved) printBasket = JSON.parse(saved); } catch (e) {}
       updatePrintBasketBar();
     }
-
     function savePrintBasket() {
-      try {
-        localStorage.setItem('elimika_print_basket', JSON.stringify(printBasket));
-      } catch (e) {}
+      try { localStorage.setItem('elimika_print_basket', JSON.stringify(printBasket)); } catch (e) {}
       updatePrintBasketBar();
     }
-
-    function isItemInPrintBasket(paperId) {
-      return printBasket.includes(paperId);
+    function isItemInPrintBasket(id) { return printBasket.includes(id); }
+    function togglePrintBasketItem(id) {
+      if (isItemInPrintBasket(id)) printBasket = printBasket.filter(i => i !== id);
+      else printBasket.push(id);
+      savePrintBasket(); renderPapersList();
     }
-
-    function togglePrintBasketItem(paperId) {
-      if (isItemInPrintBasket(paperId)) {
-        printBasket = printBasket.filter(id => id !== paperId);
-      } else {
-        printBasket.push(paperId);
-      }
-      savePrintBasket();
-      renderPapersList();
-    }
-
     function togglePrintBasketFromModal() {
       if (state.activePaperId) {
         togglePrintBasketItem(state.activePaperId);
         const btn = document.getElementById('modalPrintBasketBtn');
         if (isItemInPrintBasket(state.activePaperId)) {
-          btn.textContent = '✓ Kwenye Print';
+          btn.textContent = '✓ In Print';
           btn.className = "px-3.5 py-2.5 bg-emerald-600 text-white font-extrabold text-xs sm:text-sm rounded-xl";
         } else {
           btn.textContent = '➕ Print';
@@ -1852,138 +1486,69 @@
         }
       }
     }
-
-    function clearPrintBasket() {
-      printBasket = [];
-      savePrintBasket();
-      renderPapersList();
-    }
-
+    function clearPrintBasket() { printBasket = []; savePrintBasket(); renderPapersList(); }
     function updatePrintBasketBar() {
       const bar = document.getElementById('printBasketFloatingBar');
-      const countEl = document.getElementById('printBasketCount');
-      countEl.textContent = printBasket.length;
-      if (printBasket.length > 0) {
-        bar.classList.remove('hidden');
-        bar.classList.add('flex');
-      } else {
-        bar.classList.add('hidden');
-        bar.classList.remove('flex');
-      }
+      document.getElementById('printBasketCount').textContent = printBasket.length;
+      if (printBasket.length > 0) { bar.classList.remove('hidden'); bar.classList.add('flex'); }
+      else { bar.classList.add('hidden'); bar.classList.remove('flex'); }
     }
-
     function sendPrintBasketWhatsApp() {
       if (printBasket.length === 0) return;
-      let text = `Habari Stationery! 🖨️ Naomba uniuzie print ya mitihani na vitabu vifuatavyo kutoka Elimika:\n\n`;
+      let text = `Habari Stationery! 🖨️ Naomba print ya documents hizi kutoka Elimika:\n\n`;
       printBasket.forEach((id, idx) => {
         const p = allPapers.find(item => item.id === id);
-        if (p) {
-          text += `${idx + 1}. *${p.title}* (${p.form})\n🔗 ${p.paperUrl || p.answersUrl || 'Link'}\n\n`;
-        }
+        if (p) text += `${idx + 1}. *${p.title}* (${p.form})\n🔗 ${p.paperUrl || p.answersUrl || ''}\n\n`;
       });
-      text += `Asante sana!`;
-      const url = `https://wa.me/${CONFIG.WHATSAPP_ADMIN}?text=${encodeURIComponent(text)}`;
-      window.open(url, '_blank');
+      window.open(`https://wa.me/${CONFIG.WHATSAPP_ADMIN}?text=${encodeURIComponent(text)}`, '_blank');
     }
 
-    function findItemById(id) {
-      return allPapers.find(p => p.id === id);
-    }
-
+    function findItemById(id) { return allPapers.find(p => p.id === id); }
     function openViewer(paperId, initialType = 'paper') {
       const p = findItemById(paperId);
       if (!p) return;
-
-      state.activePaperId = paperId;
-      state.activeViewerTab = initialType;
-      saveRecentPaper(paperId);
-
+      state.activePaperId = paperId; state.activeViewerTab = initialType; saveRecentPaper(paperId);
       const rawUrl = (initialType === 'answers') ? p.answersUrl : (p.paperUrl || p.answersUrl);
       const previewUrl = getPreviewUrl(rawUrl);
       const downloadUrl = getDirectDownloadUrl(rawUrl);
 
-      if (!rawUrl || !previewUrl) {
-        showToastNotification('File link is pending upload. You can request it via WhatsApp!');
-        return;
-      }
+      if (!rawUrl || !previewUrl) { showToastNotification('File link pending upload.'); return; }
 
       const modal = document.getElementById('docViewerModal');
       const iframe = document.getElementById('docViewerIframe');
       const spinner = document.getElementById('modalSpinner');
-      const title = document.getElementById('modalPaperTitle');
-      const badge = document.getElementById('modalMetaBadge');
-      const direct = document.getElementById('modalDirectLink');
+      document.getElementById('modalPaperTitle').textContent = p.title;
+      document.getElementById('modalMetaBadge').textContent = `${p.category} • ${p.year}`;
+      document.getElementById('modalDirectLink').href = downloadUrl;
+
       const qaToggle = document.getElementById('viewerQaToggleWrap');
-
-      title.textContent = p.title;
-      badge.textContent = `${p.category} • ${p.year}`;
-      direct.href = downloadUrl;
-
       if (p.paperUrl && p.answersUrl && !p.isBook && !p.isSyllabus) {
-        qaToggle.classList.remove('hidden');
-        qaToggle.classList.add('flex');
-        document.getElementById('viewerTabPaperBtn').className = `px-2.5 py-1 text-[11px] font-black rounded ${initialType === 'paper' ? 'bg-brand-600 text-white' : 'text-slate-300 hover:text-white'}`;
-        document.getElementById('viewerTabAnswersBtn').className = `px-2.5 py-1 text-[11px] font-black rounded ${initialType === 'answers' ? 'bg-emerald-600 text-white' : 'text-slate-300 hover:text-white'}`;
-      } else {
-        qaToggle.classList.add('hidden');
-        qaToggle.classList.remove('flex');
-      }
-
-      const printBtn = document.getElementById('modalPrintBasketBtn');
-      if (isItemInPrintBasket(p.id)) {
-        printBtn.textContent = '✓ Kwenye Print';
-        printBtn.className = "px-3.5 py-2.5 bg-emerald-600 text-white font-extrabold text-xs sm:text-sm rounded-xl";
-      } else {
-        printBtn.textContent = '➕ Print';
-        printBtn.className = "px-3.5 py-2.5 bg-emerald-50 hover:bg-emerald-100 text-emerald-900 border-2 border-emerald-300 font-extrabold text-xs sm:text-sm rounded-xl";
-      }
+        qaToggle.classList.remove('hidden'); qaToggle.classList.add('flex');
+      } else { qaToggle.classList.add('hidden'); qaToggle.classList.remove('flex'); }
 
       spinner.style.display = 'flex';
       iframe.src = previewUrl;
       iframe.onload = () => { spinner.style.display = 'none'; };
-
-      modal.classList.remove('hidden');
-      modal.classList.add('flex');
+      modal.classList.remove('hidden'); modal.classList.add('flex');
     }
-
-    function switchViewerTab(type) {
-      if (!state.activePaperId) return;
-      openViewer(state.activePaperId, type);
-    }
-
+    function switchViewerTab(type) { if (state.activePaperId) openViewer(state.activePaperId, type); }
     function closeViewerModal() {
       const modal = document.getElementById('docViewerModal');
-      const iframe = document.getElementById('docViewerIframe');
-      iframe.src = 'about:blank';
-      modal.classList.add('hidden');
-      modal.classList.remove('flex');
-      state.activePaperId = null;
+      document.getElementById('docViewerIframe').src = 'about:blank';
+      modal.classList.add('hidden'); modal.classList.remove('flex'); state.activePaperId = null;
     }
 
-    function openRequestPaperModal() {
-      document.getElementById('requestPaperModal').classList.remove('hidden');
-      document.getElementById('requestPaperModal').classList.add('flex');
-    }
-    function closeRequestPaperModal() {
-      document.getElementById('requestPaperModal').classList.add('hidden');
-      document.getElementById('requestPaperModal').classList.remove('flex');
-    }
+    function openRequestPaperModal() { document.getElementById('requestPaperModal').classList.remove('hidden'); document.getElementById('requestPaperModal').classList.add('flex'); }
+    function closeRequestPaperModal() { document.getElementById('requestPaperModal').classList.add('hidden'); document.getElementById('requestPaperModal').classList.remove('flex'); }
     function submitPaperRequestWhatsApp() {
       const f = document.getElementById('reqFormInput').value.trim();
       const s = document.getElementById('reqSubjectInput').value.trim();
-      const text = `Habari Elimika! 🙋‍♂️ Naomba mweke mtihani/kitabu hiki:\nDarasa: ${f || state.selectedClass}\nSomo: ${s || state.selectedSubject}\nAsante!`;
+      const text = `Habari Elimika! 🙋‍♂️ Naomba mweke:\nDarasa: ${f}\nSomo: ${s}`;
       window.open(`https://wa.me/${CONFIG.WHATSAPP_ADMIN}?text=${encodeURIComponent(text)}`, '_blank');
       closeRequestPaperModal();
     }
-
-    function openInstallGuideModal() {
-      document.getElementById('installGuideModal').classList.remove('hidden');
-      document.getElementById('installGuideModal').classList.add('flex');
-    }
-    function closeInstallGuideModal() {
-      document.getElementById('installGuideModal').classList.add('hidden');
-      document.getElementById('installGuideModal').classList.remove('flex');
-    }
+    function openInstallGuideModal() { document.getElementById('installGuideModal').classList.remove('hidden'); document.getElementById('installGuideModal').classList.add('flex'); }
+    function closeInstallGuideModal() { document.getElementById('installGuideModal').classList.add('hidden'); document.getElementById('installGuideModal').classList.remove('flex'); }
 
     // ==========================================
     // MOHA AI TUTOR & DOCUMENT GENERATOR
@@ -1996,78 +1561,45 @@
     let activeTtsAudio = null;
     let activeTtsBtnId = null;
 
-    function toggleTeacherStudioPanel() {
-      const panel = document.getElementById('teacherStudioPanel');
-      panel.classList.toggle('hidden');
-    }
+    function toggleTeacherStudioPanel() { document.getElementById('teacherStudioPanel').classList.toggle('hidden'); }
 
     function getTeacherStudioMetadata() {
       const school = (document.getElementById('tdSchoolName')?.value || '').trim();
       const teacher = (document.getElementById('tdTeacherName')?.value || '').trim();
-      const cls = (document.getElementById('tdClassInput')?.value || '').trim() || mwalimuActiveClass || state.selectedClass || '';
-      const subject = (document.getElementById('tdSubjectInput')?.value || '').trim() || mwalimuActiveSubject || state.selectedSubject || '';
-      const topic = (document.getElementById('tdTopicInput')?.value || '').trim();
-      const subTopic = (document.getElementById('tdSubTopicInput')?.value || '').trim();
+      const cls = (document.getElementById('tdClassInput')?.value || '').trim() || mwalimuActiveClass || 'Form 1';
+      const subject = (document.getElementById('tdSubjectInput')?.value || '').trim() || mwalimuActiveSubject || 'Basic Mathematics';
+      const topic = (document.getElementById('tdTopicInput')?.value || '').trim() || 'Numbers';
+      const subTopic = (document.getElementById('tdSubTopicInput')?.value || '').trim() || 'Rational Numbers';
       const duration = (document.getElementById('tdTimeInput')?.value || '').trim() || '80 Minutes';
       const term = (document.getElementById('tdTermInput')?.value || '').trim() || 'Term 1 & 2 (2026)';
       const rawDate = (document.getElementById('tdDateInput')?.value || '').trim();
-      const regG = parseInt(document.getElementById('tdRegGirls')?.value || '25', 10) || 0;
-      const regB = parseInt(document.getElementById('tdRegBoys')?.value || '25', 10) || 0;
-      const presG = parseInt(document.getElementById('tdPresGirls')?.value || '24', 10) || 0;
-      const presB = parseInt(document.getElementById('tdPresBoys')?.value || '24', 10) || 0;
-      
+      const regG = parseInt(document.getElementById('tdRegGirls')?.value || '25', 10) || 25;
+      const regB = parseInt(document.getElementById('tdRegBoys')?.value || '25', 10) || 25;
+      const presG = parseInt(document.getElementById('tdPresGirls')?.value || '24', 10) || 24;
+      const presB = parseInt(document.getElementById('tdPresBoys')?.value || '24', 10) || 24;
+
       let formattedDate = new Date().toLocaleDateString('en-GB');
       if (rawDate) {
         const parts = rawDate.split('-');
         if (parts.length === 3) formattedDate = `${parts[2]}/${parts[1]}/${parts[0]}`;
-        else formattedDate = rawDate;
       }
-
-      try {
-        localStorage.setItem('elimika_teacher_meta', JSON.stringify({ school, teacher, cls, subject, topic, subTopic, duration, term, rawDate, regG, regB, presG, presB }));
-      } catch (e) {}
-
-      return {
-        school, teacher, cls, subject, topic, subTopic, duration, term, rawDate,
-        regG, regB, regTotal: regG + regB,
-        presG, presB, presTotal: presG + presB,
-        date: formattedDate
-      };
+      return { school, teacher, cls, subject, topic, subTopic, duration, term, rawDate, regG, regB, regTotal: regG+regB, presG, presB, presTotal: presG+presB, date: formattedDate };
     }
 
     function loadSavedTeacherMetadata() {
       try {
-        const raw = localStorage.getItem('elimika_teacher_meta');
-        if (raw) {
-          const data = JSON.parse(raw);
-          if (data.school && document.getElementById('tdSchoolName')) document.getElementById('tdSchoolName').value = data.school;
-          if (data.teacher && document.getElementById('tdTeacherName')) document.getElementById('tdTeacherName').value = data.teacher;
-          if (data.topic && document.getElementById('tdTopicInput')) document.getElementById('tdTopicInput').value = data.topic;
-          if (data.subTopic && document.getElementById('tdSubTopicInput')) document.getElementById('tdSubTopicInput').value = data.subTopic;
-          if (data.duration && document.getElementById('tdTimeInput')) document.getElementById('tdTimeInput').value = data.duration;
-          if (data.term && document.getElementById('tdTermInput')) document.getElementById('tdTermInput').value = data.term;
-          if (data.rawDate && document.getElementById('tdDateInput')) document.getElementById('tdDateInput').value = data.rawDate;
-          if (data.regG !== undefined && document.getElementById('tdRegGirls')) document.getElementById('tdRegGirls').value = data.regG;
-          if (data.regB !== undefined && document.getElementById('tdRegBoys')) document.getElementById('tdRegBoys').value = data.regB;
-          if (data.presG !== undefined && document.getElementById('tdPresGirls')) document.getElementById('tdPresGirls').value = data.presG;
-          if (data.presB !== undefined && document.getElementById('tdPresBoys')) document.getElementById('tdPresBoys').value = data.presB;
-        }
         if (document.getElementById('tdDateInput') && !document.getElementById('tdDateInput').value) {
           document.getElementById('tdDateInput').value = new Date().toISOString().split('T')[0];
         }
-        if (document.getElementById('tdClassInput')) {
-          document.getElementById('tdClassInput').value = mwalimuActiveClass || state.selectedClass || '';
-        }
-        if (document.getElementById('tdSubjectInput')) {
-          document.getElementById('tdSubjectInput').value = mwalimuActiveSubject || state.selectedSubject || '';
-        }
+        if (document.getElementById('tdClassInput')) document.getElementById('tdClassInput').value = mwalimuActiveClass || state.selectedClass || 'Form 1';
+        if (document.getElementById('tdSubjectInput')) document.getElementById('tdSubjectInput').value = mwalimuActiveSubject || state.selectedSubject || 'Basic Mathematics';
       } catch (e) {}
     }
 
     function isFormOneClass(clsStr) {
       if (!clsStr) return false;
       const norm = clsStr.trim().toLowerCase();
-      return norm === 'form 1' || norm === 'form one' || norm === 'form i' || norm === 'kidato cha 1' || norm === 'kidato cha kwanza' || norm === 'f1';
+      return norm === 'form 1' || norm === 'form one' || norm === 'form i' || norm === 'kidato cha 1' || norm === 'f1';
     }
 
     function generateOfficialDocFromStudio(type) {
@@ -2075,8 +1607,6 @@
       const missing = [];
       if (!meta.teacher) missing.push('Teacher\'s Name');
       if (!meta.school) missing.push('School Name');
-      if (!meta.cls) missing.push('Class / Form');
-      if (!meta.subject) missing.push('Subject');
       if (!meta.topic) missing.push('Main Topic');
       if (type === 'lessonplan' && !meta.subTopic) missing.push('Sub-Topic');
 
@@ -2085,15 +1615,11 @@
         showToastNotification(`⚠️ Please fill in: ${missing.join(', ')}`);
         return;
       }
-
-      mwalimuActiveClass = meta.cls;
-      mwalimuActiveSubject = meta.subject;
-      document.getElementById('mwalimuContextBadge').textContent = `${mwalimuActiveClass} • ${mwalimuActiveSubject} (Official TIE & PO-RALG)`;
       document.getElementById('teacherStudioPanel').classList.add('hidden');
       executeVerifiedDocPrompt(type, meta);
     }
 
-    async function callGeminiWithBackoff(url, payload, maxRetries = 3) {
+    async function callGeminiWithRetry(url, payload, maxRetries = 3) {
       let delay = 1000;
       for (let attempt = 0; attempt <= maxRetries; attempt++) {
         try {
@@ -2126,21 +1652,19 @@
     function openMwalimuModal(classContext, subjectContext, initialPrompt = '') {
       mwalimuActiveClass = classContext || state.selectedClass || 'Form 1';
       mwalimuActiveSubject = subjectContext || state.selectedSubject || 'Basic Mathematics';
-
       loadSavedTeacherMetadata();
       document.getElementById('mwalimuContextBadge').textContent = `${mwalimuActiveClass} • ${mwalimuActiveSubject} (Official TIE & PO-RALG)`;
 
       const modal = document.getElementById('mwalimuAiModal');
-      modal.classList.remove('hidden');
-      modal.classList.add('flex');
+      modal.classList.remove('hidden'); modal.classList.add('flex');
 
       if (mwalimuMessages.length === 0) {
-        const welcomeText = currentLang === 'sw'
-          ? `Habari! Mimi ni **Moha AI** 🇹🇿 msaidizi wako mahiri wa TIE na PO-RALG. Naweza kukusaidia kuandaa **4-Stage Lesson Plan**, **Scheme of Work (2026)**, au kukufundisha masomo yote.\n\n👉 Bonyeza **⚙️ Teacher Details** kuweka taarifa zako kabla ya kutengeneza waraka, au gusa vitufe hapo juu!`
-          : `Hello! I am **Moha AI** 🇹🇿, your official TIE and PO-RALG assistant. I can help you prepare **4-Stage Lesson Plans**, **PO-RALG Schemes of Work (2026)**, and tutor any subject.\n\n👉 Tap **⚙️ Teacher Details** to enter your information, or tap any quick button above!`;
-        mwalimuMessages.push({ id: 'msg-welcome', role: 'ai', text: welcomeText });
+        mwalimuMessages.push({
+          id: 'msg-welcome',
+          role: 'ai',
+          text: `Habari! Mimi ni **Moha AI** 🇹🇿 msaidizi wako wa TIE na PO-RALG. Naweza kukusaidia kuandaa **4-Stage Lesson Plan**, **PO-RALG Scheme (2026)**, au kujibu maswali ya mitihani.\n\n👉 Bonyeza **⚙️ Teacher Details** kuweka taarifa zako au gusa vitufe hapo juu!`
+        });
       }
-
       renderMwalimuChat();
       if (initialPrompt) {
         document.getElementById('mwalimuUserInput').value = initialPrompt;
@@ -2151,22 +1675,18 @@
     function openMwalimuForPaper(paperId) {
       const p = findItemById(paperId);
       if (!p) return;
-      const prompt = `Please give me key revision notes, core mathematical formulas, and exam tips for: ${p.title} (${p.form} - ${p.subject}).`;
-      openMwalimuModal(p.form, p.subject, prompt);
+      openMwalimuModal(p.form, p.subject, `Please give me key revision notes and exam tips for: ${p.title} (${p.form} - ${p.subject}).`);
     }
-
     function askMwalimuFromViewer() {
       const p = state.activePaperId ? findItemById(state.activePaperId) : null;
       if (p) openMwalimuForPaper(p.id);
       else openMwalimuModal(state.selectedClass, state.selectedSubject);
     }
-
     function closeMwalimuModal() {
       stopActiveTtsAudio();
       document.getElementById('mwalimuAiModal').classList.add('hidden');
       document.getElementById('mwalimuAiModal').classList.remove('flex');
     }
-
     function clearMwalimuChat() {
       stopActiveTtsAudio();
       mwalimuMessages = [];
@@ -2182,28 +1702,24 @@
         mwalimuPendingImage = { mimeType: file.type || 'image/jpeg', base64Data: dataUrl.split(',')[1], previewUrl: dataUrl };
         document.getElementById('mwalimuPreviewThumb').src = dataUrl;
         const bar = document.getElementById('mwalimuImagePreviewBar');
-        bar.classList.remove('hidden');
-        bar.classList.add('flex');
+        bar.classList.remove('hidden'); bar.classList.add('flex');
       };
       reader.readAsDataURL(file);
     }
-
     function clearMwalimuImage() {
       mwalimuPendingImage = null;
       document.getElementById('mwalimuPhotoInput').value = '';
       const bar = document.getElementById('mwalimuImagePreviewBar');
-      bar.classList.add('hidden');
-      bar.classList.remove('flex');
+      bar.classList.add('hidden'); bar.classList.remove('flex');
     }
 
     function sendQuickMwalimuPrompt(type) {
       if (type === 'lessonplan' || type === 'schemeofwork' || type === 'logbook') {
-        const docTitle = type === 'lessonplan' ? '4-Stage TIE Lesson Plan' : (type === 'schemeofwork' ? 'PO-RALG Scheme of Work (2026)' : 'Subject Log Book');
         document.getElementById('teacherStudioPanel').classList.remove('hidden');
         mwalimuMessages.push({
           id: `ai-ask-${Date.now()}`,
           role: 'ai',
-          text: `📋 Please fill in your Teacher Details in the form above (Name, School, Class, Subject, Main Topic, Sub-Topic) and tap **⚡ Create Lesson Plan** or **📅 Create Scheme**.`
+          text: `📋 Tafadhali jaza taarifa zako kwenye form hapo juu (Teacher's Name, School Name, Topic, Sub-Topic) kisha uguse **⚡ Create Lesson Plan** au **📅 Create Scheme**.`
         });
         renderMwalimuChat();
         return;
@@ -2216,11 +1732,10 @@
     function executeVerifiedDocPrompt(type, meta) {
       let prompt = '';
       if (type === 'lessonplan') {
-        prompt = `Generate an official Tanzanian TIE Competence-Based Curriculum (CBC) **LESSON PLAN** in clean HTML table format (<div class="official-tie-doc">...</div>) using: School: ${meta.school}, Teacher: ${meta.teacher}, Class: ${meta.cls}, Subject: ${meta.subject}, Topic: ${meta.topic}, Sub-Topic: ${meta.subTopic}, Date: ${meta.date}, Attendance: Registered Girls ${meta.regG}, Boys ${meta.regB} | Present Girls ${meta.presG}, Boys ${meta.presB}. Include Main Competence, Specific Competence, Activities, Resources, References, and the exact 4-Stage process (Introduction, Competence Development, Design, Realisation) with assessment criteria and remarks.`;
+        prompt = `Generate an official Tanzanian TIE Competence-Based Curriculum (CBC) **LESSON PLAN** in clean HTML table format (<div class="official-tie-doc">...</div>) using: School: ${meta.school}, Teacher: ${meta.teacher}, Class: ${meta.cls}, Subject: ${meta.subject}, Topic: ${meta.topic}, Sub-Topic: ${meta.subTopic}, Date: ${meta.date}, Registered Girls ${meta.regG}, Boys ${meta.regB} | Present Girls ${meta.presG}, Boys ${meta.presB}. Include Introduction, Competence Development, Design, and Realisation stages with assessment criteria.`;
       } else if (type === 'schemeofwork') {
-        const includeOrientation = isFormOneClass(meta.cls);
-        const calendarRule = includeOrientation ? `Include registration & orientation course for Form 1.` : `DO NOT include orientation. Start teaching activities directly from January week 2.`;
-        prompt = `Generate an official **PO-RALG SCHEME OF WORK - 2026** in clean HTML table format (<div class="official-tie-doc" data-orientation="landscape">...</div>) using: Teacher: ${meta.teacher}, School: ${meta.school}, Subject: ${meta.subject.toUpperCase()}, Class: ${meta.cls.toUpperCase()}, Topic: ${meta.topic}, Date: ${meta.date}. Use the exact 12 columns: MAIN COMPETENCES, SPECIFIC COMPETENCES, LEARNING ACTIVITIES, SPECIFIC ACTIVITIES, MONTH, WEEK, PERIODS, METHODS, RESOURCES, ASSESSMENT TOOLS, REFERENCES, REMARK. ${calendarRule}`;
+        const orientationRule = isFormOneClass(meta.cls) ? `Include registration & orientation course.` : `DO NOT include orientation. Start teaching activities directly in January week 1.`;
+        prompt = `Generate an official **PO-RALG SCHEME OF WORK - 2026** in clean HTML table format (<div class="official-tie-doc" data-orientation="landscape">...</div>) using: Teacher: ${meta.teacher}, School: ${meta.school}, Subject: ${meta.subject.toUpperCase()}, Class: ${meta.cls.toUpperCase()}, Topic: ${meta.topic}, Date: ${meta.date}. Use 12 columns: MAIN COMPETENCES, SPECIFIC COMPETENCES, LEARNING ACTIVITIES, SPECIFIC ACTIVITIES, MONTH, WEEK, PERIODS, TEACHING METHODS, RESOURCES, ASSESSMENT TOOLS, REFERENCES, REMARK. ${orientationRule}`;
       } else if (type === 'logbook') {
         prompt = `Generate an official School **SUBJECT LOG BOOK** in clean HTML table format (<div class="official-tie-doc">...</div>) for School: ${meta.school}, Teacher: ${meta.teacher}, Class: ${meta.cls}, Subject: ${meta.subject}, Date: ${meta.date}, Topic: ${meta.topic}.`;
       }
@@ -2234,9 +1749,8 @@
       const attachedImg = mwalimuPendingImage;
       if (!userText && !attachedImg) return;
 
-      const displayPrompt = userText || '📷 Please solve this question step-by-step.';
-      inputEl.value = '';
-      clearMwalimuImage();
+      const displayPrompt = userText || '📷 Please solve this question.';
+      inputEl.value = ''; clearMwalimuImage();
 
       mwalimuMessages.push({ id: `user-${Date.now()}`, role: 'user', text: displayPrompt, hasImage: Boolean(attachedImg) });
       const loadingId = `ai-load-${Date.now()}`;
@@ -2252,20 +1766,24 @@
       });
 
       const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`;
-      const payload = { contents: historyContents, systemInstruction: { parts: [{ text: "You are Moha AI, Tanzanian TIE & PO-RALG curriculum expert. When requested, output clean HTML tables for lesson plans and schemes of work." }] } };
+      const payload = {
+        contents: historyContents,
+        systemInstruction: { parts: [{ text: "You are Moha AI, expert Tanzanian TIE & PO-RALG curriculum assistant. When requested, output clean HTML tables for lesson plans and schemes of work." }] }
+      };
 
       try {
-        const result = await callGeminiWithBackoff(apiUrl, payload);
+        const result = await callGeminiWithRetry(apiUrl, payload);
         const replyText = result?.candidates?.[0]?.content?.parts?.[0]?.text || 'Samahani, jaribu tena.';
         mwalimuMessages = mwalimuMessages.map(m => m.id === loadingId ? { id: `ai-${Date.now()}`, role: 'ai', text: replyText } : m);
       } catch (err) {
-        mwalimuMessages = mwalimuMessages.map(m => m.id === loadingId ? { id: `ai-err-${Date.now()}`, role: 'ai', text: '⚠️ Connection busy. Please try sending your prompt again.' } : m);
+        mwalimuMessages = mwalimuMessages.map(m => m.id === loadingId ? { id: `ai-err-${Date.now()}`, role: 'ai', text: '⚠️ Connection busy. Please tap Send again.' } : m);
       }
       renderMwalimuChat();
     }
 
     function renderMwalimuChat() {
       const box = document.getElementById('mwalimuChatBox');
+      if (!box) return;
       let html = '';
       mwalimuMessages.forEach(msg => {
         if (msg.role === 'user') {
@@ -2295,10 +1813,10 @@
                         <span>${escapeHtml(isPlayingThis ? t('playingBtn') : t('listenBtn'))}</span>
                       </button>
                       <button onclick="downloadDocAutomatically('${msg.id}', 'portrait')" class="px-3 py-1.5 rounded-xl font-extrabold text-xs flex items-center gap-1 bg-emerald-600 hover:bg-emerald-700 text-white shadow-sm transition-all">
-                        <span>⬇️ Download PDF (Portrait)</span>
+                        <span>⬇️ PDF (Portrait)</span>
                       </button>
                       <button onclick="downloadDocAutomatically('${msg.id}', 'landscape')" class="px-3 py-1.5 rounded-xl font-extrabold text-xs flex items-center gap-1 bg-brand-600 hover:bg-brand-700 text-white shadow-sm transition-all">
-                        <span>⬇️ Download PDF (Landscape)</span>
+                        <span>⬇️ PDF (Landscape)</span>
                       </button>
                     </div>
                     <span class="text-[10px] font-black text-violet-700 uppercase tracking-wider">Moha AI 🇹🇿</span>
@@ -2352,47 +1870,29 @@
       stopActiveTtsAudio();
       activeTtsBtnId = msgId;
       renderMwalimuChat();
-      setTimeout(() => {
-        activeTtsBtnId = null;
-        renderMwalimuChat();
-      }, 4000);
+      setTimeout(() => { activeTtsBtnId = null; renderMwalimuChat(); }, 4000);
     }
 
     let currentQuizItems = [];
     let currentQuizScore = 0;
     let currentQuizAnswered = {};
 
-    function switchFromTutorToQuiz() {
-      closeMwalimuModal();
-      openAiQuizModal();
-    }
-
-    function openAiQuizModal() {
-      document.getElementById('aiQuizModal').classList.remove('hidden');
-      document.getElementById('aiQuizModal').classList.add('flex');
-      generateAiQuizQuestions();
-    }
-
-    function closeAiQuizModal() {
-      document.getElementById('aiQuizModal').classList.add('hidden');
-      document.getElementById('aiQuizModal').classList.remove('flex');
-    }
+    function switchFromTutorToQuiz() { closeMwalimuModal(); openAiQuizModal(); }
+    function openAiQuizModal() { document.getElementById('aiQuizModal').classList.remove('hidden'); document.getElementById('aiQuizModal').classList.add('flex'); generateAiQuizQuestions(); }
+    function closeAiQuizModal() { document.getElementById('aiQuizModal').classList.add('hidden'); document.getElementById('aiQuizModal').classList.remove('flex'); }
 
     async function generateAiQuizQuestions() {
       const cls = state.selectedClass || mwalimuActiveClass || 'Form 4';
       const sub = state.selectedSubject || mwalimuActiveSubject || 'Mathematics';
       const bodyEl = document.getElementById('aiQuizBody');
       document.getElementById('aiQuizSubtitle').textContent = `${cls} • ${sub}`;
-      currentQuizItems = [];
-      currentQuizScore = 0;
-      currentQuizAnswered = {};
-
+      currentQuizItems = []; currentQuizScore = 0; currentQuizAnswered = {};
       bodyEl.innerHTML = `<div class="py-12 text-center space-y-3"><div class="w-10 h-10 border-4 border-amber-300 border-t-amber-600 rounded-full animate-spin mx-auto"></div><div class="text-sm font-black text-slate-900">Generating Quiz...</div></div>`;
 
       const prompt = `Create 5 multiple-choice revision questions for ${cls} ${sub} in JSON format: array of objects with keys "question", "options" (array of 4 strings), "correctIndex" (number), "explanation" (string).`;
       const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`;
       try {
-        const res = await callGeminiWithBackoff(apiUrl, { contents: [{ role: 'user', parts: [{ text: prompt }] }] });
+        const res = await callGeminiWithRetry(apiUrl, { contents: [{ role: 'user', parts: [{ text: prompt }] }] });
         const txt = res?.candidates?.[0]?.content?.parts?.[0]?.text;
         const cleanJson = txt.replace(/```json/gi, '').replace(/```/g, '').trim();
         currentQuizItems = JSON.parse(cleanJson).slice(0, 5);
@@ -2437,17 +1937,10 @@
       renderAiQuizCards();
     }
 
-    document.getElementById('docViewerModal').addEventListener('click', (e) => {
-      if (e.target.id === 'docViewerModal') closeViewerModal();
-    });
-
+    document.getElementById('docViewerModal').addEventListener('click', (e) => { if (e.target.id === 'docViewerModal') closeViewerModal(); });
     window.addEventListener('keydown', (e) => {
       if (e.key === 'Escape') {
-        closeViewerModal();
-        closeRequestPaperModal();
-        closeInstallGuideModal();
-        closeMwalimuModal();
-        closeAiQuizModal();
+        closeViewerModal(); closeRequestPaperModal(); closeInstallGuideModal(); closeMwalimuModal(); closeAiQuizModal();
       }
     });
 
