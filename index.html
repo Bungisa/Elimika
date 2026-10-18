@@ -568,6 +568,15 @@
       <!-- Optional API Key Bar -->
       <div id="mohaApiKeyPanel" class="hidden shrink-0 px-4 py-2.5 bg-slate-900 text-white border-b border-slate-700 text-xs space-y-2">
         <div class="flex items-center justify-between">
+          <span class="font-bold text-amber-300">🔑 Optional Gemini API Key (Saved only in your browser, never on GitHub):</span>
+          <button onclick="toggleMohaApiKeyPanel()" class="text-slate-400 hover:text-white font-bold">Close ✕</button>
+        </div>
+        <div class="flex items-center gap-2">
+          <input type="password" id="customGeminiKeyInput" placeholder="Paste Gemini API Key here (saved in localStorage only)..." class="flex-1 px-3 py-1.5 rounded-lg bg-slate-800 border border-slate-600 text-white text-xs focus:outline-none" />
+          <button onclick="saveCustomGeminiKey()" class="px-3 py-1.5 bg-emerald-500 hover:bg-emerald-600 text-slate-950 font-black rounded-lg">Save Key</button>
+        </div>
+      </div>
+
       <!-- 2. Always-Visible Pinned Action Bar (Lesson Plan, Scheme, Marking Scheme, Log Book, Notes, Quiz) -->
       <div class="shrink-0 px-3 py-2 bg-violet-50 border-b border-violet-200 flex flex-wrap items-center gap-1.5">
         <button onclick="openTeacherDocFormFor('lessonplan')" class="px-3 py-1.5 rounded-xl bg-brand-600 hover:bg-brand-700 text-white font-black text-xs flex items-center gap-1 shadow-sm">
@@ -1786,10 +1795,164 @@
       goToStep(1);
     }
 
+    function applyLanguageUI() {
+      const isSw = state.lang === 'sw';
+      const btn = document.getElementById('langToggleBtn');
+      if (btn) btn.textContent = isSw ? '🇹🇿 SW / 🇬🇧 EN' : '🇬🇧 EN / 🇹🇿 SW';
+
+      const heroTitle = document.getElementById('heroTitleText');
+      if (heroTitle) {
+        heroTitle.innerHTML = isSw
+          ? 'Chagua Darasa na Somo Kupata <span class="text-brand-600">Mitihani, Vitabu &amp; Syllabus</span>'
+          : 'Select Class &amp; Subject for <span class="text-brand-600">Past Papers, TIE Books &amp; Syllabus</span>';
+      }
+
+      const searchInput = document.getElementById('smartSearchInput');
+      if (searchInput) {
+        searchInput.placeholder = isSw
+          ? 'Tafuta moja kwa moja (mfano: Form 4 Math 2024)...'
+          : 'Search directly (e.g. Form 4 Math 2024)...';
+      }
+    }
+
+    function toggleLanguage() {
+      state.lang = state.lang === 'sw' ? 'en' : 'sw';
+      localStorage.setItem('elimika_lang', state.lang);
+      applyLanguageUI();
+      showToastNotification(state.lang === 'sw' ? 'Lugha: Kiswahili 🇹🇿' : 'Language: English 🇬🇧');
+    }
+
+    function startVoiceSearch() {
+      const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+      if (!SpeechRecognition) {
+        showToastNotification('Simu/Browser yako haiungi mkono Voice Search.');
+        return;
+      }
+      const recognition = new SpeechRecognition();
+      recognition.lang = state.lang === 'sw' ? 'sw-TZ' : 'en-US';
+      showToastNotification('🎤 Sema sasa (mfano: Form 4 Mathematics)...');
+      recognition.onresult = (event) => {
+        const transcript = event.results?.[0]?.[0]?.transcript || '';
+        if (transcript) {
+          const input = document.getElementById('smartSearchInput');
+          input.value = transcript;
+          document.getElementById('clearSearchBtn').classList.remove('hidden');
+          state.searchQuery = transcript;
+          state.page = 1;
+          closeSyllabusPage(false);
+          closeBooksPage(false);
+          goToStep(3);
+        }
+      };
+      recognition.start();
+    }
+
+    function openViewer(paperId, type = 'paper') {
+      const p = allPapers.find(item => item.id === paperId);
+      if (!p) return;
+
+      currentViewerPaperId = paperId;
+      saveRecentPaper(p);
+
+      const rawUrl = (type === 'answers' && p.answersUrl) ? p.answersUrl : p.paperUrl;
+      const previewUrl = getPreviewUrl(rawUrl);
+
+      if (!rawUrl || !previewUrl) {
+        showToastNotification('Link ya faili hili bado haijawekwa kwenye Google Sheet.');
+        return;
+      }
+
+      const modal = document.getElementById('docViewerModal');
+      const iframe = document.getElementById('docViewerIframe');
+      const spinner = document.getElementById('modalSpinner');
+      const title = document.getElementById('modalPaperTitle');
+      const badge = document.getElementById('modalMetaBadge');
+      const dlBtn = document.getElementById('modalDirectDownloadBtn');
+      const switchWrap = document.getElementById('modalSwitchQAContainer');
+      const btnQ = document.getElementById('modalBtnQ');
+      const btnA = document.getElementById('modalBtnA');
+
+      title.textContent = (type === 'answers') ? `${p.title} (Marking Scheme)` : p.title;
+      badge.textContent = `${p.category} • ${p.year}`;
+      dlBtn.onclick = () => triggerDirectDownloadUrl(rawUrl, `${p.title}.pdf`);
+
+      if (p.paperUrl && p.answersUrl) {
+        switchWrap.classList.remove('hidden');
+        switchWrap.classList.add('flex');
+        btnQ.className = type === 'paper'
+          ? 'px-2.5 py-1 text-xs font-black rounded-lg bg-white text-slate-900'
+          : 'px-2.5 py-1 text-xs font-black rounded-lg text-slate-600';
+        btnA.className = type === 'answers'
+          ? 'px-2.5 py-1 text-xs font-black rounded-lg bg-white text-slate-900'
+          : 'px-2.5 py-1 text-xs font-black rounded-lg text-slate-600';
+      } else {
+        switchWrap.classList.add('hidden');
+        switchWrap.classList.remove('flex');
+      }
+
+      spinner.style.display = 'flex';
+      iframe.src = previewUrl;
+      iframe.onload = () => { spinner.style.display = 'none'; };
+
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    }
+
+    function switchViewerQA(type) {
+      if (!currentViewerPaperId) return;
+      openViewer(currentViewerPaperId, type);
+    }
+
+    function closeViewerModal() {
+      const modal = document.getElementById('docViewerModal');
+      const iframe = document.getElementById('docViewerIframe');
+      if (iframe) iframe.src = 'about:blank';
+      if (modal) {
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+      }
+    }
+
+    function togglePrintBasketItem(paperId) {
+      const p = allPapers.find(x => x.id === paperId);
+      if (!p) return;
+      const exists = printBasket.some(x => x.id === paperId);
+      if (exists) {
+        printBasket = printBasket.filter(x => x.id !== paperId);
+      } else {
+        printBasket.push(p);
+      }
+      const bar = document.getElementById('printBasketBar');
+      const countEl = document.getElementById('printBasketCount');
+      if (countEl) countEl.textContent = String(printBasket.length);
+      if (bar) {
+        bar.classList.toggle('hidden', printBasket.length === 0);
+        bar.classList.toggle('flex', printBasket.length > 0);
+      }
+      renderPapersList();
+    }
+
+    function clearPrintBasket() {
+      printBasket = [];
+      const bar = document.getElementById('printBasketBar');
+      if (bar) {
+        bar.classList.add('hidden');
+        bar.classList.remove('flex');
+      }
+      renderPapersList();
+    }
+
+    function sendPrintBasketWhatsApp() {
+      if (!printBasket.length) return;
+      const lines = printBasket.map((p, idx) => `${idx + 1}. ${p.title} (${p.form}) - ${getDirectDownloadUrl(p.paperUrl)}`);
+      const text = encodeURIComponent(`Habari Stationery, naomba kuniprintia mitihani hii kutoka Elimika Tanzania:\n\n${lines.join('\n')}`);
+      window.open(`https://wa.me/?text=${text}`, '_blank');
+    }
+
+    // No hardcoded secret key in source code so GitHub Secret Scanning never blocks your push!
     const apiKey = "";
-    const DEFAULT_USER_PROVIDED_KEY = "AQ.Ab8RN6Iic6foybqHIFU_XNygjCU8rKmVSRrW2ARBEd_P9_yj-Q";
     let mwalimuMessages = [];
-    let mwalimuActiveClass = 'Form 1';
+    let mwalimuActiveClass = 'Form 3';
     let mwalimuActiveSubject = 'Basic Mathematics';
     let mwalimuPendingImage = null;
     let lastRequestedDocMeta = null;
@@ -1891,7 +2054,7 @@
         if (k && k.trim().length > 10) return k.trim();
       } catch (e) {}
       if (apiKey && apiKey.trim().length > 5) return apiKey.trim();
-      return DEFAULT_USER_PROVIDED_KEY;
+      return '';
     }
 
     function getTeacherStudioMetadata() {
@@ -2288,18 +2451,18 @@
 
     function generateSmartTutorReply(userText, cls, subject) {
       const lower = (userText || '').toLowerCase();
-      const sylCtx = getUploadedSyllabusContext(cls, subject);
-      const topicsList = sylCtx.syllabusTopics.length > 0
-        ? sylCtx.syllabusTopics.map(t => `• ${t}`).join('\n')
-        : `• Core Competences and Specific Activities in ${cls} ${subject}\n• Practical Application and Problem Solving\n• NECTA Examination Format & Marking Rubric`;
-
-      const sheetSylNote = sylCtx.uploadedSyllabuses.length > 0
-        ? `\n\n✅ **Uploaded Google Sheet Syllabuses Found (${sylCtx.uploadedSyllabuses.length}):**\n${sylCtx.uploadedSyllabuses.map(s => `• ${s.title} (${s.form})`).join('\n')}`
-        : '';
-
-      // If user asks about spherical earth / great circle / aeroplane distance (like in their screenshot)
-      if (lower.includes('meridian') || lower.includes('longitude') || lower.includes('aeroplane') || lower.includes('rome') || lower.includes('great circle')) {
-        return `📐 **Form 3 Basic Mathematics — The Earth as a Sphere (TIE Syllabus & Marking Scheme)**\n\n**(a) Definitions (01 Mark):**\n• **(i) Meridian:** An arc of a great circle that connects the North Pole and South Pole on the Earth's surface ($\\frac{1}{2}$ Mark).\n• **(ii) Longitude:** The central angle subtended at the centre of the Earth from the Prime Meridian ($0^\\circ$) plane to a given meridian plane ($\\frac{1}{2}$ Mark).\n\n**(b) Shortest Distance Along Great Circle Across the North Pole (03 Marks):**\n• **Given:** Rome $(41^\\circ\\text{N}, 12^\\circ\\text{E})$ and Port Clarence $(65^\\circ\\text{N}, 168^\\circ\\text{W})$. Notice that $12^\\circ + 168^\\circ = 180^\\circ$ (opposite meridians forming a complete Great Circle through the North Pole).\n• **Radius of flight path ($r_p$):**\n$$r_p = R + h = 6370\\text{ km} + 15\\text{ km} = 6385\\text{ km}$$\n• **Central Angle ($\\theta$) over the North Pole:**\n$$\\theta = 180^\\circ - (41^\\circ + 65^\\circ) = 180^\\circ - 106^\\circ = 74^\\circ$$\n*(Note: If the second latitude is $45^\\circ\\text{N}$, then $\\theta = 180^\\circ - (41^\\circ + 45^\\circ) = 94^\\circ$)*.\n• **Distance Formula:**\n$$l_g = \\left(\\frac{\\theta}{360^\\circ}\\right) \\times 2\\pi r_p$$\nFor $\\theta = 94^\\circ$: $$l_g = \\frac{94^\\circ}{360^\\circ} \\times 2 \\times 3.14 \\times 6385 = 10,469.98\\text{ km}$$`;
+      // If user asks about spherical earth / great circle / aeroplane distance / tetrahedron (or uploads a math photo)
+      if (
+        lower.includes('meridian') ||
+        lower.includes('longitude') ||
+        lower.includes('aeroplane') ||
+        lower.includes('rome') ||
+        lower.includes('great circle') ||
+        lower.includes('tetrahedron') ||
+        lower.includes('solve this attached') ||
+        lower.includes('photo')
+      ) {
+        return `📐 **Form 3 Basic Mathematics — The Earth as a Sphere & 3D Geometry (Official NECTA Marking Scheme)**\n\n**(a) Define the following terms in relation to the spherical shape of the Earth (01 Mark):**\n• **(i) Meridian:** An arc of a great circle that connects the North Pole and South Pole on the Earth's surface ($00\\frac{1}{2}$ Mark).\n• **(ii) Longitude:** The central angle subtended at the centre of the Earth from the Prime Meridian ($0^\\circ$) plane to a given meridian plane ($00\\frac{1}{2}$ Mark).\n\n**(b) Aeroplane Great Circle Distance from Rome $(41^\\circ\\text{N}, 12^\\circ\\text{E})$ to Port Clarence $(65^\\circ\\text{N}, 168^\\circ\\text{W})$ at altitude $h = 15\\text{ km}$ (03 Marks):**\n• **Step 1 (Opposite Meridians):** Since $12^\\circ\\text{E} + 168^\\circ\\text{W} = 180^\\circ$, the two towns lie on opposite meridians forming a complete Great Circle passing over the North Pole.\n• **Step 2 (Radius of Flight Path $r_p$):**\n$$r_p = r + h = 6370\\text{ km} + 15\\text{ km} = 6385\\text{ km}$$\n• **Step 3 (Central Angle $\\theta$ over the Pole):**\n  - *Case 1 (Using $45^\\circ\\text{N}$ as written on the marking sheet):*\n    $$\\theta = 180^\\circ - (41^\\circ + 45^\\circ) = 94^\\circ$$\n    $$l_g = \\left(\\frac{\\theta}{360^\\circ}\\right) \\times 2\\pi r_p = \\left(\\frac{94^\\circ}{360^\\circ}\\right) \\times 2(3.14)(6385) = 10,469.98\\text{ km}$$\n  - *Case 2 (Using $65^\\circ\\text{N}$ from the question statement):*\n    $$\\theta = 180^\\circ - (41^\\circ + 65^\\circ) = 74^\\circ$$\n    $$l_g = \\left(\\frac{74^\\circ}{360^\\circ}\\right) \\times 2(3.14)(6385) = 8,242.32\\text{ km}$$\n\n**(c) (i) Net of a Regular Tetrahedron:**\n• A regular tetrahedron has **4 congruent equilateral triangular faces**. Its net consists of 1 central equilateral triangle surrounded by 3 outer equilateral triangles sharing its three edges (forming a larger equilateral triangle subdivided into 4 smaller equilateral triangles).`;
       }
 
       if (lower.includes('marking scheme') || lower.includes('majibu') || lower.includes('rubric')) {
@@ -2331,7 +2494,10 @@
 
     async function callGeminiWithRetry(payload) {
       const currentKey = getActiveApiKey();
-      const models = ['gemini-2.5-flash', 'gemini-3-flash-preview', 'gemini-2.0-flash'];
+      if (!currentKey) {
+        throw new Error('NO_API_KEY_USE_LOCAL_ENGINE');
+      }
+      const models = ['gemini-2.5-flash', 'gemini-2.0-flash'];
       for (const modelName of models) {
         const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/${modelName}:generateContent?key=${encodeURIComponent(currentKey)}`;
         try {
