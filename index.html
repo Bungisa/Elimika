@@ -3,10 +3,14 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#1d4ed8" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="apple-mobile-web-app-title" content="Elimika" />
   
   <title>Elimika | Tanzania Past Examination Papers & Marking Schemes</title>
   <meta name="description" content="Simple, fast access to Tanzanian past examination papers and marking schemes for Standard 1–7 and Form 1–6." />
-  <meta name="keywords" content="Elimika, past papers Tanzania, NECTA, CSEE, ACSEE, FTNA, PSLE, Standard 7, Form 4, marking schemes" />
+  <meta name="keywords" content="Elimika, past papers Tanzania, NECTA, CSEE, ACSEE, FTNA, PSLE, Standard 7, Form 4, marking schemes, mitihani iliyopita" />
   <meta name="robots" content="index, follow" />
 
   <!-- Tailwind CSS CDN -->
@@ -19,6 +23,7 @@
             brand: {
               50: '#eff6ff',
               100: '#dbeafe',
+              200: '#bfdbfe',
               500: '#3b82f6',
               600: '#2563eb',
               700: '#1d4ed8',
@@ -27,6 +32,7 @@
             },
             accent: {
               50: '#ecfdf5',
+              100: '#d1fae5',
               600: '#059669',
               700: '#047857',
             }
@@ -46,82 +52,147 @@
       display: inline-block;
       vertical-align: middle;
     }
-    .tap-highlight-transparent {
+    * {
       -webkit-tap-highlight-color: transparent;
+    }
+    button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible {
+      outline: 3px solid #2563eb;
+      outline-offset: 2px;
+    }
+    @keyframes micPulse {
+      0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(225, 29, 72, 0.7); }
+      50% { transform: scale(1.08); box-shadow: 0 0 0 10px rgba(225, 29, 72, 0); }
+    }
+    .mic-listening {
+      animation: micPulse 1.2s infinite;
+      background-color: #e11d48 !important;
+      color: #ffffff !important;
+      border-color: #be123c !important;
     }
   </style>
 </head>
-<body class="bg-slate-50 text-slate-800 font-sans antialiased min-h-screen flex flex-col selection:bg-brand-500 selection:text-white">
+<body class="bg-slate-100 text-slate-900 font-sans antialiased min-h-screen flex flex-col pb-36 sm:pb-20 selection:bg-brand-600 selection:text-white">
+
+  <!-- ========================================== -->
+  <!-- 0. CUSTOM TOAST MESSAGE BOX (NO ALERTS)    -->
+  <!-- ========================================== -->
+  <div id="customToast" class="fixed top-4 inset-x-4 sm:inset-x-auto sm:right-6 z-50 max-w-sm mx-auto hidden transition-all duration-300">
+    <div id="customToastInner" class="bg-slate-900 text-white px-4 py-3.5 rounded-2xl shadow-2xl border-2 border-slate-700 flex items-center justify-between gap-3">
+      <div class="flex items-center gap-2.5 text-xs sm:text-sm font-extrabold">
+        <span id="customToastIcon" class="text-lg shrink-0">ℹ️</span>
+        <span id="customToastText">Notification</span>
+      </div>
+      <button onclick="hideToast()" class="text-slate-400 hover:text-white font-black text-xs px-2 py-1 rounded-lg bg-slate-800">✕</button>
+    </div>
+  </div>
 
   <!-- ========================================== -->
   <!-- 1. TOP NAVBAR                              -->
   <!-- ========================================== -->
-  <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-sm">
-    <div class="max-w-5xl mx-auto px-4 sm:px-6">
-      <div class="flex items-center justify-between h-16 sm:h-20">
+  <header class="sticky top-0 z-40 bg-white border-b-2 border-slate-200 shadow-sm">
+    <div class="max-w-5xl mx-auto px-3 sm:px-6">
+      <div class="flex items-center justify-between h-16 sm:h-20 gap-2">
         
-        <!-- Logo -->
-        <a href="#home" onclick="resetToStep1()" class="flex items-center gap-2.5 group">
-          <div class="w-10 h-10 rounded-xl bg-brand-700 flex items-center justify-center text-white shadow-md shadow-brand-500/20 group-hover:bg-brand-800 transition-colors">
+        <!-- Logo (Tapping always goes home) -->
+        <button onclick="resetToStep1()" class="flex items-center gap-2 text-left group cursor-pointer shrink-0">
+          <div class="w-10 h-10 sm:w-11 sm:h-11 rounded-2xl bg-brand-700 flex items-center justify-center text-white shadow-md group-hover:bg-brand-800 transition-colors shrink-0">
             <i data-lucide="graduation-cap" class="w-6 h-6"></i>
           </div>
           <div>
-            <span class="text-xl font-black tracking-tight text-slate-900 block leading-tight">
+            <span class="text-lg sm:text-xl font-black tracking-tight text-slate-900 block leading-none">
               ELIMIKA<span class="text-brand-600">.</span>
             </span>
-            <span class="text-[10px] tracking-widest font-bold uppercase text-slate-500 block">Past Papers Tanzania</span>
+            <span id="navTagline" class="text-[10px] sm:text-[11px] tracking-wider font-bold uppercase text-slate-500 block mt-0.5">
+              Mitihani • Past Papers
+            </span>
           </div>
-        </a>
+        </button>
 
-        <!-- Live Status Pill -->
-        <div id="dataStatusIndicator" class="inline-flex items-center gap-1.5 text-xs px-3 py-1.5 rounded-full font-medium bg-slate-100 text-slate-600">
-          <span class="w-2 h-2 rounded-full bg-slate-400 animate-pulse"></span>
-          <span>Connecting...</span>
+        <!-- Right Controls: Install App + Language Switcher + Live Status -->
+        <div class="flex items-center gap-1.5 sm:gap-2">
+          <!-- Feature G: 1-Tap Install App Button -->
+          <button 
+            onclick="handleInstallAppClick()" 
+            id="installAppBtn"
+            class="inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-2 rounded-xl font-extrabold text-xs bg-emerald-50 hover:bg-emerald-100 text-emerald-900 border-2 border-emerald-300 transition-all active:scale-95"
+            title="Install Elimika on your phone screen"
+          >
+            <span>📲</span>
+            <span id="installAppLabel" class="hidden xs:inline sm:inline">Install App</span>
+          </button>
+
+          <!-- 1-Tap Language Toggle (Swahili / English) -->
+          <button 
+            onclick="toggleLanguage()" 
+            id="langToggleBtn"
+            class="inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-2 rounded-xl font-extrabold text-xs sm:text-sm bg-brand-50 hover:bg-brand-100 text-brand-800 border-2 border-brand-200 transition-all active:scale-95"
+            aria-label="Switch Language between Kiswahili and English"
+          >
+            <span id="langFlag">🇹🇿</span>
+            <span id="langLabel">Kiswahili</span>
+          </button>
+
+          <!-- Live Status Pill -->
+          <div id="dataStatusIndicator" class="hidden md:inline-flex items-center gap-1.5 text-xs px-3 py-2 rounded-xl font-bold bg-slate-100 text-slate-700 border border-slate-200">
+            <span class="w-2.5 h-2.5 rounded-full bg-amber-500 animate-pulse"></span>
+            <span>Connecting...</span>
+          </div>
         </div>
+
       </div>
     </div>
   </header>
 
   <!-- ========================================== -->
-  <!-- 2. HERO & SMART SEARCH                     -->
+  <!-- 2. HERO & VOICE + TEXT SEARCH              -->
   <!-- ========================================== -->
-  <section id="home" class="pt-8 pb-10 bg-gradient-to-b from-white via-slate-50 to-slate-100 border-b border-slate-200">
+  <section id="homeHero" class="pt-5 pb-6 bg-white border-b-2 border-slate-200">
     <div class="max-w-3xl mx-auto px-4 text-center">
       
-      <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-brand-50 border border-brand-200 text-brand-700 text-xs font-semibold mb-4">
-        <span>🇹🇿</span> Standard 1–7 & Form 1–6
-      </div>
-
-      <h1 class="text-2xl sm:text-4xl font-black text-slate-900 tracking-tight leading-snug mb-3">
-        Find Past Papers in <span class="text-brand-600">3 Easy Steps</span>
+      <h1 id="heroTitle" class="text-2xl sm:text-4xl font-black text-slate-900 tracking-tight leading-snug mb-1.5">
+        Find Past Papers in <span class="text-brand-600">3 Easy Taps</span>
       </h1>
-      <p class="text-sm sm:text-base text-slate-600 mb-6">
-        Choose your class, pick your subject, and download questions or marking schemes.
+      <p id="heroSubtitle" class="text-xs sm:text-base font-medium text-slate-600 mb-4">
+        1. Tap your Class &rarr; 2. Tap your Subject &rarr; 3. Download Paper
       </p>
 
-      <!-- Single Smart Search Bar (Google Style) -->
+      <!-- High-Contrast Search Bar with Feature A: Voice Search Button -->
       <div class="relative max-w-xl mx-auto">
-        <div class="flex items-center bg-white rounded-2xl shadow-md border border-slate-200 px-4 py-2.5 focus-within:ring-2 focus-within:ring-brand-500 focus-within:border-transparent transition-all">
-          <i data-lucide="search" class="w-5 h-5 text-slate-400 shrink-0 mr-3"></i>
+        <div class="flex items-center bg-slate-50 rounded-2xl shadow-inner border-2 border-slate-300 pl-3.5 pr-2 py-1.5 focus-within:bg-white focus-within:ring-4 focus-within:ring-brand-100 focus-within:border-brand-600 transition-all">
+          <i data-lucide="search" class="w-5 h-5 text-brand-600 shrink-0 mr-2"></i>
           <input 
             type="text" 
             id="smartSearchInput" 
-            placeholder="Search directly (e.g. Form 4 Math 2024)..." 
-            class="w-full text-sm sm:text-base bg-transparent text-slate-800 placeholder-slate-400 focus:outline-none"
+            placeholder="Type or tap Mic 🎤 (e.g. Form 4 Math)..." 
+            class="w-full text-sm sm:text-base font-semibold bg-transparent text-slate-900 placeholder-slate-500 focus:outline-none py-1.5"
             aria-label="Direct search for examination papers"
           />
           <button 
             id="clearSearchBtn" 
             onclick="clearSmartSearch()" 
-            class="hidden text-slate-400 hover:text-slate-600 p-1"
+            class="hidden bg-slate-200 hover:bg-slate-300 text-slate-800 font-extrabold px-2.5 py-1.5 rounded-xl text-xs shrink-0 mr-1.5"
             title="Clear search"
           >
-            <i data-lucide="x" class="w-4 h-4"></i>
+            ✕
+          </button>
+          <!-- Feature A: Voice Search ("Tafuta kwa Sauti") -->
+          <button 
+            id="voiceSearchBtn" 
+            onclick="startVoiceSearch()" 
+            type="button"
+            class="px-3 py-2 rounded-xl bg-brand-600 hover:bg-brand-700 active:scale-95 text-white font-extrabold text-xs sm:text-sm flex items-center gap-1.5 shrink-0 shadow-sm border-2 border-brand-700 transition-all"
+            title="Search by Voice (Tafuta kwa Sauti)"
+          >
+            <span>🎤</span>
+            <span id="voiceBtnLabel" class="hidden sm:inline">Voice</span>
           </button>
         </div>
-        <p class="text-[11px] text-slate-400 mt-2">
-          Tip: You can use the buttons below or just type what you need above.
-        </p>
+
+        <!-- Voice Listening Active Status Banner -->
+        <div id="voiceListeningBanner" class="hidden mt-2.5 p-3 rounded-xl bg-rose-50 border-2 border-rose-300 text-rose-900 text-xs sm:text-sm font-extrabold flex items-center justify-center gap-2">
+          <span class="w-3 h-3 rounded-full bg-rose-600 animate-ping"></span>
+          <span id="voiceListeningText">Listening... Speak now (e.g., "Form 4 Mathematics")</span>
+        </div>
       </div>
 
     </div>
@@ -130,195 +201,459 @@
   <!-- ========================================== -->
   <!-- 3. THE 3-STEP / 3-TAP FOLDER NAVIGATOR      -->
   <!-- ========================================== -->
-  <main id="browserApp" class="flex-grow py-8">
+  <main id="browserApp" class="flex-grow py-5 sm:py-8">
     <div class="max-w-4xl mx-auto px-4 sm:px-6">
 
-      <!-- Breadcrumbs Progress Indicator -->
-      <nav id="stepBreadcrumbs" class="flex items-center gap-2 mb-6 text-xs sm:text-sm font-semibold text-slate-500 overflow-x-auto pb-2" aria-label="Step Navigation">
-        <button onclick="goToStep(1)" id="crumbStep1" class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-brand-600 text-white font-bold transition-all shrink-0">
-          <span>1. Class Level</span>
+      <!-- Visual Step Progress Bar -->
+      <nav id="stepBreadcrumbs" class="grid grid-cols-3 gap-2 mb-6" aria-label="Step Progress">
+        <button onclick="goToStep(1)" id="crumbStep1" class="flex flex-col sm:flex-row items-center justify-center gap-1 sm:gap-2 p-2.5 sm:py-3 rounded-xl bg-brand-600 text-white font-extrabold text-xs sm:text-sm shadow-sm transition-all text-center">
+          <span class="w-6 h-6 rounded-full bg-white text-brand-700 font-black flex items-center justify-center text-xs shrink-0">1</span>
+          <span id="crumbStep1Label" class="truncate max-w-full">Choose Class</span>
         </button>
-        <i data-lucide="chevron-right" class="w-4 h-4 text-slate-300 shrink-0"></i>
         
-        <button onclick="goToStep(2)" id="crumbStep2" disabled class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-100 text-slate-400 disabled:opacity-60 transition-all shrink-0">
-          <span id="crumbStep2Label">2. Subject</span>
+        <button onclick="goToStep(2)" id="crumbStep2" disabled class="flex flex-col sm:flex-row items-center justify-center gap-1 sm:gap-2 p-2.5 sm:py-3 rounded-xl bg-white border-2 border-slate-200 text-slate-400 font-bold text-xs sm:text-sm disabled:opacity-60 transition-all text-center">
+          <span id="crumbStep2Badge" class="w-6 h-6 rounded-full bg-slate-200 text-slate-600 font-black flex items-center justify-center text-xs shrink-0">2</span>
+          <span id="crumbStep2Label" class="truncate max-w-full">Pick Subject</span>
         </button>
-        <i data-lucide="chevron-right" class="w-4 h-4 text-slate-300 shrink-0"></i>
 
-        <button id="crumbStep3" disabled class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-100 text-slate-400 disabled:opacity-60 transition-all shrink-0">
-          <span id="crumbStep3Label">3. Examination Papers</span>
+        <button id="crumbStep3" disabled class="flex flex-col sm:flex-row items-center justify-center gap-1 sm:gap-2 p-2.5 sm:py-3 rounded-xl bg-white border-2 border-slate-200 text-slate-400 font-bold text-xs sm:text-sm disabled:opacity-60 transition-all text-center">
+          <span id="crumbStep3Badge" class="w-6 h-6 rounded-full bg-slate-200 text-slate-600 font-black flex items-center justify-center text-xs shrink-0">3</span>
+          <span id="crumbStep3Label" class="truncate max-w-full">Get Papers</span>
         </button>
       </nav>
 
       <!-- Network Error & Retry Banner -->
-      <div id="networkErrorBanner" class="hidden mb-8 p-6 bg-rose-50 border border-rose-200 rounded-2xl text-center">
-        <div class="w-12 h-12 bg-rose-100 text-rose-600 rounded-full flex items-center justify-center mx-auto mb-3">
-          <i data-lucide="alert-triangle" class="w-6 h-6"></i>
+      <div id="networkErrorBanner" class="hidden mb-6 p-6 bg-rose-50 border-2 border-rose-300 rounded-2xl text-center shadow-sm">
+        <div class="w-14 h-14 bg-rose-100 text-rose-600 rounded-full flex items-center justify-center mx-auto mb-3">
+          <i data-lucide="wifi-off" class="w-7 h-7"></i>
         </div>
-        <h3 class="text-base font-bold text-rose-900 mb-1">Failed to Load Examination Data</h3>
-        <p class="text-xs sm:text-sm text-rose-700 max-w-md mx-auto mb-4">
-          Please verify your internet connection or confirm the Google Sheet is published to the web.
+        <h3 id="errTitle" class="text-lg font-black text-rose-900 mb-1">Internet Connection Problem</h3>
+        <p id="errDesc" class="text-sm text-rose-800 max-w-md mx-auto mb-4">
+          We could not load the examination papers. Please check if your mobile data (MBs) is turned on and tap the button below.
         </p>
-        <button onclick="fetchSheetData()" class="bg-rose-600 hover:bg-rose-700 text-white font-bold text-xs px-4 py-2.5 rounded-xl transition-colors inline-flex items-center gap-2">
-          <i data-lucide="refresh-cw" class="w-4 h-4"></i>
-          Retry Connection
+        <button onclick="fetchSheetData()" class="bg-rose-600 hover:bg-rose-700 active:scale-95 text-white font-extrabold text-sm px-6 py-3.5 rounded-xl transition-all inline-flex items-center gap-2 shadow-md">
+          <i data-lucide="refresh-cw" class="w-5 h-5"></i>
+          <span id="errBtnText">Try Again (Jaribu Tena)</span>
         </button>
       </div>
 
       <!-- ============================================== -->
-      <!-- VIEW 1: STEP 1 - CHOOSE CLASS (BIG TAP TARGETS) -->
+      <!-- VIEW 1: STEP 1 - CHOOSE CLASS (GIANT BUTTONS)  -->
       <!-- ============================================== -->
       <section id="step1View" class="space-y-6">
-        <div>
-          <h2 class="text-lg sm:text-xl font-extrabold text-slate-900">Step 1: Choose Your Class Level</h2>
-          <p class="text-xs sm:text-sm text-slate-500">Tap your Form or Standard to view available subjects.</p>
+
+        <!-- Feature B: "Remember My Class" 1-Tap Return Banner (Hidden until user selects a class once) -->
+        <div id="savedClassBanner" class="hidden bg-emerald-600 text-white p-4 sm:p-5 rounded-3xl shadow-md border-2 border-emerald-700">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+            <div class="flex items-center gap-3.5">
+              <div class="w-12 h-12 rounded-2xl bg-white text-emerald-700 font-black text-2xl flex items-center justify-center shrink-0 shadow-sm">
+                📌
+              </div>
+              <div>
+                <span id="savedClassTag" class="text-[11px] font-extrabold uppercase tracking-wider bg-emerald-800/70 px-2.5 py-0.5 rounded-lg inline-block mb-0.5">
+                  Welcome Back • Karibu Tena
+                </span>
+                <h2 class="text-lg sm:text-xl font-black leading-tight">
+                  <span id="savedClassPrefix">Continue with</span> <span id="savedClassName" class="underline decoration-2">Form 4</span>
+                </h2>
+              </div>
+            </div>
+            <button 
+              id="savedClassContinueBtn"
+              onclick="continueWithSavedClass()" 
+              class="w-full sm:w-auto px-5 py-3.5 bg-white hover:bg-emerald-50 active:scale-95 text-emerald-900 font-black text-sm sm:text-base rounded-2xl shadow-md flex items-center justify-center gap-2 transition-all shrink-0"
+            >
+              <span id="savedClassBtnText">Open Subjects Now</span>
+              <span>&rarr;</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Feature C: "Recently Opened Papers" on Home Screen (Helps users who lose files in Downloads) -->
+        <div id="recentPapersSection" class="hidden bg-white p-4 sm:p-5 rounded-3xl border-2 border-amber-300 shadow-sm">
+          <div class="flex items-center justify-between gap-2 mb-3 pb-2.5 border-b border-slate-100">
+            <div class="flex items-center gap-2">
+              <span class="text-xl">🕘</span>
+              <div>
+                <h3 id="recentPapersTitle" class="text-sm sm:text-base font-black text-slate-900 leading-tight">
+                  Recently Opened Papers
+                </h3>
+                <p id="recentPapersSub" class="text-xs font-semibold text-slate-500">
+                  Tap any paper below to open it again immediately
+                </p>
+              </div>
+            </div>
+            <button onclick="clearRecentPapers()" id="clearRecentBtn" class="text-xs font-bold text-slate-500 hover:text-rose-600 px-2.5 py-1 rounded-lg bg-slate-100 hover:bg-rose-50 transition-colors">
+              Clear
+            </button>
+          </div>
+          <div id="recentPapersList" class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+            <!-- Dynamically populated from localStorage -->
+          </div>
+        </div>
+
+        <!-- Step 1 Instruction Header -->
+        <div class="bg-brand-50 border-2 border-brand-200 rounded-2xl p-4 flex items-center gap-3">
+          <div class="w-10 h-10 rounded-xl bg-brand-600 text-white font-black flex items-center justify-center text-lg shrink-0">
+            1
+          </div>
+          <div>
+            <h2 id="step1InstructionTitle" class="text-base sm:text-lg font-black text-brand-900 leading-snug">
+              STEP 1: Tap Your Class Below
+            </h2>
+            <p id="step1InstructionSub" class="text-xs sm:text-sm font-medium text-brand-800">
+              Gusa darasa au kidato unachotafuta hapa chini
+            </p>
+          </div>
         </div>
 
         <!-- Secondary Education (Form 1–6) -->
-        <div>
-          <h3 class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-3 flex items-center gap-1.5">
-            <i data-lucide="book-open" class="w-4 h-4"></i> Secondary School (Form 1 to 6)
-          </h3>
-          <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
-            <button onclick="selectClass('Form 1')" class="p-4 bg-white hover:bg-brand-50 active:bg-brand-100 border border-slate-200 hover:border-brand-400 rounded-2xl text-left transition-all shadow-sm flex items-center justify-between">
-              <div>
-                <span class="block text-base font-extrabold text-slate-900">Form 1</span>
-                <span class="text-xs text-slate-400">Orientation</span>
+        <div class="bg-white p-4 sm:p-6 rounded-3xl border-2 border-slate-200 shadow-sm">
+          <div class="flex items-center gap-2.5 mb-4 pb-3 border-b border-slate-100">
+            <span class="text-2xl">🎓</span>
+            <div>
+              <h3 id="secHeaderTitle" class="text-base sm:text-lg font-black text-slate-900 leading-tight">
+                Secondary School (Form 1 – 6)
+              </h3>
+              <p id="secHeaderSub" class="text-xs font-semibold text-slate-500">
+                Shule ya Sekondari (Kidato cha Kwanza hadi cha Sita)
+              </p>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3.5">
+            <!-- Form 1 -->
+            <button onclick="selectClass('Form 1')" class="p-4 bg-slate-50 hover:bg-brand-50 active:bg-brand-100 border-2 border-slate-300 hover:border-brand-600 rounded-2xl text-left transition-all flex items-center justify-between group min-h-[72px]">
+              <div class="flex items-center gap-3.5">
+                <span class="w-12 h-12 rounded-xl bg-slate-200 group-hover:bg-brand-600 group-hover:text-white text-slate-800 font-black text-xl flex items-center justify-center transition-colors shrink-0">F1</span>
+                <div>
+                  <span class="block text-lg font-black text-slate-900">Form 1</span>
+                  <span class="text-xs font-semibold text-slate-600" data-i18n="f1_sub">Kidato cha 1</span>
+                </div>
               </div>
-              <i data-lucide="chevron-right" class="w-5 h-5 text-slate-300"></i>
+              <span class="px-3 py-1.5 rounded-lg bg-white border border-slate-300 text-xs font-extrabold text-brand-700 group-hover:bg-brand-600 group-hover:text-white transition-colors" data-i18n="open_btn">Open &rarr;</span>
             </button>
 
-            <button onclick="selectClass('Form 2')" class="p-4 bg-white hover:bg-brand-50 active:bg-brand-100 border border-slate-200 hover:border-brand-400 rounded-2xl text-left transition-all shadow-sm flex items-center justify-between">
-              <div>
-                <span class="block text-base font-extrabold text-slate-900">Form 2</span>
-                <span class="text-xs text-brand-600 font-semibold">FTNA Assessment</span>
+            <!-- Form 2 -->
+            <button onclick="selectClass('Form 2')" class="p-4 bg-blue-50/70 hover:bg-brand-100 active:bg-brand-200 border-2 border-brand-300 hover:border-brand-600 rounded-2xl text-left transition-all flex items-center justify-between group min-h-[72px]">
+              <div class="flex items-center gap-3.5">
+                <span class="w-12 h-12 rounded-xl bg-brand-600 text-white font-black text-xl flex items-center justify-center shrink-0">F2</span>
+                <div>
+                  <span class="block text-lg font-black text-slate-900">Form 2</span>
+                  <span class="text-xs font-extrabold text-brand-700" data-i18n="f2_sub">Kidato cha 2 (FTNA)</span>
+                </div>
               </div>
-              <i data-lucide="chevron-right" class="w-5 h-5 text-slate-300"></i>
+              <span class="px-3 py-1.5 rounded-lg bg-white border border-brand-300 text-xs font-extrabold text-brand-700 group-hover:bg-brand-600 group-hover:text-white transition-colors" data-i18n="open_btn">Open &rarr;</span>
             </button>
 
-            <button onclick="selectClass('Form 3')" class="p-4 bg-white hover:bg-brand-50 active:bg-brand-100 border border-slate-200 hover:border-brand-400 rounded-2xl text-left transition-all shadow-sm flex items-center justify-between">
-              <div>
-                <span class="block text-base font-extrabold text-slate-900">Form 3</span>
-                <span class="text-xs text-slate-400">Senior Secondary</span>
+            <!-- Form 3 -->
+            <button onclick="selectClass('Form 3')" class="p-4 bg-slate-50 hover:bg-brand-50 active:bg-brand-100 border-2 border-slate-300 hover:border-brand-600 rounded-2xl text-left transition-all flex items-center justify-between group min-h-[72px]">
+              <div class="flex items-center gap-3.5">
+                <span class="w-12 h-12 rounded-xl bg-slate-200 group-hover:bg-brand-600 group-hover:text-white text-slate-800 font-black text-xl flex items-center justify-center transition-colors shrink-0">F3</span>
+                <div>
+                  <span class="block text-lg font-black text-slate-900">Form 3</span>
+                  <span class="text-xs font-semibold text-slate-600" data-i18n="f3_sub">Kidato cha 3</span>
+                </div>
               </div>
-              <i data-lucide="chevron-right" class="w-5 h-5 text-slate-300"></i>
+              <span class="px-3 py-1.5 rounded-lg bg-white border border-slate-300 text-xs font-extrabold text-brand-700 group-hover:bg-brand-600 group-hover:text-white transition-colors" data-i18n="open_btn">Open &rarr;</span>
             </button>
 
-            <button onclick="selectClass('Form 4')" class="p-4 bg-brand-50/80 hover:bg-brand-100 active:bg-brand-200 border border-brand-300 rounded-2xl text-left transition-all shadow-sm flex items-center justify-between">
-              <div>
-                <span class="block text-base font-extrabold text-brand-900">Form 4</span>
-                <span class="text-xs text-brand-700 font-bold">CSEE National Finals</span>
+            <!-- Form 4 -->
+            <button onclick="selectClass('Form 4')" class="p-4 bg-blue-50/70 hover:bg-brand-100 active:bg-brand-200 border-2 border-brand-400 hover:border-brand-700 rounded-2xl text-left transition-all flex items-center justify-between group min-h-[72px] shadow-sm">
+              <div class="flex items-center gap-3.5">
+                <span class="w-12 h-12 rounded-xl bg-brand-700 text-white font-black text-xl flex items-center justify-center shrink-0">F4</span>
+                <div>
+                  <span class="block text-lg font-black text-brand-900">Form 4</span>
+                  <span class="text-xs font-extrabold text-brand-700" data-i18n="f4_sub">Kidato cha 4 (NECTA CSEE)</span>
+                </div>
               </div>
-              <i data-lucide="chevron-right" class="w-5 h-5 text-brand-400"></i>
+              <span class="px-3 py-1.5 rounded-lg bg-brand-600 text-white text-xs font-extrabold group-hover:bg-brand-800 transition-colors" data-i18n="open_btn">Open &rarr;</span>
             </button>
 
-            <button onclick="selectClass('Form 5')" class="p-4 bg-white hover:bg-brand-50 active:bg-brand-100 border border-slate-200 hover:border-brand-400 rounded-2xl text-left transition-all shadow-sm flex items-center justify-between">
-              <div>
-                <span class="block text-base font-extrabold text-slate-900">Form 5</span>
-                <span class="text-xs text-slate-400">Advanced Level</span>
+            <!-- Form 5 -->
+            <button onclick="selectClass('Form 5')" class="p-4 bg-slate-50 hover:bg-brand-50 active:bg-brand-100 border-2 border-slate-300 hover:border-brand-600 rounded-2xl text-left transition-all flex items-center justify-between group min-h-[72px]">
+              <div class="flex items-center gap-3.5">
+                <span class="w-12 h-12 rounded-xl bg-slate-200 group-hover:bg-brand-600 group-hover:text-white text-slate-800 font-black text-xl flex items-center justify-center transition-colors shrink-0">F5</span>
+                <div>
+                  <span class="block text-lg font-black text-slate-900">Form 5</span>
+                  <span class="text-xs font-semibold text-slate-600" data-i18n="f5_sub">Kidato cha 5 (A-Level)</span>
+                </div>
               </div>
-              <i data-lucide="chevron-right" class="w-5 h-5 text-slate-300"></i>
+              <span class="px-3 py-1.5 rounded-lg bg-white border border-slate-300 text-xs font-extrabold text-brand-700 group-hover:bg-brand-600 group-hover:text-white transition-colors" data-i18n="open_btn">Open &rarr;</span>
             </button>
 
-            <button onclick="selectClass('Form 6')" class="p-4 bg-brand-50/80 hover:bg-brand-100 active:bg-brand-200 border border-brand-300 rounded-2xl text-left transition-all shadow-sm flex items-center justify-between">
-              <div>
-                <span class="block text-base font-extrabold text-brand-900">Form 6</span>
-                <span class="text-xs text-brand-700 font-bold">ACSEE National Finals</span>
+            <!-- Form 6 -->
+            <button onclick="selectClass('Form 6')" class="p-4 bg-blue-50/70 hover:bg-brand-100 active:bg-brand-200 border-2 border-brand-400 hover:border-brand-700 rounded-2xl text-left transition-all flex items-center justify-between group min-h-[72px] shadow-sm">
+              <div class="flex items-center gap-3.5">
+                <span class="w-12 h-12 rounded-xl bg-brand-700 text-white font-black text-xl flex items-center justify-center shrink-0">F6</span>
+                <div>
+                  <span class="block text-lg font-black text-brand-900">Form 6</span>
+                  <span class="text-xs font-extrabold text-brand-700" data-i18n="f6_sub">Kidato cha 6 (NECTA ACSEE)</span>
+                </div>
               </div>
-              <i data-lucide="chevron-right" class="w-5 h-5 text-brand-400"></i>
+              <span class="px-3 py-1.5 rounded-lg bg-brand-600 text-white text-xs font-extrabold group-hover:bg-brand-800 transition-colors" data-i18n="open_btn">Open &rarr;</span>
             </button>
           </div>
         </div>
 
         <!-- Primary Education (Standard 1–7) -->
-        <div>
-          <h3 class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-3 flex items-center gap-1.5">
-            <i data-lucide="backpack" class="w-4 h-4"></i> Primary School (Standard 1 to 7)
-          </h3>
-          <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
-            <button onclick="selectClass('Standard 1')" class="p-3 bg-white hover:bg-slate-100 border border-slate-200 rounded-xl text-center font-bold text-slate-800">
-              Std 1
+        <div class="bg-white p-4 sm:p-6 rounded-3xl border-2 border-slate-200 shadow-sm">
+          <div class="flex items-center gap-2.5 mb-4 pb-3 border-b border-slate-100">
+            <span class="text-2xl">🎒</span>
+            <div>
+              <h3 id="priHeaderTitle" class="text-base sm:text-lg font-black text-slate-900 leading-tight">
+                Primary School (Standard 1 – 7)
+              </h3>
+              <p id="priHeaderSub" class="text-xs font-semibold text-slate-500">
+                Shule ya Msingi (Darasa la Kwanza hadi la Saba)
+              </p>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
+            <button onclick="selectClass('Standard 1')" class="p-3.5 bg-slate-50 hover:bg-emerald-50 border-2 border-slate-300 hover:border-emerald-600 rounded-2xl flex items-center justify-between text-left min-h-[64px]">
+              <div class="flex items-center gap-3">
+                <span class="w-10 h-10 rounded-xl bg-slate-200 font-black text-slate-800 flex items-center justify-center text-base">1</span>
+                <div>
+                  <span class="block font-black text-slate-900 text-base">Standard 1</span>
+                  <span class="text-xs font-semibold text-slate-500">Darasa la 1</span>
+                </div>
+              </div>
+              <span class="text-xs font-extrabold text-emerald-700 bg-white px-2.5 py-1 rounded-lg border border-slate-200" data-i18n="open_btn">Open &rarr;</span>
             </button>
-            <button onclick="selectClass('Standard 2')" class="p-3 bg-white hover:bg-slate-100 border border-slate-200 rounded-xl text-center font-bold text-slate-800">
-              Std 2
+
+            <button onclick="selectClass('Standard 2')" class="p-3.5 bg-slate-50 hover:bg-emerald-50 border-2 border-slate-300 hover:border-emerald-600 rounded-2xl flex items-center justify-between text-left min-h-[64px]">
+              <div class="flex items-center gap-3">
+                <span class="w-10 h-10 rounded-xl bg-slate-200 font-black text-slate-800 flex items-center justify-center text-base">2</span>
+                <div>
+                  <span class="block font-black text-slate-900 text-base">Standard 2</span>
+                  <span class="text-xs font-semibold text-slate-500">Darasa la 2</span>
+                </div>
+              </div>
+              <span class="text-xs font-extrabold text-emerald-700 bg-white px-2.5 py-1 rounded-lg border border-slate-200" data-i18n="open_btn">Open &rarr;</span>
             </button>
-            <button onclick="selectClass('Standard 3')" class="p-3 bg-white hover:bg-slate-100 border border-slate-200 rounded-xl text-center font-bold text-slate-800">
-              Std 3
+
+            <button onclick="selectClass('Standard 3')" class="p-3.5 bg-slate-50 hover:bg-emerald-50 border-2 border-slate-300 hover:border-emerald-600 rounded-2xl flex items-center justify-between text-left min-h-[64px]">
+              <div class="flex items-center gap-3">
+                <span class="w-10 h-10 rounded-xl bg-slate-200 font-black text-slate-800 flex items-center justify-center text-base">3</span>
+                <div>
+                  <span class="block font-black text-slate-900 text-base">Standard 3</span>
+                  <span class="text-xs font-semibold text-slate-500">Darasa la 3</span>
+                </div>
+              </div>
+              <span class="text-xs font-extrabold text-emerald-700 bg-white px-2.5 py-1 rounded-lg border border-slate-200" data-i18n="open_btn">Open &rarr;</span>
             </button>
-            <button onclick="selectClass('Standard 4')" class="p-3 bg-white hover:bg-slate-100 border border-slate-200 rounded-xl text-center font-bold text-amber-700">
-              Std 4 (Assessment)
+
+            <button onclick="selectClass('Standard 4')" class="p-3.5 bg-amber-50/80 hover:bg-amber-100 border-2 border-amber-400 rounded-2xl flex items-center justify-between text-left min-h-[64px]">
+              <div class="flex items-center gap-3">
+                <span class="w-10 h-10 rounded-xl bg-amber-600 text-white font-black flex items-center justify-center text-base">4</span>
+                <div>
+                  <span class="block font-black text-slate-900 text-base">Standard 4</span>
+                  <span class="text-xs font-extrabold text-amber-800">Darasa la 4 (SFNA)</span>
+                </div>
+              </div>
+              <span class="text-xs font-extrabold text-amber-900 bg-white px-2.5 py-1 rounded-lg border border-amber-300" data-i18n="open_btn">Open &rarr;</span>
             </button>
-            <button onclick="selectClass('Standard 5')" class="p-3 bg-white hover:bg-slate-100 border border-slate-200 rounded-xl text-center font-bold text-slate-800">
-              Std 5
+
+            <button onclick="selectClass('Standard 5')" class="p-3.5 bg-slate-50 hover:bg-emerald-50 border-2 border-slate-300 hover:border-emerald-600 rounded-2xl flex items-center justify-between text-left min-h-[64px]">
+              <div class="flex items-center gap-3">
+                <span class="w-10 h-10 rounded-xl bg-slate-200 font-black text-slate-800 flex items-center justify-center text-base">5</span>
+                <div>
+                  <span class="block font-black text-slate-900 text-base">Standard 5</span>
+                  <span class="text-xs font-semibold text-slate-500">Darasa la 5</span>
+                </div>
+              </div>
+              <span class="text-xs font-extrabold text-emerald-700 bg-white px-2.5 py-1 rounded-lg border border-slate-200" data-i18n="open_btn">Open &rarr;</span>
             </button>
-            <button onclick="selectClass('Standard 6')" class="p-3 bg-white hover:bg-slate-100 border border-slate-200 rounded-xl text-center font-bold text-slate-800">
-              Std 6
+
+            <button onclick="selectClass('Standard 6')" class="p-3.5 bg-slate-50 hover:bg-emerald-50 border-2 border-slate-300 hover:border-emerald-600 rounded-2xl flex items-center justify-between text-left min-h-[64px]">
+              <div class="flex items-center gap-3">
+                <span class="w-10 h-10 rounded-xl bg-slate-200 font-black text-slate-800 flex items-center justify-center text-base">6</span>
+                <div>
+                  <span class="block font-black text-slate-900 text-base">Standard 6</span>
+                  <span class="text-xs font-semibold text-slate-500">Darasa la 6</span>
+                </div>
+              </div>
+              <span class="text-xs font-extrabold text-emerald-700 bg-white px-2.5 py-1 rounded-lg border border-slate-200" data-i18n="open_btn">Open &rarr;</span>
             </button>
-            <button onclick="selectClass('Standard 7')" class="col-span-2 sm:col-span-2 p-3 bg-brand-50 hover:bg-brand-100 border border-brand-300 rounded-xl text-center font-extrabold text-brand-900">
-              Standard 7 (PSLE Finals)
+
+            <button onclick="selectClass('Standard 7')" class="sm:col-span-2 md:col-span-3 p-4 bg-emerald-50 hover:bg-emerald-100 border-2 border-emerald-500 rounded-2xl flex items-center justify-between text-left min-h-[70px] shadow-sm">
+              <div class="flex items-center gap-3.5">
+                <span class="w-12 h-12 rounded-xl bg-emerald-700 text-white font-black flex items-center justify-center text-xl">7</span>
+                <div>
+                  <span class="block font-black text-emerald-950 text-lg">Standard 7 (PSLE National Exams)</span>
+                  <span class="text-xs font-extrabold text-emerald-800">Darasa la 7 — Mtihani wa Taifa wa Kumaliza Elimu ya Msingi</span>
+                </div>
+              </div>
+              <span class="text-xs font-extrabold bg-emerald-700 text-white px-3.5 py-2 rounded-xl shrink-0" data-i18n="open_btn">Open &rarr;</span>
             </button>
           </div>
         </div>
+
       </section>
 
       <!-- ============================================== -->
       <!-- VIEW 2: STEP 2 - CHOOSE SUBJECT               -->
       <!-- ============================================== -->
-      <section id="step2View" class="hidden space-y-6">
-        <div class="flex items-center justify-between">
-          <div>
-            <button onclick="goToStep(1)" class="text-xs font-bold text-brand-600 hover:text-brand-800 flex items-center gap-1 mb-1">
-              <i data-lucide="arrow-left" class="w-3.5 h-3.5"></i> Back to Classes
-            </button>
-            <h2 class="text-lg sm:text-xl font-extrabold text-slate-900">
-              Step 2: Pick a Subject for <span id="step2CurrentClass" class="text-brand-600">Form 4</span>
-            </h2>
+      <section id="step2View" class="hidden space-y-5">
+
+        <!-- Feature I: NECTA Exam Countdown Banner (Shown for Candidate Classes) -->
+        <div id="nectaCountdownBanner" class="hidden bg-gradient-to-r from-indigo-900 via-brand-800 to-brand-700 text-white p-4 sm:p-5 rounded-2xl shadow-md border-2 border-brand-500">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+            <div class="flex items-center gap-3">
+              <div class="w-11 h-11 rounded-2xl bg-white/15 backdrop-blur flex items-center justify-center text-2xl shrink-0">
+                ⏳
+              </div>
+              <div>
+                <span id="nectaBadgeLabel" class="text-[11px] font-black uppercase tracking-wider bg-amber-400 text-slate-950 px-2 py-0.5 rounded-md inline-block mb-0.5">
+                  NECTA Exam Timer
+                </span>
+                <h3 id="nectaExamName" class="text-sm sm:text-base font-black leading-snug">
+                  Form 4 National Examinations (CSEE)
+                </h3>
+                <p id="nectaExamSub" class="text-xs text-blue-100 font-medium">
+                  Practice at least 2 past papers every day to pass with flying colors!
+                </p>
+              </div>
+            </div>
+            <div class="bg-white text-slate-900 px-4 py-2.5 rounded-xl text-center shrink-0 shadow-sm">
+              <span id="nectaDaysCount" class="block text-xl sm:text-2xl font-black text-brand-700 leading-none">14 Days</span>
+              <span id="nectaDaysUnit" class="text-[11px] font-extrabold uppercase text-slate-600">Remaining</span>
+            </div>
           </div>
         </div>
+        
+        <!-- Big Back Button + Clear Step Header -->
+        <div class="bg-white p-4 sm:p-5 rounded-2xl border-2 border-slate-200 shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-xl bg-brand-600 text-white font-black flex items-center justify-center text-lg shrink-0">
+              2
+            </div>
+            <div>
+              <h2 class="text-lg sm:text-xl font-black text-slate-900">
+                <span id="step2TitlePrefix">STEP 2: Tap a Subject for</span> <span id="step2CurrentClass" class="text-brand-600 underline decoration-2">Form 4</span>
+              </h2>
+              <p id="step2SubText" class="text-xs sm:text-sm font-medium text-slate-600">
+                Gusa somo unalotaka kuona mitihani yake
+              </p>
+            </div>
+          </div>
 
-        <!-- Subjects Grid (Populated dynamically so only active subjects appear) -->
-        <div id="subjectsListGrid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
+          <button onclick="goToStep(1)" class="w-full sm:w-auto px-4 py-3 bg-slate-100 hover:bg-slate-200 active:bg-slate-300 text-slate-800 font-extrabold text-xs sm:text-sm rounded-xl border-2 border-slate-300 flex items-center justify-center gap-2 transition-colors">
+            <i data-lucide="arrow-left" class="w-4 h-4"></i>
+            <span id="backToClassesText">Change Class (Badili Darasa)</span>
+          </button>
+        </div>
+
+        <!-- Subjects Grid (Populated dynamically with subject icons) -->
+        <div id="subjectsListGrid" class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
           <!-- Dynamically inserted -->
+        </div>
+
+        <!-- Feature H: Request Missing Paper Prompt in Step 2 -->
+        <div class="bg-white p-4 sm:p-5 rounded-2xl border-2 border-dashed border-slate-300 flex flex-col sm:flex-row items-center justify-between gap-3 text-center sm:text-left">
+          <div class="flex flex-col sm:flex-row items-center gap-3">
+            <span class="text-2xl">🙋‍♂️</span>
+            <div>
+              <h4 id="reqStep2Title" class="text-sm sm:text-base font-black text-slate-900">Missing a subject or past paper?</h4>
+              <p id="reqStep2Sub" class="text-xs text-slate-600">Tell us which paper you need and we will upload it for you.</p>
+            </div>
+          </div>
+          <button onclick="openRequestPaperModal()" class="w-full sm:w-auto px-4 py-3 bg-amber-500 hover:bg-amber-600 text-slate-950 font-black text-xs sm:text-sm rounded-xl shadow-sm shrink-0">
+            <span id="reqStep2Btn">Request a Paper (Omba Mtihani)</span>
+          </button>
         </div>
       </section>
 
       <!-- ============================================== -->
       <!-- VIEW 3: STEP 3 / SEARCH RESULTS - PAPERS LIST  -->
       <!-- ============================================== -->
-      <section id="step3View" class="hidden space-y-6">
+      <section id="step3View" class="hidden space-y-5">
         
         <!-- Header & Quick Filters -->
-        <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
-          <div>
-            <button onclick="goToStep(2)" id="backToSubjectsBtn" class="text-xs font-bold text-brand-600 hover:text-brand-800 flex items-center gap-1 mb-1">
-              <i data-lucide="arrow-left" class="w-3.5 h-3.5"></i> Back to Subjects
+        <div class="bg-white p-4 sm:p-5 rounded-2xl border-2 border-slate-200 shadow-sm space-y-4">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 rounded-xl bg-brand-600 text-white font-black flex items-center justify-center text-lg shrink-0">
+                3
+              </div>
+              <div>
+                <h2 id="step3Title" class="text-lg sm:text-xl font-black text-slate-900 leading-snug">
+                  Available Papers
+                </h2>
+                <div id="step3Subtitle" class="text-xs sm:text-sm font-bold text-emerald-700">Showing all records</div>
+              </div>
+            </div>
+
+            <button onclick="goToStep(2)" id="backToSubjectsBtn" class="w-full sm:w-auto px-4 py-3 bg-slate-100 hover:bg-slate-200 active:bg-slate-300 text-slate-800 font-extrabold text-xs sm:text-sm rounded-xl border-2 border-slate-300 flex items-center justify-center gap-2 transition-colors">
+              <i data-lucide="arrow-left" class="w-4 h-4"></i>
+              <span id="backToSubjectsText">Back to Subjects (Rudi kwenye Masomo)</span>
             </button>
-            <h2 id="step3Title" class="text-lg sm:text-xl font-extrabold text-slate-900">
-              Available Papers
-            </h2>
-            <div id="step3Subtitle" class="text-xs text-slate-500">Showing all records</div>
           </div>
 
           <!-- Quick Exam Category Filter Chips -->
-          <div class="flex flex-wrap items-center gap-1.5">
-            <button onclick="filterCategoryTag('ALL')" class="cat-chip active-chip px-2.5 py-1 text-xs font-bold rounded-lg bg-brand-600 text-white">All</button>
-            <button onclick="filterCategoryTag('NECTA')" class="cat-chip px-2.5 py-1 text-xs font-bold rounded-lg bg-slate-100 text-slate-600 hover:bg-slate-200">NECTA</button>
-            <button onclick="filterCategoryTag('Mock')" class="cat-chip px-2.5 py-1 text-xs font-bold rounded-lg bg-slate-100 text-slate-600 hover:bg-slate-200">Mock</button>
-            <button onclick="filterCategoryTag('Pre-NECTA')" class="cat-chip px-2.5 py-1 text-xs font-bold rounded-lg bg-slate-100 text-slate-600 hover:bg-slate-200">Pre-NECTA</button>
-            <button onclick="filterCategoryTag('Terminal')" class="cat-chip px-2.5 py-1 text-xs font-bold rounded-lg bg-slate-100 text-slate-600 hover:bg-slate-200">Terminal</button>
+          <div class="pt-3 border-t border-slate-100">
+            <span id="filterLabelText" class="block text-xs font-extrabold uppercase tracking-wider text-slate-500 mb-2">
+              1. Filter by Exam Type (Chuja Aina ya Mtihani):
+            </span>
+            <div class="flex flex-wrap items-center gap-2">
+              <button onclick="filterCategoryTag('ALL')" data-cat="ALL" class="cat-chip px-3.5 py-2 text-xs sm:text-sm font-extrabold rounded-xl bg-brand-600 text-white border-2 border-brand-600 shadow-sm">
+                All (Zote)
+              </button>
+              <button onclick="filterCategoryTag('NECTA')" data-cat="NECTA" class="cat-chip px-3.5 py-2 text-xs sm:text-sm font-bold rounded-xl bg-slate-100 text-slate-700 border-2 border-slate-200 hover:bg-slate-200">
+                NECTA
+              </button>
+              <button onclick="filterCategoryTag('Mock')" data-cat="Mock" class="cat-chip px-3.5 py-2 text-xs sm:text-sm font-bold rounded-xl bg-slate-100 text-slate-700 border-2 border-slate-200 hover:bg-slate-200">
+                Mock
+              </button>
+              <button onclick="filterCategoryTag('Pre-NECTA')" data-cat="Pre-NECTA" class="cat-chip px-3.5 py-2 text-xs sm:text-sm font-bold rounded-xl bg-slate-100 text-slate-700 border-2 border-slate-200 hover:bg-slate-200">
+                Pre-NECTA
+              </button>
+              <button onclick="filterCategoryTag('Terminal')" data-cat="Terminal" class="cat-chip px-3.5 py-2 text-xs sm:text-sm font-bold rounded-xl bg-slate-100 text-slate-700 border-2 border-slate-200 hover:bg-slate-200">
+                Terminal / Annual
+              </button>
+            </div>
+          </div>
+
+          <!-- Feature F: Dynamic Year Filter Buttons (2026, 2025, 2024, 2023...) -->
+          <div id="yearFilterContainer" class="pt-3 border-t border-slate-100">
+            <span id="yearFilterLabelText" class="block text-xs font-extrabold uppercase tracking-wider text-slate-500 mb-2">
+              2. Filter by Year (Chuja Mwaka):
+            </span>
+            <div id="yearFilterPills" class="flex flex-wrap items-center gap-2">
+              <!-- Dynamically generated year buttons -->
+            </div>
           </div>
         </div>
 
         <!-- Papers List -->
-        <div id="papersResultsGrid" class="space-y-3">
+        <div id="papersResultsGrid" class="space-y-4">
           <!-- Dynamically inserted -->
         </div>
 
-        <!-- Pagination -->
-        <div id="paginationWrap" class="flex items-center justify-between border-t border-slate-200 pt-4 hidden">
-          <button id="prevBtn" onclick="changeResultsPage(-1)" class="px-3 py-1.5 text-xs font-bold border border-slate-200 rounded-lg text-slate-600 hover:bg-slate-100 disabled:opacity-40">Previous</button>
-          <span id="pageIndicator" class="text-xs text-slate-500">Page 1 of 1</span>
-          <button id="nextBtn" onclick="changeResultsPage(1)" class="px-3 py-1.5 text-xs font-bold border border-slate-200 rounded-lg text-slate-600 hover:bg-slate-100 disabled:opacity-40">Next</button>
+        <!-- Big Touch-Friendly Pagination -->
+        <div id="paginationWrap" class="flex items-center justify-between bg-white p-4 rounded-2xl border-2 border-slate-200 hidden">
+          <button id="prevBtn" onclick="changeResultsPage(-1)" class="px-4 py-3 text-xs sm:text-sm font-extrabold border-2 border-slate-300 rounded-xl text-slate-800 bg-slate-50 hover:bg-slate-200 disabled:opacity-40 flex items-center gap-1.5">
+            <i data-lucide="chevron-left" class="w-4 h-4"></i> Previous
+          </button>
+          <span id="pageIndicator" class="text-xs sm:text-sm font-extrabold text-slate-700">Page 1 of 1</span>
+          <button id="nextBtn" onclick="changeResultsPage(1)" class="px-4 py-3 text-xs sm:text-sm font-extrabold border-2 border-slate-300 rounded-xl text-slate-800 bg-slate-50 hover:bg-slate-200 disabled:opacity-40 flex items-center gap-1.5">
+            Next <i data-lucide="chevron-right" class="w-4 h-4"></i>
+          </button>
+        </div>
+
+        <!-- Feature H: Request a Missing Paper Card at bottom of Step 3 -->
+        <div class="bg-amber-50 p-4 sm:p-5 rounded-2xl border-2 border-amber-300 flex flex-col sm:flex-row items-center justify-between gap-3 text-center sm:text-left">
+          <div class="flex flex-col sm:flex-row items-center gap-3">
+            <span class="text-2xl">🙋‍♂️</span>
+            <div>
+              <h4 id="reqStep3Title" class="text-sm sm:text-base font-black text-amber-950">Didn't find the year or paper you wanted?</h4>
+              <p id="reqStep3Sub" class="text-xs font-medium text-amber-900">Tap here to request it directly on WhatsApp.</p>
+            </div>
+          </div>
+          <button onclick="openRequestPaperModal()" class="w-full sm:w-auto px-5 py-3 bg-amber-600 hover:bg-amber-700 text-white font-black text-xs sm:text-sm rounded-xl shadow-sm shrink-0">
+            <span id="reqStep3Btn">Request Missing Paper &rarr;</span>
+          </button>
         </div>
 
       </section>
@@ -327,46 +662,185 @@
   </main>
 
   <!-- ========================================== -->
-  <!-- 4. DOCUMENT VIEWER MODAL                   -->
+  <!-- FEATURE E: STATIONERY PRINT BASKET BAR     -->
   <!-- ========================================== -->
-  <div id="docViewerModal" class="fixed inset-0 z-50 bg-slate-900/70 backdrop-blur-sm hidden items-center justify-center p-3 sm:p-6" role="dialog" aria-modal="true" aria-labelledby="modalPaperTitle">
-    <div class="bg-white rounded-2xl shadow-2xl max-w-4xl w-full max-h-[92vh] flex flex-col overflow-hidden border border-slate-200">
-      
-      <!-- Modal Header -->
-      <div class="px-5 py-3.5 bg-slate-50 border-b border-slate-200 flex items-center justify-between">
-        <div class="pr-3">
-          <span id="modalMetaBadge" class="text-[10px] font-extrabold uppercase tracking-wider px-2 py-0.5 rounded bg-brand-100 text-brand-800 inline-block mb-1">Paper</span>
-          <h3 id="modalPaperTitle" class="text-sm sm:text-base font-bold text-slate-900 line-clamp-1">Paper Preview</h3>
+  <div id="printBasketBar" class="fixed bottom-16 sm:bottom-4 inset-x-3 sm:inset-x-auto sm:right-6 sm:w-[420px] z-30 hidden">
+    <div class="bg-slate-900 text-white p-3.5 rounded-2xl shadow-2xl border-2 border-emerald-400 flex items-center justify-between gap-2">
+      <div class="flex items-center gap-2.5 min-w-0">
+        <span class="w-9 h-9 rounded-xl bg-emerald-600 text-white font-black text-base flex items-center justify-center shrink-0" id="printBasketCountBadge">
+          0
+        </span>
+        <div class="min-w-0">
+          <div id="printBasketTitle" class="text-xs sm:text-sm font-black truncate">Papers in Print List</div>
+          <div id="printBasketSub" class="text-[11px] text-emerald-300 font-semibold truncate">Send all at once to Stationery</div>
         </div>
-        <button onclick="closeViewerModal()" class="p-2 text-slate-400 hover:text-slate-700 rounded-lg hover:bg-slate-200 transition-colors" aria-label="Close Preview Modal">
-          <i data-lucide="x" class="w-5 h-5"></i>
+      </div>
+      <div class="flex items-center gap-1.5 shrink-0">
+        <button onclick="sendPrintBasketToWhatsApp()" class="px-3.5 py-2.5 bg-emerald-500 hover:bg-emerald-600 text-slate-950 font-black text-xs rounded-xl flex items-center gap-1 shadow-sm">
+          <span>🖨️ WhatsApp</span>
+        </button>
+        <button onclick="clearPrintBasket()" class="p-2.5 bg-slate-800 hover:bg-rose-600 text-slate-300 hover:text-white font-bold text-xs rounded-xl" title="Clear Print List">
+          ✕
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- STICKY MOBILE BOTTOM BAR (Thumb Friendly!) -->
+  <!-- ========================================== -->
+  <div id="mobileBottomNav" class="fixed bottom-0 inset-x-0 z-30 bg-white border-t-2 border-slate-300 p-2 sm:hidden hidden shadow-[0_-4px_12px_rgba(0,0,0,0.08)]">
+    <div class="grid grid-cols-2 gap-2.5 max-w-md mx-auto">
+      <button onclick="handleStepBack()" class="py-3 px-4 bg-slate-800 active:bg-slate-900 text-white font-extrabold text-sm rounded-xl flex items-center justify-center gap-2 shadow-sm">
+        <i data-lucide="arrow-left" class="w-4 h-4"></i>
+        <span id="mobileBackLabel">Go Back (Rudi)</span>
+      </button>
+      <button onclick="resetToStep1()" class="py-3 px-4 bg-brand-50 active:bg-brand-100 text-brand-800 border-2 border-brand-300 font-extrabold text-sm rounded-xl flex items-center justify-center gap-2">
+        <i data-lucide="home" class="w-4 h-4"></i>
+        <span id="mobileHomeLabel">Start Over (Mwanzo)</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- 4. DOCUMENT VIEWER MODAL (WITH Q↔A TOGGLE) -->
+  <!-- ========================================== -->
+  <div id="docViewerModal" class="fixed inset-0 z-50 bg-slate-900/80 backdrop-blur-sm hidden items-center justify-center p-2 sm:p-4" role="dialog" aria-modal="true" aria-labelledby="modalPaperTitle">
+    <div class="bg-white rounded-2xl shadow-2xl max-w-4xl w-full h-[95vh] sm:h-[92vh] flex flex-col overflow-hidden border-2 border-slate-300">
+      
+      <!-- Modal Top Header -->
+      <div class="px-3.5 py-2.5 bg-slate-100 border-b border-slate-200 flex items-center justify-between gap-2">
+        <div class="min-w-0">
+          <span id="modalMetaBadge" class="text-[10px] font-extrabold uppercase tracking-wider px-2 py-0.5 rounded bg-brand-100 text-brand-800 inline-block">Paper</span>
+          <h3 id="modalPaperTitle" class="text-xs sm:text-base font-black text-slate-900 truncate">Paper Preview</h3>
+        </div>
+        <button onclick="closeViewerModal()" class="px-3 py-2 bg-rose-600 hover:bg-rose-700 text-white font-extrabold text-xs rounded-xl flex items-center gap-1 shrink-0 shadow-sm" aria-label="Close Preview Modal">
+          <span>✕ CLOSE (FUNGA)</span>
         </button>
       </div>
 
-      <!-- Notice Bar for Mobile Fallback -->
-      <div class="bg-amber-50 px-5 py-2 border-b border-amber-200 flex items-center justify-between text-xs text-amber-900">
-        <span>If preview is blank on your phone:</span>
-        <a id="modalDirectLink" href="#" target="_blank" rel="noopener noreferrer" class="font-bold underline flex items-center gap-1">
-          <i data-lucide="external-link" class="w-3.5 h-3.5"></i> Open File Directly
+      <!-- Feature D: 1-Tap Switcher between Questions & Answers inside the Viewer -->
+      <div class="bg-slate-900 p-2 border-b border-slate-700">
+        <div class="grid grid-cols-2 gap-2 max-w-lg mx-auto">
+          <button 
+            id="modalSwitchQuestionsBtn" 
+            onclick="switchViewerMode('paper')"
+            class="py-2 px-3 rounded-xl font-black text-xs sm:text-sm flex items-center justify-center gap-1.5 transition-all"
+          >
+            <span>📖</span>
+            <span id="modalSwitchQText">Questions (Maswali)</span>
+          </button>
+          <button 
+            id="modalSwitchAnswersBtn" 
+            onclick="switchViewerMode('answers')"
+            class="py-2 px-3 rounded-xl font-black text-xs sm:text-sm flex items-center justify-center gap-1.5 transition-all"
+          >
+            <span>✅</span>
+            <span id="modalSwitchAText">Answers (Majibu)</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- High-Visibility Notice Bar for Phones -->
+      <div class="bg-amber-100 px-3.5 py-2 border-b border-amber-300 flex flex-wrap items-center justify-between gap-2 text-xs text-amber-950">
+        <span id="modalFallbackNotice" class="font-bold">📱 Blank screen on your phone?</span>
+        <a id="modalDirectLink" href="#" target="_blank" rel="noopener noreferrer" class="font-black bg-amber-900 text-white px-3 py-1 rounded-lg inline-flex items-center gap-1">
+          <i data-lucide="external-link" class="w-3.5 h-3.5"></i> <span id="modalOpenFullText">Open Full Screen</span>
         </a>
       </div>
 
       <!-- Modal Body (Iframe) -->
-      <div class="flex-grow bg-slate-100 relative min-h-[360px] sm:min-h-[480px]">
-        <div id="modalSpinner" class="absolute inset-0 flex flex-col items-center justify-center bg-white z-10">
-          <div class="w-8 h-8 border-3 border-brand-200 border-t-brand-600 rounded-full animate-spin mb-2"></div>
-          <p class="text-xs font-semibold text-slate-500">Loading document...</p>
+      <div class="flex-grow bg-slate-200 relative">
+        <div id="modalSpinner" class="absolute inset-0 flex flex-col items-center justify-center bg-white z-10 p-4 text-center">
+          <div class="w-10 h-10 border-4 border-brand-200 border-t-brand-600 rounded-full animate-spin mb-3"></div>
+          <p class="text-sm font-extrabold text-slate-800">Opening document...</p>
+          <p class="text-xs text-slate-500 mt-1">Inafungua, tafadhali subiri kidogo...</p>
         </div>
         <iframe id="docViewerIframe" class="w-full h-full border-0" title="Examination Paper Document" sandbox="allow-scripts allow-same-origin allow-popups" src="about:blank"></iframe>
       </div>
 
       <!-- Modal Footer -->
-      <div class="px-5 py-3 bg-white border-t border-slate-200 flex items-center justify-between text-xs">
-        <a id="modalDownloadActionBtn" href="#" target="_blank" rel="noopener noreferrer" download class="inline-flex items-center gap-1.5 bg-brand-600 text-white font-bold px-3 py-1.5 rounded-lg">
-          <i data-lucide="download" class="w-3.5 h-3.5"></i> Download PDF
+      <div class="px-3.5 py-2.5 bg-white border-t-2 border-slate-200 flex items-center justify-between gap-2">
+        <a id="modalDownloadActionBtn" href="#" target="_blank" rel="noopener noreferrer" download class="flex-1 sm:flex-none inline-flex items-center justify-center gap-2 bg-brand-600 hover:bg-brand-700 text-white font-extrabold text-xs sm:text-sm px-4 py-2.5 rounded-xl shadow-sm">
+          <i data-lucide="download" class="w-4 h-4"></i> <span id="modalDownloadText">Download PDF (Pakua)</span>
         </a>
-        <button onclick="closeViewerModal()" class="text-slate-600 font-bold hover:text-slate-900">Close</button>
+        <button onclick="togglePrintBasketFromModal()" id="modalPrintBasketBtn" class="px-3.5 py-2.5 bg-emerald-50 hover:bg-emerald-100 text-emerald-900 border-2 border-emerald-300 font-extrabold text-xs sm:text-sm rounded-xl">
+          ➕ Print List
+        </button>
       </div>
+    </div>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- FEATURE H: REQUEST A MISSING PAPER MODAL   -->
+  <!-- ========================================== -->
+  <div id="requestPaperModal" class="fixed inset-0 z-50 bg-slate-900/80 backdrop-blur-sm hidden items-center justify-center p-4" role="dialog" aria-modal="true">
+    <div class="bg-white rounded-3xl shadow-2xl max-w-md w-full p-5 sm:p-6 border-2 border-slate-300 space-y-4">
+      <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+        <div class="flex items-center gap-2.5">
+          <span class="text-2xl">🙋‍♂️</span>
+          <h3 id="reqModalHeader" class="text-base sm:text-lg font-black text-slate-900">Request a Missing Paper</h3>
+        </div>
+        <button onclick="closeRequestPaperModal()" class="px-3 py-1.5 bg-slate-100 hover:bg-slate-200 rounded-xl font-black text-xs text-slate-700">✕</button>
+      </div>
+
+      <p id="reqModalDesc" class="text-xs sm:text-sm text-slate-600 font-medium">
+        Fill in the paper you need below. We will prioritize uploading it to Elimika!
+      </p>
+
+      <div class="space-y-3">
+        <div>
+          <label class="block text-xs font-extrabold text-slate-700 mb-1">Class / Darasa</label>
+          <input id="reqInputClass" type="text" placeholder="e.g. Form 4 or Standard 7" class="w-full px-3.5 py-2.5 rounded-xl border-2 border-slate-300 font-bold text-sm" />
+        </div>
+        <div>
+          <label class="block text-xs font-extrabold text-slate-700 mb-1">Subject / Somo</label>
+          <input id="reqInputSubject" type="text" placeholder="e.g. Mathematics / Biology" class="w-full px-3.5 py-2.5 rounded-xl border-2 border-slate-300 font-bold text-sm" />
+        </div>
+        <div>
+          <label class="block text-xs font-extrabold text-slate-700 mb-1">Year & Exam Type / Mwaka</label>
+          <input id="reqInputYear" type="text" placeholder="e.g. 2024 NECTA or Mock" class="w-full px-3.5 py-2.5 rounded-xl border-2 border-slate-300 font-bold text-sm" />
+        </div>
+      </div>
+
+      <div class="pt-2 flex flex-col sm:flex-row gap-2.5">
+        <button onclick="submitPaperRequestWhatsApp()" class="flex-1 py-3 px-4 bg-emerald-600 hover:bg-emerald-700 text-white font-black text-sm rounded-xl shadow-md flex items-center justify-center gap-2">
+          <span>💬 Send Request via WhatsApp</span>
+        </button>
+        <button onclick="closeRequestPaperModal()" class="py-3 px-4 bg-slate-100 hover:bg-slate-200 text-slate-700 font-extrabold text-xs rounded-xl">
+          Cancel
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- FEATURE G: INSTALL APP GUIDE MODAL         -->
+  <!-- ========================================== -->
+  <div id="installGuideModal" class="fixed inset-0 z-50 bg-slate-900/80 backdrop-blur-sm hidden items-center justify-center p-4" role="dialog" aria-modal="true">
+    <div class="bg-white rounded-3xl shadow-2xl max-w-md w-full p-5 sm:p-6 border-2 border-slate-300 space-y-4">
+      <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+        <div class="flex items-center gap-2.5">
+          <span class="text-2xl">📲</span>
+          <h3 class="text-base sm:text-lg font-black text-slate-900">Put Elimika on Your Phone Screen</h3>
+        </div>
+        <button onclick="closeInstallGuideModal()" class="px-3 py-1.5 bg-slate-100 hover:bg-slate-200 rounded-xl font-black text-xs text-slate-700">✕</button>
+      </div>
+
+      <div class="space-y-3 text-xs sm:text-sm text-slate-700 font-medium">
+        <div class="p-3.5 rounded-2xl bg-brand-50 border border-brand-200">
+          <div class="font-black text-brand-900 mb-1">1. Tap the 3 Dots (⋮) or Share Button</div>
+          <p>Look at the top-right corner of Chrome (or bottom of Safari on iPhone) and tap the menu icon.</p>
+        </div>
+        <div class="p-3.5 rounded-2xl bg-emerald-50 border border-emerald-200">
+          <div class="font-black text-emerald-900 mb-1">2. Tap "Add to Home screen" (Weka Kwenye Skrini)</div>
+          <p>Elimika will appear on your phone just like WhatsApp so you can open it anytime with 1 tap!</p>
+        </div>
+      </div>
+
+      <button onclick="closeInstallGuideModal()" class="w-full py-3 bg-brand-600 hover:bg-brand-700 text-white font-black text-sm rounded-xl">
+        Got It! (Nimeelewa)
+      </button>
     </div>
   </div>
 
@@ -375,9 +849,9 @@
   <!-- ========================================== -->
   <footer class="bg-slate-900 text-slate-400 py-8 border-t border-slate-800 text-xs text-center mt-auto">
     <div class="max-w-5xl mx-auto px-4 space-y-2">
-      <div class="font-bold text-white text-sm">ELIMIKA TANZANIA</div>
-      <p>Independent revision repository for Standard 1–7 and Form 1–6.</p>
-      <p class="text-[11px] text-slate-500">Powered by Google Sheets & Vercel Static Hosting.</p>
+      <div class="font-black text-white text-sm tracking-wide">ELIMIKA TANZANIA</div>
+      <p>Free past examination papers and marking schemes for Standard 1–7 and Form 1–6.</p>
+      <p class="text-[11px] text-slate-500">Designed for fast loading on any mobile phone in Tanzania.</p>
     </div>
   </footer>
 
@@ -387,22 +861,589 @@
   <script>
     const CONFIG = {
       SHEET_ID: '1-7C_G-VAC2ICxuT3XwADzAluRoDvQyd04yS4BtSvXxM',
+      CACHE_KEY: 'elimika_papers_cache_v3',
+      LANG_KEY: 'elimika_preferred_lang',
+      LAST_CLASS_KEY: 'elimika_last_selected_class',
+      RECENT_PAPERS_KEY: 'elimika_recent_papers_v1',
+      PRINT_BASKET_KEY: 'elimika_print_basket_v1',
       ITEMS_PER_PAGE: 10,
       SEARCH_DEBOUNCE_MS: 200
     };
 
-    // State Store
+    // Bilingual Dictionary (English & Kiswahili)
+    const I18N = {
+      en: {
+        toggleBtn: 'Kiswahili',
+        installApp: 'Install App',
+        heroTitle: 'Find Past Papers in <span class="text-brand-600">3 Easy Taps</span>',
+        heroSub: '1. Tap your Class → 2. Tap your Subject → 3. Download Paper',
+        searchPlaceholder: 'Type or tap Mic 🎤 (e.g. Form 4 Math)...',
+        voiceBtn: 'Voice',
+        voiceListening: 'Listening... Speak now (e.g. "Form 4 Mathematics")',
+        crumb1: 'Choose Class',
+        crumb2: 'Pick Subject',
+        crumb3: 'Get Papers',
+        savedClassPrefix: 'Continue with',
+        savedClassBtn: 'Open Subjects Now',
+        recentPapersTitle: 'Recently Opened Papers',
+        recentPapersSub: 'Tap any paper below to open it again immediately',
+        step1Title: 'STEP 1: Tap Your Class Below',
+        step1Sub: 'Gusa darasa au kidato unachotafuta hapa chini',
+        step2Prefix: 'STEP 2: Tap a Subject for',
+        step2Sub: 'Select any subject below to view its past papers',
+        backToClasses: 'Change Class',
+        backToSubjects: 'Change Subject',
+        filterLabel: '1. Filter by Exam Type:',
+        yearFilterLabel: '2. Filter by Year:',
+        allYears: 'All Years',
+        readPaper: 'Read Questions',
+        downloadPdf: 'Download PDF',
+        viewAnswers: 'Answers (Marking Scheme)',
+        shareWhatsapp: 'Send to WhatsApp',
+        addPrint: '➕ Print List',
+        inPrintList: '✓ In Print List',
+        loadingSubjects: 'Loading subjects, please wait...',
+        noSubjectsTitle: 'No papers uploaded yet for',
+        noSubjectsSub: 'Please check back soon or request this paper below.',
+        chooseAnotherClass: 'Choose Another Class',
+        papersAvailable: 'papers available',
+        paperAvailable: 'paper available',
+        mobileBack: 'Go Back',
+        mobileHome: 'Start Over',
+        reqStep2Title: 'Missing a subject or past paper?',
+        reqStep2Sub: 'Tell us which paper you need and we will upload it for you.',
+        reqStep2Btn: 'Request a Paper (Omba Mtihani)',
+        reqStep3Title: 'Didn\'t find the year or paper you wanted?',
+        reqStep3Sub: 'Tap here to request it directly on WhatsApp.',
+        reqStep3Btn: 'Request Missing Paper →',
+        basketTitle: 'Papers in Print List',
+        basketSub: 'Send all at once to Stationery via WhatsApp'
+      },
+      sw: {
+        toggleBtn: 'English',
+        installApp: 'Weka App',
+        heroTitle: 'Pata Mitihani kwa <span class="text-brand-600">Hatua 3 Rahisi</span>',
+        heroSub: '1. Chagua Darasa → 2. Chagua Somo → 3. Pakua Mtihani',
+        searchPlaceholder: 'Andika au gusa Sauti 🎤 (mf: Form 4 Math)...',
+        voiceBtn: 'Sauti',
+        voiceListening: 'Inasikiliza... Sema sasa (mfano: "Kidato cha Nne Hisabati")',
+        crumb1: 'Chagua Darasa',
+        crumb2: 'Chagua Somo',
+        crumb3: 'Pakua Mitihani',
+        savedClassPrefix: 'Endelea na',
+        savedClassBtn: 'Fungua Masomo Sasa',
+        recentPapersTitle: 'Mitihani Uliyofungua Hivi Karibuni',
+        recentPapersSub: 'Gusa mtihani wowote hapa chini kuufungua tena',
+        step1Title: 'HATUA YA 1: Gusa Darasa Lako Hapa Chini',
+        step1Sub: 'Chagua Shule ya Sekondari (Form 1–6) au Msingi (Std 1–7)',
+        step2Prefix: 'HATUA YA 2: Chagua Somo la',
+        step2Sub: 'Gusa somo lolote hapa chini kuona mitihani yake',
+        backToClasses: 'Badili Darasa',
+        backToSubjects: 'Rudi Kwenye Masomo',
+        filterLabel: '1. Chuja Aina ya Mtihani:',
+        yearFilterLabel: '2. Chuja Mwaka wa Mtihani:',
+        allYears: 'Miaka Yote',
+        readPaper: 'Soma Maswali',
+        downloadPdf: 'Pakua PDF',
+        viewAnswers: 'Majibu (Marking Scheme)',
+        shareWhatsapp: 'Tuma WhatsApp',
+        addPrint: '➕ Orodha ya Kuprint',
+        inPrintList: '✓ Ipo Kwenye Orodha',
+        loadingSubjects: 'Inapakua masomo, tafadhali subiri kidogo...',
+        noSubjectsTitle: 'Bado hakuna mitihani iliyowekwa kwa',
+        noSubjectsSub: 'Tafadhali jaribu darasa jingine au omba mtihani huo hapa chini.',
+        chooseAnotherClass: 'Chagua Darasa Jingine',
+        papersAvailable: 'mitihani ipo',
+        paperAvailable: 'mtihani upo',
+        mobileBack: 'Rudi Nyuma',
+        mobileHome: 'Anza Upya',
+        reqStep2Title: 'Hujapata somo au mtihani unaotafuta?',
+        reqStep2Sub: 'Tuambie mtihani unaohitaji na tutauweka haraka.',
+        reqStep2Btn: 'Omba Mtihani Huo Hapa',
+        reqStep3Title: 'Hujapata mwaka au mtihani unaoutafuta?',
+        reqStep3Sub: 'Bonyeza hapa kuomba mtihani huo kupitia WhatsApp.',
+        reqStep3Btn: 'Omba Mtihani Usiopo →',
+        basketTitle: 'Mitihani Kwenye Orodha ya Kuprint',
+        basketSub: 'Tuma yote kwa pamoja kwenda Stationery (WhatsApp)'
+      }
+    };
+
+    // Visual Icon Helper so low-literacy users can recognize subjects by icon
+    function getSubjectIcon(subjectName) {
+      const s = (subjectName || '').toLowerCase();
+      if (s.includes('math') || s.includes('hisabati')) return '📐';
+      if (s.includes('biol') || s.includes('baiolojia')) return '🌿';
+      if (s.includes('chem') || s.includes('kemia')) return '🧪';
+      if (s.includes('phys') || s.includes('fizikia')) return '⚡';
+      if (s.includes('geog') || s.includes('jiografia')) return '🌍';
+      if (s.includes('hist')) return '📜';
+      if (s.includes('civ') || s.includes('uraia') || s.includes('general studies')) return '⚖️';
+      if (s.includes('kisw')) return '🗣️';
+      if (s.includes('engl')) return '📖';
+      if (s.includes('comp') || s.includes('ict') || s.includes('tehama')) return '💻';
+      if (s.includes('comm') || s.includes('book') || s.includes('account') || s.includes('econ') || s.includes('biashara')) return '📊';
+      if (s.includes('scien') || s.includes('sayansi')) return '🔬';
+      if (s.includes('agric') || s.includes('kilimo')) return '🌾';
+      if (s.includes('bible') || s.includes('islam') || s.includes('dini')) return '🕌';
+      if (s.includes('french') || s.includes('arabic') || s.includes('chinese')) return '🌐';
+      return '📘';
+    }
+
+    // Normalize class names so "Std 7", "Standard 7", "Form IV", "Form 4" match reliably
+    function normalizeClassName(raw) {
+      if (!raw) return '';
+      let s = String(raw).trim().toLowerCase();
+      s = s.replace(/^std\.?\s*/, 'standard ');
+      s = s.replace(/^darasa la\s*/, 'standard ');
+      s = s.replace(/^kidato cha\s*/, 'form ');
+      const romanMap = {
+        'form i': 'form 1',
+        'form ii': 'form 2',
+        'form iii': 'form 3',
+        'form iv': 'form 4',
+        'form v': 'form 5',
+        'form vi': 'form 6',
+        'standard i': 'standard 1',
+        'standard ii': 'standard 2',
+        'standard iii': 'standard 3',
+        'standard iv': 'standard 4',
+        'standard v': 'standard 5',
+        'standard vi': 'standard 6',
+        'standard vii': 'standard 7'
+      };
+      return romanMap[s] || s;
+    }
+
+    // Application State
     let allPapers = [];
+    let isLoadingData = true;
+    let currentLang = localStorage.getItem(CONFIG.LANG_KEY) || 'en';
+    let recentPaperIds = [];
+    let printBasketIds = [];
+    let deferredInstallPrompt = null;
+
     let state = {
       step: 1,                 // 1 = Class, 2 = Subject, 3 = Papers
       selectedClass: '',
       selectedSubject: '',
       selectedCategory: 'ALL',
+      selectedYear: 'ALL',
       searchQuery: '',
-      page: 1
+      page: 1,
+      modalOpen: false,
+      activePaperId: null,
+      activeModalMode: 'paper' // 'paper' or 'answers'
     };
 
     let searchTimer = null;
+    let toastTimer = null;
+
+    function t(key) {
+      return (I18N[currentLang] && I18N[currentLang][key]) || I18N.en[key] || key;
+    }
+
+    // Custom Toast Notification (replaces alert/confirm)
+    function showToast(message, icon = 'ℹ️') {
+      const toast = document.getElementById('customToast');
+      document.getElementById('customToastText').textContent = message;
+      document.getElementById('customToastIcon').textContent = icon;
+      toast.classList.remove('hidden');
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => {
+        hideToast();
+      }, 4000);
+    }
+
+    function hideToast() {
+      document.getElementById('customToast').classList.add('hidden');
+    }
+
+    function toggleLanguage() {
+      currentLang = (currentLang === 'en') ? 'sw' : 'en';
+      try {
+        localStorage.setItem(CONFIG.LANG_KEY, currentLang);
+      } catch (e) {}
+      applyLanguageUI();
+      showToast(currentLang === 'sw' ? 'Lugha imebadilishwa kuwa Kiswahili 🇹🇿' : 'Language switched to English 🇬🇧', '🌐');
+    }
+
+    function applyLanguageUI() {
+      document.getElementById('langLabel').textContent = t('toggleBtn');
+      document.getElementById('installAppLabel').textContent = t('installApp');
+      document.getElementById('heroTitle').innerHTML = t('heroTitle');
+      document.getElementById('heroSubtitle').textContent = t('heroSub');
+      document.getElementById('smartSearchInput').placeholder = t('searchPlaceholder');
+      document.getElementById('voiceBtnLabel').textContent = t('voiceBtn');
+      document.getElementById('voiceListeningText').textContent = t('voiceListening');
+
+      document.getElementById('savedClassPrefix').textContent = t('savedClassPrefix');
+      document.getElementById('savedClassBtnText').textContent = t('savedClassBtn');
+      document.getElementById('recentPapersTitle').textContent = t('recentPapersTitle');
+      document.getElementById('recentPapersSub').textContent = t('recentPapersSub');
+
+      document.getElementById('step1InstructionTitle').textContent = t('step1Title');
+      document.getElementById('step1InstructionSub').textContent = t('step1Sub');
+      document.getElementById('step2TitlePrefix').textContent = t('step2Prefix');
+      document.getElementById('step2SubText').textContent = t('step2Sub');
+      document.getElementById('backToClassesText').textContent = t('backToClasses');
+      document.getElementById('backToSubjectsText').textContent = t('backToSubjects');
+      document.getElementById('filterLabelText').textContent = t('filterLabel');
+      document.getElementById('yearFilterLabelText').textContent = t('yearFilterLabel');
+      document.getElementById('mobileBackLabel').textContent = t('mobileBack');
+      document.getElementById('mobileHomeLabel').textContent = t('mobileHome');
+
+      document.getElementById('reqStep2Title').textContent = t('reqStep2Title');
+      document.getElementById('reqStep2Sub').textContent = t('reqStep2Sub');
+      document.getElementById('reqStep2Btn').textContent = t('reqStep2Btn');
+      document.getElementById('reqStep3Title').textContent = t('reqStep3Title');
+      document.getElementById('reqStep3Sub').textContent = t('reqStep3Sub');
+      document.getElementById('reqStep3Btn').textContent = t('reqStep3Btn');
+
+      document.getElementById('printBasketTitle').textContent = t('basketTitle');
+      document.getElementById('printBasketSub').textContent = t('basketSub');
+
+      renderSavedClassBanner();
+      renderRecentPapersSection();
+
+      if (state.step === 1) {
+        document.getElementById('crumbStep1Label').textContent = t('crumb1');
+        document.getElementById('crumbStep2Label').textContent = t('crumb2');
+        document.getElementById('crumbStep3Label').textContent = t('crumb3');
+      } else if (state.step === 2) {
+        renderNectaCountdown(state.selectedClass);
+        renderSubjectsForClass();
+      } else if (state.step === 3) {
+        renderPapersList();
+      }
+    }
+
+    // Feature A: Voice Search ("Tafuta kwa Sauti")
+    function normalizeVoiceTranscript(transcript) {
+      let text = (transcript || '').toLowerCase().trim();
+      // Convert common Swahili & English spoken class phrases into standard search tokens
+      const replacements = [
+        [/kidato cha kwanza|form one/g, 'form 1'],
+        [/kidato cha pili|form two/g, 'form 2'],
+        [/kidato cha tatu|form three/g, 'form 3'],
+        [/kidato cha nne|form four/g, 'form 4'],
+        [/kidato cha tano|form five/g, 'form 5'],
+        [/kidato cha sita|form six/g, 'form 6'],
+        [/darasa la kwanza|standard one/g, 'standard 1'],
+        [/darasa la pili|standard two/g, 'standard 2'],
+        [/darasa la tatu|standard three/g, 'standard 3'],
+        [/darasa la nne|standard four/g, 'standard 4'],
+        [/darasa la tano|standard five/g, 'standard 5'],
+        [/darasa la sita|standard six/g, 'standard 6'],
+        [/darasa la saba|standard seven/g, 'standard 7'],
+        [/hisabati/g, 'mathematics'],
+        [/baiolojia/g, 'biology'],
+        [/kemia/g, 'chemistry'],
+        [/fizikia/g, 'physics'],
+        [/jiografia/g, 'geography'],
+        [/uraia/g, 'civics'],
+        [/sayansi/g, 'science']
+      ];
+      replacements.forEach(([regex, rep]) => {
+        text = text.replace(regex, rep);
+      });
+      return text.replace(/[.,?!]/g, '').trim();
+    }
+
+    function startVoiceSearch() {
+      const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+      if (!SpeechRecognition) {
+        showToast(
+          currentLang === 'sw'
+            ? 'Kivinjari chako hakitumii utafutaji wa sauti. Tafadhali andika kwenye kisanduku.'
+            : 'Voice search is not supported on this browser. Please type in the search box.',
+          '🎤'
+        );
+        document.getElementById('smartSearchInput').focus();
+        return;
+      }
+
+      const voiceBtn = document.getElementById('voiceSearchBtn');
+      const listeningBanner = document.getElementById('voiceListeningBanner');
+      const recognition = new SpeechRecognition();
+
+      recognition.lang = currentLang === 'sw' ? 'sw-TZ' : 'en-US';
+      recognition.interimResults = false;
+      recognition.maxAlternatives = 1;
+
+      recognition.onstart = () => {
+        voiceBtn.classList.add('mic-listening');
+        listeningBanner.classList.remove('hidden');
+      };
+
+      recognition.onresult = (event) => {
+        const rawTranscript = event.results[0][0].transcript;
+        const cleanedQuery = normalizeVoiceTranscript(rawTranscript);
+        const searchInput = document.getElementById('smartSearchInput');
+        searchInput.value = cleanedQuery;
+        document.getElementById('clearSearchBtn').classList.remove('hidden');
+        state.searchQuery = cleanedQuery;
+        state.page = 1;
+        showToast(`🎤 "${cleanedQuery}"`, '✅');
+        goToStep(3);
+      };
+
+      recognition.onerror = () => {
+        showToast(
+          currentLang === 'sw'
+            ? 'Hatukukusikia vizuri. Tafadhali gusa kipaza sauti ujaribu tena.'
+            : 'Could not hear clearly. Please tap the Mic and speak again.',
+          '🎤'
+        );
+      };
+
+      recognition.onend = () => {
+        voiceBtn.classList.remove('mic-listening');
+        listeningBanner.classList.add('hidden');
+      };
+
+      try {
+        recognition.start();
+      } catch (e) {
+        voiceBtn.classList.remove('mic-listening');
+        listeningBanner.classList.add('hidden');
+      }
+    }
+
+    // Feature B: "Remember My Class"
+    function saveLastSelectedClass(className) {
+      try {
+        localStorage.setItem(CONFIG.LAST_CLASS_KEY, className);
+      } catch (e) {}
+      renderSavedClassBanner();
+    }
+
+    function renderSavedClassBanner() {
+      const saved = localStorage.getItem(CONFIG.LAST_CLASS_KEY);
+      const banner = document.getElementById('savedClassBanner');
+      if (!saved) {
+        banner.classList.add('hidden');
+        return;
+      }
+      document.getElementById('savedClassName').textContent = saved;
+      banner.classList.remove('hidden');
+    }
+
+    function continueWithSavedClass() {
+      const saved = localStorage.getItem(CONFIG.LAST_CLASS_KEY);
+      if (saved) {
+        selectClass(saved);
+      }
+    }
+
+    // Feature C: "Recently Opened Papers"
+    function loadRecentPapers() {
+      try {
+        const raw = localStorage.getItem(CONFIG.RECENT_PAPERS_KEY);
+        if (raw) {
+          const parsed = JSON.parse(raw);
+          if (Array.isArray(parsed)) recentPaperIds = parsed;
+        }
+      } catch (e) {}
+    }
+
+    function recordRecentPaper(paperId) {
+      recentPaperIds = [paperId, ...recentPaperIds.filter(id => id !== paperId)].slice(0, 4);
+      try {
+        localStorage.setItem(CONFIG.RECENT_PAPERS_KEY, JSON.stringify(recentPaperIds));
+      } catch (e) {}
+      renderRecentPapersSection();
+    }
+
+    function clearRecentPapers() {
+      recentPaperIds = [];
+      try {
+        localStorage.removeItem(CONFIG.RECENT_PAPERS_KEY);
+      } catch (e) {}
+      renderRecentPapersSection();
+    }
+
+    function renderRecentPapersSection() {
+      const section = document.getElementById('recentPapersSection');
+      const listEl = document.getElementById('recentPapersList');
+      if (!recentPaperIds.length || !allPapers.length) {
+        section.classList.add('hidden');
+        return;
+      }
+
+      const items = recentPaperIds
+        .map(id => allPapers.find(p => p.id === id))
+        .filter(Boolean);
+
+      if (items.length === 0) {
+        section.classList.add('hidden');
+        return;
+      }
+
+      section.classList.remove('hidden');
+      let html = '';
+      items.forEach(p => {
+        const icon = getSubjectIcon(p.subject);
+        html += `
+          <div class="p-3 rounded-2xl bg-amber-50/60 border-2 border-amber-200 flex items-center justify-between gap-2">
+            <div class="min-w-0">
+              <div class="text-[11px] font-extrabold text-amber-900">${icon} ${escapeHtml(p.form)} • ${escapeHtml(p.year)}</div>
+              <div class="text-xs sm:text-sm font-black text-slate-900 truncate">${escapeHtml(p.title)}</div>
+            </div>
+            <div class="flex items-center gap-1.5 shrink-0">
+              <button onclick="openViewer('${p.id}', 'paper')" class="px-3 py-2 bg-brand-600 hover:bg-brand-700 text-white font-extrabold text-xs rounded-xl">
+                📖 Open
+              </button>
+              ${p.answersUrl ? `
+                <button onclick="openViewer('${p.id}', 'answers')" class="px-2.5 py-2 bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold text-xs rounded-xl" title="Answers">
+                  ✅
+                </button>
+              ` : ''}
+            </div>
+          </div>
+        `;
+      });
+      listEl.innerHTML = html;
+    }
+
+    // Feature E: "Stationery Print Basket"
+    function loadPrintBasket() {
+      try {
+        const raw = localStorage.getItem(CONFIG.PRINT_BASKET_KEY);
+        if (raw) {
+          const parsed = JSON.parse(raw);
+          if (Array.isArray(parsed)) printBasketIds = parsed;
+        }
+      } catch (e) {}
+      updatePrintBasketBar();
+    }
+
+    function togglePrintBasket(paperId) {
+      if (printBasketIds.includes(paperId)) {
+        printBasketIds = printBasketIds.filter(id => id !== paperId);
+        showToast(currentLang === 'sw' ? 'Imeondolewa kwenye orodha ya kuprint' : 'Removed from Print List', '🗑️');
+      } else {
+        printBasketIds.push(paperId);
+        showToast(currentLang === 'sw' ? 'Imeongezwa kwenye Orodha ya Kuprint!' : 'Added to Stationery Print List!', '🖨️');
+      }
+      try {
+        localStorage.setItem(CONFIG.PRINT_BASKET_KEY, JSON.stringify(printBasketIds));
+      } catch (e) {}
+      updatePrintBasketBar();
+      if (state.step === 3) renderPapersList();
+      updateModalPrintButtonState();
+    }
+
+    function togglePrintBasketFromModal() {
+      if (state.activePaperId) {
+        togglePrintBasket(state.activePaperId);
+      }
+    }
+
+    function updateModalPrintButtonState() {
+      const btn = document.getElementById('modalPrintBasketBtn');
+      if (!btn || !state.activePaperId) return;
+      const inBasket = printBasketIds.includes(state.activePaperId);
+      btn.textContent = inBasket ? t('inPrintList') : t('addPrint');
+    }
+
+    function clearPrintBasket() {
+      printBasketIds = [];
+      try {
+        localStorage.removeItem(CONFIG.PRINT_BASKET_KEY);
+      } catch (e) {}
+      updatePrintBasketBar();
+      if (state.step === 3) renderPapersList();
+    }
+
+    function updatePrintBasketBar() {
+      const bar = document.getElementById('printBasketBar');
+      const badge = document.getElementById('printBasketCountBadge');
+      if (printBasketIds.length === 0) {
+        bar.classList.add('hidden');
+      } else {
+        badge.textContent = String(printBasketIds.length);
+        bar.classList.remove('hidden');
+      }
+    }
+
+    function sendPrintBasketToWhatsApp() {
+      const papers = printBasketIds
+        .map(id => allPapers.find(p => p.id === id))
+        .filter(Boolean);
+
+      if (papers.length === 0) return;
+
+      let msg = `*🖨️ ELIMIKA STATIONERY PRINT LIST (${papers.length} PAPERS)*\n`;
+      msg += `Tafadhali naomba uniprintie mitihani ifuatayo:\n\n`;
+      papers.forEach((p, idx) => {
+        const dl = getDirectDownloadUrl(p.paperUrl || '');
+        msg += `${idx + 1}. *${p.title}* (${p.form} • ${p.subject} • ${p.year})\n`;
+        msg += `   📄 Maswali: ${dl}\n`;
+        if (p.answersUrl) {
+          msg += `   ✅ Majibu: ${getDirectDownloadUrl(p.answersUrl)}\n`;
+        }
+        msg += `\n`;
+      });
+
+      const waUrl = `https://wa.me/?text=${encodeURIComponent(msg)}`;
+      window.open(waUrl, '_blank', 'noopener,noreferrer');
+    }
+
+    // Feature I: National Exam Countdown Banner (NECTA Timer)
+    function renderNectaCountdown(className) {
+      const banner = document.getElementById('nectaCountdownBanner');
+      const norm = normalizeClassName(className);
+
+      // Approximate typical NECTA examination months in Tanzania (Month is 0-indexed: 8=Sept, 9=Oct, 10=Nov, 4=May)
+      const schedules = {
+        'standard 7': {
+          month: 8, day: 10,
+          enTitle: 'Standard 7 National Exams (PSLE)',
+          swTitle: 'Mtihani wa Taifa wa Darasa la Saba (PSLE)'
+        },
+        'standard 4': {
+          month: 9, day: 25,
+          enTitle: 'Standard 4 National Assessment (SFNA)',
+          swTitle: 'Upimaji wa Kitaifa wa Darasa la Nne (SFNA)'
+        },
+        'form 2': {
+          month: 9, day: 28,
+          enTitle: 'Form 2 National Assessment (FTNA)',
+          swTitle: 'Upimaji wa Kitaifa wa Kidato cha Pili (FTNA)'
+        },
+        'form 4': {
+          month: 10, day: 11,
+          enTitle: 'Form 4 National Examinations (NECTA CSEE)',
+          swTitle: 'Mtihani wa Taifa wa Kidato cha Nne (NECTA CSEE)'
+        },
+        'form 6': {
+          month: 4, day: 4,
+          enTitle: 'Form 6 Advanced National Exams (NECTA ACSEE)',
+          swTitle: 'Mtihani wa Taifa wa Kidato cha Sita (NECTA ACSEE)'
+        }
+      };
+
+      const info = schedules[norm];
+      if (!info) {
+        banner.classList.add('hidden');
+        return;
+      }
+
+      const now = new Date();
+      let target = new Date(now.getFullYear(), info.month, info.day);
+      if (target < now) {
+        target = new Date(now.getFullYear() + 1, info.month, info.day);
+      }
+      const diffDays = Math.max(1, Math.ceil((target - now) / (1000 * 60 * 60 * 24)));
+
+      document.getElementById('nectaExamName').textContent = currentLang === 'sw' ? info.swTitle : info.enTitle;
+      document.getElementById('nectaExamSub').textContent = currentLang === 'sw'
+        ? 'Fanya mazoezi angalau mitihani 2 kila siku ili ufaulu vizuri!'
+        : 'Practice at least 2 past papers every day to pass with flying colors!';
+      document.getElementById('nectaDaysCount').textContent = `${diffDays} ${currentLang === 'sw' ? 'Siku' : 'Days'}`;
+      document.getElementById('nectaDaysUnit').textContent = currentLang === 'sw' ? 'Zimebaki' : 'Until Exam Season';
+      banner.classList.remove('hidden');
+    }
 
     // Entity encoding for safe UI rendering
     function escapeHtml(str) {
@@ -493,7 +1534,7 @@
       return rows;
     }
 
-    // Map rows to schema (A:Title, B:Form, C:Subject, D:Year, E:Category, F:PaperURL, G:AnswersURL)
+    // Map rows to schema
     function processParsedRows(rows) {
       if (rows.length < 2) return [];
       const records = [];
@@ -523,12 +1564,30 @@
       return records;
     }
 
+    // Load cached papers first for 0.0s instant response on slow connections
+    function loadCachedData() {
+      try {
+        const cached = localStorage.getItem(CONFIG.CACHE_KEY);
+        if (cached) {
+          const parsed = JSON.parse(cached);
+          if (Array.isArray(parsed) && parsed.length > 0) {
+            allPapers = parsed;
+            isLoadingData = false;
+          }
+        }
+      } catch (e) {}
+    }
+
     // Fetch Google Sheet Data
     async function fetchSheetData() {
       const statusEl = document.getElementById('dataStatusIndicator');
       const banner = document.getElementById('networkErrorBanner');
       banner.classList.add('hidden');
-      statusEl.innerHTML = `<span class="w-2 h-2 rounded-full bg-amber-500 animate-pulse"></span><span>Connecting...</span>`;
+      
+      if (allPapers.length === 0) {
+        isLoadingData = true;
+      }
+      statusEl.innerHTML = `<span class="w-2.5 h-2.5 rounded-full bg-amber-500 animate-pulse"></span><span>Updating...</span>`;
 
       const endpoints = [
         `https://docs.google.com/spreadsheets/d/${CONFIG.SHEET_ID}/gviz/tq?tqx=out:csv`,
@@ -546,74 +1605,145 @@
               break;
             }
           }
-        } catch (e) {
-          // try next
-        }
+        } catch (e) {}
       }
 
+      isLoadingData = false;
+
       if (!csvText) {
-        statusEl.innerHTML = `<span class="w-2 h-2 rounded-full bg-rose-500"></span><span>Offline</span>`;
-        banner.classList.remove('hidden');
+        if (allPapers.length > 0) {
+          statusEl.innerHTML = `<span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span><span>${allPapers.length} Papers (Offline Ready)</span>`;
+        } else {
+          statusEl.innerHTML = `<span class="w-2.5 h-2.5 rounded-full bg-rose-500"></span><span>Offline</span>`;
+          banner.classList.remove('hidden');
+        }
+        refreshCurrentStepView();
         return;
       }
 
       try {
         const raw = parseCSV(csvText);
-        allPapers = processParsedRows(raw);
-        statusEl.innerHTML = `<span class="w-2 h-2 rounded-full bg-emerald-500"></span><span>${allPapers.length} Papers Live</span>`;
+        const freshPapers = processParsedRows(raw);
+        if (freshPapers.length > 0) {
+          allPapers = freshPapers;
+          try {
+            localStorage.setItem(CONFIG.CACHE_KEY, JSON.stringify(allPapers));
+          } catch (e) {}
+        }
+        statusEl.innerHTML = `<span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span><span>${allPapers.length} Papers Ready</span>`;
+        refreshCurrentStepView();
       } catch (err) {
-        banner.classList.remove('hidden');
+        if (allPapers.length === 0) banner.classList.remove('hidden');
       }
     }
 
+    function refreshCurrentStepView() {
+      renderRecentPapersSection();
+      if (state.step === 2) renderSubjectsForClass();
+      if (state.step === 3) renderPapersList();
+    }
+
     // ==========================================
-    // STEP NAVIGATION (The 3-Tap Journey)
+    // HARDWARE BACK BUTTON & STEP NAVIGATION
     // ==========================================
-    function goToStep(stepNum) {
+    function pushHistoryState() {
+      try {
+        window.history.pushState({
+          step: state.step,
+          selectedClass: state.selectedClass,
+          selectedSubject: state.selectedSubject,
+          searchQuery: state.searchQuery,
+          modalOpen: state.modalOpen
+        }, '');
+      } catch (e) {}
+    }
+
+    window.addEventListener('popstate', (event) => {
+      if (state.modalOpen) {
+        closeViewerModal(true);
+        return;
+      }
+      if (event.state && event.state.step) {
+        state.selectedClass = event.state.selectedClass || '';
+        state.selectedSubject = event.state.selectedSubject || '';
+        state.searchQuery = event.state.searchQuery || '';
+        goToStep(event.state.step, true);
+      } else {
+        goToStep(1, true);
+      }
+    });
+
+    function handleStepBack() {
+      if (state.step === 3) {
+        if (state.searchQuery.trim().length > 0) {
+          clearSmartSearch();
+        } else {
+          goToStep(2);
+        }
+      } else if (state.step === 2) {
+        goToStep(1);
+      }
+    }
+
+    function goToStep(stepNum, skipHistory = false) {
       state.step = stepNum;
+      if (!skipHistory) pushHistoryState();
 
       const step1 = document.getElementById('step1View');
       const step2 = document.getElementById('step2View');
       const step3 = document.getElementById('step3View');
+      const mobileBottomNav = document.getElementById('mobileBottomNav');
 
       const crumb1 = document.getElementById('crumbStep1');
       const crumb2 = document.getElementById('crumbStep2');
       const crumb3 = document.getElementById('crumbStep3');
 
-      // Hide all
       step1.classList.add('hidden');
       step2.classList.add('hidden');
       step3.classList.add('hidden');
 
-      // Reset breadcrumbs styles
-      crumb1.className = "flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-100 text-slate-500 font-semibold transition-all shrink-0";
-      crumb2.className = "flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-100 text-slate-400 font-semibold disabled:opacity-60 transition-all shrink-0";
-      crumb3.className = "flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-100 text-slate-400 font-semibold disabled:opacity-60 transition-all shrink-0";
+      const inactiveCrumbClass = "flex flex-col sm:flex-row items-center justify-center gap-1 sm:gap-2 p-2.5 sm:py-3 rounded-xl bg-white border-2 border-slate-200 text-slate-500 font-bold text-xs sm:text-sm disabled:opacity-50 transition-all text-center";
+      const doneCrumbClass = "flex flex-col sm:flex-row items-center justify-center gap-1 sm:gap-2 p-2.5 sm:py-3 rounded-xl bg-brand-50 border-2 border-brand-300 text-brand-900 font-extrabold text-xs sm:text-sm transition-all text-center";
+      const activeCrumbClass = "flex flex-col sm:flex-row items-center justify-center gap-1 sm:gap-2 p-2.5 sm:py-3 rounded-xl bg-brand-600 border-2 border-brand-600 text-white font-extrabold text-xs sm:text-sm shadow-md transition-all text-center";
 
       if (stepNum === 1) {
         step1.classList.remove('hidden');
-        crumb1.className = "flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-brand-600 text-white font-bold transition-all shrink-0";
+        mobileBottomNav.classList.add('hidden');
+        crumb1.className = activeCrumbClass;
+        crumb2.className = inactiveCrumbClass;
+        crumb3.className = inactiveCrumbClass;
         crumb2.disabled = true;
         crumb3.disabled = true;
-        document.getElementById('crumbStep2Label').textContent = "2. Subject";
+        document.getElementById('crumbStep1Label').textContent = t('crumb1');
+        document.getElementById('crumbStep2Label').textContent = t('crumb2');
+        document.getElementById('crumbStep3Label').textContent = t('crumb3');
+        renderSavedClassBanner();
+        renderRecentPapersSection();
       } else if (stepNum === 2) {
         step2.classList.remove('hidden');
-        crumb1.className = "flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-brand-100 text-brand-800 font-semibold transition-all shrink-0";
-        crumb2.className = "flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-brand-600 text-white font-bold transition-all shrink-0";
+        mobileBottomNav.classList.remove('hidden');
+        crumb1.className = doneCrumbClass;
+        crumb2.className = activeCrumbClass;
+        crumb3.className = inactiveCrumbClass;
         crumb2.disabled = false;
         crumb3.disabled = true;
+        document.getElementById('crumbStep1Label').textContent = state.selectedClass || t('crumb1');
+        document.getElementById('crumbStep2Label').textContent = t('crumb2');
+        renderNectaCountdown(state.selectedClass);
         renderSubjectsForClass();
       } else if (stepNum === 3) {
         step3.classList.remove('hidden');
-        crumb1.className = "flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-brand-100 text-brand-800 font-semibold transition-all shrink-0";
-        crumb2.className = "flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-brand-100 text-brand-800 font-semibold transition-all shrink-0";
-        crumb3.className = "flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-brand-600 text-white font-bold transition-all shrink-0";
-        crumb2.disabled = false;
+        mobileBottomNav.classList.remove('hidden');
+        crumb1.className = doneCrumbClass;
+        crumb2.className = doneCrumbClass;
+        crumb3.className = activeCrumbClass;
+        crumb2.disabled = !state.selectedClass;
         crumb3.disabled = false;
+        document.getElementById('crumbStep3Label').textContent = state.selectedSubject || t('crumb3');
         renderPapersList();
       }
 
-      window.scrollTo({ top: document.getElementById('browserApp').offsetTop - 20, behavior: 'smooth' });
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
     // Tap 1: User picks a class
@@ -623,19 +1753,28 @@
       document.getElementById('smartSearchInput').value = '';
       document.getElementById('clearSearchBtn').classList.add('hidden');
       
+      saveLastSelectedClass(className);
       document.getElementById('step2CurrentClass').textContent = className;
-      document.getElementById('crumbStep2Label').textContent = `2. ${className}`;
       goToStep(2);
     }
 
-    // Tap 2: Render Subjects available for selected class (eliminates "zero results" trap)
+    // Tap 2: Render Subjects available for selected class
     function renderSubjectsForClass() {
       const container = document.getElementById('subjectsListGrid');
       
-      // Find papers matching this class
-      const classPapers = allPapers.filter(p => p.form.toLowerCase() === state.selectedClass.toLowerCase());
+      if (isLoadingData && allPapers.length === 0) {
+        container.innerHTML = `
+          <div class="col-span-full py-12 text-center bg-white rounded-2xl border-2 border-slate-200 p-6">
+            <div class="w-10 h-10 border-4 border-brand-200 border-t-brand-600 rounded-full animate-spin mx-auto mb-3"></div>
+            <h4 class="font-extrabold text-slate-900 text-base">${escapeHtml(t('loadingSubjects'))}</h4>
+          </div>
+        `;
+        return;
+      }
 
-      // Count papers per subject
+      const targetNorm = normalizeClassName(state.selectedClass);
+      const classPapers = allPapers.filter(p => normalizeClassName(p.form) === targetNorm);
+
       const subjectCounts = {};
       classPapers.forEach(p => {
         const s = p.subject.trim();
@@ -646,27 +1785,45 @@
 
       if (subjects.length === 0) {
         container.innerHTML = `
-          <div class="col-span-full py-12 text-center bg-white rounded-2xl border border-slate-200 p-6">
-            <i data-lucide="folder-open" class="w-10 h-10 text-slate-300 mx-auto mb-2"></i>
-            <h4 class="font-bold text-slate-800">No subjects cataloged yet for ${escapeHtml(state.selectedClass)}</h4>
-            <p class="text-xs text-slate-500 mt-1 mb-4">Please check back soon or try another class level.</p>
-            <button onclick="goToStep(1)" class="px-4 py-2 bg-brand-600 text-white font-bold text-xs rounded-xl">Choose Another Class</button>
+          <div class="col-span-full py-12 text-center bg-white rounded-2xl border-2 border-slate-200 p-6">
+            <div class="text-4xl mb-2">📂</div>
+            <h4 class="font-black text-slate-900 text-base">${escapeHtml(t('noSubjectsTitle'))} ${escapeHtml(state.selectedClass)}</h4>
+            <p class="text-xs sm:text-sm text-slate-600 mt-1 mb-5">${escapeHtml(t('noSubjectsSub'))}</p>
+            <div class="flex flex-wrap items-center justify-center gap-2.5">
+              <button onclick="goToStep(1)" class="px-5 py-3 bg-brand-600 text-white font-extrabold text-xs sm:text-sm rounded-xl shadow-sm">
+                &larr; ${escapeHtml(t('chooseAnotherClass'))}
+              </button>
+              <button onclick="openRequestPaperModal()" class="px-5 py-3 bg-amber-500 text-slate-950 font-black text-xs sm:text-sm rounded-xl shadow-sm">
+                🙋‍♂️ ${escapeHtml(t('reqStep2Btn'))}
+              </button>
+            </div>
           </div>
         `;
-        lucide.createIcons();
         return;
       }
 
       let html = '';
       subjects.forEach(sub => {
         const count = subjectCounts[sub];
+        const icon = getSubjectIcon(sub);
+        const countLabel = count === 1 ? t('paperAvailable') : t('papersAvailable');
+
         html += `
-          <button onclick="selectSubject('${escapeHtml(sub)}')" class="p-4 bg-white hover:bg-brand-50 active:bg-brand-100 border border-slate-200 hover:border-brand-300 rounded-2xl text-left transition-all shadow-sm flex items-center justify-between group">
-            <div>
-              <span class="block text-base font-bold text-slate-900 group-hover:text-brand-700">${escapeHtml(sub)}</span>
-              <span class="text-xs text-slate-500">${count} paper${count === 1 ? '' : 's'} available</span>
+          <button onclick="selectSubject('${escapeHtml(sub.replace(/'/g, "\\'"))}')" class="p-4 bg-white hover:bg-brand-50 active:bg-brand-100 border-2 border-slate-300 hover:border-brand-600 rounded-2xl text-left transition-all shadow-sm flex items-center justify-between group min-h-[76px]">
+            <div class="flex items-center gap-3.5 pr-2">
+              <span class="w-12 h-12 rounded-2xl bg-brand-50 border border-brand-200 flex items-center justify-center text-2xl shrink-0">
+                ${icon}
+              </span>
+              <div>
+                <span class="block text-base sm:text-lg font-black text-slate-900 group-hover:text-brand-700 leading-snug">${escapeHtml(sub)}</span>
+                <span class="inline-block mt-0.5 text-xs font-extrabold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-md border border-emerald-200">
+                  ${count} ${escapeHtml(countLabel)}
+                </span>
+              </div>
             </div>
-            <i data-lucide="chevron-right" class="w-5 h-5 text-slate-300 group-hover:text-brand-500"></i>
+            <span class="px-3 py-2 rounded-xl bg-slate-100 group-hover:bg-brand-600 group-hover:text-white text-slate-700 font-extrabold text-xs shrink-0 transition-colors">
+              Open &rarr;
+            </span>
           </button>
         `;
       });
@@ -679,25 +1836,71 @@
     function selectSubject(subjectName) {
       state.selectedSubject = subjectName;
       state.selectedCategory = 'ALL';
+      state.selectedYear = 'ALL';
       state.page = 1;
-      document.getElementById('crumbStep3Label').textContent = `3. ${subjectName}`;
+      resetCategoryChipStyles('ALL');
       goToStep(3);
     }
 
-    // Filter category tags inside Step 3
+    function resetCategoryChipStyles(activeCat) {
+      document.querySelectorAll('.cat-chip').forEach(btn => {
+        const btnCat = btn.getAttribute('data-cat');
+        if (btnCat === activeCat) {
+          btn.className = "cat-chip px-3.5 py-2 text-xs sm:text-sm font-extrabold rounded-xl bg-brand-600 text-white border-2 border-brand-600 shadow-sm";
+        } else {
+          btn.className = "cat-chip px-3.5 py-2 text-xs sm:text-sm font-bold rounded-xl bg-slate-100 text-slate-700 border-2 border-slate-200 hover:bg-slate-200";
+        }
+      });
+    }
+
     function filterCategoryTag(cat) {
       state.selectedCategory = cat;
       state.page = 1;
-      
-      document.querySelectorAll('.cat-chip').forEach(btn => {
-        if (btn.textContent.trim() === cat || (cat === 'ALL' && btn.textContent.trim() === 'All')) {
-          btn.className = "cat-chip px-2.5 py-1 text-xs font-bold rounded-lg bg-brand-600 text-white";
-        } else {
-          btn.className = "cat-chip px-2.5 py-1 text-xs font-bold rounded-lg bg-slate-100 text-slate-600 hover:bg-slate-200";
-        }
+      resetCategoryChipStyles(cat);
+      renderPapersList();
+    }
+
+    // Feature F: Filter by Year
+    function filterYearTag(yearVal) {
+      state.selectedYear = yearVal;
+      state.page = 1;
+      renderPapersList();
+    }
+
+    function renderYearFilterPills(basePapers) {
+      const container = document.getElementById('yearFilterPills');
+      const yearsSet = new Set();
+      basePapers.forEach(p => {
+        if (p.year && p.year !== 'N/A') yearsSet.add(p.year.trim());
+      });
+      const years = Array.from(yearsSet).sort((a, b) => b.localeCompare(a));
+
+      let html = `
+        <button onclick="filterYearTag('ALL')" class="px-3.5 py-1.5 text-xs sm:text-sm rounded-xl border-2 transition-all ${state.selectedYear === 'ALL' ? 'bg-slate-900 text-white border-slate-900 font-extrabold shadow-sm' : 'bg-slate-100 text-slate-700 border-slate-200 font-bold hover:bg-slate-200'}">
+          ${escapeHtml(t('allYears'))}
+        </button>
+      `;
+
+      years.forEach(yr => {
+        const isActive = state.selectedYear === yr;
+        html += `
+          <button onclick="filterYearTag('${escapeHtml(yr)}')" class="px-3.5 py-1.5 text-xs sm:text-sm rounded-xl border-2 transition-all ${isActive ? 'bg-slate-900 text-white border-slate-900 font-extrabold shadow-sm' : 'bg-slate-100 text-slate-700 border-slate-200 font-bold hover:bg-slate-200'}">
+            📅 ${escapeHtml(yr)}
+          </button>
+        `;
       });
 
-      renderPapersList();
+      container.innerHTML = html;
+    }
+
+    // Share Single Paper via WhatsApp
+    function shareOnWhatsApp(paperId) {
+      const p = allPapers.find(item => item.id === paperId);
+      if (!p) return;
+      const link = p.paperUrl || window.location.href;
+      const message = `*${p.title}* (${p.form} • ${p.subject} • ${p.year})\nPakua / Fungua Mtihani hapa: ${link}`;
+      const waUrl = `https://wa.me/?text=${encodeURIComponent(message)}`;
+      window.open(waUrl, '_blank', 'noopener,noreferrer');
     }
 
     // Render the final papers cards
@@ -707,51 +1910,75 @@
       const subtitleEl = document.getElementById('step3Subtitle');
       const paginationWrap = document.getElementById('paginationWrap');
 
-      let matches = [];
+      if (isLoadingData && allPapers.length === 0) {
+        listContainer.innerHTML = `
+          <div class="py-12 text-center bg-white rounded-2xl border-2 border-slate-200 p-6">
+            <div class="w-10 h-10 border-4 border-brand-200 border-t-brand-600 rounded-full animate-spin mx-auto mb-3"></div>
+            <h4 class="font-extrabold text-slate-900 text-base">${escapeHtml(t('loadingSubjects'))}</h4>
+          </div>
+        `;
+        return;
+      }
 
-      // If user typed in smart search
+      let baseMatches = [];
+
       if (state.searchQuery.trim().length > 0) {
-        const q = state.searchQuery.toLowerCase();
-        titleEl.textContent = `Search Results for "${state.searchQuery}"`;
+        const tokens = state.searchQuery.toLowerCase().split(/\s+/).filter(Boolean);
+        titleEl.textContent = `Search: "${state.searchQuery}"`;
         document.getElementById('backToSubjectsBtn').classList.add('hidden');
 
-        matches = allPapers.filter(p => {
-          const hay = `${p.title} ${p.subject} ${p.form} ${p.year} ${p.category}`.toLowerCase();
-          return hay.includes(q);
+        baseMatches = allPapers.filter(p => {
+          const hay = `${p.title} ${p.subject} ${p.form} ${normalizeClassName(p.form)} ${p.year} ${p.category}`.toLowerCase();
+          return tokens.every(tok => hay.includes(tok));
         });
       } else {
-        // Normal 3-Tap Journey
-        titleEl.textContent = `${state.selectedClass} • ${state.selectedSubject}`;
+        const icon = getSubjectIcon(state.selectedSubject);
+        titleEl.textContent = `${icon} ${state.selectedClass} • ${state.selectedSubject}`;
         document.getElementById('backToSubjectsBtn').classList.remove('hidden');
 
-        matches = allPapers.filter(p => {
-          const matchClass = p.form.toLowerCase() === state.selectedClass.toLowerCase();
+        const targetNorm = normalizeClassName(state.selectedClass);
+        baseMatches = allPapers.filter(p => {
+          const matchClass = normalizeClassName(p.form) === targetNorm;
           const matchSub = p.subject.toLowerCase() === state.selectedSubject.toLowerCase();
-          const matchCat = (state.selectedCategory === 'ALL') || (p.category.toLowerCase() === state.selectedCategory.toLowerCase());
-          return matchClass && matchSub && matchCat;
+          return matchClass && matchSub;
         });
       }
 
-      // Sort by year descending (newest first)
+      // Populate dynamic year pills from the available papers in this subject/search
+      renderYearFilterPills(baseMatches);
+
+      // Apply Category and Year filters
+      const matches = baseMatches.filter(p => {
+        const matchCat = (state.selectedCategory === 'ALL') || (p.category.toLowerCase().includes(state.selectedCategory.toLowerCase()));
+        const matchYear = (state.selectedYear === 'ALL') || (p.year.trim() === state.selectedYear);
+        return matchCat && matchYear;
+      });
+
+      // Sort newest year first
       matches.sort((a, b) => (b.year || '').localeCompare(a.year || ''));
 
-      subtitleEl.textContent = `Found ${matches.length} paper${matches.length === 1 ? '' : 's'}`;
+      subtitleEl.textContent = `${matches.length} ${matches.length === 1 ? t('paperAvailable') : t('papersAvailable')}`;
 
       if (matches.length === 0) {
         paginationWrap.classList.add('hidden');
         listContainer.innerHTML = `
-          <div class="py-12 text-center bg-white rounded-2xl border border-slate-200 p-6">
-            <i data-lucide="file-question" class="w-10 h-10 text-slate-300 mx-auto mb-2"></i>
-            <h4 class="font-bold text-slate-800">No examination papers found</h4>
-            <p class="text-xs text-slate-500 mt-1 mb-4">Try clearing category filters or choosing another subject.</p>
-            <button onclick="filterCategoryTag('ALL')" class="px-4 py-2 bg-brand-600 text-white font-bold text-xs rounded-xl">Show All Categories</button>
+          <div class="py-12 text-center bg-white rounded-2xl border-2 border-slate-200 p-6">
+            <div class="text-4xl mb-2">🔍</div>
+            <h4 class="font-black text-slate-900 text-base">No examination papers found in this filter</h4>
+            <p class="text-xs sm:text-sm text-slate-600 mt-1 mb-4">Tap below to reset filters or request this paper.</p>
+            <div class="flex flex-wrap items-center justify-center gap-2.5">
+              <button onclick="resetAllStep3Filters()" class="px-5 py-3 bg-brand-600 text-white font-extrabold text-xs sm:text-sm rounded-xl">
+                Show All Papers (Onyesha Zote)
+              </button>
+              <button onclick="openRequestPaperModal()" class="px-5 py-3 bg-amber-500 text-slate-950 font-black text-xs sm:text-sm rounded-xl">
+                🙋‍♂️ Request Paper
+              </button>
+            </div>
           </div>
         `;
-        lucide.createIcons();
         return;
       }
 
-      // Pagination slice
       const total = matches.length;
       const start = (state.page - 1) * CONFIG.ITEMS_PER_PAGE;
       const end = Math.min(start + CONFIG.ITEMS_PER_PAGE, total);
@@ -761,38 +1988,54 @@
       pageItems.forEach(p => {
         const hasPaper = Boolean(p.paperUrl);
         const hasAnswers = Boolean(p.answersUrl);
+        const inPrintList = printBasketIds.includes(p.id);
 
         html += `
-          <article class="bg-white p-4 sm:p-5 rounded-2xl border border-slate-200 shadow-sm hover:border-brand-300 transition-all">
-            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-3">
+          <article class="bg-white p-4 sm:p-5 rounded-2xl border-2 border-slate-300 shadow-sm hover:border-brand-500 transition-all">
+            <div class="flex items-start justify-between gap-3 mb-3">
               <div>
-                <div class="flex items-center gap-2 mb-1">
-                  <span class="text-[10px] font-extrabold uppercase px-2 py-0.5 rounded bg-blue-50 text-blue-700 border border-blue-200">
+                <div class="flex flex-wrap items-center gap-2 mb-1.5">
+                  <span class="text-xs font-black uppercase px-2.5 py-0.5 rounded-md bg-brand-100 text-brand-900 border border-brand-300">
                     ${escapeHtml(p.category)}
                   </span>
-                  <span class="text-xs font-bold text-slate-500">${escapeHtml(p.year)}</span>
-                  <span class="text-xs font-medium text-slate-400">• ${escapeHtml(p.form)}</span>
+                  <span class="text-xs font-black px-2.5 py-0.5 rounded-md bg-slate-100 text-slate-800 border border-slate-300">
+                    📅 ${escapeHtml(p.year)}
+                  </span>
+                  <span class="text-xs font-bold text-slate-600">• ${escapeHtml(p.form)}</span>
                 </div>
-                <h3 class="text-base font-bold text-slate-900 leading-snug">${escapeHtml(p.title)}</h3>
+                <h3 class="text-base sm:text-lg font-black text-slate-900 leading-snug">${escapeHtml(p.title)}</h3>
               </div>
             </div>
 
-            <!-- Action buttons designed for fingers / phone screens -->
-            <div class="flex flex-wrap items-center gap-2 pt-3 border-t border-slate-100">
+            <!-- Big, High-Contrast Buttons Designed for Easy Tapping -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-2.5 pt-3 border-t-2 border-slate-100">
               ${hasPaper ? `
-                <button onclick="openViewer('${p.id}', 'paper')" class="flex-1 sm:flex-none px-3.5 py-2.5 bg-brand-50 hover:bg-brand-100 active:bg-brand-200 text-brand-700 text-xs font-bold rounded-xl flex items-center justify-center gap-1.5 transition-colors">
-                  <i data-lucide="eye" class="w-4 h-4"></i> Preview Paper
+                <button onclick="openViewer('${p.id}', 'paper')" class="min-h-[48px] px-3.5 py-2.5 bg-brand-600 hover:bg-brand-700 active:bg-brand-800 text-white text-xs sm:text-sm font-extrabold rounded-xl flex items-center justify-center gap-2 shadow-sm transition-colors">
+                  <i data-lucide="book-open" class="w-4 h-4 shrink-0"></i>
+                  <span>${escapeHtml(t('readPaper'))}</span>
                 </button>
-                <a href="${escapeHtml(getDirectDownloadUrl(p.paperUrl))}" target="_blank" rel="noopener noreferrer" download class="px-3.5 py-2.5 bg-slate-100 hover:bg-brand-600 hover:text-white text-slate-700 text-xs font-bold rounded-xl flex items-center justify-center gap-1.5 transition-colors">
-                  <i data-lucide="download" class="w-4 h-4"></i> Download
+
+                <a href="${escapeHtml(getDirectDownloadUrl(p.paperUrl))}" onclick="recordRecentPaper('${p.id}')" target="_blank" rel="noopener noreferrer" download class="min-h-[48px] px-3.5 py-2.5 bg-slate-100 hover:bg-slate-200 active:bg-slate-300 text-slate-900 border-2 border-slate-300 text-xs sm:text-sm font-extrabold rounded-xl flex items-center justify-center gap-2 transition-colors">
+                  <i data-lucide="download" class="w-4 h-4 shrink-0"></i>
+                  <span>${escapeHtml(t('downloadPdf'))}</span>
                 </a>
+
+                <button onclick="shareOnWhatsApp('${p.id}')" class="min-h-[48px] px-3.5 py-2.5 bg-emerald-50 hover:bg-emerald-100 text-emerald-900 border-2 border-emerald-300 text-xs sm:text-sm font-extrabold rounded-xl flex items-center justify-center gap-2 transition-colors">
+                  <i data-lucide="share-2" class="w-4 h-4 text-emerald-700 shrink-0"></i>
+                  <span>${escapeHtml(t('shareWhatsapp'))}</span>
+                </button>
+
+                <button onclick="togglePrintBasket('${p.id}')" class="min-h-[48px] px-3.5 py-2.5 ${inPrintList ? 'bg-slate-900 text-white border-slate-900' : 'bg-amber-50 hover:bg-amber-100 text-amber-950 border-amber-300'} border-2 text-xs sm:text-sm font-extrabold rounded-xl flex items-center justify-center gap-1.5 transition-colors">
+                  <span>${escapeHtml(inPrintList ? t('inPrintList') : t('addPrint'))}</span>
+                </button>
               ` : `
-                <span class="text-xs text-slate-400 italic py-2">Paper file pending upload</span>
+                <span class="col-span-full text-xs font-bold text-slate-400 italic py-2">Paper file pending upload</span>
               `}
 
               ${hasAnswers ? `
-                <button onclick="openViewer('${p.id}', 'answers')" class="w-full sm:w-auto px-3.5 py-2.5 bg-emerald-50 hover:bg-emerald-100 active:bg-emerald-200 text-emerald-800 text-xs font-bold rounded-xl flex items-center justify-center gap-1.5 transition-colors border border-emerald-200">
-                  <i data-lucide="check-circle" class="w-4 h-4 text-emerald-600"></i> Marking Scheme (Answers)
+                <button onclick="openViewer('${p.id}', 'answers')" class="sm:col-span-2 md:col-span-4 min-h-[48px] px-4 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white text-xs sm:text-sm font-extrabold rounded-xl flex items-center justify-center gap-2 shadow-sm transition-colors">
+                  <i data-lucide="check-circle-2" class="w-4 h-4 shrink-0"></i>
+                  <span>✅ ${escapeHtml(t('viewAnswers'))}</span>
                 </button>
               ` : ''}
             </div>
@@ -803,7 +2046,6 @@
       listContainer.innerHTML = html;
       lucide.createIcons();
 
-      // Pagination controls
       if (total > CONFIG.ITEMS_PER_PAGE) {
         paginationWrap.classList.remove('hidden');
         const totalPages = Math.ceil(total / CONFIG.ITEMS_PER_PAGE);
@@ -815,10 +2057,18 @@
       }
     }
 
+    function resetAllStep3Filters() {
+      state.selectedCategory = 'ALL';
+      state.selectedYear = 'ALL';
+      state.page = 1;
+      resetCategoryChipStyles('ALL');
+      renderPapersList();
+    }
+
     function changeResultsPage(dir) {
       state.page += dir;
       renderPapersList();
-      window.scrollTo({ top: document.getElementById('step3View').offsetTop - 30, behavior: 'smooth' });
+      window.scrollTo({ top: document.getElementById('step3View').offsetTop - 20, behavior: 'smooth' });
     }
 
     // Smart Search input handler
@@ -835,11 +2085,13 @@
       clearTimeout(searchTimer);
       searchTimer = setTimeout(() => {
         state.searchQuery = val;
+        state.selectedCategory = 'ALL';
+        state.selectedYear = 'ALL';
         state.page = 1;
         if (val.trim().length > 0) {
-          goToStep(3);
+          goToStep(3, true);
         } else {
-          goToStep(state.selectedClass ? 2 : 1);
+          goToStep(state.selectedClass ? 2 : 1, true);
         }
       }, CONFIG.SEARCH_DEBOUNCE_MS);
     });
@@ -848,6 +2100,7 @@
       document.getElementById('smartSearchInput').value = '';
       document.getElementById('clearSearchBtn').classList.add('hidden');
       state.searchQuery = '';
+      state.selectedYear = 'ALL';
       goToStep(state.selectedClass ? 2 : 1);
     }
 
@@ -855,26 +2108,74 @@
       state.selectedClass = '';
       state.selectedSubject = '';
       state.searchQuery = '';
+      state.selectedYear = 'ALL';
       document.getElementById('smartSearchInput').value = '';
       document.getElementById('clearSearchBtn').classList.add('hidden');
       goToStep(1);
     }
 
-    // Modal Viewer
+    // Feature D: Modal Viewer with 1-Tap Switch between Questions & Answers
     function openViewer(paperId, type) {
       const p = allPapers.find(item => item.id === paperId);
       if (!p) return;
 
       const rawUrl = (type === 'answers') ? p.answersUrl : p.paperUrl;
       const previewUrl = getPreviewUrl(rawUrl);
-      const downloadUrl = getDirectDownloadUrl(rawUrl);
 
       if (!rawUrl || !previewUrl) {
-        alert('This file does not have a valid link attached.');
+        showToast(
+          currentLang === 'sw'
+            ? 'Faili hili bado halijawekwa.'
+            : 'This document does not have a valid link attached yet.',
+          '⚠️'
+        );
         return;
       }
 
+      state.activePaperId = paperId;
+      state.activeModalMode = type;
+      recordRecentPaper(paperId);
+
+      if (!state.modalOpen) {
+        state.modalOpen = true;
+        pushHistoryState();
+      }
+
+      updateViewerModalContent(p, type);
+
       const modal = document.getElementById('docViewerModal');
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    }
+
+    function switchViewerMode(targetMode) {
+      if (!state.activePaperId) return;
+      const p = allPapers.find(item => item.id === state.activePaperId);
+      if (!p) return;
+
+      if (targetMode === 'answers' && !p.answersUrl) {
+        showToast(
+          currentLang === 'sw'
+            ? 'Majibu (Marking Scheme) ya mtihani huu bado hayajawekwa.'
+            : 'Marking Scheme (Answers) is not available for this paper yet.',
+          'ℹ️'
+        );
+        return;
+      }
+      if (targetMode === 'paper' && !p.paperUrl) {
+        showToast('Question paper link is unavailable.', 'ℹ️');
+        return;
+      }
+
+      state.activeModalMode = targetMode;
+      updateViewerModalContent(p, targetMode);
+    }
+
+    function updateViewerModalContent(p, type) {
+      const rawUrl = (type === 'answers') ? p.answersUrl : p.paperUrl;
+      const previewUrl = getPreviewUrl(rawUrl);
+      const downloadUrl = getDirectDownloadUrl(rawUrl);
+
       const iframe = document.getElementById('docViewerIframe');
       const spinner = document.getElementById('modalSpinner');
       const title = document.getElementById('modalPaperTitle');
@@ -882,37 +2183,139 @@
       const direct = document.getElementById('modalDirectLink');
       const dlBtn = document.getElementById('modalDownloadActionBtn');
 
-      title.textContent = (type === 'answers') ? `${p.title} (Marking Scheme)` : p.title;
-      badge.textContent = `${p.category} • ${p.year}`;
+      const qBtn = document.getElementById('modalSwitchQuestionsBtn');
+      const aBtn = document.getElementById('modalSwitchAnswersBtn');
+
+      if (type === 'paper') {
+        qBtn.className = "py-2 px-3 rounded-xl font-black text-xs sm:text-sm flex items-center justify-center gap-1.5 bg-brand-600 text-white shadow-sm";
+        aBtn.className = p.answersUrl
+          ? "py-2 px-3 rounded-xl font-bold text-xs sm:text-sm flex items-center justify-center gap-1.5 bg-slate-800 text-emerald-300 hover:bg-slate-700"
+          : "py-2 px-3 rounded-xl font-bold text-xs sm:text-sm flex items-center justify-center gap-1.5 bg-slate-800/50 text-slate-500 cursor-not-allowed";
+      } else {
+        qBtn.className = "py-2 px-3 rounded-xl font-bold text-xs sm:text-sm flex items-center justify-center gap-1.5 bg-slate-800 text-blue-200 hover:bg-slate-700";
+        aBtn.className = "py-2 px-3 rounded-xl font-black text-xs sm:text-sm flex items-center justify-center gap-1.5 bg-emerald-600 text-white shadow-sm";
+      }
+
+      title.textContent = (type === 'answers') ? `✅ ${p.title} (Answers)` : `📖 ${p.title}`;
+      badge.textContent = `${p.form} • ${p.category} • ${p.year}`;
       direct.href = rawUrl;
       dlBtn.href = downloadUrl;
+      updateModalPrintButtonState();
 
       spinner.style.display = 'flex';
       iframe.src = previewUrl;
       iframe.onload = () => { spinner.style.display = 'none'; };
-
-      modal.classList.remove('hidden');
-      modal.classList.add('flex');
     }
 
-    function closeViewerModal() {
+    function closeViewerModal(fromPopState = false) {
       const modal = document.getElementById('docViewerModal');
       const iframe = document.getElementById('docViewerIframe');
       iframe.src = 'about:blank';
       modal.classList.add('hidden');
       modal.classList.remove('flex');
+      state.modalOpen = false;
+      if (!fromPopState && window.history.state && window.history.state.modalOpen) {
+        window.history.back();
+      }
     }
 
+    // Feature H: Request a Missing Paper Modal
+    function openRequestPaperModal() {
+      document.getElementById('reqInputClass').value = state.selectedClass || '';
+      document.getElementById('reqInputSubject').value = state.selectedSubject || state.searchQuery || '';
+      document.getElementById('reqInputYear').value = state.selectedYear !== 'ALL' ? state.selectedYear : '';
+      const modal = document.getElementById('requestPaperModal');
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    }
+
+    function closeRequestPaperModal() {
+      const modal = document.getElementById('requestPaperModal');
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+    }
+
+    function submitPaperRequestWhatsApp() {
+      const cls = document.getElementById('reqInputClass').value.trim() || 'Any Class';
+      const sub = document.getElementById('reqInputSubject').value.trim() || 'Any Subject';
+      const yr = document.getElementById('reqInputYear').value.trim() || 'Recent Years';
+
+      const msg = `*🙋‍♂️ ELIMIKA PAPER REQUEST (OMBI LA MTIHANI)*\nHabari Elimika, naomba mweke mtihani ufuatao:\n• *Darasa / Class:* ${cls}\n• *Somo / Subject:* ${sub}\n• *Mwaka / Year:* ${yr}\nAsante!`;
+      const waUrl = `https://wa.me/?text=${encodeURIComponent(msg)}`;
+      window.open(waUrl, '_blank', 'noopener,noreferrer');
+      closeRequestPaperModal();
+    }
+
+    // Feature G: Install App (PWA Support + Visual Guide Fallback)
+    function setupPWA() {
+      const manifest = {
+        name: "Elimika Past Papers Tanzania",
+        short_name: "Elimika",
+        start_url: window.location.href,
+        display: "standalone",
+        background_color: "#f1f5f9",
+        theme_color: "#1d4ed8",
+        icons: [
+          {
+            src: "https://placehold.co/192x192/1d4ed8/ffffff.png?text=E",
+            sizes: "192x192",
+            type: "image/png"
+          }
+        ]
+      };
+      try {
+        const blob = new Blob([JSON.stringify(manifest)], { type: 'application/json' });
+        const manifestURL = URL.createObjectURL(blob);
+        const link = document.createElement('link');
+        link.rel = 'manifest';
+        link.href = manifestURL;
+        document.head.appendChild(link);
+      } catch (e) {}
+
+      window.addEventListener('beforeinstallprompt', (e) => {
+        e.preventDefault();
+        deferredInstallPrompt = e;
+      });
+    }
+
+    async function handleInstallAppClick() {
+      if (deferredInstallPrompt) {
+        deferredInstallPrompt.prompt();
+        await deferredInstallPrompt.userChoice;
+        deferredInstallPrompt = null;
+      } else {
+        const modal = document.getElementById('installGuideModal');
+        modal.classList.remove('hidden');
+        modal.classList.add('flex');
+      }
+    }
+
+    function closeInstallGuideModal() {
+      const modal = document.getElementById('installGuideModal');
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+    }
+
+    // Close modals on backdrop click or Escape key
     document.getElementById('docViewerModal').addEventListener('click', (e) => {
       if (e.target.id === 'docViewerModal') closeViewerModal();
     });
 
     window.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') closeViewerModal();
+      if (e.key === 'Escape') {
+        if (state.modalOpen) closeViewerModal();
+        closeRequestPaperModal();
+        closeInstallGuideModal();
+      }
     });
 
     // Run on launch
     document.addEventListener('DOMContentLoaded', () => {
+      loadCachedData();
+      loadRecentPapers();
+      loadPrintBasket();
+      setupPWA();
+      applyLanguageUI();
       lucide.createIcons();
       fetchSheetData();
     });
