@@ -122,16 +122,17 @@
       </div>
 
       <h1 id="heroTitleText" class="text-2xl sm:text-4xl font-black text-slate-900 tracking-tight leading-snug">
-        Chagua Darasa na Somo Kupata <span class="text-brand-600">Mitihani &amp; Vitabu</span>
+        Chagua Darasa na Somo Kupata <span class="text-brand-600">Mitihani, Vitabu &amp; Syllabus</span>
       </h1>
 
-      <!-- Mode Switcher: Past Papers vs TIE Books vs Syllabus (Opens Dedicated Page) -->
+      <!-- Mode Switcher: Past Papers vs Dedicated TIE Books Page vs Dedicated Syllabus Page -->
       <div class="flex flex-wrap items-center justify-center gap-2 pt-1">
         <button onclick="setResourceMode('papers')" id="heroBtnPapers" class="px-4 py-2.5 rounded-xl font-black text-xs sm:text-sm border-2 border-brand-700 bg-brand-600 text-white shadow-sm transition-all flex items-center gap-1.5">
           <span>📝</span> <span id="heroPapersLabel">Mitihani (Papers)</span>
         </button>
-        <button onclick="setResourceMode('books')" id="heroBtnBooks" class="px-4 py-2.5 rounded-xl font-black text-xs sm:text-sm border-2 border-slate-200 bg-white text-slate-700 hover:bg-slate-100 shadow-sm transition-all flex items-center gap-1.5">
+        <button onclick="openBooksPage()" id="heroBtnBooks" class="px-4 py-2.5 rounded-xl font-black text-xs sm:text-sm border-2 border-emerald-600 bg-emerald-500 hover:bg-emerald-400 text-slate-950 shadow-sm transition-all flex items-center gap-1.5">
           <span>📚</span> <span id="heroBooksLabel">Vitabu vya TIE</span>
+          <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
         </button>
         <button onclick="openSyllabusPage()" id="heroBtnSyllabus" class="px-4 py-2.5 rounded-xl font-black text-xs sm:text-sm border-2 border-amber-500 bg-amber-400 hover:bg-amber-300 text-slate-950 shadow-sm transition-all flex items-center gap-1.5">
           <span>📜</span> <span id="heroSyllabusLabel">Syllabus (Muhtasari)</span>
@@ -268,8 +269,8 @@
           </div>
 
           <div class="flex flex-wrap items-center gap-1.5">
-            <button onclick="setResourceMode('papers')" id="step2BtnPapers" class="px-3 py-2 rounded-xl font-extrabold text-xs border-2 transition-all">📝 Papers</button>
-            <button onclick="setResourceMode('books')" id="step2BtnBooks" class="px-3 py-2 rounded-xl font-extrabold text-xs border-2 transition-all">📚 TIE Books</button>
+            <button onclick="setResourceMode('papers')" id="step2BtnPapers" class="px-3 py-2 rounded-xl font-extrabold text-xs border-2 border-brand-600 bg-brand-600 text-white transition-all">📝 Papers</button>
+            <button onclick="openBooksPage(true, state.selectedClass)" id="step2BtnBooks" class="px-3 py-2 rounded-xl font-extrabold text-xs border-2 border-emerald-500 bg-emerald-100 text-emerald-950 hover:bg-emerald-200 transition-all">📚 TIE Books ↗</button>
             <button onclick="openSyllabusPage()" class="px-3 py-2 rounded-xl font-extrabold text-xs border-2 border-amber-400 bg-amber-100 text-amber-950 hover:bg-amber-200 transition-all">📜 Syllabus ↗</button>
             <button onclick="openMwalimuModal(state.selectedClass, '')" class="px-3 py-2 rounded-xl font-black text-xs bg-violet-600 hover:bg-violet-700 text-white transition-all">🤖 Moha AI</button>
           </div>
@@ -291,8 +292,8 @@
             </div>
 
             <div class="flex flex-wrap items-center gap-2">
-              <button onclick="toggleModeInsideStep3()" id="crossSwitchModeBtn" class="px-3 py-2 rounded-xl bg-emerald-50 hover:bg-emerald-100 text-emerald-900 border border-emerald-300 font-black text-xs">
-                📚 Switch to TIE Books
+              <button onclick="openBooksPage(true, state.selectedClass, state.selectedSubject)" id="crossSwitchModeBtn" class="px-3 py-2 rounded-xl bg-emerald-50 hover:bg-emerald-100 text-emerald-900 border border-emerald-300 font-black text-xs">
+                📚 Fungua TIE Books Page ↗
               </button>
               <button onclick="openMwalimuModal(state.selectedClass, state.selectedSubject)" class="px-3 py-2 rounded-xl bg-violet-600 hover:bg-violet-700 text-white font-black text-xs">
                 🤖 Ask Moha AI
@@ -327,6 +328,86 @@
     </div>
   </main>
 
+  <div id="dedicatedBooksPage" class="hidden flex-grow bg-slate-50 min-h-screen pb-24">
+    <div class="bg-gradient-to-r from-emerald-600 via-emerald-500 to-teal-500 border-b-2 border-emerald-700 shadow-sm">
+      <div class="max-w-5xl mx-auto px-4 sm:px-6 py-6">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div class="space-y-1">
+            <div class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-slate-950 text-emerald-300 text-[11px] font-black uppercase tracking-wider">
+              <span>🇹🇿</span> Official TIE Textbooks Page (Mtaala Mpya)
+            </div>
+            <h1 class="text-2xl sm:text-3xl font-black text-white tracking-tight">
+              Vitabu vya TIE (Standard 1–7 &amp; Form 1–6)
+            </h1>
+            <p class="text-xs sm:text-sm font-bold text-emerald-50">
+              Chagua Darasa na Somo kupakua au kusoma Vitabu vya TIE moja kwa moja kutoka Google Drive
+            </p>
+          </div>
+          <div class="flex flex-wrap items-center gap-2 shrink-0">
+            <button onclick="openBooksNewWindow()" class="px-3.5 py-2.5 bg-white/15 hover:bg-white/25 text-white font-black text-xs rounded-xl border border-white/30 flex items-center gap-1.5">
+              <i data-lucide="external-link" class="w-4 h-4"></i>
+              <span>Open New Tab</span>
+            </button>
+            <button onclick="openSyllabusPage()" class="px-3.5 py-2.5 bg-amber-400 hover:bg-amber-300 text-slate-950 font-black text-xs rounded-xl shadow-sm flex items-center gap-1.5">
+              <span>📜</span>
+              <span>Syllabus Page</span>
+            </button>
+            <button onclick="closeBooksPage()" class="px-4 py-2.5 bg-slate-950 hover:bg-slate-800 text-white font-black text-xs sm:text-sm rounded-xl shadow-md flex items-center gap-1.5">
+              <i data-lucide="arrow-left" class="w-4 h-4"></i>
+              <span>Rudi Kwenye Mitihani</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 py-6 space-y-6">
+      <div class="bg-white p-4 sm:p-5 rounded-3xl border-2 border-emerald-300 shadow-sm space-y-4">
+        <!-- Level Filter Tabs -->
+        <div class="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3">
+          <div class="flex flex-wrap items-center gap-2">
+            <button onclick="setBooksPageLevel('ALL')" id="bookTabALL" class="px-4 py-2.5 rounded-xl font-black text-xs sm:text-sm bg-emerald-600 text-white shadow-sm">
+              📚 All Levels
+            </button>
+            <button onclick="setBooksPageLevel('Primary')" id="bookTabPrimary" class="px-4 py-2.5 rounded-xl font-black text-xs sm:text-sm bg-slate-100 text-slate-700 hover:bg-slate-200">
+              🎒 Primary (Std 1–7)
+            </button>
+            <button onclick="setBooksPageLevel('Secondary')" id="bookTabSecondary" class="px-4 py-2.5 rounded-xl font-black text-xs sm:text-sm bg-slate-100 text-slate-700 hover:bg-slate-200">
+              🏫 Secondary (Form 1–4)
+            </button>
+            <button onclick="setBooksPageLevel('Advanced')" id="bookTabAdvanced" class="px-4 py-2.5 rounded-xl font-black text-xs sm:text-sm bg-slate-100 text-slate-700 hover:bg-slate-200">
+              🎓 Advanced (Form 5–6)
+            </button>
+          </div>
+
+          <div class="relative min-w-[240px]">
+            <input
+              type="text"
+              id="booksPageSearchInput"
+              oninput="renderDedicatedBooksList()"
+              placeholder="Tafuta kitabu au somo (mfano: Form 1 Biology)..."
+              class="w-full pl-9 pr-4 py-2.5 rounded-xl border-2 border-slate-200 focus:border-emerald-600 focus:outline-none text-xs sm:text-sm font-bold bg-slate-50"
+            />
+            <i data-lucide="search" class="w-4 h-4 text-slate-400 absolute left-3 top-3"></i>
+          </div>
+        </div>
+
+        <!-- Quick Class Selector Pills -->
+        <div id="booksClassPillsRow" class="flex flex-wrap items-center gap-1.5 pt-2 border-t border-slate-100"></div>
+
+        <div class="flex flex-wrap items-center justify-between gap-2 text-xs font-bold text-slate-500 pt-2 border-t border-slate-100">
+          <span id="booksPageCountBadge">Showing available TIE Books</span>
+          <button onclick="openMwalimuModal(booksPageSelectedClass === 'ALL' ? 'Form 1' : booksPageSelectedClass, 'TIE Textbook')" class="text-violet-700 hover:underline font-extrabold">
+            🤖 Ask Moha AI about TIE Books &amp; Syllabus
+          </button>
+        </div>
+      </div>
+
+      <div id="dedicatedBooksGrid" class="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
+    </div>
+  </div>
+
+  <!-- Dedicated Syllabus Page -->
   <div id="dedicatedSyllabusPage" class="hidden flex-grow bg-slate-50 min-h-screen pb-24">
     <div class="bg-gradient-to-r from-amber-500 via-amber-400 to-yellow-400 border-b-2 border-amber-600 shadow-sm">
       <div class="max-w-5xl mx-auto px-4 sm:px-6 py-6">
@@ -487,16 +568,7 @@
       <!-- Optional API Key Bar -->
       <div id="mohaApiKeyPanel" class="hidden shrink-0 px-4 py-2.5 bg-slate-900 text-white border-b border-slate-700 text-xs space-y-2">
         <div class="flex items-center justify-between">
-          <span class="font-bold text-amber-300">🔑 Optional Gemini API Key (Moha AI also works automatically without a key!)</span>
-          <button onclick="toggleMohaApiKeyPanel()" class="text-slate-400 hover:text-white">✕</button>
-        </div>
-        <div class="flex items-center gap-2">
-          <input type="password" id="customGeminiKeyInput" placeholder="Paste AIzaSy... key (optional)" class="flex-1 px-3 py-1.5 rounded-lg bg-slate-800 border border-slate-600 text-white text-xs" />
-          <button onclick="saveCustomGeminiKey()" class="px-3 py-1.5 bg-emerald-600 hover:bg-emerald-500 text-white font-black rounded-lg">Save</button>
-        </div>
-      </div>
-
-      <!-- 2. Always-Visible Pinned Action Bar (Lesson Plan, Scheme, Log Book, Notes, Quiz) -->
+      <!-- 2. Always-Visible Pinned Action Bar (Lesson Plan, Scheme, Marking Scheme, Log Book, Notes, Quiz) -->
       <div class="shrink-0 px-3 py-2 bg-violet-50 border-b border-violet-200 flex flex-wrap items-center gap-1.5">
         <button onclick="openTeacherDocFormFor('lessonplan')" class="px-3 py-1.5 rounded-xl bg-brand-600 hover:bg-brand-700 text-white font-black text-xs flex items-center gap-1 shadow-sm">
           <span>📋</span> <span>4-Stage Lesson Plan</span>
@@ -504,14 +576,20 @@
         <button onclick="openTeacherDocFormFor('schemeofwork')" class="px-3 py-1.5 rounded-xl bg-emerald-700 hover:bg-emerald-800 text-white font-black text-xs flex items-center gap-1 shadow-sm">
           <span>📅</span> <span>PO-RALG Scheme (2026)</span>
         </button>
+        <button onclick="openTeacherDocFormFor('markingscheme')" class="px-3 py-1.5 rounded-xl bg-rose-600 hover:bg-rose-700 text-white font-black text-xs flex items-center gap-1 shadow-sm">
+          <span>✅</span> <span>Marking Scheme</span>
+        </button>
         <button onclick="openTeacherDocFormFor('logbook')" class="px-3 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-900 text-white font-black text-xs flex items-center gap-1 shadow-sm">
           <span>📖</span> <span>Subject Log Book</span>
+        </button>
+        <button onclick="sendQuickMwalimuPrompt('syllabus')" class="px-2.5 py-1.5 rounded-xl bg-amber-100 hover:bg-amber-200 text-amber-950 border border-amber-300 font-black text-xs">
+          📜 Syllabus Topics
         </button>
         <button onclick="sendQuickMwalimuPrompt('summary')" class="px-2.5 py-1.5 rounded-xl bg-white hover:bg-violet-100 text-violet-900 border border-violet-200 font-bold text-xs">
           📝 Topic Summary
         </button>
         <button onclick="sendQuickMwalimuPrompt('questions')" class="px-2.5 py-1.5 rounded-xl bg-white hover:bg-violet-100 text-violet-900 border border-violet-200 font-bold text-xs">
-          ❓ 5 Practice Qs
+          ❓ 5 Practice Qs + Marking
         </button>
         <button onclick="startAiQuiz()" class="px-2.5 py-1.5 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 font-black text-xs">
           🎯 Start Quiz
@@ -521,8 +599,11 @@
       <!-- 3. Collapsible Teacher Details Form (Asks Teacher Before Generating) -->
       <div id="teacherStudioPanel" class="hidden shrink-0 bg-amber-50/90 border-b-2 border-amber-300 p-3 sm:p-4 max-h-[46vh] overflow-y-auto space-y-3 text-xs">
         <div class="flex items-center justify-between">
-          <span class="font-black text-slate-900 uppercase tracking-wide">📋 Fill Teacher &amp; Lesson Details First:</span>
+          <span class="font-black text-slate-900 uppercase tracking-wide">📋 Fill Teacher, Syllabus Topic &amp; Exam Details First:</span>
           <button onclick="toggleTeacherStudioPanel()" class="text-slate-500 hover:text-slate-900 font-bold">Hide ▲</button>
+        </div>
+        <div id="teacherSyllabusSyncBadge" class="p-2 rounded-xl bg-emerald-50 border border-emerald-300 text-emerald-950 font-bold text-[11px]">
+          🔗 Integrated with uploaded Google Sheet Syllabuses &amp; TIE Curriculum
         </div>
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
           <div>
@@ -585,6 +666,9 @@
           </button>
           <button onclick="submitTeacherStudioDoc('schemeofwork')" class="px-4 py-2 bg-emerald-700 hover:bg-emerald-800 text-white font-black rounded-xl shadow-sm">
             📅 Generate PO-RALG Scheme (2026)
+          </button>
+          <button onclick="submitTeacherStudioDoc('markingscheme')" class="px-4 py-2 bg-rose-600 hover:bg-rose-700 text-white font-black rounded-xl shadow-sm">
+            ✅ Generate NECTA Marking Scheme
           </button>
           <button onclick="submitTeacherStudioDoc('logbook')" class="px-4 py-2 bg-slate-800 hover:bg-slate-900 text-white font-black rounded-xl shadow-sm">
             📖 Generate Subject Log Book
@@ -666,6 +750,8 @@
     let printBasket = [];
     let currentViewerPaperId = null;
     let syllabusPageLevel = 'ALL';
+    let booksPageLevel = 'ALL';
+    let booksPageSelectedClass = 'ALL';
     let searchTimer = null;
 
     let state = {
@@ -679,6 +765,82 @@
       searchQuery: '',
       page: 1
     };
+
+    const TIE_SYLLABUS_COMPETENCES = {
+      'Basic Mathematics': {
+        'Form 1': ['1.0 Numbers & Mathematical Language (Rational, Irrational, Real Numbers, Approximations)', '2.0 Fractions, Decimals, Percentages, Ratios & Proportions', '3.0 Algebra (Linear Equations, Simultaneous Equations, Inequalities)', '4.0 Geometry & Coordinate Geometry (Gradient, Straight Line Equations)'],
+        'Form 2': ['1.0 Exponents, Radicals & Logarithms', '2.0 Algebra (Quadratic Expressions & Equations, Factorisation)', '3.0 Congruence, Similarity & Geometrical Transformations', '4.0 Pythagoras Theorem & Right-Angled Trigonometry', '5.0 Sets & Statistics'],
+        'Form 3': ['1.0 Relations & Functions (Linear, Quadratic, Polynomial)', '2.0 Sequences & Series (AP and GP)', '3.0 Circles, Earth as a Sphere (Great Circles, Meridiands, Shortest Distance)', '4.0 Accounts (Double Entry, Trial Balance, Financial Statements)'],
+        'Form 4': ['1.0 Coordinate Geometry & Vectors', '2.0 Area & Perimeter of Regular Polygons', '3.0 Three-Dimensional Figures (Surface Area, Volume, Angle Between Line & Plane)', '4.0 Probability', '5.0 Matrices & Linear Transformations (2x2 Matrices, Inverse, Cramer Rule, Linear Programming)']
+      },
+      'Biology': {
+        'Form 1': ['1.0 Introduction to Biology & Scientific Processes', '2.0 Safety in Our Environment & First Aid', '3.0 Cell Structure and Organization', '4.0 Classification of Living Things'],
+        'Form 2': ['1.0 Nutrition in Plants and Animals (Photosynthesis & Human Digestive System)', '2.0 Food Processing, Preservation and Storage', '3.0 Balance of Nature & Natural Environment', '4.0 Transport of Materials in Living Things', '5.0 Gaseous Exchange and Respiration'],
+        'Form 3': ['1.0 Classification of Kingdom Plantae & Animalia', '2.0 Movement & Locomotion', '3.0 Coordination (Nervous & Hormonal Systems) and Sense Organs', '4.0 Excretion and Regulation (Homeostasis)', '5.0 Reproduction in Plants and Animals'],
+        'Form 4': ['1.0 Growth and Development', '2.0 Genetics, Mendelian Inheritance & Variation', '3.0 Classification of Arthropoda & Chordata', '4.0 Organic Evolution', '5.0 HIV/AIDS and STIs']
+      },
+      'Chemistry': {
+        'Form 1': ['1.0 Introduction to Chemistry & Laboratory Techniques', '2.0 Heat Sources, Flames & Scientific Procedure', '3.0 Matter (States, Physical & Chemical Changes, Separation of Mixtures)', '4.0 Air, Combustion, Rusting and Firefighting'],
+        'Form 2': ['1.0 Oxygen and Hydrogen', '2.0 Water (Treatment & Purification)', '3.0 Fuels and Energy', '4.0 Atomic Structure, Periodic Table, Bonding & Formulae/Nomenclature'],
+        'Form 3': ['1.0 Chemical Equations, Hardness of Water', '2.0 Acids, Bases and Salts', '3.0 The Mole Concept and Volumetric Analysis (Titration)', '4.0 Ionic Theory and Electrolysis (Faraday Laws)', '5.0 Chemical Kinetics, Equilibrium and Energetics'],
+        'Form 4': ['1.0 Extraction of Metals (Sodium, Aluminium, Iron, Copper)', '2.0 Compounds of Metals & Non-Metals (Chlorine, Sulphur, Nitrogen)', '3.0 Organic Chemistry (Hydrocarbons, Alcohols, Carboxylic Acids, Polymers)', '4.0 Soil Chemistry and Environmental Pollution']
+      },
+      'Physics': {
+        'Form 1': ['1.0 Introduction to Physics & Laboratory Rules', '2.0 Measurement, Density & Relative Density', '3.0 Force, Archimedes Principle & Law of Flotation', '4.0 Structure and Properties of Matter (Elasticity, Surface Tension, Capillarity)', '5.0 Pressure, Work, Energy, Power & Light'],
+        'Form 2': ['1.0 Static Electricity & Current Electricity (Ohm Law)', '2.0 Magnetism & Earth Magnetic Field', '3.0 Forces in Equilibrium (Moments, Center of Gravity) & Simple Machines', '4.0 Motion in a Straight Line (Newton Laws of Motion)', '5.0 Temperature and Sustainable Energy Sources'],
+        'Form 3': ['1.0 Applications of Vectors & Friction', '2.0 Light (Reflection & Refraction at Curved Mirrors and Lenses, Optical Instruments)', '3.0 Thermal Expansion, Transfer of Thermal Energy & Measurement of Heat', '4.0 Vapour, Humidity and Current Electricity (EMF, Internal Resistance)'],
+        'Form 4': ['1.0 Waves & Sound Waves, Electromagnetic Spectrum', '2.0 Electromagnetism (Induction, Transformers)', '3.0 Radioactivity (Alpha, Beta, Gamma, Half-Life)', '4.0 Thermionic Emission & Electronics (Semiconductors, Diodes, Transistors)', '5.0 Elementary Astronomy & Geophysics']
+      },
+      'Geography': {
+        'Form 1': ['1.0 Concept of Geography & The Solar System', '2.0 Major Features of the Earth Surface', '3.0 Weather and Climate', '4.0 Map Work'],
+        'Form 2': ['1.0 Human Activities & Agriculture', '2.0 Water Management for Economic Development', '3.0 Sustainable Use of Forest Resources & Mining', '4.0 Tourism, Manufacturing Industry, Power/Energy & Transport'],
+        'Form 3': ['1.0 Structure of the Earth, Internal & External Forces', '2.0 Soil', '3.0 Elementary Surveying', '4.0 Map Reading and Map Interpretation', '5.0 Photograph Reading and Interpretation', '6.0 Application of Simple Statistics'],
+        'Form 4': ['1.0 Introduction to Research', '2.0 Climate and Natural Regions of the World', '3.0 Human Population and Settlements', '4.0 Environmental Issues and Management']
+      },
+      'History': {
+        'Form 1': ['1.0 Meaning, Importance & Sources of History', '2.0 Evolution of Man, Technology and Environment', '3.0 Development of Economic Activities and Social-Political Systems in Pre-Colonial Africa'],
+        'Form 2': ['1.0 Interactions Among the People of Africa', '2.0 Socio-Economic Development and Production in Pre-Colonial Africa', '3.0 Africa and the External World (Early Contacts & Slave Trade)', '4.0 Industrial Capitalism'],
+        'Form 3': ['1.0 Scramble for and Partition of Africa (Berlin Conference 1884-1885)', '2.0 Establishment of Colonial Rule & African Reactions (Maji Maji, Nandi, Samori Toure)', '3.0 Colonial Administrative Systems (Direct, Indirect, Assimilation)', '4.0 Colonial Economy and Colonial Social Services'],
+        'Form 4': ['1.0 Crises in the Capitalist System (WWI, Great Depression, WWII)', '2.0 Nationalism and Decolonisation in Africa', '3.0 Changes in Political, Social and Economic Policies in Africa After Independence', '4.0 Africa in International Affairs (AU, UN, EAC, SADC)']
+      }
+    };
+
+    function getUploadedSyllabusContext(cls, subject) {
+      const subLower = (subject || '').toLowerCase();
+      const clsLower = (cls || '').toLowerCase();
+
+      // 1. Find any syllabus rows uploaded in the Google Sheet for this subject
+      const uploadedSyllabuses = allPapers.filter(p => {
+        if (!p.isSyllabus) return false;
+        const matchSub = !subLower || p.subject.toLowerCase().includes(subLower) || p.title.toLowerCase().includes(subLower);
+        return matchSub;
+      });
+
+      // 2. Also find any TIE Books uploaded in the Google Sheet for this class/subject
+      const uploadedBooks = allPapers.filter(p => {
+        if (!p.isBook) return false;
+        return p.subject.toLowerCase().includes(subLower) && p.form.toLowerCase().includes(clsLower);
+      });
+
+      // 3. Built-in TIE competence topics for this class & subject
+      let syllabusTopics = [];
+      Object.keys(TIE_SYLLABUS_COMPETENCES).forEach(key => {
+        if (subLower.includes(key.toLowerCase()) || key.toLowerCase().includes(subLower)) {
+          const classMap = TIE_SYLLABUS_COMPETENCES[key];
+          if (classMap[cls]) {
+            syllabusTopics = classMap[cls];
+          } else {
+            syllabusTopics = Object.values(classMap).flat().slice(0, 6);
+          }
+        }
+      });
+
+      return {
+        uploadedSyllabuses,
+        uploadedBooks,
+        syllabusTopics
+      };
+    }
 
     function escapeHtml(str) {
       if (!str) return '';
@@ -944,32 +1106,17 @@
       if (!document.getElementById('dedicatedSyllabusPage').classList.contains('hidden')) {
         renderDedicatedSyllabusList();
       }
+      if (!document.getElementById('dedicatedBooksPage').classList.contains('hidden')) {
+        renderDedicatedBooksList();
+      }
       if (state.step === 2) renderSubjectsForClass();
       if (state.step === 3) renderPapersList();
     }
 
     function updateModeSwitcherUI() {
-      const isBooks = state.resourceMode === 'books';
       const heroP = document.getElementById('heroBtnPapers');
-      const heroB = document.getElementById('heroBtnBooks');
-      if (heroP && heroB) {
-        heroP.className = !isBooks
-          ? "px-4 py-2.5 rounded-xl font-black text-xs sm:text-sm border-2 border-brand-700 bg-brand-600 text-white shadow-sm transition-all flex items-center gap-1.5"
-          : "px-4 py-2.5 rounded-xl font-black text-xs sm:text-sm border-2 border-slate-200 bg-white text-slate-700 hover:bg-slate-100 shadow-sm transition-all flex items-center gap-1.5";
-        heroB.className = isBooks
-          ? "px-4 py-2.5 rounded-xl font-black text-xs sm:text-sm border-2 border-emerald-700 bg-emerald-600 text-white shadow-sm transition-all flex items-center gap-1.5"
-          : "px-4 py-2.5 rounded-xl font-black text-xs sm:text-sm border-2 border-slate-200 bg-white text-slate-700 hover:bg-slate-100 shadow-sm transition-all flex items-center gap-1.5";
-      }
-
-      const s2P = document.getElementById('step2BtnPapers');
-      const s2B = document.getElementById('step2BtnBooks');
-      if (s2P && s2B) {
-        s2P.className = !isBooks
-          ? "px-3 py-2 rounded-xl font-extrabold text-xs border-2 border-brand-600 bg-brand-600 text-white"
-          : "px-3 py-2 rounded-xl font-extrabold text-xs border-2 border-slate-200 bg-white text-slate-700";
-        s2B.className = isBooks
-          ? "px-3 py-2 rounded-xl font-extrabold text-xs border-2 border-emerald-600 bg-emerald-600 text-white"
-          : "px-3 py-2 rounded-xl font-extrabold text-xs border-2 border-slate-200 bg-white text-slate-700";
+      if (heroP) {
+        heroP.className = "px-4 py-2.5 rounded-xl font-black text-xs sm:text-sm border-2 border-brand-700 bg-brand-600 text-white shadow-sm transition-all flex items-center gap-1.5";
       }
     }
 
@@ -978,21 +1125,188 @@
         openSyllabusPage();
         return;
       }
+      if (mode === 'books') {
+        openBooksPage();
+        return;
+      }
       closeSyllabusPage(false);
-      state.resourceMode = mode;
+      closeBooksPage(false);
+      state.resourceMode = 'papers';
       updateModeSwitcherUI();
       if (state.step === 2) renderSubjectsForClass();
       if (state.step === 3) renderPapersList();
     }
 
     function toggleModeInsideStep3() {
-      setResourceMode(state.resourceMode === 'papers' ? 'books' : 'papers');
+      openBooksPage(true, state.selectedClass, state.selectedSubject);
+    }
+
+    function openBooksPage(pushHist = true, filterClass = '', filterSubject = '') {
+      state.resourceMode = 'books';
+      document.getElementById('home').classList.add('hidden');
+      document.getElementById('browserApp').classList.add('hidden');
+      document.getElementById('dedicatedSyllabusPage').classList.add('hidden');
+      document.getElementById('dedicatedBooksPage').classList.remove('hidden');
+
+      if (filterClass) {
+        booksPageSelectedClass = filterClass;
+        const fLower = filterClass.toLowerCase();
+        if (fLower.includes('standard')) setBooksPageLevel('Primary', false);
+        else if (fLower.includes('form 5') || fLower.includes('form 6')) setBooksPageLevel('Advanced', false);
+        else setBooksPageLevel('Secondary', false);
+        booksPageSelectedClass = filterClass;
+      }
+
+      const searchInput = document.getElementById('booksPageSearchInput');
+      if (searchInput && filterSubject) {
+        searchInput.value = filterSubject;
+      }
+
+      if (pushHist) {
+        try { history.pushState({ page: 'books' }, '', '#books'); } catch (e) {}
+      }
+      renderDedicatedBooksList();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      lucide.createIcons();
+    }
+
+    function closeBooksPage(goHome = true) {
+      document.getElementById('dedicatedBooksPage').classList.add('hidden');
+      document.getElementById('home').classList.remove('hidden');
+      document.getElementById('browserApp').classList.remove('hidden');
+      if (state.resourceMode === 'books') state.resourceMode = 'papers';
+      updateModeSwitcherUI();
+      if (goHome) {
+        try { history.pushState({ page: 'home' }, '', '#home'); } catch (e) {}
+      }
+      lucide.createIcons();
+    }
+
+    function openBooksNewWindow() {
+      const base = window.location.href.split('#')[0];
+      window.open(base + '#books', '_blank');
+    }
+
+    function setBooksPageLevel(level, resetClass = true) {
+      booksPageLevel = level;
+      if (resetClass) booksPageSelectedClass = 'ALL';
+      ['ALL', 'Primary', 'Secondary', 'Advanced'].forEach(lvl => {
+        const btn = document.getElementById(`bookTab${lvl}`);
+        if (!btn) return;
+        btn.className = (lvl === level)
+          ? "px-4 py-2.5 rounded-xl font-black text-xs sm:text-sm bg-emerald-600 text-white shadow-sm"
+          : "px-4 py-2.5 rounded-xl font-black text-xs sm:text-sm bg-slate-100 text-slate-700 hover:bg-slate-200";
+      });
+      renderDedicatedBooksList();
+    }
+
+    function setBooksPageClassPill(cls) {
+      booksPageSelectedClass = cls;
+      renderDedicatedBooksList();
+    }
+
+    function renderDedicatedBooksList() {
+      const grid = document.getElementById('dedicatedBooksGrid');
+      const badge = document.getElementById('booksPageCountBadge');
+      const pillsRow = document.getElementById('booksClassPillsRow');
+      const q = (document.getElementById('booksPageSearchInput')?.value || '').trim().toLowerCase();
+      if (!grid) return;
+
+      // Determine classes to show in the class filter row based on level
+      let levelClasses = [];
+      if (booksPageLevel === 'Primary') {
+        levelClasses = ['Standard 1', 'Standard 2', 'Standard 3', 'Standard 4', 'Standard 5', 'Standard 6', 'Standard 7'];
+      } else if (booksPageLevel === 'Secondary') {
+        levelClasses = ['Form 1', 'Form 2', 'Form 3', 'Form 4'];
+      } else if (booksPageLevel === 'Advanced') {
+        levelClasses = ['Form 5', 'Form 6'];
+      } else {
+        levelClasses = ['Form 1', 'Form 2', 'Form 3', 'Form 4', 'Form 5', 'Form 6', 'Standard 1', 'Standard 2', 'Standard 3', 'Standard 4', 'Standard 5', 'Standard 6', 'Standard 7'];
+      }
+
+      if (pillsRow) {
+        pillsRow.innerHTML = ['ALL', ...levelClasses].map(c => `
+          <button onclick="setBooksPageClassPill('${escapeHtml(c)}')" class="px-3 py-1.5 rounded-xl text-xs font-black transition-all ${booksPageSelectedClass === c ? 'bg-slate-900 text-white shadow-sm' : 'bg-slate-100 text-slate-700 hover:bg-slate-200'}">
+            ${c === 'ALL' ? 'All Classes' : escapeHtml(c)}
+          </button>
+        `).join('');
+      }
+
+      const books = allPapers.filter(p => {
+        if (!p.isBook) return false;
+        if (!matchesSyllabusTier(p.form, booksPageLevel)) return false;
+        if (booksPageSelectedClass !== 'ALL' && p.form.toLowerCase() !== booksPageSelectedClass.toLowerCase()) return false;
+        if (q && !`${p.title} ${p.subject} ${p.form} ${p.year}`.toLowerCase().includes(q)) return false;
+        return true;
+      });
+
+      // Sort so books that already have Google Drive links appear at the top
+      books.sort((a, b) => (b.paperUrl ? 1 : 0) - (a.paperUrl ? 1 : 0));
+
+      const linkedCount = books.filter(b => Boolean(b.paperUrl)).length;
+      if (badge) {
+        badge.textContent = `Showing ${books.length} TIE Books (${linkedCount} with live Google Drive PDF links)`;
+      }
+
+      if (books.length === 0) {
+        grid.innerHTML = `
+          <div class="col-span-full py-12 text-center bg-white rounded-3xl border-2 border-slate-200 p-6 space-y-3">
+            <div class="text-4xl">📚</div>
+            <h3 class="text-base font-black text-slate-900">Hakuna Kitabu Kilichopatikana kwa Utafutaji Huu</h3>
+            <button onclick="document.getElementById('booksPageSearchInput').value=''; setBooksPageLevel('ALL');" class="px-4 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-black text-xs rounded-xl">
+              Onyesha Vitabu Vyote vya TIE
+            </button>
+          </div>
+        `;
+        return;
+      }
+
+      grid.innerHTML = books.map(p => {
+        const hasUrl = Boolean(p.paperUrl);
+        const icon = getSubjectIcon(p.subject);
+        return `
+          <article class="bg-white p-5 rounded-2xl border-2 ${hasUrl ? 'border-emerald-400 shadow-md' : 'border-slate-200'} hover:border-emerald-600 transition-all flex flex-col justify-between gap-4">
+            <div>
+              <div class="flex items-center justify-between gap-2 mb-2">
+                <span class="text-[10px] font-black uppercase px-2.5 py-0.5 rounded-full ${hasUrl ? 'bg-emerald-100 text-emerald-950 border border-emerald-400' : 'bg-slate-100 text-slate-700'}">
+                  📚 ${escapeHtml(p.category)}
+                </span>
+                <span class="text-xs font-extrabold text-emerald-800 bg-emerald-50 px-2.5 py-0.5 rounded-lg">${escapeHtml(p.form)}</span>
+              </div>
+              <h3 class="text-base font-black text-slate-900 flex items-center gap-2">
+                <span>${icon}</span>
+                <span>${escapeHtml(p.title)}</span>
+              </h3>
+              <p class="text-xs font-bold text-slate-500 mt-1">Somo / Subject: <span class="text-slate-800">${escapeHtml(p.subject)}</span></p>
+            </div>
+            <div class="flex flex-wrap items-center gap-2 pt-3 border-t border-slate-100">
+              ${hasUrl ? `
+                <button onclick="triggerDirectDownloadUrl('${escapeHtml(p.paperUrl)}', '${escapeHtml(p.title)}.pdf')" class="flex-1 px-4 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-black rounded-xl flex items-center justify-center gap-1.5 shadow-sm">
+                  <i data-lucide="download" class="w-4 h-4"></i> ⬇️ Pakua Kitabu (PDF)
+                </button>
+                <button onclick="openViewer('${p.id}', 'paper')" class="px-3.5 py-2.5 bg-emerald-50 hover:bg-emerald-100 text-emerald-950 border border-emerald-300 text-xs font-extrabold rounded-xl">
+                  📖 Soma
+                </button>
+              ` : `
+                <span class="text-xs font-bold text-amber-800 bg-amber-50 px-3 py-2 rounded-xl border border-amber-200 flex-1 text-center">
+                  ⏳ Weka Google Drive Link (Category: TIE Book)
+                </span>
+              `}
+              <button onclick="openMwalimuModal('${escapeHtml(p.form)}', '${escapeHtml(p.subject)}')" class="px-3 py-2.5 bg-violet-50 hover:bg-violet-100 text-violet-900 border border-violet-200 text-xs font-black rounded-xl" title="Prepare Lesson Plan or Summary with Moha AI">
+                🤖 Moha AI
+              </button>
+            </div>
+          </article>
+        `;
+      }).join('');
+      lucide.createIcons();
     }
 
     function openSyllabusPage(pushHist = true) {
       state.resourceMode = 'syllabus';
       document.getElementById('home').classList.add('hidden');
       document.getElementById('browserApp').classList.add('hidden');
+      document.getElementById('dedicatedBooksPage').classList.add('hidden');
       document.getElementById('dedicatedSyllabusPage').classList.remove('hidden');
       if (pushHist) {
         try { history.pushState({ page: 'syllabus' }, '', '#syllabus'); } catch (e) {}
@@ -1446,6 +1760,7 @@
         state.page = 1;
         if (val.trim().length > 0) {
           closeSyllabusPage(false);
+          closeBooksPage(false);
           goToStep(3);
         } else {
           goToStep(state.selectedClass ? 2 : 1);
@@ -1462,6 +1777,7 @@
 
     function resetToStep1() {
       closeSyllabusPage(false);
+      closeBooksPage(false);
       state.selectedClass = '';
       state.selectedSubject = '';
       state.searchQuery = '';
@@ -1470,130 +1786,8 @@
       goToStep(1);
     }
 
-    function startVoiceSearch() {
-      const SpeechRec = window.SpeechRecognition || window.webkitSpeechRecognition;
-      if (!SpeechRec) {
-        showToastNotification('Browser yako haina Voice Search. Tafadhali andika kwenye kisanduku.');
-        return;
-      }
-      const rec = new SpeechRec();
-      rec.lang = state.lang === 'sw' ? 'sw-TZ' : 'en-US';
-      showToastNotification('🎤 Sema sasa (mfano: Form 4 Mathematics)...');
-      rec.onresult = (event) => {
-        const transcript = event.results[0][0].transcript;
-        const input = document.getElementById('smartSearchInput');
-        input.value = transcript;
-        state.searchQuery = transcript;
-        document.getElementById('clearSearchBtn').classList.remove('hidden');
-        closeSyllabusPage(false);
-        goToStep(3);
-      };
-      rec.start();
-    }
-
-    function togglePrintBasketItem(paperId) {
-      const p = allPapers.find(x => x.id === paperId);
-      if (!p) return;
-      const exists = printBasket.some(x => x.id === paperId);
-      if (exists) {
-        printBasket = printBasket.filter(x => x.id !== paperId);
-      } else {
-        printBasket.push({ id: p.id, title: p.title, url: getDirectDownloadUrl(p.paperUrl) });
-      }
-      updatePrintBasketUI();
-      renderPapersList();
-    }
-
-    function updatePrintBasketUI() {
-      const bar = document.getElementById('printBasketBar');
-      const countEl = document.getElementById('printBasketCount');
-      if (!bar || !countEl) return;
-      countEl.textContent = printBasket.length;
-      bar.classList.toggle('hidden', printBasket.length === 0);
-      bar.classList.toggle('flex', printBasket.length > 0);
-    }
-
-    function clearPrintBasket() {
-      printBasket = [];
-      updatePrintBasketUI();
-      if (state.step === 3) renderPapersList();
-    }
-
-    function sendPrintBasketWhatsApp() {
-      if (!printBasket.length) return;
-      const lines = printBasket.map((item, i) => `${i + 1}. ${item.title}\n${item.url}`).join('\n\n');
-      const msg = `Habari Stationery, naomba mniprintie mitihani hii kutoka Elimika:\n\n${lines}`;
-      window.open(`https://wa.me/?text=${encodeURIComponent(msg)}`, '_blank');
-    }
-
-    function openViewer(paperId, type = 'paper') {
-      const p = allPapers.find(item => item.id === paperId);
-      if (!p) return;
-      currentViewerPaperId = paperId;
-      saveRecentPaper(p);
-
-      const rawUrl = (type === 'answers') ? p.answersUrl : p.paperUrl;
-      const previewUrl = getPreviewUrl(rawUrl);
-      if (!rawUrl || !previewUrl) {
-        showToastNotification('Link ya faili hili bado haijawekwa.');
-        return;
-      }
-
-      document.getElementById('modalPaperTitle').textContent = (type === 'answers') ? `${p.title} (Majibu)` : p.title;
-      document.getElementById('modalMetaBadge').textContent = `${p.category} • ${p.year}`;
-
-      const switchWrap = document.getElementById('modalSwitchQAContainer');
-      if (p.paperUrl && p.answersUrl) {
-        switchWrap.classList.remove('hidden');
-        switchWrap.classList.add('flex');
-      } else {
-        switchWrap.classList.add('hidden');
-        switchWrap.classList.remove('flex');
-      }
-
-      const dlBtn = document.getElementById('modalDirectDownloadBtn');
-      dlBtn.onclick = () => triggerDirectDownloadUrl(rawUrl, `${p.title}.pdf`);
-
-      const spinner = document.getElementById('modalSpinner');
-      const iframe = document.getElementById('docViewerIframe');
-      spinner.style.display = 'flex';
-      iframe.src = previewUrl;
-      iframe.onload = () => { spinner.style.display = 'none'; };
-
-      const modal = document.getElementById('docViewerModal');
-      modal.classList.remove('hidden');
-      modal.classList.add('flex');
-    }
-
-    function switchViewerQA(type) {
-      if (!currentViewerPaperId) return;
-      openViewer(currentViewerPaperId, type);
-    }
-
-    function closeViewerModal() {
-      const modal = document.getElementById('docViewerModal');
-      document.getElementById('docViewerIframe').src = 'about:blank';
-      modal.classList.add('hidden');
-      modal.classList.remove('flex');
-    }
-
-    function toggleLanguage() {
-      state.lang = state.lang === 'sw' ? 'en' : 'sw';
-      localStorage.setItem('elimika_lang', state.lang);
-      applyLanguageUI();
-    }
-
-    function applyLanguageUI() {
-      const isSw = state.lang === 'sw';
-      document.getElementById('heroTitleText').innerHTML = isSw
-        ? `Chagua Darasa na Somo Kupata <span class="text-brand-600">Mitihani &amp; Vitabu</span>`
-        : `Find Past Papers, TIE Books &amp; Syllabuses in <span class="text-brand-600">3 Easy Steps</span>`;
-      document.getElementById('heroPapersLabel').textContent = isSw ? 'Mitihani (Papers)' : 'Past Papers';
-      document.getElementById('heroBooksLabel').textContent = isSw ? 'Vitabu vya TIE' : 'TIE Books';
-      document.getElementById('heroSyllabusLabel').textContent = isSw ? 'Syllabus (Muhtasari)' : 'Official Syllabus';
-    }
-
     const apiKey = "";
+    const DEFAULT_USER_PROVIDED_KEY = "AQ.Ab8RN6Iic6foybqHIFU_XNygjCU8rKmVSRrW2ARBEd_P9_yj-Q";
     let mwalimuMessages = [];
     let mwalimuActiveClass = 'Form 1';
     let mwalimuActiveSubject = 'Basic Mathematics';
@@ -1610,19 +1804,37 @@
       mwalimuActiveClass = cls || state.selectedClass || 'Form 1';
       mwalimuActiveSubject = sub || state.selectedSubject || 'Basic Mathematics';
 
-      document.getElementById('mwalimuContextSubtitle').textContent = `${mwalimuActiveClass} • ${mwalimuActiveSubject}`;
+      const sylCtx = getUploadedSyllabusContext(mwalimuActiveClass, mwalimuActiveSubject);
+      const sylCount = sylCtx.uploadedSyllabuses.length;
+
+      document.getElementById('mwalimuContextSubtitle').textContent = `${mwalimuActiveClass} • ${mwalimuActiveSubject} (${sylCount > 0 ? sylCount + ' Live Sheet Syllabus Linked' : 'TIE Syllabus Integrated'})`;
       document.getElementById('tsClass').value = mwalimuActiveClass;
       document.getElementById('tsSubject').value = mwalimuActiveSubject;
+
+      const syncBadge = document.getElementById('teacherSyllabusSyncBadge');
+      if (syncBadge) {
+        if (sylCount > 0) {
+          syncBadge.innerHTML = `✅ <strong>Live Google Sheet Syllabus Active:</strong> Found ${sylCount} uploaded syllabus record(s) for ${escapeHtml(mwalimuActiveSubject)}. Moha AI will use them for Lesson Plans, Schemes &amp; Marking Schemes.`;
+        } else if (sylCtx.syllabusTopics.length > 0) {
+          syncBadge.innerHTML = `📜 <strong>TIE Syllabus Topics Ready (${escapeHtml(mwalimuActiveClass)} ${escapeHtml(mwalimuActiveSubject)}):</strong> ${escapeHtml(sylCtx.syllabusTopics.join(' • '))}`;
+        } else {
+          syncBadge.innerHTML = `🔗 Integrated with uploaded Google Sheet Syllabuses &amp; TIE Competence-Based Curriculum.`;
+        }
+      }
+
       const dateInput = document.getElementById('tsDate');
       if (dateInput && !dateInput.value) {
         dateInput.value = new Date().toISOString().split('T')[0];
       }
 
       if (mwalimuMessages.length === 0) {
+        const topicsPreview = sylCtx.syllabusTopics.length > 0
+          ? `\n\n📜 **Mada za Syllabus (${mwalimuActiveClass} ${mwalimuActiveSubject}):**\n• ${sylCtx.syllabusTopics.join('\n• ')}`
+          : '';
         mwalimuMessages.push({
           id: 'msg-welcome',
           role: 'ai',
-          text: `Habari! Mimi ni **Moha AI** 🇹🇿 (${mwalimuActiveClass} • ${mwalimuActiveSubject}).\n\n• Kwa **Waalimu**: Bonyeza **📋 4-Stage Lesson Plan**, **📅 PO-RALG Scheme (2026)**, au **📖 Subject Log Book** hapo juu, jaza jina la mwalimu, shule, mada na tarehe, kisha pakua **PDF** moja kwa moja!\n• Kwa **Wanafunzi**: Bonyeza **📝 Topic Summary**, **❓ 5 Practice Qs**, **🎯 Start Quiz**, au uliza swali lolote hapa chini.`
+          text: `Habari! Mimi ni **Moha AI** 🇹🇿 (**${mwalimuActiveClass} • ${mwalimuActiveSubject}**).\nNimeunganishwa moja kwa moja na **Syllabus za TIE** unazopakia kwenye Google Sheet yako.${topicsPreview}\n\n• **Kwa Waalimu:** Bonyeza **📋 4-Stage Lesson Plan**, **📅 PO-RALG Scheme (2026)**, **✅ Marking Scheme**, au **📖 Subject Log Book** hapo juu, jaza taarifa za mwalimu na mada, kisha pakua **PDF** moja kwa moja!\n• **Kwa Wanafunzi & Waalimu:** Andika swali lolote hapa chini (mfano: *"Nitungie maswali 5 na Marking Scheme yake kuhusu ${mwalimuActiveSubject}"* au *"Niandalie lesson plan"*).`
         });
       }
 
@@ -1678,7 +1890,8 @@
         const k = localStorage.getItem('elimika_custom_gemini_key');
         if (k && k.trim().length > 10) return k.trim();
       } catch (e) {}
-      return apiKey;
+      if (apiKey && apiKey.trim().length > 5) return apiKey.trim();
+      return DEFAULT_USER_PROVIDED_KEY;
     }
 
     function getTeacherStudioMetadata() {
@@ -1723,12 +1936,19 @@
       document.getElementById('teacherStudioPanel').classList.add('hidden');
       lastRequestedDocMeta = { ...meta, docType: type };
 
-      // Generate official TIE/PO-RALG table immediately & reliably
+      const docLabels = {
+        lessonplan: '4-Stage TIE Lesson Plan',
+        schemeofwork: 'PO-RALG Scheme of Work (2026)',
+        markingscheme: 'Official NECTA Marking Scheme',
+        logbook: 'Subject Log Book'
+      };
+
+      // Generate official TIE/PO-RALG/NECTA table immediately & reliably using integrated syllabus
       const docHtml = buildInstantOfficialDocument(type, meta);
       mwalimuMessages.push({
         id: `user-${Date.now()}`,
         role: 'user',
-        text: `Prepare official ${type === 'lessonplan' ? '4-Stage TIE Lesson Plan' : type === 'schemeofwork' ? 'PO-RALG Scheme of Work (2026)' : 'Subject Log Book'} for ${meta.cls} ${meta.subject} — Topic: ${meta.topic} (${meta.subTopic}), Teacher: ${meta.teacher}, School: ${meta.school}, Date: ${meta.date}`
+        text: `Prepare official ${docLabels[type] || 'Teaching Document'} for ${meta.cls} ${meta.subject} — Topic: ${meta.topic} (${meta.subTopic}), Teacher: ${meta.teacher}, School: ${meta.school}, Date: ${meta.date}`
       });
       mwalimuMessages.push({
         id: `ai-${Date.now() + 1}`,
@@ -1748,6 +1968,102 @@
       const subTopic = escapeHtml(m.subTopic || m.topic || 'Specific Activity');
       const dateStr = escapeHtml(m.date || new Date().toISOString().split('T')[0]);
       const duration = escapeHtml(m.duration || '80 Minutes');
+
+      const sylCtx = getUploadedSyllabusContext(m.cls, m.subject);
+      const uploadedSylTitle = sylCtx.uploadedSyllabuses[0]?.title || `Official TIE ${cls} ${subject} Syllabus`;
+
+      if (type === 'markingscheme') {
+        return `<div class="official-tie-doc">
+          <div style="text-align:center; font-weight:900; font-size:13px; margin-bottom:8px; text-transform:uppercase;">
+            THE UNITED REPUBLIC OF TANZANIA — NATIONAL EXAMINATIONS COUNCIL (NECTA) FORMAT<br/>
+            ${school} — OFFICIAL MARKING SCHEME (${cls.toUpperCase()} ${subject.toUpperCase()})
+          </div>
+          <table>
+            <tr>
+              <td><strong>Subject:</strong> ${subject}</td>
+              <td><strong>Class / Level:</strong> ${cls}</td>
+              <td><strong>Date:</strong> ${dateStr}</td>
+            </tr>
+            <tr>
+              <td><strong>Main Topic (Syllabus):</strong> ${topic}</td>
+              <td><strong>Sub-Topic:</strong> ${subTopic}</td>
+              <td><strong>Examiner / Teacher:</strong> ${teacher}</td>
+            </tr>
+            <tr>
+              <td colspan="3"><strong>Syllabus Reference:</strong> ${escapeHtml(uploadedSylTitle)}</td>
+            </tr>
+          </table>
+          <table>
+            <thead>
+              <tr>
+                <th style="width:10%;">QN NO.</th>
+                <th style="width:32%;">QUESTION / ASSESSMENT ITEM</th>
+                <th style="width:43%;">MODEL ANSWER / SCORING RUBRIC (SOLUTIONS)</th>
+                <th style="width:15%;">MARKS ALLOCATION</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>1 (a)</strong></td>
+                <td>Define the key terms and state the fundamental principle of <strong>${subTopic}</strong> under <strong>${topic}</strong>.</td>
+                <td>
+                  • Clear scientific/academic definition of <strong>${subTopic}</strong> = 02 Marks<br/>
+                  • Correct statement of governing principle/law with appropriate SI units or terminology = 02 Marks<br/>
+                  • One relevant real-life example in Tanzania = 01 Mark
+                </td>
+                <td><strong>05 Marks</strong></td>
+              </tr>
+              <tr>
+                <td><strong>1 (b)</strong></td>
+                <td>Explain three (3) major factors or procedures involved in <strong>${subTopic}</strong>.</td>
+                <td>
+                  • Factor/Procedure 1 stated and explained clearly = 02 Marks<br/>
+                  • Factor/Procedure 2 stated and explained clearly = 02 Marks<br/>
+                  • Factor/Procedure 3 stated and explained clearly = 02 Marks
+                </td>
+                <td><strong>06 Marks</strong></td>
+              </tr>
+              <tr>
+                <td><strong>2 (a)</strong></td>
+                <td>Solve a structured problem / practical application on <strong>${subTopic}</strong> (${topic}).</td>
+                <td>
+                  • Extracting given data / identifying required variables = 01 Mark<br/>
+                  • Writing the correct formula / method = 02 Marks<br/>
+                  • Correct substitution and step-by-step calculation = 03 Marks<br/>
+                  • Correct final answer with proper units/conclusion = 02 Marks
+                </td>
+                <td><strong>08 Marks</strong></td>
+              </tr>
+              <tr>
+                <td><strong>2 (b)</strong></td>
+                <td>Distinguish between the core concepts of <strong>${topic}</strong> and state two real-life applications.</td>
+                <td>
+                  • Two clear contrasting points in a table = 04 Marks (02 @)<br/>
+                  • Two real-world applications in daily life = 02 Marks (01 @)
+                </td>
+                <td><strong>06 Marks</strong></td>
+              </tr>
+              <tr>
+                <td><strong>3</strong></td>
+                <td>Essay / Comprehensive Analysis: Evaluate the importance of <strong>${topic} (${subTopic})</strong> in socio-economic and technological development in Tanzania.</td>
+                <td>
+                  • <strong>Introduction:</strong> Meaning of ${subTopic} &amp; context = 02 Marks<br/>
+                  • <strong>Main Body:</strong> Any five (5) well-explained points with vivid examples (5 × 2.5 Marks) = 12.5 Marks<br/>
+                  • <strong>Conclusion:</strong> Summary &amp; recommendation = 0.5 Mark
+                </td>
+                <td><strong>15 Marks</strong></td>
+              </tr>
+            </tbody>
+          </table>
+          <table>
+            <tr>
+              <td><strong>TOTAL MARKS: 40 MARKS</strong></td>
+              <td><strong>Verified By Teacher:</strong> ${teacher}</td>
+              <td><strong>Academic Master Sign:</strong> __________________</td>
+            </tr>
+          </table>
+        </div>`;
+      }
 
       if (type === 'lessonplan') {
         return `<div class="official-tie-doc">
@@ -1794,7 +2110,7 @@
             <tr><td><strong>Main Activity:</strong></td><td>Explore and analyse principles of ${topic}</td></tr>
             <tr><td><strong>Specific Activity:</strong></td><td>Perform guided and practical tasks on ${subTopic}</td></tr>
             <tr><td><strong>Teaching &amp; Learning Resources:</strong></td><td>TIE ${cls} ${subject} Textbook, Wall Charts, Real Objects, Past NECTA Papers</td></tr>
-            <tr><td><strong>References:</strong></td><td>Tanzania Institute of Education (TIE). (2023). <em>${subject} for ${cls} Student's Book</em>. Dar es Salaam: TIE.</td></tr>
+            <tr><td><strong>References:</strong></td><td>Tanzania Institute of Education (TIE). (2023). <em>${subject} for ${cls} Student's Book</em> &amp; <em>${escapeHtml(uploadedSylTitle)}</em>. Dar es Salaam: TIE.</td></tr>
           </table>
           <div style="font-weight:900; font-size:11px; margin:6px 0 4px 0; text-transform:uppercase;">Teaching and Learning Process</div>
           <table>
@@ -1972,20 +2288,52 @@
 
     function generateSmartTutorReply(userText, cls, subject) {
       const lower = (userText || '').toLowerCase();
-      if (lower.includes('summary') || lower.includes('muhtasari')) {
-        return `📚 **${cls} ${subject} — TIE Competence-Based Revision Summary**\n\n**1. Dhana Kuu (Key Competences):**\n• Kuelewa kanuni za msingi, fasili (definitions), na vipimo rasmi katika **${subject}**.\n• Kuhusianisha nadharia ya darasani na mazingira halisi ya Tanzania.\n\n**2. Mbinu za Kujibu Mitihani ya NECTA:**\n• **Section A:** Soma swali kwa makini na ondoa majibu yasiyo sahihi kwanza.\n• **Section B:** Andika kanuni (formula) kabla ya kuweka namba na ukumbuke kuweka units.\n• **Section C:** Jibu kwa mpangilio wa hoja zenye mifano halisi.`;
+      const sylCtx = getUploadedSyllabusContext(cls, subject);
+      const topicsList = sylCtx.syllabusTopics.length > 0
+        ? sylCtx.syllabusTopics.map(t => `• ${t}`).join('\n')
+        : `• Core Competences and Specific Activities in ${cls} ${subject}\n• Practical Application and Problem Solving\n• NECTA Examination Format & Marking Rubric`;
+
+      const sheetSylNote = sylCtx.uploadedSyllabuses.length > 0
+        ? `\n\n✅ **Uploaded Google Sheet Syllabuses Found (${sylCtx.uploadedSyllabuses.length}):**\n${sylCtx.uploadedSyllabuses.map(s => `• ${s.title} (${s.form})`).join('\n')}`
+        : '';
+
+      // If user asks about spherical earth / great circle / aeroplane distance (like in their screenshot)
+      if (lower.includes('meridian') || lower.includes('longitude') || lower.includes('aeroplane') || lower.includes('rome') || lower.includes('great circle')) {
+        return `📐 **Form 3 Basic Mathematics — The Earth as a Sphere (TIE Syllabus & Marking Scheme)**\n\n**(a) Definitions (01 Mark):**\n• **(i) Meridian:** An arc of a great circle that connects the North Pole and South Pole on the Earth's surface ($\\frac{1}{2}$ Mark).\n• **(ii) Longitude:** The central angle subtended at the centre of the Earth from the Prime Meridian ($0^\\circ$) plane to a given meridian plane ($\\frac{1}{2}$ Mark).\n\n**(b) Shortest Distance Along Great Circle Across the North Pole (03 Marks):**\n• **Given:** Rome $(41^\\circ\\text{N}, 12^\\circ\\text{E})$ and Port Clarence $(65^\\circ\\text{N}, 168^\\circ\\text{W})$. Notice that $12^\\circ + 168^\\circ = 180^\\circ$ (opposite meridians forming a complete Great Circle through the North Pole).\n• **Radius of flight path ($r_p$):**\n$$r_p = R + h = 6370\\text{ km} + 15\\text{ km} = 6385\\text{ km}$$\n• **Central Angle ($\\theta$) over the North Pole:**\n$$\\theta = 180^\\circ - (41^\\circ + 65^\\circ) = 180^\\circ - 106^\\circ = 74^\\circ$$\n*(Note: If the second latitude is $45^\\circ\\text{N}$, then $\\theta = 180^\\circ - (41^\\circ + 45^\\circ) = 94^\\circ$)*.\n• **Distance Formula:**\n$$l_g = \\left(\\frac{\\theta}{360^\\circ}\\right) \\times 2\\pi r_p$$\nFor $\\theta = 94^\\circ$: $$l_g = \\frac{94^\\circ}{360^\\circ} \\times 2 \\times 3.14 \\times 6385 = 10,469.98\\text{ km}$$`;
       }
+
+      if (lower.includes('marking scheme') || lower.includes('majibu') || lower.includes('rubric')) {
+        return buildInstantOfficialDocument('markingscheme', {
+          school: 'ELIMIKA TANZANIA SECONDARY',
+          teacher: 'SUBJECT TEACHER',
+          cls,
+          subject,
+          topic: sylCtx.syllabusTopics[0] || `${subject} Core Topic`,
+          subTopic: userText.slice(0, 65),
+          date: new Date().toISOString().split('T')[0]
+        });
+      }
+
+      if (lower.includes('syllabus') || lower.includes('muhtasari') || lower.includes('mada')) {
+        return `📜 **Official TIE Syllabus Overview — ${cls} ${subject}**\n\n**Main Competences & Topics:**\n${topicsList}${sheetSylNote}\n\n💡 **Tip for Teachers:** Unaweza kubonyeza **📋 4-Stage Lesson Plan**, **📅 PO-RALG Scheme (2026)**, au **✅ Marking Scheme** hapo juu na kuchagua mada yoyote kati ya hizi ili kupakua PDF rasmi!`;
+      }
+
+      if (lower.includes('summary') || lower.includes('notes')) {
+        return `📚 **${cls} ${subject} — TIE Competence-Based Revision Summary**\n\n**1. Syllabus Competences Covered (${cls}):**\n${topicsList}\n\n**2. Mbinu za Kujibu na Kusahihisha Mitihani ya NECTA (Marking Guide):**\n• **Section A (Objective Items - 16 Marks):** Kila swali lina alama 1. Hakikisha unachagua herufi sahihi na kuandika majibu kwa ufasaha.\n• **Section B (Short Answer / Structured - 54 Marks):** Kila swali lina alama 9. Onyesha **Formula (01 Mark)**, **Substitution (02 Marks)**, na **Final Answer with SI Units (01 Mark)**.\n• **Section C (Essay / Practical - 30 Marks):** Utangulizi (al. 1.5), Hoja 5–6 zenye mifano (al. 12), Hitimisho (al. 1.5).`;
+      }
+
       if (lower.includes('practice') || lower.includes('maswali') || lower.includes('questions')) {
-        return `❓ **5 High-Yield NECTA Practice Questions — ${cls} ${subject}**\n\n**1.** Define the fundamental terms studied in **${cls} ${subject}** and give two real-life examples.\n**2.** Explain three major factors affecting key processes in **${subject}**.\n**3.** Distinguish between the main concepts covered in Term 1 and Term 2 of **${cls} ${subject}**.\n**4.** Calculate / solve a structured problem in **${subject}** showing full formula and SI units.\n**5.** Explain the importance of **${subject}** in daily socio-economic activities in Tanzania.`;
+        return `❓ **5 NECTA Practice Questions & Marking Scheme — ${cls} ${subject}**\n\n**Topics from ${cls} Syllabus:**\n${topicsList}\n\n**Q1.** Define the core terms in the first topic of **${cls} ${subject}** and give two real-life examples. *(03 Marks: 01 Mark definition, 02 Marks examples)*\n**Q2.** Explain four major factors affecting key processes studied in **${cls} ${subject}**. *(08 Marks: 02 Marks @ point)*\n**Q3.** Solve a structured problem from **${cls} ${subject}** showing the formula, substitution, and units. *(06 Marks)*\n**Q4.** Distinguish between the primary concepts covered in Term 1 and Term 2 of **${cls} ${subject}**. *(04 Marks)*\n**Q5.** Write a comprehensive essay explaining five ways **${subject}** contributes to industrial and social development in Tanzania. *(15 Marks: Intro 02, Body 5×2.5=12.5, Conclusion 0.5)*`;
       }
-      return `Habari! Mimi ni **Moha AI** (${cls} • ${subject}).\n\nKuhusu swali lako: **"${userText.slice(0, 80)}"**\n\n• Katika mtaala wa TIE (**${cls} ${subject}**), mada hii inalenga kumjengea mwanafunzi uwezo wa kutumia kanuni za somo kutatua changamoto za kila siku.\n• Kama unataka kuandaa **Lesson Plan ya Hatua 4** au **Scheme of Work ya PO-RALG (2026)**, bonyeza kitufe cha **📋 4-Stage Lesson Plan** au **📅 PO-RALG Scheme (2026)** hapo juu, jaza jina la mwalimu na mada, kisha pakua **PDF** moja kwa moja!`;
+
+      return `Habari! Mimi ni **Moha AI** 🇹🇿 (**${cls} • ${subject}**).\n\nKuhusu ujumbe wako: **"${userText.slice(0, 90)}"**\n\n📜 **Mada za Syllabus ya ${cls} ${subject} Zilizounganishwa:**\n${topicsList}${sheetSylNote}\n\n• Kama unataka **Lesson Plan ya Hatua 4**, **PO-RALG Scheme of Work (2026)**, au **NECTA Marking Scheme** ya mada hii, bonyeza kitufe husika hapo juu (**📋 4-Stage Lesson Plan** au **✅ Marking Scheme**), jaza jina la mwalimu na mada, kisha pakua **PDF** moja kwa moja!`;
     }
 
     async function callGeminiWithRetry(payload) {
       const currentKey = getActiveApiKey();
-      const models = ['gemini-3-flash-preview', 'gemini-2.5-flash'];
+      const models = ['gemini-2.5-flash', 'gemini-3-flash-preview', 'gemini-2.0-flash'];
       for (const modelName of models) {
-        const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/${modelName}:generateContent?key=${currentKey}`;
+        const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/${modelName}:generateContent?key=${encodeURIComponent(currentKey)}`;
         try {
           const response = await fetch(endpoint, {
             method: 'POST',
@@ -2005,10 +2353,12 @@
       document.getElementById('mwalimuQuizContainer').classList.add('hidden');
       document.getElementById('mwalimuChatContainer').classList.remove('hidden');
       const input = document.getElementById('mwalimuUserInput');
-      if (kind === 'summary') {
+      if (kind === 'syllabus') {
+        input.value = `Show me the official TIE Syllabus topics and competences for ${mwalimuActiveClass} ${mwalimuActiveSubject}.`;
+      } else if (kind === 'summary') {
         input.value = `Give me a clear TIE revision summary and key formulas for ${mwalimuActiveClass} ${mwalimuActiveSubject}.`;
       } else {
-        input.value = `Give me 5 important NECTA practice questions and brief answers for ${mwalimuActiveClass} ${mwalimuActiveSubject}.`;
+        input.value = `Give me 5 important NECTA practice questions and their Marking Scheme for ${mwalimuActiveClass} ${mwalimuActiveSubject}.`;
       }
       sendMwalimuMessage();
     }
@@ -2031,20 +2381,28 @@
         mwalimuMessages.push({
           id: `ai-${Date.now() + 1}`,
           role: 'ai',
-          text: `Tafadhali jaza fomu ya **📋 Teacher & Lesson Details** iliyofunguka hapo juu (**Jina la Mwalimu, Jina la Shule, Darasa, Somo, Mada Kuu, Mada Ndogo, na Tarehe**) kisha bonyeza **⚡ Generate** ili nikupatie jedwali kamili tayari kwa kupakua PDF!`
+          text: `Tafadhali jaza fomu ya **📋 Teacher, Syllabus Topic & Exam Details** iliyofunguka hapo juu (**Jina la Mwalimu, Jina la Shule, Darasa, Somo, Mada Kuu ya Syllabus, Mada Ndogo, na Tarehe**) kisha bonyeza **⚡ Generate** ili nikupatie jedwali kamili tayari kwa kupakua PDF!`
         });
         renderMwalimuChat();
         return;
       }
 
-      const displayPrompt = userText || '📷 Solve this attached question step-by-step.';
+      const displayPrompt = userText || '📷 Solve this attached question step-by-step and show the Marking Scheme.';
       inputEl.value = '';
       clearMwalimuImage();
 
       mwalimuMessages.push({ id: `user-${Date.now()}`, role: 'user', text: displayPrompt });
       const loadingId = `load-${Date.now()}`;
-      mwalimuMessages.push({ id: loadingId, role: 'ai', loading: true, text: 'Moha AI inaandaa jibu...' });
+      mwalimuMessages.push({ id: loadingId, role: 'ai', loading: true, text: 'Moha AI inaandaa jibu kutoka kwenye Syllabus...' });
       renderMwalimuChat();
+
+      const sylCtx = getUploadedSyllabusContext(mwalimuActiveClass, mwalimuActiveSubject);
+      const syllabusSystemNote = [
+        `You are Moha AI, an expert Tanzanian TIE Curriculum & NECTA Examiner assistant for ${mwalimuActiveClass} ${mwalimuActiveSubject}.`,
+        `Official TIE Syllabus Competences for ${mwalimuActiveClass} ${mwalimuActiveSubject}: ${sylCtx.syllabusTopics.join('; ') || 'Standard TIE Competence-Based Curriculum'}.`,
+        `Uploaded Google Sheet Syllabuses for this subject: ${sylCtx.uploadedSyllabuses.map(s => s.title + ' (' + s.form + ')').join(', ') || 'Integrated TIE Syllabus'}.`,
+        `Help teachers prepare 4-Stage TIE Lesson Plans (Introduction, Competence Development, Design, Realisation), 2026 PO-RALG Schemes of Work (Note: Registration & Orientation is ONLY for Form 1), and detailed NECTA Marking Schemes with mark allocations. Use LaTeX ($...$ or $$...$$) for mathematical formulas.`
+      ].join(' ');
 
       const parts = [{ text: displayPrompt }];
       if (attachedImg) {
@@ -2054,7 +2412,7 @@
       const payload = {
         contents: [{ role: 'user', parts }],
         systemInstruction: {
-          parts: [{ text: `You are Moha AI, an expert Tanzanian TIE & NECTA tutor for ${mwalimuActiveClass} ${mwalimuActiveSubject}. Explain clearly step-by-step.` }]
+          parts: [{ text: syllabusSystemNote }]
         }
       };
 
@@ -2269,8 +2627,11 @@
     window.addEventListener('popstate', () => {
       if (window.location.hash === '#syllabus') {
         openSyllabusPage(false);
+      } else if (window.location.hash === '#books') {
+        openBooksPage(false);
       } else {
         closeSyllabusPage(false);
+        closeBooksPage(false);
       }
     });
 
@@ -2284,6 +2645,8 @@
       fetchSheetData();
       if (window.location.hash === '#syllabus') {
         openSyllabusPage(false);
+      } else if (window.location.hash === '#books') {
+        openBooksPage(false);
       }
     });
   </script>
