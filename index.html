@@ -8,6 +8,7 @@
 <script src="https://cdn.tailwindcss.com"></script>
 <script>
 tailwind.config = {
+  darkMode: 'class',
   theme: {
     extend: {
       colors: {
@@ -67,10 +68,82 @@ tailwind.config = {
   text-transform: uppercase;
   font-size: 10px;
 }
+
+/* Comprehensive Dark Mode Overrides */
+html.dark body {
+  background-color: #090d16;
+  color: #f1f5f9;
+}
+html.dark header {
+  background-color: rgba(15, 23, 42, 0.95);
+  border-color: #1e293b;
+}
+html.dark #home {
+  background: linear-gradient(to bottom, #0f172a, #090d16);
+  border-color: #1e293b;
+}
+html.dark .bg-white:not(.official-tie-doc) {
+  background-color: #1e293b !important;
+  color: #f8fafc;
+}
+html.dark .bg-slate-50 {
+  background-color: #0f172a !important;
+}
+html.dark .bg-slate-100 {
+  background-color: #334155 !important;
+  color: #e2e8f0 !important;
+}
+html.dark .text-slate-900,
+html.dark .text-slate-800 {
+  color: #f8fafc !important;
+}
+html.dark .text-slate-700,
+html.dark .text-slate-600 {
+  color: #cbd5e1 !important;
+}
+html.dark .text-slate-500 {
+  color: #94a3b8 !important;
+}
+html.dark .border-slate-200,
+html.dark .border-slate-100,
+html.dark .border-slate-300 {
+  border-color: #334155 !important;
+}
+html.dark .bg-brand-50 {
+  background-color: rgba(37, 99, 235, 0.18) !important;
+  border-color: #3b82f6 !important;
+}
+html.dark .text-brand-900,
+html.dark .text-brand-800,
+html.dark .text-brand-700 {
+  color: #93c5fd !important;
+}
+html.dark .bg-amber-50 {
+  background-color: rgba(245, 158, 11, 0.16) !important;
+  border-color: #f59e0b !important;
+}
+html.dark .text-amber-900,
+html.dark .text-amber-800 {
+  color: #fde68a !important;
+}
+html.dark .bg-emerald-50 {
+  background-color: rgba(16, 185, 129, 0.16) !important;
+  border-color: #10b981 !important;
+}
+html.dark .text-emerald-950,
+html.dark .text-emerald-900,
+html.dark .text-emerald-800,
+html.dark .text-emerald-700 {
+  color: #6ee7b7 !important;
+}
+html.dark #stickyMobileBottomBar {
+  background-color: rgba(15, 23, 42, 0.95) !important;
+  border-color: #1e293b !important;
+}
 </style>
 </head>
-<body class="bg-slate-50 text-slate-800 font-sans antialiased min-h-screen flex flex-col selection:bg-brand-600 selection:text-white">
-<header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-sm">
+<body class="bg-slate-50 text-slate-800 font-sans antialiased min-h-screen flex flex-col selection:bg-brand-600 selection:text-white transition-colors duration-200">
+<header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-sm transition-colors">
   <div class="max-w-5xl mx-auto px-3 sm:px-6">
     <div class="flex items-center justify-between h-16 sm:h-20 gap-2">
       <!-- Logo -->
@@ -88,7 +161,12 @@ tailwind.config = {
 
       <!-- Top Right Controls -->
       <div class="flex items-center gap-1.5 sm:gap-2">
-        <button onclick="openMwalimuModal()" class="px-3.5 py-2 rounded-xl bg-violet-600 hover:bg-violet-700 text-white font-black text-xs flex items-center gap-1.5 shadow-sm transition-all">
+        <button onclick="toggleDarkMode()" id="darkModeToggleBtn" class="px-3 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 font-black text-xs flex items-center gap-1.5 shadow-sm transition-all" title="Toggle Dark Mode">
+          <span id="darkModeIcon">🌙</span>
+          <span id="darkModeLabel" class="hidden sm:inline">Dark</span>
+        </button>
+
+        <button id="headerMohaBtn" onclick="openMwalimuModal()" class="px-3.5 py-2 rounded-xl bg-violet-600 hover:bg-violet-700 text-white font-black text-xs flex items-center gap-1.5 shadow-sm transition-all">
           <span>🤖</span>
           <span>Moha AI</span>
         </button>
@@ -109,11 +187,11 @@ tailwind.config = {
     </div>
 
     <h1 id="heroTitleText" class="text-2xl sm:text-4xl font-black text-slate-900 tracking-tight leading-snug">
-      Select Class &amp; Subject for <span class="text-brand-600">Past Papers, TIE Books &amp; Syllabus</span>
+      Select Class &amp; Subject for <span class="text-brand-600">Past Papers</span>
     </h1>
 
-    <!-- Mode Switcher: Past Papers vs Dedicated TIE Books Page vs Dedicated Syllabus Page -->
-    <div class="flex flex-wrap items-center justify-center gap-2 pt-1">
+    <!-- Mode Switcher: Visible ONLY on Home (Step 1), hidden when user clicks a Class Level -->
+    <div id="heroResourceModeBar" class="flex flex-wrap items-center justify-center gap-2 pt-1">
       <button onclick="setResourceMode('papers')" id="heroBtnPapers" class="px-4 py-2.5 rounded-xl font-black text-xs sm:text-sm border-2 border-brand-700 bg-brand-600 text-white shadow-sm transition-all flex items-center gap-1.5">
         <span>📝</span> <span id="heroPapersLabel">Past Papers</span>
       </button>
@@ -242,7 +320,7 @@ tailwind.config = {
       </div>
     </section>
 
-    <!-- STEP 2: CHOOSE SUBJECT -->
+    <!-- STEP 2: CHOOSE SUBJECT (Clean — No Syllabus, Moha AI, or Books buttons) -->
     <section id="step2View" class="hidden space-y-5">
       <div class="bg-white p-4 rounded-2xl border-2 border-slate-200 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
         <div>
@@ -253,19 +331,12 @@ tailwind.config = {
             Select Subject — <span id="step2CurrentClass" class="text-brand-600">Form 4</span>
           </h2>
         </div>
-
-        <div class="flex flex-wrap items-center gap-1.5">
-          <button onclick="setResourceMode('papers')" id="step2BtnPapers" class="px-3 py-2 rounded-xl font-extrabold text-xs border-2 border-brand-600 bg-brand-600 text-white transition-all">📝 Papers</button>
-          <button onclick="openBooksPage(true, state.selectedClass)" id="step2BtnBooks" class="px-3 py-2 rounded-xl font-extrabold text-xs border-2 border-emerald-500 bg-emerald-100 text-emerald-950 hover:bg-emerald-200 transition-all">📚 TIE Books ↗</button>
-          <button onclick="openSyllabusPage()" class="px-3 py-2 rounded-xl font-extrabold text-xs border-2 border-amber-400 bg-amber-100 text-amber-950 hover:bg-amber-200 transition-all">📜 Syllabus ↗</button>
-          <button onclick="openMwalimuModal(state.selectedClass, '')" class="px-3 py-2 rounded-xl font-black text-xs bg-violet-600 hover:bg-violet-700 text-white transition-all">🤖 Moha AI</button>
-        </div>
       </div>
 
       <div id="subjectsListGrid" class="grid grid-cols-1 sm:grid-cols-2 gap-3"></div>
     </section>
 
-    <!-- STEP 3: PAPERS OR BOOKS LIST -->
+    <!-- STEP 3: PAPERS LIST (Clean — No Syllabus, Moha AI, or Books buttons) -->
     <section id="step3View" class="hidden space-y-4">
       <div class="bg-white p-4 rounded-2xl border-2 border-slate-200 shadow-sm space-y-3">
         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
@@ -275,15 +346,6 @@ tailwind.config = {
             </button>
             <h2 id="step3Title" class="text-lg sm:text-xl font-black text-slate-900">Available Papers</h2>
             <div id="step3Subtitle" class="text-xs font-bold text-slate-500">Showing records</div>
-          </div>
-
-          <div class="flex flex-wrap items-center gap-2">
-            <button onclick="openBooksPage(true, state.selectedClass, state.selectedSubject)" id="crossSwitchModeBtn" class="px-3 py-2 rounded-xl bg-emerald-50 hover:bg-emerald-100 text-emerald-900 border border-emerald-300 font-black text-xs">
-              📚 Open TIE Books Page ↗
-            </button>
-            <button onclick="openMwalimuModal(state.selectedClass, state.selectedSubject)" class="px-3 py-2 rounded-xl bg-violet-600 hover:bg-violet-700 text-white font-black text-xs">
-              🤖 Ask Moha AI
-            </button>
           </div>
         </div>
 
@@ -1386,9 +1448,6 @@ function renderDedicatedSyllabusList() {
         <div class="text-4xl">📜</div>
         <h3 class="text-base font-black text-slate-900">Syllabuses Will Appear Here Once Uploaded to Your Google Sheet</h3>
         <p class="text-xs text-slate-500 max-w-md mx-auto">Add rows to your Google Sheet with Category set to <strong>TIE Syllabus</strong> and your Google Drive link.</p>
-        <button onclick="openMwalimuModal('Form 1-4', 'Basic Mathematics')" class="px-4 py-2.5 bg-violet-600 hover:bg-violet-700 text-white font-black text-xs rounded-xl">
-          🤖 Ask Moha AI for Subject Syllabus Topics
-        </button>
       </div>
     `;
     return;
@@ -1424,11 +1483,43 @@ function renderDedicatedSyllabusList() {
   lucide.createIcons();
 }
 
+function initDarkMode() {
+  const savedTheme = localStorage.getItem('elimika_theme');
+  const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+  const isDark = savedTheme ? savedTheme === 'dark' : prefersDark;
+  applyDarkMode(isDark);
+}
+
+function toggleDarkMode() {
+  const isCurrentlyDark = document.documentElement.classList.contains('dark');
+  const nextDark = !isCurrentlyDark;
+  localStorage.setItem('elimika_theme', nextDark ? 'dark' : 'light');
+  applyDarkMode(nextDark);
+}
+
+function applyDarkMode(isDark) {
+  document.documentElement.classList.toggle('dark', isDark);
+  const iconEl = document.getElementById('darkModeIcon');
+  const labelEl = document.getElementById('darkModeLabel');
+  if (iconEl) iconEl.textContent = isDark ? '☀️' : '🌙';
+  if (labelEl) labelEl.textContent = isDark ? 'Light' : 'Dark';
+}
+
 function goToStep(stepNum, pushHistory = true) {
   state.step = stepNum;
   document.getElementById('step1View').classList.toggle('hidden', stepNum !== 1);
   document.getElementById('step2View').classList.toggle('hidden', stepNum !== 2);
   document.getElementById('step3View').classList.toggle('hidden', stepNum !== 3);
+
+  // Hide TIE Books, Official Syllabuses, and Moha AI buttons whenever a Class Level is clicked (Steps 2 & 3)
+  const heroResourceBar = document.getElementById('heroResourceModeBar');
+  if (heroResourceBar) {
+    heroResourceBar.classList.toggle('hidden', stepNum !== 1);
+  }
+  const headerMohaBtn = document.getElementById('headerMohaBtn');
+  if (headerMohaBtn) {
+    headerMohaBtn.classList.toggle('hidden', stepNum !== 1);
+  }
 
   const stickyBar = document.getElementById('stickyMobileBottomBar');
   if (stickyBar) stickyBar.classList.toggle('hidden', stepNum === 1);
@@ -1538,11 +1629,8 @@ function renderSubjectsForClass() {
   if (!container) return;
   updateModeSwitcherUI();
 
-  const isBooks = state.resourceMode === 'books';
   const classItems = allPapers.filter(p => {
-    if (p.isSyllabus) return false;
-    if (isBooks && !p.isBook) return false;
-    if (!isBooks && p.isBook) return false;
+    if (p.isSyllabus || p.isBook) return false;
     return p.form.toLowerCase() === state.selectedClass.toLowerCase();
   });
 
@@ -1558,13 +1646,10 @@ function renderSubjectsForClass() {
     container.innerHTML = `
       <div class="col-span-full py-10 text-center bg-white rounded-2xl border-2 border-slate-200 p-6 space-y-3">
         <div class="text-3xl">📂</div>
-        <h4 class="font-black text-slate-900">No ${isBooks ? 'TIE Books' : 'Past Papers'} uploaded for ${escapeHtml(state.selectedClass)} yet</h4>
+        <h4 class="font-black text-slate-900">No Past Papers uploaded for ${escapeHtml(state.selectedClass)} yet</h4>
         <div class="flex flex-wrap justify-center gap-2">
-          <button onclick="setResourceMode('${isBooks ? 'papers' : 'books'}')" class="px-4 py-2 bg-emerald-600 text-white font-black text-xs rounded-xl">
-            View ${isBooks ? 'Past Papers' : 'TIE Books'}
-          </button>
-          <button onclick="openMwalimuModal('${escapeHtml(state.selectedClass)}', 'Basic Mathematics')" class="px-4 py-2 bg-violet-600 text-white font-black text-xs rounded-xl">
-            🤖 Ask Moha AI
+          <button onclick="goToStep(1)" class="px-4 py-2 bg-brand-600 text-white font-black text-xs rounded-xl">
+            ← Back to Classes
           </button>
         </div>
       </div>
@@ -1581,7 +1666,7 @@ function renderSubjectsForClass() {
           <span class="text-2xl">${icon}</span>
           <div>
             <span class="block text-base font-black text-slate-900 group-hover:text-brand-700">${escapeHtml(sub)}</span>
-            <span class="text-xs font-bold text-slate-500">${count} ${isBooks ? 'TIE Book' : (count === 1 ? 'paper' : 'papers')}</span>
+            <span class="text-xs font-bold text-slate-500">${count} ${count === 1 ? 'paper' : 'papers'}</span>
           </div>
         </div>
         <i data-lucide="chevron-right" class="w-5 h-5 text-slate-400 group-hover:text-brand-600"></i>
@@ -1623,27 +1708,19 @@ function renderPapersList() {
   const titleEl = document.getElementById('step3Title');
   const subtitleEl = document.getElementById('step3Subtitle');
   const paginationWrap = document.getElementById('paginationWrap');
-  const crossBtn = document.getElementById('crossSwitchModeBtn');
   const yearRow = document.getElementById('yearFilterRow');
-  const isBooks = state.resourceMode === 'books';
-
-  if (crossBtn) {
-    crossBtn.textContent = isBooks ? '📝 Switch to Past Papers' : '📚 Switch to TIE Books';
-  }
 
   let baseMatches = [];
   if (state.searchQuery.trim().length > 0) {
     const q = state.searchQuery.toLowerCase();
     titleEl.textContent = `Search Results for "${state.searchQuery}"`;
     document.getElementById('backToSubjectsBtn').classList.add('hidden');
-    baseMatches = allPapers.filter(p => `${p.title} ${p.subject} ${p.form} ${p.year} ${p.category}`.toLowerCase().includes(q));
+    baseMatches = allPapers.filter(p => !p.isBook && !p.isSyllabus && `${p.title} ${p.subject} ${p.form} ${p.year} ${p.category}`.toLowerCase().includes(q));
   } else {
-    titleEl.textContent = `${state.selectedClass} • ${state.selectedSubject} (${isBooks ? 'TIE Books' : 'Past Papers'})`;
+    titleEl.textContent = `${state.selectedClass} • ${state.selectedSubject} (Past Papers)`;
     document.getElementById('backToSubjectsBtn').classList.remove('hidden');
     baseMatches = allPapers.filter(p => {
-      if (p.isSyllabus) return false;
-      if (isBooks && !p.isBook) return false;
-      if (!isBooks && p.isBook) return false;
+      if (p.isSyllabus || p.isBook) return false;
       const matchClass = p.form.toLowerCase() === state.selectedClass.toLowerCase();
       const matchSub = p.subject.toLowerCase() === state.selectedSubject.toLowerCase();
       const matchCat = (state.selectedCategory === 'ALL') || (p.category.toLowerCase() === state.selectedCategory.toLowerCase());
@@ -1673,10 +1750,9 @@ function renderPapersList() {
     paginationWrap.classList.add('hidden');
     listContainer.innerHTML = `
       <div class="py-10 text-center bg-white rounded-2xl border-2 border-slate-200 p-6 space-y-3">
-        <h4 class="font-black text-slate-800">No matching records found</h4>
+        <h4 class="font-black text-slate-800">No matching past papers found</h4>
         <div class="flex flex-wrap justify-center gap-2">
           <button onclick="filterCategoryTag('ALL'); filterYearTag('ALL');" class="px-4 py-2 bg-brand-600 text-white font-black text-xs rounded-xl">Show All</button>
-          <button onclick="openMwalimuModal('${escapeHtml(state.selectedClass)}', '${escapeHtml(state.selectedSubject)}')" class="px-4 py-2 bg-violet-600 text-white font-black text-xs rounded-xl">🤖 Ask Moha AI</button>
         </div>
       </div>
     `;
@@ -1727,10 +1803,6 @@ function renderPapersList() {
               ⬇️ Download Answers
             </button>
           ` : ''}
-
-          <button onclick="openMwalimuModal('${escapeHtml(p.form)}', '${escapeHtml(p.subject)}')" class="px-3 py-2.5 bg-violet-50 hover:bg-violet-100 text-violet-900 border border-violet-200 text-xs font-black rounded-xl">
-            🤖 Moha AI
-          </button>
 
           ${hasPaper ? `
             <button onclick="togglePrintBasketItem('${p.id}')" class="px-3 py-2.5 ${inBasket ? 'bg-slate-900 text-white' : 'bg-slate-100 text-slate-700'} text-xs font-bold rounded-xl">
@@ -2737,6 +2809,7 @@ window.addEventListener('popstate', () => {
 });
 
 document.addEventListener('DOMContentLoaded', () => {
+  initDarkMode();
   allPapers = processParsedRows([]);
   applyLanguageUI();
   updateModeSwitcherUI();
