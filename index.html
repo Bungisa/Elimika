@@ -1,31 +1,2755 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Elimika | Tanzania Past Papers, TIE Books, Syllabus & Moha AI</title>
-    <meta name="description" content="Simple, fast access to Tanzanian past examination papers, marking schemes, TIE books, official syllabuses, and Moha AI for Standard 1–7 and Form 1–6." />
-    <meta property="og:title" content="Elimika | Tanzania Past Papers, TIE Books, Syllabus & Moha AI" />
-    <meta property="og:description" content="Simple, fast access to Tanzanian past examination papers, marking schemes, TIE books, official syllabuses, and Moha AI for Standard 1–7 and Form 1–6." />
-    <meta property="og:type" content="website" />
-    <meta name="twitter:card" content="summary_large_image" />
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Elimika | Tanzania Past Papers, TIE Books, Syllabus & Moha AI</title>
+<meta name="description" content="Simple, fast access to Tanzanian past examination papers, marking schemes, TIE books, official syllabuses, and Moha AI for Standard 1–7 and Form 1–6." />
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        brand: {
+          50: '#eff6ff',
+          100: '#dbeafe',
+          500: '#3b82f6',
+          600: '#2563eb',
+          700: '#1d4ed8',
+          800: '#1e40af',
+          900: '#0f172a',
+        }
+      }
+    }
+  }
+}
+</script>
+<script src="https://unpkg.com/lucide@latest"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" />
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+<style>
+[data-lucide] {
+  width: 1.25rem;
+  height: 1.25rem;
+  display: inline-block;
+  vertical-align: middle;
+}
+.official-tie-doc {
+  background: #ffffff;
+  color: #0f172a;
+  padding: 14px;
+  border: 2px solid #0f172a;
+  border-radius: 8px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 11px;
+  line-height: 1.4;
+  overflow-x: auto;
+  margin-top: 8px;
+}
+.official-tie-doc table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 10px;
+}
+.official-tie-doc th,
+.official-tie-doc td {
+  border: 1px solid #0f172a;
+  padding: 6px 8px;
+  text-align: left;
+  vertical-align: top;
+}
+.official-tie-doc th {
+  background-color: #f1f5f9;
+  font-weight: 800;
+  text-transform: uppercase;
+  font-size: 10px;
+}
+</style>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans antialiased min-h-screen flex flex-col selection:bg-brand-600 selection:text-white">
+<header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-sm">
+  <div class="max-w-5xl mx-auto px-3 sm:px-6">
+    <div class="flex items-center justify-between h-16 sm:h-20 gap-2">
+      <!-- Logo -->
+      <a href="#home" onclick="resetToStep1(); return false;" class="flex items-center gap-2.5 group shrink-0">
+        <div class="w-10 h-10 rounded-xl bg-brand-700 flex items-center justify-center text-white shadow-md">
+          <i data-lucide="graduation-cap" class="w-6 h-6"></i>
+        </div>
+        <div>
+          <span class="text-lg sm:text-xl font-black tracking-tight text-slate-900 block leading-none">
+            ELIMIKA<span class="text-brand-600">.</span>
+          </span>
+          <span class="text-[10px] tracking-widest font-bold uppercase text-slate-500 block mt-0.5">Tanzania</span>
+        </div>
+      </a>
 
-    <!-- Google Fonts: Plus Jakarta Sans & Outfit -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Outfit:wght@600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+      <!-- Top Right Controls -->
+      <div class="flex items-center gap-1.5 sm:gap-2">
+        <button onclick="openMwalimuModal()" class="px-3.5 py-2 rounded-xl bg-violet-600 hover:bg-violet-700 text-white font-black text-xs flex items-center gap-1.5 shadow-sm transition-all">
+          <span>🤖</span>
+          <span>Moha AI</span>
+        </button>
 
-    <!-- KaTeX for Clean Mathematical Equations -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" />
-    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
-    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+        <div id="dataStatusIndicator" class="hidden md:inline-flex items-center gap-1.5 text-xs px-3 py-1.5 rounded-full font-bold bg-slate-100 text-slate-600">
+          <span class="w-2 h-2 rounded-full bg-amber-500 animate-pulse"></span>
+          <span>Connecting...</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
 
-    <!-- html2pdf.js for Direct Automatic PDF Download -->
-    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-  </head>
-  <body class="bg-slate-50 text-slate-800 antialiased min-h-screen flex flex-col selection:bg-blue-600 selection:text-white">
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
+<section id="home" class="pt-6 pb-8 bg-gradient-to-b from-white via-slate-50 to-slate-100 border-b border-slate-200">
+  <div class="max-w-3xl mx-auto px-4 text-center space-y-4">
+    <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-brand-50 border border-brand-200 text-brand-700 text-xs font-bold">
+      <span>🇹🇿</span> <span id="heroBadgeText">Standard 1–7 &amp; Form 1–6</span>
+    </div>
+
+    <h1 id="heroTitleText" class="text-2xl sm:text-4xl font-black text-slate-900 tracking-tight leading-snug">
+      Select Class &amp; Subject for <span class="text-brand-600">Past Papers, TIE Books &amp; Syllabus</span>
+    </h1>
+
+    <!-- Mode Switcher: Past Papers vs Dedicated TIE Books Page vs Dedicated Syllabus Page -->
+    <div class="flex flex-wrap items-center justify-center gap-2 pt-1">
+      <button onclick="setResourceMode('papers')" id="heroBtnPapers" class="px-4 py-2.5 rounded-xl font-black text-xs sm:text-sm border-2 border-brand-700 bg-brand-600 text-white shadow-sm transition-all flex items-center gap-1.5">
+        <span>📝</span> <span id="heroPapersLabel">Past Papers</span>
+      </button>
+      <button onclick="openBooksPage()" id="heroBtnBooks" class="px-4 py-2.5 rounded-xl font-black text-xs sm:text-sm border-2 border-emerald-600 bg-emerald-500 hover:bg-emerald-400 text-slate-950 shadow-sm transition-all flex items-center gap-1.5">
+        <span>📚</span> <span id="heroBooksLabel">TIE Books</span>
+        <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+      </button>
+      <button onclick="openSyllabusPage()" id="heroBtnSyllabus" class="px-4 py-2.5 rounded-xl font-black text-xs sm:text-sm border-2 border-amber-500 bg-amber-400 hover:bg-amber-300 text-slate-950 shadow-sm transition-all flex items-center gap-1.5">
+        <span>📜</span> <span id="heroSyllabusLabel">Official Syllabuses</span>
+        <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+      </button>
+    </div>
+
+    <!-- Smart Search + Voice Search -->
+    <div class="relative max-w-xl mx-auto pt-1">
+      <div class="flex items-center bg-white rounded-2xl shadow-md border-2 border-slate-200 px-3.5 py-2 focus-within:border-brand-600 transition-all">
+        <i data-lucide="search" class="w-5 h-5 text-slate-400 shrink-0 mr-2.5"></i>
+        <input
+          type="text"
+          id="smartSearchInput"
+          placeholder="Search directly (e.g. Form 4 Math 2024)..."
+          class="w-full text-sm sm:text-base font-medium bg-transparent text-slate-800 placeholder-slate-400 focus:outline-none"
+        />
+        <button
+          id="clearSearchBtn"
+          onclick="clearSmartSearch()"
+          class="hidden text-slate-400 hover:text-slate-700 p-1.5 mr-1"
+          title="Clear search"
+        >
+          <i data-lucide="x" class="w-4 h-4"></i>
+        </button>
+        <button
+          onclick="startVoiceSearch()"
+          id="voiceSearchBtn"
+          class="p-2 rounded-xl bg-brand-50 hover:bg-brand-100 text-brand-700 font-bold text-xs flex items-center gap-1 shrink-0"
+          title="Voice Search"
+        >
+          <span>🎤</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<main id="browserApp" class="flex-grow py-6 pb-24">
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 space-y-6">
+    <!-- Breadcrumbs -->
+    <nav id="stepBreadcrumbs" class="flex items-center gap-2 text-xs sm:text-sm font-bold text-slate-500 overflow-x-auto pb-1">
+      <button onclick="goToStep(1)" id="crumbStep1" class="px-3 py-1.5 rounded-xl bg-brand-600 text-white font-black shrink-0">
+        1. Class Level
+      </button>
+      <i data-lucide="chevron-right" class="w-4 h-4 text-slate-300 shrink-0"></i>
+      <button onclick="goToStep(2)" id="crumbStep2" disabled class="px-3 py-1.5 rounded-xl bg-slate-100 text-slate-400 disabled:opacity-60 shrink-0">
+        <span id="crumbStep2Label">2. Subject</span>
+      </button>
+      <i data-lucide="chevron-right" class="w-4 h-4 text-slate-300 shrink-0"></i>
+      <button id="crumbStep3" disabled class="px-3 py-1.5 rounded-xl bg-slate-100 text-slate-400 disabled:opacity-60 shrink-0">
+        <span id="crumbStep3Label">3. Past Papers</span>
+      </button>
+    </nav>
+
+    <!-- Network Retry Banner -->
+    <div id="networkErrorBanner" class="hidden p-5 bg-rose-50 border-2 border-rose-200 rounded-2xl text-center space-y-2">
+      <h3 class="text-sm font-black text-rose-900">Unable to Sync Google Sheet Data</h3>
+      <p class="text-xs text-rose-700">Please check your internet connection and click Retry.</p>
+      <button onclick="fetchSheetData()" class="bg-rose-600 hover:bg-rose-700 text-white font-black text-xs px-4 py-2 rounded-xl inline-flex items-center gap-1.5">
+        <i data-lucide="refresh-cw" class="w-4 h-4"></i> Retry Connection
+      </button>
+    </div>
+
+    <!-- STEP 1: CHOOSE CLASS -->
+    <section id="step1View" class="space-y-6">
+      <!-- Remember My Class Banner -->
+      <div id="savedClassBannerWrap" class="hidden"></div>
+
+      <!-- Recently Opened Papers -->
+      <div id="recentPapersWrap" class="hidden"></div>
+
+      <!-- Secondary School (Form 1-6) -->
+      <div class="space-y-3">
+        <h2 class="text-sm font-black uppercase tracking-wider text-slate-500 flex items-center gap-1.5">
+          <span>🏫</span> <span id="secHeaderLabel">Secondary School (Form 1 – Form 6)</span>
+        </h2>
+        <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
+          <button onclick="selectClass('Form 1')" class="p-4 bg-white hover:bg-brand-50 border-2 border-slate-200 hover:border-brand-500 rounded-2xl text-left shadow-sm flex items-center justify-between transition-all">
+            <span class="text-base font-black text-slate-900">Form 1</span>
+            <i data-lucide="chevron-right" class="w-5 h-5 text-slate-400"></i>
+          </button>
+          <button onclick="selectClass('Form 2')" class="p-4 bg-white hover:bg-brand-50 border-2 border-slate-200 hover:border-brand-500 rounded-2xl text-left shadow-sm flex items-center justify-between transition-all">
+            <span class="text-base font-black text-slate-900">Form 2</span>
+            <i data-lucide="chevron-right" class="w-5 h-5 text-slate-400"></i>
+          </button>
+          <button onclick="selectClass('Form 3')" class="p-4 bg-white hover:bg-brand-50 border-2 border-slate-200 hover:border-brand-500 rounded-2xl text-left shadow-sm flex items-center justify-between transition-all">
+            <span class="text-base font-black text-slate-900">Form 3</span>
+            <i data-lucide="chevron-right" class="w-5 h-5 text-slate-400"></i>
+          </button>
+          <button onclick="selectClass('Form 4')" class="p-4 bg-brand-50 hover:bg-brand-100 border-2 border-brand-400 rounded-2xl text-left shadow-sm flex items-center justify-between transition-all">
+            <span class="text-base font-black text-brand-900">Form 4</span>
+            <i data-lucide="chevron-right" class="w-5 h-5 text-brand-600"></i>
+          </button>
+          <button onclick="selectClass('Form 5')" class="p-4 bg-white hover:bg-brand-50 border-2 border-slate-200 hover:border-brand-500 rounded-2xl text-left shadow-sm flex items-center justify-between transition-all">
+            <span class="text-base font-black text-slate-900">Form 5</span>
+            <i data-lucide="chevron-right" class="w-5 h-5 text-slate-400"></i>
+          </button>
+          <button onclick="selectClass('Form 6')" class="p-4 bg-brand-50 hover:bg-brand-100 border-2 border-brand-400 rounded-2xl text-left shadow-sm flex items-center justify-between transition-all">
+            <span class="text-base font-black text-brand-900">Form 6</span>
+            <i data-lucide="chevron-right" class="w-5 h-5 text-brand-600"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Primary School (Standard 1-7) -->
+      <div class="space-y-3">
+        <h2 class="text-sm font-black uppercase tracking-wider text-slate-500 flex items-center gap-1.5">
+          <span>🎒</span> <span id="priHeaderLabel">Primary School (Standard 1 – 7)</span>
+        </h2>
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+          <button onclick="selectClass('Standard 1')" class="p-3.5 bg-white hover:bg-brand-50 border-2 border-slate-200 rounded-2xl text-center font-black text-slate-800">Standard 1</button>
+          <button onclick="selectClass('Standard 2')" class="p-3.5 bg-white hover:bg-brand-50 border-2 border-slate-200 rounded-2xl text-center font-black text-slate-800">Standard 2</button>
+          <button onclick="selectClass('Standard 3')" class="p-3.5 bg-white hover:bg-brand-50 border-2 border-slate-200 rounded-2xl text-center font-black text-slate-800">Standard 3</button>
+          <button onclick="selectClass('Standard 4')" class="p-3.5 bg-amber-50 hover:bg-amber-100 border-2 border-amber-300 rounded-2xl text-center font-black text-amber-900">Standard 4</button>
+          <button onclick="selectClass('Standard 5')" class="p-3.5 bg-white hover:bg-brand-50 border-2 border-slate-200 rounded-2xl text-center font-black text-slate-800">Standard 5</button>
+          <button onclick="selectClass('Standard 6')" class="p-3.5 bg-white hover:bg-brand-50 border-2 border-slate-200 rounded-2xl text-center font-black text-slate-800">Standard 6</button>
+          <button onclick="selectClass('Standard 7')" class="col-span-2 p-3.5 bg-brand-50 hover:bg-brand-100 border-2 border-brand-400 rounded-2xl text-center font-black text-brand-900">Standard 7 (PSLE)</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- STEP 2: CHOOSE SUBJECT -->
+    <section id="step2View" class="hidden space-y-5">
+      <div class="bg-white p-4 rounded-2xl border-2 border-slate-200 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+        <div>
+          <button onclick="goToStep(1)" class="text-xs font-black text-brand-600 hover:underline flex items-center gap-1 mb-1">
+            <i data-lucide="arrow-left" class="w-3.5 h-3.5"></i> Back to Classes
+          </button>
+          <h2 class="text-lg sm:text-xl font-black text-slate-900">
+            Select Subject — <span id="step2CurrentClass" class="text-brand-600">Form 4</span>
+          </h2>
+        </div>
+
+        <div class="flex flex-wrap items-center gap-1.5">
+          <button onclick="setResourceMode('papers')" id="step2BtnPapers" class="px-3 py-2 rounded-xl font-extrabold text-xs border-2 border-brand-600 bg-brand-600 text-white transition-all">📝 Papers</button>
+          <button onclick="openBooksPage(true, state.selectedClass)" id="step2BtnBooks" class="px-3 py-2 rounded-xl font-extrabold text-xs border-2 border-emerald-500 bg-emerald-100 text-emerald-950 hover:bg-emerald-200 transition-all">📚 TIE Books ↗</button>
+          <button onclick="openSyllabusPage()" class="px-3 py-2 rounded-xl font-extrabold text-xs border-2 border-amber-400 bg-amber-100 text-amber-950 hover:bg-amber-200 transition-all">📜 Syllabus ↗</button>
+          <button onclick="openMwalimuModal(state.selectedClass, '')" class="px-3 py-2 rounded-xl font-black text-xs bg-violet-600 hover:bg-violet-700 text-white transition-all">🤖 Moha AI</button>
+        </div>
+      </div>
+
+      <div id="subjectsListGrid" class="grid grid-cols-1 sm:grid-cols-2 gap-3"></div>
+    </section>
+
+    <!-- STEP 3: PAPERS OR BOOKS LIST -->
+    <section id="step3View" class="hidden space-y-4">
+      <div class="bg-white p-4 rounded-2xl border-2 border-slate-200 shadow-sm space-y-3">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+          <div>
+            <button onclick="goToStep(2)" id="backToSubjectsBtn" class="text-xs font-black text-brand-600 hover:underline flex items-center gap-1 mb-1">
+              <i data-lucide="arrow-left" class="w-3.5 h-3.5"></i> Back to Subjects
+            </button>
+            <h2 id="step3Title" class="text-lg sm:text-xl font-black text-slate-900">Available Papers</h2>
+            <div id="step3Subtitle" class="text-xs font-bold text-slate-500">Showing records</div>
+          </div>
+
+          <div class="flex flex-wrap items-center gap-2">
+            <button onclick="openBooksPage(true, state.selectedClass, state.selectedSubject)" id="crossSwitchModeBtn" class="px-3 py-2 rounded-xl bg-emerald-50 hover:bg-emerald-100 text-emerald-900 border border-emerald-300 font-black text-xs">
+              📚 Open TIE Books Page ↗
+            </button>
+            <button onclick="openMwalimuModal(state.selectedClass, state.selectedSubject)" class="px-3 py-2 rounded-xl bg-violet-600 hover:bg-violet-700 text-white font-black text-xs">
+              🤖 Ask Moha AI
+            </button>
+          </div>
+        </div>
+
+        <!-- Category Filter Pills -->
+        <div id="categoryFilterRow" class="flex flex-wrap items-center gap-1.5 pt-2 border-t border-slate-100">
+          <button onclick="filterCategoryTag('ALL')" class="cat-chip px-3 py-1.5 text-xs font-black rounded-xl bg-brand-600 text-white">All</button>
+          <button onclick="filterCategoryTag('NECTA')" class="cat-chip px-3 py-1.5 text-xs font-bold rounded-xl bg-slate-100 text-slate-700 hover:bg-slate-200">NECTA</button>
+          <button onclick="filterCategoryTag('Mock')" class="cat-chip px-3 py-1.5 text-xs font-bold rounded-xl bg-slate-100 text-slate-700 hover:bg-slate-200">Mock</button>
+          <button onclick="filterCategoryTag('Pre-NECTA')" class="cat-chip px-3 py-1.5 text-xs font-bold rounded-xl bg-slate-100 text-slate-700 hover:bg-slate-200">Pre-NECTA</button>
+          <button onclick="filterCategoryTag('Terminal')" class="cat-chip px-3 py-1.5 text-xs font-bold rounded-xl bg-slate-100 text-slate-700 hover:bg-slate-200">Terminal</button>
+        </div>
+
+        <!-- Year Filter Pills -->
+        <div id="yearFilterRow" class="flex flex-wrap items-center gap-1.5"></div>
+      </div>
+
+      <!-- Results List -->
+      <div id="papersResultsGrid" class="space-y-3"></div>
+
+      <!-- Pagination -->
+      <div id="paginationWrap" class="flex items-center justify-between bg-white p-3 rounded-2xl border-2 border-slate-200 hidden">
+        <button id="prevBtn" onclick="changeResultsPage(-1)" class="px-3.5 py-2 text-xs font-black border-2 border-slate-200 rounded-xl text-slate-700 hover:bg-slate-100 disabled:opacity-40">Previous</button>
+        <span id="pageIndicator" class="text-xs font-bold text-slate-600">Page 1 of 1</span>
+        <button id="nextBtn" onclick="changeResultsPage(1)" class="px-3.5 py-2 text-xs font-black border-2 border-slate-200 rounded-xl text-slate-700 hover:bg-slate-100 disabled:opacity-40">Next</button>
+      </div>
+    </section>
+  </div>
+</main>
+
+<div id="dedicatedBooksPage" class="hidden flex-grow bg-slate-50 min-h-screen pb-24">
+  <div class="bg-gradient-to-r from-emerald-600 via-emerald-500 to-teal-500 border-b-2 border-emerald-700 shadow-sm">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 py-6">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div class="space-y-1">
+          <div class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-slate-950 text-emerald-300 text-[11px] font-black uppercase tracking-wider">
+            <span>🇹🇿</span> Official TIE Textbooks Page
+          </div>
+          <h1 class="text-2xl sm:text-3xl font-black text-white tracking-tight">
+            TIE Textbooks (Standard 1–7 &amp; Form 1–6)
+          </h1>
+          <p class="text-xs sm:text-sm font-bold text-emerald-50">
+            Select your Class and Subject to read or download official TIE Books directly from Google Drive
+          </p>
+        </div>
+        <div class="flex flex-wrap items-center gap-2 shrink-0">
+          <button onclick="openBooksNewWindow()" class="px-3.5 py-2.5 bg-white/15 hover:bg-white/25 text-white font-black text-xs rounded-xl border border-white/30 flex items-center gap-1.5">
+            <i data-lucide="external-link" class="w-4 h-4"></i>
+            <span>Open New Tab</span>
+          </button>
+          <button onclick="openSyllabusPage()" class="px-3.5 py-2.5 bg-amber-400 hover:bg-amber-300 text-slate-950 font-black text-xs rounded-xl shadow-sm flex items-center gap-1.5">
+            <span>📜</span>
+            <span>Syllabus Page</span>
+          </button>
+          <button onclick="closeBooksPage()" class="px-4 py-2.5 bg-slate-950 hover:bg-slate-800 text-white font-black text-xs sm:text-sm rounded-xl shadow-md flex items-center gap-1.5">
+            <i data-lucide="arrow-left" class="w-4 h-4"></i>
+            <span>Back to Past Papers</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="max-w-5xl mx-auto px-4 sm:px-6 py-6 space-y-6">
+    <div class="bg-white p-4 sm:p-5 rounded-3xl border-2 border-emerald-300 shadow-sm space-y-4">
+      <div class="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3">
+        <div class="flex flex-wrap items-center gap-2">
+          <button onclick="setBooksPageLevel('ALL')" id="bookTabALL" class="px-4 py-2.5 rounded-xl font-black text-xs sm:text-sm bg-emerald-600 text-white shadow-sm">
+            📚 All Levels
+          </button>
+          <button onclick="setBooksPageLevel('Primary')" id="bookTabPrimary" class="px-4 py-2.5 rounded-xl font-black text-xs sm:text-sm bg-slate-100 text-slate-700 hover:bg-slate-200">
+            🎒 Primary (Std 1–7)
+          </button>
+          <button onclick="setBooksPageLevel('Secondary')" id="bookTabSecondary" class="px-4 py-2.5 rounded-xl font-black text-xs sm:text-sm bg-slate-100 text-slate-700 hover:bg-slate-200">
+            🏫 Secondary (Form 1–4)
+          </button>
+          <button onclick="setBooksPageLevel('Advanced')" id="bookTabAdvanced" class="px-4 py-2.5 rounded-xl font-black text-xs sm:text-sm bg-slate-100 text-slate-700 hover:bg-slate-200">
+            🎓 Advanced (Form 5–6)
+          </button>
+        </div>
+
+        <div class="relative min-w-[240px]">
+          <input
+            type="text"
+            id="booksPageSearchInput"
+            oninput="renderDedicatedBooksList()"
+            placeholder="Search textbook or subject..."
+            class="w-full pl-9 pr-4 py-2.5 rounded-xl border-2 border-slate-200 focus:border-emerald-600 focus:outline-none text-xs sm:text-sm font-bold bg-slate-50"
+          />
+          <i data-lucide="search" class="w-4 h-4 text-slate-400 absolute left-3 top-3"></i>
+        </div>
+      </div>
+
+      <div id="booksClassPillsRow" class="flex flex-wrap items-center gap-1.5 pt-2 border-t border-slate-100"></div>
+
+      <div class="flex flex-wrap items-center justify-between gap-2 text-xs font-bold text-slate-500 pt-2 border-t border-slate-100">
+        <span id="booksPageCountBadge">Showing available TIE Books</span>
+        <button onclick="openMwalimuModal(booksPageSelectedClass === 'ALL' ? 'Form 1' : booksPageSelectedClass, 'TIE Textbook')" class="text-violet-700 hover:underline font-extrabold">
+          🤖 Ask Moha AI about TIE Books &amp; Syllabus
+        </button>
+      </div>
+    </div>
+
+    <div id="dedicatedBooksGrid" class="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
+  </div>
+</div>
+
+<div id="dedicatedSyllabusPage" class="hidden flex-grow bg-slate-50 min-h-screen pb-24">
+  <div class="bg-gradient-to-r from-amber-500 via-amber-400 to-yellow-400 border-b-2 border-amber-600 shadow-sm">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 py-6">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div class="space-y-1">
+          <div class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-slate-950 text-amber-300 text-[11px] font-black uppercase tracking-wider">
+            <span>🇹🇿</span> Official TIE Syllabus Page
+          </div>
+          <h1 class="text-2xl sm:text-3xl font-black text-slate-950 tracking-tight">
+            Official TIE Syllabuses
+          </h1>
+          <p class="text-xs sm:text-sm font-bold text-slate-900">
+            Primary (Std 1–7), Ordinary Secondary (Form 1–4) &amp; Advanced Level (Form 5–6) — Direct PDF Download
+          </p>
+        </div>
+        <div class="flex items-center gap-2 shrink-0">
+          <button onclick="openSyllabusNewWindow()" class="px-3.5 py-2.5 bg-slate-950/15 hover:bg-slate-950/25 text-slate-950 font-black text-xs rounded-xl border border-slate-950/30 flex items-center gap-1.5">
+            <i data-lucide="external-link" class="w-4 h-4"></i>
+            <span>Open New Tab</span>
+          </button>
+          <button onclick="closeSyllabusPage()" class="px-4 py-2.5 bg-slate-950 hover:bg-slate-800 text-white font-black text-xs sm:text-sm rounded-xl shadow-md flex items-center gap-1.5">
+            <i data-lucide="arrow-left" class="w-4 h-4"></i>
+            <span>Back to Past Papers</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="max-w-5xl mx-auto px-4 sm:px-6 py-6 space-y-6">
+    <div class="bg-white p-4 sm:p-5 rounded-3xl border-2 border-amber-300 shadow-sm space-y-4">
+      <div class="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3">
+        <div class="flex flex-wrap items-center gap-2">
+          <button onclick="setSyllabusPageLevel('ALL')" id="sylTabALL" class="px-4 py-2.5 rounded-xl font-black text-xs sm:text-sm bg-amber-500 text-slate-950 shadow-sm">
+            📚 All Levels
+          </button>
+          <button onclick="setSyllabusPageLevel('Primary')" id="sylTabPrimary" class="px-4 py-2.5 rounded-xl font-black text-xs sm:text-sm bg-slate-100 text-slate-700 hover:bg-slate-200">
+            🎒 Primary (Std 1–7)
+          </button>
+          <button onclick="setSyllabusPageLevel('Secondary')" id="sylTabSecondary" class="px-4 py-2.5 rounded-xl font-black text-xs sm:text-sm bg-slate-100 text-slate-700 hover:bg-slate-200">
+            🏫 Secondary (Form 1–4)
+          </button>
+          <button onclick="setSyllabusPageLevel('Advanced')" id="sylTabAdvanced" class="px-4 py-2.5 rounded-xl font-black text-xs sm:text-sm bg-slate-100 text-slate-700 hover:bg-slate-200">
+            🎓 Advanced (Form 5–6)
+          </button>
+        </div>
+
+        <div class="relative min-w-[240px]">
+          <input
+            type="text"
+            id="syllabusPageSearchInput"
+            oninput="renderDedicatedSyllabusList()"
+            placeholder="Search syllabus subject..."
+            class="w-full pl-9 pr-4 py-2.5 rounded-xl border-2 border-slate-200 focus:border-amber-500 focus:outline-none text-xs sm:text-sm font-bold bg-slate-50"
+          />
+          <i data-lucide="search" class="w-4 h-4 text-slate-400 absolute left-3 top-3"></i>
+        </div>
+      </div>
+
+      <div class="flex items-center justify-between text-xs font-bold text-slate-500 pt-2 border-t border-slate-100">
+        <span id="syllabusPageCountBadge">Showing available syllabuses</span>
+        <button onclick="openMwalimuModal('Form 1-4', 'Syllabus')" class="text-violet-700 hover:underline font-extrabold">
+          🤖 Ask Moha AI for Syllabus Topics
+        </button>
+      </div>
+    </div>
+
+    <div id="dedicatedSyllabusGrid" class="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
+  </div>
+</div>
+
+<div id="stickyMobileBottomBar" class="fixed bottom-0 inset-x-0 z-30 bg-white/95 backdrop-blur-md border-t-2 border-slate-200 px-4 py-2.5 flex items-center justify-between gap-3 sm:hidden hidden">
+  <button onclick="handleStepBack()" class="flex-1 py-2.5 px-3 bg-slate-100 active:bg-slate-200 text-slate-800 font-black text-xs rounded-xl flex items-center justify-center gap-1.5">
+    <i data-lucide="arrow-left" class="w-4 h-4"></i>
+    <span>Go Back</span>
+  </button>
+  <button onclick="resetToStep1()" class="flex-1 py-2.5 px-3 bg-brand-600 active:bg-brand-700 text-white font-black text-xs rounded-xl flex items-center justify-center gap-1.5">
+    <i data-lucide="home" class="w-4 h-4"></i>
+    <span>Home</span>
+  </button>
+</div>
+
+<div id="printBasketBar" class="fixed bottom-16 sm:bottom-5 left-1/2 -translate-x-1/2 z-40 bg-slate-900 text-white px-4 py-3 rounded-2xl shadow-2xl border border-slate-700 hidden items-center gap-3 w-[92%] max-w-lg justify-between">
+  <div class="text-xs font-bold">
+    🖨️ <span id="printBasketCount">0</span> Papers in Print List
+  </div>
+  <div class="flex items-center gap-2">
+    <button onclick="sendPrintBasketWhatsApp()" class="px-3 py-1.5 bg-emerald-500 hover:bg-emerald-600 text-slate-950 font-black text-xs rounded-xl">
+      Send to WhatsApp
+    </button>
+    <button onclick="clearPrintBasket()" class="p-1.5 text-slate-400 hover:text-white">✕</button>
+  </div>
+</div>
+
+<div id="docViewerModal" class="fixed inset-0 z-50 bg-slate-900/75 backdrop-blur-sm hidden items-center justify-center p-2 sm:p-6" role="dialog" aria-modal="true">
+  <div class="bg-white rounded-2xl shadow-2xl max-w-4xl w-full h-[90vh] flex flex-col overflow-hidden border-2 border-slate-200">
+    <div class="px-4 py-3 bg-slate-50 border-b border-slate-200 flex items-center justify-between gap-2">
+      <div class="min-w-0">
+        <span id="modalMetaBadge" class="text-[10px] font-black uppercase px-2 py-0.5 rounded bg-brand-100 text-brand-800 inline-block">Paper</span>
+        <h3 id="modalPaperTitle" class="text-sm sm:text-base font-black text-slate-900 truncate">Document Preview</h3>
+      </div>
+
+      <div class="flex items-center gap-1.5 shrink-0">
+        <div id="modalSwitchQAContainer" class="hidden items-center bg-slate-200 p-0.5 rounded-xl">
+          <button onclick="switchViewerQA('paper')" id="modalBtnQ" class="px-2.5 py-1 text-xs font-black rounded-lg bg-white text-slate-900">📖 Questions</button>
+          <button onclick="switchViewerQA('answers')" id="modalBtnA" class="px-2.5 py-1 text-xs font-black rounded-lg text-slate-600">✅ Answers</button>
+        </div>
+        <button onclick="closeViewerModal()" class="px-3 py-1.5 bg-rose-600 hover:bg-rose-700 text-white font-black text-xs rounded-xl">
+          ✖ Close
+        </button>
+      </div>
+    </div>
+
+    <div class="flex-grow bg-slate-100 relative">
+      <div id="modalSpinner" class="absolute inset-0 flex flex-col items-center justify-center bg-white z-10">
+        <div class="w-8 h-8 border-4 border-brand-200 border-t-brand-600 rounded-full animate-spin mb-2"></div>
+        <p class="text-xs font-bold text-slate-500">Loading PDF document...</p>
+      </div>
+      <iframe id="docViewerIframe" class="w-full h-full border-0" src="about:blank"></iframe>
+    </div>
+
+    <div class="px-4 py-3 bg-white border-t border-slate-200 flex items-center justify-between gap-2 text-xs">
+      <button id="modalDirectDownloadBtn" onclick="" class="px-4 py-2 bg-brand-600 hover:bg-brand-700 text-white font-black rounded-xl flex items-center gap-1.5">
+        <i data-lucide="download" class="w-4 h-4"></i> ⬇️ Direct Download PDF
+      </button>
+      <button onclick="closeViewerModal()" class="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 font-black rounded-xl">
+        Close
+      </button>
+    </div>
+  </div>
+</div>
+
+<div id="mwalimuAiModal" class="fixed inset-0 z-50 bg-slate-900/75 backdrop-blur-sm hidden items-center justify-center p-2 sm:p-4" role="dialog" aria-modal="true">
+  <div class="bg-white rounded-3xl shadow-2xl max-w-4xl w-full h-[92vh] max-h-[92vh] flex flex-col overflow-hidden border-2 border-violet-300">
+    <!-- 1. Pinned Header -->
+    <div class="shrink-0 px-4 py-3 bg-gradient-to-r from-violet-700 via-violet-600 to-indigo-700 text-white flex items-center justify-between gap-2">
+      <div class="flex items-center gap-2.5 min-w-0">
+        <div class="w-9 h-9 rounded-xl bg-white/15 flex items-center justify-center text-lg shrink-0">🤖</div>
+        <div class="min-w-0">
+          <h3 class="text-sm sm:text-base font-black truncate">Moha AI (Official TIE &amp; NECTA Assistant)</h3>
+          <p id="mwalimuContextSubtitle" class="text-[11px] text-violet-200 truncate">Instant responses • Self-Learning Memory • Lesson Plans &amp; Schemes</p>
+        </div>
+      </div>
+      <div class="flex items-center gap-1.5 shrink-0">
+        <button onclick="toggleMohaLearnPanel()" class="px-2.5 py-1.5 bg-emerald-400 hover:bg-emerald-300 text-slate-950 font-black text-xs rounded-xl flex items-center gap-1" title="Teach Moha AI new notes or solutions">
+          <span>🧠</span> <span class="hidden sm:inline">Teach AI</span> <span id="mohaMemoryCountBadge" class="px-1.5 py-0.2 bg-slate-950 text-emerald-300 rounded-full text-[10px]">0</span>
+        </button>
+        <button onclick="toggleTeacherStudioPanel()" class="px-2.5 py-1.5 bg-amber-400 hover:bg-amber-300 text-slate-950 font-black text-xs rounded-xl flex items-center gap-1">
+          <span>⚙️</span> <span class="hidden sm:inline">Teacher Form</span>
+        </button>
+        <button onclick="toggleMohaApiKeyPanel()" class="px-2.5 py-1.5 bg-violet-800 hover:bg-violet-900 text-amber-300 font-black text-xs rounded-xl" title="Gemini API Key">
+          🔑
+        </button>
+        <button onclick="clearMwalimuChat()" class="px-2.5 py-1.5 bg-violet-800 hover:bg-violet-900 text-white font-bold text-xs rounded-xl" title="Clear Chat">🗑️</button>
+        <button onclick="closeMwalimuModal()" class="px-3 py-1.5 bg-rose-600 hover:bg-rose-700 text-white font-black text-xs rounded-xl">✕ CLOSE</button>
+      </div>
+    </div>
+
+    <!-- Optional API Key Bar -->
+    <div id="mohaApiKeyPanel" class="hidden shrink-0 px-4 py-2.5 bg-slate-900 text-white border-b border-slate-700 text-xs space-y-2">
+      <div class="flex items-center justify-between">
+        <span class="font-bold text-amber-300">🔑 Gemini API Key (Saved privately in browser):</span>
+        <button onclick="toggleMohaApiKeyPanel()" class="text-slate-400 hover:text-white font-bold">Close ✕</button>
+      </div>
+      <div class="flex items-center gap-2">
+        <input type="password" id="customGeminiKeyInput" placeholder="Paste Google AI Studio Key (AIzaSy...) here..." class="flex-1 px-3 py-1.5 rounded-lg bg-slate-800 border border-slate-600 text-white text-xs focus:outline-none" />
+        <button onclick="saveCustomGeminiKey()" class="px-3 py-1.5 bg-emerald-500 hover:bg-emerald-600 text-slate-950 font-black rounded-lg">Save Key</button>
+      </div>
+    </div>
+
+    <!-- Self-Learning Knowledge Trainer Panel -->
+    <div id="mohaLearnPanel" class="hidden shrink-0 bg-emerald-50 border-b-2 border-emerald-300 p-3 sm:p-4 text-xs space-y-2.5 max-h-[42vh] overflow-y-auto">
+      <div class="flex items-center justify-between">
+        <span class="font-black text-emerald-950 uppercase tracking-wide">🧠 Teach Moha AI (Permanent Learning Memory)</span>
+        <button onclick="toggleMohaLearnPanel()" class="text-slate-500 hover:text-slate-900 font-bold">Hide ▲</button>
+      </div>
+      <p class="text-[11px] font-semibold text-emerald-900">
+        Teach Moha AI any new syllabus topic, formula, or marking scheme. Type <code class="bg-white px-1.5 py-0.5 rounded border border-emerald-300">learn: Topic = Explanation</code> in chat!
+      </p>
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-2">
+        <input type="text" id="learnTopicInput" placeholder="Topic / Question (e.g. Ohm's Law)" class="px-3 py-2 rounded-xl border border-emerald-300 font-bold bg-white" />
+        <input type="text" id="learnAnswerInput" placeholder="Knowledge / Solution to remember..." class="sm:col-span-2 px-3 py-2 rounded-xl border border-emerald-300 font-semibold bg-white" />
+      </div>
+      <div class="flex items-center justify-between gap-2">
+        <button onclick="saveLearnedKnowledgeFromForm()" class="px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white font-black rounded-xl shadow-sm">
+          💾 Save to Moha AI Memory
+        </button>
+        <div id="learnedItemsPreview" class="text-[11px] font-bold text-emerald-800 truncate"></div>
+      </div>
+    </div>
+
+    <!-- 2. Always-Visible Pinned Action Bar -->
+    <div class="shrink-0 px-3 py-2 bg-violet-50 border-b border-violet-200 flex flex-wrap items-center gap-1.5">
+      <button onclick="openTeacherDocFormFor('lessonplan')" class="px-3 py-1.5 rounded-xl bg-brand-600 hover:bg-brand-700 text-white font-black text-xs flex items-center gap-1 shadow-sm">
+        <span>📋</span> <span>4-Stage Lesson Plan</span>
+      </button>
+      <button onclick="openTeacherDocFormFor('schemeofwork')" class="px-3 py-1.5 rounded-xl bg-emerald-700 hover:bg-emerald-800 text-white font-black text-xs flex items-center gap-1 shadow-sm">
+        <span>📅</span> <span>PO-RALG Scheme (2026)</span>
+      </button>
+      <button onclick="openTeacherDocFormFor('markingscheme')" class="px-3 py-1.5 rounded-xl bg-rose-600 hover:bg-rose-700 text-white font-black text-xs flex items-center gap-1 shadow-sm">
+        <span>✅</span> <span>Marking Scheme</span>
+      </button>
+      <button onclick="openTeacherDocFormFor('logbook')" class="px-3 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-900 text-white font-black text-xs flex items-center gap-1 shadow-sm">
+        <span>📖</span> <span>Subject Log Book</span>
+      </button>
+      <button onclick="sendQuickMwalimuPrompt('syllabus')" class="px-2.5 py-1.5 rounded-xl bg-amber-100 hover:bg-amber-200 text-amber-950 border border-amber-300 font-black text-xs">
+        📜 Syllabus Topics
+      </button>
+      <button onclick="sendQuickMwalimuPrompt('summary')" class="px-2.5 py-1.5 rounded-xl bg-white hover:bg-violet-100 text-violet-900 border border-violet-200 font-bold text-xs">
+        📝 Topic Summary
+      </button>
+      <button onclick="sendQuickMwalimuPrompt('questions')" class="px-2.5 py-1.5 rounded-xl bg-white hover:bg-violet-100 text-violet-900 border border-violet-200 font-bold text-xs">
+        ❓ Practice Qs + Marking
+      </button>
+      <button onclick="startAiQuiz()" class="px-2.5 py-1.5 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 font-black text-xs">
+        🎯 Start Quiz
+      </button>
+    </div>
+
+    <!-- 3. Collapsible Teacher Details Form -->
+    <div id="teacherStudioPanel" class="hidden shrink-0 bg-amber-50/90 border-b-2 border-amber-300 p-3 sm:p-4 max-h-[46vh] overflow-y-auto space-y-3 text-xs">
+      <div class="flex items-center justify-between">
+        <span class="font-black text-slate-900 uppercase tracking-wide">📋 Fill Teacher &amp; Topic Details First:</span>
+        <button onclick="toggleTeacherStudioPanel()" class="text-slate-500 hover:text-slate-900 font-bold">Hide ▲</button>
+      </div>
+      <div id="teacherSyllabusSyncBadge" class="p-2 rounded-xl bg-emerald-50 border border-emerald-300 text-emerald-950 font-bold text-[11px]">
+        🔗 Integrated with TIE Competence-Based Curriculum &amp; Google Sheet Syllabuses
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
+        <div>
+          <label class="font-bold text-slate-700 block mb-0.5">School Name *</label>
+          <input type="text" id="tsSchool" placeholder="e.g. Kipingo Secondary School" class="w-full px-2.5 py-1.5 rounded-lg border border-slate-300 font-semibold bg-white" />
+        </div>
+        <div>
+          <label class="font-bold text-slate-700 block mb-0.5">Teacher's Name *</label>
+          <input type="text" id="tsTeacher" placeholder="e.g. John Elia Njukula" class="w-full px-2.5 py-1.5 rounded-lg border border-slate-300 font-semibold bg-white" />
+        </div>
+        <div>
+          <label class="font-bold text-slate-700 block mb-0.5">Date *</label>
+          <input type="date" id="tsDate" class="w-full px-2.5 py-1.5 rounded-lg border border-slate-300 font-semibold bg-white" />
+        </div>
+        <div>
+          <label class="font-bold text-slate-700 block mb-0.5">Class / Form *</label>
+          <input type="text" id="tsClass" placeholder="e.g. Form 1 or Form 4" class="w-full px-2.5 py-1.5 rounded-lg border border-slate-300 font-semibold bg-white" />
+        </div>
+        <div>
+          <label class="font-bold text-slate-700 block mb-0.5">Subject *</label>
+          <input type="text" id="tsSubject" placeholder="e.g. Basic Mathematics" class="w-full px-2.5 py-1.5 rounded-lg border border-slate-300 font-semibold bg-white" />
+        </div>
+        <div>
+          <label class="font-bold text-slate-700 block mb-0.5">Time / Duration</label>
+          <input type="text" id="tsDuration" value="80 Minutes" class="w-full px-2.5 py-1.5 rounded-lg border border-slate-300 font-semibold bg-white" />
+        </div>
+        <div class="sm:col-span-2">
+          <label class="font-bold text-slate-700 block mb-0.5">Main Topic / Competence *</label>
+          <input type="text" id="tsTopic" placeholder="e.g. Numbers / Rational & Irrational Numbers" class="w-full px-2.5 py-1.5 rounded-lg border border-slate-300 font-semibold bg-white" />
+        </div>
+        <div>
+          <label class="font-bold text-slate-700 block mb-0.5">Sub-Topic / Specific Activity *</label>
+          <input type="text" id="tsSubTopic" placeholder="e.g. Basic operations on rational numbers" class="w-full px-2.5 py-1.5 rounded-lg border border-slate-300 font-semibold bg-white" />
+        </div>
+      </div>
+
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 pt-1">
+        <div>
+          <label class="font-bold text-slate-600 block">Registered Girls</label>
+          <input type="number" id="tsRegG" value="25" class="w-full px-2 py-1 rounded border border-slate-300 font-bold bg-white" />
+        </div>
+        <div>
+          <label class="font-bold text-slate-600 block">Registered Boys</label>
+          <input type="number" id="tsRegB" value="25" class="w-full px-2 py-1 rounded border border-slate-300 font-bold bg-white" />
+        </div>
+        <div>
+          <label class="font-bold text-slate-600 block">Present Girls</label>
+          <input type="number" id="tsPresG" value="24" class="w-full px-2 py-1 rounded border border-slate-300 font-bold bg-white" />
+        </div>
+        <div>
+          <label class="font-bold text-slate-600 block">Present Boys</label>
+          <input type="number" id="tsPresB" value="24" class="w-full px-2 py-1 rounded border border-slate-300 font-bold bg-white" />
+        </div>
+      </div>
+
+      <div class="flex flex-wrap items-center gap-2 pt-2">
+        <button onclick="submitTeacherStudioDoc('lessonplan')" class="px-4 py-2 bg-brand-600 hover:bg-brand-700 text-white font-black rounded-xl shadow-sm">
+          ⚡ Generate 4-Stage Lesson Plan
+        </button>
+        <button onclick="submitTeacherStudioDoc('schemeofwork')" class="px-4 py-2 bg-emerald-700 hover:bg-emerald-800 text-white font-black rounded-xl shadow-sm">
+          📅 Generate PO-RALG Scheme (2026)
+        </button>
+        <button onclick="submitTeacherStudioDoc('markingscheme')" class="px-4 py-2 bg-rose-600 hover:bg-rose-700 text-white font-black rounded-xl shadow-sm">
+          ✅ Generate NECTA Marking Scheme
+        </button>
+        <button onclick="submitTeacherStudioDoc('logbook')" class="px-4 py-2 bg-slate-800 hover:bg-slate-900 text-white font-black rounded-xl shadow-sm">
+          📖 Generate Subject Log Book
+        </button>
+      </div>
+    </div>
+
+    <!-- 4. Scrollable Chat & Quiz Container -->
+    <div id="mwalimuChatContainer" class="flex-1 min-h-0 overflow-y-auto p-4 space-y-4 bg-slate-50"></div>
+
+    <div id="mwalimuQuizContainer" class="hidden flex-1 min-h-0 overflow-y-auto p-4 space-y-4 bg-slate-50"></div>
+
+    <!-- Attached Image Preview -->
+    <div id="mwalimuImagePreviewBar" class="hidden shrink-0 px-4 py-2 bg-violet-50 border-t border-violet-200 items-center justify-between">
+      <div class="flex items-center gap-2 text-xs font-bold text-violet-900">
+        <img id="mwalimuPreviewThumb" src="" alt="Preview" class="w-8 h-8 rounded object-cover border border-violet-300" />
+        <span>📷 Photo attached for solving</span>
+      </div>
+      <button onclick="clearMwalimuImage()" class="text-xs font-black text-rose-600">Remove ✕</button>
+    </div>
+
+    <!-- 5. Pinned Chat Input Footer -->
+    <div class="shrink-0 p-3 bg-white border-t border-slate-200 flex items-center gap-2">
+      <label class="p-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 cursor-pointer shrink-0" title="Upload question photo">
+        <span>📷</span>
+        <input type="file" id="mwalimuImageInput" accept="image/*" class="hidden" onchange="handleMwalimuImageSelect(event)" />
+      </label>
+      <input
+        type="text"
+        id="mwalimuUserInput"
+        onkeydown="if(event.key==='Enter') sendMwalimuMessage()"
+        placeholder="Ask Moha AI any question, calculation, or type 'learn: topic = notes'..."
+        class="flex-1 px-3.5 py-2.5 rounded-xl border-2 border-slate-200 focus:border-violet-600 focus:outline-none text-xs sm:text-sm font-semibold"
+      />
+      <button onclick="sendMwalimuMessage()" class="px-4 py-2.5 bg-violet-600 hover:bg-violet-700 text-white font-black text-xs sm:text-sm rounded-xl shrink-0">
+        Send →
+      </button>
+    </div>
+  </div>
+</div>
+
+<div id="toastNotification" class="fixed bottom-20 right-4 z-50 bg-slate-900 text-white text-xs font-bold px-4 py-3 rounded-xl shadow-lg hidden"></div>
+
+<footer class="bg-slate-900 text-slate-400 py-8 border-t border-slate-800 text-xs text-center mt-auto">
+  <div class="max-w-5xl mx-auto px-4 space-y-1.5">
+    <div class="font-black text-white text-sm">ELIMIKA TANZANIA</div>
+    <p>Past Papers, Marking Schemes, TIE Books, Official Syllabuses &amp; Moha AI.</p>
+  </div>
+</footer>
+
+<script>
+const CONFIG = {
+  SHEET_ID: '1-7C_G-VAC2ICxuT3XwADzAluRoDvQyd04yS4BtSvXxM',
+  ITEMS_PER_PAGE: 12,
+  SEARCH_DEBOUNCE_MS: 200,
+  ADMIN_WHATSAPP: '255700000000'
+};
+
+const TIE_CURRICULUM_SUBJECTS = {
+  'Standard 1': ['Kusoma', 'Kuandika', 'Kuhesabu', 'Afya na Mazingira', 'Michezo na Sanaa'],
+  'Standard 2': ['Kusoma', 'Kuandika', 'Kuhesabu', 'Afya na Mazingira', 'Michezo na Sanaa'],
+  'Standard 3': ['Kiswahili', 'English', 'Hisabati (Mathematics)', 'Sayansi (Science)', 'Jiografia na Mazingira', 'Historia ya Tanzania na Maadili', 'Sanaa na Michezo'],
+  'Standard 4': ['Kiswahili', 'English', 'Hisabati (Mathematics)', 'Sayansi (Science)', 'Jiografia na Mazingira', 'Historia ya Tanzania na Maadili', 'Sanaa na Michezo'],
+  'Standard 5': ['Kiswahili', 'English', 'Hisabati (Mathematics)', 'Sayansi na Teknolojia', 'Maarifa ya Jamii', 'Uraia na Maadili', 'Stadi za Kazi'],
+  'Standard 6': ['Kiswahili', 'English', 'Hisabati (Mathematics)', 'Sayansi na Teknolojia', 'Maarifa ya Jamii', 'Uraia na Maadili', 'Stadi za Kazi'],
+  'Standard 7': ['Kiswahili', 'English', 'Hisabati (Mathematics)', 'Sayansi na Teknolojia', 'Maarifa ya Jamii', 'Uraia na Maadili', 'Stadi za Kazi'],
+  'Form 1': ['Basic Mathematics', 'English Language', 'Kiswahili', 'Biology', 'Physics', 'Chemistry', 'Geography', 'History', 'Historia ya Tanzania na Maadili', 'Business Studies', 'Civics', 'Book-Keeping', 'Commerce', 'Computer Science', 'Agriculture'],
+  'Form 2': ['Basic Mathematics', 'English Language', 'Kiswahili', 'Biology', 'Physics', 'Chemistry', 'Geography', 'History', 'Historia ya Tanzania na Maadili', 'Business Studies', 'Civics', 'Book-Keeping', 'Commerce', 'Computer Science', 'Agriculture'],
+  'Form 3': ['Basic Mathematics', 'English Language', 'Kiswahili', 'Biology', 'Physics', 'Chemistry', 'Geography', 'History', 'Historia ya Tanzania na Maadili', 'Business Studies', 'Civics', 'Book-Keeping', 'Commerce', 'Computer Science', 'Literature in English'],
+  'Form 4': ['Basic Mathematics', 'English Language', 'Kiswahili', 'Biology', 'Physics', 'Chemistry', 'Geography', 'History', 'Historia ya Tanzania na Maadili', 'Business Studies', 'Civics', 'Book-Keeping', 'Commerce', 'Computer Science', 'Literature in English'],
+  'Form 5': ['General Studies', 'Academic Communication', 'Advanced Mathematics', 'Basic Applied Mathematics (BAM)', 'Physics', 'Chemistry', 'Biology', 'Geography', 'History', 'Economics', 'Accountancy', 'Commerce', 'English Language', 'Kiswahili', 'Computer Science'],
+  'Form 6': ['General Studies', 'Academic Communication', 'Advanced Mathematics', 'Basic Applied Mathematics (BAM)', 'Physics', 'Chemistry', 'Biology', 'Geography', 'History', 'Economics', 'Accountancy', 'Commerce', 'English Language', 'Kiswahili', 'Computer Science']
+};
+
+let allPapers = [];
+let isLoadingData = true;
+let printBasket = [];
+let currentViewerPaperId = null;
+let syllabusPageLevel = 'ALL';
+let booksPageLevel = 'ALL';
+let booksPageSelectedClass = 'ALL';
+let searchTimer = null;
+
+let state = {
+  lang: 'en',
+  resourceMode: 'papers', // 'papers' | 'books' | 'syllabus'
+  step: 1,
+  selectedClass: '',
+  selectedSubject: '',
+  selectedCategory: 'ALL',
+  selectedYear: 'ALL',
+  searchQuery: '',
+  page: 1
+};
+
+const TIE_SYLLABUS_COMPETENCES = {
+  'Basic Mathematics': {
+    'Form 1': ['1.0 Numbers & Mathematical Language (Rational, Irrational, Real Numbers, Approximations)', '2.0 Fractions, Decimals, Percentages, Ratios & Proportions', '3.0 Algebra (Linear Equations, Simultaneous Equations, Inequalities)', '4.0 Geometry & Coordinate Geometry (Gradient, Straight Line Equations)'],
+    'Form 2': ['1.0 Exponents, Radicals & Logarithms', '2.0 Algebra (Quadratic Expressions & Equations, Factorisation)', '3.0 Congruence, Similarity & Geometrical Transformations', '4.0 Pythagoras Theorem & Right-Angled Trigonometry', '5.0 Sets & Statistics'],
+    'Form 3': ['1.0 Relations & Functions (Linear, Quadratic, Polynomial)', '2.0 Sequences & Series (AP and GP)', '3.0 Circles, Earth as a Sphere (Great Circles, Meridians, Shortest Distance)', '4.0 Accounts (Double Entry, Trial Balance, Financial Statements)'],
+    'Form 4': ['1.0 Coordinate Geometry & Vectors', '2.0 Area & Perimeter of Regular Polygons', '3.0 Three-Dimensional Figures (Surface Area, Volume, Angle Between Line & Plane)', '4.0 Probability', '5.0 Matrices & Linear Transformations (2x2 Matrices, Inverse, Cramer Rule, Linear Programming)']
+  },
+  'Biology': {
+    'Form 1': ['1.0 Introduction to Biology & Scientific Processes', '2.0 Safety in Our Environment & First Aid', '3.0 Cell Structure and Organization', '4.0 Classification of Living Things'],
+    'Form 2': ['1.0 Nutrition in Plants and Animals (Photosynthesis & Human Digestive System)', '2.0 Food Processing, Preservation and Storage', '3.0 Balance of Nature & Natural Environment', '4.0 Transport of Materials in Living Things', '5.0 Gaseous Exchange and Respiration'],
+    'Form 3': ['1.0 Classification of Kingdom Plantae & Animalia', '2.0 Movement & Locomotion', '3.0 Coordination (Nervous & Hormonal Systems) and Sense Organs', '4.0 Excretion and Regulation (Homeostasis)', '5.0 Reproduction in Plants and Animals'],
+    'Form 4': ['1.0 Growth and Development', '2.0 Genetics, Mendelian Inheritance & Variation', '3.0 Classification of Arthropoda & Chordata', '4.0 Organic Evolution', '5.0 HIV/AIDS and STIs']
+  },
+  'Chemistry': {
+    'Form 1': ['1.0 Introduction to Chemistry & Laboratory Techniques', '2.0 Heat Sources, Flames & Scientific Procedure', '3.0 Matter (States, Physical & Chemical Changes, Separation of Mixtures)', '4.0 Air, Combustion, Rusting and Firefighting'],
+    'Form 2': ['1.0 Oxygen and Hydrogen', '2.0 Water (Treatment & Purification)', '3.0 Fuels and Energy', '4.0 Atomic Structure, Periodic Table, Bonding & Formulae/Nomenclature'],
+    'Form 3': ['1.0 Chemical Equations, Hardness of Water', '2.0 Acids, Bases and Salts', '3.0 The Mole Concept and Volumetric Analysis (Titration)', '4.0 Ionic Theory and Electrolysis (Faraday Laws)', '5.0 Chemical Kinetics, Equilibrium and Energetics'],
+    'Form 4': ['1.0 Extraction of Metals (Sodium, Aluminium, Iron, Copper)', '2.0 Compounds of Metals & Non-Metals (Chlorine, Sulphur, Nitrogen)', '3.0 Organic Chemistry (Hydrocarbons, Alcohols, Carboxylic Acids, Polymers)', '4.0 Soil Chemistry and Environmental Pollution']
+  },
+  'Physics': {
+    'Form 1': ['1.0 Introduction to Physics & Laboratory Rules', '2.0 Measurement, Density & Relative Density', '3.0 Force, Archimedes Principle & Law of Flotation', '4.0 Structure and Properties of Matter (Elasticity, Surface Tension, Capillarity)', '5.0 Pressure, Work, Energy, Power & Light'],
+    'Form 2': ['1.0 Static Electricity & Current Electricity (Ohm Law)', '2.0 Magnetism & Earth Magnetic Field', '3.0 Forces in Equilibrium (Moments, Center of Gravity) & Simple Machines', '4.0 Motion in a Straight Line (Newton Laws of Motion)', '5.0 Temperature and Sustainable Energy Sources'],
+    'Form 3': ['1.0 Applications of Vectors & Friction', '2.0 Light (Reflection & Refraction at Curved Mirrors and Lenses, Optical Instruments)', '3.0 Thermal Expansion, Transfer of Thermal Energy & Measurement of Heat', '4.0 Vapour, Humidity and Current Electricity (EMF, Internal Resistance)'],
+    'Form 4': ['1.0 Waves & Sound Waves, Electromagnetic Spectrum', '2.0 Electromagnetism (Induction, Transformers)', '3.0 Radioactivity (Alpha, Beta, Gamma, Half-Life)', '4.0 Thermionic Emission & Electronics (Semiconductors, Diodes, Transistors)', '5.0 Elementary Astronomy & Geophysics']
+  }
+};
+
+const MOHA_BUILTIN_KNOWLEDGE = [
+  {
+    keywords: ['photosynthesis', 'nutrition in plants', 'chlorophyll'],
+    title: 'Photosynthesis (Biology — Form 2 Nutrition in Plants)',
+    content: `**Definition:** Photosynthesis is the biochemical process by which green plants manufacture organic food (glucose) from carbon dioxide and water in the presence of sunlight energy trapped by chlorophyll.\n\n**Balanced Chemical Equation:**\n$$6\\text{CO}_2 + 6\\text{H}_2\\text{O} \\xrightarrow{\\text{Sunlight / Chlorophyll}} \\text{C}_6\\text{H}_{12}\\text{O}_6 + 6\\text{O}_2$$\n\n**Stages of Photosynthesis:**\n1. **Light Reaction (Photolysis - Grana):** Splits water molecules ($2\\text{H}_2\\text{O} \\rightarrow 4\\text{H}^+ + \\text{O}_2 + 4e^-$) and forms ATP.\n2. **Dark Reaction (Calvin Cycle - Stroma):** Reduces $\\text{CO}_2$ to form glucose.\n\n**Leaf Adaptations (NECTA Points - 02 Marks @):**\n• Broad, flat lamina for large surface area.\n• Numerous stomata for gaseous exchange.\n• Palisade mesophyll cells packed with chloroplasts.`
+  },
+  {
+    keywords: ['ohm', 'resistance', 'current electricity', 'voltage'],
+    title: "Ohm's Law & Current Electricity (Physics — Form 2)",
+    content: `**Ohm's Law:** States that electric current ($I$) through a metallic conductor is directly proportional to the potential difference ($V$) across its ends, provided temperature remains constant.\n\n$$V = I \\times R \\quad \\Rightarrow \\quad I = \\frac{V}{R}$$\n\n**Resistors:**\n• **Series:** $R_{\\text{total}} = R_1 + R_2 + R_3$\n• **Parallel:** $\\frac{1}{R_{\\text{total}}} = \\frac{1}{R_1} + \\frac{1}{R_2}$`
+  },
+  {
+    keywords: ['archimedes', 'flotation', 'upthrust', 'buoyancy'],
+    title: "Archimedes' Principle & Law of Flotation (Physics — Form 1)",
+    content: `**1. Archimedes' Principle:** Upthrust experienced by an immersed body equals the weight of the fluid displaced.\n$$\\text{Upthrust } (U) = \\text{Real Weight } (W_a) - \\text{Apparent Weight } (W_f)$$\n\n**2. Law of Flotation:** A floating body displaces its own weight of the fluid in which it floats.`
+  },
+  {
+    keywords: ['mole', 'molarity', 'titration', 'avogadro'],
+    title: 'The Mole Concept & Volumetric Analysis (Chemistry — Form 3)',
+    content: `**Key Formulas:**\n1. $n = \\frac{\\text{Mass }(m)}{\\text{Molar Mass }(M_r)} = \\frac{\\text{Number of Particles }}{6.02 \\times 10^{23}}$\n2. $\\text{Molarity} = \\frac{\\text{Concentration in g/dm}^3}{M_r}$\n3. $\\frac{M_A V_A}{M_B V_B} = \\frac{n_A}{n_B}$`
+  }
+];
+
+function escapeHtml(str) {
+  if (str === null || str === undefined) return '';
+  return String(str)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
+function showToastNotification(message) {
+  const toast = document.getElementById('toastNotification');
+  if (!toast) return;
+  toast.textContent = message;
+  toast.classList.remove('hidden');
+  clearTimeout(window._toastTimer);
+  window._toastTimer = setTimeout(() => {
+    toast.classList.add('hidden');
+  }, 3200);
+}
+
+function sanitizeUrl(rawUrl) {
+  if (!rawUrl) return null;
+  const clean = String(rawUrl).trim();
+  return /^https?:\/\//i.test(clean) ? clean : null;
+}
+
+function extractGoogleDriveId(url) {
+  if (!url || !url.includes('drive.google.com')) return null;
+  const match = url.match(/\/file\/d\/([a-zA-Z0-9_-]+)/) || url.match(/[?&]id=([a-zA-Z0-9_-]+)/);
+  return match ? match[1] : null;
+}
+
+function getPreviewUrl(rawUrl) {
+  const safe = sanitizeUrl(rawUrl);
+  if (!safe) return null;
+  const driveId = extractGoogleDriveId(safe);
+  if (driveId) return `https://drive.google.com/file/d/${driveId}/preview`;
+  return safe;
+}
+
+function getDirectDownloadUrl(rawUrl) {
+  const safe = sanitizeUrl(rawUrl);
+  if (!safe) return '#';
+  const driveId = extractGoogleDriveId(safe);
+  if (driveId) return `https://drive.google.com/uc?export=download&id=${driveId}`;
+  return safe;
+}
+
+function getSubjectIcon(subject) {
+  const s = (subject || '').toLowerCase();
+  if (s.includes('math') || s.includes('hisabati')) return '📐';
+  if (s.includes('physic')) return '⚡';
+  if (s.includes('chemi')) return '🧪';
+  if (s.includes('biolog') || s.includes('sayansi')) return '🧬';
+  if (s.includes('geograph') || s.includes('jiografia')) return '🌍';
+  if (s.includes('histor')) return '🏛️';
+  if (s.includes('civic') || s.includes('uraia')) return '⚖️';
+  if (s.includes('english') || s.includes('literature')) return '📖';
+  if (s.includes('kiswahili')) return '🗣️';
+  return '📘';
+}
+
+function normalizeClassName(rawForm) {
+  const f = (rawForm || '').trim();
+  const lower = f.toLowerCase();
+  if (/^(form\s*1|form\s*i|form\s*one|f1)$/i.test(lower)) return 'Form 1';
+  if (/^(form\s*2|form\s*ii|form\s*two|f2)$/i.test(lower)) return 'Form 2';
+  if (/^(form\s*3|form\s*iii|form\s*three|f3)$/i.test(lower)) return 'Form 3';
+  if (/^(form\s*4|form\s*iv|form\s*four|f4)$/i.test(lower)) return 'Form 4';
+  if (/^(form\s*5|form\s*v|form\s*five|f5)$/i.test(lower)) return 'Form 5';
+  if (/^(form\s*6|form\s*vi|form\s*six|f6)$/i.test(lower)) return 'Form 6';
+  if (/^(std\s*1|standard\s*1|standard\s*i)$/i.test(lower)) return 'Standard 1';
+  if (/^(std\s*2|standard\s*2|standard\s*ii)$/i.test(lower)) return 'Standard 2';
+  if (/^(std\s*3|standard\s*3|standard\s*iii)$/i.test(lower)) return 'Standard 3';
+  if (/^(std\s*4|standard\s*4|standard\s*iv)$/i.test(lower)) return 'Standard 4';
+  if (/^(std\s*5|standard\s*5|standard\s*v)$/i.test(lower)) return 'Standard 5';
+  if (/^(std\s*6|standard\s*6|standard\s*vi)$/i.test(lower)) return 'Standard 6';
+  if (/^(std\s*7|standard\s*7|standard\s*vii)$/i.test(lower)) return 'Standard 7';
+  return f || 'Form 4';
+}
+
+function parseCSV(text) {
+  const rows = [];
+  let currentRow = [];
+  let currentField = '';
+  let inQuotes = false;
+  const cleanText = String(text || '').replace(/\r\n/g, '\n').replace(/\r/g, '\n');
+
+  for (let i = 0; i < cleanText.length; i++) {
+    const char = cleanText[i];
+    const nextChar = cleanText[i + 1];
+
+    if (inQuotes) {
+      if (char === '"' && nextChar === '"') {
+        currentField += '"';
+        i++;
+      } else if (char === '"') {
+        inQuotes = false;
+      } else {
+        currentField += char;
+      }
+    } else {
+      if (char === '"') {
+        inQuotes = true;
+      } else if (char === ',') {
+        currentRow.push(currentField.trim());
+        currentField = '';
+      } else if (char === '\n') {
+        currentRow.push(currentField.trim());
+        if (currentRow.some(f => f.length > 0)) rows.push(currentRow);
+        currentRow = [];
+        currentField = '';
+      } else {
+        currentField += char;
+      }
+    }
+  }
+  if (currentField.length > 0 || currentRow.length > 0) {
+    currentRow.push(currentField.trim());
+    if (currentRow.some(f => f.length > 0)) rows.push(currentRow);
+  }
+  return rows;
+}
+
+function processParsedRows(rows) {
+  const records = [];
+  const seenBooks = new Set();
+
+  if (Array.isArray(rows) && rows.length >= 2) {
+    for (let i = 1; i < rows.length; i++) {
+      const cols = rows[i];
+      const rawTitle = (cols[0] || '').trim();
+      const rawForm = (cols[1] || '').trim();
+      const rawSubject = (cols[2] || '').trim();
+      const rawYear = (cols[3] || '').trim();
+      const rawCat = (cols[4] || '').trim();
+      const paperUrl = sanitizeUrl(cols[5] || '');
+      const answersUrl = sanitizeUrl(cols[6] || '');
+
+      if (!rawTitle && !rawSubject) continue;
+
+      const form = normalizeClassName(rawForm);
+      const subject = rawSubject || 'General';
+      const year = rawYear || '2025';
+      const category = rawCat || 'NECTA';
+      const catLower = `${category} ${rawTitle}`.toLowerCase();
+
+      const isSyllabus = catLower.includes('syllabus') || catLower.includes('muhtasari');
+      const isBook = !isSyllabus && (catLower.includes('book') || catLower.includes('kitabu') || catLower.includes('textbook') || catLower.includes('tie'));
+
+      if (isBook) {
+        seenBooks.add(`${form.toLowerCase()}__${subject.toLowerCase()}`);
+      }
+
+      records.push({
+        id: `sheet-${i}`,
+        title: rawTitle || `${form} ${subject} (${year})`,
+        form,
+        subject,
+        year,
+        category: isSyllabus ? 'TIE Syllabus' : (isBook ? 'TIE Book' : category),
+        paperUrl,
+        answersUrl,
+        isBook,
+        isSyllabus
+      });
+    }
+  }
+
+  Object.entries(TIE_CURRICULUM_SUBJECTS).forEach(([cls, subjects]) => {
+    subjects.forEach((sub, idx) => {
+      const key = `${cls.toLowerCase()}__${sub.toLowerCase()}`;
+      if (!seenBooks.has(key)) {
+        records.push({
+          id: `tie-book-${cls.replace(/\s+/g, '')}-${idx}`,
+          title: `${cls} ${sub} — Official TIE Student's Book`,
+          form: cls,
+          subject: sub,
+          year: '2025',
+          category: 'TIE Book',
+          paperUrl: null,
+          answersUrl: null,
+          isBook: true,
+          isSyllabus: false
+        });
+      }
+    });
+  });
+
+  return records;
+}
+
+function getUploadedSyllabusContext(cls, subject) {
+  const cleanCls = normalizeClassName(cls || 'Form 3');
+  const cleanSub = (subject || 'Basic Mathematics').trim();
+
+  const uploadedSyllabuses = allPapers.filter(p => {
+    if (!p.isSyllabus) return false;
+    return p.subject.toLowerCase().includes(cleanSub.toLowerCase()) || cleanSub.toLowerCase().includes(p.subject.toLowerCase());
+  });
+
+  let syllabusTopics = [];
+  const subjectKey = Object.keys(TIE_SYLLABUS_COMPETENCES).find(
+    k => k.toLowerCase() === cleanSub.toLowerCase() || cleanSub.toLowerCase().includes(k.toLowerCase())
+  );
+  if (subjectKey && TIE_SYLLABUS_COMPETENCES[subjectKey]) {
+    const classMap = TIE_SYLLABUS_COMPETENCES[subjectKey];
+    if (classMap[cleanCls]) {
+      syllabusTopics = classMap[cleanCls];
+    } else {
+      syllabusTopics = Object.values(classMap).flat().slice(0, 6);
+    }
+  }
+
+  return { uploadedSyllabuses, syllabusTopics };
+}
+
+function triggerDirectDownloadUrl(rawUrl, filename) {
+  const dlUrl = getDirectDownloadUrl(rawUrl);
+  if (!dlUrl || dlUrl === '#') {
+    showToastNotification('Google Drive link is not attached in the Google Sheet yet.');
+    return;
+  }
+  const a = document.createElement('a');
+  a.href = dlUrl;
+  a.target = '_blank';
+  a.rel = 'noopener noreferrer';
+  if (filename) a.download = filename;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+}
+
+async function fetchSheetData() {
+  const statusEl = document.getElementById('dataStatusIndicator');
+  const banner = document.getElementById('networkErrorBanner');
+  if (banner) banner.classList.add('hidden');
+  if (statusEl) {
+    statusEl.innerHTML = `<span class="w-2 h-2 rounded-full bg-amber-500 animate-pulse"></span><span>Syncing...</span>`;
+  }
+
+  try {
+    const cached = localStorage.getItem('elimika_papers_cache_v3');
+    if (cached) {
+      const parsedCache = JSON.parse(cached);
+      if (Array.isArray(parsedCache) && parsedCache.length > 0) {
+        allPapers = parsedCache;
+        refreshCurrentViews();
+      }
+    }
+  } catch (e) {}
+
+  const endpoints = [
+    `https://docs.google.com/spreadsheets/d/${CONFIG.SHEET_ID}/gviz/tq?tqx=out:csv`,
+    `https://docs.google.com/spreadsheets/d/${CONFIG.SHEET_ID}/export?format=csv`
+  ];
+
+  let csvText = null;
+  for (const url of endpoints) {
+    try {
+      const res = await fetch(url, { cache: 'no-cache' });
+      if (res.ok) {
+        const text = await res.text();
+        if (text && !text.includes('<!DOCTYPE html>') && text.length > 20) {
+          csvText = text;
+          break;
+        }
+      }
+    } catch (e) {}
+  }
+
+  isLoadingData = false;
+
+  if (!csvText) {
+    if (statusEl) statusEl.innerHTML = `<span class="w-2 h-2 rounded-full bg-amber-500"></span><span>Offline Mode</span>`;
+    if (allPapers.length === 0) allPapers = processParsedRows([]);
+    refreshCurrentViews();
+    return;
+  }
+
+  try {
+    const raw = parseCSV(csvText);
+    allPapers = processParsedRows(raw);
+    localStorage.setItem('elimika_papers_cache_v3', JSON.stringify(allPapers));
+    if (statusEl) {
+      statusEl.innerHTML = `<span class="w-2 h-2 rounded-full bg-emerald-500"></span><span>Live Sync</span>`;
+    }
+    refreshCurrentViews();
+  } catch (err) {
+    if (banner) banner.classList.remove('hidden');
+  }
+}
+
+function refreshCurrentViews() {
+  renderSavedClassBanner();
+  renderRecentPapersSection();
+  if (!document.getElementById('dedicatedSyllabusPage').classList.contains('hidden')) {
+    renderDedicatedSyllabusList();
+  }
+  if (!document.getElementById('dedicatedBooksPage').classList.contains('hidden')) {
+    renderDedicatedBooksList();
+  }
+  if (state.step === 2) renderSubjectsForClass();
+  if (state.step === 3) renderPapersList();
+}
+
+function updateModeSwitcherUI() {
+  const heroP = document.getElementById('heroBtnPapers');
+  if (heroP) {
+    heroP.className = "px-4 py-2.5 rounded-xl font-black text-xs sm:text-sm border-2 border-brand-700 bg-brand-600 text-white shadow-sm transition-all flex items-center gap-1.5";
+  }
+}
+
+function setResourceMode(mode) {
+  if (mode === 'syllabus') {
+    openSyllabusPage();
+    return;
+  }
+  if (mode === 'books') {
+    openBooksPage();
+    return;
+  }
+  closeSyllabusPage(false);
+  closeBooksPage(false);
+  state.resourceMode = 'papers';
+  updateModeSwitcherUI();
+  if (state.step === 2) renderSubjectsForClass();
+  if (state.step === 3) renderPapersList();
+}
+
+function openBooksPage(pushHist = true, filterClass = '', filterSubject = '') {
+  state.resourceMode = 'books';
+  document.getElementById('home').classList.add('hidden');
+  document.getElementById('browserApp').classList.add('hidden');
+  document.getElementById('dedicatedSyllabusPage').classList.add('hidden');
+  document.getElementById('dedicatedBooksPage').classList.remove('hidden');
+
+  if (filterClass) {
+    booksPageSelectedClass = filterClass;
+    const fLower = filterClass.toLowerCase();
+    if (fLower.includes('standard')) setBooksPageLevel('Primary', false);
+    else if (fLower.includes('form 5') || fLower.includes('form 6')) setBooksPageLevel('Advanced', false);
+    else setBooksPageLevel('Secondary', false);
+    booksPageSelectedClass = filterClass;
+  }
+
+  const searchInput = document.getElementById('booksPageSearchInput');
+  if (searchInput && filterSubject) {
+    searchInput.value = filterSubject;
+  }
+
+  if (pushHist) {
+    try { history.pushState({ page: 'books' }, '', '#books'); } catch (e) {}
+  }
+  renderDedicatedBooksList();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  lucide.createIcons();
+}
+
+function closeBooksPage(goHome = true) {
+  document.getElementById('dedicatedBooksPage').classList.add('hidden');
+  document.getElementById('home').classList.remove('hidden');
+  document.getElementById('browserApp').classList.remove('hidden');
+  if (state.resourceMode === 'books') state.resourceMode = 'papers';
+  updateModeSwitcherUI();
+  if (goHome) {
+    try { history.pushState({ page: 'home' }, '', '#home'); } catch (e) {}
+  }
+  lucide.createIcons();
+}
+
+function openBooksNewWindow() {
+  const base = window.location.href.split('#')[0];
+  window.open(base + '#books', '_blank');
+}
+
+function setBooksPageLevel(level, resetClass = true) {
+  booksPageLevel = level;
+  if (resetClass) booksPageSelectedClass = 'ALL';
+  ['ALL', 'Primary', 'Secondary', 'Advanced'].forEach(lvl => {
+    const btn = document.getElementById(`bookTab${lvl}`);
+    if (!btn) return;
+    btn.className = (lvl === level)
+      ? "px-4 py-2.5 rounded-xl font-black text-xs sm:text-sm bg-emerald-600 text-white shadow-sm"
+      : "px-4 py-2.5 rounded-xl font-black text-xs sm:text-sm bg-slate-100 text-slate-700 hover:bg-slate-200";
+  });
+  renderDedicatedBooksList();
+}
+
+function setBooksPageClassPill(cls) {
+  booksPageSelectedClass = cls;
+  renderDedicatedBooksList();
+}
+
+function renderDedicatedBooksList() {
+  const grid = document.getElementById('dedicatedBooksGrid');
+  const badge = document.getElementById('booksPageCountBadge');
+  const pillsRow = document.getElementById('booksClassPillsRow');
+  const q = (document.getElementById('booksPageSearchInput')?.value || '').trim().toLowerCase();
+  if (!grid) return;
+
+  let levelClasses = [];
+  if (booksPageLevel === 'Primary') {
+    levelClasses = ['Standard 1', 'Standard 2', 'Standard 3', 'Standard 4', 'Standard 5', 'Standard 6', 'Standard 7'];
+  } else if (booksPageLevel === 'Secondary') {
+    levelClasses = ['Form 1', 'Form 2', 'Form 3', 'Form 4'];
+  } else if (booksPageLevel === 'Advanced') {
+    levelClasses = ['Form 5', 'Form 6'];
+  } else {
+    levelClasses = ['Form 1', 'Form 2', 'Form 3', 'Form 4', 'Form 5', 'Form 6', 'Standard 1', 'Standard 2', 'Standard 3', 'Standard 4', 'Standard 5', 'Standard 6', 'Standard 7'];
+  }
+
+  if (pillsRow) {
+    pillsRow.innerHTML = ['ALL', ...levelClasses].map(c => `
+      <button onclick="setBooksPageClassPill('${escapeHtml(c)}')" class="px-3 py-1.5 rounded-xl text-xs font-black transition-all ${booksPageSelectedClass === c ? 'bg-slate-900 text-white shadow-sm' : 'bg-slate-100 text-slate-700 hover:bg-slate-200'}">
+        ${c === 'ALL' ? 'All Classes' : escapeHtml(c)}
+      </button>
+    `).join('');
+  }
+
+  const books = allPapers.filter(p => {
+    if (!p.isBook) return false;
+    if (!matchesSyllabusTier(p.form, booksPageLevel)) return false;
+    if (booksPageSelectedClass !== 'ALL' && p.form.toLowerCase() !== booksPageSelectedClass.toLowerCase()) return false;
+    if (q && !`${p.title} ${p.subject} ${p.form} ${p.year}`.toLowerCase().includes(q)) return false;
+    return true;
+  });
+
+  books.sort((a, b) => (b.paperUrl ? 1 : 0) - (a.paperUrl ? 1 : 0));
+  const linkedCount = books.filter(b => Boolean(b.paperUrl)).length;
+  if (badge) badge.textContent = `Showing ${books.length} TIE Books (${linkedCount} with Google Drive PDF links)`;
+
+  if (books.length === 0) {
+    grid.innerHTML = `
+      <div class="col-span-full py-12 text-center bg-white rounded-3xl border-2 border-slate-200 p-6 space-y-3">
+        <div class="text-4xl">📚</div>
+        <h3 class="text-base font-black text-slate-900">No Textbooks Found</h3>
+        <button onclick="document.getElementById('booksPageSearchInput').value=''; setBooksPageLevel('ALL');" class="px-4 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-black text-xs rounded-xl">
+          Show All Textbooks
+        </button>
+      </div>
+    `;
+    return;
+  }
+
+  grid.innerHTML = books.map(p => {
+    const hasUrl = Boolean(p.paperUrl);
+    const icon = getSubjectIcon(p.subject);
+    return `
+      <article class="bg-white p-5 rounded-2xl border-2 ${hasUrl ? 'border-emerald-400 shadow-md' : 'border-slate-200'} hover:border-emerald-600 transition-all flex flex-col justify-between gap-4">
+        <div>
+          <div class="flex items-center justify-between gap-2 mb-2">
+            <span class="text-[10px] font-black uppercase px-2.5 py-0.5 rounded-full ${hasUrl ? 'bg-emerald-100 text-emerald-950 border border-emerald-400' : 'bg-slate-100 text-slate-700'}">
+              📚 ${escapeHtml(p.category)}
+            </span>
+            <span class="text-xs font-extrabold text-emerald-800 bg-emerald-50 px-2.5 py-0.5 rounded-lg">${escapeHtml(p.form)}</span>
+          </div>
+          <h3 class="text-base font-black text-slate-900 flex items-center gap-2">
+            <span>${icon}</span>
+            <span>${escapeHtml(p.title)}</span>
+          </h3>
+          <p class="text-xs font-bold text-slate-500 mt-1">Subject: <span class="text-slate-800">${escapeHtml(p.subject)}</span></p>
+        </div>
+        <div class="flex flex-wrap items-center gap-2 pt-3 border-t border-slate-100">
+          ${hasUrl ? `
+            <button onclick="triggerDirectDownloadUrl('${escapeHtml(p.paperUrl)}', '${escapeHtml(p.title)}.pdf')" class="flex-1 px-4 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-black rounded-xl flex items-center justify-center gap-1.5 shadow-sm">
+              <i data-lucide="download" class="w-4 h-4"></i> ⬇️ Download Book (PDF)
+            </button>
+            <button onclick="openViewer('${p.id}', 'paper')" class="px-3.5 py-2.5 bg-emerald-50 hover:bg-emerald-100 text-emerald-950 border border-emerald-300 text-xs font-extrabold rounded-xl">
+              📖 Read
+            </button>
+          ` : `
+            <span class="text-xs font-bold text-amber-800 bg-amber-50 px-3 py-2 rounded-xl border border-amber-200 flex-1 text-center">
+              ⏳ Add Google Drive Link in Sheet (Category: TIE Book)
+            </span>
+          `}
+          <button onclick="openMwalimuModal('${escapeHtml(p.form)}', '${escapeHtml(p.subject)}')" class="px-3 py-2.5 bg-violet-50 hover:bg-violet-100 text-violet-900 border border-violet-200 text-xs font-black rounded-xl" title="Prepare Lesson Plan">
+            🤖 Moha AI
+          </button>
+        </div>
+      </article>
+    `;
+  }).join('');
+  lucide.createIcons();
+}
+
+function openSyllabusPage(pushHist = true) {
+  state.resourceMode = 'syllabus';
+  document.getElementById('home').classList.add('hidden');
+  document.getElementById('browserApp').classList.add('hidden');
+  document.getElementById('dedicatedBooksPage').classList.add('hidden');
+  document.getElementById('dedicatedSyllabusPage').classList.remove('hidden');
+  if (pushHist) {
+    try { history.pushState({ page: 'syllabus' }, '', '#syllabus'); } catch (e) {}
+  }
+  renderDedicatedSyllabusList();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  lucide.createIcons();
+}
+
+function closeSyllabusPage(goHome = true) {
+  document.getElementById('dedicatedSyllabusPage').classList.add('hidden');
+  document.getElementById('home').classList.remove('hidden');
+  document.getElementById('browserApp').classList.remove('hidden');
+  if (state.resourceMode === 'syllabus') state.resourceMode = 'papers';
+  updateModeSwitcherUI();
+  if (goHome) {
+    try { history.pushState({ page: 'home' }, '', '#home'); } catch (e) {}
+  }
+  lucide.createIcons();
+}
+
+function openSyllabusNewWindow() {
+  const base = window.location.href.split('#')[0];
+  window.open(base + '#syllabus', '_blank');
+}
+
+function setSyllabusPageLevel(level) {
+  syllabusPageLevel = level;
+  ['ALL', 'Primary', 'Secondary', 'Advanced'].forEach(lvl => {
+    const btn = document.getElementById(`sylTab${lvl}`);
+    if (!btn) return;
+    btn.className = (lvl === level)
+      ? "px-4 py-2.5 rounded-xl font-black text-xs sm:text-sm bg-amber-500 text-slate-950 shadow-sm"
+      : "px-4 py-2.5 rounded-xl font-black text-xs sm:text-sm bg-slate-100 text-slate-700 hover:bg-slate-200";
+  });
+  renderDedicatedSyllabusList();
+}
+
+function matchesSyllabusTier(formStr, tier) {
+  if (tier === 'ALL') return true;
+  const f = (formStr || '').toLowerCase();
+  if (tier === 'Primary') return f.includes('primary') || f.includes('std') || f.includes('standard');
+  if (tier === 'Secondary') return f.includes('secondary') || f.includes('form 1') || f.includes('form 2') || f.includes('form 3') || f.includes('form 4');
+  if (tier === 'Advanced') return f.includes('advanced') || f.includes('form 5') || f.includes('form 6');
+  return true;
+}
+
+function renderDedicatedSyllabusList() {
+  const grid = document.getElementById('dedicatedSyllabusGrid');
+  const badge = document.getElementById('syllabusPageCountBadge');
+  const q = (document.getElementById('syllabusPageSearchInput')?.value || '').trim().toLowerCase();
+  if (!grid) return;
+
+  const syllabuses = allPapers.filter(p => {
+    if (!p.isSyllabus) return false;
+    if (!matchesSyllabusTier(p.form, syllabusPageLevel)) return false;
+    if (q && !`${p.title} ${p.subject} ${p.form} ${p.year}`.toLowerCase().includes(q)) return false;
+    return true;
+  });
+
+  if (badge) badge.textContent = `${syllabuses.length} Official Syllabus${syllabuses.length === 1 ? '' : 'es'} Found`;
+
+  if (syllabuses.length === 0) {
+    grid.innerHTML = `
+      <div class="col-span-full py-12 text-center bg-white rounded-3xl border-2 border-slate-200 p-6 space-y-3">
+        <div class="text-4xl">📜</div>
+        <h3 class="text-base font-black text-slate-900">Syllabuses Will Appear Here Once Uploaded to Your Google Sheet</h3>
+        <p class="text-xs text-slate-500 max-w-md mx-auto">Add rows to your Google Sheet with Category set to <strong>TIE Syllabus</strong> and your Google Drive link.</p>
+        <button onclick="openMwalimuModal('Form 1-4', 'Basic Mathematics')" class="px-4 py-2.5 bg-violet-600 hover:bg-violet-700 text-white font-black text-xs rounded-xl">
+          🤖 Ask Moha AI for Subject Syllabus Topics
+        </button>
+      </div>
+    `;
+    return;
+  }
+
+  grid.innerHTML = syllabuses.map(p => {
+    const hasUrl = Boolean(p.paperUrl);
+    return `
+      <article class="bg-white p-5 rounded-2xl border-2 border-amber-200 hover:border-amber-500 shadow-sm flex flex-col justify-between gap-4">
+        <div>
+          <div class="flex items-center justify-between gap-2 mb-1.5">
+            <span class="text-[10px] font-black uppercase px-2.5 py-0.5 rounded-full bg-amber-100 text-amber-950 border border-amber-300">📜 ${escapeHtml(p.category)}</span>
+            <span class="text-xs font-extrabold text-slate-500">${escapeHtml(p.form)} • ${escapeHtml(p.year)}</span>
+          </div>
+          <h3 class="text-base font-black text-slate-900">${escapeHtml(p.title)}</h3>
+          <p class="text-xs font-bold text-slate-500 mt-1">Subject: <span class="text-slate-800">${escapeHtml(p.subject)}</span></p>
+        </div>
+        <div class="flex flex-wrap items-center gap-2 pt-3 border-t border-slate-100">
+          ${hasUrl ? `
+            <button onclick="triggerDirectDownloadUrl('${escapeHtml(p.paperUrl)}', '${escapeHtml(p.title)}.pdf')" class="flex-1 px-4 py-2.5 bg-amber-500 hover:bg-amber-600 text-slate-950 text-xs font-black rounded-xl flex items-center justify-center gap-1.5">
+              <i data-lucide="download" class="w-4 h-4"></i> ⬇️ Direct Download PDF
+            </button>
+            <button onclick="openViewer('${p.id}', 'paper')" class="px-3.5 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-800 text-xs font-extrabold rounded-xl">
+              📖 Read
+            </button>
+          ` : `
+            <span class="text-xs font-bold text-amber-700 bg-amber-50 px-3 py-2 rounded-xl border border-amber-200 flex-1 text-center">⏳ Google Drive Link Pending</span>
+          `}
+        </div>
+      </article>
+    `;
+  }).join('');
+  lucide.createIcons();
+}
+
+function goToStep(stepNum, pushHistory = true) {
+  state.step = stepNum;
+  document.getElementById('step1View').classList.toggle('hidden', stepNum !== 1);
+  document.getElementById('step2View').classList.toggle('hidden', stepNum !== 2);
+  document.getElementById('step3View').classList.toggle('hidden', stepNum !== 3);
+
+  const stickyBar = document.getElementById('stickyMobileBottomBar');
+  if (stickyBar) stickyBar.classList.toggle('hidden', stepNum === 1);
+
+  const c1 = document.getElementById('crumbStep1');
+  const c2 = document.getElementById('crumbStep2');
+  const c3 = document.getElementById('crumbStep3');
+
+  c1.className = stepNum === 1 ? "px-3 py-1.5 rounded-xl bg-brand-600 text-white font-black shrink-0" : "px-3 py-1.5 rounded-xl bg-brand-100 text-brand-800 font-bold shrink-0";
+  c2.className = stepNum === 2 ? "px-3 py-1.5 rounded-xl bg-brand-600 text-white font-black shrink-0" : (stepNum > 2 ? "px-3 py-1.5 rounded-xl bg-brand-100 text-brand-800 font-bold shrink-0" : "px-3 py-1.5 rounded-xl bg-slate-100 text-slate-400 shrink-0");
+  c3.className = stepNum === 3 ? "px-3 py-1.5 rounded-xl bg-brand-600 text-white font-black shrink-0" : "px-3 py-1.5 rounded-xl bg-slate-100 text-slate-400 shrink-0";
+
+  c2.disabled = stepNum < 2;
+  c3.disabled = stepNum < 3;
+
+  if (stepNum === 2) renderSubjectsForClass();
+  if (stepNum === 3) renderPapersList();
+
+  if (pushHistory) {
+    try { history.pushState({ step: stepNum }, '', `#step${stepNum}`); } catch (e) {}
+  }
+  lucide.createIcons();
+}
+
+function handleStepBack() {
+  if (state.step === 3) goToStep(2);
+  else if (state.step === 2) goToStep(1);
+}
+
+function selectClass(className) {
+  state.selectedClass = className;
+  state.searchQuery = '';
+  localStorage.setItem('elimika_saved_class', className);
+  document.getElementById('smartSearchInput').value = '';
+  document.getElementById('clearSearchBtn').classList.add('hidden');
+  document.getElementById('step2CurrentClass').textContent = className;
+  document.getElementById('crumbStep2Label').textContent = `2. ${className}`;
+  goToStep(2);
+}
+
+function renderSavedClassBanner() {
+  const wrap = document.getElementById('savedClassBannerWrap');
+  if (!wrap) return;
+  const saved = localStorage.getItem('elimika_saved_class');
+  if (!saved) {
+    wrap.classList.add('hidden');
+    return;
+  }
+  wrap.classList.remove('hidden');
+  wrap.innerHTML = `
+    <div class="p-4 bg-emerald-50 border-2 border-emerald-400 rounded-2xl flex items-center justify-between gap-3">
+      <div>
+        <span class="text-[11px] font-black uppercase text-emerald-700 block">📌 Your Last Selected Class</span>
+        <span class="text-sm sm:text-base font-black text-emerald-950">Continue with ${escapeHtml(saved)}</span>
+      </div>
+      <button onclick="selectClass('${escapeHtml(saved)}')" class="px-4 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-black text-xs rounded-xl shadow-sm">
+        Open ${escapeHtml(saved)} →
+      </button>
+    </div>
+  `;
+}
+
+function saveRecentPaper(paper) {
+  if (!paper) return;
+  try {
+    let list = JSON.parse(localStorage.getItem('elimika_recent_papers') || '[]');
+    list = list.filter(x => x.id !== paper.id);
+    list.unshift({ id: paper.id, title: paper.title, form: paper.form, subject: paper.subject, year: paper.year });
+    localStorage.setItem('elimika_recent_papers', JSON.stringify(list.slice(0, 4)));
+    renderRecentPapersSection();
+  } catch (e) {}
+}
+
+function renderRecentPapersSection() {
+  const wrap = document.getElementById('recentPapersWrap');
+  if (!wrap) return;
+  try {
+    const list = JSON.parse(localStorage.getItem('elimika_recent_papers') || '[]');
+    if (!list.length) {
+      wrap.classList.add('hidden');
+      return;
+    }
+    wrap.classList.remove('hidden');
+    wrap.innerHTML = `
+      <div class="bg-white p-4 rounded-2xl border-2 border-slate-200 space-y-2.5">
+        <div class="text-xs font-black uppercase text-slate-500">🕘 Recently Opened Papers</div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+          ${list.map(item => `
+            <button onclick="openViewer('${escapeHtml(item.id)}', 'paper')" class="p-2.5 rounded-xl bg-slate-50 hover:bg-brand-50 border border-slate-200 text-left flex items-center justify-between gap-2">
+              <div class="min-w-0">
+                <div class="text-xs font-black text-slate-900 truncate">${escapeHtml(item.title)}</div>
+                <div class="text-[11px] font-bold text-slate-500">${escapeHtml(item.form)} • ${escapeHtml(item.subject)}</div>
+              </div>
+              <span class="text-xs font-black text-brand-600 shrink-0">Read →</span>
+            </button>
+          `).join('')}
+        </div>
+      </div>
+    `;
+  } catch (e) {
+    wrap.classList.add('hidden');
+  }
+}
+
+function renderSubjectsForClass() {
+  const container = document.getElementById('subjectsListGrid');
+  if (!container) return;
+  updateModeSwitcherUI();
+
+  const isBooks = state.resourceMode === 'books';
+  const classItems = allPapers.filter(p => {
+    if (p.isSyllabus) return false;
+    if (isBooks && !p.isBook) return false;
+    if (!isBooks && p.isBook) return false;
+    return p.form.toLowerCase() === state.selectedClass.toLowerCase();
+  });
+
+  const counts = {};
+  classItems.forEach(p => {
+    const s = p.subject.trim();
+    counts[s] = (counts[s] || 0) + 1;
+  });
+
+  const subjects = Object.keys(counts).sort();
+
+  if (subjects.length === 0) {
+    container.innerHTML = `
+      <div class="col-span-full py-10 text-center bg-white rounded-2xl border-2 border-slate-200 p-6 space-y-3">
+        <div class="text-3xl">📂</div>
+        <h4 class="font-black text-slate-900">No ${isBooks ? 'TIE Books' : 'Past Papers'} uploaded for ${escapeHtml(state.selectedClass)} yet</h4>
+        <div class="flex flex-wrap justify-center gap-2">
+          <button onclick="setResourceMode('${isBooks ? 'papers' : 'books'}')" class="px-4 py-2 bg-emerald-600 text-white font-black text-xs rounded-xl">
+            View ${isBooks ? 'Past Papers' : 'TIE Books'}
+          </button>
+          <button onclick="openMwalimuModal('${escapeHtml(state.selectedClass)}', 'Basic Mathematics')" class="px-4 py-2 bg-violet-600 text-white font-black text-xs rounded-xl">
+            🤖 Ask Moha AI
+          </button>
+        </div>
+      </div>
+    `;
+    return;
+  }
+
+  container.innerHTML = subjects.map(sub => {
+    const count = counts[sub];
+    const icon = getSubjectIcon(sub);
+    return `
+      <button onclick="selectSubject('${escapeHtml(sub)}')" class="p-4 bg-white hover:bg-brand-50 border-2 border-slate-200 hover:border-brand-500 rounded-2xl text-left shadow-sm flex items-center justify-between transition-all group">
+        <div class="flex items-center gap-3">
+          <span class="text-2xl">${icon}</span>
+          <div>
+            <span class="block text-base font-black text-slate-900 group-hover:text-brand-700">${escapeHtml(sub)}</span>
+            <span class="text-xs font-bold text-slate-500">${count} ${isBooks ? 'TIE Book' : (count === 1 ? 'paper' : 'papers')}</span>
+          </div>
+        </div>
+        <i data-lucide="chevron-right" class="w-5 h-5 text-slate-400 group-hover:text-brand-600"></i>
+      </button>
+    `;
+  }).join('');
+  lucide.createIcons();
+}
+
+function selectSubject(subjectName) {
+  state.selectedSubject = subjectName;
+  state.selectedCategory = 'ALL';
+  state.selectedYear = 'ALL';
+  state.page = 1;
+  document.getElementById('crumbStep3Label').textContent = `3. ${subjectName}`;
+  goToStep(3);
+}
+
+function filterCategoryTag(cat) {
+  state.selectedCategory = cat;
+  state.page = 1;
+  document.querySelectorAll('.cat-chip').forEach(btn => {
+    const match = (btn.textContent.trim() === cat) || (cat === 'ALL' && btn.textContent.trim() === 'All');
+    btn.className = match
+      ? "cat-chip px-3 py-1.5 text-xs font-black rounded-xl bg-brand-600 text-white"
+      : "cat-chip px-3 py-1.5 text-xs font-bold rounded-xl bg-slate-100 text-slate-700 hover:bg-slate-200";
+  });
+  renderPapersList();
+}
+
+function filterYearTag(yr) {
+  state.selectedYear = yr;
+  state.page = 1;
+  renderPapersList();
+}
+
+function renderPapersList() {
+  const listContainer = document.getElementById('papersResultsGrid');
+  const titleEl = document.getElementById('step3Title');
+  const subtitleEl = document.getElementById('step3Subtitle');
+  const paginationWrap = document.getElementById('paginationWrap');
+  const crossBtn = document.getElementById('crossSwitchModeBtn');
+  const yearRow = document.getElementById('yearFilterRow');
+  const isBooks = state.resourceMode === 'books';
+
+  if (crossBtn) {
+    crossBtn.textContent = isBooks ? '📝 Switch to Past Papers' : '📚 Switch to TIE Books';
+  }
+
+  let baseMatches = [];
+  if (state.searchQuery.trim().length > 0) {
+    const q = state.searchQuery.toLowerCase();
+    titleEl.textContent = `Search Results for "${state.searchQuery}"`;
+    document.getElementById('backToSubjectsBtn').classList.add('hidden');
+    baseMatches = allPapers.filter(p => `${p.title} ${p.subject} ${p.form} ${p.year} ${p.category}`.toLowerCase().includes(q));
+  } else {
+    titleEl.textContent = `${state.selectedClass} • ${state.selectedSubject} (${isBooks ? 'TIE Books' : 'Past Papers'})`;
+    document.getElementById('backToSubjectsBtn').classList.remove('hidden');
+    baseMatches = allPapers.filter(p => {
+      if (p.isSyllabus) return false;
+      if (isBooks && !p.isBook) return false;
+      if (!isBooks && p.isBook) return false;
+      const matchClass = p.form.toLowerCase() === state.selectedClass.toLowerCase();
+      const matchSub = p.subject.toLowerCase() === state.selectedSubject.toLowerCase();
+      const matchCat = (state.selectedCategory === 'ALL') || (p.category.toLowerCase() === state.selectedCategory.toLowerCase());
+      return matchClass && matchSub && matchCat;
+    });
+  }
+
+  const years = [...new Set(baseMatches.map(p => p.year).filter(y => y && y !== 'N/A'))].sort((a, b) => b.localeCompare(a));
+  if (yearRow) {
+    if (years.length > 1) {
+      yearRow.innerHTML = ['ALL', ...years].map(yr => `
+        <button onclick="filterYearTag('${escapeHtml(yr)}')" class="px-2.5 py-1 text-xs font-extrabold rounded-lg ${state.selectedYear === yr ? 'bg-slate-900 text-white' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'}">
+          ${yr === 'ALL' ? 'All Years' : escapeHtml(yr)}
+        </button>
+      `).join('');
+    } else {
+      yearRow.innerHTML = '';
+    }
+  }
+
+  const matches = state.selectedYear === 'ALL' ? baseMatches : baseMatches.filter(p => p.year === state.selectedYear);
+  matches.sort((a, b) => (b.year || '').localeCompare(a.year || ''));
+
+  subtitleEl.textContent = `Found ${matches.length} item${matches.length === 1 ? '' : 's'}`;
+
+  if (matches.length === 0) {
+    paginationWrap.classList.add('hidden');
+    listContainer.innerHTML = `
+      <div class="py-10 text-center bg-white rounded-2xl border-2 border-slate-200 p-6 space-y-3">
+        <h4 class="font-black text-slate-800">No matching records found</h4>
+        <div class="flex flex-wrap justify-center gap-2">
+          <button onclick="filterCategoryTag('ALL'); filterYearTag('ALL');" class="px-4 py-2 bg-brand-600 text-white font-black text-xs rounded-xl">Show All</button>
+          <button onclick="openMwalimuModal('${escapeHtml(state.selectedClass)}', '${escapeHtml(state.selectedSubject)}')" class="px-4 py-2 bg-violet-600 text-white font-black text-xs rounded-xl">🤖 Ask Moha AI</button>
+        </div>
+      </div>
+    `;
+    return;
+  }
+
+  const total = matches.length;
+  const start = (state.page - 1) * CONFIG.ITEMS_PER_PAGE;
+  const pageItems = matches.slice(start, start + CONFIG.ITEMS_PER_PAGE);
+
+  listContainer.innerHTML = pageItems.map(p => {
+    const hasPaper = Boolean(p.paperUrl);
+    const hasAnswers = Boolean(p.answersUrl);
+    const inBasket = printBasket.some(x => x.id === p.id);
+
+    return `
+      <article class="bg-white p-4 sm:p-5 rounded-2xl border-2 border-slate-200 hover:border-brand-400 shadow-sm transition-all space-y-3">
+        <div class="flex items-start justify-between gap-2">
+          <div>
+            <div class="flex flex-wrap items-center gap-1.5 mb-1">
+              <span class="text-[10px] font-black uppercase px-2 py-0.5 rounded bg-brand-50 text-brand-700 border border-brand-200">${escapeHtml(p.category)}</span>
+              <span class="text-xs font-extrabold text-slate-600">${escapeHtml(p.year)}</span>
+              <span class="text-xs font-bold text-slate-400">• ${escapeHtml(p.form)}</span>
+            </div>
+            <h3 class="text-base font-black text-slate-900">${escapeHtml(p.title)}</h3>
+          </div>
+        </div>
+
+        <div class="flex flex-wrap items-center gap-2 pt-2 border-t border-slate-100">
+          ${hasPaper ? `
+            <button onclick="openViewer('${p.id}', 'paper')" class="px-3.5 py-2.5 bg-brand-50 hover:bg-brand-100 text-brand-800 text-xs font-black rounded-xl flex items-center gap-1.5">
+              📖 Preview Paper
+            </button>
+            <button onclick="triggerDirectDownloadUrl('${escapeHtml(p.paperUrl)}', '${escapeHtml(p.title)}.pdf')" class="px-3.5 py-2.5 bg-brand-600 hover:bg-brand-700 text-white text-xs font-black rounded-xl flex items-center gap-1.5 shadow-sm">
+              ⬇️ Direct Download PDF
+            </button>
+          ` : `
+            <span class="text-xs font-bold text-amber-700 bg-amber-50 px-3 py-2 rounded-xl border border-amber-200">
+              ⏳ Google Drive link pending upload
+            </span>
+          `}
+
+          ${hasAnswers ? `
+            <button onclick="openViewer('${p.id}', 'answers')" class="px-3.5 py-2.5 bg-emerald-50 hover:bg-emerald-100 text-emerald-900 border border-emerald-300 text-xs font-black rounded-xl flex items-center gap-1.5">
+              ✅ Marking Scheme (Answers)
+            </button>
+            <button onclick="triggerDirectDownloadUrl('${escapeHtml(p.answersUrl)}', '${escapeHtml(p.title)}_Answers.pdf')" class="px-3.5 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-black rounded-xl">
+              ⬇️ Download Answers
+            </button>
+          ` : ''}
+
+          <button onclick="openMwalimuModal('${escapeHtml(p.form)}', '${escapeHtml(p.subject)}')" class="px-3 py-2.5 bg-violet-50 hover:bg-violet-100 text-violet-900 border border-violet-200 text-xs font-black rounded-xl">
+            🤖 Moha AI
+          </button>
+
+          ${hasPaper ? `
+            <button onclick="togglePrintBasketItem('${p.id}')" class="px-3 py-2.5 ${inBasket ? 'bg-slate-900 text-white' : 'bg-slate-100 text-slate-700'} text-xs font-bold rounded-xl">
+              ${inBasket ? '✓ In Print List' : '➕ Print List'}
+            </button>
+          ` : ''}
+        </div>
+      </article>
+    `;
+  }).join('');
+
+  lucide.createIcons();
+
+  if (total > CONFIG.ITEMS_PER_PAGE) {
+    paginationWrap.classList.remove('hidden');
+    const totalPages = Math.ceil(total / CONFIG.ITEMS_PER_PAGE);
+    document.getElementById('pageIndicator').textContent = `Page ${state.page} of ${totalPages}`;
+    document.getElementById('prevBtn').disabled = state.page === 1;
+    document.getElementById('nextBtn').disabled = state.page === totalPages;
+  } else {
+    paginationWrap.classList.add('hidden');
+  }
+}
+
+function changeResultsPage(dir) {
+  state.page += dir;
+  renderPapersList();
+  window.scrollTo({ top: document.getElementById('step3View').offsetTop - 20, behavior: 'smooth' });
+}
+
+document.getElementById('smartSearchInput').addEventListener('input', (e) => {
+  const val = e.target.value;
+  document.getElementById('clearSearchBtn').classList.toggle('hidden', val.trim().length === 0);
+  clearTimeout(searchTimer);
+  searchTimer = setTimeout(() => {
+    state.searchQuery = val;
+    state.page = 1;
+    if (val.trim().length > 0) {
+      closeSyllabusPage(false);
+      closeBooksPage(false);
+      goToStep(3);
+    } else {
+      goToStep(state.selectedClass ? 2 : 1);
+    }
+  }, CONFIG.SEARCH_DEBOUNCE_MS);
+});
+
+function clearSmartSearch() {
+  document.getElementById('smartSearchInput').value = '';
+  document.getElementById('clearSearchBtn').classList.add('hidden');
+  state.searchQuery = '';
+  goToStep(state.selectedClass ? 2 : 1);
+}
+
+function resetToStep1() {
+  closeSyllabusPage(false);
+  closeBooksPage(false);
+  state.selectedClass = '';
+  state.selectedSubject = '';
+  state.searchQuery = '';
+  document.getElementById('smartSearchInput').value = '';
+  document.getElementById('clearSearchBtn').classList.add('hidden');
+  goToStep(1);
+}
+
+function applyLanguageUI() {}
+
+function startVoiceSearch() {
+  const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+  if (!SpeechRecognition) {
+    showToastNotification('Your browser does not support Voice Search.');
+    return;
+  }
+  const recognition = new SpeechRecognition();
+  recognition.lang = 'en-US';
+  showToastNotification('🎤 Speak now (e.g. Form 4 Mathematics)...');
+  recognition.onresult = (event) => {
+    const transcript = event.results?.[0]?.[0]?.transcript || '';
+    if (transcript) {
+      const input = document.getElementById('smartSearchInput');
+      input.value = transcript;
+      document.getElementById('clearSearchBtn').classList.remove('hidden');
+      state.searchQuery = transcript;
+      state.page = 1;
+      closeSyllabusPage(false);
+      closeBooksPage(false);
+      goToStep(3);
+    }
+  };
+  recognition.start();
+}
+
+function openViewer(paperId, type = 'paper') {
+  const p = allPapers.find(item => item.id === paperId);
+  if (!p) return;
+
+  currentViewerPaperId = paperId;
+  saveRecentPaper(p);
+
+  const rawUrl = (type === 'answers' && p.answersUrl) ? p.answersUrl : p.paperUrl;
+  const previewUrl = getPreviewUrl(rawUrl);
+
+  if (!rawUrl || !previewUrl) {
+    showToastNotification('Google Drive link is not attached in the Google Sheet yet.');
+    return;
+  }
+
+  const modal = document.getElementById('docViewerModal');
+  const iframe = document.getElementById('docViewerIframe');
+  const spinner = document.getElementById('modalSpinner');
+  const title = document.getElementById('modalPaperTitle');
+  const badge = document.getElementById('modalMetaBadge');
+  const dlBtn = document.getElementById('modalDirectDownloadBtn');
+  const switchWrap = document.getElementById('modalSwitchQAContainer');
+  const btnQ = document.getElementById('modalBtnQ');
+  const btnA = document.getElementById('modalBtnA');
+
+  title.textContent = (type === 'answers') ? `${p.title} (Marking Scheme)` : p.title;
+  badge.textContent = `${p.category} • ${p.year}`;
+  dlBtn.onclick = () => triggerDirectDownloadUrl(rawUrl, `${p.title}.pdf`);
+
+  if (p.paperUrl && p.answersUrl) {
+    switchWrap.classList.remove('hidden');
+    switchWrap.classList.add('flex');
+    btnQ.className = type === 'paper' ? 'px-2.5 py-1 text-xs font-black rounded-lg bg-white text-slate-900' : 'px-2.5 py-1 text-xs font-black rounded-lg text-slate-600';
+    btnA.className = type === 'answers' ? 'px-2.5 py-1 text-xs font-black rounded-lg bg-white text-slate-900' : 'px-2.5 py-1 text-xs font-black rounded-lg text-slate-600';
+  } else {
+    switchWrap.classList.add('hidden');
+    switchWrap.classList.remove('flex');
+  }
+
+  spinner.style.display = 'flex';
+  iframe.src = previewUrl;
+  iframe.onload = () => { spinner.style.display = 'none'; };
+
+  modal.classList.remove('hidden');
+  modal.classList.add('flex');
+}
+
+function switchViewerQA(type) {
+  if (!currentViewerPaperId) return;
+  openViewer(currentViewerPaperId, type);
+}
+
+function closeViewerModal() {
+  const modal = document.getElementById('docViewerModal');
+  const iframe = document.getElementById('docViewerIframe');
+  if (iframe) iframe.src = 'about:blank';
+  if (modal) {
+    modal.classList.add('hidden');
+    modal.classList.remove('flex');
+  }
+}
+
+function togglePrintBasketItem(paperId) {
+  const p = allPapers.find(x => x.id === paperId);
+  if (!p) return;
+  const exists = printBasket.some(x => x.id === paperId);
+  if (exists) {
+    printBasket = printBasket.filter(x => x.id !== paperId);
+  } else {
+    printBasket.push(p);
+  }
+  const bar = document.getElementById('printBasketBar');
+  const countEl = document.getElementById('printBasketCount');
+  if (countEl) countEl.textContent = String(printBasket.length);
+  if (bar) {
+    bar.classList.toggle('hidden', printBasket.length === 0);
+    bar.classList.toggle('flex', printBasket.length > 0);
+  }
+  renderPapersList();
+}
+
+function clearPrintBasket() {
+  printBasket = [];
+  const bar = document.getElementById('printBasketBar');
+  if (bar) {
+    bar.classList.add('hidden');
+    bar.classList.remove('flex');
+  }
+  renderPapersList();
+}
+
+function sendPrintBasketWhatsApp() {
+  if (!printBasket.length) return;
+  const lines = printBasket.map((p, idx) => `${idx + 1}. ${p.title} (${p.form}) - ${getDirectDownloadUrl(p.paperUrl)}`);
+  const text = encodeURIComponent(`Hello Stationery, please print these past papers from Elimika Tanzania:\n\n${lines.join('\n')}`);
+  window.open(`https://wa.me/?text=${text}`, '_blank');
+}
+
+let mwalimuMessages = [];
+let mwalimuActiveClass = 'Form 3';
+let mwalimuActiveSubject = 'Basic Mathematics';
+let mwalimuPendingImage = null;
+let currentQuizItems = [];
+
+function getMohaLearnedMemory() {
+  try {
+    return JSON.parse(localStorage.getItem('elimika_moha_learned_v1') || '[]');
+  } catch (e) {
+    return [];
+  }
+}
+
+function saveMohaLearnedItem(topic, content) {
+  if (!topic || !content) return;
+  const list = getMohaLearnedMemory().filter(x => x.topic.toLowerCase() !== topic.toLowerCase());
+  list.unshift({
+    topic: topic.trim(),
+    content: content.trim(),
+    cls: mwalimuActiveClass,
+    subject: mwalimuActiveSubject,
+    timestamp: new Date().toISOString().split('T')[0]
+  });
+  localStorage.setItem('elimika_moha_learned_v1', JSON.stringify(list.slice(0, 100)));
+  updateMohaMemoryBadge();
+}
+
+function updateMohaMemoryBadge() {
+  const list = getMohaLearnedMemory();
+  const badge = document.getElementById('mohaMemoryCountBadge');
+  if (badge) badge.textContent = String(list.length);
+  const preview = document.getElementById('learnedItemsPreview');
+  if (preview) {
+    preview.textContent = list.length > 0 ? `${list.length} custom topic(s) saved` : '0 custom topics saved';
+  }
+}
+
+function toggleMohaLearnPanel() {
+  const panel = document.getElementById('mohaLearnPanel');
+  panel.classList.toggle('hidden');
+  updateMohaMemoryBadge();
+}
+
+function saveLearnedKnowledgeFromForm() {
+  const t = document.getElementById('learnTopicInput').value.trim();
+  const a = document.getElementById('learnAnswerInput').value.trim();
+  if (!t || !a) {
+    showToastNotification('Please enter both Topic and Knowledge.');
+    return;
+  }
+  saveMohaLearnedItem(t, a);
+  document.getElementById('learnTopicInput').value = '';
+  document.getElementById('learnAnswerInput').value = '';
+  document.getElementById('mohaLearnPanel').classList.add('hidden');
+  showToastNotification(`🧠 Moha AI learned "${t}"!`);
+
+  mwalimuMessages.push({
+    id: `ai-learn-${Date.now()}`,
+    role: 'ai',
+    text: `🧠 **New Knowledge Saved to Memory!**\n• **Topic:** ${t}\n• **Knowledge:** ${a}`
+  });
+  renderMwalimuChat();
+}
+
+function isFormOneClass(clsStr) {
+  const c = (clsStr || '').trim().toLowerCase();
+  return c === 'form 1' || c === 'form one' || c === 'form i';
+}
+
+function openMwalimuModal(cls, sub) {
+  mwalimuActiveClass = cls || state.selectedClass || 'Form 3';
+  mwalimuActiveSubject = sub || state.selectedSubject || 'Basic Mathematics';
+
+  const sylCtx = getUploadedSyllabusContext(mwalimuActiveClass, mwalimuActiveSubject);
+  const sylCount = sylCtx.uploadedSyllabuses.length;
+  const learnedCount = getMohaLearnedMemory().length;
+
+  document.getElementById('mwalimuContextSubtitle').textContent = `${mwalimuActiveClass} • ${mwalimuActiveSubject} (${sylCount > 0 ? sylCount + ' Sheet Syllabus Linked' : 'TIE Syllabus Integrated'} • ${learnedCount} Learned)`;
+  document.getElementById('tsClass').value = mwalimuActiveClass;
+  document.getElementById('tsSubject').value = mwalimuActiveSubject;
+  updateMohaMemoryBadge();
+
+  const dateInput = document.getElementById('tsDate');
+  if (dateInput && !dateInput.value) {
+    dateInput.value = new Date().toISOString().split('T')[0];
+  }
+
+  if (mwalimuMessages.length === 0) {
+    mwalimuMessages.push({
+      id: 'msg-welcome',
+      role: 'ai',
+      text: `Hello! I am **Moha AI** 🇹🇿 (**${mwalimuActiveClass} • ${mwalimuActiveSubject}**).\nI am ready to help you with instant answers, NECTA Marking Schemes, 4-Stage Lesson Plans, and 2026 PO-RALG Schemes of Work.\n\n• Click **📋 4-Stage Lesson Plan**, **📅 PO-RALG Scheme (2026)**, or **✅ Marking Scheme** above, fill in the teacher details, and download your **PDF** directly.`
+    });
+  }
+
+  const modal = document.getElementById('mwalimuAiModal');
+  modal.classList.remove('hidden');
+  modal.classList.add('flex');
+  renderMwalimuChat();
+}
+
+function closeMwalimuModal() {
+  const modal = document.getElementById('mwalimuAiModal');
+  modal.classList.add('hidden');
+  modal.classList.remove('flex');
+}
+
+function clearMwalimuChat() {
+  mwalimuMessages = [];
+  openMwalimuModal(mwalimuActiveClass, mwalimuActiveSubject);
+}
+
+function toggleTeacherStudioPanel() {
+  document.getElementById('teacherStudioPanel').classList.toggle('hidden');
+}
+
+function openTeacherDocFormFor(docType) {
+  const panel = document.getElementById('teacherStudioPanel');
+  panel.classList.remove('hidden');
+  document.getElementById('tsSchool').focus();
+  showToastNotification('Please fill in School Name, Teacher Name, and Topic details, then click Generate.');
+}
+
+function toggleMohaApiKeyPanel() {
+  const panel = document.getElementById('mohaApiKeyPanel');
+  panel.classList.toggle('hidden');
+  const saved = localStorage.getItem('elimika_custom_gemini_key') || '';
+  if (saved) document.getElementById('customGeminiKeyInput').value = saved;
+}
+
+function saveCustomGeminiKey() {
+  const val = document.getElementById('customGeminiKeyInput').value.trim();
+  if (val) {
+    localStorage.setItem('elimika_custom_gemini_key', val);
+    showToastNotification('✅ Gemini API Key saved!');
+  } else {
+    localStorage.removeItem('elimika_custom_gemini_key');
+    showToastNotification('Using local engine.');
+  }
+  document.getElementById('mohaApiKeyPanel').classList.add('hidden');
+}
+
+function getActiveApiKey() {
+  try {
+    const k = localStorage.getItem('elimika_custom_gemini_key');
+    if (k && k.trim().length > 10) return k.trim();
+  } catch (e) {}
+  return '';
+}
+
+function getTeacherStudioMetadata() {
+  const school = document.getElementById('tsSchool').value.trim();
+  const teacher = document.getElementById('tsTeacher').value.trim();
+  const date = document.getElementById('tsDate').value.trim() || new Date().toISOString().split('T')[0];
+  const cls = document.getElementById('tsClass').value.trim() || mwalimuActiveClass;
+  const subject = document.getElementById('tsSubject').value.trim() || mwalimuActiveSubject;
+  const duration = document.getElementById('tsDuration').value.trim() || '80 Minutes';
+  const topic = document.getElementById('tsTopic').value.trim();
+  const subTopic = document.getElementById('tsSubTopic').value.trim();
+  const regG = parseInt(document.getElementById('tsRegG').value || '25', 10);
+  const regB = parseInt(document.getElementById('tsRegB').value || '25', 10);
+  const presG = parseInt(document.getElementById('tsPresG').value || '24', 10);
+  const presB = parseInt(document.getElementById('tsPresB').value || '24', 10);
+
+  return { school, teacher, date, cls, subject, duration, topic, subTopic, regG, regB, regTotal: regG + regB, presG, presB, presTotal: presG + presB };
+}
+
+function submitTeacherStudioDoc(type) {
+  const meta = getTeacherStudioMetadata();
+  if (!meta.teacher || !meta.school || !meta.topic) {
+    showToastNotification('⚠️ Please fill in School Name, Teacher Name, and Main Topic first!');
+    return;
+  }
+  if (!meta.subTopic) meta.subTopic = meta.topic;
+  document.getElementById('teacherStudioPanel').classList.add('hidden');
+
+  const docLabels = {
+    lessonplan: '4-Stage TIE Lesson Plan',
+    schemeofwork: 'PO-RALG Scheme of Work (2026)',
+    markingscheme: 'Official NECTA Marking Scheme',
+    logbook: 'Subject Log Book'
+  };
+
+  const docHtml = buildInstantOfficialDocument(type, meta);
+  mwalimuMessages.push({
+    id: `user-${Date.now()}`,
+    role: 'user',
+    text: `Generate official ${docLabels[type] || 'Teaching Document'} for ${meta.cls} ${meta.subject} — Topic: ${meta.topic}, Teacher: ${meta.teacher}, School: ${meta.school}`
+  });
+  mwalimuMessages.push({
+    id: `ai-${Date.now() + 1}`,
+    role: 'ai',
+    text: docHtml
+  });
+  renderMwalimuChat();
+}
+
+function buildInstantOfficialDocument(type, meta) {
+  const m = meta || getTeacherStudioMetadata();
+  const school = escapeHtml((m.school || 'SECONDARY SCHOOL').toUpperCase());
+  const teacher = escapeHtml((m.teacher || 'MWALIMU').toUpperCase());
+  const cls = escapeHtml(m.cls || 'Form 1');
+  const subject = escapeHtml(m.subject || 'Basic Mathematics');
+  const topic = escapeHtml(m.topic || 'Core Competence');
+  const subTopic = escapeHtml(m.subTopic || m.topic || 'Specific Activity');
+  const dateStr = escapeHtml(m.date || new Date().toISOString().split('T')[0]);
+  const duration = escapeHtml(m.duration || '80 Minutes');
+
+  if (type === 'markingscheme') {
+    return `<div class="official-tie-doc">
+<div style="text-align:center; font-weight:900; font-size:13px; margin-bottom:8px; text-transform:uppercase;">
+THE UNITED REPUBLIC OF TANZANIA — NATIONAL EXAMINATIONS COUNCIL (NECTA)<br/>
+${school} — OFFICIAL MARKING SCHEME (${cls.toUpperCase()} ${subject.toUpperCase()})
+</div>
+<table>
+<tr>
+<td><strong>Subject:</strong> ${subject}</td>
+<td><strong>Class:</strong> ${cls}</td>
+<td><strong>Date:</strong> ${dateStr}</td>
+</tr>
+<tr>
+<td><strong>Main Topic:</strong> ${topic}</td>
+<td><strong>Sub-Topic:</strong> ${subTopic}</td>
+<td><strong>Examiner:</strong> ${teacher}</td>
+</tr>
+</table>
+<table>
+<thead>
+<tr>
+<th style="width:10%;">QN NO.</th>
+<th style="width:32%;">ASSESSMENT ITEM</th>
+<th style="width:43%;">MODEL ANSWER &amp; SCORING RUBRIC</th>
+<th style="width:15%;">MARKS</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>1 (a)</strong></td>
+<td>Define key terms and state governing principles of <strong>${subTopic}</strong>.</td>
+<td>• Clear definition of ${subTopic} = 02 Marks<br/>• Correct governing formula or principle = 02 Marks<br/>• One real-life application = 01 Mark</td>
+<td><strong>05 Marks</strong></td>
+</tr>
+<tr>
+<td><strong>1 (b)</strong></td>
+<td>Explain three major factors or procedures in <strong>${subTopic}</strong>.</td>
+<td>• Factor/Procedure 1 = 02 Marks<br/>• Factor/Procedure 2 = 02 Marks<br/>• Factor/Procedure 3 = 02 Marks</td>
+<td><strong>06 Marks</strong></td>
+</tr>
+<tr>
+<td><strong>2</strong></td>
+<td>Solve structured problem and calculate required parameters for <strong>${subTopic}</strong>.</td>
+<td>• Extracting given data = 01 Mark<br/>• Appropriate formula/method = 02 Marks<br/>• Substitution &amp; calculation = 03 Marks<br/>• Final answer with SI units = 02 Marks</td>
+<td><strong>08 Marks</strong></td>
+</tr>
+<tr>
+<td><strong>3</strong></td>
+<td>Essay / Comprehensive Analysis: Evaluate the importance of <strong>${topic}</strong> in socio-economic development in Tanzania.</td>
+<td>• Introduction = 02 Marks<br/>• 5 Well-explained main points (5 × 2.5) = 12.5 Marks<br/>• Conclusion = 0.5 Mark</td>
+<td><strong>15 Marks</strong></td>
+</tr>
+</tbody>
+</table>
+<table>
+<tr>
+<td><strong>TOTAL MARKS: 34 MARKS</strong></td>
+<td><strong>Verified By Teacher:</strong> ${teacher}</td>
+<td><strong>Academic Sign:</strong> __________________</td>
+</tr>
+</table>
+</div>`;
+  }
+
+  if (type === 'lessonplan') {
+    return `<div class="official-tie-doc">
+<div style="text-align:center; font-weight:900; font-size:13px; margin-bottom:8px; text-transform:uppercase;">
+PRESIDENT'S OFFICE (PO-RALG) — TANZANIA INSTITUTE OF EDUCATION (TIE)<br/>
+COMPETENCE-BASED LESSON PLAN
+</div>
+<table>
+<tr>
+<td><strong>School:</strong> ${school}</td>
+<td><strong>Teacher:</strong> ${teacher}</td>
+</tr>
+<tr>
+<td><strong>Class:</strong> ${cls}</td>
+<td><strong>Subject:</strong> ${subject}</td>
+</tr>
+<tr>
+<td><strong>Time:</strong> ${duration}</td>
+<td><strong>Date:</strong> ${dateStr}</td>
+</tr>
+</table>
+<table>
+<thead>
+<tr><th colspan="6" style="text-align:center;">STUDENT ATTENDANCE</th></tr>
+<tr>
+<th colspan="3" style="text-align:center;">REGISTERED</th>
+<th colspan="3" style="text-align:center;">PRESENT</th>
+</tr>
+<tr>
+<th>Girls</th><th>Boys</th><th>Total</th>
+<th>Girls</th><th>Boys</th><th>Total</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>${m.regG}</td><td>${m.regB}</td><td><strong>${m.regTotal}</strong></td>
+<td>${m.presG}</td><td>${m.presB}</td><td><strong>${m.presTotal}</strong></td>
+</tr>
+</tbody>
+</table>
+<table>
+<tr><td style="width:28%;"><strong>Main Competence:</strong></td><td>Demonstrate mastery of ${subject} in ${topic}</td></tr>
+<tr><td><strong>Specific Competence:</strong></td><td>Use knowledge of ${topic} (${subTopic}) in various contexts</td></tr>
+<tr><td><strong>Teaching Resources:</strong></td><td>TIE ${cls} ${subject} Student's Book, Charts, Real Objects</td></tr>
+</table>
+<div style="font-weight:900; font-size:11px; margin:6px 0 4px 0; text-transform:uppercase;">Teaching and Learning Process</div>
+<table>
+<thead>
+<tr>
+<th style="width:16%;">Stages</th>
+<th style="width:10%;">Time</th>
+<th style="width:26%;">Teaching Activities</th>
+<th style="width:26%;">Learning Activities</th>
+<th style="width:22%;">Assessment Criteria</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Introduction</strong></td>
+<td>10 Mins</td>
+<td>Guide students through brainstorming questions to connect prior knowledge to <strong>${subTopic}</strong>.</td>
+<td>Respond to questions and share prior experiences related to <strong>${subTopic}</strong>.</td>
+<td>Prior knowledge of ${subTopic} is stated.</td>
+</tr>
+<tr>
+<td><strong>Competence Development</strong></td>
+<td>35 Mins</td>
+<td>Organize students in groups to investigate, discuss, and demonstrate procedures on <strong>${subTopic}</strong>.</td>
+<td>Collaborate in groups to read texts, discuss steps, and present findings.</td>
+<td>Worked examples of ${subTopic} are demonstrated.</td>
+</tr>
+<tr>
+<td><strong>Design</strong></td>
+<td>20 Mins</td>
+<td>Guide students to apply acquired knowledge of <strong>${subTopic}</strong> to solve real-life challenges.</td>
+<td>Solve practical problems involving <strong>${subTopic}</strong>.</td>
+<td>Real-life problems are solved.</td>
+</tr>
+<tr>
+<td><strong>Realisation</strong></td>
+<td>15 Mins</td>
+<td>Administer short assessment tasks and evaluate student understanding.</td>
+<td>Complete individual exercises and assess peers' work.</td>
+<td>Exercise questions are answered.</td>
+</tr>
+</tbody>
+</table>
+<table>
+<tr>
+<td><strong>Remarks:</strong> The lesson on <em>${subTopic}</em> was successfully understood by ${m.presTotal} students. Remedial practice will be provided.</td>
+</tr>
+</table>
+</div>`;
+  }
+
+  if (type === 'schemeofwork') {
+    const showOrientation = isFormOneClass(m.cls);
+    return `<div class="official-tie-doc" data-orientation="landscape">
+<div style="text-align:center; font-weight:900; font-size:13px; margin-bottom:6px; text-transform:uppercase;">
+PRESIDENT'S OFFICE — PO-RALG SCHEME OF WORK - 2026
+</div>
+<table>
+<tr>
+<td><strong>TEACHER:</strong> ${teacher}</td>
+<td><strong>SCHOOL:</strong> ${school}</td>
+<td><strong>SUBJECT:</strong> ${subject.toUpperCase()}</td>
+</tr>
+<tr>
+<td><strong>CLASS:</strong> ${cls.toUpperCase()}</td>
+<td><strong>TERM:</strong> 1st &amp; 2nd</td>
+<td><strong>DATE:</strong> ${dateStr}</td>
+</tr>
+</table>
+<table>
+<thead>
+<tr>
+<th>MAIN COMPETENCES</th>
+<th>SPECIFIC COMPETENCES</th>
+<th>LEARNING ACTIVITIES</th>
+<th>SPECIFIC ACTIVITIES</th>
+<th>MONTH</th>
+<th>WEEK</th>
+<th>PERIODS</th>
+<th>METHODS</th>
+<th>RESOURCES</th>
+<th>ASSESSMENT</th>
+<th>REFERENCES</th>
+<th>REMARK</th>
+</tr>
+</thead>
+<tbody>
+${showOrientation ? `<tr><td colspan="12" style="text-align:center; font-weight:800; background:#fef3c7;">Registration &amp; Orientation course 13/01/2026 - 28/02/2026</td></tr>` : ''}
+<tr>
+<td>1.0 Master concepts in ${topic}</td>
+<td>1.1 Use concepts of ${topic}</td>
+<td>(a) Explain basic concepts of ${topic} (${subTopic})</td>
+<td>Guide students to discuss meaning and importance</td>
+<td>${showOrientation ? 'MARCH' : 'JANUARY'}</td>
+<td>1st &amp; 2nd</td>
+<td>6</td>
+<td>Presentations, Discussion</td>
+<td>Charts, Real objects</td>
+<td>Oral Qs, Exercises</td>
+<td>TIE (2023)</td>
+<td></td>
+</tr>
+<tr>
+<td>1.0 Master concepts in ${topic}</td>
+<td>1.1 Use concepts of ${topic}</td>
+<td>(b) Perform tasks on ${subTopic}</td>
+<td>Demonstrate operations and solve problems</td>
+<td>${showOrientation ? 'MARCH' : 'FEBRUARY'}</td>
+<td>3rd &amp; 4th</td>
+<td>6</td>
+<td>Problem solving</td>
+<td>Calculators, Charts</td>
+<td>Quizzes, Homework</td>
+<td>TIE (2023)</td>
+<td></td>
+</tr>
+<tr><td colspan="12" style="text-align:center; font-weight:800; background:#f1f5f9;">MID-TERM ASSESSMENT &amp; BREAK</td></tr>
+</tbody>
+</table>
+</div>`;
+  }
+
+  return `<div class="official-tie-doc">
+<div style="text-align:center; font-weight:900; font-size:13px; margin-bottom:8px; text-transform:uppercase;">
+PRESIDENT'S OFFICE (PO-RALG) — SUBJECT LOG BOOK — ${school}
+</div>
+<table>
+<tr>
+<td><strong>Teacher:</strong> ${teacher}</td>
+<td><strong>Class:</strong> ${cls}</td>
+<td><strong>Subject:</strong> ${subject}</td>
+</tr>
+</table>
+<table>
+<thead>
+<tr>
+<th>DATE</th>
+<th>MAIN TOPIC</th>
+<th>SUB-TOPIC</th>
+<th>PERIODS</th>
+<th>TEACHER'S COMMENT</th>
+<th>HOD REMARKS</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>${dateStr}</td>
+<td>${topic}</td>
+<td>${subTopic}</td>
+<td>3</td>
+<td>Taught successfully (${teacher})</td>
+<td>Checked &amp; Verified</td>
+</tr>
+</tbody>
+</table>
+</div>`;
+}
+
+function generateSmartTutorReply(userText, cls, subject) {
+  const cleanInput = (userText || '').trim();
+  const lower = cleanInput.toLowerCase();
+
+  const sylCtx = getUploadedSyllabusContext(cls, subject);
+  const topicsList = sylCtx.syllabusTopics.length > 0
+    ? sylCtx.syllabusTopics.map(t => `• ${t}`).join('\n')
+    : `• 1.0 Core Principles and Concepts of ${subject}\n• 2.0 Practical Applications in ${subject}\n• 3.0 Problem Solving and Real-Life Applications`;
+
+  const learnMatch = cleanInput.match(/^(?:learn|teach|remember)\s*:\s*([^=:-]+)[=:-](.+)$/i);
+  if (learnMatch) {
+    const learnedTopic = learnMatch[1].trim();
+    const learnedContent = learnMatch[2].trim();
+    saveMohaLearnedItem(learnedTopic, learnedContent);
+    return `🧠 **Knowledge Saved Permanently!**\n\n• **Topic:** ${learnedTopic}\n• **Knowledge:** ${learnedContent}\n\nI will recall this whenever you ask about **${learnedTopic}**.`;
+  }
+
+  const learnedList = getMohaLearnedMemory();
+  for (const item of learnedList) {
+    if (lower.includes(item.topic.toLowerCase()) || item.topic.toLowerCase().includes(lower)) {
+      return `🧠 **Moha AI (Learned Memory — ${item.topic}):**\n\n${item.content}\n\n*(Saved on ${item.timestamp})*`;
+    }
+  }
+
+  const linearEqMatch = cleanInput.match(/solve\s+([+-]?\d*)x\s*([+-]\s*\d+)\s*=\s*([+-]?\d+)/i);
+  if (linearEqMatch) {
+    const a = parseFloat(linearEqMatch[1] || '1');
+    const b = parseFloat(linearEqMatch[2].replace(/\s+/g, ''));
+    const c = parseFloat(linearEqMatch[3]);
+    if (a !== 0) {
+      const rhs = c - b;
+      const xVal = rhs / a;
+      return `📐 **Step-by-Step Solution:**\n\nGiven equation:\n$$${a}x ${b >= 0 ? '+ ' + b : '- ' + Math.abs(b)} = ${c}$$\n• **Step 1:** $${a}x = ${c} - (${b}) = ${rhs}$\n• **Step 2:** $x = \\frac{${rhs}}{${a}} = ${xVal}$`;
+    }
+  }
+
+  for (const entry of MOHA_BUILTIN_KNOWLEDGE) {
+    if (entry.keywords.some(kw => lower.includes(kw))) {
+      return `📘 **${entry.title}**\n\n${entry.content}\n\n💡 *Need a Lesson Plan or Marking Scheme? Click **📋 4-Stage Lesson Plan** or **✅ Marking Scheme** above!*`;
+    }
+  }
+
+  if (lower.includes('marking scheme') || lower.includes('rubric')) {
+    return buildInstantOfficialDocument('markingscheme', {
+      school: 'ELIMIKA SECONDARY SCHOOL',
+      teacher: 'SUBJECT EXAMINER',
+      cls,
+      subject,
+      topic: sylCtx.syllabusTopics[0] || `${subject} Core Topic`,
+      subTopic: cleanInput.slice(0, 65),
+      date: new Date().toISOString().split('T')[0]
+    });
+  }
+
+  if (lower.includes('syllabus') || lower.includes('competence') || lower.includes('topics')) {
+    return `📜 **Official TIE Syllabus Overview — ${cls} ${subject}**\n\n**Main Competences & Topics:**\n${topicsList}\n\n💡 *Click **📋 4-Stage Lesson Plan** or **📅 PO-RALG Scheme (2026)** above to generate official documents.*`;
+  }
+
+  return `📘 **Moha AI Assistant — ${cls} ${subject}**\n**Query:** *"${cleanInput}"*\n\n**1. TIE Curriculum Alignment:**\nIn the official Tanzania Institute of Education (TIE) Curriculum for **${cls} ${subject}**, this relates to:\n${topicsList}\n\n**2. NECTA Exam Guidelines:**\n• State the definition and governing formula clearly.\n• Show step-by-step calculations with proper SI units.\n• Apply concepts to real-life Tanzanian context.\n\n💡 *Type \`learn: Topic = Explanation\` to teach me new notes!*`;
+}
+
+async function callGeminiApi(payload) {
+  const key = getActiveApiKey();
+  if (!key) throw new Error('NO_API_KEY');
+
+  const endpoints = [
+    `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${encodeURIComponent(key)}`,
+    `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${encodeURIComponent(key)}`
+  ];
+
+  for (const ep of endpoints) {
+    try {
+      const res = await fetch(ep, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+      if (res.ok) {
+        const data = await res.json();
+        const text = data?.candidates?.[0]?.content?.parts?.[0]?.text;
+        if (text) return text;
+      }
+    } catch (e) {}
+  }
+  throw new Error('API_CALL_FAILED');
+}
+
+function sendQuickMwalimuPrompt(kind) {
+  document.getElementById('mwalimuQuizContainer').classList.add('hidden');
+  document.getElementById('mwalimuChatContainer').classList.remove('hidden');
+  const input = document.getElementById('mwalimuUserInput');
+  if (kind === 'syllabus') {
+    input.value = `Show me the official TIE Syllabus topics and competences for ${mwalimuActiveClass} ${mwalimuActiveSubject}.`;
+  } else if (kind === 'summary') {
+    input.value = `Give me a TIE revision summary and key formulas for ${mwalimuActiveClass} ${mwalimuActiveSubject}.`;
+  } else {
+    input.value = `Give me 5 important NECTA practice questions and their Marking Scheme for ${mwalimuActiveClass} ${mwalimuActiveSubject}.`;
+  }
+  sendMwalimuMessage();
+}
+
+async function sendMwalimuMessage() {
+  const inputEl = document.getElementById('mwalimuUserInput');
+  const userText = inputEl.value.trim();
+  const attachedImg = mwalimuPendingImage;
+  if (!userText && !attachedImg) return;
+
+  document.getElementById('mwalimuQuizContainer').classList.add('hidden');
+  document.getElementById('mwalimuChatContainer').classList.remove('hidden');
+
+  const lower = userText.toLowerCase();
+  if ((lower.includes('lesson plan') || lower.includes('scheme of work')) && !lower.includes('school:')) {
+    inputEl.value = '';
+    openTeacherDocFormFor('lessonplan');
+    mwalimuMessages.push({ id: `user-${Date.now()}`, role: 'user', text: userText });
+    mwalimuMessages.push({
+      id: `ai-${Date.now() + 1}`,
+      role: 'ai',
+      text: `Please fill in the **Teacher Details** form above (**School Name, Teacher's Name, Class, Subject, Main Topic, Sub-Topic**) and click **Generate** to create your official document.`
+    });
+    renderMwalimuChat();
+    return;
+  }
+
+  const displayPrompt = userText || 'Solve this question step-by-step and show the Marking Scheme.';
+  inputEl.value = '';
+  clearMwalimuImage();
+
+  mwalimuMessages.push({ id: `user-${Date.now()}`, role: 'user', text: displayPrompt });
+
+  const loadingId = `load-${Date.now()}`;
+  mwalimuMessages.push({ id: loadingId, role: 'ai', loading: true, text: 'Moha AI is thinking...' });
+  renderMwalimuChat();
+
+  let reply = '';
+  const apiKey = getActiveApiKey();
+
+  if (apiKey) {
+    const sylCtx = getUploadedSyllabusContext(mwalimuActiveClass, mwalimuActiveSubject);
+    const systemPrompt = `You are Moha AI, an expert Tanzanian TIE Curriculum & NECTA Examiner assistant for ${mwalimuActiveClass} ${mwalimuActiveSubject}. Official TIE topics: ${sylCtx.syllabusTopics.join('; ')}. Answer accurately in English using LaTeX ($...$) for math.`;
+    const parts = [{ text: displayPrompt }];
+    if (attachedImg) {
+      parts.push({ inlineData: { mimeType: attachedImg.mimeType, data: attachedImg.base64Data } });
+    }
+    try {
+      reply = await callGeminiApi({ contents: [{ role: 'user', parts }], systemInstruction: { parts: [{ text: systemPrompt }] } });
+    } catch (e) {
+      reply = generateSmartTutorReply(displayPrompt, mwalimuActiveClass, mwalimuActiveSubject);
+    }
+  } else {
+    reply = generateSmartTutorReply(displayPrompt, mwalimuActiveClass, mwalimuActiveSubject);
+  }
+
+  mwalimuMessages = mwalimuMessages.map(m => m.id === loadingId ? { id: `ai-${Date.now()}`, role: 'ai', text: reply } : m);
+  renderMwalimuChat();
+}
+
+function formatMwalimuHtml(raw) {
+  if (!raw) return '';
+  if (raw.includes('official-tie-doc')) return raw;
+  return escapeHtml(raw)
+    .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+    .replace(/\n/g, '<br/>');
+}
+
+function renderMwalimuChat() {
+  const container = document.getElementById('mwalimuChatContainer');
+  if (!container) return;
+
+  container.innerHTML = mwalimuMessages.map(m => {
+    if (m.role === 'user') {
+      return `
+        <div class="flex justify-end">
+          <div class="max-w-[85%] bg-violet-600 text-white px-4 py-3 rounded-2xl rounded-br-sm text-xs sm:text-sm font-semibold shadow-sm">
+            ${escapeHtml(m.text)}
+          </div>
+        </div>
+      `;
+    }
+    return `
+      <div class="flex justify-start">
+        <div class="max-w-[96%] w-full bg-white border-2 border-slate-200 p-4 rounded-2xl rounded-bl-sm shadow-sm space-y-3">
+          <div id="msg-body-${m.id}" class="text-xs sm:text-sm text-slate-800 leading-relaxed overflow-x-auto">
+            ${m.loading ? `<div class="flex items-center gap-2 font-bold text-violet-700"><span class="w-4 h-4 border-2 border-violet-600 border-t-transparent rounded-full animate-spin"></span> ${escapeHtml(m.text)}</div>` : formatMwalimuHtml(m.text)}
+          </div>
+          ${!m.loading ? `
+            <div class="flex flex-wrap items-center justify-between gap-2 pt-2 border-t border-slate-100">
+              <div class="flex flex-wrap items-center gap-1.5">
+                <button onclick="speakMwalimuText('${m.id}')" class="px-3 py-1.5 rounded-xl bg-violet-50 hover:bg-violet-100 text-violet-900 font-black text-xs">🔊 Listen</button>
+                <button onclick="downloadMwalimuDocPdf('${m.id}', 'portrait')" class="px-3 py-1.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-black text-xs">⬇️ PDF (Portrait)</button>
+                <button onclick="downloadMwalimuDocPdf('${m.id}', 'landscape')" class="px-3 py-1.5 rounded-xl bg-brand-600 hover:bg-brand-700 text-white font-black text-xs">⬇️ PDF (Landscape)</button>
+              </div>
+              <span class="text-[10px] font-black uppercase tracking-wider text-violet-700">MOHA AI 🇹🇿</span>
+            </div>
+          ` : ''}
+        </div>
+      </div>
+    `;
+  }).join('');
+
+  container.scrollTop = container.scrollHeight;
+
+  if (window.renderMathInElement) {
+    try {
+      renderMathInElement(container, {
+        delimiters: [
+          { left: '$$', right: '$$', display: true },
+          { left: '$', right: '$', display: false }
+        ],
+        throwOnError: false
+      });
+    } catch (e) {}
+  }
+}
+
+function speakMwalimuText(msgId) {
+  const msg = mwalimuMessages.find(x => x.id === msgId);
+  if (!msg || !window.speechSynthesis) return;
+  window.speechSynthesis.cancel();
+  const clean = msg.text.replace(/<[^>]+>/g, ' ').replace(/[*#]/g, '');
+  const utter = new SpeechSynthesisUtterance(clean);
+  utter.lang = 'en-US';
+  window.speechSynthesis.speak(utter);
+}
+
+function downloadMwalimuDocPdf(msgId, orientation = 'portrait') {
+  const target = document.getElementById(`msg-body-${msgId}`);
+  if (!target) return;
+  showToastNotification('⏳ Generating PDF...');
+  const opt = {
+    margin: 8,
+    filename: `${mwalimuActiveClass}_${mwalimuActiveSubject}_Moha_AI.pdf`.replace(/\s+/g, '_'),
+    image: { type: 'jpeg', quality: 0.98 },
+    html2canvas: { scale: 2, useCORS: true },
+    jsPDF: { unit: 'mm', format: 'a4', orientation }
+  };
+  if (window.html2pdf) {
+    html2pdf().set(opt).from(target).save();
+  }
+}
+
+function handleMwalimuImageSelect(e) {
+  const file = e.target.files?.[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = () => {
+    const base64Data = String(reader.result).split(',')[1];
+    mwalimuPendingImage = { mimeType: file.type, base64Data };
+    document.getElementById('mwalimuPreviewThumb').src = reader.result;
+    const bar = document.getElementById('mwalimuImagePreviewBar');
+    bar.classList.remove('hidden');
+    bar.classList.add('flex');
+  };
+  reader.readAsDataURL(file);
+}
+
+function clearMwalimuImage() {
+  mwalimuPendingImage = null;
+  const input = document.getElementById('mwalimuImageInput');
+  if (input) input.value = '';
+  const bar = document.getElementById('mwalimuImagePreviewBar');
+  if (bar) {
+    bar.classList.add('hidden');
+    bar.classList.remove('flex');
+  }
+}
+
+function startAiQuiz() {
+  const chatC = document.getElementById('mwalimuChatContainer');
+  const quizC = document.getElementById('mwalimuQuizContainer');
+  chatC.classList.add('hidden');
+  quizC.classList.remove('hidden');
+
+  const cls = mwalimuActiveClass;
+  const sub = mwalimuActiveSubject;
+
+  currentQuizItems = [
+    {
+      question: `Which curriculum approach is officially used by TIE for ${cls} ${sub} in Tanzania?`,
+      options: ["Competence-Based Curriculum (CBC)", "Content-Only Memorization", "Foreign Non-Structured System", "Optional Assessment Only"],
+      correctIndex: 0,
+      explanation: "Tanzania Institute of Education (TIE) uses the Competence-Based Curriculum (CBC)."
+    },
+    {
+      question: `In the official 4-stage TIE Lesson Plan for ${sub}, which stage activates prior knowledge?`,
+      options: ["Realisation", "Design", "Introduction", "Competence Development"],
+      correctIndex: 2,
+      explanation: "The Introduction stage connects prior student experiences to the new lesson."
+    }
+  ];
+
+  quizC.innerHTML = `
+    <div class="flex items-center justify-between bg-white p-3 rounded-2xl border-2 border-violet-200">
+      <div class="font-black text-xs sm:text-sm text-violet-950">🎯 ${escapeHtml(cls)} • ${escapeHtml(sub)} Quiz</div>
+      <button onclick="document.getElementById('mwalimuQuizContainer').classList.add('hidden'); document.getElementById('mwalimuChatContainer').classList.remove('hidden');" class="px-3 py-1 bg-slate-100 hover:bg-slate-200 text-xs font-black rounded-lg">← Back</button>
+    </div>
+    ${currentQuizItems.map((q, qIdx) => `
+      <div class="bg-white p-4 rounded-2xl border-2 border-slate-200 space-y-2.5">
+        <div class="font-black text-xs sm:text-sm text-slate-900">Q${qIdx + 1}. ${escapeHtml(q.question)}</div>
+        <div class="space-y-1.5">
+          ${q.options.map((opt, oIdx) => `
+            <button onclick="checkQuizOption(${qIdx}, ${oIdx})" id="quiz-opt-${qIdx}-${oIdx}" class="w-full text-left p-2.5 rounded-xl border-2 border-slate-200 hover:border-violet-400 text-xs font-bold text-slate-700 transition-all">
+              ${escapeHtml(opt)}
+            </button>
+          `).join('')}
+        </div>
+        <div id="quiz-exp-${qIdx}" class="hidden p-2.5 rounded-xl bg-emerald-50 border border-emerald-200 text-xs font-semibold text-emerald-900">
+          ✅ ${escapeHtml(q.explanation)}
+        </div>
+      </div>
+    `).join('')}
+  `;
+}
+
+function checkQuizOption(qIdx, oIdx) {
+  const item = currentQuizItems[qIdx];
+  if (!item) return;
+  item.options.forEach((_, idx) => {
+    const btn = document.getElementById(`quiz-opt-${qIdx}-${idx}`);
+    if (!btn) return;
+    if (idx === item.correctIndex) {
+      btn.className = "w-full text-left p-2.5 rounded-xl border-2 border-emerald-600 bg-emerald-50 text-xs font-black text-emerald-950";
+    } else if (idx === oIdx) {
+      btn.className = "w-full text-left p-2.5 rounded-xl border-2 border-rose-500 bg-rose-50 text-xs font-bold text-rose-900";
+    }
+  });
+  const exp = document.getElementById(`quiz-exp-${qIdx}`);
+  if (exp) exp.classList.remove('hidden');
+}
+
+window.addEventListener('popstate', () => {
+  if (window.location.hash === '#syllabus') {
+    openSyllabusPage(false);
+  } else if (window.location.hash === '#books') {
+    openBooksPage(false);
+  } else {
+    closeSyllabusPage(false);
+    closeBooksPage(false);
+  }
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+  allPapers = processParsedRows([]);
+  applyLanguageUI();
+  updateModeSwitcherUI();
+  renderSavedClassBanner();
+  renderRecentPapersSection();
+  lucide.createIcons();
+  fetchSheetData();
+  if (window.location.hash === '#syllabus') {
+    openSyllabusPage(false);
+  } else if (window.location.hash === '#books') {
+    openBooksPage(false);
+  }
+});
+</script>
+</body>
 </html>
-
