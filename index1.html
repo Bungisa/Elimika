@@ -1,0 +1,1858 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+  <title>ELIMIKA TANZANIA — Past Papers, Annual Exams, TIE Books, Syllabuses &amp; Interactive Games</title>
+  <meta name="description" content="Official Tanzania educational website for NECTA Past Papers, Annual Examination Papers, Marking Schemes, TIE Student Textbooks, Official Syllabuses, Interactive Games &amp; Moha AI." />
+  <meta property="og:title" content="ELIMIKA TANZANIA — Past Papers, Annual Exams, TIE Books &amp; Games" />
+  <meta property="og:description" content="Access NECTA Past Papers, Annual Examination Papers, TIE Textbooks, Syllabuses, Interactive Games, and Moha AI for Primary and Secondary Schools in Tanzania." />
+  <meta name="theme-color" content="#0f172a" />
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts: Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <style>
+    body {
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background-color: #f8fafc;
+      color: #0f172a;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    .fade-in { animation: fadeIn 0.16s ease-out; }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col bg-slate-50 text-slate-900 selection:bg-blue-600 selection:text-white">
+
+  <!-- ==================== STICKY TOP NAVIGATION BAR ==================== -->
+  <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-xs">
+    <div class="max-w-6xl mx-auto px-3 sm:px-6 h-16 flex items-center justify-between gap-2">
+      <!-- Brand -->
+      <button onclick="resetToHome()" class="flex items-center gap-2.5 text-left group cursor-pointer shrink-0">
+        <div class="w-10 h-10 rounded-xl bg-slate-900 text-white flex items-center justify-center font-black text-lg shadow-xs group-hover:bg-blue-700 transition-colors">
+          E
+        </div>
+        <div>
+          <div class="font-extrabold text-sm sm:text-base tracking-tight text-slate-900 leading-none">
+            ELIMIKA <span class="text-blue-600">TANZANIA</span>
+          </div>
+          <div class="text-[10px] font-bold text-slate-500 tracking-wider uppercase mt-0.5 flex items-center gap-1.5">
+            <span>NECTA · ANNUAL · TIE</span>
+            <span id="syncBadge" class="inline-flex items-center gap-1 px-1.5 py-0.5 rounded bg-emerald-50 text-emerald-700 border border-emerald-200 text-[9px]">
+              <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span> Live
+            </span>
+          </div>
+        </div>
+      </button>
+
+      <!-- Clear, Distinct Page Navigation Tabs (Never Mixed) -->
+      <nav class="flex items-center gap-1 sm:gap-1.5 overflow-x-auto no-scrollbar py-1">
+        <button id="nav-papers" onclick="resetToHome()" class="px-3 py-1.5 rounded-xl text-xs font-bold whitespace-nowrap transition-all cursor-pointer bg-slate-900 text-white">
+          📄 Past Papers
+        </button>
+        <button id="nav-books" onclick="openPage('books')" class="px-3 py-1.5 rounded-xl text-xs font-bold whitespace-nowrap transition-all cursor-pointer text-slate-700 hover:bg-slate-100">
+          📘 TIE Books
+        </button>
+        <button id="nav-syllabus" onclick="openPage('syllabus')" class="px-3 py-1.5 rounded-xl text-xs font-bold whitespace-nowrap transition-all cursor-pointer text-slate-700 hover:bg-slate-100">
+          📜 Syllabuses
+        </button>
+        <button id="nav-quiz" onclick="openPage('quiz')" class="px-3 py-1.5 rounded-xl text-xs font-bold whitespace-nowrap transition-all cursor-pointer text-slate-700 hover:bg-slate-100">
+          🎯 Solving Quiz
+        </button>
+        <button id="nav-games" onclick="openPage('games')" class="px-3 py-1.5 rounded-xl text-xs font-bold whitespace-nowrap transition-all cursor-pointer text-slate-700 hover:bg-slate-100">
+          🎮 Interactive Games
+        </button>
+        <button onclick="openMohaAppModal('moha')" class="px-3.5 py-1.5 rounded-xl text-xs font-bold whitespace-nowrap transition-all cursor-pointer bg-violet-600 hover:bg-violet-700 text-white shadow-xs flex items-center gap-1">
+          <span>🤖 Moha AI</span>
+          <span class="text-[10px] bg-white/20 px-1.5 py-0.5 rounded">App ↗</span>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ==================== MAIN CONTENT AREA ==================== -->
+  <main class="flex-grow pb-24">
+
+    <!-- =========================================================================
+         PAGE 1: EXAMINATION PAST PAPERS PORTAL (STRICTLY PAPERS ONLY — NO BOOKS)
+         ========================================================================= -->
+    <div id="page-papers" class="fade-in">
+      <!-- Hero & Fast Search Section -->
+      <section class="pt-5 pb-6 bg-gradient-to-b from-white via-slate-50 to-slate-100 border-b border-slate-200">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 text-center space-y-4">
+          <div class="text-xs font-bold text-blue-700 uppercase tracking-wider">
+            NECTA National Exams · Annual Examination Papers · Regional Mocks (Standard 1–7 &amp; Form 1–6)
+          </div>
+          <h1 class="text-2xl sm:text-4xl font-extrabold text-slate-900 tracking-tight leading-tight">
+            Select Class &amp; Subject for <span class="text-blue-600">Examination Past Papers</span>
+          </h1>
+
+          <!-- Fast Debounced Search Bar (Searches Past Papers) -->
+          <div class="relative max-w-2xl mx-auto">
+            <svg class="w-5 h-5 text-slate-400 absolute left-4 top-1/2 -translate-y-1/2 pointer-events-none" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+            <input
+              id="smartSearchInput"
+              type="text"
+              oninput="handleSmartSearch(this.value)"
+              placeholder="Search exam papers e.g. Form 5 Physics Annual, Form 4 Math NECTA, Form 2 Biology..."
+              class="w-full pl-12 pr-24 py-3.5 rounded-2xl bg-white border-2 border-slate-200 shadow-xs text-sm font-medium text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-blue-600"
+            />
+            <div class="absolute right-2.5 top-1/2 -translate-y-1/2 flex items-center gap-1">
+              <button
+                id="clearSearchBtn"
+                onclick="handleSmartSearch('')"
+                class="hidden p-2 text-slate-400 hover:text-slate-600 cursor-pointer"
+                title="Clear search"
+              >
+                ✕
+              </button>
+              <button
+                onclick="startVoiceSearch()"
+                class="p-2 rounded-xl bg-blue-50 text-blue-600 hover:bg-blue-100 transition-colors cursor-pointer"
+                title="Voice Search"
+              >
+                🎤
+              </button>
+            </div>
+          </div>
+
+          <!-- Separate Dedicated Portal Buttons (Clear Separation of Papers, Books, Syllabuses, Quiz & Games) -->
+          <div class="pt-1 flex flex-wrap items-center justify-center gap-2">
+            <button onclick="openAnnualPapersShortcut()" class="px-3.5 py-2 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs flex items-center gap-1.5 shadow-xs cursor-pointer">
+              📋 Annual Exam Papers (<span id="count-annual-top">0</span>)
+            </button>
+            <button onclick="openPage('books')" class="px-3.5 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs flex items-center gap-1.5 shadow-xs cursor-pointer">
+              📘 TIE Books Library (<span id="count-books-top">0</span>)
+            </button>
+            <button onclick="openPage('syllabus')" class="px-3.5 py-2 rounded-xl bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold text-xs flex items-center gap-1.5 shadow-xs cursor-pointer">
+              📜 Official Syllabuses (<span id="count-syllabus-top">0</span>)
+            </button>
+            <button onclick="openPage('quiz')" class="px-3.5 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-xs flex items-center gap-1.5 shadow-xs cursor-pointer">
+              🎯 Daily Solving Quiz Page
+            </button>
+            <button onclick="openPage('games')" class="px-3.5 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-amber-300 font-bold text-xs flex items-center gap-1.5 shadow-xs cursor-pointer">
+              🎮 Interactive Games Page
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- STEP 1: HOME CLASS SELECTION & SEPARATED PORTAL HUB -->
+      <section id="step-1-view" class="py-7">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 space-y-8">
+
+          <!-- SECTION 1: CHOOSE YOUR CLASS LEVEL (FOR EXAMINATION PAST PAPERS) -->
+          <div class="bg-white rounded-2xl border border-slate-200 p-4 sm:p-6 shadow-xs space-y-6">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-100 pb-3.5">
+              <div>
+                <span class="text-[11px] font-black uppercase tracking-wider text-blue-600">
+                  Step 1 of 3 · Examination Past Papers Portal
+                </span>
+                <h2 class="text-lg sm:text-xl font-black text-slate-900">
+                  1. Choose Your Class Level (Past Papers &amp; Annual Exams)
+                </h2>
+              </div>
+              <span class="text-xs text-slate-500 font-medium">
+                Strictly Examination Papers &amp; Marking Schemes (Books are on the TIE Books page)
+              </span>
+            </div>
+
+            <!-- Secondary School (Form 1 - Form 6) -->
+            <div class="space-y-3">
+              <div class="flex items-center justify-between">
+                <h3 class="text-xs font-extrabold uppercase tracking-wider text-slate-600 flex items-center gap-2">
+                  <span class="w-2.5 h-2.5 rounded-full bg-blue-600"></span>
+                  <span>Secondary School (O-Level &amp; A-Level)</span>
+                </h3>
+                <span class="text-[11px] font-semibold text-slate-400">NECTA · Annual · Mock · Pre-NECTA</span>
+              </div>
+              <div id="secondaryClassGrid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-2.5 sm:gap-3"></div>
+            </div>
+
+            <!-- Primary School (Standard 1 - Standard 7) -->
+            <div class="space-y-3 pt-2 border-t border-slate-100">
+              <div class="flex items-center justify-between">
+                <h3 class="text-xs font-extrabold uppercase tracking-wider text-slate-600 flex items-center gap-2">
+                  <span class="w-2.5 h-2.5 rounded-full bg-emerald-600"></span>
+                  <span>Primary School (Shule ya Msingi)</span>
+                </h3>
+                <span class="text-[11px] font-semibold text-slate-400">PSLE · SFNA · Annual · Mock</span>
+              </div>
+              <div id="primaryClassGrid" class="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-7 gap-2.5"></div>
+            </div>
+          </div>
+
+          <!-- SECTION 2: CLEARLY SEPARATED PORTALS (BOOKS, SYLLABUSES, INTERACTIVE GAMES, QUIZ & MOHA AI APP) -->
+          <div class="space-y-3">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1 px-1">
+              <div>
+                <span class="text-[11px] font-black uppercase tracking-wider text-violet-700">
+                  Dedicated Learning Portals
+                </span>
+                <h2 class="text-lg sm:text-xl font-black text-slate-900">
+                  2. TIE Textbooks, Interactive Games, Solving Quiz &amp; Moha AI App
+                </h2>
+              </div>
+              <span class="text-xs text-slate-500 font-medium">
+                Each section has its own dedicated page for clean, fast navigation
+              </span>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <!-- Card 1: Dedicated Interactive Games Page -->
+              <div class="bg-gradient-to-br from-slate-900 via-indigo-950 to-slate-900 text-white rounded-2xl p-5 border border-indigo-800/80 shadow-xs flex flex-col justify-between gap-4">
+                <div class="space-y-2">
+                  <div class="flex items-center justify-between gap-2">
+                    <span class="px-2.5 py-0.5 rounded-md bg-amber-400 text-slate-950 text-[10px] font-black uppercase tracking-wider">
+                      🎮 Dedicated Games Page
+                    </span>
+                    <span class="text-[11px] font-bold text-indigo-200">3 Interactive Modes</span>
+                  </div>
+                  <h3 class="text-base sm:text-lg font-black text-white">
+                    Elimika Play — Interactive Educational Games
+                  </h3>
+                  <p class="text-xs text-slate-300 leading-relaxed">
+                    Play NECTA Treasure Hunt, Escape the Classroom (4-Lock Science &amp; Math Puzzle), and 60-Second Speed STEM Arena on its own dedicated page.
+                  </p>
+                </div>
+                <div class="flex flex-wrap items-center gap-2 pt-1">
+                  <button onclick="openPage('games')" class="px-4 py-2.5 bg-amber-400 hover:bg-amber-300 text-slate-950 font-black text-xs rounded-xl shadow-xs cursor-pointer">
+                    🎮 Open Interactive Games Page →
+                  </button>
+                </div>
+              </div>
+
+              <!-- Card 2: Dedicated Step-by-Step Solving Quiz Page -->
+              <div class="bg-gradient-to-br from-violet-950 via-slate-900 to-blue-950 text-white rounded-2xl p-5 border border-violet-800/80 shadow-xs flex flex-col justify-between gap-4">
+                <div class="space-y-2">
+                  <div class="flex items-center justify-between gap-2">
+                    <span class="px-2.5 py-0.5 rounded-md bg-emerald-400 text-slate-950 text-[10px] font-black uppercase tracking-wider">
+                      🎯 Dedicated Quiz Page
+                    </span>
+                    <span class="text-[11px] font-bold text-violet-200">Instant Worked Solutions</span>
+                  </div>
+                  <h3 class="text-base sm:text-lg font-black text-white">
+                    Daily Step-by-Step Problem Solving Quiz
+                  </h3>
+                  <p class="text-xs text-slate-300 leading-relaxed">
+                    Practice topic-by-topic questions with instant marking and worked solutions on our dedicated Quiz page, or launch 20-Qn AI quizzes in the Moha AI App.
+                  </p>
+                </div>
+                <div class="flex flex-wrap items-center gap-2 pt-1">
+                  <button onclick="openPage('quiz')" class="px-4 py-2.5 bg-emerald-400 hover:bg-emerald-300 text-slate-950 font-black text-xs rounded-xl shadow-xs cursor-pointer">
+                    🎯 Open Solving Quiz Page →
+                  </button>
+                  <button onclick="openMohaAppModal('daily-quiz')" class="px-3.5 py-2.5 bg-white/10 hover:bg-white/20 text-white font-bold text-xs rounded-xl border border-white/15 cursor-pointer">
+                    🤖 20-Qn AI App ↗
+                  </button>
+                </div>
+              </div>
+
+              <!-- Card 3: Dedicated TIE Books & Official Syllabuses Pages -->
+              <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-xs flex flex-col justify-between gap-4">
+                <div class="space-y-2">
+                  <div class="flex items-center justify-between gap-2">
+                    <span class="px-2.5 py-0.5 rounded-md bg-emerald-100 text-emerald-900 text-[10px] font-black uppercase tracking-wider">
+                      📘 Separate Books &amp; Syllabuses
+                    </span>
+                    <span class="text-[11px] font-bold text-slate-500">2023 Revised &amp; Current</span>
+                  </div>
+                  <h3 class="text-base sm:text-lg font-black text-slate-900">
+                    Official TIE Student Textbooks &amp; Syllabuses
+                  </h3>
+                  <p class="text-xs text-slate-600 leading-relaxed">
+                    Browse all TIE Student Textbooks and Official MoEST Syllabuses on their own dedicated pages without mixing them with past examination papers.
+                  </p>
+                </div>
+                <div class="flex flex-wrap items-center gap-2 pt-2 border-t border-slate-100">
+                  <button onclick="openPage('books')" class="px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs rounded-xl cursor-pointer">
+                    📘 Open TIE Books Page →
+                  </button>
+                  <button onclick="openPage('syllabus')" class="px-4 py-2 bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold text-xs rounded-xl cursor-pointer">
+                    📜 Open Syllabuses Page →
+                  </button>
+                </div>
+              </div>
+
+              <!-- Card 4: Moha AI Tutor & Teacher Document Studio (Option to Go to App) -->
+              <div class="bg-white rounded-2xl p-5 border border-violet-200 shadow-xs flex flex-col justify-between gap-4">
+                <div class="space-y-2">
+                  <div class="flex items-center justify-between gap-2">
+                    <span class="px-2.5 py-0.5 rounded-md bg-violet-100 text-violet-900 text-[10px] font-black uppercase tracking-wider">
+                      🤖 Official Moha AI App
+                    </span>
+                    <span class="text-[11px] font-bold text-violet-700">AI Tutor &amp; Teacher Studio</span>
+                  </div>
+                  <h3 class="text-base sm:text-lg font-black text-slate-900">
+                    Moha AI Textbook Tutor &amp; Lesson Plan Studio
+                  </h3>
+                  <p class="text-xs text-slate-600 leading-relaxed">
+                    Need AI reading comprehension on TIE books, step-by-step exam solving, or official Lesson Plans &amp; Schemes of Work? Open the Moha AI App.
+                  </p>
+                </div>
+                <div class="flex flex-wrap items-center justify-between gap-2 pt-2 border-t border-slate-100">
+                  <span class="text-[11px] font-bold text-violet-700">Full AI Workspace</span>
+                  <button onclick="openMohaAppModal('moha')" class="px-4 py-2 bg-violet-600 hover:bg-violet-700 text-white font-bold text-xs rounded-xl cursor-pointer">
+                    🚀 Go to Moha AI App ↗
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- STEP 2: CHOOSE SUBJECT FOR SELECTED CLASS (PAST PAPERS ONLY) -->
+      <section id="step-2-view" class="hidden py-7 fade-in">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 space-y-5">
+          <div class="flex flex-wrap items-center justify-between gap-3 bg-white p-4 sm:p-5 rounded-2xl border border-slate-200 shadow-xs">
+            <div class="flex items-center gap-3">
+              <button onclick="handleGoBack()" class="px-3.5 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold text-xs flex items-center gap-1.5 cursor-pointer">
+                ← Back
+              </button>
+              <div>
+                <div class="text-[11px] font-bold uppercase tracking-wider text-blue-600">Step 2 of 3 · Select Subject (Past Papers)</div>
+                <h2 id="step2ClassTitle" class="text-lg sm:text-xl font-black text-slate-900">Form 4 Subjects</h2>
+              </div>
+            </div>
+            <div class="flex flex-wrap items-center gap-2">
+              <button onclick="openClassAnnualPapers(state.selectedClass)" class="px-3 py-2 rounded-xl bg-blue-50 hover:bg-blue-100 text-blue-900 border border-blue-200 font-bold text-xs cursor-pointer">
+                📋 Annual Exam Papers
+              </button>
+              <button onclick="openPage('books', state.selectedClass)" class="px-3 py-2 rounded-xl bg-emerald-50 hover:bg-emerald-100 text-emerald-900 border border-emerald-200 font-bold text-xs cursor-pointer">
+                📘 Open TIE Books Page →
+              </button>
+              <button onclick="openMohaAppModal('moha', state.selectedClass)" class="px-3.5 py-2 rounded-xl bg-violet-600 hover:bg-violet-700 text-white font-bold text-xs cursor-pointer">
+                🤖 Moha AI App ↗
+              </button>
+            </div>
+          </div>
+
+          <div id="subjectGrid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3"></div>
+        </div>
+      </section>
+
+      <!-- STEP 3: EXAMINATION PAST PAPERS LIST (STRICTLY PAPERS ONLY — NO BOOKS MIXED) -->
+      <section id="step-3-view" class="hidden py-7 fade-in">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 space-y-5">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-white p-4 sm:p-5 rounded-2xl border border-slate-200 shadow-xs">
+            <div class="flex items-center gap-3">
+              <button onclick="handleGoBack()" class="px-3.5 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold text-xs flex items-center gap-1.5 cursor-pointer">
+                ← Back
+              </button>
+              <div>
+                <div id="step3Breadcrumb" class="text-[11px] font-bold uppercase tracking-wider text-blue-600">Form 4 · Basic Mathematics</div>
+                <h2 id="step3Title" class="text-lg sm:text-xl font-black text-slate-900">Examination Past Papers &amp; Marking Schemes</h2>
+              </div>
+            </div>
+            <div class="flex flex-wrap items-center gap-2">
+              <button onclick="openPage('books', state.selectedClass, state.selectedSubject)" class="px-3 py-2 rounded-xl bg-emerald-50 hover:bg-emerald-100 text-emerald-900 border border-emerald-300 font-bold text-xs cursor-pointer">
+                📘 View TIE Book on Books Page →
+              </button>
+              <button onclick="openPage('quiz', state.selectedClass, state.selectedSubject)" class="px-3 py-2 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 font-bold text-xs cursor-pointer">
+                🎯 Subject Quiz
+              </button>
+              <button onclick="openMohaAppModal('moha', state.selectedClass, state.selectedSubject)" class="px-3.5 py-2 rounded-xl bg-violet-600 hover:bg-violet-700 text-white font-bold text-xs cursor-pointer">
+                🤖 Moha AI App ↗
+              </button>
+            </div>
+          </div>
+
+          <!-- Exam Category Filter Buttons (ALL, NECTA, Annual, Mock, Pre-NECTA) & Year Filter -->
+          <div class="flex flex-wrap items-center justify-between gap-3 bg-white p-3.5 rounded-2xl border border-slate-200">
+            <div id="categoryFilterBar" class="flex flex-wrap items-center gap-1.5"></div>
+            <div class="flex items-center gap-2 text-xs">
+              <label class="font-bold text-slate-600">Year:</label>
+              <select id="yearFilterSelect" onchange="setYearFilter(this.value)" class="px-3 py-1.5 rounded-xl border border-slate-300 font-bold bg-white text-slate-900">
+                <option value="ALL">All Years</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Strictly Examination Past Papers Grid -->
+          <div id="papersGrid" class="grid grid-cols-1 md:grid-cols-2 gap-3.5"></div>
+        </div>
+      </section>
+    </div>
+
+    <!-- =========================================================================
+         PAGE 2: DEDICATED TIE BOOKS LIBRARY (STRICTLY BOOKS ONLY — NO PAPERS MIXED)
+         ========================================================================= -->
+    <div id="page-books" class="hidden py-7 fade-in">
+      <div class="max-w-5xl mx-auto px-4 sm:px-6 space-y-5">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-emerald-950 text-white p-5 rounded-2xl shadow-xs">
+          <div class="space-y-1">
+            <span class="px-2.5 py-0.5 rounded-md bg-emerald-500/30 border border-emerald-400/30 text-emerald-200 text-[11px] font-bold uppercase">
+              📘 Official TIE Student Textbooks Only
+            </span>
+            <h1 class="text-xl sm:text-2xl font-black">TIE Textbooks Library (Standard 1–7 &amp; Form 1–6)</h1>
+            <p class="text-xs text-emerald-100">Dedicated textbook library — preview online, download PDF, or open in the Moha AI App.</p>
+          </div>
+          <div class="flex items-center gap-2 shrink-0">
+            <button onclick="openMohaAppModal('moha')" class="px-3.5 py-2 bg-violet-600 hover:bg-violet-500 text-white font-bold text-xs rounded-xl cursor-pointer">
+              🤖 Read with Moha AI App ↗
+            </button>
+            <button onclick="handleGoBack()" class="px-3.5 py-2 bg-white/15 hover:bg-white/25 text-white font-bold text-xs rounded-xl cursor-pointer">
+              ← Back
+            </button>
+          </div>
+        </div>
+
+        <!-- Class & Search Filter for Books -->
+        <div class="bg-white p-4 rounded-2xl border border-slate-200 flex flex-col sm:flex-row gap-3 items-stretch sm:items-center justify-between">
+          <div class="flex flex-wrap items-center gap-1.5" id="booksClassTabs"></div>
+          <input
+            id="booksSearchInput"
+            type="text"
+            oninput="renderBooksPage()"
+            placeholder="Search textbook by subject or class..."
+            class="px-3.5 py-2 rounded-xl border border-slate-300 text-xs font-semibold bg-white sm:w-64"
+          />
+        </div>
+
+        <div id="booksGrid" class="grid grid-cols-1 md:grid-cols-2 gap-3.5"></div>
+      </div>
+    </div>
+
+    <!-- =========================================================================
+         PAGE 3: DEDICATED OFFICIAL SYLLABUSES PAGE (STRICTLY SYLLABUSES ONLY)
+         ========================================================================= -->
+    <div id="page-syllabus" class="hidden py-7 fade-in">
+      <div class="max-w-5xl mx-auto px-4 sm:px-6 space-y-5">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-amber-950 text-white p-5 rounded-2xl shadow-xs">
+          <div class="space-y-1">
+            <span class="px-2.5 py-0.5 rounded-md bg-amber-400 text-slate-950 text-[11px] font-black uppercase">
+              📜 Official MoEST / TIE Syllabuses (2023 Revised &amp; Current)
+            </span>
+            <h1 class="text-xl sm:text-2xl font-black">Official Tanzania Curriculum Syllabuses</h1>
+            <p class="text-xs text-amber-200">Dedicated syllabus portal — preview and download official TIE Syllabuses for Primary &amp; Secondary schools.</p>
+          </div>
+          <div class="flex items-center gap-2 shrink-0">
+            <button onclick="openMohaAppModal('studio')" class="px-3.5 py-2 bg-amber-400 hover:bg-amber-300 text-slate-950 font-black text-xs rounded-xl cursor-pointer">
+              📋 Teacher Studio in App ↗
+            </button>
+            <button onclick="handleGoBack()" class="px-3.5 py-2 bg-white/15 hover:bg-white/25 text-white font-bold text-xs rounded-xl cursor-pointer">
+              ← Back
+            </button>
+          </div>
+        </div>
+
+        <div class="bg-white p-4 rounded-2xl border border-slate-200 flex flex-col sm:flex-row gap-3 items-stretch sm:items-center justify-between">
+          <div class="text-xs font-bold text-slate-700">Filter Official Syllabuses:</div>
+          <input
+            id="syllabusSearchInput"
+            type="text"
+            oninput="renderSyllabusPage()"
+            placeholder="Search syllabus e.g. Basic Mathematics, Physics, Historia..."
+            class="px-3.5 py-2 rounded-xl border border-slate-300 text-xs font-semibold bg-white sm:w-80"
+          />
+        </div>
+
+        <div id="syllabusGrid" class="grid grid-cols-1 md:grid-cols-2 gap-3.5"></div>
+      </div>
+    </div>
+
+    <!-- =========================================================================
+         PAGE 4: DEDICATED SOLVING QUIZ PAGE (INTERACTIVE STEP-BY-STEP QUIZ)
+         ========================================================================= -->
+    <div id="page-quiz" class="hidden py-7 fade-in">
+      <div class="max-w-5xl mx-auto px-4 sm:px-6 space-y-5">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-gradient-to-r from-violet-950 via-slate-900 to-blue-950 text-white p-5 rounded-2xl shadow-xs">
+          <div class="space-y-1">
+            <div class="flex items-center gap-2">
+              <span class="px-2.5 py-0.5 rounded-md bg-amber-400 text-slate-950 text-[11px] font-black uppercase">
+                🎯 Dedicated Solving Quiz Page
+              </span>
+              <span class="text-xs font-bold text-violet-200">TIE Textbooks &amp; NECTA Past Papers</span>
+            </div>
+            <h1 class="text-xl sm:text-2xl font-black">Step-by-Step Problem Solving Quiz</h1>
+            <p class="text-xs text-slate-300">Select Class &amp; Subject below to solve interactive questions with instant marking and worked explanations.</p>
+          </div>
+          <div class="flex flex-wrap items-center gap-2 shrink-0">
+            <button onclick="openMohaAppModal('daily-quiz', state.quizClass, state.quizSubject)" class="px-3.5 py-2 bg-violet-600 hover:bg-violet-500 text-white font-bold text-xs rounded-xl cursor-pointer">
+              🤖 20-Qn AI Generator in App ↗
+            </button>
+            <button onclick="handleGoBack()" class="px-3.5 py-2 bg-white/15 hover:bg-white/25 text-white font-bold text-xs rounded-xl cursor-pointer">
+              ← Back
+            </button>
+          </div>
+        </div>
+
+        <!-- Quiz Controls & Live Score -->
+        <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-xs flex flex-wrap items-center justify-between gap-3 text-xs">
+          <div class="flex flex-wrap items-center gap-2.5">
+            <div>
+              <label class="font-bold text-slate-600 block mb-1">Class Level</label>
+              <select id="quizClassSelect" onchange="changeQuizFilter(this.value, state.quizSubject)" class="px-3 py-2 rounded-xl border border-slate-300 font-bold bg-white text-slate-900">
+                <option value="Form 1">Form 1</option>
+                <option value="Form 2">Form 2</option>
+                <option value="Form 3">Form 3</option>
+                <option value="Form 4" selected>Form 4</option>
+                <option value="Form 5">Form 5</option>
+                <option value="Form 6">Form 6</option>
+              </select>
+            </div>
+            <div>
+              <label class="font-bold text-slate-600 block mb-1">Subject</label>
+              <select id="quizSubjectSelect" onchange="changeQuizFilter(state.quizClass, this.value)" class="px-3 py-2 rounded-xl border border-slate-300 font-bold bg-white text-slate-900">
+                <option value="Basic Mathematics">Basic Mathematics</option>
+                <option value="Physics">Physics</option>
+                <option value="Chemistry">Chemistry</option>
+                <option value="Biology">Biology</option>
+                <option value="Geography">Geography</option>
+                <option value="History">History</option>
+                <option value="English Language">English Language</option>
+                <option value="Kiswahili">Kiswahili</option>
+                <option value="Civics">Civics</option>
+              </select>
+            </div>
+            <div class="pt-5">
+              <button onclick="resetQuizSession()" class="px-3.5 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-bold cursor-pointer">
+                🔄 New Question Set
+              </button>
+            </div>
+          </div>
+
+          <div id="quizScoreBadge" class="px-4 py-2.5 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-900 font-black text-xs">
+            Score: 0 / 0 (0%)
+          </div>
+        </div>
+
+        <!-- Quiz Questions List -->
+        <div id="quizQuestionsContainer" class="space-y-4"></div>
+      </div>
+    </div>
+
+    <!-- =========================================================================
+         PAGE 5: DEDICATED INTERACTIVE GAMES PAGE (ELIMIKA PLAY HUB)
+         ========================================================================= -->
+    <div id="page-games" class="hidden py-7 fade-in">
+      <div class="max-w-5xl mx-auto px-4 sm:px-6 space-y-5">
+        <!-- Games Header -->
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-gradient-to-r from-slate-900 via-indigo-950 to-slate-900 text-white p-5 rounded-2xl shadow-xs">
+          <div class="space-y-1">
+            <div class="flex items-center gap-2">
+              <span class="px-2.5 py-0.5 rounded-md bg-amber-400 text-slate-950 text-[11px] font-black uppercase">
+                🎮 Elimika Play Arcade
+              </span>
+              <span class="text-xs font-bold text-indigo-200">Dedicated Interactive Games Page</span>
+            </div>
+            <h1 class="text-xl sm:text-2xl font-black">Interactive NECTA &amp; STEM Revision Games</h1>
+            <p class="text-xs text-slate-300">Choose any game mode below to play immediately on this page, or open the 3D AI Arena in the Moha AI App.</p>
+          </div>
+          <div class="flex flex-wrap items-center gap-2 shrink-0">
+            <button onclick="openMohaAppModal('play')" class="px-3.5 py-2 bg-violet-600 hover:bg-violet-500 text-white font-bold text-xs rounded-xl cursor-pointer">
+              🚀 Full AI Games in App ↗
+            </button>
+            <button onclick="handleGoBack()" class="px-3.5 py-2 bg-white/15 hover:bg-white/25 text-white font-bold text-xs rounded-xl cursor-pointer">
+              ← Back
+            </button>
+          </div>
+        </div>
+
+        <!-- Game Mode Switcher Tabs -->
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+          <button id="gameTab-treasure" onclick="switchGameMode('treasure')" class="p-4 rounded-2xl border-2 text-left transition-all cursor-pointer bg-amber-50 border-amber-400">
+            <div class="flex items-center justify-between">
+              <span class="text-lg">🏴‍☠️</span>
+              <span class="px-2 py-0.5 rounded bg-amber-400 text-slate-950 font-black text-[10px] uppercase">Adventure</span>
+            </div>
+            <div class="font-black text-sm text-slate-900 mt-1">1. NECTA Treasure Hunt</div>
+            <p class="text-xs text-slate-600 mt-0.5">Unlock 5 islands (Zanzibar to Kilimanjaro) by solving NECTA problems.</p>
+          </button>
+
+          <button id="gameTab-escape" onclick="switchGameMode('escape')" class="p-4 rounded-2xl border-2 text-left transition-all cursor-pointer bg-white border-slate-200 hover:border-indigo-300">
+            <div class="flex items-center justify-between">
+              <span class="text-lg">🔐</span>
+              <span class="px-2 py-0.5 rounded bg-indigo-100 text-indigo-900 font-black text-[10px] uppercase">4-Digit Lock</span>
+            </div>
+            <div class="font-black text-sm text-slate-900 mt-1">2. Escape the Classroom</div>
+            <p class="text-xs text-slate-600 mt-0.5">Crack 4 Science &amp; Math locks to reveal the 4-digit laboratory passcode.</p>
+          </button>
+
+          <button id="gameTab-arena" onclick="switchGameMode('arena')" class="p-4 rounded-2xl border-2 text-left transition-all cursor-pointer bg-white border-slate-200 hover:border-emerald-300">
+            <div class="flex items-center justify-between">
+              <span class="text-lg">⚡</span>
+              <span class="px-2 py-0.5 rounded bg-emerald-100 text-emerald-900 font-black text-[10px] uppercase">60s Speed</span>
+            </div>
+            <div class="font-black text-sm text-slate-900 mt-1">3. Speed STEM Arena</div>
+            <p class="text-xs text-slate-600 mt-0.5">Race the clock with streak multipliers and beat your personal best score.</p>
+          </button>
+        </div>
+
+        <!-- Active Game Stage Container -->
+        <div id="gameStageContainer" class="bg-white rounded-2xl border border-slate-200 p-5 sm:p-6 shadow-xs"></div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- STICKY MOBILE BACK BAR -->
+  <div id="mobileBackBar" class="hidden fixed bottom-0 inset-x-0 z-30 bg-white/95 backdrop-blur-md border-t border-slate-200 px-4 py-2.5 flex items-center justify-between gap-3 sm:hidden">
+    <button onclick="handleGoBack()" class="flex-1 py-2.5 px-3 bg-slate-100 active:bg-slate-200 text-slate-800 font-bold text-xs rounded-xl flex items-center justify-center gap-1.5">
+      ← Go Back
+    </button>
+    <button onclick="resetToHome()" class="flex-1 py-2.5 px-3 bg-blue-600 active:bg-blue-700 text-white font-bold text-xs rounded-xl flex items-center justify-center gap-1.5">
+      🏠 Home
+    </button>
+  </div>
+
+  <!-- DOCUMENT PDF PREVIEW MODAL -->
+  <div id="viewerModal" class="hidden fixed inset-0 z-50 bg-slate-900/75 backdrop-blur-sm flex items-center justify-center p-2 sm:p-6">
+    <div class="bg-white rounded-2xl shadow-2xl max-w-4xl w-full h-[90vh] flex flex-col overflow-hidden border border-slate-200">
+      <div class="px-4 py-3 bg-slate-50 border-b border-slate-200 flex items-center justify-between gap-2">
+        <div class="min-w-0">
+          <div id="viewerMeta" class="text-[11px] font-bold text-blue-700">NECTA · 2025</div>
+          <h3 id="viewerTitle" class="text-sm sm:text-base font-bold text-slate-900 truncate">Document Preview</h3>
+        </div>
+        <div class="flex items-center gap-1.5 shrink-0">
+          <div id="viewerToggleBtns" class="hidden items-center bg-slate-200 p-0.5 rounded-xl">
+            <button id="btnViewPaper" onclick="switchViewerType('paper')" class="px-2.5 py-1 text-xs font-bold rounded-lg bg-white text-slate-900 cursor-pointer">Questions</button>
+            <button id="btnViewAnswers" onclick="switchViewerType('answers')" class="px-2.5 py-1 text-xs font-bold rounded-lg text-slate-600 cursor-pointer">Answers</button>
+          </div>
+          <button onclick="closeViewerModal()" class="px-3 py-1.5 bg-rose-600 hover:bg-rose-700 text-white font-bold text-xs rounded-xl cursor-pointer">
+            Close ✕
+          </button>
+        </div>
+      </div>
+
+      <div class="flex-grow bg-slate-100 relative">
+        <iframe id="viewerIframe" class="w-full h-full border-0" src="about:blank" title="PDF Preview"></iframe>
+      </div>
+
+      <div class="px-4 py-3 bg-white border-t border-slate-200 flex flex-wrap items-center justify-between gap-2 text-xs">
+        <div class="flex flex-wrap items-center gap-1.5">
+          <button id="viewerDownloadBtn" class="px-3.5 py-2 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl cursor-pointer">
+            ⬇ Direct Download PDF
+          </button>
+          <button id="viewerMohaBtn" class="px-3.5 py-2 bg-violet-600 hover:bg-violet-700 text-white font-bold rounded-xl cursor-pointer">
+            🤖 Solve &amp; Explain in Moha AI App ↗
+          </button>
+        </div>
+        <button onclick="closeViewerModal()" class="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold rounded-xl cursor-pointer">
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MOHA AI APP LAUNCH MODAL (OPTION TO GO TO FULL MOHA AI APP) -->
+  <div id="mohaAppModal" class="hidden fixed inset-0 z-50 bg-slate-900/75 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="bg-white rounded-2xl shadow-2xl max-w-lg w-full overflow-hidden border border-slate-200">
+      <div class="bg-gradient-to-r from-violet-950 via-indigo-950 to-slate-900 text-white p-5">
+        <div class="flex items-center justify-between">
+          <span class="px-2.5 py-0.5 rounded-md bg-amber-400 text-slate-950 text-[10px] font-black uppercase tracking-wider">
+            🤖 Official Moha AI App
+          </span>
+          <button onclick="closeMohaAppModal()" class="text-slate-300 hover:text-white font-bold text-sm cursor-pointer">✕</button>
+        </div>
+        <h3 class="text-lg sm:text-xl font-black mt-2">Open in the Interactive Moha AI App</h3>
+        <p id="mohaModalSubtitle" class="text-xs text-indigo-200 mt-1">
+          Access AI Textbook Reading Comprehension, Step-by-Step NECTA Exam Solutions, 20-Question AI Quizzes, and Teacher Document Studio.
+        </p>
+      </div>
+
+      <div class="p-5 space-y-4 text-xs">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+          <div class="p-3 rounded-xl bg-violet-50 border border-violet-200">
+            <div class="font-black text-violet-950">📘 TIE Book Comprehension</div>
+            <p class="text-slate-600 mt-0.5">Reads pinned TIE textbooks &amp; past papers to answer any student question.</p>
+          </div>
+          <div class="p-3 rounded-xl bg-emerald-50 border border-emerald-200">
+            <div class="font-black text-emerald-950">🎯 20-Question AI Quiz</div>
+            <p class="text-slate-600 mt-0.5">Topic &amp; Sub-Topic quizzes with worked step-by-step solutions.</p>
+          </div>
+          <div class="p-3 rounded-xl bg-blue-50 border border-blue-200">
+            <div class="font-black text-blue-950">📋 Teacher Document Studio</div>
+            <p class="text-slate-600 mt-0.5">Generate Lesson Plans, PO-RALG Schemes of Work, Notes &amp; Marking Schemes.</p>
+          </div>
+          <div class="p-3 rounded-xl bg-teal-50 border border-teal-200">
+            <div class="font-black text-teal-950">🧪 Virtual Science Lab</div>
+            <p class="text-slate-600 mt-0.5">Interactive NECTA Paper 2 Titration, Qualitative Analysis &amp; Physics Labs.</p>
+          </div>
+        </div>
+
+        <div class="flex flex-col sm:flex-row items-stretch sm:items-center justify-end gap-2 pt-2 border-t border-slate-100">
+          <button onclick="closeMohaAppModal()" class="px-4 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold cursor-pointer">
+            Stay on Website
+          </button>
+          <a
+            id="mohaAppLaunchLink"
+            href="https://ais-pre-utxrgt5piro4x4xpbnh75h-142058246407.europe-west2.run.app/#moha"
+            target="_blank"
+            rel="noopener noreferrer"
+            onclick="closeMohaAppModal()"
+            class="px-5 py-2.5 rounded-xl bg-violet-600 hover:bg-violet-700 text-white font-black text-center shadow-xs"
+          >
+            🚀 Go to Moha AI App Now ↗
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="bg-slate-900 text-slate-400 py-8 border-t border-slate-800 text-xs text-center mt-auto">
+    <div class="max-w-5xl mx-auto px-4 space-y-2">
+      <div class="font-extrabold text-white text-sm">ELIMIKA TANZANIA</div>
+      <p>Past Papers, Annual Exams, Marking Schemes, TIE Textbooks, Syllabuses, Interactive Games &amp; Moha AI.</p>
+      <div class="pt-1 flex flex-wrap justify-center gap-4">
+        <button onclick="resetToHome()" class="text-slate-300 hover:text-white font-bold cursor-pointer">Past Papers</button>
+        <button onclick="openPage('books')" class="text-slate-300 hover:text-white font-bold cursor-pointer">TIE Books</button>
+        <button onclick="openPage('syllabus')" class="text-slate-300 hover:text-white font-bold cursor-pointer">Syllabuses</button>
+        <button onclick="openPage('quiz')" class="text-slate-300 hover:text-white font-bold cursor-pointer">Solving Quiz</button>
+        <button onclick="openPage('games')" class="text-amber-400 hover:text-amber-300 font-bold cursor-pointer">Interactive Games</button>
+        <a href="https://ais-pre-utxrgt5piro4x4xpbnh75h-142058246407.europe-west2.run.app/#moha" target="_blank" rel="noopener noreferrer" class="text-violet-400 hover:text-violet-300 font-bold underline">
+          Moha AI App ↗
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ==================== FAST, RESPONSIVE APPLICATION ENGINE ==================== -->
+  <script>
+    const CONFIG = {
+      SHEET_ID: '1-7C_G-VAC2ICxuT3XwADzAluRoDvQyd04yS4BtSvXxM',
+      MOHA_APP_URL: 'https://ais-pre-utxrgt5piro4x4xpbnh75h-142058246407.europe-west2.run.app',
+      CACHE_KEY: 'elimika_web_sheet_cache_v3'
+    };
+
+    const TIE_SUBJECTS = {
+      'Standard 1': ['Kusoma', 'Kuandika', 'Kuhesabu', 'Afya na Mazingira', 'Michezo na Sanaa'],
+      'Standard 2': ['Kusoma', 'Kuandika', 'Kuhesabu', 'Afya na Mazingira', 'Michezo na Sanaa'],
+      'Standard 3': ['Kiswahili', 'English Language', 'Hisabati (Mathematics)', 'Sayansi (Science)', 'Jiografia na Mazingira', 'Historia ya Tanzania na Maadili', 'Sanaa na Michezo'],
+      'Standard 4': ['Kiswahili', 'English Language', 'Hisabati (Mathematics)', 'Sayansi (Science)', 'Jiografia na Mazingira', 'Historia ya Tanzania na Maadili', 'Sanaa na Michezo'],
+      'Standard 5': ['Kiswahili', 'English Language', 'Hisabati (Mathematics)', 'Sayansi na Teknolojia', 'Maarifa ya Jamii', 'Uraia na Maadili', 'Stadi za Kazi'],
+      'Standard 6': ['Kiswahili', 'English Language', 'Hisabati (Mathematics)', 'Sayansi na Teknolojia', 'Maarifa ya Jamii', 'Uraia na Maadili', 'Stadi za Kazi'],
+      'Standard 7': ['Kiswahili', 'English Language', 'Hisabati (Mathematics)', 'Sayansi na Teknolojia', 'Maarifa ya Jamii', 'Uraia na Maadili', 'Stadi za Kazi'],
+      'Form 1': ['Basic Mathematics', 'Additional Mathematics', 'Physics', 'Chemistry', 'Biology', 'Geography', 'History', 'Historia ya Tanzania na Maadili', 'English Language', 'Kiswahili', 'Civics', 'Business Studies', 'Book-Keeping', 'Commerce', 'Computer Science', 'Agriculture', 'Home Economics'],
+      'Form 2': ['Basic Mathematics', 'Additional Mathematics', 'Physics', 'Chemistry', 'Biology', 'Geography', 'History', 'Historia ya Tanzania na Maadili', 'English Language', 'Kiswahili', 'Civics', 'Business Studies', 'Book-Keeping', 'Commerce', 'Computer Science', 'Agriculture', 'Home Economics'],
+      'Form 3': ['Basic Mathematics', 'Additional Mathematics', 'Physics', 'Chemistry', 'Biology', 'Geography', 'History', 'Historia ya Tanzania na Maadili', 'English Language', 'Kiswahili', 'Civics', 'Business Studies', 'Book-Keeping', 'Commerce', 'Computer Science', 'Agriculture', 'Home Economics', 'Literature in English'],
+      'Form 4': ['Basic Mathematics', 'Additional Mathematics', 'Physics', 'Chemistry', 'Biology', 'Geography', 'History', 'Historia ya Tanzania na Maadili', 'English Language', 'Kiswahili', 'Civics', 'Business Studies', 'Book-Keeping', 'Commerce', 'Computer Science', 'Agriculture', 'Home Economics', 'Literature in English'],
+      'Form 5': ['Advanced Mathematics', 'Basic Applied Mathematics (BAM)', 'Physics', 'Chemistry', 'Biology', 'Geography', 'History', 'Historia ya Tanzania na Maadili', 'Economics', 'Accountancy', 'Commerce', 'General Studies', 'Academic Communication', 'Computer Science', 'English Language', 'Kiswahili', 'French'],
+      'Form 6': ['Advanced Mathematics', 'Basic Applied Mathematics (BAM)', 'Physics', 'Chemistry', 'Biology', 'Geography', 'History', 'Historia ya Tanzania na Maadili', 'Economics', 'Accountancy', 'Commerce', 'General Studies', 'Academic Communication', 'Computer Science', 'English Language', 'Kiswahili', 'French']
+    };
+
+    const BUILTIN_RESOURCES = [
+      // Past Papers — NECTA & Annual Examination Papers
+      { id: 'p-f2-math-25', title: 'Form 2 Basic Mathematics FTNA 2025', form: 'Form 2', subject: 'Basic Mathematics', year: '2025', category: 'NECTA', paperUrl: 'https://drive.google.com/file/d/1YzJrJhluBVSPALrz3iZLgVxGLFGTlqB5/view?usp=drive_link', answersUrl: 'https://drive.google.com/file/d/1hblqzTn6CQcYOOt-AaY5Mcy26SseVoDA/view?usp=drive_link', isBook: false, isSyllabus: false },
+      { id: 'p-f2-phy-25', title: 'Form 2 Physics FTNA 2025', form: 'Form 2', subject: 'Physics', year: '2025', category: 'NECTA', paperUrl: 'https://drive.google.com/file/d/1Ei2yObZZOif_hXQRL7gWrbIcGn73uYej/view?usp=drive_link', answersUrl: 'https://drive.google.com/file/d/1mFdYALMNOSpC6wg_AdKCToj2W8PrrxMi/view?usp=drive_link', isBook: false, isSyllabus: false },
+      { id: 'p-f2-cs-25', title: 'Form 2 Computer Science (ICS) FTNA 2025', form: 'Form 2', subject: 'Computer Science', year: '2025', category: 'NECTA', paperUrl: 'https://drive.google.com/file/d/1hI9eeVqPWcsOzZyUjp2Mt3v8q4V5091-/view?usp=drive_link', answersUrl: 'https://drive.google.com/file/d/101A9Z5XUWaKdvp4jetUyvV6NBqEzy-I-/view?usp=drive_link', isBook: false, isSyllabus: false },
+      { id: 'p-f2-kis-25', title: 'Form 2 Kiswahili FTNA 2025', form: 'Form 2', subject: 'Kiswahili', year: '2025', category: 'NECTA', paperUrl: 'https://drive.google.com/file/d/1Os_JqflqbuYpcVvM_0gnt1-iSaIE82W8/view?usp=drive_link', answersUrl: 'https://drive.google.com/file/d/1y6GTyihS7yx-PO3ZemramFhJLx8BOQez/view?usp=drive_link', isBook: false, isSyllabus: false },
+      { id: 'p-f5-advmath-ann', title: 'Form 5 Advanced Mathematics Annual Exam', form: 'Form 5', subject: 'Advanced Mathematics', year: '2025', category: 'Annual', paperUrl: 'https://drive.google.com/file/d/19KfNjMT1n7tCIOlXxZNRzmTnIsOj3-BZ/view?usp=drivesdk', answersUrl: 'https://drive.google.com/file/d/1Nt_iSLvXBR3oBP2hRHbS52YVriaYOgb7/view?usp=drivesdk', isBook: false, isSyllabus: false },
+      { id: 'p-f5-geo-ann', title: 'Form 5 Geography Annual Exam', form: 'Form 5', subject: 'Geography', year: '2025', category: 'Annual', paperUrl: 'https://drive.google.com/file/d/1hx0UzMe_DFeXc32_UxqWeatWgJjievcj/view?usp=drivesdk', answersUrl: 'https://drive.google.com/file/d/1_FYCrhumZcJtE-Wz8be1syEazVYxKqsz/view?usp=drivesdk', isBook: false, isSyllabus: false },
+      { id: 'p-f5-bio-ann', title: 'Form 5 Biology 01 Annual Exam', form: 'Form 5', subject: 'Biology', year: '2025', category: 'Annual', paperUrl: 'https://drive.google.com/file/d/19799EnuWQnPnzFHrbh9vyPDAZDGbD0cQ/view?usp=drivesdk', answersUrl: 'https://drive.google.com/file/d/1HVqSCPNjXc-4R3lgOaS9CxcrziUundMC/view?usp=drivesdk', isBook: false, isSyllabus: false },
+      { id: 'p-f5-che-ann', title: 'Form 5 Chemistry 01 Annual Exam', form: 'Form 5', subject: 'Chemistry', year: '2025', category: 'Annual', paperUrl: 'https://drive.google.com/file/d/1KghlsGi8rzXjYSVym6BlCs4trbaJp3oR/view?usp=drivesdk', answersUrl: 'https://drive.google.com/file/d/15HHMpQ8v4mdAmVVVzCz-E5ZfEfxl3hQ_/view?usp=drivesdk', isBook: false, isSyllabus: false },
+      { id: 'p-f5-bam-ann', title: 'Form 5 Basic Applied Mathematics (BAM) Annual Exam', form: 'Form 5', subject: 'Basic Applied Mathematics (BAM)', year: '2025', category: 'Annual', paperUrl: 'https://drive.google.com/file/d/1d0v2eXneK1XvR32ErhsmBBkIEqrcOIq0/view?usp=drivesdk', answersUrl: 'https://drive.google.com/file/d/12QQBT3jLhvwQOfcucp8usAGK-OlYtEq6/view?usp=drivesdk', isBook: false, isSyllabus: false },
+      { id: 'p-f5-cs-ann', title: 'Form 5 Computer Science 01 Annual Exam', form: 'Form 5', subject: 'Computer Science', year: '2025', category: 'Annual', paperUrl: 'https://drive.google.com/file/d/1sd6tKBclY_LFJcgrFLNMbWwABafY6cin/view?usp=drivesdk', answersUrl: 'https://drive.google.com/file/d/1q5l13a0dWJMRi18uZJasGDgU1zZVkqHr/view?usp=drivesdk', isBook: false, isSyllabus: false },
+      { id: 'p-f5-phy-ann', title: 'Form 5 Physics 01 Annual Exam', form: 'Form 5', subject: 'Physics', year: '2025', category: 'Annual', paperUrl: 'https://drive.google.com/file/d/1SPbWqo9dil1qIux1TzJMDj-y6mXNjsTT/view?usp=drivesdk', answersUrl: 'https://drive.google.com/file/d/1co_2vhPQnGE0EbZzdYLcIKoJG5ghDYXS/view?usp=drivesdk', isBook: false, isSyllabus: false },
+      { id: 'p-f5-ac-ann', title: 'Form 5 Academic Communication Annual Exam', form: 'Form 5', subject: 'Academic Communication', year: '2025', category: 'Annual', paperUrl: 'https://drive.google.com/file/d/1C13dOa4NCyn5D7KN7c-H3vbhNA13ZX1y/view?usp=drivesdk', answersUrl: 'https://drive.google.com/file/d/1r_X9-IvoK9kpjTw4e6hjNQM9WzK_TN5e/view?usp=drivesdk', isBook: false, isSyllabus: false },
+      { id: 'p-f5-eco-ann', title: 'Form 5 Economics 01 Annual Exam', form: 'Form 5', subject: 'Economics', year: '2025', category: 'Annual', paperUrl: 'https://drive.google.com/file/d/1C_qf5-Or4OTbT49c-lAemc-Ptp-D0bMR/view?usp=drivesdk', answersUrl: 'https://drive.google.com/file/d/1Ibg_jQJZ3yL7yQqrSkdeN5QpbQ2rSrmD/view?usp=drivesdk', isBook: false, isSyllabus: false },
+      { id: 'p-f5-eng-ann', title: 'Form 5 English Language Annual Exam', form: 'Form 5', subject: 'English Language', year: '2025', category: 'Annual', paperUrl: 'https://drive.google.com/file/d/1DIdNSCmsLIBMLHgtk3xXnNzZGVWkSgk1/view?usp=drivesdk', answersUrl: 'https://drive.google.com/file/d/12VFnsJYrnm_nrkfDt8l0xBrflSTyDfqH/view?usp=drivesdk', isBook: false, isSyllabus: false },
+      { id: 'p-f5-htm-ann', title: 'Form 5 Historia ya Tanzania na Maadili Annual Exam', form: 'Form 5', subject: 'Historia ya Tanzania na Maadili', year: '2025', category: 'Annual', paperUrl: 'https://drive.google.com/file/d/1o_B8oNIzvCs5zV9xu4dZdNKErOdHo_wZ/view?usp=drivesdk', answersUrl: 'https://drive.google.com/file/d/1aEFcxQO8caXquMB2ZriROjmVYyq5UJll/view?usp=drivesdk', isBook: false, isSyllabus: false },
+      { id: 'p-f5-his-ann', title: 'Form 5 History 01 Annual Exam', form: 'Form 5', subject: 'History', year: '2025', category: 'Annual', paperUrl: 'https://drive.google.com/file/d/1vxhlBBcVk5i207DjOGXX9XSG8tCptQXv/view?usp=drivesdk', answersUrl: 'https://drive.google.com/file/d/1_8PKXaDCuFrC76bAY9ocRocaNCKbdMV2/view?usp=drivesdk', isBook: false, isSyllabus: false },
+
+      // Official TIE Student Textbooks (Strictly separated on TIE Books Page)
+      { id: 'b-f1-phy', title: 'Physics TIE Student Book Form 1', form: 'Form 1', subject: 'Physics', year: '2023', category: 'TIE Book', paperUrl: 'https://drive.google.com/file/d/1mUAUNoLsP0c_kAJ89Uhr0Zl5O13mgyVp/view?usp=drive_link', answersUrl: null, isBook: true, isSyllabus: false },
+      { id: 'b-f1-math', title: 'Basic Mathematics TIE Student Book Form 1', form: 'Form 1', subject: 'Basic Mathematics', year: '2023', category: 'TIE Book', paperUrl: 'https://drive.google.com/file/d/1g0lE1PZAyD1wjQP_EyjzUJow39caujxn/view?usp=drive_link', answersUrl: null, isBook: true, isSyllabus: false },
+      { id: 'b-f1-kis', title: 'Kiswahili TIE Student Book Form 1', form: 'Form 1', subject: 'Kiswahili', year: '2023', category: 'TIE Book', paperUrl: 'https://drive.google.com/file/d/1LfBotG42DW_gV_L7eBAutmt_ffKWIry_/view?usp=drive_link', answersUrl: null, isBook: true, isSyllabus: false },
+      { id: 'b-f1-cs', title: 'Computer Science / ICT TIE Book Form 1', form: 'Form 1', subject: 'Computer Science', year: '2023', category: 'TIE Book', paperUrl: 'https://drive.google.com/file/d/15rOmh17imv9zkPsJL7Wo7PxUTDWIBHyx/view?usp=drive_link', answersUrl: null, isBook: true, isSyllabus: false },
+      { id: 'b-f1-he', title: 'Home Economics TIE Book Form 1', form: 'Form 1', subject: 'Home Economics', year: '2023', category: 'TIE Book', paperUrl: 'https://drive.google.com/file/d/16sPDL6ymcvAKTnL_66j_dATs-4tzuaQm/view?usp=drive_link', answersUrl: null, isBook: true, isSyllabus: false },
+      { id: 'b-f1-his', title: 'History TIE Student Book Form 1', form: 'Form 1', subject: 'History', year: '2023', category: 'TIE Book', paperUrl: 'https://drive.google.com/file/d/1coCwP76dwQM74WwuVwqOKzEh1eHQ1gPY/view?usp=drive_link', answersUrl: null, isBook: true, isSyllabus: false },
+      { id: 'b-f1-geo', title: 'Geography TIE Student Book Form 1', form: 'Form 1', subject: 'Geography', year: '2023', category: 'TIE Book', paperUrl: 'https://drive.google.com/file/d/1dNmaVjNfZ-7HgI3ETJ3szjHa7I1x16PS/view?usp=drive_link', answersUrl: null, isBook: true, isSyllabus: false },
+      { id: 'b-f1-eng', title: 'English Language TIE Book Form 1', form: 'Form 1', subject: 'English Language', year: '2023', category: 'TIE Book', paperUrl: 'https://drive.google.com/open?id=1YuIBXOzleVolDl1T5Gd5CXmDegATFRMh', answersUrl: null, isBook: true, isSyllabus: false },
+      { id: 'b-f1-com', title: 'Commerce TIE Student Book Form 1', form: 'Form 1', subject: 'Commerce', year: '2023', category: 'TIE Book', paperUrl: 'https://drive.google.com/open?id=1hx_Zt7F3jUarc7FJm65L-aqVu0oG7nWr', answersUrl: null, isBook: true, isSyllabus: false },
+      { id: 'b-f1-civ', title: 'Civics TIE Student Book Form 1', form: 'Form 1', subject: 'Civics', year: '2023', category: 'TIE Book', paperUrl: 'https://drive.google.com/open?id=1_JDCPIYBwKspvLLhBAKJ7Bb7ieiAnQu_', answersUrl: null, isBook: true, isSyllabus: false },
+      { id: 'b-f1-che', title: 'Chemistry TIE Student Book Form 1', form: 'Form 1', subject: 'Chemistry', year: '2023', category: 'TIE Book', paperUrl: 'https://drive.google.com/open?id=12w3buklw125scVNcJB6r1TMwZz5x7KfQ', answersUrl: null, isBook: true, isSyllabus: false },
+      { id: 'b-f1-bk', title: 'Book-Keeping TIE Student Book Form 1', form: 'Form 1', subject: 'Book-Keeping', year: '2023', category: 'TIE Book', paperUrl: 'https://drive.google.com/open?id=1ZzInPa700Y4_pzgY0tK1oJEXu1VNI08n', answersUrl: null, isBook: true, isSyllabus: false },
+      { id: 'b-f1-bio', title: 'Biology TIE Student Book Form 1', form: 'Form 1', subject: 'Biology', year: '2023', category: 'TIE Book', paperUrl: 'https://drive.google.com/open?id=1w2j6WfBPDEQIUZvYFJoWF-YcnalgjUAN', answersUrl: null, isBook: true, isSyllabus: false },
+      { id: 'b-f1-agr', title: 'Agriculture TIE Student Book Form 1', form: 'Form 1', subject: 'Agriculture', year: '2023', category: 'TIE Book', paperUrl: 'https://drive.google.com/open?id=1KmcYUqPkXoRjmRwrop4t33gtHS2M6S_t', answersUrl: null, isBook: true, isSyllabus: false },
+      { id: 'b-f1-htm', title: 'Historia ya Tanzania na Maadili Kitabu cha Mwanafunzi Kidato cha 1', form: 'Form 1', subject: 'Historia ya Tanzania na Maadili', year: '2023', category: 'TIE Book', paperUrl: 'https://drive.google.com/file/d/1UrNR3Dd7lxZR8Tp66O0wM-9NgqrEmmvy/view?usp=drive_link', answersUrl: null, isBook: true, isSyllabus: false },
+      { id: 'b-f1-bs', title: 'Business Studies TIE Student Book Form 1', form: 'Form 1', subject: 'Business Studies', year: '2023', category: 'TIE Book', paperUrl: 'https://drive.google.com/file/d/1O4Ax5H-gAT5UaHbXCq9ztqROv_zrKPrt/view?usp=drive_link', answersUrl: null, isBook: true, isSyllabus: false },
+      { id: 'b-f1-addm', title: 'Additional Mathematics TIE Student Book Form 1', form: 'Form 1', subject: 'Additional Mathematics', year: '2023', category: 'TIE Book', paperUrl: 'https://drive.google.com/file/d/104HQOCmb8SaJCWNvMHfn6Ff236DA6sBM/view?usp=drive_link', answersUrl: null, isBook: true, isSyllabus: false },
+      { id: 'b-f2-phy', title: 'Physics TIE Student Book Form 2', form: 'Form 2', subject: 'Physics', year: '2023', category: 'TIE Book', paperUrl: 'https://drive.google.com/file/d/1FLxPeajErXbEESO0Evezeh4QL8pQ8LY8/view?usp=drive_link', answersUrl: null, isBook: true, isSyllabus: false },
+      { id: 'b-f2-math', title: 'Basic Mathematics TIE Student Book Form 2', form: 'Form 2', subject: 'Basic Mathematics', year: '2023', category: 'TIE Book', paperUrl: 'https://drive.google.com/file/d/1yhx10LAspqFck81xdn56WcPsnH_JbLzI/view?usp=drive_link', answersUrl: null, isBook: true, isSyllabus: false },
+      { id: 'b-f2-kis', title: 'Kiswahili TIE Student Book Form 2', form: 'Form 2', subject: 'Kiswahili', year: '2023', category: 'TIE Book', paperUrl: 'https://drive.google.com/file/d/1Uy6QCfS8lORVPB38N4vej6PY_KOgzVah/view?usp=drive_link', answersUrl: null, isBook: true, isSyllabus: false },
+      { id: 'b-f2-cs', title: 'Computer Science / ICT TIE Book Form 2', form: 'Form 2', subject: 'Computer Science', year: '2023', category: 'TIE Book', paperUrl: 'https://drive.google.com/file/d/1YWevhyTnKHWCNagX4gpGhI5229L642BC/view?usp=drive_link', answersUrl: null, isBook: true, isSyllabus: false },
+      { id: 'b-f2-his', title: 'History TIE Student Book Form 2', form: 'Form 2', subject: 'History', year: '2023', category: 'TIE Book', paperUrl: 'https://drive.google.com/file/d/1drf8VIg6MfpGZNWVqkl1FlMGpDlGOhUg/view?usp=drive_link', answersUrl: null, isBook: true, isSyllabus: false },
+      { id: 'b-f2-geo', title: 'Geography TIE Student Book Form 2', form: 'Form 2', subject: 'Geography', year: '2023', category: 'TIE Book', paperUrl: 'https://drive.google.com/file/d/1IloB7ZSJzZ1BxkzibrC7uCzaiEsRgC0s/view?usp=drive_link', answersUrl: null, isBook: true, isSyllabus: false },
+      { id: 'b-f2-eng', title: 'English Language TIE Book Form 2', form: 'Form 2', subject: 'English Language', year: '2023', category: 'TIE Book', paperUrl: 'https://drive.google.com/file/d/1rZpMHLdlmDyXPFwyBBr54HWOj_2F5Vvi/view?usp=drive_link', answersUrl: null, isBook: true, isSyllabus: false },
+      { id: 'b-f2-che', title: 'Chemistry TIE Student Book Form 2', form: 'Form 2', subject: 'Chemistry', year: '2023', category: 'TIE Book', paperUrl: 'https://drive.google.com/file/d/1h26uIRH4UD5_UrD6CMsfDrQ800OtJlj3/view?usp=drive_link', answersUrl: null, isBook: true, isSyllabus: false },
+      { id: 'b-f2-bio', title: 'Biology TIE Student Book Form 2', form: 'Form 2', subject: 'Biology', year: '2023', category: 'TIE Book', paperUrl: 'https://drive.google.com/file/d/1A0voCf2A83VvMEEaQONtnyQhuNGBXrX2/view?usp=drive_link', answersUrl: null, isBook: true, isSyllabus: false },
+      { id: 'b-f2-htm', title: 'Historia ya Tanzania na Maadili Kitabu cha Mwanafunzi Kidato cha 2', form: 'Form 2', subject: 'Historia ya Tanzania na Maadili', year: '2023', category: 'TIE Book', paperUrl: 'https://drive.google.com/file/d/1EhCwHX6cmAqtEdF1zvbEG_HuQbBtZdEU/view?usp=drive_link', answersUrl: null, isBook: true, isSyllabus: false },
+      { id: 'b-f2-bs', title: 'Business Studies TIE Student Book Form 2', form: 'Form 2', subject: 'Business Studies', year: '2023', category: 'TIE Book', paperUrl: 'https://drive.google.com/file/d/1ttUVMMlXRG1tXVuwECsB6_OgYbgCJeHZ/view?usp=drive_link', answersUrl: null, isBook: true, isSyllabus: false },
+
+      // Official TIE Syllabuses (Strictly separated on Syllabuses Page)
+      { id: 's-math', title: 'Basic Mathematics Official TIE Syllabus (Form 1 - 4)', form: 'Form 1 - 4', subject: 'Basic Mathematics', year: '2023', category: 'TIE Syllabus', paperUrl: 'https://drive.google.com/file/d/1TbDQ-C13pzkJHSKR8gskwM77riDY842m/view?usp=drive_link', answersUrl: null, isBook: false, isSyllabus: true },
+      { id: 's-phy', title: 'Physics Official TIE Syllabus (Form 1 - 4)', form: 'Form 1 - 4', subject: 'Physics', year: '2023', category: 'TIE Syllabus', paperUrl: 'https://drive.google.com/file/d/1M5-2aHxOsiyr-HDiS6-sHkaAN5raqYN2/view?usp=drive_link', answersUrl: null, isBook: false, isSyllabus: true },
+      { id: 's-che', title: 'Chemistry Official TIE Syllabus (Form 1 - 4)', form: 'Form 1 - 4', subject: 'Chemistry', year: '2023', category: 'TIE Syllabus', paperUrl: 'https://drive.google.com/file/d/1sYEkHf3OkqqlNwK9V0GdbMOoAF-JU3HV/view?usp=drive_link', answersUrl: null, isBook: false, isSyllabus: true },
+      { id: 's-bio', title: 'Biology Official TIE Syllabus (Form 1 - 4)', form: 'Form 1 - 4', subject: 'Biology', year: '2023', category: 'TIE Syllabus', paperUrl: 'https://drive.google.com/file/d/1XHyaS_5CuicUH64nVw13um8mjxJrpQ2R/view?usp=drive_link', answersUrl: null, isBook: false, isSyllabus: true },
+      { id: 's-geo', title: 'Geography Official TIE Syllabus (Form 1 - 4)', form: 'Form 1 - 4', subject: 'Geography', year: '2023', category: 'TIE Syllabus', paperUrl: 'https://drive.google.com/file/d/1pwlWNBvWthun17KKYa_GJB3-kFgxppX-/view?usp=drive_link', answersUrl: null, isBook: false, isSyllabus: true },
+      { id: 's-his', title: 'History Official TIE Syllabus (Form 1 - 4)', form: 'Form 1 - 4', subject: 'History', year: '2023', category: 'TIE Syllabus', paperUrl: 'https://drive.google.com/file/d/1tBS-H1AdSflxkLo57ds9NhIoQ54_zCnJ/view?usp=drive_link', answersUrl: null, isBook: false, isSyllabus: true },
+      { id: 's-eng', title: 'English Language Official TIE Syllabus (Form 1 - 4)', form: 'Form 1 - 4', subject: 'English Language', year: '2023', category: 'TIE Syllabus', paperUrl: 'https://drive.google.com/file/d/1zZOjQjUGlz98hTsal6ra359sHyf8fLfJ/view?usp=drive_link', answersUrl: null, isBook: false, isSyllabus: true },
+      { id: 's-kis', title: 'Kiswahili Official TIE Syllabus (Form 1 - 4)', form: 'Form 1 - 4', subject: 'Kiswahili', year: '2023', category: 'TIE Syllabus', paperUrl: 'https://drive.google.com/file/d/1pwyRPGk0bXInQ_r-x8uuUsi48Dp5dgla/view?usp=drive_link', answersUrl: null, isBook: false, isSyllabus: true },
+      { id: 's-cs', title: 'Computer Science Official TIE Syllabus (Form 1 - 4)', form: 'Form 1 - 4', subject: 'Computer Science', year: '2023', category: 'TIE Syllabus', paperUrl: 'https://drive.google.com/file/d/1yR9J_vxQiqPdaxMt4MMNd8pNIQ33x2vh/view?usp=drive_link', answersUrl: null, isBook: false, isSyllabus: true },
+      { id: 's-bs', title: 'Business Studies Official TIE Syllabus (Form 1 - 4)', form: 'Form 1 - 4', subject: 'Business Studies', year: '2023', category: 'TIE Syllabus', paperUrl: 'https://drive.google.com/file/d/1Qjyl7EZ0obuonkILrYAqzdADtustahBH/view?usp=drive_link', answersUrl: null, isBook: false, isSyllabus: true }
+    ];
+
+    const QUESTION_BANK = [
+      { subject: 'Basic Mathematics', topic: 'Coordinate Geometry & Algebra', q: 'Find the gradient (slope) of the straight line passing through points A(2, 3) and B(6, 11).', options: ['m = 2', 'm = 4', 'm = 1/2', 'm = -2'], ans: 0, exp: 'Using gradient formula m = (y₂ - y₁) / (x₂ - x₁) = (11 - 3) / (6 - 2) = 8 / 4 = 2.' },
+      { subject: 'Basic Mathematics', topic: 'Sequences & Series', q: 'The 1st term of an Arithmetic Progression (AP) is 4 and the common difference is 3. Find the 10th term.', options: ['27', '31', '34', '28'], ans: 1, exp: 'Using Aₙ = A₁ + (n - 1)d: A₁₀ = 4 + (10 - 1)×3 = 4 + 27 = 31.' },
+      { subject: 'Basic Mathematics', topic: 'Exponents & Logarithms', q: 'Solve for x in the equation 2^(x + 1) = 16.', options: ['x = 2', 'x = 3', 'x = 4', 'x = 1'], ans: 1, exp: 'Since 16 = 2⁴, we have 2^(x + 1) = 2⁴ ⇒ x + 1 = 4 ⇒ x = 3.' },
+      { subject: 'Physics', topic: 'Current Electricity (Ohm Law)', q: 'A resistor of resistance 6 Ω is connected across a 12 V battery. Calculate the electric current flowing through the resistor.', options: ['0.5 A', '2.0 A', '18 A', '72 A'], ans: 1, exp: 'By Ohm’s Law, V = IR ⇒ I = V / R = 12 V / 6 Ω = 2.0 A.' },
+      { subject: 'Physics', topic: 'Force & Motion', q: 'Calculate the resultant force required to give a mass of 5 kg an acceleration of 4 m/s².', options: ['9 N', '1.25 N', '20 N', '40 N'], ans: 2, exp: 'By Newton’s Second Law, F = ma = 5 kg × 4 m/s² = 20 N.' },
+      { subject: 'Physics', topic: 'Archimedes Principle', q: 'An object weighs 45 N in air and 32 N when completely immersed in water. What is the upthrust experienced by the object?', options: ['77 N', '13 N', '32 N', '45 N'], ans: 1, exp: 'Upthrust U = Real Weight in Air - Apparent Weight in Fluid = 45 N - 32 N = 13 N.' },
+      { subject: 'Chemistry', topic: 'Mole Concept & Stoichiometry', q: 'What volume does 0.5 moles of Oxygen gas (O₂) occupy at Standard Temperature and Pressure (STP = 22.4 dm³/mol)?', options: ['44.8 dm³', '11.2 dm³', '22.4 dm³', '5.6 dm³'], ans: 1, exp: 'Volume at STP = Number of moles × Molar gas volume = 0.5 mol × 22.4 dm³/mol = 11.2 dm³.' },
+      { subject: 'Chemistry', topic: 'Atomic Structure', q: 'An element X has atomic number Z = 11 and mass number A = 23. How many neutrons are in its nucleus?', options: ['11', '12', '23', '34'], ans: 1, exp: 'Number of neutrons N = A - Z = 23 - 11 = 12 neutrons.' },
+      { subject: 'Biology', topic: 'Cell Structure & Organisation', q: 'Which cell organelle is responsible for aerobic respiration and ATP energy production?', options: ['Ribosome', 'Mitochondrion', 'Chloroplast', 'Golgi body'], ans: 1, exp: 'The mitochondrion is the powerhouse of the cell where aerobic respiration produces ATP.' },
+      { subject: 'Biology', topic: 'Genetics & Inheritance', q: 'In a monohybrid cross between two heterozygous tall pea plants (Tt × Tt), what is the phenotypic ratio of Tall to Dwarf offspring?', options: ['1 : 1', '2 : 1', '3 : 1', '1 : 2 : 1'], ans: 2, exp: 'Tt × Tt gives genotypes TT, Tt, Tt (3 Tall) and tt (1 Dwarf), so the phenotypic ratio is 3 : 1.' },
+      { subject: 'Geography', topic: 'The Solar System & Time Calculation', q: 'If the local time at Greenwich (0° longitude) is 12:00 Noon, what is the local time at Dar es Salaam (45°E)?', options: ['09:00 AM', '03:00 PM', '02:00 PM', '04:00 PM'], ans: 1, exp: 'Every 15° of longitude equals 1 hour. 45° / 15° = 3 hours ahead of GMT ⇒ 12:00 Noon + 3 hours = 03:00 PM.' },
+      { subject: 'History', topic: 'Nationalism & Decolonisation', q: 'In which year did Tanganyika attain independence under the leadership of Mwalimu Julius Kambarage Nyerere?', options: ['1961', '1963', '1964', '1967'], ans: 0, exp: 'Tanganyika gained independence on 9 December 1961, and united with Zanzibar on 26 April 1964.' },
+      { subject: 'English Language', topic: 'Grammar & Tenses', q: 'Choose the correct verb form: "Neither the teacher nor the students ___ present yesterday."', options: ['was', 'were', 'is', 'has been'], ans: 1, exp: 'With "Neither... nor...", the verb agrees with the closer subject ("students", plural) in past tense: "were".' },
+      { subject: 'Kiswahili', topic: 'Sarufi na Ngeli za Nomino', q: 'Nomino "Kitabu" huingia katika ngeli ipi ya Kiswahili?', options: ['A-WA', 'KI-VI', 'M-MI', 'U-I'], ans: 1, exp: 'Kitabu - Vitabu huingia katika ngeli ya KI-VI (Kitabu kimepatikana / Vitabu vimepatikana).' },
+      { subject: 'Civics', topic: 'National Symbols & Constitution', q: 'How many chapters are contained in the Constitution of the United Republic of Tanzania of 1977?', options: ['8 Chapters', '10 Chapters', '12 Chapters', '6 Chapters'], ans: 1, exp: 'The 1977 Constitution of the United Republic of Tanzania consists of 10 Chapters.' }
+    ];
+
+    let allPapers = [...BUILTIN_RESOURCES];
+    let state = {
+      activePage: 'papers',
+      step: 1,
+      selectedClass: '',
+      selectedSubject: '',
+      selectedCategory: 'ALL',
+      selectedYear: 'ALL',
+      searchQuery: '',
+      booksClassFilter: 'ALL',
+      booksSearchQuery: '',
+      quizClass: 'Form 4',
+      quizSubject: 'Basic Mathematics',
+      quizAnswers: {},
+      gameMode: 'treasure',
+      treasureStage: 0,
+      treasureUnlocked: [true, false, false, false, false],
+      escapeUnlocked: [false, false, false, false],
+      escapeDigits: ['?', '?', '?', '?'],
+      arenaScore: 0,
+      arenaStreak: 0,
+      arenaBest: parseInt(localStorage.getItem('elimika_arena_best') || '0', 10),
+      arenaIndex: 0,
+      viewerPaper: null,
+      viewerType: 'paper'
+    };
+
+    const navStack = [{ activePage: 'papers', step: 1, selectedClass: '', selectedSubject: '' }];
+    let isPopping = false;
+    let searchRaf = null;
+
+    function pushHistorySnapshot() {
+      if (isPopping) {
+        isPopping = false;
+        return;
+      }
+      const snap = {
+        activePage: state.activePage,
+        step: state.step,
+        selectedClass: state.selectedClass,
+        selectedSubject: state.selectedSubject
+      };
+      const top = navStack[navStack.length - 1];
+      if (top && top.activePage === snap.activePage && top.step === snap.step && top.selectedClass === snap.selectedClass && top.selectedSubject === snap.selectedSubject) {
+        return;
+      }
+      navStack.push(snap);
+      try {
+        window.history.pushState({ elimikaWeb: true, ...snap }, '');
+      } catch (e) {}
+    }
+
+    window.addEventListener('popstate', function () {
+      if (!document.getElementById('viewerModal').classList.contains('hidden')) {
+        closeViewerModal();
+        return;
+      }
+      if (!document.getElementById('mohaAppModal').classList.contains('hidden')) {
+        closeMohaAppModal();
+        return;
+      }
+      if (navStack.length > 1) {
+        navStack.pop();
+        const prev = navStack[navStack.length - 1];
+        if (prev) {
+          isPopping = true;
+          state.activePage = prev.activePage;
+          state.step = prev.step;
+          state.selectedClass = prev.selectedClass;
+          state.selectedSubject = prev.selectedSubject;
+          renderAll();
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+          return;
+        }
+      }
+      if (state.activePage !== 'papers') {
+        state.activePage = 'papers';
+        renderAll();
+      } else if (state.step === 3) {
+        state.step = state.selectedClass ? 2 : 1;
+        renderAll();
+      } else if (state.step === 2) {
+        state.step = 1;
+        renderAll();
+      }
+    });
+
+    function handleGoBack() {
+      if (!document.getElementById('viewerModal').classList.contains('hidden')) {
+        closeViewerModal();
+        return;
+      }
+      if (!document.getElementById('mohaAppModal').classList.contains('hidden')) {
+        closeMohaAppModal();
+        return;
+      }
+      if (navStack.length > 1) {
+        try {
+          window.history.back();
+          return;
+        } catch (e) {}
+      }
+      if (state.activePage !== 'papers') {
+        state.activePage = 'papers';
+      } else if (state.step === 3) {
+        state.step = state.selectedClass ? 2 : 1;
+      } else if (state.step === 2) {
+        state.step = 1;
+      }
+      renderAll();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function extractDriveId(url) {
+      if (!url) return null;
+      const m1 = url.match(/\/file\/d\/([a-zA-Z0-9_-]+)/);
+      if (m1) return m1[1];
+      const m2 = url.match(/[?&]id=([a-zA-Z0-9_-]+)/);
+      if (m2) return m2[1];
+      return null;
+    }
+
+    function getPreviewUrl(url) {
+      const id = extractDriveId(url);
+      if (id) return 'https://drive.google.com/file/d/' + id + '/preview';
+      return url;
+    }
+
+    function getDownloadUrl(url) {
+      const id = extractDriveId(url);
+      if (id) return 'https://drive.google.com/uc?export=download&id=' + id;
+      return url;
+    }
+
+    function normalizeClassName(raw) {
+      const s = (raw || '').trim();
+      const l = s.toLowerCase();
+      if (/form\s*1\s*-\s*4|form\s*i\s*-\s*iv/i.test(l)) return 'Form 1 - 4';
+      if (/form\s*3\s*-\s*4/i.test(l)) return 'Form 3 - 4';
+      if (/form\s*5\s*-\s*6/i.test(l)) return 'Form 5 - 6';
+      for (let i = 1; i <= 6; i++) {
+        if (new RegExp('\\b(form|f)\\s*' + i + '\\b', 'i').test(l)) return 'Form ' + i;
+      }
+      for (let i = 1; i <= 7; i++) {
+        if (new RegExp('\\b(standard|std|darasa)\\s*' + i + '\\b', 'i').test(l)) return 'Standard ' + i;
+      }
+      return s || 'Form 4';
+    }
+
+    function normalizeSubjectName(raw, titleFallback) {
+      const combined = ((raw || '') + ' ' + (titleFallback || '')).toLowerCase();
+      if (combined.includes('additional math') || combined.includes('aditional math')) return 'Additional Mathematics';
+      if (combined.includes('basic applied math') || /\bbam\b/.test(combined)) return 'Basic Applied Mathematics (BAM)';
+      if (combined.includes('advanced math')) return 'Advanced Mathematics';
+      if (combined.includes('math') || combined.includes('hisabati')) return 'Basic Mathematics';
+      if (combined.includes('historia ya tanzania') || /\bhtm\b/.test(combined)) return 'Historia ya Tanzania na Maadili';
+      if (combined.includes('business studies') || combined.includes('bussiness studies')) return 'Business Studies';
+      if (combined.includes('computer') || /\bics\b/.test(combined) || /\bict\b/.test(combined)) return 'Computer Science';
+      if (combined.includes('book-keeping') || combined.includes('book keeping')) return 'Book-Keeping';
+      if (combined.includes('home economics')) return 'Home Economics';
+      if (combined.includes('academic communication')) return 'Academic Communication';
+      if (combined.includes('english')) return 'English Language';
+      if (combined.includes('physics')) return 'Physics';
+      if (combined.includes('chemistry')) return 'Chemistry';
+      if (combined.includes('biology')) return 'Biology';
+      if (combined.includes('geography') || combined.includes('jiografia')) return 'Geography';
+      if (combined.includes('history')) return 'History';
+      if (combined.includes('kiswahili')) return 'Kiswahili';
+      if (combined.includes('civics') || combined.includes('uraia')) return 'Civics';
+      if (combined.includes('commerce')) return 'Commerce';
+      if (combined.includes('agriculture')) return 'Agriculture';
+      if (combined.includes('economics')) return 'Economics';
+      if (combined.includes('french')) return 'French';
+      return (raw || 'General').trim();
+    }
+
+    function normalizeExamCategory(rawCat, rawTitle) {
+      const combined = ((rawCat || '') + ' ' + (rawTitle || '')).toLowerCase();
+      if (combined.includes('annual') || combined.includes('terminal')) return 'Annual';
+      if (combined.includes('pre-necta') || combined.includes('pre necta')) return 'Pre-NECTA';
+      if (combined.includes('mock')) return 'Mock';
+      if (combined.includes('necta') || combined.includes('ftna') || combined.includes('csee') || combined.includes('acsee') || combined.includes('psle') || combined.includes('sfna')) return 'NECTA';
+      return (rawCat || 'NECTA').trim();
+    }
+
+    function matchesFormRange(itemForm, targetClass) {
+      if (!targetClass || targetClass === 'ALL') return true;
+      if (itemForm.toLowerCase() === targetClass.toLowerCase()) return true;
+      const m = targetClass.match(/Form\s*(\d)/i);
+      if (m) {
+        const num = parseInt(m[1], 10);
+        if (itemForm === 'Form 1 - 4' && num >= 1 && num <= 4) return true;
+        if (itemForm === 'Form 3 - 4' && (num === 3 || num === 4)) return true;
+        if (itemForm === 'Form 5 - 6' && (num === 5 || num === 6)) return true;
+      }
+      return false;
+    }
+
+    function parseCSV(text) {
+      const rows = [];
+      let row = [];
+      let cur = '';
+      let inQuotes = false;
+      for (let i = 0; i < text.length; i++) {
+        const ch = text[i];
+        const next = text[i + 1];
+        if (inQuotes) {
+          if (ch === '"' && next === '"') { cur += '"'; i++; }
+          else if (ch === '"') { inQuotes = false; }
+          else { cur += ch; }
+        } else {
+          if (ch === '"') inQuotes = true;
+          else if (ch === ',') { row.push(cur.trim()); cur = ''; }
+          else if (ch === '\n' || ch === '\r') {
+            if (ch === '\r' && next === '\n') i++;
+            row.push(cur.trim());
+            if (row.some(cell => cell !== '')) rows.push(row);
+            row = [];
+            cur = '';
+          } else {
+            cur += ch;
+          }
+        }
+      }
+      if (cur || row.length) {
+        row.push(cur.trim());
+        if (row.some(cell => cell !== '')) rows.push(row);
+      }
+      return rows;
+    }
+
+    function loadCachedSheetData() {
+      try {
+        const cached = localStorage.getItem(CONFIG.CACHE_KEY);
+        if (cached) {
+          const parsed = JSON.parse(cached);
+          if (Array.isArray(parsed) && parsed.length > 0) {
+            allPapers = parsed;
+          }
+        }
+      } catch (e) {}
+    }
+
+    async function syncGoogleSheet() {
+      const urls = [
+        'https://docs.google.com/spreadsheets/d/' + CONFIG.SHEET_ID + '/gviz/tq?tqx=out:csv',
+        'https://docs.google.com/spreadsheets/d/' + CONFIG.SHEET_ID + '/export?format=csv'
+      ];
+      for (const u of urls) {
+        try {
+          const res = await fetch(u);
+          if (!res.ok) continue;
+          const csv = await res.text();
+          if (!csv || csv.includes('<!DOCTYPE html>')) continue;
+          const rows = parseCSV(csv);
+          const parsed = [];
+          for (let i = 1; i < rows.length; i++) {
+            const r = rows[i];
+            if (!r || r.length < 3) continue;
+            const rawTitle = r[0] || '';
+            const rawForm = r[1] || '';
+            const rawSub = r[2] || '';
+            const rawYear = r[3] || '2025';
+            const rawCat = r[4] || 'NECTA';
+            const rawPaperUrl = r[5] && r[5].startsWith('http') ? r[5] : null;
+            const rawAnsUrl = r[6] && r[6].startsWith('http') ? r[6] : null;
+            if (!rawTitle && !rawSub) continue;
+
+            const form = normalizeClassName(rawForm);
+            const subject = normalizeSubjectName(rawSub, rawTitle);
+            const catLower = (rawCat + ' ' + rawTitle).toLowerCase();
+            const isSyllabus = catLower.includes('syllabus') || catLower.includes('muhtasari');
+            const isBook = !isSyllabus && (catLower.includes('book') || catLower.includes('kitabu') || catLower.includes('tie'));
+            const examCat = normalizeExamCategory(rawCat, rawTitle);
+
+            parsed.push({
+              id: 'sheet-' + i,
+              title: rawTitle || (form + ' ' + subject),
+              form,
+              subject,
+              year: rawYear || '2025',
+              category: isSyllabus ? 'TIE Syllabus' : isBook ? 'TIE Book' : examCat,
+              paperUrl: rawPaperUrl,
+              answersUrl: rawAnsUrl,
+              isBook,
+              isSyllabus
+            });
+          }
+          if (parsed.length > 0) {
+            const byKey = new Map();
+            parsed.forEach(p => byKey.set(p.title + '|' + p.form, p));
+            BUILTIN_RESOURCES.forEach(b => {
+              const k = b.title + '|' + b.form;
+              if (!byKey.has(k)) byKey.set(k, b);
+            });
+            allPapers = Array.from(byKey.values());
+            try { localStorage.setItem(CONFIG.CACHE_KEY, JSON.stringify(allPapers)); } catch (e) {}
+            renderAll();
+            break;
+          }
+        } catch (err) {}
+      }
+    }
+
+    function openPage(pageName, clsFilter, subFilter) {
+      state.activePage = pageName;
+      if (pageName === 'books') {
+        if (clsFilter) state.booksClassFilter = clsFilter;
+        if (subFilter) {
+          state.booksSearchQuery = subFilter;
+          const inp = document.getElementById('booksSearchInput');
+          if (inp) inp.value = subFilter;
+        }
+      } else if (pageName === 'quiz') {
+        if (clsFilter) state.quizClass = clsFilter;
+        if (subFilter) state.quizSubject = subFilter;
+      }
+      pushHistorySnapshot();
+      renderAll();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function openAnnualPapersShortcut() {
+      state.activePage = 'papers';
+      state.selectedClass = '';
+      state.selectedSubject = '';
+      state.selectedCategory = 'Annual';
+      state.selectedYear = 'ALL';
+      state.searchQuery = '';
+      state.step = 3;
+      pushHistorySnapshot();
+      renderAll();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function openClassAnnualPapers(clsName) {
+      state.activePage = 'papers';
+      state.selectedClass = clsName || '';
+      state.selectedSubject = '';
+      state.selectedCategory = 'Annual';
+      state.selectedYear = 'ALL';
+      state.step = 3;
+      pushHistorySnapshot();
+      renderAll();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function resetToHome() {
+      state.activePage = 'papers';
+      state.step = 1;
+      state.selectedClass = '';
+      state.selectedSubject = '';
+      state.selectedCategory = 'ALL';
+      state.searchQuery = '';
+      const inp = document.getElementById('smartSearchInput');
+      if (inp) inp.value = '';
+      pushHistorySnapshot();
+      renderAll();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function selectClass(clsName) {
+      state.activePage = 'papers';
+      state.selectedClass = clsName;
+      state.selectedSubject = '';
+      state.step = 2;
+      pushHistorySnapshot();
+      renderAll();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function selectSubject(subName, catOverride) {
+      state.selectedSubject = subName;
+      state.selectedCategory = catOverride || 'ALL';
+      state.selectedYear = 'ALL';
+      state.step = 3;
+      pushHistorySnapshot();
+      renderAll();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function handleSmartSearch(val) {
+      state.searchQuery = val || '';
+      const clearBtn = document.getElementById('clearSearchBtn');
+      if (clearBtn) clearBtn.classList.toggle('hidden', !state.searchQuery.trim());
+      if (searchRaf) cancelAnimationFrame(searchRaf);
+      searchRaf = requestAnimationFrame(function () {
+        if (state.searchQuery.trim().length > 0) {
+          state.activePage = 'papers';
+          state.step = 3;
+        } else {
+          state.step = state.selectedClass ? 2 : 1;
+        }
+        renderAll();
+      });
+    }
+
+    function startVoiceSearch() {
+      const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+      if (!SR) {
+        alert('Voice search is not supported in this browser.');
+        return;
+      }
+      const rec = new SR();
+      rec.lang = 'en-US';
+      rec.onresult = function (e) {
+        const text = e.results?.[0]?.[0]?.transcript || '';
+        if (text) {
+          document.getElementById('smartSearchInput').value = text;
+          handleSmartSearch(text);
+        }
+      };
+      rec.start();
+    }
+
+    function setCategoryFilter(cat) {
+      state.selectedCategory = cat;
+      renderStep3();
+    }
+
+    function setYearFilter(yr) {
+      state.selectedYear = yr;
+      renderStep3();
+    }
+
+    function openViewerModal(itemId, type) {
+      const item = allPapers.find(p => p.id === itemId);
+      if (!item) return;
+      state.viewerPaper = item;
+      state.viewerType = type || 'paper';
+
+      document.getElementById('viewerMeta').textContent = item.category + ' · ' + item.form + ' · ' + item.year;
+      document.getElementById('viewerTitle').textContent = state.viewerType === 'answers' ? item.title + ' (Marking Scheme)' : item.title;
+
+      const toggleContainer = document.getElementById('viewerToggleBtns');
+      if (item.paperUrl && item.answersUrl) {
+        toggleContainer.classList.remove('hidden');
+        toggleContainer.classList.add('flex');
+      } else {
+        toggleContainer.classList.add('hidden');
+        toggleContainer.classList.remove('flex');
+      }
+
+      const targetUrl = state.viewerType === 'answers' && item.answersUrl ? item.answersUrl : item.paperUrl;
+      document.getElementById('viewerIframe').src = getPreviewUrl(targetUrl) || 'about:blank';
+
+      document.getElementById('viewerDownloadBtn').onclick = function () {
+        window.open(getDownloadUrl(targetUrl), '_blank', 'noopener,noreferrer');
+      };
+      document.getElementById('viewerMohaBtn').onclick = function () {
+        closeViewerModal();
+        openMohaAppModal('moha', item.form, item.subject, item.title);
+      };
+
+      document.getElementById('viewerModal').classList.remove('hidden');
+    }
+
+    function switchViewerType(type) {
+      if (!state.viewerPaper) return;
+      openViewerModal(state.viewerPaper.id, type);
+    }
+
+    function closeViewerModal() {
+      document.getElementById('viewerModal').classList.add('hidden');
+      document.getElementById('viewerIframe').src = 'about:blank';
+      state.viewerPaper = null;
+    }
+
+    function openMohaAppModal(feature, cls, sub, docTitle) {
+      let hash = '#moha';
+      if (feature === 'daily-quiz') hash = '#daily-quiz';
+      else if (feature === 'play') hash = '#play';
+      const url = CONFIG.MOHA_APP_URL + '/' + hash;
+
+      document.getElementById('mohaAppLaunchLink').href = url;
+      const subEl = document.getElementById('mohaModalSubtitle');
+      if (docTitle) {
+        subEl.textContent = 'Open "' + docTitle + '" (' + (cls || '') + ' ' + (sub || '') + ') in the Moha AI App for reading comprehension & step-by-step solutions.';
+      } else if (cls || sub) {
+        subEl.textContent = 'Open ' + (cls || '') + ' ' + (sub || '') + ' in the Moha AI App for AI tutoring, 20-question quizzes & teacher documents.';
+      } else {
+        subEl.textContent = 'Access AI Textbook Reading Comprehension, Step-by-Step NECTA Exam Solutions, 20-Question AI Quizzes, and Teacher Document Studio.';
+      }
+      document.getElementById('mohaAppModal').classList.remove('hidden');
+    }
+
+    function closeMohaAppModal() {
+      document.getElementById('mohaAppModal').classList.add('hidden');
+    }
+
+    function renderClassCards() {
+      const secClasses = [
+        { name: 'Form 1', sub: 'Annual & Terminal Papers' },
+        { name: 'Form 2', sub: 'FTNA & Annual Papers' },
+        { name: 'Form 3', sub: 'Annual & Mock Papers' },
+        { name: 'Form 4', sub: 'CSEE, Mock & Annual' },
+        { name: 'Form 5', sub: 'Annual & Mock Papers' },
+        { name: 'Form 6', sub: 'ACSEE, Mock & Annual' }
+      ];
+      const priClasses = [
+        { name: 'Standard 1', sub: 'Annual & Terminal' },
+        { name: 'Standard 2', sub: 'Annual & Terminal' },
+        { name: 'Standard 3', sub: 'Annual & Terminal' },
+        { name: 'Standard 4', sub: 'SFNA & Annual Papers' },
+        { name: 'Standard 5', sub: 'Annual & Terminal' },
+        { name: 'Standard 6', sub: 'Annual & Terminal' },
+        { name: 'Standard 7', sub: 'PSLE, Mock & Annual' }
+      ];
+
+      const secGrid = document.getElementById('secondaryClassGrid');
+      secGrid.innerHTML = secClasses.map(c => {
+        const count = allPapers.filter(p => !p.isBook && !p.isSyllabus && p.form.toLowerCase() === c.name.toLowerCase()).length;
+        return `
+          <button onclick="selectClass('${c.name}')" class="group p-3.5 rounded-2xl bg-slate-50 hover:bg-blue-600 border border-slate-200 hover:border-blue-600 text-left transition-all cursor-pointer shadow-2xs">
+            <div class="flex items-center justify-between gap-1">
+              <span class="text-sm sm:text-base font-black text-slate-900 group-hover:text-white">${c.name}</span>
+              <span class="px-1.5 py-0.5 rounded-md bg-blue-100 group-hover:bg-white/20 text-blue-800 group-hover:text-white text-[10px] font-bold">${count} papers</span>
+            </div>
+            <div class="text-[11px] font-medium text-slate-500 group-hover:text-blue-100 mt-1 truncate">${c.sub}</div>
+          </button>
+        `;
+      }).join('');
+
+      const priGrid = document.getElementById('primaryClassGrid');
+      priGrid.innerHTML = priClasses.map(c => {
+        const count = allPapers.filter(p => !p.isBook && !p.isSyllabus && p.form.toLowerCase() === c.name.toLowerCase()).length;
+        return `
+          <button onclick="selectClass('${c.name}')" class="group p-3 rounded-2xl bg-slate-50 hover:bg-emerald-600 border border-slate-200 hover:border-emerald-600 text-left transition-all cursor-pointer shadow-2xs">
+            <div class="flex items-center justify-between gap-1">
+              <span class="text-xs sm:text-sm font-black text-slate-900 group-hover:text-white">${c.name}</span>
+              <span class="px-1.5 py-0.5 rounded-md bg-emerald-100 group-hover:bg-white/20 text-emerald-800 group-hover:text-white text-[10px] font-bold">${count}</span>
+            </div>
+            <div class="text-[10px] font-medium text-slate-500 group-hover:text-emerald-100 mt-1 truncate">${c.sub}</div>
+          </button>
+        `;
+      }).join('');
+    }
+
+    function renderStep2() {
+      const cls = state.selectedClass || 'Form 4';
+      document.getElementById('step2ClassTitle').textContent = cls + ' — Choose Subject (Past Papers)';
+      const subjects = TIE_SUBJECTS[cls] || TIE_SUBJECTS['Form 4'];
+
+      const grid = document.getElementById('subjectGrid');
+      grid.innerHTML = subjects.map(sub => {
+        const papersForSub = allPapers.filter(p => !p.isBook && !p.isSyllabus && p.form.toLowerCase() === cls.toLowerCase() && p.subject.toLowerCase() === sub.toLowerCase());
+        const count = papersForSub.length;
+        const annualCount = papersForSub.filter(p => p.category === 'Annual').length;
+        return `
+          <div class="p-4 rounded-2xl bg-white border border-slate-200 hover:border-blue-500 shadow-2xs flex flex-col justify-between gap-3 transition-all">
+            <div onclick="selectSubject('${sub}')" class="cursor-pointer">
+              <div class="flex items-center justify-between gap-2">
+                <h3 class="font-extrabold text-sm sm:text-base text-slate-900">${sub}</h3>
+                <span class="px-2 py-0.5 rounded-lg bg-blue-50 text-blue-800 font-bold text-xs">${count} papers</span>
+              </div>
+              <p class="text-xs text-slate-500 mt-1">NECTA, Annual, Mock &amp; Pre-NECTA Papers ${annualCount > 0 ? '· ' + annualCount + ' Annual' : ''}</p>
+            </div>
+            <div class="flex flex-wrap items-center gap-1.5 pt-2 border-t border-slate-100">
+              <button onclick="selectSubject('${sub}', 'ALL')" class="flex-1 py-2 px-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs cursor-pointer">
+                All Papers
+              </button>
+              <button onclick="selectSubject('${sub}', 'Annual')" class="py-2 px-2.5 rounded-xl bg-indigo-50 hover:bg-indigo-100 text-indigo-900 border border-indigo-200 font-bold text-xs cursor-pointer" title="View Annual Examination Papers">
+                Annual
+              </button>
+              <button onclick="openPage('quiz', '${cls}', '${sub}')" class="py-2 px-2.5 rounded-xl bg-amber-100 hover:bg-amber-200 text-amber-950 font-bold text-xs cursor-pointer" title="Subject Solving Quiz">
+                🎯 Quiz
+              </button>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function renderResourceCard(item) {
+      const hasLink = Boolean(item.paperUrl);
+      const badgeColor = item.isBook
+        ? 'bg-emerald-100 text-emerald-900 border-emerald-200'
+        : item.isSyllabus
+        ? 'bg-amber-100 text-amber-950 border-amber-200'
+        : item.category === 'Annual'
+        ? 'bg-indigo-100 text-indigo-900 border-indigo-200'
+        : 'bg-blue-50 text-blue-800 border-blue-200';
+
+      return `
+        <article class="bg-white rounded-2xl border border-slate-200 p-4 shadow-2xs flex flex-col justify-between gap-3 hover:border-slate-300 transition-all">
+          <div class="space-y-1.5">
+            <div class="flex flex-wrap items-center justify-between gap-2">
+              <span class="px-2.5 py-0.5 rounded-md text-[11px] font-bold border ${badgeColor}">
+                ${item.category} · ${item.form} · ${item.year}
+              </span>
+              ${hasLink ? '<span class="text-[11px] font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">✓ PDF Ready</span>' : '<span class="text-[11px] font-semibold text-slate-400">Pending Upload</span>'}
+            </div>
+            <h3 class="font-extrabold text-sm sm:text-base text-slate-900">${item.title}</h3>
+            <div class="text-xs font-semibold text-slate-500">${item.subject}</div>
+          </div>
+
+          <div class="flex flex-wrap items-center gap-2 pt-2.5 border-t border-slate-100">
+            ${hasLink ? `
+              <button onclick="openViewerModal('${item.id}', 'paper')" class="px-3 py-2 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs cursor-pointer">
+                👁 Preview PDF
+              </button>
+              <a href="${getDownloadUrl(item.paperUrl)}" target="_blank" rel="noopener noreferrer" class="px-3 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs">
+                ⬇ Download
+              </a>
+            ` : ''}
+            ${item.answersUrl ? `
+              <button onclick="openViewerModal('${item.id}', 'answers')" class="px-3 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs cursor-pointer">
+                ✅ Marking Scheme
+              </button>
+            ` : ''}
+            <button onclick="openMohaAppModal('moha', '${item.form}', '${item.subject}', '${item.title.replace(/'/g, "\\'")}')" class="px-3 py-2 rounded-xl bg-violet-50 hover:bg-violet-100 text-violet-900 border border-violet-200 font-bold text-xs cursor-pointer ml-auto">
+              🤖 Moha AI App ↗
+            </button>
+          </div>
+        </article>
+      `;
+    }
+
+    function renderStep3() {
+      const q = state.searchQuery.trim().toLowerCase();
+      const cls = state.selectedClass;
+      const sub = state.selectedSubject;
+
+      document.getElementById('step3Breadcrumb').textContent = q
+        ? 'Examination Past Papers Search'
+        : (cls || 'All Classes') + ' · ' + (sub || 'All Subjects');
+      document.getElementById('step3Title').textContent = q
+        ? 'Past Papers matching "' + state.searchQuery + '"'
+        : (sub ? sub + ' Examination Papers' : (state.selectedCategory === 'Annual' ? 'Annual Examination Papers' : 'Examination Past Papers'));
+
+      let basePapers = allPapers.filter(p => {
+        if (p.isBook || p.isSyllabus) return false;
+        if (q) {
+          const hay = (p.title + ' ' + p.form + ' ' + p.subject + ' ' + p.category + ' ' + p.year).toLowerCase();
+          return hay.includes(q);
+        }
+        const matchCls = !cls || p.form.toLowerCase() === cls.toLowerCase();
+        const matchSub = !sub || p.subject.toLowerCase() === sub.toLowerCase();
+        return matchCls && matchSub;
+      });
+
+      const examCategories = ['ALL', 'NECTA', 'Annual', 'Mock', 'Pre-NECTA'];
+      document.getElementById('categoryFilterBar').innerHTML = examCategories.map(cat => {
+        const active = state.selectedCategory === cat;
+        return `
+          <button onclick="setCategoryFilter('${cat}')" class="px-3.5 py-1.5 rounded-xl text-xs font-bold cursor-pointer transition-colors ${active ? 'bg-blue-600 text-white shadow-2xs' : 'bg-slate-100 text-slate-700 hover:bg-slate-200'}">
+            ${cat === 'ALL' ? 'All Exam Papers' : cat}
+          </button>
+        `;
+      }).join('');
+
+      let filtered = basePapers;
+      if (state.selectedCategory !== 'ALL') {
+        filtered = filtered.filter(p => p.category.toLowerCase() === state.selectedCategory.toLowerCase());
+      }
+
+      const years = Array.from(new Set(filtered.map(p => p.year).filter(Boolean))).sort((a, b) => b.localeCompare(a));
+      const yearSelect = document.getElementById('yearFilterSelect');
+      yearSelect.innerHTML = '<option value="ALL">All Years</option>' + years.map(y => `<option value="${y}" ${state.selectedYear === y ? 'selected' : ''}>${y}</option>`).join('');
+
+      if (state.selectedYear !== 'ALL') {
+        filtered = filtered.filter(p => p.year === state.selectedYear);
+      }
+
+      const grid = document.getElementById('papersGrid');
+      if (filtered.length === 0) {
+        grid.innerHTML = `
+          <div class="col-span-full bg-white rounded-2xl border border-slate-200 p-8 text-center space-y-3">
+            <div class="text-base font-bold text-slate-800">No ${state.selectedCategory !== 'ALL' ? state.selectedCategory : ''} past papers found for this selection yet.</div>
+            <p class="text-xs text-slate-500">Switch exam filter above, view the TIE Textbook on the Books page, or open the Moha AI App.</p>
+            <div class="flex flex-wrap justify-center gap-2 pt-1">
+              <button onclick="setCategoryFilter('ALL')" class="px-4 py-2 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs cursor-pointer">
+                Show All Exam Categories
+              </button>
+              <button onclick="openPage('books', '${cls}', '${sub}')" class="px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs cursor-pointer">
+                📘 Open TIE Books Page →
+              </button>
+              <button onclick="openMohaAppModal('moha', '${cls}', '${sub}')" class="px-4 py-2 rounded-xl bg-violet-600 hover:bg-violet-700 text-white font-bold text-xs cursor-pointer">
+                🤖 Open in Moha AI App ↗
+              </button>
+            </div>
+          </div>
+        `;
+      } else {
+        grid.innerHTML = filtered.map(renderResourceCard).join('');
+      }
+    }
+
+    function renderBooksPage() {
+      const classes = ['ALL', 'Form 1', 'Form 2', 'Form 3', 'Form 4', 'Form 5', 'Form 6', 'Standard 1', 'Standard 2', 'Standard 3', 'Standard 4', 'Standard 5', 'Standard 6', 'Standard 7'];
+      document.getElementById('booksClassTabs').innerHTML = classes.map(c => {
+        const active = state.booksClassFilter === c;
+        return `
+          <button onclick="state.booksClassFilter='${c}'; renderBooksPage();" class="px-3 py-1.5 rounded-xl text-xs font-bold cursor-pointer ${active ? 'bg-emerald-600 text-white' : 'bg-slate-100 text-slate-700 hover:bg-slate-200'}">
+            ${c === 'ALL' ? 'All Classes' : c}
+          </button>
+        `;
+      }).join('');
+
+      const q = (document.getElementById('booksSearchInput')?.value || '').trim().toLowerCase();
+      const books = allPapers.filter(p => {
+        if (!p.isBook) return false;
+        if (state.booksClassFilter !== 'ALL' && !matchesFormRange(p.form, state.booksClassFilter)) return false;
+        if (q && !(p.title + ' ' + p.subject + ' ' + p.form).toLowerCase().includes(q)) return false;
+        return true;
+      });
+
+      document.getElementById('booksGrid').innerHTML = books.length
+        ? books.map(renderResourceCard).join('')
+        : '<div class="col-span-full p-8 text-center bg-white rounded-2xl border border-slate-200 text-xs font-bold text-slate-500">No TIE Textbooks match this filter.</div>';
+    }
+
+    function renderSyllabusPage() {
+      const q = (document.getElementById('syllabusSearchInput')?.value || '').trim().toLowerCase();
+      const syllabuses = allPapers.filter(p => {
+        if (!p.isSyllabus) return false;
+        if (q && !(p.title + ' ' + p.subject + ' ' + p.form).toLowerCase().includes(q)) return false;
+        return true;
+      });
+
+      document.getElementById('syllabusGrid').innerHTML = syllabuses.length
+        ? syllabuses.map(renderResourceCard).join('')
+        : '<div class="col-span-full p-8 text-center bg-white rounded-2xl border border-slate-200 text-xs font-bold text-slate-500">No Syllabuses match this filter.</div>';
+    }
+
+    function getQuizQuestionsForCurrentFilter() {
+      const sub = state.quizSubject;
+      const matches = QUESTION_BANK.filter(q => q.subject.toLowerCase() === sub.toLowerCase());
+      return matches.length >= 3 ? matches : QUESTION_BANK;
+    }
+
+    function changeQuizFilter(cls, sub) {
+      state.quizClass = cls || 'Form 4';
+      state.quizSubject = sub || 'Basic Mathematics';
+      state.quizAnswers = {};
+      renderQuizPage();
+    }
+
+    function resetQuizSession() {
+      state.quizAnswers = {};
+      renderQuizPage();
+    }
+
+    function answerQuizQuestion(qIdx, optIdx) {
+      state.quizAnswers[qIdx] = optIdx;
+      renderQuizPage();
+    }
+
+    function renderQuizPage() {
+      const clsSel = document.getElementById('quizClassSelect');
+      const subSel = document.getElementById('quizSubjectSelect');
+      if (clsSel) clsSel.value = state.quizClass;
+      if (subSel) subSel.value = state.quizSubject;
+
+      const qList = getQuizQuestionsForCurrentFilter();
+      let correct = 0;
+      let answered = 0;
+      qList.forEach((item, idx) => {
+        if (state.quizAnswers[idx] !== undefined) {
+          answered++;
+          if (state.quizAnswers[idx] === item.ans) correct++;
+        }
+      });
+      const pct = qList.length > 0 ? Math.round((correct / qList.length) * 100) : 0;
+      document.getElementById('quizScoreBadge').textContent = `Score: ${correct} / ${qList.length} (${pct}%) · ${answered} Answered`;
+
+      document.getElementById('quizQuestionsContainer').innerHTML = qList.map((item, idx) => {
+        const chosen = state.quizAnswers[idx];
+        const hasAns = chosen !== undefined;
+        return `
+          <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-2xs space-y-3">
+            <div class="flex flex-wrap items-center justify-between gap-2 text-xs">
+              <span class="px-2.5 py-0.5 rounded-md bg-slate-900 text-white font-black">Question ${idx + 1} of ${qList.length}</span>
+              <span class="px-2.5 py-0.5 rounded-md bg-violet-50 text-violet-900 border border-violet-200 font-bold">${item.subject} · ${item.topic}</span>
+            </div>
+            <div class="text-sm sm:text-base font-bold text-slate-900">${item.q}</div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+              ${item.options.map((opt, oIdx) => {
+                const letter = String.fromCharCode(65 + oIdx);
+                let cls = 'p-3 rounded-xl border border-slate-200 bg-slate-50 hover:border-violet-400 text-left text-xs font-bold text-slate-800 cursor-pointer flex items-center gap-2';
+                if (hasAns) {
+                  if (oIdx === item.ans) cls = 'p-3 rounded-xl border-2 border-emerald-600 bg-emerald-50 text-left text-xs font-black text-emerald-950 flex items-center gap-2';
+                  else if (oIdx === chosen) cls = 'p-3 rounded-xl border-2 border-rose-500 bg-rose-50 text-left text-xs font-bold text-rose-900 flex items-center gap-2';
+                }
+                return `
+                  <button onclick="answerQuizQuestion(${idx}, ${oIdx})" class="${cls}">
+                    <span class="w-5 h-5 rounded bg-white border border-slate-300 flex items-center justify-center text-[11px] font-black shrink-0">${letter}</span>
+                    <span>${opt}</span>
+                  </button>
+                `;
+              }).join('')}
+            </div>
+            ${hasAns ? `
+              <div class="p-3.5 rounded-xl bg-emerald-50 border border-emerald-200 text-xs text-emerald-950 space-y-1">
+                <div class="font-black">✅ Step-by-Step Worked Solution:</div>
+                <div>${item.exp}</div>
+              </div>
+            ` : ''}
+          </div>
+        `;
+      }).join('');
+    }
+
+    function switchGameMode(mode) {
+      state.gameMode = mode;
+      renderGamesPage();
+    }
+
+    function answerTreasureStage(stageIdx, optIdx) {
+      const q = QUESTION_BANK[stageIdx % QUESTION_BANK.length];
+      if (optIdx === q.ans) {
+        if (stageIdx + 1 < 5) state.treasureUnlocked[stageIdx + 1] = true;
+        alert('🎉 Correct! ' + q.exp + '\n\nNext Island Chest Unlocked!');
+        if (stageIdx + 1 < 5) state.treasureStage = stageIdx + 1;
+      } else {
+        alert('❌ Not quite! Hint: ' + q.exp);
+      }
+      renderGamesPage();
+    }
+
+    function solveEscapeLock(lockIdx, optIdx) {
+      const q = QUESTION_BANK[(lockIdx + 3) % QUESTION_BANK.length];
+      const codeDigits = ['4', '2', '8', '5'];
+      if (optIdx === q.ans) {
+        state.escapeUnlocked[lockIdx] = true;
+        state.escapeDigits[lockIdx] = codeDigits[lockIdx];
+      } else {
+        alert('❌ Lock jammed! Check the formula: ' + q.exp);
+      }
+      renderGamesPage();
+    }
+
+    function answerArenaQuestion(optIdx) {
+      const q = QUESTION_BANK[state.arenaIndex % QUESTION_BANK.length];
+      if (optIdx === q.ans) {
+        state.arenaStreak++;
+        state.arenaScore += 10 * state.arenaStreak;
+        if (state.arenaScore > state.arenaBest) {
+          state.arenaBest = state.arenaScore;
+          try { localStorage.setItem('elimika_arena_best', String(state.arenaBest)); } catch (e) {}
+        }
+      } else {
+        state.arenaStreak = 0;
+      }
+      state.arenaIndex = (state.arenaIndex + 1) % QUESTION_BANK.length;
+      renderGamesPage();
+    }
+
+    function renderGamesPage() {
+      const modes = ['treasure', 'escape', 'arena'];
+      modes.forEach(m => {
+        const btn = document.getElementById('gameTab-' + m);
+        if (!btn) return;
+        btn.className = 'p-4 rounded-2xl border-2 text-left transition-all cursor-pointer ' + (state.gameMode === m ? 'bg-amber-50 border-amber-400 shadow-xs' : 'bg-white border-slate-200 hover:border-slate-300');
+      });
+
+      const container = document.getElementById('gameStageContainer');
+      if (state.gameMode === 'treasure') {
+        const islands = ['1. Zanzibar Spice Port', '2. Bagamoyo Kaole Ruins', '3. Serengeti Plains', '4. Ngorongoro Crater', '5. Uhuru Peak (Kilimanjaro)'];
+        const curStage = state.treasureStage;
+        const q = QUESTION_BANK[curStage % QUESTION_BANK.length];
+        container.innerHTML = `
+          <div class="space-y-5">
+            <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-100 pb-3">
+              <div>
+                <span class="text-xs font-black uppercase text-amber-700">🏴‍☠️ Mode 1 · NECTA Treasure Hunt</span>
+                <h2 class="text-lg font-black text-slate-900">Unlock All 5 Tanzania Heritage Checkpoints</h2>
+              </div>
+              <div class="text-xs font-bold text-emerald-700 bg-emerald-50 px-3 py-1.5 rounded-xl border border-emerald-200">
+                Unlocked: ${state.treasureUnlocked.filter(Boolean).length} / 5 Chests
+              </div>
+            </div>
+
+            <div class="grid grid-cols-2 sm:grid-cols-5 gap-2">
+              ${islands.map((name, idx) => {
+                const unlocked = state.treasureUnlocked[idx];
+                const active = curStage === idx;
+                return `
+                  <button ${unlocked ? `onclick="state.treasureStage=${idx}; renderGamesPage();"` : 'disabled'} class="p-3 rounded-xl border text-left text-xs font-bold transition-all ${active ? 'bg-slate-900 text-white border-slate-900' : unlocked ? 'bg-emerald-50 text-emerald-950 border-emerald-200 cursor-pointer' : 'bg-slate-100 text-slate-400 border-slate-200 opacity-60'}">
+                    <div>${unlocked ? '🔓 Chest ' + (idx + 1) : '🔒 Locked'}</div>
+                    <div class="truncate mt-0.5 text-[11px]">${name}</div>
+                  </button>
+                `;
+              }).join('')}
+            </div>
+
+            <div class="p-5 rounded-2xl bg-slate-50 border border-slate-200 space-y-3">
+              <div class="text-xs font-bold text-violet-700">${islands[curStage]} · ${q.subject} (${q.topic})</div>
+              <div class="text-sm sm:text-base font-extrabold text-slate-900">${q.q}</div>
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                ${q.options.map((opt, oIdx) => `
+                  <button onclick="answerTreasureStage(${curStage}, ${oIdx})" class="p-3 rounded-xl bg-white hover:bg-amber-50 border border-slate-200 hover:border-amber-400 text-left text-xs font-bold text-slate-800 cursor-pointer">
+                    ${String.fromCharCode(65 + oIdx)}. ${opt}
+                  </button>
+                `).join('')}
+              </div>
+            </div>
+          </div>
+        `;
+      } else if (state.gameMode === 'escape') {
+        const allSolved = state.escapeUnlocked.every(Boolean);
+        container.innerHTML = `
+          <div class="space-y-5">
+            <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-100 pb-3">
+              <div>
+                <span class="text-xs font-black uppercase text-indigo-700">🔐 Mode 2 · Escape the Classroom</span>
+                <h2 class="text-lg font-black text-slate-900">Solve All 4 Locks to Reveal the 4-Digit Laboratory Passcode</h2>
+              </div>
+              <div class="px-4 py-2 rounded-xl bg-slate-900 text-amber-400 font-black tracking-widest text-sm">
+                PASSCODE: ${state.escapeDigits.join(' - ')}
+              </div>
+            </div>
+
+            ${allSolved ? `
+              <div class="p-5 rounded-2xl bg-emerald-50 border-2 border-emerald-500 text-center space-y-2">
+                <div class="text-xl font-black text-emerald-900">🎉 DOOR UNLOCKED! Passcode 4 - 2 - 8 - 5 Verified!</div>
+                <p class="text-xs text-emerald-800">You solved all 4 STEM &amp; Humanities locks! Click below to reset or try Speed STEM Arena.</p>
+                <button onclick="state.escapeUnlocked=[false,false,false,false]; state.escapeDigits=['?','?','?','?']; renderGamesPage();" class="px-4 py-2 rounded-xl bg-emerald-600 text-white font-bold text-xs cursor-pointer">Play Again</button>
+              </div>
+            ` : ''}
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              ${[0, 1, 2, 3].map(lockIdx => {
+                const q = QUESTION_BANK[(lockIdx + 3) % QUESTION_BANK.length];
+                const solved = state.escapeUnlocked[lockIdx];
+                return `
+                  <div class="p-4 rounded-2xl border ${solved ? 'bg-emerald-50/70 border-emerald-400' : 'bg-slate-50 border-slate-200'} space-y-2.5">
+                    <div class="flex items-center justify-between text-xs font-black">
+                      <span>${solved ? '🔓 Lock #' + (lockIdx + 1) + ' Solved' : '🔒 Lock #' + (lockIdx + 1) + ' (' + q.subject + ')'}</span>
+                      <span class="px-2 py-0.5 rounded bg-slate-900 text-amber-300">Digit: ${state.escapeDigits[lockIdx]}</span>
+                    </div>
+                    <div class="text-xs sm:text-sm font-bold text-slate-900">${q.q}</div>
+                    <div class="grid grid-cols-2 gap-2">
+                      ${q.options.map((opt, oIdx) => `
+                        <button onclick="solveEscapeLock(${lockIdx}, ${oIdx})" class="p-2.5 rounded-xl bg-white hover:bg-indigo-50 border border-slate-200 text-left text-xs font-bold text-slate-800 cursor-pointer">
+                          ${String.fromCharCode(65 + oIdx)}. ${opt}
+                        </button>
+                      `).join('')}
+                    </div>
+                  </div>
+                `;
+              }).join('')}
+            </div>
+          </div>
+        `;
+      } else {
+        const q = QUESTION_BANK[state.arenaIndex % QUESTION_BANK.length];
+        container.innerHTML = `
+          <div class="space-y-5">
+            <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-100 pb-3">
+              <div>
+                <span class="text-xs font-black uppercase text-emerald-700">⚡ Mode 3 · Rapid-Fire STEM &amp; NECTA Arena</span>
+                <h2 class="text-lg font-black text-slate-900">Build Your Streak Multiplier &amp; Set a New High Score</h2>
+              </div>
+              <div class="flex items-center gap-2 text-xs font-black">
+                <span class="px-3 py-1.5 rounded-xl bg-amber-100 text-amber-950">🔥 Streak: ${state.arenaStreak}x</span>
+                <span class="px-3 py-1.5 rounded-xl bg-emerald-100 text-emerald-900">Score: ${state.arenaScore}</span>
+                <span class="px-3 py-1.5 rounded-xl bg-slate-900 text-white">🏆 Best: ${state.arenaBest}</span>
+              </div>
+            </div>
+
+            <div class="p-5 rounded-2xl bg-slate-50 border border-slate-200 space-y-4">
+              <div class="text-xs font-bold text-emerald-700">${q.subject} · ${q.topic}</div>
+              <div class="text-base sm:text-lg font-black text-slate-900">${q.q}</div>
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                ${q.options.map((opt, oIdx) => `
+                  <button onclick="answerArenaQuestion(${oIdx})" class="p-3.5 rounded-xl bg-white hover:bg-emerald-50 border border-slate-200 hover:border-emerald-500 text-left text-xs sm:text-sm font-bold text-slate-800 cursor-pointer">
+                    ${String.fromCharCode(65 + oIdx)}. ${opt}
+                  </button>
+                `).join('')}
+              </div>
+            </div>
+          </div>
+        `;
+      }
+    }
+
+    function renderAll() {
+      document.getElementById('count-annual-top').textContent = allPapers.filter(p => !p.isBook && !p.isSyllabus && p.category === 'Annual').length;
+      document.getElementById('count-books-top').textContent = allPapers.filter(p => p.isBook).length;
+      document.getElementById('count-syllabus-top').textContent = allPapers.filter(p => p.isSyllabus).length;
+
+      const pages = ['papers', 'books', 'syllabus', 'quiz', 'games'];
+      pages.forEach(p => {
+        const el = document.getElementById('page-' + p);
+        if (el) el.classList.toggle('hidden', state.activePage !== p);
+      });
+
+      const navStyles = {
+        papers: 'bg-slate-900 text-white',
+        books: 'bg-emerald-600 text-white',
+        syllabus: 'bg-amber-500 text-slate-950',
+        quiz: 'bg-indigo-600 text-white',
+        games: 'bg-amber-400 text-slate-950'
+      };
+      pages.forEach(p => {
+        const btn = document.getElementById('nav-' + p);
+        if (!btn) return;
+        btn.className = 'px-3 py-1.5 rounded-xl text-xs font-bold whitespace-nowrap transition-all cursor-pointer ' +
+          (state.activePage === p ? navStyles[p] : 'text-slate-700 hover:bg-slate-100');
+      });
+
+      if (state.activePage === 'papers') {
+        document.getElementById('step-1-view').classList.toggle('hidden', state.step !== 1);
+        document.getElementById('step-2-view').classList.toggle('hidden', state.step !== 2);
+        document.getElementById('step-3-view').classList.toggle('hidden', state.step !== 3);
+        if (state.step === 1) renderClassCards();
+        if (state.step === 2) renderStep2();
+        if (state.step === 3) renderStep3();
+      } else if (state.activePage === 'books') {
+        renderBooksPage();
+      } else if (state.activePage === 'syllabus') {
+        renderSyllabusPage();
+      } else if (state.activePage === 'quiz') {
+        renderQuizPage();
+      } else if (state.activePage === 'games') {
+        renderGamesPage();
+      }
+
+      const showMobileBack = state.activePage !== 'papers' || state.step > 1;
+      document.getElementById('mobileBackBar').classList.toggle('hidden', !showMobileBack);
+    }
+
+    loadCachedSheetData();
+    renderAll();
+    syncGoogleSheet();
+  </script>
+</body>
+</html>
