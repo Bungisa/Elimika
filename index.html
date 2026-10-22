@@ -31,7 +31,7 @@
       to { opacity: 1; transform: translateY(0); }
     }
   </style>
-</head>
+<script src="/_aistudio-iframe.js?v=6634132a"></script></head>
 <body class="min-h-screen flex flex-col bg-slate-50 text-slate-900 selection:bg-blue-600 selection:text-white">
 
   <!-- ==================== STICKY TOP NAVIGATION BAR ==================== -->
@@ -316,7 +316,7 @@
         </div>
       </section>
 
-      <!-- STEP 2: CHOOSE SUBJECT FOR SELECTED CLASS (PAST PAPERS ONLY) -->
+      <!-- STEP 2: CHOOSE SUBJECT FOR SELECTED CLASS (SIMPLE & CLEAN) -->
       <section id="step-2-view" class="hidden py-7 fade-in">
         <div class="max-w-5xl mx-auto px-4 sm:px-6 space-y-5">
           <div class="flex flex-wrap items-center justify-between gap-3 bg-white p-4 sm:p-5 rounded-2xl border border-slate-200 shadow-xs">
@@ -325,19 +325,13 @@
                 ← Back
               </button>
               <div>
-                <div class="text-[11px] font-bold uppercase tracking-wider text-blue-600">Step 2 of 3 · Select Subject (Past Papers)</div>
-                <h2 id="step2ClassTitle" class="text-lg sm:text-xl font-black text-slate-900">Form 4 Subjects</h2>
+                <div class="text-[11px] font-bold uppercase tracking-wider text-blue-600">Step 2 of 3 · Class → Subject</div>
+                <h2 id="step2ClassTitle" class="text-lg sm:text-xl font-black text-slate-900">Form 4 — Select Subject</h2>
               </div>
             </div>
             <div class="flex flex-wrap items-center gap-2">
-              <button onclick="openClassAnnualPapers(state.selectedClass)" class="px-3 py-2 rounded-xl bg-blue-50 hover:bg-blue-100 text-blue-900 border border-blue-200 font-bold text-xs cursor-pointer">
-                📋 Annual Exam Papers
-              </button>
               <button onclick="openPage('books', state.selectedClass)" class="px-3 py-2 rounded-xl bg-emerald-50 hover:bg-emerald-100 text-emerald-900 border border-emerald-200 font-bold text-xs cursor-pointer">
-                📘 Open TIE Books Page →
-              </button>
-              <button onclick="openMohaAppModal('moha', state.selectedClass)" class="px-3.5 py-2 rounded-xl bg-violet-600 hover:bg-violet-700 text-white font-bold text-xs cursor-pointer">
-                🤖 Moha AI App ↗
+                📘 TIE Books Page →
               </button>
             </div>
           </div>
@@ -346,7 +340,7 @@
         </div>
       </section>
 
-      <!-- STEP 3: EXAMINATION PAST PAPERS LIST (STRICTLY PAPERS ONLY — NO BOOKS MIXED) -->
+      <!-- STEP 3: SELECT YEAR -> TYPE OF PAPER (ANNUAL, MOCK, MIDTERM, NECTA, PRE-NECTA) -> PAPERS -->
       <section id="step-3-view" class="hidden py-7 fade-in">
         <div class="max-w-5xl mx-auto px-4 sm:px-6 space-y-5">
           <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-white p-4 sm:p-5 rounded-2xl border border-slate-200 shadow-xs">
@@ -355,31 +349,36 @@
                 ← Back
               </button>
               <div>
-                <div id="step3Breadcrumb" class="text-[11px] font-bold uppercase tracking-wider text-blue-600">Form 4 · Basic Mathematics</div>
-                <h2 id="step3Title" class="text-lg sm:text-xl font-black text-slate-900">Examination Past Papers &amp; Marking Schemes</h2>
+                <div id="step3Breadcrumb" class="text-[11px] font-bold uppercase tracking-wider text-blue-600">Step 3 of 3 · Class → Subject → Year → Type of Paper</div>
+                <h2 id="step3Title" class="text-lg sm:text-xl font-black text-slate-900">Examination Past Papers</h2>
               </div>
             </div>
             <div class="flex flex-wrap items-center gap-2">
               <button onclick="openPage('books', state.selectedClass, state.selectedSubject)" class="px-3 py-2 rounded-xl bg-emerald-50 hover:bg-emerald-100 text-emerald-900 border border-emerald-300 font-bold text-xs cursor-pointer">
-                📘 View TIE Book on Books Page →
+                📘 TIE Books →
               </button>
               <button onclick="openPage('quiz', state.selectedClass, state.selectedSubject)" class="px-3 py-2 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 font-bold text-xs cursor-pointer">
-                🎯 Subject Quiz
-              </button>
-              <button onclick="openMohaAppModal('moha', state.selectedClass, state.selectedSubject)" class="px-3.5 py-2 rounded-xl bg-violet-600 hover:bg-violet-700 text-white font-bold text-xs cursor-pointer">
-                🤖 Moha AI App ↗
+                🎯 Solving Quiz
               </button>
             </div>
           </div>
 
-          <!-- Exam Category Filter Buttons (ALL, NECTA, Annual, Mock, Pre-NECTA) & Year Filter -->
-          <div class="flex flex-wrap items-center justify-between gap-3 bg-white p-3.5 rounded-2xl border border-slate-200">
-            <div id="categoryFilterBar" class="flex flex-wrap items-center gap-1.5"></div>
-            <div class="flex items-center gap-2 text-xs">
-              <label class="font-bold text-slate-600">Year:</label>
-              <select id="yearFilterSelect" onchange="setYearFilter(this.value)" class="px-3 py-1.5 rounded-xl border border-slate-300 font-bold bg-white text-slate-900">
-                <option value="ALL">All Years</option>
-              </select>
+          <!-- SIMPLE 2-STEP FILTER: 1. YEAR -> 2. TYPE OF PAPER (Annual, Mock, Midterm, NECTA, Pre-NECTA) -->
+          <div class="bg-white p-4 sm:p-5 rounded-2xl border border-slate-200 shadow-xs space-y-4">
+            <!-- 1. Select Year -->
+            <div class="space-y-2">
+              <div class="text-xs font-extrabold uppercase tracking-wider text-slate-500">
+                1. Select Year
+              </div>
+              <div id="yearFilterBar" class="flex flex-wrap items-center gap-1.5"></div>
+            </div>
+
+            <!-- 2. Select Type of Paper -->
+            <div class="space-y-2 pt-3 border-t border-slate-100">
+              <div class="text-xs font-extrabold uppercase tracking-wider text-slate-500">
+                2. Select Type of Paper (Annual, Mock, Midterm, NECTA or Pre-NECTA)
+              </div>
+              <div id="categoryFilterBar" class="flex flex-wrap items-center gap-2"></div>
             </div>
           </div>
 
@@ -400,11 +399,11 @@
               📘 Official TIE Student Textbooks Only
             </span>
             <h1 class="text-xl sm:text-2xl font-black">TIE Textbooks Library (Standard 1–7 &amp; Form 1–6)</h1>
-            <p class="text-xs text-emerald-100">Dedicated textbook library — preview online, download PDF, or open in the Moha AI App.</p>
+            <p class="text-xs text-emerald-100">Dedicated textbook library — Read, Download, or open Solution in the Moha AI App.</p>
           </div>
           <div class="flex items-center gap-2 shrink-0">
             <button onclick="openMohaAppModal('moha')" class="px-3.5 py-2 bg-violet-600 hover:bg-violet-500 text-white font-bold text-xs rounded-xl cursor-pointer">
-              🤖 Read with Moha AI App ↗
+              🤖 Moha AI App ↗
             </button>
             <button onclick="handleGoBack()" class="px-3.5 py-2 bg-white/15 hover:bg-white/25 text-white font-bold text-xs rounded-xl cursor-pointer">
               ← Back
@@ -439,7 +438,7 @@
               📜 Official MoEST / TIE Syllabuses (2023 Revised &amp; Current)
             </span>
             <h1 class="text-xl sm:text-2xl font-black">Official Tanzania Curriculum Syllabuses</h1>
-            <p class="text-xs text-amber-200">Dedicated syllabus portal — preview and download official TIE Syllabuses for Primary &amp; Secondary schools.</p>
+            <p class="text-xs text-amber-200">Dedicated syllabus portal — Read and Download official TIE Syllabuses for Primary &amp; Secondary schools.</p>
           </div>
           <div class="flex items-center gap-2 shrink-0">
             <button onclick="openMohaAppModal('studio')" class="px-3.5 py-2 bg-amber-400 hover:bg-amber-300 text-slate-950 font-black text-xs rounded-xl cursor-pointer">
@@ -621,8 +620,8 @@
         </div>
         <div class="flex items-center gap-1.5 shrink-0">
           <div id="viewerToggleBtns" class="hidden items-center bg-slate-200 p-0.5 rounded-xl">
-            <button id="btnViewPaper" onclick="switchViewerType('paper')" class="px-2.5 py-1 text-xs font-bold rounded-lg bg-white text-slate-900 cursor-pointer">Questions</button>
-            <button id="btnViewAnswers" onclick="switchViewerType('answers')" class="px-2.5 py-1 text-xs font-bold rounded-lg text-slate-600 cursor-pointer">Answers</button>
+            <button id="btnViewPaper" onclick="switchViewerType('paper')" class="px-2.5 py-1 text-xs font-bold rounded-lg bg-white text-slate-900 cursor-pointer">Read</button>
+            <button id="btnViewAnswers" onclick="switchViewerType('answers')" class="px-2.5 py-1 text-xs font-bold rounded-lg text-slate-600 cursor-pointer">Solution</button>
           </div>
           <button onclick="closeViewerModal()" class="px-3 py-1.5 bg-rose-600 hover:bg-rose-700 text-white font-bold text-xs rounded-xl cursor-pointer">
             Close ✕
@@ -635,12 +634,15 @@
       </div>
 
       <div class="px-4 py-3 bg-white border-t border-slate-200 flex flex-wrap items-center justify-between gap-2 text-xs">
-        <div class="flex flex-wrap items-center gap-1.5">
-          <button id="viewerDownloadBtn" class="px-3.5 py-2 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl cursor-pointer">
-            ⬇ Direct Download PDF
+        <div class="flex flex-wrap items-center gap-2">
+          <button id="viewerReadBtn" onclick="switchViewerType('paper')" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl cursor-pointer">
+            📖 Read
           </button>
-          <button id="viewerMohaBtn" class="px-3.5 py-2 bg-violet-600 hover:bg-violet-700 text-white font-bold rounded-xl cursor-pointer">
-            🤖 Solve &amp; Explain in Moha AI App ↗
+          <button id="viewerDownloadBtn" class="px-4 py-2 bg-slate-900 hover:bg-slate-800 text-white font-bold rounded-xl cursor-pointer">
+            ⬇ Download
+          </button>
+          <button id="viewerSolutionBtn" class="px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl cursor-pointer">
+            ✅ Solution
           </button>
         </div>
         <button onclick="closeViewerModal()" class="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold rounded-xl cursor-pointer">
@@ -747,6 +749,7 @@
       'Form 6': ['Advanced Mathematics', 'Basic Applied Mathematics (BAM)', 'Physics', 'Chemistry', 'Biology', 'Geography', 'History', 'Historia ya Tanzania na Maadili', 'Economics', 'Accountancy', 'Commerce', 'General Studies', 'Academic Communication', 'Computer Science', 'English Language', 'Kiswahili', 'French']
     };
 
+    // Built-in verified Past Papers (NECTA & Annual), TIE Books, and Syllabuses for instant 0ms startup
     const BUILTIN_RESOURCES = [
       // Past Papers — NECTA & Annual Examination Papers
       { id: 'p-f2-math-25', title: 'Form 2 Basic Mathematics FTNA 2025', form: 'Form 2', subject: 'Basic Mathematics', year: '2025', category: 'NECTA', paperUrl: 'https://drive.google.com/file/d/1YzJrJhluBVSPALrz3iZLgVxGLFGTlqB5/view?usp=drive_link', answersUrl: 'https://drive.google.com/file/d/1hblqzTn6CQcYOOt-AaY5Mcy26SseVoDA/view?usp=drive_link', isBook: false, isSyllabus: false },
@@ -809,6 +812,7 @@
       { id: 's-bs', title: 'Business Studies Official TIE Syllabus (Form 1 - 4)', form: 'Form 1 - 4', subject: 'Business Studies', year: '2023', category: 'TIE Syllabus', paperUrl: 'https://drive.google.com/file/d/1Qjyl7EZ0obuonkILrYAqzdADtustahBH/view?usp=drive_link', answersUrl: null, isBook: false, isSyllabus: true }
     ];
 
+    // Curated Interactive Quiz & Games Question Bank
     const QUESTION_BANK = [
       { subject: 'Basic Mathematics', topic: 'Coordinate Geometry & Algebra', q: 'Find the gradient (slope) of the straight line passing through points A(2, 3) and B(6, 11).', options: ['m = 2', 'm = 4', 'm = 1/2', 'm = -2'], ans: 0, exp: 'Using gradient formula m = (y₂ - y₁) / (x₂ - x₁) = (11 - 3) / (6 - 2) = 8 / 4 = 2.' },
       { subject: 'Basic Mathematics', topic: 'Sequences & Series', q: 'The 1st term of an Arithmetic Progression (AP) is 4 and the common difference is 3. Find the 10th term.', options: ['27', '31', '34', '28'], ans: 1, exp: 'Using Aₙ = A₁ + (n - 1)d: A₁₀ = 4 + (10 - 1)×3 = 4 + 27 = 31.' },
@@ -829,8 +833,8 @@
 
     let allPapers = [...BUILTIN_RESOURCES];
     let state = {
-      activePage: 'papers',
-      step: 1,
+      activePage: 'papers', // 'papers' | 'books' | 'syllabus' | 'quiz' | 'games'
+      step: 1,              // 1 | 2 | 3
       selectedClass: '',
       selectedSubject: '',
       selectedCategory: 'ALL',
@@ -841,7 +845,7 @@
       quizClass: 'Form 4',
       quizSubject: 'Basic Mathematics',
       quizAnswers: {},
-      gameMode: 'treasure',
+      gameMode: 'treasure', // 'treasure' | 'escape' | 'arena'
       treasureStage: 0,
       treasureUnlocked: [true, false, false, false, false],
       escapeUnlocked: [false, false, false, false],
@@ -1005,6 +1009,7 @@
 
     function normalizeExamCategory(rawCat, rawTitle) {
       const combined = ((rawCat || '') + ' ' + (rawTitle || '')).toLowerCase();
+      if (combined.includes('midterm') || combined.includes('mid-term') || combined.includes('mid term') || combined.includes('nusu muhula')) return 'Midterm';
       if (combined.includes('annual') || combined.includes('terminal')) return 'Annual';
       if (combined.includes('pre-necta') || combined.includes('pre necta')) return 'Pre-NECTA';
       if (combined.includes('mock')) return 'Mock';
@@ -1252,6 +1257,16 @@
       renderStep3();
     }
 
+    function openSolutionForItem(itemId) {
+      const item = allPapers.find(p => p.id === itemId);
+      if (!item) return;
+      if (item.answersUrl) {
+        openViewerModal(item.id, 'answers');
+      } else {
+        openMohaAppModal('moha', item.form, item.subject, item.title);
+      }
+    }
+
     function openViewerModal(itemId, type) {
       const item = allPapers.find(p => p.id === itemId);
       if (!item) return;
@@ -1259,7 +1274,7 @@
       state.viewerType = type || 'paper';
 
       document.getElementById('viewerMeta').textContent = item.category + ' · ' + item.form + ' · ' + item.year;
-      document.getElementById('viewerTitle').textContent = state.viewerType === 'answers' ? item.title + ' (Marking Scheme)' : item.title;
+      document.getElementById('viewerTitle').textContent = state.viewerType === 'answers' ? item.title + ' (Solution)' : item.title;
 
       const toggleContainer = document.getElementById('viewerToggleBtns');
       if (item.paperUrl && item.answersUrl) {
@@ -1276,9 +1291,13 @@
       document.getElementById('viewerDownloadBtn').onclick = function () {
         window.open(getDownloadUrl(targetUrl), '_blank', 'noopener,noreferrer');
       };
-      document.getElementById('viewerMohaBtn').onclick = function () {
-        closeViewerModal();
-        openMohaAppModal('moha', item.form, item.subject, item.title);
+      document.getElementById('viewerSolutionBtn').onclick = function () {
+        if (item.answersUrl) {
+          openViewerModal(item.id, 'answers');
+        } else {
+          closeViewerModal();
+          openMohaAppModal('moha', item.form, item.subject, item.title);
+        }
       };
 
       document.getElementById('viewerModal').classList.remove('hidden');
@@ -1317,25 +1336,27 @@
       document.getElementById('mohaAppModal').classList.add('hidden');
     }
 
+    // ==================== RENDER PAGE 1: PAST PAPERS ONLY ====================
     function renderClassCards() {
       const secClasses = [
-        { name: 'Form 1', sub: 'Annual & Terminal Papers' },
-        { name: 'Form 2', sub: 'FTNA & Annual Papers' },
-        { name: 'Form 3', sub: 'Annual & Mock Papers' },
-        { name: 'Form 4', sub: 'CSEE, Mock & Annual' },
-        { name: 'Form 5', sub: 'Annual & Mock Papers' },
-        { name: 'Form 6', sub: 'ACSEE, Mock & Annual' }
+        { name: 'Form 1', sub: 'Annual, Mock & Midterm' },
+        { name: 'Form 2', sub: 'NECTA, Annual & Mock' },
+        { name: 'Form 3', sub: 'Annual, Mock & Midterm' },
+        { name: 'Form 4', sub: 'NECTA, Pre-NECTA & Mock' },
+        { name: 'Form 5', sub: 'Annual, Mock & Midterm' },
+        { name: 'Form 6', sub: 'NECTA, Pre-NECTA & Mock' }
       ];
       const priClasses = [
-        { name: 'Standard 1', sub: 'Annual & Terminal' },
-        { name: 'Standard 2', sub: 'Annual & Terminal' },
-        { name: 'Standard 3', sub: 'Annual & Terminal' },
-        { name: 'Standard 4', sub: 'SFNA & Annual Papers' },
-        { name: 'Standard 5', sub: 'Annual & Terminal' },
-        { name: 'Standard 6', sub: 'Annual & Terminal' },
-        { name: 'Standard 7', sub: 'PSLE, Mock & Annual' }
+        { name: 'Standard 1', sub: 'Annual & Midterm' },
+        { name: 'Standard 2', sub: 'Annual & Midterm' },
+        { name: 'Standard 3', sub: 'Annual & Midterm' },
+        { name: 'Standard 4', sub: 'NECTA, Annual & Mock' },
+        { name: 'Standard 5', sub: 'Annual & Midterm' },
+        { name: 'Standard 6', sub: 'Annual & Midterm' },
+        { name: 'Standard 7', sub: 'NECTA, Pre-NECTA & Mock' }
       ];
 
+      // Strictly count ONLY Past Papers (!p.isBook && !p.isSyllabus)
       const secGrid = document.getElementById('secondaryClassGrid');
       secGrid.innerHTML = secClasses.map(c => {
         const count = allPapers.filter(p => !p.isBook && !p.isSyllabus && p.form.toLowerCase() === c.name.toLowerCase()).length;
@@ -1367,35 +1388,21 @@
 
     function renderStep2() {
       const cls = state.selectedClass || 'Form 4';
-      document.getElementById('step2ClassTitle').textContent = cls + ' — Choose Subject (Past Papers)';
+      document.getElementById('step2ClassTitle').textContent = cls + ' — Select Subject';
       const subjects = TIE_SUBJECTS[cls] || TIE_SUBJECTS['Form 4'];
 
       const grid = document.getElementById('subjectGrid');
       grid.innerHTML = subjects.map(sub => {
         const papersForSub = allPapers.filter(p => !p.isBook && !p.isSyllabus && p.form.toLowerCase() === cls.toLowerCase() && p.subject.toLowerCase() === sub.toLowerCase());
         const count = papersForSub.length;
-        const annualCount = papersForSub.filter(p => p.category === 'Annual').length;
         return `
-          <div class="p-4 rounded-2xl bg-white border border-slate-200 hover:border-blue-500 shadow-2xs flex flex-col justify-between gap-3 transition-all">
-            <div onclick="selectSubject('${sub}')" class="cursor-pointer">
-              <div class="flex items-center justify-between gap-2">
-                <h3 class="font-extrabold text-sm sm:text-base text-slate-900">${sub}</h3>
-                <span class="px-2 py-0.5 rounded-lg bg-blue-50 text-blue-800 font-bold text-xs">${count} papers</span>
-              </div>
-              <p class="text-xs text-slate-500 mt-1">NECTA, Annual, Mock &amp; Pre-NECTA Papers ${annualCount > 0 ? '· ' + annualCount + ' Annual' : ''}</p>
+          <button onclick="selectSubject('${sub}')" class="group p-4 rounded-2xl bg-white hover:bg-blue-50 border border-slate-200 hover:border-blue-600 shadow-2xs flex items-center justify-between gap-3 text-left transition-all cursor-pointer">
+            <div>
+              <h3 class="font-extrabold text-sm sm:text-base text-slate-900 group-hover:text-blue-700">${sub}</h3>
+              <p class="text-xs text-slate-500 mt-0.5">${count} papers · Annual, Mock, Midterm, NECTA, Pre-NECTA</p>
             </div>
-            <div class="flex flex-wrap items-center gap-1.5 pt-2 border-t border-slate-100">
-              <button onclick="selectSubject('${sub}', 'ALL')" class="flex-1 py-2 px-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs cursor-pointer">
-                All Papers
-              </button>
-              <button onclick="selectSubject('${sub}', 'Annual')" class="py-2 px-2.5 rounded-xl bg-indigo-50 hover:bg-indigo-100 text-indigo-900 border border-indigo-200 font-bold text-xs cursor-pointer" title="View Annual Examination Papers">
-                Annual
-              </button>
-              <button onclick="openPage('quiz', '${cls}', '${sub}')" class="py-2 px-2.5 rounded-xl bg-amber-100 hover:bg-amber-200 text-amber-950 font-bold text-xs cursor-pointer" title="Subject Solving Quiz">
-                🎯 Quiz
-              </button>
-            </div>
-          </div>
+            <span class="px-2.5 py-1 rounded-xl bg-blue-600 text-white font-bold text-xs shrink-0">Select →</span>
+          </button>
         `;
       }).join('');
     }
@@ -1425,20 +1432,19 @@
 
           <div class="flex flex-wrap items-center gap-2 pt-2.5 border-t border-slate-100">
             ${hasLink ? `
-              <button onclick="openViewerModal('${item.id}', 'paper')" class="px-3 py-2 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs cursor-pointer">
-                👁 Preview PDF
+              <button onclick="openViewerModal('${item.id}', 'paper')" class="flex-1 py-2 px-3 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs text-center cursor-pointer">
+                📖 Read
               </button>
-              <a href="${getDownloadUrl(item.paperUrl)}" target="_blank" rel="noopener noreferrer" class="px-3 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs">
+              <a href="${getDownloadUrl(item.paperUrl)}" target="_blank" rel="noopener noreferrer" class="flex-1 py-2 px-3 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs text-center">
                 ⬇ Download
               </a>
-            ` : ''}
-            ${item.answersUrl ? `
-              <button onclick="openViewerModal('${item.id}', 'answers')" class="px-3 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs cursor-pointer">
-                ✅ Marking Scheme
-              </button>
-            ` : ''}
-            <button onclick="openMohaAppModal('moha', '${item.form}', '${item.subject}', '${item.title.replace(/'/g, "\\'")}')" class="px-3 py-2 rounded-xl bg-violet-50 hover:bg-violet-100 text-violet-900 border border-violet-200 font-bold text-xs cursor-pointer ml-auto">
-              🤖 Moha AI App ↗
+            ` : `
+              <span class="flex-1 py-2 px-3 rounded-xl bg-slate-100 text-slate-500 font-bold text-xs text-center">
+                PDF Pending
+              </span>
+            `}
+            <button onclick="openSolutionForItem('${item.id}')" class="flex-1 py-2 px-3 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs text-center cursor-pointer">
+              ✅ Solution
             </button>
           </div>
         </article>
@@ -1455,8 +1461,9 @@
         : (cls || 'All Classes') + ' · ' + (sub || 'All Subjects');
       document.getElementById('step3Title').textContent = q
         ? 'Past Papers matching "' + state.searchQuery + '"'
-        : (sub ? sub + ' Examination Papers' : (state.selectedCategory === 'Annual' ? 'Annual Examination Papers' : 'Examination Past Papers'));
+        : (sub ? cls + ' · ' + sub : (state.selectedCategory === 'Annual' ? 'Annual Examination Papers' : 'Examination Past Papers'));
 
+      // STRICTLY FILTER PAST PAPERS ONLY (!p.isBook && !p.isSyllabus)
       let basePapers = allPapers.filter(p => {
         if (p.isBook || p.isSyllabus) return false;
         if (q) {
@@ -1468,44 +1475,50 @@
         return matchCls && matchSub;
       });
 
-      const examCategories = ['ALL', 'NECTA', 'Annual', 'Mock', 'Pre-NECTA'];
+      // 1. Select Year Buttons (All Years + available years + standard recent years)
+      const dataYears = basePapers.map(p => p.year).filter(Boolean);
+      const standardYears = ['2026', '2025', '2024', '2023', '2022'];
+      const years = ['ALL', ...Array.from(new Set([...dataYears, ...standardYears])).sort((a, b) => b.localeCompare(a))];
+      document.getElementById('yearFilterBar').innerHTML = years.map(yr => {
+        const active = state.selectedYear === yr;
+        return `
+          <button onclick="setYearFilter('${yr}')" class="px-3.5 py-1.5 rounded-xl text-xs font-bold cursor-pointer transition-colors ${active ? 'bg-slate-900 text-white shadow-2xs' : 'bg-slate-100 text-slate-700 hover:bg-slate-200'}">
+            ${yr === 'ALL' ? 'All Years' : yr}
+          </button>
+        `;
+      }).join('');
+
+      // 2. Select Type of Paper Buttons: ALL, Annual, Mock, Midterm, NECTA, Pre-NECTA
+      const examCategories = ['ALL', 'Annual', 'Mock', 'Midterm', 'NECTA', 'Pre-NECTA'];
       document.getElementById('categoryFilterBar').innerHTML = examCategories.map(cat => {
         const active = state.selectedCategory === cat;
         return `
-          <button onclick="setCategoryFilter('${cat}')" class="px-3.5 py-1.5 rounded-xl text-xs font-bold cursor-pointer transition-colors ${active ? 'bg-blue-600 text-white shadow-2xs' : 'bg-slate-100 text-slate-700 hover:bg-slate-200'}">
-            ${cat === 'ALL' ? 'All Exam Papers' : cat}
+          <button onclick="setCategoryFilter('${cat}')" class="px-3.5 py-2 rounded-xl text-xs font-bold cursor-pointer transition-colors ${active ? 'bg-blue-600 text-white shadow-2xs' : 'bg-slate-100 text-slate-700 hover:bg-slate-200'}">
+            ${cat === 'ALL' ? 'All Types' : cat}
           </button>
         `;
       }).join('');
 
       let filtered = basePapers;
-      if (state.selectedCategory !== 'ALL') {
-        filtered = filtered.filter(p => p.category.toLowerCase() === state.selectedCategory.toLowerCase());
-      }
-
-      const years = Array.from(new Set(filtered.map(p => p.year).filter(Boolean))).sort((a, b) => b.localeCompare(a));
-      const yearSelect = document.getElementById('yearFilterSelect');
-      yearSelect.innerHTML = '<option value="ALL">All Years</option>' + years.map(y => `<option value="${y}" ${state.selectedYear === y ? 'selected' : ''}>${y}</option>`).join('');
-
       if (state.selectedYear !== 'ALL') {
         filtered = filtered.filter(p => p.year === state.selectedYear);
+      }
+      if (state.selectedCategory !== 'ALL') {
+        filtered = filtered.filter(p => p.category.toLowerCase() === state.selectedCategory.toLowerCase());
       }
 
       const grid = document.getElementById('papersGrid');
       if (filtered.length === 0) {
         grid.innerHTML = `
           <div class="col-span-full bg-white rounded-2xl border border-slate-200 p-8 text-center space-y-3">
-            <div class="text-base font-bold text-slate-800">No ${state.selectedCategory !== 'ALL' ? state.selectedCategory : ''} past papers found for this selection yet.</div>
-            <p class="text-xs text-slate-500">Switch exam filter above, view the TIE Textbook on the Books page, or open the Moha AI App.</p>
+            <div class="text-base font-bold text-slate-800">No ${state.selectedCategory !== 'ALL' ? state.selectedCategory : ''} papers found for ${state.selectedYear !== 'ALL' ? state.selectedYear : 'this selection'} yet.</div>
+            <p class="text-xs text-slate-500">Select another Year or Type of Paper above, or open the Solution in the Moha AI App.</p>
             <div class="flex flex-wrap justify-center gap-2 pt-1">
-              <button onclick="setCategoryFilter('ALL')" class="px-4 py-2 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs cursor-pointer">
-                Show All Exam Categories
+              <button onclick="state.selectedYear='ALL'; state.selectedCategory='ALL'; renderStep3();" class="px-4 py-2 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs cursor-pointer">
+                Show All Years &amp; Paper Types
               </button>
-              <button onclick="openPage('books', '${cls}', '${sub}')" class="px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs cursor-pointer">
-                📘 Open TIE Books Page →
-              </button>
-              <button onclick="openMohaAppModal('moha', '${cls}', '${sub}')" class="px-4 py-2 rounded-xl bg-violet-600 hover:bg-violet-700 text-white font-bold text-xs cursor-pointer">
-                🤖 Open in Moha AI App ↗
+              <button onclick="openMohaAppModal('moha', '${cls}', '${sub}')" class="px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs cursor-pointer">
+                ✅ Solution in Moha AI App ↗
               </button>
             </div>
           </div>
@@ -1515,6 +1528,7 @@
       }
     }
 
+    // ==================== RENDER PAGE 2: DEDICATED TIE BOOKS ONLY ====================
     function renderBooksPage() {
       const classes = ['ALL', 'Form 1', 'Form 2', 'Form 3', 'Form 4', 'Form 5', 'Form 6', 'Standard 1', 'Standard 2', 'Standard 3', 'Standard 4', 'Standard 5', 'Standard 6', 'Standard 7'];
       document.getElementById('booksClassTabs').innerHTML = classes.map(c => {
@@ -1539,6 +1553,7 @@
         : '<div class="col-span-full p-8 text-center bg-white rounded-2xl border border-slate-200 text-xs font-bold text-slate-500">No TIE Textbooks match this filter.</div>';
     }
 
+    // ==================== RENDER PAGE 3: DEDICATED SYLLABUSES ONLY ====================
     function renderSyllabusPage() {
       const q = (document.getElementById('syllabusSearchInput')?.value || '').trim().toLowerCase();
       const syllabuses = allPapers.filter(p => {
@@ -1552,6 +1567,7 @@
         : '<div class="col-span-full p-8 text-center bg-white rounded-2xl border border-slate-200 text-xs font-bold text-slate-500">No Syllabuses match this filter.</div>';
     }
 
+    // ==================== RENDER PAGE 4: DEDICATED SOLVING QUIZ PAGE ====================
     function getQuizQuestionsForCurrentFilter() {
       const sub = state.quizSubject;
       const matches = QUESTION_BANK.filter(q => q.subject.toLowerCase() === sub.toLowerCase());
@@ -1630,6 +1646,7 @@
       }).join('');
     }
 
+    // ==================== RENDER PAGE 5: DEDICATED INTERACTIVE GAMES PAGE ====================
     function switchGameMode(mode) {
       state.gameMode = mode;
       renderGamesPage();
@@ -1804,17 +1821,21 @@
       }
     }
 
+    // ==================== MASTER RENDER DISPATCHER ====================
     function renderAll() {
+      // Update top counts strictly by type
       document.getElementById('count-annual-top').textContent = allPapers.filter(p => !p.isBook && !p.isSyllabus && p.category === 'Annual').length;
       document.getElementById('count-books-top').textContent = allPapers.filter(p => p.isBook).length;
       document.getElementById('count-syllabus-top').textContent = allPapers.filter(p => p.isSyllabus).length;
 
+      // Toggle the 5 distinct pages
       const pages = ['papers', 'books', 'syllabus', 'quiz', 'games'];
       pages.forEach(p => {
         const el = document.getElementById('page-' + p);
         if (el) el.classList.toggle('hidden', state.activePage !== p);
       });
 
+      // Update Top Nav Active States
       const navStyles = {
         papers: 'bg-slate-900 text-white',
         books: 'bg-emerald-600 text-white',
@@ -1850,6 +1871,7 @@
       document.getElementById('mobileBackBar').classList.toggle('hidden', !showMobileBack);
     }
 
+    // Boot immediately from cache + built-in data, then sync live Google Sheet in background
     loadCachedSheetData();
     renderAll();
     syncGoogleSheet();
