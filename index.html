@@ -69,12 +69,9 @@
         <button id="nav-quiz" onclick="openPage('quiz')" class="px-3 py-1.5 rounded-xl text-xs font-bold whitespace-nowrap transition-all cursor-pointer text-slate-700 hover:bg-slate-100">
           🎯 Solving Quiz
         </button>
-        <button id="nav-games" onclick="openPage('games')" class="px-3 py-1.5 rounded-xl text-xs font-bold whitespace-nowrap transition-all cursor-pointer text-slate-700 hover:bg-slate-100">
-          🎮 Interactive Games
-        </button>
         <button onclick="openMohaAppModal('moha')" class="px-3.5 py-1.5 rounded-xl text-xs font-bold whitespace-nowrap transition-all cursor-pointer bg-violet-600 hover:bg-violet-700 text-white shadow-xs flex items-center gap-1">
           <span>🤖 Moha AI</span>
-          <span class="text-[10px] bg-white/20 px-1.5 py-0.5 rounded">App ↗</span>
+          <span class="text-[10px] bg-white/20 px-1.5 py-0.5 rounded">Open App ↗</span>
         </button>
       </nav>
     </div>
@@ -97,8 +94,8 @@
             Select Class &amp; Subject for <span class="text-blue-600">Examination Past Papers</span>
           </h1>
 
-          <!-- Fast Debounced Search Bar (Searches Past Papers) -->
-          <div class="relative max-w-2xl mx-auto">
+          <!-- Fast Debounced Search Bar + Recent Search Queries Dropdown -->
+          <div id="smartSearchContainer" class="relative max-w-2xl mx-auto">
             <svg class="w-5 h-5 text-slate-400 absolute left-4 top-1/2 -translate-y-1/2 pointer-events-none" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
               <circle cx="11" cy="11" r="8"></circle>
               <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
@@ -106,14 +103,17 @@
             <input
               id="smartSearchInput"
               type="text"
+              onfocus="showRecentSearchDropdown()"
+              onclick="showRecentSearchDropdown()"
               oninput="handleSmartSearch(this.value)"
+              onkeydown="handleSearchKeyDown(event)"
               placeholder="Search exam papers e.g. Form 5 Physics Annual, Form 4 Math NECTA, Form 2 Biology..."
               class="w-full pl-12 pr-24 py-3.5 rounded-2xl bg-white border-2 border-slate-200 shadow-xs text-sm font-medium text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-blue-600"
             />
             <div class="absolute right-2.5 top-1/2 -translate-y-1/2 flex items-center gap-1">
               <button
                 id="clearSearchBtn"
-                onclick="handleSmartSearch('')"
+                onclick="handleSmartSearch(''); showRecentSearchDropdown();"
                 class="hidden p-2 text-slate-400 hover:text-slate-600 cursor-pointer"
                 title="Clear search"
               >
@@ -126,6 +126,15 @@
               >
                 🎤
               </button>
+            </div>
+
+            <!-- Recent Search Queries Suggestions Dropdown -->
+            <div id="recentSearchesDropdown" class="hidden absolute left-0 right-0 top-full mt-2 z-30 bg-white rounded-2xl border border-slate-200 shadow-xl overflow-hidden text-left">
+              <div class="px-4 py-2.5 bg-slate-50 border-b border-slate-100 flex items-center justify-between">
+                <span class="text-[11px] font-extrabold uppercase tracking-wider text-slate-500">Recent Searches</span>
+                <button type="button" onclick="clearRecentSearchQueries()" class="text-[11px] font-bold text-rose-600 hover:text-rose-700 cursor-pointer">Clear All</button>
+              </div>
+              <div id="recentSearchesList" class="max-h-60 overflow-y-auto divide-y divide-slate-100"></div>
             </div>
           </div>
 
@@ -143,8 +152,8 @@
             <button onclick="openPage('quiz')" class="px-3.5 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-xs flex items-center gap-1.5 shadow-xs cursor-pointer">
               🎯 Daily Solving Quiz Page
             </button>
-            <button onclick="openPage('games')" class="px-3.5 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-amber-300 font-bold text-xs flex items-center gap-1.5 shadow-xs cursor-pointer">
-              🎮 Interactive Games Page
+            <button onclick="openMohaAppModal('moha')" class="px-3.5 py-2 rounded-xl bg-violet-600 hover:bg-violet-700 text-white font-bold text-xs flex items-center gap-1.5 shadow-xs cursor-pointer">
+              🤖 Moha AI (Go to App ↗)
             </button>
           </div>
         </div>
@@ -195,7 +204,7 @@
             </div>
           </div>
 
-          <!-- SECTION 2: CLEARLY SEPARATED PORTALS (BOOKS, SYLLABUSES, INTERACTIVE GAMES, QUIZ & MOHA AI APP) -->
+          <!-- SECTION 2: CLEARLY SEPARATED PORTALS (BOOKS, SYLLABUSES, QUIZ & MOHA AI APP) -->
           <div class="space-y-3">
             <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1 px-1">
               <div>
@@ -203,7 +212,7 @@
                   Dedicated Learning Portals
                 </span>
                 <h2 class="text-lg sm:text-xl font-black text-slate-900">
-                  2. TIE Textbooks, Interactive Games, Solving Quiz &amp; Moha AI App
+                  2. TIE Textbooks, Official Syllabuses, Solving Quiz &amp; Moha AI App
                 </h2>
               </div>
               <span class="text-xs text-slate-500 font-medium">
@@ -211,31 +220,8 @@
               </span>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <!-- Card 1: Dedicated Interactive Games Page -->
-              <div class="bg-gradient-to-br from-slate-900 via-indigo-950 to-slate-900 text-white rounded-2xl p-5 border border-indigo-800/80 shadow-xs flex flex-col justify-between gap-4">
-                <div class="space-y-2">
-                  <div class="flex items-center justify-between gap-2">
-                    <span class="px-2.5 py-0.5 rounded-md bg-amber-400 text-slate-950 text-[10px] font-black uppercase tracking-wider">
-                      🎮 Dedicated Games Page
-                    </span>
-                    <span class="text-[11px] font-bold text-indigo-200">3 Interactive Modes</span>
-                  </div>
-                  <h3 class="text-base sm:text-lg font-black text-white">
-                    Elimika Play — Interactive Educational Games
-                  </h3>
-                  <p class="text-xs text-slate-300 leading-relaxed">
-                    Play NECTA Treasure Hunt, Escape the Classroom (4-Lock Science &amp; Math Puzzle), and 60-Second Speed STEM Arena on its own dedicated page.
-                  </p>
-                </div>
-                <div class="flex flex-wrap items-center gap-2 pt-1">
-                  <button onclick="openPage('games')" class="px-4 py-2.5 bg-amber-400 hover:bg-amber-300 text-slate-950 font-black text-xs rounded-xl shadow-xs cursor-pointer">
-                    🎮 Open Interactive Games Page →
-                  </button>
-                </div>
-              </div>
-
-              <!-- Card 2: Dedicated Step-by-Step Solving Quiz Page -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <!-- Card 1: Dedicated Step-by-Step Solving Quiz Page -->
               <div class="bg-gradient-to-br from-violet-950 via-slate-900 to-blue-950 text-white rounded-2xl p-5 border border-violet-800/80 shadow-xs flex flex-col justify-between gap-4">
                 <div class="space-y-2">
                   <div class="flex items-center justify-between gap-2">
@@ -536,68 +522,6 @@
       </div>
     </div>
 
-    <!-- =========================================================================
-         PAGE 5: DEDICATED INTERACTIVE GAMES PAGE (ELIMIKA PLAY HUB)
-         ========================================================================= -->
-    <div id="page-games" class="hidden py-7 fade-in">
-      <div class="max-w-5xl mx-auto px-4 sm:px-6 space-y-5">
-        <!-- Games Header -->
-        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-gradient-to-r from-slate-900 via-indigo-950 to-slate-900 text-white p-5 rounded-2xl shadow-xs">
-          <div class="space-y-1">
-            <div class="flex items-center gap-2">
-              <span class="px-2.5 py-0.5 rounded-md bg-amber-400 text-slate-950 text-[11px] font-black uppercase">
-                🎮 Elimika Play Arcade
-              </span>
-              <span class="text-xs font-bold text-indigo-200">Dedicated Interactive Games Page</span>
-            </div>
-            <h1 class="text-xl sm:text-2xl font-black">Interactive NECTA &amp; STEM Revision Games</h1>
-            <p class="text-xs text-slate-300">Choose any game mode below to play immediately on this page, or open the 3D AI Arena in the Moha AI App.</p>
-          </div>
-          <div class="flex flex-wrap items-center gap-2 shrink-0">
-            <button onclick="openMohaAppModal('play')" class="px-3.5 py-2 bg-violet-600 hover:bg-violet-500 text-white font-bold text-xs rounded-xl cursor-pointer">
-              🚀 Full AI Games in App ↗
-            </button>
-            <button onclick="handleGoBack()" class="px-3.5 py-2 bg-white/15 hover:bg-white/25 text-white font-bold text-xs rounded-xl cursor-pointer">
-              ← Back
-            </button>
-          </div>
-        </div>
-
-        <!-- Game Mode Switcher Tabs -->
-        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
-          <button id="gameTab-treasure" onclick="switchGameMode('treasure')" class="p-4 rounded-2xl border-2 text-left transition-all cursor-pointer bg-amber-50 border-amber-400">
-            <div class="flex items-center justify-between">
-              <span class="text-lg">🏴‍☠️</span>
-              <span class="px-2 py-0.5 rounded bg-amber-400 text-slate-950 font-black text-[10px] uppercase">Adventure</span>
-            </div>
-            <div class="font-black text-sm text-slate-900 mt-1">1. NECTA Treasure Hunt</div>
-            <p class="text-xs text-slate-600 mt-0.5">Unlock 5 islands (Zanzibar to Kilimanjaro) by solving NECTA problems.</p>
-          </button>
-
-          <button id="gameTab-escape" onclick="switchGameMode('escape')" class="p-4 rounded-2xl border-2 text-left transition-all cursor-pointer bg-white border-slate-200 hover:border-indigo-300">
-            <div class="flex items-center justify-between">
-              <span class="text-lg">🔐</span>
-              <span class="px-2 py-0.5 rounded bg-indigo-100 text-indigo-900 font-black text-[10px] uppercase">4-Digit Lock</span>
-            </div>
-            <div class="font-black text-sm text-slate-900 mt-1">2. Escape the Classroom</div>
-            <p class="text-xs text-slate-600 mt-0.5">Crack 4 Science &amp; Math locks to reveal the 4-digit laboratory passcode.</p>
-          </button>
-
-          <button id="gameTab-arena" onclick="switchGameMode('arena')" class="p-4 rounded-2xl border-2 text-left transition-all cursor-pointer bg-white border-slate-200 hover:border-emerald-300">
-            <div class="flex items-center justify-between">
-              <span class="text-lg">⚡</span>
-              <span class="px-2 py-0.5 rounded bg-emerald-100 text-emerald-900 font-black text-[10px] uppercase">60s Speed</span>
-            </div>
-            <div class="font-black text-sm text-slate-900 mt-1">3. Speed STEM Arena</div>
-            <p class="text-xs text-slate-600 mt-0.5">Race the clock with streak multipliers and beat your personal best score.</p>
-          </button>
-        </div>
-
-        <!-- Active Game Stage Container -->
-        <div id="gameStageContainer" class="bg-white rounded-2xl border border-slate-200 p-5 sm:p-6 shadow-xs"></div>
-      </div>
-    </div>
-
   </main>
 
   <!-- STICKY MOBILE BACK BAR -->
@@ -763,16 +687,15 @@
   <footer class="bg-slate-900 text-slate-400 py-8 border-t border-slate-800 text-xs text-center mt-auto">
     <div class="max-w-5xl mx-auto px-4 space-y-2">
       <div class="font-extrabold text-white text-sm">ELIMIKA TANZANIA</div>
-      <p>Past Papers, Annual Exams, Marking Schemes, TIE Textbooks, Syllabuses, Interactive Games &amp; Moha AI.</p>
+      <p>Past Papers, Annual Exams, Marking Schemes, TIE Textbooks, Syllabuses &amp; Moha AI.</p>
       <div class="pt-1 flex flex-wrap justify-center gap-4">
         <button onclick="resetToHome()" class="text-slate-300 hover:text-white font-bold cursor-pointer">Past Papers</button>
         <button onclick="openPage('books')" class="text-slate-300 hover:text-white font-bold cursor-pointer">TIE Books</button>
         <button onclick="openPage('syllabus')" class="text-slate-300 hover:text-white font-bold cursor-pointer">Syllabuses</button>
         <button onclick="openPage('quiz')" class="text-slate-300 hover:text-white font-bold cursor-pointer">Solving Quiz</button>
-        <button onclick="openPage('games')" class="text-amber-400 hover:text-amber-300 font-bold cursor-pointer">Interactive Games</button>
-        <a href="https://ais-pre-utxrgt5piro4x4xpbnh75h-142058246407.europe-west2.run.app/#moha" target="_blank" rel="noopener noreferrer" class="text-violet-400 hover:text-violet-300 font-bold underline">
-          Moha AI App ↗
-        </a>
+        <button onclick="openMohaAppModal('moha')" class="text-violet-400 hover:text-violet-300 font-bold underline cursor-pointer">
+          Moha AI (Go to App ↗)
+        </button>
       </div>
     </div>
   </footer>
@@ -1273,10 +1196,120 @@
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    function handleSmartSearch(val) {
+    let searchSaveTimer = null;
+
+    function getRecentSearchQueries() {
+      try {
+        const saved = JSON.parse(localStorage.getItem('recentSearchQueries') || '[]');
+        return Array.isArray(saved) ? saved.filter(q => typeof q === 'string' && q.trim().length > 0) : [];
+      } catch (e) {
+        return [];
+      }
+    }
+
+    function saveRecentSearchQuery(rawQuery) {
+      const clean = (rawQuery || '').trim();
+      if (clean.length < 2) return;
+      const current = getRecentSearchQueries();
+      const filtered = current.filter(item => item.toLowerCase() !== clean.toLowerCase());
+      const updated = [clean, ...filtered].slice(0, 8);
+      try {
+        localStorage.setItem('recentSearchQueries', JSON.stringify(updated));
+      } catch (e) {}
+    }
+
+    function removeRecentSearchQuery(termToRemove, ev) {
+      if (ev) ev.stopPropagation();
+      const updated = getRecentSearchQueries().filter(item => item !== termToRemove);
+      try {
+        localStorage.setItem('recentSearchQueries', JSON.stringify(updated));
+      } catch (e) {}
+      renderRecentSearchDropdown();
+    }
+
+    function clearRecentSearchQueries() {
+      try {
+        localStorage.removeItem('recentSearchQueries');
+      } catch (e) {}
+      hideRecentSearchDropdown();
+    }
+
+    function selectRecentSearchQuery(term) {
+      const inp = document.getElementById('smartSearchInput');
+      if (inp) inp.value = term;
+      saveRecentSearchQuery(term);
+      hideRecentSearchDropdown();
+      handleSmartSearch(term, true);
+    }
+
+    function renderRecentSearchDropdown() {
+      const dropdown = document.getElementById('recentSearchesDropdown');
+      const listEl = document.getElementById('recentSearchesList');
+      if (!dropdown || !listEl) return;
+
+      const allRecent = getRecentSearchQueries();
+      if (allRecent.length === 0) {
+        dropdown.classList.add('hidden');
+        return;
+      }
+
+      const qLower = (state.searchQuery || '').trim().toLowerCase();
+      const matching = qLower ? allRecent.filter(item => item.toLowerCase().includes(qLower)) : allRecent;
+      const displayList = matching.length > 0 ? matching : allRecent;
+
+      listEl.innerHTML = displayList.map((term, idx) => `
+        <div class="flex items-center justify-between px-4 py-2.5 hover:bg-blue-50/70 transition-colors">
+          <button type="button" data-idx="${idx}" onclick="selectRecentSearchQuery(this.getAttribute('data-term'))" data-term="${term.replace(/"/g, '&quot;')}" class="flex items-center gap-2.5 flex-1 min-w-0 text-left cursor-pointer">
+            <span class="text-slate-400 text-xs">🔍</span>
+            <span class="text-xs sm:text-sm font-semibold text-slate-700 truncate">${term.replace(/</g, '&lt;')}</span>
+          </button>
+          <button type="button" data-term="${term.replace(/"/g, '&quot;')}" onclick="removeRecentSearchQuery(this.getAttribute('data-term'), event)" class="p-1 text-slate-400 hover:text-rose-600 rounded-lg cursor-pointer shrink-0" title="Remove">
+            ✕
+          </button>
+        </div>
+      `).join('');
+
+      dropdown.classList.remove('hidden');
+    }
+
+    function showRecentSearchDropdown() {
+      renderRecentSearchDropdown();
+    }
+
+    function hideRecentSearchDropdown() {
+      const dropdown = document.getElementById('recentSearchesDropdown');
+      if (dropdown) dropdown.classList.add('hidden');
+    }
+
+    function handleSearchKeyDown(e) {
+      if (e.key === 'Enter' && state.searchQuery.trim().length >= 2) {
+        saveRecentSearchQuery(state.searchQuery);
+        hideRecentSearchDropdown();
+      } else if (e.key === 'Escape') {
+        hideRecentSearchDropdown();
+      }
+    }
+
+    document.addEventListener('mousedown', function (e) {
+      const container = document.getElementById('smartSearchContainer');
+      if (container && !container.contains(e.target)) {
+        hideRecentSearchDropdown();
+      }
+    });
+
+    function handleSmartSearch(val, skipDropdown) {
       state.searchQuery = val || '';
       const clearBtn = document.getElementById('clearSearchBtn');
       if (clearBtn) clearBtn.classList.toggle('hidden', !state.searchQuery.trim());
+      if (searchSaveTimer) clearTimeout(searchSaveTimer);
+      if (state.searchQuery.trim().length >= 2) {
+        searchSaveTimer = setTimeout(function () {
+          saveRecentSearchQuery(state.searchQuery);
+        }, 900);
+      }
+      if (!skipDropdown) {
+        renderRecentSearchDropdown();
+      }
       if (searchRaf) cancelAnimationFrame(searchRaf);
       searchRaf = requestAnimationFrame(function () {
         if (state.searchQuery.trim().length > 0) {
@@ -1301,7 +1334,8 @@
         const text = e.results?.[0]?.[0]?.transcript || '';
         if (text) {
           document.getElementById('smartSearchInput').value = text;
-          handleSmartSearch(text);
+          saveRecentSearchQuery(text);
+          handleSmartSearch(text, true);
         }
       };
       rec.start();
@@ -1774,181 +1808,6 @@
       }).join('');
     }
 
-    // ==================== RENDER PAGE 5: DEDICATED INTERACTIVE GAMES PAGE ====================
-    function switchGameMode(mode) {
-      state.gameMode = mode;
-      renderGamesPage();
-    }
-
-    function answerTreasureStage(stageIdx, optIdx) {
-      const q = QUESTION_BANK[stageIdx % QUESTION_BANK.length];
-      if (optIdx === q.ans) {
-        if (stageIdx + 1 < 5) state.treasureUnlocked[stageIdx + 1] = true;
-        alert('🎉 Correct! ' + q.exp + '\n\nNext Island Chest Unlocked!');
-        if (stageIdx + 1 < 5) state.treasureStage = stageIdx + 1;
-      } else {
-        alert('❌ Not quite! Hint: ' + q.exp);
-      }
-      renderGamesPage();
-    }
-
-    function solveEscapeLock(lockIdx, optIdx) {
-      const q = QUESTION_BANK[(lockIdx + 3) % QUESTION_BANK.length];
-      const codeDigits = ['4', '2', '8', '5'];
-      if (optIdx === q.ans) {
-        state.escapeUnlocked[lockIdx] = true;
-        state.escapeDigits[lockIdx] = codeDigits[lockIdx];
-      } else {
-        alert('❌ Lock jammed! Check the formula: ' + q.exp);
-      }
-      renderGamesPage();
-    }
-
-    function answerArenaQuestion(optIdx) {
-      const q = QUESTION_BANK[state.arenaIndex % QUESTION_BANK.length];
-      if (optIdx === q.ans) {
-        state.arenaStreak++;
-        state.arenaScore += 10 * state.arenaStreak;
-        if (state.arenaScore > state.arenaBest) {
-          state.arenaBest = state.arenaScore;
-          try { localStorage.setItem('elimika_arena_best', String(state.arenaBest)); } catch (e) {}
-        }
-      } else {
-        state.arenaStreak = 0;
-      }
-      state.arenaIndex = (state.arenaIndex + 1) % QUESTION_BANK.length;
-      renderGamesPage();
-    }
-
-    function renderGamesPage() {
-      const modes = ['treasure', 'escape', 'arena'];
-      modes.forEach(m => {
-        const btn = document.getElementById('gameTab-' + m);
-        if (!btn) return;
-        btn.className = 'p-4 rounded-2xl border-2 text-left transition-all cursor-pointer ' + (state.gameMode === m ? 'bg-amber-50 border-amber-400 shadow-xs' : 'bg-white border-slate-200 hover:border-slate-300');
-      });
-
-      const container = document.getElementById('gameStageContainer');
-      if (state.gameMode === 'treasure') {
-        const islands = ['1. Zanzibar Spice Port', '2. Bagamoyo Kaole Ruins', '3. Serengeti Plains', '4. Ngorongoro Crater', '5. Uhuru Peak (Kilimanjaro)'];
-        const curStage = state.treasureStage;
-        const q = QUESTION_BANK[curStage % QUESTION_BANK.length];
-        container.innerHTML = `
-          <div class="space-y-5">
-            <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-100 pb-3">
-              <div>
-                <span class="text-xs font-black uppercase text-amber-700">🏴‍☠️ Mode 1 · NECTA Treasure Hunt</span>
-                <h2 class="text-lg font-black text-slate-900">Unlock All 5 Tanzania Heritage Checkpoints</h2>
-              </div>
-              <div class="text-xs font-bold text-emerald-700 bg-emerald-50 px-3 py-1.5 rounded-xl border border-emerald-200">
-                Unlocked: ${state.treasureUnlocked.filter(Boolean).length} / 5 Chests
-              </div>
-            </div>
-
-            <div class="grid grid-cols-2 sm:grid-cols-5 gap-2">
-              ${islands.map((name, idx) => {
-                const unlocked = state.treasureUnlocked[idx];
-                const active = curStage === idx;
-                return `
-                  <button ${unlocked ? `onclick="state.treasureStage=${idx}; renderGamesPage();"` : 'disabled'} class="p-3 rounded-xl border text-left text-xs font-bold transition-all ${active ? 'bg-slate-900 text-white border-slate-900' : unlocked ? 'bg-emerald-50 text-emerald-950 border-emerald-200 cursor-pointer' : 'bg-slate-100 text-slate-400 border-slate-200 opacity-60'}">
-                    <div>${unlocked ? '🔓 Chest ' + (idx + 1) : '🔒 Locked'}</div>
-                    <div class="truncate mt-0.5 text-[11px]">${name}</div>
-                  </button>
-                `;
-              }).join('')}
-            </div>
-
-            <div class="p-5 rounded-2xl bg-slate-50 border border-slate-200 space-y-3">
-              <div class="text-xs font-bold text-violet-700">${islands[curStage]} · ${q.subject} (${q.topic})</div>
-              <div class="text-sm sm:text-base font-extrabold text-slate-900">${q.q}</div>
-              <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
-                ${q.options.map((opt, oIdx) => `
-                  <button onclick="answerTreasureStage(${curStage}, ${oIdx})" class="p-3 rounded-xl bg-white hover:bg-amber-50 border border-slate-200 hover:border-amber-400 text-left text-xs font-bold text-slate-800 cursor-pointer">
-                    ${String.fromCharCode(65 + oIdx)}. ${opt}
-                  </button>
-                `).join('')}
-              </div>
-            </div>
-          </div>
-        `;
-      } else if (state.gameMode === 'escape') {
-        const allSolved = state.escapeUnlocked.every(Boolean);
-        container.innerHTML = `
-          <div class="space-y-5">
-            <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-100 pb-3">
-              <div>
-                <span class="text-xs font-black uppercase text-indigo-700">🔐 Mode 2 · Escape the Classroom</span>
-                <h2 class="text-lg font-black text-slate-900">Solve All 4 Locks to Reveal the 4-Digit Laboratory Passcode</h2>
-              </div>
-              <div class="px-4 py-2 rounded-xl bg-slate-900 text-amber-400 font-black tracking-widest text-sm">
-                PASSCODE: ${state.escapeDigits.join(' - ')}
-              </div>
-            </div>
-
-            ${allSolved ? `
-              <div class="p-5 rounded-2xl bg-emerald-50 border-2 border-emerald-500 text-center space-y-2">
-                <div class="text-xl font-black text-emerald-900">🎉 DOOR UNLOCKED! Passcode 4 - 2 - 8 - 5 Verified!</div>
-                <p class="text-xs text-emerald-800">You solved all 4 STEM &amp; Humanities locks! Click below to reset or try Speed STEM Arena.</p>
-                <button onclick="state.escapeUnlocked=[false,false,false,false]; state.escapeDigits=['?','?','?','?']; renderGamesPage();" class="px-4 py-2 rounded-xl bg-emerald-600 text-white font-bold text-xs cursor-pointer">Play Again</button>
-              </div>
-            ` : ''}
-
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-              ${[0, 1, 2, 3].map(lockIdx => {
-                const q = QUESTION_BANK[(lockIdx + 3) % QUESTION_BANK.length];
-                const solved = state.escapeUnlocked[lockIdx];
-                return `
-                  <div class="p-4 rounded-2xl border ${solved ? 'bg-emerald-50/70 border-emerald-400' : 'bg-slate-50 border-slate-200'} space-y-2.5">
-                    <div class="flex items-center justify-between text-xs font-black">
-                      <span>${solved ? '🔓 Lock #' + (lockIdx + 1) + ' Solved' : '🔒 Lock #' + (lockIdx + 1) + ' (' + q.subject + ')'}</span>
-                      <span class="px-2 py-0.5 rounded bg-slate-900 text-amber-300">Digit: ${state.escapeDigits[lockIdx]}</span>
-                    </div>
-                    <div class="text-xs sm:text-sm font-bold text-slate-900">${q.q}</div>
-                    <div class="grid grid-cols-2 gap-2">
-                      ${q.options.map((opt, oIdx) => `
-                        <button onclick="solveEscapeLock(${lockIdx}, ${oIdx})" class="p-2.5 rounded-xl bg-white hover:bg-indigo-50 border border-slate-200 text-left text-xs font-bold text-slate-800 cursor-pointer">
-                          ${String.fromCharCode(65 + oIdx)}. ${opt}
-                        </button>
-                      `).join('')}
-                    </div>
-                  </div>
-                `;
-              }).join('')}
-            </div>
-          </div>
-        `;
-      } else {
-        const q = QUESTION_BANK[state.arenaIndex % QUESTION_BANK.length];
-        container.innerHTML = `
-          <div class="space-y-5">
-            <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-100 pb-3">
-              <div>
-                <span class="text-xs font-black uppercase text-emerald-700">⚡ Mode 3 · Rapid-Fire STEM &amp; NECTA Arena</span>
-                <h2 class="text-lg font-black text-slate-900">Build Your Streak Multiplier &amp; Set a New High Score</h2>
-              </div>
-              <div class="flex items-center gap-2 text-xs font-black">
-                <span class="px-3 py-1.5 rounded-xl bg-amber-100 text-amber-950">🔥 Streak: ${state.arenaStreak}x</span>
-                <span class="px-3 py-1.5 rounded-xl bg-emerald-100 text-emerald-900">Score: ${state.arenaScore}</span>
-                <span class="px-3 py-1.5 rounded-xl bg-slate-900 text-white">🏆 Best: ${state.arenaBest}</span>
-              </div>
-            </div>
-
-            <div class="p-5 rounded-2xl bg-slate-50 border border-slate-200 space-y-4">
-              <div class="text-xs font-bold text-emerald-700">${q.subject} · ${q.topic}</div>
-              <div class="text-base sm:text-lg font-black text-slate-900">${q.q}</div>
-              <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
-                ${q.options.map((opt, oIdx) => `
-                  <button onclick="answerArenaQuestion(${oIdx})" class="p-3.5 rounded-xl bg-white hover:bg-emerald-50 border border-slate-200 hover:border-emerald-500 text-left text-xs sm:text-sm font-bold text-slate-800 cursor-pointer">
-                    ${String.fromCharCode(65 + oIdx)}. ${opt}
-                  </button>
-                `).join('')}
-              </div>
-            </div>
-          </div>
-        `;
-      }
-    }
-
     // ==================== MASTER RENDER DISPATCHER ====================
     function renderAll() {
       // Update top counts strictly by type
@@ -1956,8 +1815,8 @@
       document.getElementById('count-books-top').textContent = allPapers.filter(p => p.isBook).length;
       document.getElementById('count-syllabus-top').textContent = allPapers.filter(p => p.isSyllabus).length;
 
-      // Toggle the 5 distinct pages
-      const pages = ['papers', 'books', 'syllabus', 'quiz', 'games'];
+      // Toggle the 4 distinct pages (no games page in standalone HTML)
+      const pages = ['papers', 'books', 'syllabus', 'quiz'];
       pages.forEach(p => {
         const el = document.getElementById('page-' + p);
         if (el) el.classList.toggle('hidden', state.activePage !== p);
@@ -1968,8 +1827,7 @@
         papers: 'bg-slate-900 text-white',
         books: 'bg-emerald-600 text-white',
         syllabus: 'bg-amber-500 text-slate-950',
-        quiz: 'bg-indigo-600 text-white',
-        games: 'bg-amber-400 text-slate-950'
+        quiz: 'bg-indigo-600 text-white'
       };
       pages.forEach(p => {
         const btn = document.getElementById('nav-' + p);
@@ -1991,8 +1849,6 @@
         renderSyllabusPage();
       } else if (state.activePage === 'quiz') {
         renderQuizPage();
-      } else if (state.activePage === 'games') {
-        renderGamesPage();
       }
 
       const showMobileBack = state.activePage !== 'papers' || state.step > 1;
