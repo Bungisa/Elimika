@@ -6,12 +6,12 @@
   <meta name="google-adsense-account" content="ca-pub-7502193981138651" />
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7502193981138651"
      crossorigin="anonymous"></script>
-  <link rel="canonical" href="https://elimika.online/" />
-  <title>ELIMIKA ONLINE (elimika.online) — Past Papers, Annual Exams, TIE Books, Syllabuses, Games &amp; Moha AI</title>
-  <meta name="description" content="Official Tanzania educational website (elimika.online) for NECTA Past Papers, Annual Examination Papers, Marking Schemes, TIE Student Textbooks, Official Syllabuses, Interactive STEM Games, Solving Quizzes &amp; Moha AI." />
-  <meta property="og:title" content="ELIMIKA ONLINE — Past Papers, Annual Exams, TIE Books, Games &amp; Quizzes" />
-  <meta property="og:description" content="Access NECTA Past Papers, Annual Examination Papers, TIE Textbooks, Syllabuses, Interactive Educational Games, and Moha AI for Primary and Secondary Schools in Tanzania." />
-  <meta property="og:url" content="https://elimika.online/" />
+  <link rel="canonical" href="https://www.elimika.online/" />
+  <title>ELIMIKA ONLINE (www.elimika.online) — NECTA Past Papers, Annual Exams, TIE Books &amp; Official Syllabuses</title>
+  <meta name="description" content="Official Tanzania educational website (www.elimika.online) for NECTA Past Papers, Annual Examination Papers, Marking Schemes, TIE Student Textbooks, and Official Syllabuses for Primary and Secondary Schools." />
+  <meta property="og:title" content="ELIMIKA ONLINE — NECTA Past Papers, Annual Exams, TIE Books &amp; Syllabuses" />
+  <meta property="og:description" content="Access NECTA Past Papers, Annual Examination Papers, Marking Schemes, TIE Textbooks, and Official Syllabuses for Standard 1–7 and Form 1–6 in Tanzania." />
+  <meta property="og:url" content="https://www.elimika.online/" />
   <meta name="theme-color" content="#1d4ed8" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
@@ -45,7 +45,7 @@
 <script src="/_aistudio-iframe.js?v=1f94f900"></script></head>
 <body class="min-h-screen flex flex-col bg-slate-50 text-slate-900 selection:bg-blue-600 selection:text-white">
 
-  <!-- ==================== STICKY TOP NAVIGATION BAR ==================== -->
+  <!-- ==================== STICKY TOP NAVIGATION BAR (NO GAMES, NO QUIZZES, NO MOHA AI) ==================== -->
   <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-xs">
     <div class="max-w-6xl mx-auto px-2.5 sm:px-6 h-14 sm:h-16 flex items-center justify-between gap-1.5 sm:gap-2">
       <!-- Brand -->
@@ -66,13 +66,8 @@
         </div>
       </button>
 
-      <!-- Clear, Distinct Page Navigation Tabs + Visible Mobile "Get App" & WhatsApp -->
+      <!-- Clean Website Navigation: Past Papers, TIE Books, Syllabus, WhatsApp, and App Download (Play Store for Android / www.elimika.online for iPhone) -->
       <nav class="flex items-center gap-1 sm:gap-1.5 overflow-x-auto no-scrollbar py-1">
-        <!-- Always-Visible Top "Get App" Button (Mobile & Desktop) -->
-        <button id="topGetAppBtn" onclick="handleTopGetAppClick()" class="px-2.5 sm:px-3 py-1.5 rounded-xl text-[11px] sm:text-xs font-black whitespace-nowrap transition-all cursor-pointer bg-emerald-600 hover:bg-emerald-700 text-white shadow-xs flex items-center gap-1 shrink-0" title="Get Elimika App">
-          <span id="topGetAppIcon">📲</span>
-          <span id="topGetAppLabel">Get App</span>
-        </button>
         <button id="nav-papers" onclick="resetToHome()" class="px-2.5 sm:px-3 py-1.5 rounded-xl text-[11px] sm:text-xs font-bold whitespace-nowrap transition-all cursor-pointer bg-slate-900 text-white shrink-0">
           📄 Past Papers
         </button>
@@ -82,20 +77,16 @@
         <button id="nav-syllabus" onclick="openPage('syllabus')" class="px-2.5 sm:px-3 py-1.5 rounded-xl text-[11px] sm:text-xs font-bold whitespace-nowrap transition-all cursor-pointer text-slate-700 hover:bg-slate-100 shrink-0">
           📜 Syllabus
         </button>
-        <button id="nav-quiz" onclick="openPage('quiz')" class="px-2.5 sm:px-3 py-1.5 rounded-xl text-[11px] sm:text-xs font-bold whitespace-nowrap transition-all cursor-pointer text-slate-700 hover:bg-slate-100 shrink-0">
-          🎯 Solving Quiz
-        </button>
-        <button id="nav-games" onclick="openPage('games')" class="px-2.5 sm:px-3 py-1.5 rounded-xl text-[11px] sm:text-xs font-bold whitespace-nowrap transition-all cursor-pointer text-slate-700 hover:bg-slate-100 shrink-0">
-          🎮 Elimika Play
-        </button>
         <button onclick="openWhatsappModal()" class="px-2.5 sm:px-3 py-1.5 rounded-xl text-[11px] sm:text-xs font-bold whitespace-nowrap transition-all cursor-pointer bg-[#25D366] hover:bg-[#1ebe5d] text-white shadow-xs flex items-center gap-1 shrink-0" title="WhatsApp Channel">
           <svg class="w-3.5 h-3.5 fill-current shrink-0" viewBox="0 0 24 24" aria-hidden="true">
             <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86s.274.072.376-.043c.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.045.072.045.419-.1.824zm-3.423-14.416c-6.627 0-12 5.373-12 12 0 2.625.846 5.059 2.284 7.033l-1.494 5.457 5.586-1.466c1.911 1.251 4.187 1.976 6.624 1.976 6.627 0 12-5.373 12-12s-5.373-12-12-12z"/>
           </svg>
           <span class="hidden sm:inline">WhatsApp</span>
         </button>
-        <button onclick="openMohaAppModal('moha')" class="px-2.5 sm:px-3.5 py-1.5 rounded-xl text-[11px] sm:text-xs font-bold whitespace-nowrap transition-all cursor-pointer bg-violet-600 hover:bg-violet-700 text-white shadow-xs flex items-center gap-1 shrink-0">
-          <span>🤖 Moha AI</span>
+        <!-- App Download Option (Replaces "Go to App": Android -> Google Play Store, iPhone -> www.elimika.online direct download) -->
+        <button id="topGetAppBtn" onclick="openAppDownloadModal()" class="px-2.5 sm:px-3.5 py-1.5 rounded-xl text-[11px] sm:text-xs font-black whitespace-nowrap transition-all cursor-pointer bg-emerald-600 hover:bg-emerald-700 text-white shadow-xs flex items-center gap-1 shrink-0" title="Download Elimika App (Android Play Store & iPhone Direct Download)">
+          <span id="topGetAppIcon">📲</span>
+          <span id="topGetAppLabel">Download App</span>
         </button>
       </nav>
     </div>
@@ -162,7 +153,7 @@
             </div>
           </div>
 
-          <!-- Separate Dedicated Portal Buttons -->
+          <!-- Separate Dedicated Portal Buttons (Past Papers, TIE Books, Syllabuses & App Download) -->
           <div class="pt-1 flex flex-wrap items-center justify-center gap-2">
             <button onclick="openAnnualPapersShortcut()" class="px-3.5 py-2 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs flex items-center gap-1.5 shadow-xs cursor-pointer">
               📋 Annual Exam Papers (<span id="count-annual-top">0</span>)
@@ -173,14 +164,8 @@
             <button onclick="openPage('syllabus')" class="px-3.5 py-2 rounded-xl bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold text-xs flex items-center gap-1.5 shadow-xs cursor-pointer">
               📜 Official Syllabuses (<span id="count-syllabus-top">0</span>)
             </button>
-            <button onclick="openPage('quiz')" class="px-3.5 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-xs flex items-center gap-1.5 shadow-xs cursor-pointer">
-              🎯 Solving Quiz Page
-            </button>
-            <button onclick="openPage('games')" class="px-3.5 py-2 rounded-xl bg-teal-600 hover:bg-teal-700 text-white font-bold text-xs flex items-center gap-1.5 shadow-xs cursor-pointer">
-              🎮 Elimika Play Games
-            </button>
-            <button onclick="scrollToGetAppSection()" class="px-3.5 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs flex items-center gap-1.5 shadow-xs cursor-pointer">
-              📲 Get Elimika App
+            <button onclick="openAppDownloadModal()" class="px-3.5 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs flex items-center gap-1.5 shadow-xs cursor-pointer">
+              📲 Download Elimika App
             </button>
           </div>
         </div>
@@ -231,128 +216,72 @@
             </div>
           </div>
 
-          <!-- SECTION 2: CLEARLY SEPARATED PORTALS (BOOKS, SYLLABUSES, QUIZ, GAMES & MOHA AI APP) -->
+          <!-- SECTION 2: DEDICATED TIE TEXTBOOKS & OFFICIAL SYLLABUSES -->
           <div class="space-y-3">
             <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1 px-1">
               <div>
-                <span class="text-[11px] font-black uppercase tracking-wider text-violet-700">
-                  Dedicated Learning Portals
+                <span class="text-[11px] font-black uppercase tracking-wider text-emerald-700">
+                  Curriculum Library
                 </span>
                 <h2 class="text-lg sm:text-xl font-black text-slate-900">
-                  2. TIE Textbooks, Official Syllabuses, Solving Quiz, Interactive Games &amp; Moha AI
+                  2. Official TIE Student Textbooks &amp; MoEST Syllabuses
                 </h2>
               </div>
               <span class="text-xs text-slate-500 font-medium">
-                Each section has its own dedicated page for clean, fast navigation
+                Separate pages for Textbooks and Official Syllabuses
               </span>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <!-- Card 1: Dedicated Step-by-Step Solving Quiz Page -->
-              <div class="bg-gradient-to-br from-violet-950 via-slate-900 to-blue-950 text-white rounded-2xl p-5 border border-violet-800/80 shadow-xs flex flex-col justify-between gap-4">
-                <div class="space-y-2">
-                  <div class="flex items-center justify-between gap-2">
-                    <span class="px-2.5 py-0.5 rounded-md bg-emerald-400 text-slate-950 text-[10px] font-black uppercase tracking-wider">
-                      🎯 Open-Ended Solving Quiz (Form 1–6)
-                    </span>
-                    <span class="text-[11px] font-bold text-violet-200">SVG Diagrams &amp; Worked Solutions</span>
-                  </div>
-                  <h3 class="text-base sm:text-lg font-black text-white">
-                    Step-by-Step Problem Solving Quiz &amp; Interval Tables
-                  </h3>
-                  <p class="text-xs text-slate-300 leading-relaxed">
-                    Solve structured NECTA &amp; TIE textbook problems (with parts a, b, c on separate lines, SVG diagrams, and grouped frequency interval tables) and click <strong>Show Solution</strong> to verify your working.
-                  </p>
-                </div>
-                <div class="flex flex-wrap items-center gap-2 pt-1">
-                  <button onclick="openPage('quiz')" class="px-4 py-2.5 bg-emerald-400 hover:bg-emerald-300 text-slate-950 font-black text-xs rounded-xl shadow-xs cursor-pointer">
-                    🎯 Open Solving Quiz Page →
-                  </button>
-                  <button onclick="openMohaAppModal('daily-quiz')" class="px-3.5 py-2.5 bg-white/10 hover:bg-white/20 text-white font-bold text-xs rounded-xl border border-white/15 cursor-pointer">
-                    🤖 20-Qn AI App ↗
-                  </button>
-                </div>
-              </div>
-
-              <!-- Card 2: Elimika Play Interactive Games Hub -->
-              <div class="bg-gradient-to-br from-emerald-950 via-teal-950 to-slate-900 text-white rounded-2xl p-5 border border-emerald-800/80 shadow-xs flex flex-col justify-between gap-4">
-                <div class="space-y-2">
-                  <div class="flex items-center justify-between gap-2">
-                    <span class="px-2.5 py-0.5 rounded-md bg-amber-400 text-slate-950 text-[10px] font-black uppercase tracking-wider">
-                      🎮 Elimika Play Arcade
-                    </span>
-                    <span class="text-[11px] font-bold text-emerald-200">Android · iPhone · Desktop</span>
-                  </div>
-                  <h3 class="text-base sm:text-lg font-black text-white">
-                    3D Bridge Builder, NECTA Treasure Hunt &amp; Escape Classroom
-                  </h3>
-                  <p class="text-xs text-emerald-100/90 leading-relaxed">
-                    Play all interactive STEM &amp; NECTA educational games directly in your browser: 3D Bridge Structural Simulator, Zanzibar &amp; Kilimanjaro Treasure Hunt, Escape the Classroom Locks, and Moha STEM Arena.
-                  </p>
-                </div>
-                <div class="flex flex-wrap items-center gap-2 pt-1">
-                  <button onclick="openPage('games')" class="px-4 py-2.5 bg-amber-400 hover:bg-amber-300 text-slate-950 font-black text-xs rounded-xl shadow-xs cursor-pointer">
-                    🎮 Play Educational Games Now →
-                  </button>
-                  <button onclick="openMohaAppModal('play')" class="px-3.5 py-2.5 bg-white/10 hover:bg-white/20 text-white font-bold text-xs rounded-xl border border-white/15 cursor-pointer">
-                    🚀 Full 3D WebGL View ↗
-                  </button>
-                </div>
-              </div>
-
-              <!-- Card 3: Dedicated TIE Books & Official Syllabuses Pages -->
+              <!-- Card 1: Dedicated TIE Books Library -->
               <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-xs flex flex-col justify-between gap-4">
                 <div class="space-y-2">
                   <div class="flex items-center justify-between gap-2">
                     <span class="px-2.5 py-0.5 rounded-md bg-emerald-100 text-emerald-900 text-[10px] font-black uppercase tracking-wider">
-                      📘 Separate Books &amp; Syllabuses
+                      📘 TIE Textbooks Library
                     </span>
-                    <span class="text-[11px] font-bold text-slate-500">2023–2025 Revised Editions</span>
+                    <span class="text-[11px] font-bold text-slate-500">Standard 1–7 &amp; Form 1–6</span>
                   </div>
                   <h3 class="text-base sm:text-lg font-black text-slate-900">
-                    Official TIE Student Textbooks &amp; Syllabuses
+                    Official TIE Student Textbooks (2023–2025 Editions)
                   </h3>
                   <p class="text-xs text-slate-600 leading-relaxed">
-                    Browse all TIE Student Textbooks and Official MoEST Syllabuses on their own dedicated pages without mixing them with past examination papers.
+                    Read and download official Tanzania Institute of Education (TIE) student textbooks organized by class level and subject.
                   </p>
                 </div>
-                <div class="flex flex-wrap items-center gap-2 pt-2 border-t border-slate-100">
-                  <button onclick="openPage('books')" class="px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs rounded-xl cursor-pointer">
-                    📘 Open TIE Books Page →
-                  </button>
-                  <button onclick="openPage('syllabus')" class="px-4 py-2 bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold text-xs rounded-xl cursor-pointer">
-                    📜 Open Syllabuses Page →
+                <div class="pt-2 border-t border-slate-100">
+                  <button onclick="openPage('books')" class="w-full sm:w-auto px-4 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs rounded-xl cursor-pointer">
+                    📘 Open TIE Books Library →
                   </button>
                 </div>
               </div>
 
-              <!-- Card 4: Moha AI Tutor & Teacher Document Studio -->
-              <div class="bg-white rounded-2xl p-5 border border-violet-200 shadow-xs flex flex-col justify-between gap-4">
+              <!-- Card 2: Dedicated Official Syllabuses Portal -->
+              <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-xs flex flex-col justify-between gap-4">
                 <div class="space-y-2">
                   <div class="flex items-center justify-between gap-2">
-                    <span class="px-2.5 py-0.5 rounded-md bg-violet-100 text-violet-900 text-[10px] font-black uppercase tracking-wider">
-                      🤖 Official Moha AI App
+                    <span class="px-2.5 py-0.5 rounded-md bg-amber-100 text-amber-950 text-[10px] font-black uppercase tracking-wider">
+                      📜 Official MoEST / TIE Syllabuses
                     </span>
-                    <span class="text-[11px] font-bold text-violet-700">Gemini API Reasoning Tutor</span>
+                    <span class="text-[11px] font-bold text-slate-500">Primary, O-Level &amp; A-Level</span>
                   </div>
                   <h3 class="text-base sm:text-lg font-black text-slate-900">
-                    Moha AI Textbook Tutor &amp; Lesson Plan Studio
+                    Official Tanzania Curriculum Syllabuses
                   </h3>
                   <p class="text-xs text-slate-600 leading-relaxed">
-                    Need AI step-by-step reasoning on TIE books, past paper solutions, or official 4-Stage Lesson Plans &amp; 12-Column Schemes of Work? Open Moha AI.
+                    Access and download revised competency-based MoEST / TIE syllabuses for Primary (Std 1–7), Ordinary Secondary (Form 1–4), and Advanced Level (Form 5–6).
                   </p>
                 </div>
-                <div class="flex flex-wrap items-center justify-between gap-2 pt-2 border-t border-slate-100">
-                  <span class="text-[11px] font-bold text-violet-700">Full AI Workspace</span>
-                  <button onclick="openMohaAppModal('moha')" class="px-4 py-2 bg-violet-600 hover:bg-violet-700 text-white font-bold text-xs rounded-xl cursor-pointer">
-                    🚀 Go to Moha AI App ↗
+                <div class="pt-2 border-t border-slate-100">
+                  <button onclick="openPage('syllabus')" class="w-full sm:w-auto px-4 py-2.5 bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold text-xs rounded-xl cursor-pointer">
+                    📜 Open Official Syllabuses →
                   </button>
                 </div>
               </div>
             </div>
           </div>
 
-          <!-- SECTION 3: PROFESSIONAL "GET ELIMIKA APP" INSTALLATION SECTION (AUTO DEVICE DETECTION) -->
+          <!-- SECTION 3: DOWNLOAD ELIMIKA APP (ANDROID PLAY STORE & IPHONE DIRECT DOWNLOAD AT WWW.ELIMIKA.ONLINE) -->
           <div id="get-elimika-app-section" class="rounded-3xl bg-gradient-to-br from-slate-900 via-blue-950 to-slate-900 text-white border border-slate-800 p-5 sm:p-7 shadow-lg space-y-6">
             <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-white/10 pb-5">
               <div class="flex items-start sm:items-center gap-4">
@@ -362,37 +291,66 @@
                 <div class="space-y-1">
                   <div class="flex flex-wrap items-center gap-2">
                     <span class="px-2.5 py-0.5 rounded-md bg-emerald-500/20 border border-emerald-400/30 text-emerald-300 text-[10px] font-black uppercase tracking-wider">
-                      📲 Get Elimika App
+                      📲 Download Elimika App
                     </span>
                     <span id="detectedDeviceBadge" class="px-2.5 py-0.5 rounded-md bg-white/10 text-blue-200 text-[10px] font-bold">
-                      Detecting device...
+                      Android Play Store &amp; iPhone Direct Download
                     </span>
                   </div>
                   <h2 class="text-lg sm:text-2xl font-black text-white tracking-tight">
-                    Install Elimika Tanzania on Your Phone, Tablet or Computer
+                    Get the Official Elimika App on Android or iPhone
                   </h2>
                   <p class="text-xs sm:text-sm text-slate-300 max-w-2xl">
-                    Fast, 1-tap access to NECTA Past Papers, Marking Schemes, Official TIE Textbooks, Interactive 3D STEM Games, and Moha AI from your Home Screen.
+                    <strong>Android users:</strong> Access and download the app from the <strong>Google Play Store</strong>. <strong>iPhone users only:</strong> Go to <strong>www.elimika.online</strong> to download the app directly to your phone.
                   </p>
-                </div>
-              </div>
-
-              <!-- Platform Preview Switcher for Testing iPhone, Android & Desktop -->
-              <div class="flex flex-col items-start md:items-end gap-1.5 shrink-0">
-                <span class="text-[10px] font-bold uppercase tracking-wider text-slate-400">
-                  Device View (Auto-Detected):
-                </span>
-                <div class="inline-flex items-center gap-1 p-1 rounded-xl bg-white/10 border border-white/15 text-[11px] font-bold">
-                  <button type="button" id="devBtn-auto" onclick="setInstallDevicePreview('auto')" class="px-2.5 py-1 rounded-lg bg-blue-600 text-white cursor-pointer">Auto</button>
-                  <button type="button" id="devBtn-ios" onclick="setInstallDevicePreview('ios')" class="px-2.5 py-1 rounded-lg text-slate-300 hover:text-white cursor-pointer"> iPhone/iPad</button>
-                  <button type="button" id="devBtn-android" onclick="setInstallDevicePreview('android')" class="px-2.5 py-1 rounded-lg text-slate-300 hover:text-white cursor-pointer">🤖 Android</button>
-                  <button type="button" id="devBtn-desktop" onclick="setInstallDevicePreview('desktop')" class="px-2.5 py-1 rounded-lg text-slate-300 hover:text-white cursor-pointer">💻 Desktop</button>
                 </div>
               </div>
             </div>
 
-            <!-- Dynamic Device-Specific Installation View -->
-            <div id="deviceInstallCardContainer"></div>
+            <!-- Two Clear Device Options: Android (Google Play Store) & iPhone Only (www.elimika.online Direct Download) -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <!-- Option 1: Android Users -> Google Play Store -->
+              <div class="p-5 rounded-2xl bg-slate-950/80 border border-emerald-500/40 flex flex-col justify-between gap-4">
+                <div class="space-y-2">
+                  <div class="inline-flex items-center gap-2 px-3 py-1 rounded-xl bg-emerald-500/20 border border-emerald-400/30 text-emerald-300 text-xs font-black">
+                    <span>🤖 Android Users — Google Play Store</span>
+                  </div>
+                  <h3 class="text-base sm:text-lg font-black text-white">
+                    Access the Elimika App on Google Play Store
+                  </h3>
+                  <p class="text-xs text-slate-300 leading-relaxed">
+                    Using an Android smartphone or tablet? Download and access the official Elimika Tanzania application from the Google Play Store.
+                  </p>
+                </div>
+                <button type="button" onclick="handleAndroidPlayStoreAccess()" class="w-full py-3.5 px-5 rounded-2xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-black text-xs sm:text-sm flex items-center justify-center gap-2 shadow-md cursor-pointer transition-all">
+                  <span>▶</span>
+                  <span>Get it on Google Play Store</span>
+                </button>
+              </div>
+
+              <!-- Option 2: iPhone Users Only -> Directed to www.elimika.online for Direct Phone Download -->
+              <div class="p-5 rounded-2xl bg-slate-950/80 border border-sky-400/40 flex flex-col justify-between gap-4">
+                <div class="space-y-2">
+                  <div class="inline-flex items-center gap-2 px-3 py-1 rounded-xl bg-sky-500/20 border border-sky-400/30 text-sky-300 text-xs font-black">
+                    <span> iPhone Users Only — Direct Phone Download</span>
+                  </div>
+                  <h3 class="text-base sm:text-lg font-black text-white">
+                    Download Direct to iPhone at www.elimika.online
+                  </h3>
+                  <p class="text-xs text-slate-300 leading-relaxed">
+                    iPhone and iPad users are directed to <strong>www.elimika.online</strong> where you can download and install the Elimika app directly to your phone.
+                  </p>
+                </div>
+                <a
+                  href="https://www.elimika.online/?install=iphone"
+                  onclick="return handleIPhoneDirectDownload(event)"
+                  class="w-full py-3.5 px-5 rounded-2xl bg-white hover:bg-sky-50 text-slate-950 font-black text-xs sm:text-sm flex items-center justify-center gap-2 shadow-md cursor-pointer transition-all text-center"
+                >
+                  <span></span>
+                  <span>iPhone Users: Download at www.elimika.online</span>
+                </a>
+              </div>
+            </div>
           </div>
 
         </div>
@@ -439,9 +397,6 @@
               <button onclick="openPage('books', state.selectedClass, state.selectedSubject)" class="px-3 py-2 rounded-xl bg-emerald-50 hover:bg-emerald-100 text-emerald-900 border border-emerald-300 font-bold text-xs cursor-pointer">
                 📘 TIE Books →
               </button>
-              <button onclick="openPage('quiz', state.selectedClass, state.selectedSubject)" class="px-3 py-2 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 font-bold text-xs cursor-pointer">
-                🎯 Solving Quiz
-              </button>
             </div>
           </div>
 
@@ -482,9 +437,6 @@
             <p class="text-xs text-emerald-100">Dedicated textbook library — Select your class and click Download to get official TIE Textbooks.</p>
           </div>
           <div class="flex items-center gap-2 shrink-0">
-            <button onclick="openMohaAppModal('moha')" class="px-3.5 py-2 bg-violet-600 hover:bg-violet-500 text-white font-bold text-xs rounded-xl cursor-pointer">
-              🤖 Moha AI App ↗
-            </button>
             <button onclick="handleGoBack()" class="px-3.5 py-2 bg-white/15 hover:bg-white/25 text-white font-bold text-xs rounded-xl cursor-pointer">
               ← Back
             </button>
@@ -523,9 +475,6 @@
             <p class="text-xs text-amber-200">Dedicated syllabus portal — Filter by Primary (Std 1–7), Secondary (Form 1–4), or Advanced (Form 5–6).</p>
           </div>
           <div class="flex items-center gap-2 shrink-0">
-            <button onclick="openMohaAppModal('studio')" class="px-3.5 py-2 bg-amber-400 hover:bg-amber-300 text-slate-950 font-black text-xs rounded-xl cursor-pointer">
-              📋 Teacher Studio in App ↗
-            </button>
             <button onclick="handleGoBack()" class="px-3.5 py-2 bg-white/15 hover:bg-white/25 text-white font-bold text-xs rounded-xl cursor-pointer">
               ← Back
             </button>
@@ -547,134 +496,6 @@
       </div>
     </div>
 
-    <!-- =========================================================================
-         PAGE 4: DEDICATED SOLVING QUIZ PAGE (OPEN-ENDED QUESTIONS + SOLUTION BUTTON + SVG DIAGRAMS)
-         ========================================================================= -->
-    <div id="page-quiz" class="hidden py-7 fade-in">
-      <div class="max-w-5xl mx-auto px-4 sm:px-6 space-y-5">
-        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-gradient-to-r from-violet-950 via-slate-900 to-blue-950 text-white p-5 rounded-2xl shadow-xs">
-          <div class="space-y-1">
-            <div class="flex items-center gap-2">
-              <span class="px-2.5 py-0.5 rounded-md bg-amber-400 text-slate-950 text-[11px] font-black uppercase">
-                🎯 Open-Ended Problem Solving Quiz (Form 1 – Form 6)
-              </span>
-              <span class="text-xs font-bold text-violet-200">SVG Diagrams · Interval Tables · Worked Solutions</span>
-            </div>
-            <h1 class="text-xl sm:text-2xl font-black">Step-by-Step Problem Solving Workout</h1>
-            <p class="text-xs text-slate-300">Work out each structured question on paper (parts a, b, c on separate lines), then click <strong>Show Solution</strong> to view the full NECTA Marking Scheme.</p>
-          </div>
-          <div class="flex flex-wrap items-center gap-2 shrink-0">
-            <button onclick="openMohaAppModal('daily-quiz', state.quizClass, state.quizSubject)" class="px-3.5 py-2 bg-violet-600 hover:bg-violet-500 text-white font-bold text-xs rounded-xl cursor-pointer">
-              🤖 Full AI Quiz in App ↗
-            </button>
-            <button onclick="handleGoBack()" class="px-3.5 py-2 bg-white/15 hover:bg-white/25 text-white font-bold text-xs rounded-xl cursor-pointer">
-              ← Back
-            </button>
-          </div>
-        </div>
-
-        <!-- Quiz Controls -->
-        <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-xs flex flex-wrap items-center justify-between gap-3 text-xs">
-          <div class="flex flex-wrap items-center gap-2.5">
-            <div>
-              <label class="font-bold text-slate-600 block mb-1">Class Level</label>
-              <select id="quizClassSelect" onchange="changeQuizFilter(this.value, state.quizSubject)" class="px-3 py-2 rounded-xl border border-slate-300 font-bold bg-white text-slate-900">
-                <option value="Form 1">Form 1</option>
-                <option value="Form 2">Form 2</option>
-                <option value="Form 3">Form 3</option>
-                <option value="Form 4" selected>Form 4</option>
-                <option value="Form 5">Form 5</option>
-                <option value="Form 6">Form 6</option>
-              </select>
-            </div>
-            <div>
-              <label class="font-bold text-slate-600 block mb-1">Subject</label>
-              <select id="quizSubjectSelect" onchange="changeQuizFilter(state.quizClass, this.value)" class="px-3 py-2 rounded-xl border border-slate-300 font-bold bg-white text-slate-900">
-                <option value="Basic Mathematics">Basic Mathematics</option>
-                <option value="Additional Mathematics">Additional Mathematics</option>
-                <option value="Physics">Physics</option>
-                <option value="Chemistry">Chemistry</option>
-                <option value="Biology">Biology</option>
-                <option value="Computer Science">Computer Science</option>
-                <option value="Geography">Geography</option>
-                <option value="History">History</option>
-                <option value="English Language">English Language</option>
-                <option value="Kiswahili">Kiswahili</option>
-                <option value="Civics">Civics</option>
-              </select>
-            </div>
-            <div class="pt-5">
-              <button onclick="resetQuizSession()" class="px-3.5 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-bold cursor-pointer">
-                🔄 Hide All Solutions
-              </button>
-            </div>
-          </div>
-
-          <div id="quizScoreBadge" class="px-4 py-2.5 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-900 font-black text-xs">
-            Solutions Revealed: 0
-          </div>
-        </div>
-
-        <!-- Quiz Questions List -->
-        <div id="quizQuestionsContainer" class="space-y-4"></div>
-      </div>
-    </div>
-
-    <!-- =========================================================================
-         PAGE 5: ELIMIKA PLAY — INTERACTIVE EDUCATIONAL GAMES HUB
-         ========================================================================= -->
-    <div id="page-games" class="hidden py-7 fade-in">
-      <div class="max-w-5xl mx-auto px-4 sm:px-6 space-y-6">
-        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-gradient-to-r from-slate-900 via-emerald-950 to-teal-950 text-white p-5 sm:p-6 rounded-3xl shadow-md border border-emerald-800/60">
-          <div class="space-y-1.5">
-            <div class="flex flex-wrap items-center gap-2">
-              <span class="px-2.5 py-0.5 rounded-md bg-amber-400 text-slate-950 text-[10px] font-black uppercase tracking-wider">
-                🎮 Elimika Play Arcade
-              </span>
-              <span class="px-2.5 py-0.5 rounded-md bg-emerald-500/20 border border-emerald-400/30 text-emerald-200 text-[10px] font-bold">
-                Works on Android · iPhone · Desktop
-              </span>
-            </div>
-            <h1 class="text-xl sm:text-2xl font-black">Interactive STEM &amp; NECTA Educational Games</h1>
-            <p class="text-xs sm:text-sm text-emerald-100/90 max-w-2xl">
-              Select any game below to play directly in your browser with saved progress, or launch the full-screen 3D WebGL viewport.
-            </p>
-          </div>
-          <div class="flex flex-wrap items-center gap-2 shrink-0">
-            <button onclick="openMohaAppModal('play')" class="px-3.5 py-2 bg-amber-400 hover:bg-amber-300 text-slate-950 font-black text-xs rounded-xl cursor-pointer">
-              🚀 Full-Screen 3D Hub ↗
-            </button>
-            <button onclick="handleGoBack()" class="px-3.5 py-2 bg-white/15 hover:bg-white/25 text-white font-bold text-xs rounded-xl cursor-pointer">
-              ← Back
-            </button>
-          </div>
-        </div>
-
-        <!-- 4 Game Selector Tabs -->
-        <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
-          <button id="gameTab-bridge" onclick="switchGameTab('bridge')" class="p-3.5 rounded-2xl border text-left transition-all cursor-pointer bg-slate-900 text-white border-slate-900 shadow-xs">
-            <div class="text-base font-black">🌉 1. 3D STEM Builder</div>
-            <div class="text-[11px] opacity-80 mt-0.5">Bridge Simulator &amp; Lab</div>
-          </button>
-          <button id="gameTab-treasure" onclick="switchGameTab('treasure')" class="p-3.5 rounded-2xl border text-left transition-all cursor-pointer bg-white text-slate-900 border-slate-200 hover:border-emerald-500">
-            <div class="text-base font-black">🏝️ 2. Treasure Hunt</div>
-            <div class="text-[11px] text-slate-500 mt-0.5">Zanzibar &amp; Kilimanjaro</div>
-          </button>
-          <button id="gameTab-escape" onclick="switchGameTab('escape')" class="p-3.5 rounded-2xl border text-left transition-all cursor-pointer bg-white text-slate-900 border-slate-200 hover:border-violet-500">
-            <div class="text-base font-black">🔐 3. Escape Room</div>
-            <div class="text-[11px] text-slate-500 mt-0.5">4-Digit Keypad Locks</div>
-          </button>
-          <button id="gameTab-arena" onclick="switchGameTab('arena')" class="p-3.5 rounded-2xl border text-left transition-all cursor-pointer bg-white text-slate-900 border-slate-200 hover:border-amber-500">
-            <div class="text-base font-black">⚡ 4. STEM Arena</div>
-            <div class="text-[11px] text-slate-500 mt-0.5">Speed Calculation</div>
-          </button>
-        </div>
-
-        <!-- Active Game Stage Container -->
-        <div id="gameStageContainer" class="bg-white rounded-3xl border border-slate-200 p-5 sm:p-6 shadow-xs"></div>
-      </div>
-    </div>
-
   </main>
 
   <!-- STICKY MOBILE BACK BAR -->
@@ -687,86 +508,71 @@
     </button>
   </div>
 
-  <!-- ==================== IPHONE & IPAD SAFARI INSTALLATION GUIDE MODAL ==================== -->
-  <div id="iosInstallModal" class="hidden fixed inset-0 z-50 bg-slate-950/75 backdrop-blur-xs flex items-center justify-center p-4" onclick="closeIOSInstallModal()">
-    <div class="w-full max-w-md rounded-3xl bg-white border border-slate-200 p-6 shadow-2xl text-slate-800 space-y-4" onclick="event.stopPropagation()">
+  <!-- ==================== APP DOWNLOAD MODAL (ANDROID PLAY STORE & IPHONE WWW.ELIMIKA.ONLINE) ==================== -->
+  <div id="appDownloadModal" class="hidden fixed inset-0 z-50 bg-slate-950/75 backdrop-blur-xs flex items-center justify-center p-4" onclick="closeAppDownloadModal()">
+    <div class="w-full max-w-lg rounded-3xl bg-white border border-slate-200 p-6 shadow-2xl text-slate-800 space-y-4" onclick="event.stopPropagation()">
       <div class="flex items-start justify-between gap-3">
         <div class="flex items-center gap-3">
           <div class="w-12 h-12 rounded-2xl bg-blue-600 text-white flex items-center justify-center font-black text-xl shadow-xs shrink-0">E</div>
           <div>
             <div class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-md bg-slate-900 text-white text-[10px] font-black uppercase tracking-wider">
-              <span> iPhone &amp; iPad Installation</span>
+              <span>📲 Official Elimika Mobile App</span>
             </div>
             <h3 class="text-base sm:text-lg font-black text-slate-900 mt-1">
-              Add Elimika to Home Screen
+              Choose Your Phone to Download Elimika
             </h3>
           </div>
         </div>
-        <button type="button" onclick="closeIOSInstallModal()" class="p-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-600 font-bold text-xs cursor-pointer">✕</button>
+        <button type="button" onclick="closeAppDownloadModal()" class="p-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-600 font-bold text-xs cursor-pointer">✕</button>
       </div>
 
-      <div class="p-3.5 rounded-2xl bg-blue-50 border border-blue-200 text-xs text-blue-950 leading-relaxed">
-        <strong class="font-black block mb-0.5">📱 Important for iPhone &amp; iPad Users:</strong>
-        Installation on iOS must be completed using the <strong>Apple Safari</strong> browser at <strong>https://elimika.online</strong>.
-      </div>
+      <div class="space-y-3 text-xs">
+        <!-- 1. Android Option: Google Play Store -->
+        <div class="p-4 rounded-2xl bg-emerald-50 border border-emerald-200 space-y-2.5">
+          <div class="flex items-center justify-between">
+            <span class="font-black text-sm text-emerald-950 flex items-center gap-1.5">
+              <span>🤖 Android Phone &amp; Tablet Users</span>
+            </span>
+            <span class="px-2 py-0.5 rounded bg-emerald-600 text-white text-[10px] font-extrabold">Google Play Store</span>
+          </div>
+          <p class="text-slate-700 leading-relaxed">
+            Access and download the Elimika Tanzania application from the <strong>Google Play Store</strong>.
+          </p>
+          <button type="button" onclick="handleAndroidPlayStoreAccess()" class="w-full py-3 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-black text-xs flex items-center justify-center gap-2 shadow-xs cursor-pointer">
+            <span>▶</span>
+            <span>Access App on Google Play Store</span>
+          </button>
+          <div id="androidPlayNotice" class="hidden p-3 rounded-xl bg-white border border-emerald-300 text-emerald-950 font-semibold leading-relaxed"></div>
+        </div>
 
-      <div class="space-y-2.5 text-xs">
-        <div class="p-3 rounded-2xl bg-slate-50 border border-slate-200 flex items-center gap-3">
-          <div class="w-8 h-8 rounded-xl bg-blue-600 text-white flex items-center justify-center font-black shrink-0">1</div>
-          <div>
-            <div class="font-black text-slate-900">Tap the Safari Share Icon (↑)</div>
-            <p class="text-slate-600 mt-0.5">Tap the <strong>Share</strong> button at the bottom or top of your Safari screen.</p>
+        <!-- 2. iPhone Option: Directed to www.elimika.online to download direct to phone -->
+        <div class="p-4 rounded-2xl bg-blue-50 border border-blue-200 space-y-2.5">
+          <div class="flex items-center justify-between">
+            <span class="font-black text-sm text-blue-950 flex items-center gap-1.5">
+              <span> iPhone &amp; iPad Users Only</span>
+            </span>
+            <span class="px-2 py-0.5 rounded bg-blue-600 text-white text-[10px] font-extrabold">www.elimika.online</span>
+          </div>
+          <p class="text-slate-700 leading-relaxed">
+            iPhone users are directed to <strong>www.elimika.online</strong> where you can download and install the Elimika app directly to your phone.
+          </p>
+          <a
+            href="https://www.elimika.online/?install=iphone"
+            onclick="return handleIPhoneDirectDownload(event)"
+            class="w-full py-3 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-black text-xs flex items-center justify-center gap-2 shadow-xs text-center"
+          >
+            <span></span>
+            <span>Go to www.elimika.online (Download Direct to iPhone)</span>
+          </a>
+          <div id="iphoneDirectDownloadSteps" class="hidden p-3 rounded-xl bg-white border border-blue-300 text-blue-950 space-y-1.5 leading-relaxed">
+            <div class="font-black text-xs">📲 Direct iPhone Download at www.elimika.online:</div>
+            <div>1. In Safari on <strong>www.elimika.online</strong>, tap the <strong>Share icon (↑)</strong> at the bottom of your screen.</div>
+            <div>2. Tap <strong>Add to Home Screen (＋)</strong> and tap <strong>Add</strong> to install the app directly onto your iPhone.</div>
           </div>
         </div>
-        <div class="p-3 rounded-2xl bg-slate-50 border border-slate-200 flex items-center gap-3">
-          <div class="w-8 h-8 rounded-xl bg-blue-600 text-white flex items-center justify-center font-black shrink-0">2</div>
-          <div>
-            <div class="font-black text-slate-900">Select &ldquo;Add to Home Screen&rdquo; (＋)</div>
-            <p class="text-slate-600 mt-0.5">Scroll down the Safari menu and tap <strong>Add to Home Screen</strong>.</p>
-          </div>
-        </div>
-        <div class="p-3 rounded-2xl bg-slate-50 border border-slate-200 flex items-center gap-3">
-          <div class="w-8 h-8 rounded-xl bg-emerald-600 text-white flex items-center justify-center font-black shrink-0">3</div>
-          <div>
-            <div class="font-black text-slate-900">Tap &ldquo;Add&rdquo; in the Top-Right Corner</div>
-            <p class="text-slate-600 mt-0.5">The Elimika Tanzania icon will appear directly on your iPhone or iPad Home Screen.</p>
-          </div>
-        </div>
       </div>
 
-      <button type="button" onclick="closeIOSInstallModal()" class="w-full py-3 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-black text-xs cursor-pointer">
-        Got It
-      </button>
-    </div>
-  </div>
-
-  <!-- ==================== ANDROID GOOGLE PLAY STORE / COMING SOON MODAL ==================== -->
-  <div id="androidPlayModal" class="hidden fixed inset-0 z-50 bg-slate-950/75 backdrop-blur-xs flex items-center justify-center p-4" onclick="closeAndroidPlayModal()">
-    <div class="w-full max-w-md rounded-3xl bg-white border border-slate-200 p-6 shadow-2xl text-slate-800 space-y-4" onclick="event.stopPropagation()">
-      <div class="flex items-start justify-between gap-3">
-        <div class="flex items-center gap-3">
-          <div class="w-12 h-12 rounded-2xl bg-emerald-600 text-white flex items-center justify-center font-black text-xl shadow-xs shrink-0">E</div>
-          <div>
-            <div class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-md bg-emerald-700 text-white text-[10px] font-black uppercase tracking-wider">
-              <span>🤖 Android Installation</span>
-            </div>
-            <h3 class="text-base sm:text-lg font-black text-slate-900 mt-1">
-              Google Play Store — Coming Soon
-            </h3>
-          </div>
-        </div>
-        <button type="button" onclick="closeAndroidPlayModal()" class="p-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-600 font-bold text-xs cursor-pointer">✕</button>
-      </div>
-
-      <div class="p-4 rounded-2xl bg-amber-50 border border-amber-200 text-xs text-amber-950 space-y-1.5 leading-relaxed">
-        <div class="font-black text-sm">▶ Official Google Play Listing Coming Soon!</div>
-        <p>The official <strong>Elimika Tanzania</strong> Android app is being prepared for publication on Google Play.</p>
-        <p class="font-semibold text-amber-900">You can install the Elimika Web App directly to your Android Home Screen right now:</p>
-      </div>
-
-      <div id="androidDirectInstallBox"></div>
-
-      <button type="button" onclick="closeAndroidPlayModal()" class="w-full py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold text-xs cursor-pointer">
+      <button type="button" onclick="closeAppDownloadModal()" class="w-full py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs cursor-pointer">
         Close
       </button>
     </div>
@@ -866,61 +672,6 @@
     </div>
   </div>
 
-  <!-- MOHA AI APP LAUNCH MODAL -->
-  <div id="mohaAppModal" class="hidden fixed inset-0 z-50 bg-slate-900/75 backdrop-blur-sm flex items-center justify-center p-4">
-    <div class="bg-white rounded-2xl shadow-2xl max-w-lg w-full overflow-hidden border border-slate-200">
-      <div class="bg-gradient-to-r from-violet-950 via-indigo-950 to-slate-900 text-white p-5">
-        <div class="flex items-center justify-between">
-          <span class="px-2.5 py-0.5 rounded-md bg-amber-400 text-slate-950 text-[10px] font-black uppercase tracking-wider">
-            🤖 Official Moha AI App
-          </span>
-          <button onclick="closeMohaAppModal()" class="text-slate-300 hover:text-white font-bold text-sm cursor-pointer">✕</button>
-        </div>
-        <h3 class="text-lg sm:text-xl font-black mt-2">Open in the Interactive Moha AI App</h3>
-        <p id="mohaModalSubtitle" class="text-xs text-indigo-200 mt-1">
-          Access AI Textbook Reading Comprehension, Step-by-Step NECTA Exam Solutions, 20-Question AI Quizzes, and Teacher Document Studio.
-        </p>
-      </div>
-
-      <div class="p-5 space-y-4 text-xs">
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
-          <div class="p-3 rounded-xl bg-violet-50 border border-violet-200">
-            <div class="font-black text-violet-950">📘 TIE Book Comprehension</div>
-            <p class="text-slate-600 mt-0.5">Reads pinned TIE textbooks &amp; past papers to answer any student question.</p>
-          </div>
-          <div class="p-3 rounded-xl bg-emerald-50 border border-emerald-200">
-            <div class="font-black text-emerald-950">🎯 20-Question AI Quiz</div>
-            <p class="text-slate-600 mt-0.5">Topic &amp; Sub-Topic quizzes with worked step-by-step solutions.</p>
-          </div>
-          <div class="p-3 rounded-xl bg-blue-50 border border-blue-200">
-            <div class="font-black text-blue-950">📋 Teacher Document Studio</div>
-            <p class="text-slate-600 mt-0.5">Generate Lesson Plans, PO-RALG Schemes of Work, Notes &amp; Marking Schemes.</p>
-          </div>
-          <div class="p-3 rounded-xl bg-teal-50 border border-teal-200">
-            <div class="font-black text-teal-950">🎮 3D STEM Games &amp; Labs</div>
-            <p class="text-slate-600 mt-0.5">Full Three.js 3D Bridge Builder, Treasure Hunt &amp; Virtual Science Lab.</p>
-          </div>
-        </div>
-
-        <div class="flex flex-col sm:flex-row items-stretch sm:items-center justify-end gap-2 pt-2 border-t border-slate-100">
-          <button onclick="closeMohaAppModal()" class="px-4 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold cursor-pointer">
-            Stay on Website
-          </button>
-          <a
-            id="mohaAppLaunchLink"
-            href="https://ais-pre-utxrgt5piro4x4xpbnh75h-142058246407.europe-west2.run.app/#moha"
-            target="_blank"
-            rel="noopener noreferrer"
-            onclick="closeMohaAppModal()"
-            class="px-5 py-2.5 rounded-xl bg-violet-600 hover:bg-violet-700 text-white font-black text-center shadow-xs"
-          >
-            🚀 Go to Moha AI App Now ↗
-          </a>
-        </div>
-      </div>
-    </div>
-  </div>
-
   <!-- LEGAL COMPLIANCE MODAL -->
   <div id="legalModal" class="hidden fixed inset-0 z-50 bg-slate-900/75 backdrop-blur-sm flex items-center justify-center p-4" onclick="closeLegalModal()">
     <div class="bg-white rounded-2xl shadow-2xl max-w-2xl w-full p-6 sm:p-8 border border-slate-200 max-h-[90vh] overflow-y-auto text-slate-700 text-xs sm:text-sm space-y-4" onclick="event.stopPropagation()">
@@ -958,7 +709,7 @@
             </span>
             <h4 class="text-base sm:text-lg font-black">Elimika Online</h4>
             <p class="text-xs text-emerald-50">
-              Get daily NECTA Past Papers, Marking Schemes, TIE Textbooks, and 20-Question Quiz links straight to your phone. Phone numbers stay 100% private.
+              Get daily NECTA Past Papers, Marking Schemes, TIE Textbooks, and Official Syllabuses straight to your phone. Phone numbers stay 100% private.
             </p>
             <div class="pt-2 flex flex-wrap items-center justify-center sm:justify-start gap-2">
               <a
@@ -970,7 +721,7 @@
                 <span>🔔 Follow WhatsApp Channel</span>
               </a>
               <a
-                href="https://wa.me/?text=📚%20*Follow%20Elimika%20Online%20on%20WhatsApp*%20for%20daily%20NECTA%20Past%20Papers%2C%20Marking%20Schemes%2C%20TIE%20Books%20%26%20Quiz%20Challenges%3A%0A👉%20https%3A%2F%2Fwhatsapp.com%2Fchannel%2F0029VbE4Ctl0G0Xbp8kQwu0t"
+                href="https://wa.me/?text=📚%20*Follow%20Elimika%20Online%20on%20WhatsApp*%20for%20daily%20NECTA%20Past%20Papers%2C%20Marking%20Schemes%20%26%20TIE%20Books%3A%0A👉%20https%3A%2F%2Fwhatsapp.com%2Fchannel%2F0029VbE4Ctl0G0Xbp8kQwu0t"
                 target="_blank"
                 rel="noopener noreferrer"
                 class="px-3 py-2 rounded-xl bg-emerald-900/60 hover:bg-emerald-900 text-white font-bold text-xs inline-flex items-center gap-1"
@@ -1004,9 +755,7 @@
         </p>
         <div class="flex flex-wrap gap-1.5">
           <button type="button" onclick="setWaPostTemplate('paper')" class="px-3 py-1.5 rounded-xl font-bold bg-emerald-600 text-white cursor-pointer">📄 New Past Paper Post</button>
-          <button type="button" onclick="setWaPostTemplate('quiz')" class="px-3 py-1.5 rounded-xl font-bold bg-slate-100 text-slate-700 hover:bg-slate-200 cursor-pointer">🎯 Daily Quiz Challenge</button>
           <button type="button" onclick="setWaPostTemplate('book')" class="px-3 py-1.5 rounded-xl font-bold bg-slate-100 text-slate-700 hover:bg-slate-200 cursor-pointer">📚 TIE Books &amp; Syllabus</button>
-          <button type="button" onclick="setWaPostTemplate('teacher')" class="px-3 py-1.5 rounded-xl font-bold bg-slate-100 text-slate-700 hover:bg-slate-200 cursor-pointer">🧑‍🏫 Teacher Lesson Plans</button>
         </div>
         <textarea id="waBroadcastTextarea" readonly rows="8" class="w-full p-3.5 rounded-2xl bg-slate-900 text-emerald-100 font-mono text-xs leading-relaxed border border-slate-800 focus:outline-none"></textarea>
         <div class="flex flex-wrap items-center justify-end gap-2">
@@ -1024,23 +773,18 @@
     </div>
   </div>
 
-  <!-- FOOTER -->
+  <!-- FOOTER (NO GAMES, NO QUIZZES, NO MOHA AI) -->
   <footer class="bg-slate-900 text-slate-400 py-8 border-t border-slate-800 text-xs text-center mt-auto">
     <div class="max-w-5xl mx-auto px-4 space-y-3">
-      <div class="font-extrabold text-white text-sm">ELIMIKA TANZANIA (elimika.online)</div>
-      <p>Past Papers, Annual Exams, Marking Schemes, TIE Textbooks, Official Syllabuses, Interactive Games &amp; Moha AI.</p>
+      <div class="font-extrabold text-white text-sm">ELIMIKA TANZANIA (www.elimika.online)</div>
+      <p>NECTA Past Papers, Annual Examination Papers, Marking Schemes, TIE Student Textbooks &amp; Official Syllabuses.</p>
       <div class="pt-1 flex flex-wrap justify-center gap-4">
-        <button onclick="scrollToGetAppSection()" class="text-emerald-400 hover:text-emerald-300 font-bold underline cursor-pointer">📲 Get Elimika App</button>
+        <button onclick="openAppDownloadModal()" class="text-emerald-400 hover:text-emerald-300 font-bold underline cursor-pointer">📲 Download App (Android Play Store / iPhone www.elimika.online)</button>
         <a href="https://whatsapp.com/channel/0029VbE4Ctl0G0Xbp8kQwu0t" target="_blank" rel="noopener noreferrer" class="text-emerald-400 hover:text-emerald-300 font-bold underline">🔔 Follow Elimika Online Channel</a>
         <button onclick="openWhatsappModal()" class="text-sky-400 hover:text-sky-300 font-bold underline cursor-pointer">💬 WhatsApp Channel</button>
         <button onclick="resetToHome()" class="text-slate-300 hover:text-white font-bold cursor-pointer">Past Papers</button>
         <button onclick="openPage('books')" class="text-slate-300 hover:text-white font-bold cursor-pointer">📚 TIE Books</button>
         <button onclick="openPage('syllabus')" class="text-slate-300 hover:text-white font-bold cursor-pointer">📜 Syllabus</button>
-        <button onclick="openPage('quiz')" class="text-slate-300 hover:text-white font-bold cursor-pointer">🎯 Solving Quiz</button>
-        <button onclick="openPage('games')" class="text-amber-400 hover:text-amber-300 font-bold cursor-pointer">🎮 Elimika Play Games</button>
-        <button onclick="openMohaAppModal('moha')" class="text-violet-400 hover:text-violet-300 font-bold underline cursor-pointer">
-          Moha AI (Go to App ↗)
-        </button>
         <button onclick="openLegalModal('privacy')" class="text-slate-300 hover:text-white underline cursor-pointer">Privacy Policy</button>
         <button onclick="openLegalModal('terms')" class="text-slate-300 hover:text-white underline cursor-pointer">Terms of Service</button>
       </div>
@@ -1053,33 +797,22 @@
   <!-- ==================== FAST, RESPONSIVE APPLICATION ENGINE ==================== -->
   <script>
     /**
-     * Configurable Official Google Play Store URL.
-     * Leave empty ('') while unpublished to show the "Coming Soon" modal + instant web app install.
+     * Configurable Official Google Play Store URL for Android users.
      */
-    const PLAY_STORE_URL = '';
+    const PLAY_STORE_URL = 'https://play.google.com/store/apps/details?id=online.elimika.tanzania';
 
     const CONFIG = {
       SHEET_ID: '1-7C_G-VAC2ICxuT3XwADzAluRoDvQyd04yS4BtSvXxM',
-      MOHA_APP_URL: 'https://ais-pre-utxrgt5piro4x4xpbnh75h-142058246407.europe-west2.run.app',
+      IPHONE_DIRECT_URL: 'https://www.elimika.online',
       WHATSAPP_CHANNEL_URL: 'https://whatsapp.com/channel/0029VbE4Ctl0G0Xbp8kQwu0t',
-      CACHE_KEY: 'elimika_web_sheet_cache_v4'
+      CACHE_KEY: 'elimika_web_sheet_cache_v5'
     };
 
-    // ==================== AUTOMATIC DEVICE & PWA STANDALONE DETECTION ====================
     let deferredInstallPrompt = null;
-    let installDevicePreviewMode = 'auto'; // 'auto' | 'ios' | 'android' | 'desktop'
 
     window.addEventListener('beforeinstallprompt', function (e) {
       e.preventDefault();
       deferredInstallPrompt = e;
-      renderGetElimikaAppSection();
-      updateTopGetAppButton();
-    });
-
-    window.addEventListener('appinstalled', function () {
-      deferredInstallPrompt = null;
-      renderGetElimikaAppSection();
-      updateTopGetAppButton();
     });
 
     if ('serviceWorker' in navigator) {
@@ -1093,17 +826,8 @@
       const isIPadOS = navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1;
       const isIOS = /iPad|iPhone|iPod/.test(ua) || isIPadOS;
       const isAndroid = /Android/i.test(ua);
-      const isSafari = isIOS && /Safari/i.test(ua) && !/CriOS|FxiOS|EdgiOS|OPiOS/i.test(ua);
       const isStandalone = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
-      const realType = isIOS ? 'ios' : isAndroid ? 'android' : 'desktop';
-      return {
-        realType,
-        effectiveType: installDevicePreviewMode === 'auto' ? realType : installDevicePreviewMode,
-        isIOS,
-        isAndroid,
-        isSafari,
-        isStandalone
-      };
+      return { isIOS, isAndroid, isStandalone };
     }
 
     function updateTopGetAppButton() {
@@ -1111,269 +835,60 @@
       const iconEl = document.getElementById('topGetAppIcon');
       const labelEl = document.getElementById('topGetAppLabel');
       if (!iconEl || !labelEl) return;
-      if (info.isStandalone) {
-        iconEl.textContent = '✓';
-        labelEl.textContent = 'Installed';
-      } else if (info.isIOS) {
+      if (info.isIOS) {
         iconEl.textContent = '';
-        labelEl.textContent = 'Get App';
+        labelEl.textContent = 'iPhone App';
       } else if (info.isAndroid) {
         iconEl.textContent = '▶';
-        labelEl.textContent = 'Get App';
+        labelEl.textContent = 'Play Store';
       } else {
         iconEl.textContent = '📲';
-        labelEl.textContent = 'Get App';
+        labelEl.textContent = 'Download App';
       }
     }
 
-    function handleTopGetAppClick() {
+    function openAppDownloadModal() {
       const info = detectDeviceDetails();
+      // If iPhone user clicks top button and is not yet on www.elimika.online, direct them to www.elimika.online
+      if (info.isIOS && window.location.hostname !== 'www.elimika.online' && window.location.hostname !== 'elimika.online') {
+        window.location.href = 'https://www.elimika.online/?install=iphone';
+        return;
+      }
+      const modal = document.getElementById('appDownloadModal');
+      if (modal) modal.classList.remove('hidden');
       if (info.isIOS) {
-        openIOSInstallModal();
-        return;
+        const steps = document.getElementById('iphoneDirectDownloadSteps');
+        if (steps) steps.classList.remove('hidden');
       }
-      if (info.isAndroid) {
-        const playUrl = PLAY_STORE_URL || localStorage.getItem('elimika_playstore_url') || '';
-        if (playUrl) {
-          window.open(playUrl, '_blank', 'noopener,noreferrer');
-          return;
-        }
-        if (deferredInstallPrompt) {
-          triggerPWAInstallPrompt();
-          return;
-        }
-        openAndroidPlayModal();
-        return;
-      }
-      if (deferredInstallPrompt) {
-        triggerPWAInstallPrompt();
-        return;
-      }
-      scrollToGetAppSection();
     }
 
-    function scrollToGetAppSection() {
-      if (state.activePage !== 'papers' || state.step !== 1) {
-        state.activePage = 'papers';
-        state.step = 1;
-        renderAll();
-      }
-      setTimeout(function () {
-        const el = document.getElementById('get-elimika-app-section');
-        if (el) el.scrollIntoView({ behavior: 'smooth' });
-      }, 60);
+    function closeAppDownloadModal() {
+      const modal = document.getElementById('appDownloadModal');
+      if (modal) modal.classList.add('hidden');
     }
 
-    function setInstallDevicePreview(mode) {
-      installDevicePreviewMode = mode;
-      ['auto', 'ios', 'android', 'desktop'].forEach(function (k) {
-        const btn = document.getElementById('devBtn-' + k);
-        if (btn) {
-          btn.className = k === mode
-            ? 'px-2.5 py-1 rounded-lg bg-blue-600 text-white cursor-pointer'
-            : 'px-2.5 py-1 rounded-lg text-slate-300 hover:text-white cursor-pointer';
-        }
-      });
-      renderGetElimikaAppSection();
+    function handleAndroidPlayStoreAccess() {
+      const customPlayUrl = localStorage.getItem('elimika_playstore_url') || PLAY_STORE_URL;
+      if (customPlayUrl) {
+        window.open(customPlayUrl, '_blank', 'noopener,noreferrer');
+      }
     }
 
-    async function triggerPWAInstallPrompt() {
-      if (!deferredInstallPrompt) return false;
-      deferredInstallPrompt.prompt();
-      const res = await deferredInstallPrompt.userChoice;
-      if (res && res.outcome === 'accepted') {
-        deferredInstallPrompt = null;
-        renderGetElimikaAppSection();
-        updateTopGetAppButton();
-        return true;
+    function handleIPhoneDirectDownload(ev) {
+      const host = (window.location.hostname || '').toLowerCase();
+      // If already on www.elimika.online or elimika.online, show direct iPhone installation steps right away
+      if (host === 'www.elimika.online' || host === 'elimika.online') {
+        if (ev) ev.preventDefault();
+        const modal = document.getElementById('appDownloadModal');
+        if (modal) modal.classList.remove('hidden');
+        const steps = document.getElementById('iphoneDirectDownloadSteps');
+        if (steps) steps.classList.remove('hidden');
+        return false;
       }
+      // Otherwise direct iPhone user to https://www.elimika.online
+      window.location.href = 'https://www.elimika.online/?install=iphone';
+      if (ev) ev.preventDefault();
       return false;
-    }
-
-    function openIOSInstallModal() {
-      document.getElementById('iosInstallModal').classList.remove('hidden');
-    }
-    function closeIOSInstallModal() {
-      document.getElementById('iosInstallModal').classList.add('hidden');
-    }
-
-    function openAndroidPlayModal() {
-      const box = document.getElementById('androidDirectInstallBox');
-      if (box) {
-        if (deferredInstallPrompt) {
-          box.innerHTML = `
-            <button type="button" onclick="triggerPWAInstallPrompt(); closeAndroidPlayModal();" class="w-full py-3 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-black text-xs cursor-pointer shadow-xs">
-              ⬇ Install Elimika App to Home Screen Now
-            </button>
-          `;
-        } else {
-          box.innerHTML = `
-            <div class="p-3.5 rounded-2xl bg-slate-50 border border-slate-200 text-xs text-slate-700">
-              <div class="font-black text-slate-900">How to Add to Android Home Screen right now:</div>
-              <p class="mt-0.5">Tap the <strong>Chrome menu (⋮)</strong> in the top-right corner and select <strong>Install app</strong> or <strong>Add to Home screen</strong>.</p>
-            </div>
-          `;
-        }
-      }
-      document.getElementById('androidPlayModal').classList.remove('hidden');
-    }
-    function closeAndroidPlayModal() {
-      document.getElementById('androidPlayModal').classList.add('hidden');
-    }
-
-    function handleAndroidDownloadClick() {
-      const playUrl = PLAY_STORE_URL || localStorage.getItem('elimika_playstore_url') || '';
-      if (playUrl) {
-        window.open(playUrl, '_blank', 'noopener,noreferrer');
-      } else {
-        openAndroidPlayModal();
-      }
-    }
-
-    function renderGetElimikaAppSection() {
-      const container = document.getElementById('deviceInstallCardContainer');
-      const badge = document.getElementById('detectedDeviceBadge');
-      if (!container) return;
-      const info = detectDeviceDetails();
-      const playUrl = PLAY_STORE_URL || localStorage.getItem('elimika_playstore_url') || '';
-
-      if (badge) {
-        badge.textContent = info.realType === 'ios'
-          ? ' Detected: iPhone / iPad (iOS)'
-          : info.realType === 'android'
-          ? '🤖 Detected: Android Device'
-          : '💻 Detected: Desktop Browser';
-      }
-
-      if (info.isStandalone) {
-        container.innerHTML = `
-          <div class="p-4 rounded-2xl bg-emerald-500/20 border border-emerald-400/40 flex items-center justify-between gap-3">
-            <div class="flex items-center gap-3">
-              <span class="w-8 h-8 rounded-xl bg-emerald-500 text-slate-950 font-black flex items-center justify-center">✓</span>
-              <div>
-                <div class="text-sm font-black text-white">Elimika is already installed</div>
-                <div class="text-xs text-emerald-200">You are running Elimika in standalone Home Screen mode.</div>
-              </div>
-            </div>
-            <span class="px-3 py-1 rounded-xl bg-emerald-400 text-slate-950 font-black text-xs">Active</span>
-          </div>
-        `;
-        return;
-      }
-
-      if (info.effectiveType === 'ios') {
-        container.innerHTML = `
-          <div class="grid grid-cols-1 lg:grid-cols-12 gap-5 items-center">
-            <div class="lg:col-span-7 space-y-3">
-              <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-xl bg-white/10 border border-white/15 text-xs font-bold text-white">
-                <span> iPhone &amp; iPad Official Home Screen App</span>
-              </div>
-              <h3 class="text-base sm:text-xl font-black text-white">
-                Install Elimika on Your iPhone or iPad via Safari
-              </h3>
-              <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
-                On iPhone and iPad, installation is completed directly through <strong>Apple Safari</strong>. Tap the button below for the visual step-by-step guide:
-              </p>
-              <div class="flex flex-wrap items-center gap-3 pt-1">
-                <button type="button" onclick="openIOSInstallModal()" class="px-5 py-3.5 rounded-2xl bg-white hover:bg-blue-50 text-slate-950 font-black text-xs sm:text-sm inline-flex items-center gap-2 shadow-md cursor-pointer transition-all">
-                  <span></span>
-                  <span>Add Elimika to Home Screen</span>
-                </button>
-              </div>
-            </div>
-            <div class="lg:col-span-5 p-4 rounded-2xl bg-white/10 border border-white/15 space-y-2.5 text-xs">
-              <div class="font-black text-amber-300 uppercase tracking-wider text-[11px]">
-                Quick Visual Guide (Safari Browser):
-              </div>
-              <div class="flex items-center gap-2.5">
-                <span class="w-6 h-6 rounded-lg bg-blue-600 text-white font-black flex items-center justify-center shrink-0">1</span>
-                <span>Tap the <strong>Safari Share icon (↑)</strong> at the bottom of Safari</span>
-              </div>
-              <div class="flex items-center gap-2.5">
-                <span class="w-6 h-6 rounded-lg bg-blue-600 text-white font-black flex items-center justify-center shrink-0">2</span>
-                <span>Scroll and tap <strong>Add to Home Screen (＋)</strong></span>
-              </div>
-              <div class="flex items-center gap-2.5">
-                <span class="w-6 h-6 rounded-lg bg-emerald-600 text-white font-black flex items-center justify-center shrink-0">3</span>
-                <span>Tap <strong>Add</strong> in the top-right corner</span>
-              </div>
-            </div>
-          </div>
-        `;
-      } else if (info.effectiveType === 'android') {
-        container.innerHTML = `
-          <div class="grid grid-cols-1 lg:grid-cols-12 gap-5 items-center">
-            <div class="lg:col-span-7 space-y-3">
-              <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-xl bg-emerald-500/20 border border-emerald-400/30 text-xs font-bold text-emerald-300">
-                <span>🤖 Android Smartphone &amp; Tablet</span>
-              </div>
-              <h3 class="text-base sm:text-xl font-black text-white">
-                Get the Elimika Tanzania App for Android
-              </h3>
-              <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
-                Download Elimika on Google Play or install the instant Home Screen Web App for offline NECTA past papers, TIE textbooks, and 3D games.
-              </p>
-              <div class="flex flex-wrap items-center gap-3 pt-1">
-                <button type="button" onclick="handleAndroidDownloadClick()" class="px-5 py-3.5 rounded-2xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-black text-xs sm:text-sm inline-flex items-center gap-2 shadow-md cursor-pointer transition-all">
-                  <span>▶</span>
-                  <span>Download on Google Play</span>
-                  ${!playUrl ? '<span class="px-2 py-0.5 rounded-md bg-slate-950/20 text-[10px] font-extrabold uppercase">Coming Soon</span>' : ''}
-                </button>
-                ${deferredInstallPrompt ? `
-                  <button type="button" onclick="triggerPWAInstallPrompt()" class="px-4 py-3.5 rounded-2xl bg-white/15 hover:bg-white/25 text-white font-bold text-xs sm:text-sm inline-flex items-center gap-2 border border-white/20 cursor-pointer">
-                    <span>⬇ Install Web App Now</span>
-                  </button>
-                ` : ''}
-              </div>
-            </div>
-            <div class="lg:col-span-5 p-4 rounded-2xl bg-white/10 border border-white/15 space-y-2 text-xs">
-              <div class="font-black text-emerald-300 uppercase tracking-wider text-[11px]">
-                Android Features Included:
-              </div>
-              <p class="text-slate-200">✓ Full-screen standalone mode from your Android launcher</p>
-              <p class="text-slate-200">✓ Cached TIE Syllabuses, Past Papers &amp; 3D STEM Games</p>
-              <p class="text-slate-200">✓ Instant Moha AI step-by-step problem solver</p>
-            </div>
-          </div>
-        `;
-      } else {
-        container.innerHTML = `
-          <div class="grid grid-cols-1 lg:grid-cols-12 gap-5 items-center">
-            <div class="lg:col-span-8 space-y-3">
-              <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-xl bg-blue-500/20 border border-blue-400/30 text-xs font-bold text-blue-200">
-                <span>💻 Desktop &amp; Mobile QR Access</span>
-              </div>
-              <h3 class="text-base sm:text-xl font-black text-white">
-                Scan QR Code to Open Elimika on Your Phone
-              </h3>
-              <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
-                Scan the QR code with your iPhone or Android camera to open <strong>https://elimika.online</strong> on your mobile device, or switch the preview tabs above to view iPhone and Android installation guides.
-              </p>
-              <div class="flex flex-wrap items-center gap-2.5 pt-1">
-                <a href="https://elimika.online" target="_blank" rel="noopener noreferrer" class="px-4 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-black text-xs inline-flex items-center gap-1.5 shadow-xs">
-                  <span>🌐 Visit https://elimika.online</span>
-                </a>
-                <button type="button" onclick="openIOSInstallModal()" class="px-3.5 py-2.5 rounded-xl bg-white/10 hover:bg-white/20 text-white font-bold text-xs border border-white/15 cursor-pointer">
-                   iPhone Guide
-                </button>
-                <button type="button" onclick="openAndroidPlayModal()" class="px-3.5 py-2.5 rounded-xl bg-white/10 hover:bg-white/20 text-white font-bold text-xs border border-white/15 cursor-pointer">
-                  🤖 Android Guide
-                </button>
-              </div>
-            </div>
-            <div class="lg:col-span-4 flex justify-center lg:justify-end">
-              <div class="bg-white p-3 rounded-2xl shadow-md text-center text-slate-900">
-                <img
-                  src="https://api.qrserver.com/v1/create-qr-code/?size=130x130&amp;data=https%3A%2F%2Felimika.online"
-                  alt="Scan to open elimika.online on mobile"
-                  class="w-28 h-28 rounded-lg mx-auto"
-                />
-                <span class="block text-[10px] font-black text-slate-700 mt-1.5">https://elimika.online</span>
-              </div>
-            </div>
-          </div>
-        `;
-      }
     }
 
     const TIE_SUBJECTS = {
@@ -1457,132 +972,9 @@
       { id: 's-bs', title: 'Business Studies Official TIE Syllabus (Form 1 - 4)', form: 'Form 1 - 4', subject: 'Business Studies', year: '2023', category: 'TIE Syllabus', paperUrl: 'https://drive.google.com/file/d/1Qjyl7EZ0obuonkILrYAqzdADtustahBH/view?usp=drive_link', answersUrl: null, isBook: false, isSyllabus: true }
     ];
 
-    // Open-Ended Structured Solving Quiz Bank (With Part a/b/c line breaks, SVG diagrams & grouped interval tables)
-    const QUESTION_BANK = [
-      {
-        subject: 'Basic Mathematics',
-        topic: 'Statistics — Grouped Frequency Distribution Table',
-        q: 'The marks scored by 40 Form 3 students in a Mathematics test are summarized in the grouped frequency interval table below:\n(a) State the modal class and its class mark (midpoint).\n(b) Calculate the mean mark using the assumed mean A = 64.5.\n(c) Find the median mark correct to 2 decimal places.',
-        tableHtml: `
-          <table class="w-full text-xs border-collapse border border-slate-300 mt-2">
-            <thead class="bg-slate-900 text-white">
-              <tr><th class="border border-slate-300 px-2.5 py-1.5">Class Interval (Marks)</th><th class="border border-slate-300 px-2.5 py-1.5">40–49</th><th class="border border-slate-300 px-2.5 py-1.5">50–59</th><th class="border border-slate-300 px-2.5 py-1.5">60–69</th><th class="border border-slate-300 px-2.5 py-1.5">70–79</th><th class="border border-slate-300 px-2.5 py-1.5">80–89</th></tr>
-            </thead>
-            <tbody>
-              <tr class="text-center font-bold bg-slate-50"><td class="border border-slate-300 px-2.5 py-1.5">Frequency (f)</td><td class="border border-slate-300 px-2.5 py-1.5">4</td><td class="border border-slate-300 px-2.5 py-1.5">8</td><td class="border border-slate-300 px-2.5 py-1.5">14</td><td class="border border-slate-300 px-2.5 py-1.5">10</td><td class="border border-slate-300 px-2.5 py-1.5">4</td></tr>
-            </tbody>
-          </table>
-        `,
-        exp: '(a) Highest frequency is 14 in class 60–69. Modal class = 60–69; Class mark = (60 + 69)/2 = 64.5.\n(b) Class midpoints x: 44.5, 54.5, 64.5, 74.5, 84.5. Σf·d = 4(-20) + 8(-10) + 14(0) + 10(10) + 4(20) = 20. Mean = 64.5 + 20/40 = 65.0 marks.\n(c) N/2 = 20 lies in class 60–69 (L = 59.5, cf_b = 12, f_m = 14, c = 10). Median = 59.5 + ((20 - 12)/14)×10 = 65.21 marks.'
-      },
-      {
-        subject: 'Basic Mathematics',
-        topic: 'Similarity & Intercept Theorem (With SVG Diagram)',
-        q: 'In ΔABC shown in the diagram below, line segment DE is drawn parallel to base BC with D on AB and E on AC:\n(a) Prove that ΔADE is similar to ΔABC.\n(b) Given AD = 4 cm, DB = 6 cm, AE = 6 cm, and DE = 5 cm, calculate the lengths of EC and BC.',
-        svgHtml: `
-          <svg viewBox="0 0 360 170" class="w-full max-w-sm h-40 bg-slate-50 rounded-xl border border-slate-200 p-2">
-            <polygon points="180,18 70,148 290,148" fill="#eff6ff" stroke="#1d4ed8" stroke-width="2.5"/>
-            <line x1="125" y1="83" x2="235" y2="83" stroke="#dc2626" stroke-width="2.5"/>
-            <text x="176" y="13" font-size="12" font-weight="bold" fill="#0f172a">A</text>
-            <text x="54" y="152" font-size="12" font-weight="bold" fill="#0f172a">B</text>
-            <text x="296" y="152" font-size="12" font-weight="bold" fill="#0f172a">C</text>
-            <text x="105" y="85" font-size="12" font-weight="bold" fill="#dc2626">D</text>
-            <text x="242" y="85" font-size="12" font-weight="bold" fill="#dc2626">E</text>
-            <text x="135" y="52" font-size="11" fill="#1e40af">4 cm</text>
-            <text x="82" y="122" font-size="11" fill="#1e40af">6 cm</text>
-            <text x="212" y="52" font-size="11" fill="#1e40af">6 cm</text>
-            <text x="165" y="78" font-size="11" fill="#dc2626">5 cm</text>
-          </svg>
-        `,
-        exp: '(a) Since DE ∥ BC, ∠ADE = ∠ABC and ∠AED = ∠ACB (corresponding angles), and ∠DAE is common. Therefore ΔADE ∼ ΔABC by AA Similarity.\n(b) AB = AD + DB = 4 + 6 = 10 cm. Since AD/DB = AE/EC ⇒ 4/6 = 6/EC ⇒ EC = 9 cm. Also DE/BC = AD/AB ⇒ 5/BC = 4/10 ⇒ BC = 12.5 cm.'
-      },
-      {
-        subject: 'Additional Mathematics',
-        topic: 'Statistics — Standard Deviation of Grouped Interval Data',
-        q: 'The table below shows the distribution of masses (in kg) of 50 parcels at Dar es Salaam port:\n(a) State the modal class and median class.\n(b) Using coding u = (x - 24.5)/10, calculate the mean mass.\n(c) Calculate the variance and standard deviation of the masses.',
-        tableHtml: `
-          <table class="w-full text-xs border-collapse border border-slate-300 mt-2">
-            <thead class="bg-slate-900 text-white">
-              <tr><th class="border border-slate-300 px-2.5 py-1.5">Mass Interval (kg)</th><th class="border border-slate-300 px-2.5 py-1.5">0–9</th><th class="border border-slate-300 px-2.5 py-1.5">10–19</th><th class="border border-slate-300 px-2.5 py-1.5">20–29</th><th class="border border-slate-300 px-2.5 py-1.5">30–39</th><th class="border border-slate-300 px-2.5 py-1.5">40–49</th></tr>
-            </thead>
-            <tbody>
-              <tr class="text-center font-bold bg-slate-50"><td class="border border-slate-300 px-2.5 py-1.5">Frequency (f)</td><td class="border border-slate-300 px-2.5 py-1.5">5</td><td class="border border-slate-300 px-2.5 py-1.5">11</td><td class="border border-slate-300 px-2.5 py-1.5">18</td><td class="border border-slate-300 px-2.5 py-1.5">10</td><td class="border border-slate-300 px-2.5 py-1.5">6</td></tr>
-            </tbody>
-          </table>
-        `,
-        exp: '(a) Modal class = 20–29 (f = 18); Cumulative frequencies: 5, 16, 34, 44, 50 ⇒ N/2 = 25 lies in 20–29 (Median class).\n(b) With u = -2, -1, 0, 1, 2: Σfu = 5(-2) + 11(-1) + 18(0) + 10(1) + 6(2) = 1. Mean = 24.5 + 10(1/50) = 24.7 kg.\n(c) Σfu² = 5(4) + 11(1) + 0 + 10(1) + 6(4) = 65. Variance σ² = 10² × [65/50 - (1/50)²] = 129.96 kg² ⇒ Standard deviation σ = 11.40 kg.'
-      },
-      {
-        subject: 'Physics',
-        topic: 'Current Electricity — Ohm’s Law Circuit (With SVG Diagram)',
-        q: 'Two resistors R₁ = 4 Ω and R₂ = 8 Ω are connected in series across a 12 V battery of negligible internal resistance:\n(a) Find the total equivalent resistance of the circuit.\n(b) Calculate the electric current I flowing through the circuit.\n(c) Determine the potential difference across each resistor.',
-        svgHtml: `
-          <svg viewBox="0 0 360 140" class="w-full max-w-sm h-36 bg-slate-50 rounded-xl border border-slate-200 p-2">
-            <rect x="40" y="25" width="280" height="90" fill="none" stroke="#0f172a" stroke-width="2.5"/>
-            <rect x="95" y="15" width="60" height="20" fill="#dbeafe" stroke="#1d4ed8" stroke-width="2"/>
-            <text x="105" y="29" font-size="11" font-weight="bold" fill="#1e3a8a">R₁ = 4Ω</text>
-            <rect x="205" y="15" width="60" height="20" fill="#dbeafe" stroke="#1d4ed8" stroke-width="2"/>
-            <text x="215" y="29" font-size="11" font-weight="bold" fill="#1e3a8a">R₂ = 8Ω</text>
-            <line x1="175" y1="100" x2="175" y2="130" stroke="#dc2626" stroke-width="3"/>
-            <line x1="185" y1="107" x2="185" y2="123" stroke="#0f172a" stroke-width="3"/>
-            <text x="155" y="96" font-size="11" font-weight="bold" fill="#dc2626">12 V Battery</text>
-          </svg>
-        `,
-        exp: '(a) Total series resistance R_T = R₁ + R₂ = 4 Ω + 8 Ω = 12 Ω.\n(b) By Ohm’s Law, I = V / R_T = 12 V / 12 Ω = 1.0 A.\n(c) V₁ = I × R₁ = 1.0 A × 4 Ω = 4.0 V, and V₂ = I × R₂ = 1.0 A × 8 Ω = 8.0 V.'
-      },
-      {
-        subject: 'Chemistry',
-        topic: 'Mole Concept & Volumetric Analysis',
-        q: 'In a titration experiment, 25.0 cm³ of 0.10 M Sodium Hydroxide (NaOH) required 20.0 cm³ of dilute Hydrochloric acid (HCl) for complete neutralisation:\n(a) Write a balanced chemical equation for the reaction.\n(b) Calculate the number of moles of NaOH used.\n(c) Determine the molarity (concentration in mol/dm³) of the HCl solution.',
-        exp: '(a) NaOH(aq) + HCl(aq) → NaCl(aq) + H₂O(l) (mole ratio 1 : 1).\n(b) Moles of NaOH = Molarity × Volume(dm³) = 0.10 mol/dm³ × 0.025 dm³ = 0.0025 mol.\n(c) Since mole ratio is 1:1, moles of HCl = 0.0025 mol. Molarity of HCl = 0.0025 mol / 0.020 dm³ = 0.125 M.'
-      },
-      {
-        subject: 'Biology',
-        topic: 'Genetics & Mendelian Inheritance',
-        q: 'In garden peas, the allele for Tall stem (T) is dominant over the allele for dwarf stem (t). A heterozygous tall plant is crossed with a dwarf plant:\n(a) State the genotypes of the two parent plants.\n(b) Show the genetic cross to determine the F₁ offspring genotypes.\n(c) State the phenotypic ratio of the F₁ generation.',
-        exp: '(a) Heterozygous tall parent = Tt; Dwarf parent = tt.\n(b) Gametes: (T, t) × (t, t) → Offspring genotypes: 2 Tt (Tall) and 2 tt (Dwarf).\n(c) Phenotypic ratio = 1 Tall : 1 Dwarf (50% Tall, 50% Dwarf).'
-      },
-      {
-        subject: 'Computer Science',
-        topic: 'Number Systems, Logic Gates & Programming',
-        q: 'Answer the following Computer Science questions:\n(a) Convert the decimal number 45₁₀ into an 8-bit binary number and hexadecimal.\n(b) Write the Boolean algebraic expression for a two-input NAND gate with inputs A and B.\n(c) State two differences between RAM and ROM.',
-        exp: '(a) 45 = 32 + 8 + 4 + 1 = 00101101₂ in 8-bit binary, and 2D₁₆ in hexadecimal.\n(b) Output Q = ¬(A · B) (NOT (A AND B)).\n(c) 1. RAM is volatile (loses data when power is off) while ROM is non-volatile. 2. RAM allows both read and write operations during execution while ROM stores permanent firmware.'
-      },
-      {
-        subject: 'Geography',
-        topic: 'Mathematical Geography — Time & Longitude',
-        q: 'A live football match kicks off in Dar es Salaam (45°E) at 04:00 p.m. local time:\n(a) Calculate the difference in longitude between Dar es Salaam (45°E) and Accra, Ghana (0°).\n(b) Find the time difference in hours between the two cities.\n(c) What is the local time in Accra when the match kicks off?',
-        exp: '(a) Difference in longitude = 45° - 0° = 45°.\n(b) Since 15° = 1 hour, time difference = 45° / 15° = 3 hours.\n(c) Accra is west of Dar es Salaam, so subtract 3 hours: 04:00 p.m. - 3 hours = 01:00 p.m. (13:00 GMT).'
-      },
-      {
-        subject: 'History',
-        topic: 'Nationalism & Decolonisation in Africa',
-        q: 'With vivid historical examples from East and Central Africa:\n(a) Define the term "African Nationalism".\n(b) Explain three internal factors that accelerated the struggle for independence in Tanganyika after 1945.\n(c) State the significance of the Arusha Declaration of 1967.',
-        exp: '(a) African Nationalism was the political and patriotic desire of Africans to unite and end colonial rule in order to regain self-determination.\n(b) 1. Formation of mass political parties (TANU in 1954 under Mwalimu J.K. Nyerere). 2. Use of Kiswahili as a unifying national language. 3. Grievances against colonial land alienation, taxation, and forced cash-crop schemes.\n(c) The Arusha Declaration (1967) established Ujamaa and Self-Reliance, nationalized key economic sectors, and promoted social equality.'
-      },
-      {
-        subject: 'English Language',
-        topic: 'Grammar, Tenses & Active/Passive Voice',
-        q: 'Rewrite each of the following sentences according to the instructions given:\n(a) "The students are solving the NECTA Mathematics examination." (Rewrite in Passive Voice).\n(b) Hardly had the bell rung when the teacher entered the classroom. (Begin: No sooner...).\n(c) Despite the heavy rain, the Form Four students attended the practical lab. (Use: Although...).',
-        exp: '(a) The NECTA Mathematics examination is being solved by the students.\n(b) No sooner had the bell rung than the teacher entered the classroom.\n(c) Although it rained heavily, the Form Four students attended the practical lab.'
-      },
-      {
-        subject: 'Kiswahili',
-        topic: 'Sarufi, Ngeli za Nomino na Fasihi',
-        q: 'Jibu maswali yafuatayo ya Kiswahili Sanifu:\n(a) Ainisha maneno yaliyopigiwa mstari katika sentensi: "Mwanafunzi mhodari amefaulu mtihani vizuri."\n(b) Taja ngeli ya kisintaksia ya nomino "Chuo — Vyuo" na tunga sentensi moja kwa wingi.\n(c) Eleza tofauti mbili kati ya Fasihi Simulizi na Fasihi Andishi.',
-        exp: '(a) Mwanafunzi = Nomino (N); mhodari = Kivumishi (V); amefaulu = Kitenzi (T); mtihani = Nomino (N); vizuri = Kielezi (E).\n(b) Ngeli ya KI-VI (Chuo kimefunguliwa → Vyuo vimefunguliwa).\n(c) 1. Fasihi Simulizi huwasilishwa kwa njia ya mdomo ilhali Fasihi Andishi huwasilishwa kwa maandishi. 2. Fasihi Simulizi ni mali ya jamii nzima ilhali Fasihi Andishi ni mali ya mwandishi.'
-      },
-      {
-        subject: 'Civics',
-        topic: 'The Constitution & Pillars of the State',
-        q: 'Answer the following Civics questions:\n(a) Name the three pillars (organs) of the State in the United Republic of Tanzania.\n(b) State four functions of the Parliament (Bunge) of Tanzania.\n(c) Why is the rule of law important in a democratic society?',
-        exp: '(a) The Executive, the Legislature (Parliament), and the Judiciary.\n(b) 1. Enacting and amending laws. 2. Approving the national government budget. 3. Overseeing and holding the Executive accountable. 4. Ratifying international treaties.\n(c) The rule of law ensures equality before the law, protects human rights, and prevents abuse of power.'
-      }
-    ];
-
     let allPapers = [...BUILTIN_RESOURCES];
     let state = {
-      activePage: 'papers', // 'papers' | 'books' | 'syllabus' | 'quiz' | 'games'
+      activePage: 'papers', // 'papers' | 'books' | 'syllabus'
       step: 1,
       selectedClass: '',
       selectedSubject: '',
@@ -1591,23 +983,6 @@
       searchQuery: '',
       booksClassFilter: 'ALL',
       booksSearchQuery: '',
-      quizClass: 'Form 4',
-      quizSubject: 'Basic Mathematics',
-      quizRevealed: {},
-      gameTab: 'bridge',
-      bridgeMaterial: 'Steel Truss',
-      bridgePiers: 2,
-      bridgeLoad: 40,
-      bridgeTested: false,
-      treasureStage: 0,
-      treasureHearts: 3,
-      treasureScore: parseInt(localStorage.getItem('elimika_treasure_best') || '0', 10),
-      escapeLocks: [false, false, false, false],
-      escapeDigits: ['?', '?', '?', '?'],
-      arenaScore: 0,
-      arenaStreak: 0,
-      arenaBest: parseInt(localStorage.getItem('elimika_arena_best') || '0', 10),
-      arenaIndex: 0,
       viewerPaper: null,
       viewerType: 'paper'
     };
@@ -1646,8 +1021,8 @@
         closeDownloadOptionsModal();
         return;
       }
-      if (!document.getElementById('mohaAppModal').classList.contains('hidden')) {
-        closeMohaAppModal();
+      if (!document.getElementById('appDownloadModal').classList.contains('hidden')) {
+        closeAppDownloadModal();
         return;
       }
       if (navStack.length > 1) {
@@ -1685,8 +1060,8 @@
         closeDownloadOptionsModal();
         return;
       }
-      if (!document.getElementById('mohaAppModal').classList.contains('hidden')) {
-        closeMohaAppModal();
+      if (!document.getElementById('appDownloadModal').classList.contains('hidden')) {
+        closeAppDownloadModal();
         return;
       }
       if (navStack.length > 1) {
@@ -1920,9 +1295,6 @@
           const inp = document.getElementById('booksSearchInput');
           if (inp) inp.value = subFilter;
         }
-      } else if (pageName === 'quiz') {
-        if (clsFilter) state.quizClass = clsFilter;
-        if (subFilter) state.quizSubject = subFilter;
       }
       pushHistorySnapshot();
       renderAll();
@@ -2203,28 +1575,6 @@
       state.viewerPaper = null;
     }
 
-    function openMohaAppModal(feature, cls, sub, docTitle) {
-      let hash = '#moha';
-      if (feature === 'daily-quiz') hash = '#daily-quiz';
-      else if (feature === 'play') hash = '#play';
-      const url = CONFIG.MOHA_APP_URL + '/' + hash;
-
-      document.getElementById('mohaAppLaunchLink').href = url;
-      const subEl = document.getElementById('mohaModalSubtitle');
-      if (docTitle) {
-        subEl.textContent = 'Open "' + docTitle + '" (' + (cls || '') + ' ' + (sub || '') + ') in the Moha AI App for reading comprehension & step-by-step solutions.';
-      } else if (cls || sub) {
-        subEl.textContent = 'Open ' + (cls || '') + ' ' + (sub || '') + ' in the Moha AI App for AI tutoring, 20-question quizzes & teacher documents.';
-      } else {
-        subEl.textContent = 'Access AI Textbook Reading Comprehension, Step-by-Step NECTA Exam Solutions, 20-Question AI Quizzes, and Teacher Document Studio.';
-      }
-      document.getElementById('mohaAppModal').classList.remove('hidden');
-    }
-
-    function closeMohaAppModal() {
-      document.getElementById('mohaAppModal').classList.add('hidden');
-    }
-
     // ==================== RENDER PAGE 1: PAST PAPERS ONLY ====================
     function renderClassCards() {
       const secClasses = [
@@ -2272,8 +1622,6 @@
           </button>
         `;
       }).join('');
-
-      renderGetElimikaAppSection();
     }
 
     function renderStep2() {
@@ -2530,298 +1878,6 @@
         : '<div class="col-span-full p-8 text-center bg-white rounded-2xl border border-slate-200 text-xs font-bold text-slate-500">No Syllabuses match this filter.</div>';
     }
 
-    // ==================== RENDER PAGE 4: OPEN-ENDED SOLVING QUIZ (WITH SOLUTION BUTTON & SVG DIAGRAMS) ====================
-    function formatQuestionPartsOnNewLines(rawText) {
-      return String(rawText || '')
-        .replace(/\s+(\([a-d]\)|\b[a-d]\)|\([i]{1,3}\))/gi, '\n$1')
-        .split('\n')
-        .map(line => `<div class="py-0.5">${line.trim()}</div>`)
-        .join('');
-    }
-
-    function getQuizQuestionsForCurrentFilter() {
-      const sub = state.quizSubject;
-      const matches = QUESTION_BANK.filter(q => q.subject.toLowerCase() === sub.toLowerCase());
-      return matches.length >= 1 ? matches : QUESTION_BANK;
-    }
-
-    function changeQuizFilter(cls, sub) {
-      state.quizClass = cls || 'Form 4';
-      state.quizSubject = sub || 'Basic Mathematics';
-      state.quizRevealed = {};
-      renderQuizPage();
-    }
-
-    function resetQuizSession() {
-      state.quizRevealed = {};
-      renderQuizPage();
-    }
-
-    function toggleQuizSolution(qIdx) {
-      state.quizRevealed[qIdx] = !state.quizRevealed[qIdx];
-      renderQuizPage();
-    }
-
-    function renderQuizPage() {
-      const clsSel = document.getElementById('quizClassSelect');
-      const subSel = document.getElementById('quizSubjectSelect');
-      if (clsSel) clsSel.value = state.quizClass;
-      if (subSel) subSel.value = state.quizSubject;
-
-      const qList = getQuizQuestionsForCurrentFilter();
-      const revealedCount = Object.values(state.quizRevealed).filter(Boolean).length;
-      document.getElementById('quizScoreBadge').textContent = `Solutions Revealed: ${revealedCount} / ${qList.length}`;
-
-      document.getElementById('quizQuestionsContainer').innerHTML = qList.map((item, idx) => {
-        const isShown = Boolean(state.quizRevealed[idx]);
-        return `
-          <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-2xs space-y-3.5">
-            <div class="flex flex-wrap items-center justify-between gap-2 text-xs">
-              <span class="px-2.5 py-0.5 rounded-md bg-slate-900 text-white font-black">Question ${idx + 1} of ${qList.length}</span>
-              <span class="px-2.5 py-0.5 rounded-md bg-violet-50 text-violet-900 border border-violet-200 font-bold">${state.quizClass} · ${item.subject} · ${item.topic}</span>
-            </div>
-            <div class="text-sm sm:text-base font-bold text-slate-900 leading-relaxed space-y-1">
-              ${formatQuestionPartsOnNewLines(item.q)}
-            </div>
-            ${item.svgHtml ? `<div class="pt-1">${item.svgHtml}</div>` : ''}
-            ${item.tableHtml ? `<div class="pt-1 overflow-x-auto">${item.tableHtml}</div>` : ''}
-            <div class="pt-2 flex flex-wrap items-center gap-2">
-              <button onclick="toggleQuizSolution(${idx})" class="px-4 py-2.5 rounded-xl font-black text-xs cursor-pointer transition-colors ${isShown ? 'bg-slate-900 text-white' : 'bg-emerald-600 hover:bg-emerald-700 text-white'}">
-                ${isShown ? '🙈 Hide Solution' : '👁️ Show Solution & Marking Scheme'}
-              </button>
-            </div>
-            ${isShown ? `
-              <div class="p-4 rounded-xl bg-emerald-50 border border-emerald-200 text-xs sm:text-sm text-emerald-950 space-y-1.5 leading-relaxed">
-                <div class="font-black text-emerald-900">✅ Worked Solution &amp; NECTA Marking Scheme:</div>
-                <div>${formatQuestionPartsOnNewLines(item.exp)}</div>
-              </div>
-            ` : ''}
-          </div>
-        `;
-      }).join('');
-    }
-
-    // ==================== RENDER PAGE 5: ELIMIKA PLAY — INTERACTIVE EDUCATIONAL GAMES ====================
-    function switchGameTab(tab) {
-      state.gameTab = tab;
-      ['bridge', 'treasure', 'escape', 'arena'].forEach(function (t) {
-        const btn = document.getElementById('gameTab-' + t);
-        if (!btn) return;
-        btn.className = t === tab
-          ? 'p-3.5 rounded-2xl border text-left transition-all cursor-pointer bg-slate-900 text-white border-slate-900 shadow-xs'
-          : 'p-3.5 rounded-2xl border text-left transition-all cursor-pointer bg-white text-slate-900 border-slate-200 hover:border-blue-500';
-      });
-      renderGamesPage();
-    }
-
-    function testBridgeStructure() {
-      state.bridgeTested = true;
-      renderGamesPage();
-    }
-
-    function solveTreasureStage(optIdx, correctIdx) {
-      if (optIdx === correctIdx) {
-        state.treasureScore += 150;
-        localStorage.setItem('elimika_treasure_best', String(state.treasureScore));
-        state.treasureStage = (state.treasureStage + 1) % 3;
-      } else {
-        state.treasureHearts = Math.max(1, state.treasureHearts - 1);
-      }
-      renderGamesPage();
-    }
-
-    function unlockEscapeLock(lockIdx, digitVal) {
-      state.escapeLocks[lockIdx] = true;
-      state.escapeDigits[lockIdx] = String(digitVal);
-      renderGamesPage();
-    }
-
-    function answerArenaQuestion(optIdx, correctIdx) {
-      if (optIdx === correctIdx) {
-        state.arenaStreak += 1;
-        state.arenaScore += 100 * state.arenaStreak;
-        if (state.arenaScore > state.arenaBest) {
-          state.arenaBest = state.arenaScore;
-          localStorage.setItem('elimika_arena_best', String(state.arenaBest));
-        }
-      } else {
-        state.arenaStreak = 0;
-      }
-      state.arenaIndex = (state.arenaIndex + 1) % QUESTION_BANK.length;
-      renderGamesPage();
-    }
-
-    function renderGamesPage() {
-      const container = document.getElementById('gameStageContainer');
-      if (!container) return;
-
-      if (state.gameTab === 'bridge') {
-        const capMap = { 'Timber': 45, 'Steel Truss': 95, 'Reinforced Arch': 130 };
-        const maxCap = (capMap[state.bridgeMaterial] || 80) + state.bridgePiers * 25;
-        const safetyRatio = (maxCap / Math.max(10, state.bridgeLoad)).toFixed(2);
-        const passed = maxCap >= state.bridgeLoad;
-
-        container.innerHTML = `
-          <div class="space-y-4">
-            <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-100 pb-3">
-              <div>
-                <span class="text-[11px] font-black uppercase tracking-wider text-blue-600">Game 1 · Physics &amp; Civil Engineering</span>
-                <h2 class="text-lg font-black text-slate-900">🌉 3D STEM Builder: Bridge Structural Simulator</h2>
-              </div>
-              <button onclick="openMohaAppModal('play')" class="px-3.5 py-2 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs cursor-pointer">
-                🚀 Open Full Three.js 3D Viewport ↗
-              </button>
-            </div>
-
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-5 items-center">
-              <div class="lg:col-span-7 bg-slate-900 rounded-2xl p-4 text-white">
-                <svg viewBox="0 0 420 190" class="w-full h-44 rounded-xl bg-gradient-to-b from-sky-900 to-slate-950">
-                  <!-- River -->
-                  <rect x="70" y="145" width="280" height="45" fill="#0284c7" opacity="0.75"/>
-                  <!-- Cliffs -->
-                  <polygon points="0,110 80,110 70,190 0,190" fill="#475569"/>
-                  <polygon points="340,110 420,110 420,190 350,190" fill="#475569"/>
-                  <!-- Piers -->
-                  ${state.bridgePiers >= 1 ? '<rect x="155" y="110" width="14" height="75" fill="#94a3b8"/>' : ''}
-                  ${state.bridgePiers >= 2 ? '<rect x="250" y="110" width="14" height="75" fill="#94a3b8"/>' : ''}
-                  <!-- Truss / Arch -->
-                  <polyline points="70,110 135,70 210,110 285,70 350,110" fill="none" stroke="${passed ? '#22c55e' : '#ef4444'}" stroke-width="3.5"/>
-                  <line x1="135" y1="70" x2="285" y2="70" stroke="${passed ? '#38bdf8' : '#f97316'}" stroke-width="3"/>
-                  <!-- Bridge Deck -->
-                  <line x1="65" y1="110" x2="355" y2="110" stroke="#f8fafc" stroke-width="5"/>
-                  <!-- Test Truck -->
-                  <rect x="185" y="92" width="46" height="16" rx="3" fill="#facc15"/>
-                  <circle cx="195" cy="110" r="4" fill="#0f172a"/>
-                  <circle cx="220" cy="110" r="4" fill="#0f172a"/>
-                  <text x="16" y="26" font-size="11" font-weight="bold" fill="#e2e8f0">Material: ${state.bridgeMaterial} | Piers: ${state.bridgePiers} | Load: ${state.bridgeLoad} Tons</text>
-                  <text x="16" y="44" font-size="11" font-weight="bold" fill="${passed ? '#4ade80' : '#f87171'}">Safety Factor: ${safetyRatio}x (${passed ? 'STABLE — BRIDGE HOLDS' : 'OVERLOADED — ADD PIERS OR STEEL'})</text>
-                </svg>
-              </div>
-
-              <div class="lg:col-span-5 space-y-3 text-xs">
-                <div>
-                  <label class="font-bold text-slate-700 block mb-1">1. Choose Bridge Structure Material</label>
-                  <select onchange="state.bridgeMaterial=this.value; renderGamesPage();" class="w-full px-3 py-2 rounded-xl border border-slate-300 font-bold bg-white">
-                    <option value="Timber" ${state.bridgeMaterial === 'Timber' ? 'selected' : ''}>Timber Beam (45T Base)</option>
-                    <option value="Steel Truss" ${state.bridgeMaterial === 'Steel Truss' ? 'selected' : ''}>Steel Warren Truss (95T Base)</option>
-                    <option value="Reinforced Arch" ${state.bridgeMaterial === 'Reinforced Arch' ? 'selected' : ''}>Reinforced Concrete Arch (130T Base)</option>
-                  </select>
-                </div>
-                <div>
-                  <label class="font-bold text-slate-700 block mb-1">2. Support Pillars (Piers): ${state.bridgePiers}</label>
-                  <input type="range" min="0" max="3" value="${state.bridgePiers}" oninput="state.bridgePiers=parseInt(this.value,10); renderGamesPage();" class="w-full" />
-                </div>
-                <div>
-                  <label class="font-bold text-slate-700 block mb-1">3. Test Vehicle Load: ${state.bridgeLoad} Tons</label>
-                  <input type="range" min="20" max="180" step="10" value="${state.bridgeLoad}" oninput="state.bridgeLoad=parseInt(this.value,10); renderGamesPage();" class="w-full" />
-                </div>
-                <button onclick="testBridgeStructure()" class="w-full py-3 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-black cursor-pointer">
-                  🚛 Run Structural Load Simulation
-                </button>
-              </div>
-            </div>
-          </div>
-        `;
-      } else if (state.gameTab === 'treasure') {
-        const stages = [
-          { name: 'Checkpoint 1: Stone Town Harbour (Zanzibar)', q: 'A ship sails 6 km East and 8 km North from Stone Town. What is its resultant displacement magnitude?', opts: ['10 km', '14 km', '7 km', '48 km'], ans: 0 },
-          { name: 'Checkpoint 2: Jozani Forest Sanctuary', q: 'Which gas is released by green plants during photosynthesis in Jozani Forest?', opts: ['Carbon dioxide', 'Oxygen (O₂)', 'Nitrogen', 'Methane'], ans: 1 },
-          { name: 'Checkpoint 3: Uhuru Peak (Mount Kilimanjaro)', q: 'Atmospheric pressure at the summit of Mount Kilimanjaro (5,895 m) compared to sea level in Dar es Salaam is:', opts: ['Lower than at sea level', 'Higher than at sea level', 'Equal to sea level', 'Zero'], ans: 0 }
-        ];
-        const cur = stages[state.treasureStage % stages.length];
-        container.innerHTML = `
-          <div class="space-y-4">
-            <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-100 pb-3">
-              <div>
-                <span class="text-[11px] font-black uppercase tracking-wider text-emerald-600">Game 2 · Island Expedition</span>
-                <h2 class="text-lg font-black text-slate-900">🏝️ NECTA Treasure Hunt Adventure</h2>
-              </div>
-              <div class="flex items-center gap-3 text-xs font-black">
-                <span class="px-3 py-1 rounded-xl bg-rose-50 text-rose-700 border border-rose-200">❤️ Hearts: ${state.treasureHearts}</span>
-                <span class="px-3 py-1 rounded-xl bg-amber-50 text-amber-900 border border-amber-200">🏆 XP Score: ${state.treasureScore}</span>
-              </div>
-            </div>
-            <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-3">
-              <div class="text-xs font-black text-emerald-700 uppercase">${cur.name}</div>
-              <div class="text-sm sm:text-base font-bold text-slate-900">${cur.q}</div>
-              <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                ${cur.opts.map((o, idx) => `
-                  <button onclick="solveTreasureStage(${idx}, ${cur.ans})" class="p-3 rounded-xl bg-white hover:bg-emerald-50 border border-slate-200 hover:border-emerald-500 text-left text-xs font-bold cursor-pointer">
-                    ${String.fromCharCode(65 + idx)}. ${o}
-                  </button>
-                `).join('')}
-              </div>
-            </div>
-          </div>
-        `;
-      } else if (state.gameTab === 'escape') {
-        const allOpen = state.escapeLocks.every(Boolean);
-        container.innerHTML = `
-          <div class="space-y-4">
-            <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-100 pb-3">
-              <div>
-                <span class="text-[11px] font-black uppercase tracking-wider text-violet-600">Game 3 · 4-Digit Mystery Keypad</span>
-                <h2 class="text-lg font-black text-slate-900">🔐 Escape the Form 4 Science Lab</h2>
-              </div>
-              <span class="px-3 py-1.5 rounded-xl bg-slate-900 text-amber-400 font-mono font-black text-xs">
-                Vault Code: ${state.escapeDigits.join(' - ')}
-              </span>
-            </div>
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
-              <div class="p-4 rounded-2xl border ${state.escapeLocks[0] ? 'bg-emerald-50 border-emerald-300' : 'bg-slate-50 border-slate-200'} space-y-2">
-                <div class="font-black">Lock 1 (Chemistry): pH of pure neutral water at 25°C</div>
-                <button onclick="unlockEscapeLock(0, 7)" class="px-3 py-1.5 rounded-lg bg-slate-900 text-white font-bold cursor-pointer">${state.escapeLocks[0] ? '✓ Unlocked (Digit: 7)' : 'Enter Digit 7'}</button>
-              </div>
-              <div class="p-4 rounded-2xl border ${state.escapeLocks[1] ? 'bg-emerald-50 border-emerald-300' : 'bg-slate-50 border-slate-200'} space-y-2">
-                <div class="font-black">Lock 2 (Mathematics): Positive root of x² - 5x + 6 = 0 greater than 2</div>
-                <button onclick="unlockEscapeLock(1, 3)" class="px-3 py-1.5 rounded-lg bg-slate-900 text-white font-bold cursor-pointer">${state.escapeLocks[1] ? '✓ Unlocked (Digit: 3)' : 'Enter Digit 3'}</button>
-              </div>
-              <div class="p-4 rounded-2xl border ${state.escapeLocks[2] ? 'bg-emerald-50 border-emerald-300' : 'bg-slate-50 border-slate-200'} space-y-2">
-                <div class="font-black">Lock 3 (Physics): Current I (in A) when V = 18 V and R = 9 Ω</div>
-                <button onclick="unlockEscapeLock(2, 2)" class="px-3 py-1.5 rounded-lg bg-slate-900 text-white font-bold cursor-pointer">${state.escapeLocks[2] ? '✓ Unlocked (Digit: 2)' : 'Enter Digit 2'}</button>
-              </div>
-              <div class="p-4 rounded-2xl border ${state.escapeLocks[3] ? 'bg-emerald-50 border-emerald-300' : 'bg-slate-50 border-slate-200'} space-y-2">
-                <div class="font-black">Lock 4 (Biology): Number of chambers in the human heart</div>
-                <button onclick="unlockEscapeLock(3, 4)" class="px-3 py-1.5 rounded-lg bg-slate-900 text-white font-bold cursor-pointer">${state.escapeLocks[3] ? '✓ Unlocked (Digit: 4)' : 'Enter Digit 4'}</button>
-              </div>
-            </div>
-            ${allOpen ? '<div class="p-4 rounded-2xl bg-emerald-600 text-white font-black text-center text-sm">🎉 LAB DOOR UNLOCKED! Code 7-3-2-4 Verified!</div>' : ''}
-          </div>
-        `;
-      } else {
-        const arenaQns = [
-          { q: 'Balance & Solve: 2x - 7 = 15. Find x:', opts: ['x = 11', 'x = 4', 'x = 8', 'x = 22'], ans: 0 },
-          { q: 'Coefficient of O₂ when balancing 2Mg + O₂ → 2MgO:', opts: ['1', '2', '3', '4'], ans: 0 },
-          { q: 'Evaluate log₁₀(1000):', opts: ['2', '3', '10', '100'], ans: 1 }
-        ];
-        const cur = arenaQns[state.arenaIndex % arenaQns.length];
-        container.innerHTML = `
-          <div class="space-y-4">
-            <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-100 pb-3">
-              <div>
-                <span class="text-[11px] font-black uppercase tracking-wider text-amber-600">Game 4 · Rapid STEM Challenge</span>
-                <h2 class="text-lg font-black text-slate-900">⚡ Moha STEM Arena</h2>
-              </div>
-              <div class="flex items-center gap-2 text-xs font-black">
-                <span class="px-3 py-1 rounded-xl bg-amber-50 text-amber-900 border border-amber-200">🔥 Streak: ${state.arenaStreak}</span>
-                <span class="px-3 py-1 rounded-xl bg-slate-900 text-white">Score: ${state.arenaScore} (Best: ${state.arenaBest})</span>
-              </div>
-            </div>
-            <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-3">
-              <div class="text-sm sm:text-base font-bold text-slate-900">${cur.q}</div>
-              <div class="grid grid-cols-2 gap-2">
-                ${cur.opts.map((o, idx) => `
-                  <button onclick="answerArenaQuestion(${idx}, ${cur.ans})" class="p-3 rounded-xl bg-white hover:bg-amber-50 border border-slate-200 hover:border-amber-500 text-xs font-bold cursor-pointer">
-                    ${o}
-                  </button>
-                `).join('')}
-              </div>
-            </div>
-          </div>
-        `;
-      }
-    }
-
     function openLegalModal(type) {
       const modal = document.getElementById('legalModal');
       const titleEl = document.getElementById('legalModalTitle');
@@ -2829,10 +1885,10 @@
       if (!modal || !titleEl || !bodyEl) return;
       if (type === 'privacy') {
         titleEl.textContent = 'Privacy Policy — Elimika Tanzania';
-        bodyEl.innerHTML = '<p><strong>Effective Date:</strong> January 1, 2026</p><p>Elimika Tanzania respects the privacy of all students and teachers. Preferences, quiz progress, and custom AI notes are stored locally in your browser\'s localStorage.</p><p><strong>Cookies &amp; Google AdSense:</strong> Third-party vendors, including Google, use cookies to serve ads based on a user\'s prior visits to this website or other websites. Users may opt out of personalized advertising by visiting <a href="https://www.google.com/settings/ads" target="_blank" rel="noopener noreferrer" class="text-blue-600 underline">Google Ads Settings</a>.</p>';
+        bodyEl.innerHTML = '<p><strong>Effective Date:</strong> January 1, 2026</p><p>Elimika Tanzania respects the privacy of all students and teachers. Preferences are stored locally in your browser\'s localStorage.</p><p><strong>Cookies &amp; Google AdSense:</strong> Third-party vendors, including Google, use cookies to serve ads based on a user\'s prior visits to this website or other websites. Users may opt out of personalized advertising by visiting <a href="https://www.google.com/settings/ads" target="_blank" rel="noopener noreferrer" class="text-blue-600 underline">Google Ads Settings</a>.</p>';
       } else {
         titleEl.textContent = 'Terms of Service — Elimika Tanzania';
-        bodyEl.innerHTML = '<p><strong>Last Updated:</strong> January 1, 2026</p><p>All Past Papers, Marking Schemes, TIE Textbooks, Official Syllabuses, and AI Teacher Studio tools on Elimika Tanzania are provided strictly for educational and revision purposes in accordance with TIE and NECTA curriculum standards.</p>';
+        bodyEl.innerHTML = '<p><strong>Last Updated:</strong> January 1, 2026</p><p>All Past Papers, Marking Schemes, TIE Textbooks, and Official Syllabuses on Elimika Tanzania are provided strictly for educational and revision purposes in accordance with TIE and NECTA curriculum standards.</p>';
       }
       modal.classList.remove('hidden');
     }
@@ -2903,14 +1959,10 @@
     function setWaPostTemplate(type) {
       const cls = state.selectedClass || 'Form 4';
       const sub = state.selectedSubject || 'Basic Mathematics';
-      const siteUrl = window.location.origin && window.location.origin !== 'null' ? window.location.origin : 'https://elimika.online';
+      const siteUrl = 'https://www.elimika.online';
       const msg = type === 'paper'
-        ? `📢 *NEW NECTA PAST PAPERS & SOLUTIONS — ELIMIKA ONLINE!* 🇹🇿\n\n📚 *Class:* ${cls}\n📖 *Subject:* ${sub}\n✅ Includes Official Marking Schemes & Moha AI Step-by-Step Worked Solutions!\n\n👉 *Read & Download Free PDF:* ${siteUrl}\n🔔 *Follow Elimika Online on WhatsApp:* ${CONFIG.WHATSAPP_CHANNEL_URL}`
-        : type === 'quiz'
-        ? `🎯 *DAILY NECTA PROBLEM-SOLVING QUIZ — ELIMIKA ONLINE!* 🏆\n\nPractice *${cls} ${sub}* structured questions with SVG diagrams & full marking schemes!\n\n👉 *Start the Quiz Now:* ${siteUrl}\n🔔 *Follow Elimika Online on WhatsApp:* ${CONFIG.WHATSAPP_CHANNEL_URL}`
-        : type === 'book'
-        ? `📚 *OFFICIAL TIE TEXTBOOKS & SYLLABUSES — ELIMIKA ONLINE* 🇹🇿\n\nAccess all competency-based TIE Student Books and Official Syllabuses (Std 1–7 & Form 1–6) for *${cls} ${sub}* in one click.\n\n👉 *Open TIE Library:* ${siteUrl}\n🔔 *Follow Elimika Online:* ${CONFIG.WHATSAPP_CHANNEL_URL}`
-        : `🧑‍🏫 *FOR TEACHERS: INSTANT TIE LESSON PLANS & 12-COLUMN PO-RALG SCHEMES* ✍️\n\nGenerate printable, curriculum-aligned *4-Stage TIE Lesson Plans* and *12-Column Schemes of Work* for *${cls} ${sub}* in seconds on *Elimika Online*.\n\n👉 *Generate & Download PDF:* ${siteUrl}\n🔔 *Follow Elimika Online on WhatsApp:* ${CONFIG.WHATSAPP_CHANNEL_URL}`;
+        ? `📢 *NEW NECTA PAST PAPERS & SOLUTIONS — ELIMIKA ONLINE!* 🇹🇿\n\n📚 *Class:* ${cls}\n📖 *Subject:* ${sub}\n✅ Includes Official Marking Schemes & Solutions!\n\n👉 *Read & Download Free PDF:* ${siteUrl}\n🔔 *Follow Elimika Online on WhatsApp:* ${CONFIG.WHATSAPP_CHANNEL_URL}`
+        : `📚 *OFFICIAL TIE TEXTBOOKS & SYLLABUSES — ELIMIKA ONLINE* 🇹🇿\n\nAccess all competency-based TIE Student Books and Official Syllabuses (Std 1–7 & Form 1–6) for *${cls} ${sub}* in one click.\n\n👉 *Open TIE Library:* ${siteUrl}\n🔔 *Follow Elimika Online:* ${CONFIG.WHATSAPP_CHANNEL_URL}`;
       const ta = document.getElementById('waBroadcastTextarea');
       if (ta) ta.value = msg;
       const shareBtn = document.getElementById('waDirectShareBtn');
@@ -2927,7 +1979,7 @@
       document.getElementById('count-books-top').textContent = allPapers.filter(p => p.isBook).length;
       document.getElementById('count-syllabus-top').textContent = allPapers.filter(p => p.isSyllabus).length;
 
-      const pages = ['papers', 'books', 'syllabus', 'quiz', 'games'];
+      const pages = ['papers', 'books', 'syllabus'];
       pages.forEach(p => {
         const el = document.getElementById('page-' + p);
         if (el) el.classList.toggle('hidden', state.activePage !== p);
@@ -2936,9 +1988,7 @@
       const navStyles = {
         papers: 'bg-slate-900 text-white',
         books: 'bg-emerald-600 text-white',
-        syllabus: 'bg-amber-500 text-slate-950',
-        quiz: 'bg-indigo-600 text-white',
-        games: 'bg-teal-600 text-white'
+        syllabus: 'bg-amber-500 text-slate-950'
       };
       pages.forEach(p => {
         const btn = document.getElementById('nav-' + p);
@@ -2958,10 +2008,6 @@
         renderBooksPage();
       } else if (state.activePage === 'syllabus') {
         renderSyllabusPage();
-      } else if (state.activePage === 'quiz') {
-        renderQuizPage();
-      } else if (state.activePage === 'games') {
-        renderGamesPage();
       }
 
       const showMobileBack = state.activePage !== 'papers' || state.step > 1;
@@ -2973,6 +2019,11 @@
     loadCachedSheetData();
     renderAll();
     syncGoogleSheet();
+
+    // If iPhone user arrived via ?install=iphone on www.elimika.online, open the direct download guide
+    if (window.location.search.includes('install=iphone')) {
+      openAppDownloadModal();
+    }
   </script>
 </body>
 </html>
