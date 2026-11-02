@@ -446,10 +446,13 @@
         <span>ELIMIKA<span class="text-blue-600">.</span></span>
       </a>
 
-      <nav class="hidden lg:flex items-center gap-5 text-sm font-semibold text-slate-600">
+      <nav class="hidden lg:flex items-center gap-4 text-sm font-semibold text-slate-600">
         <button id="nav-papers" onclick="resetToStep1()" class="text-blue-600 font-bold underline underline-offset-4">Past Papers</button>
         <button id="nav-books" onclick="openBooksPage()">📚 TIE Books</button>
         <button id="nav-syllabus" onclick="openSyllabusPage()">📜 Syllabus</button>
+        <a href="#editorial-curriculum-guide" class="hover:text-blue-600">📖 Study Guides</a>
+        <button onclick="openLegalModal('about')" class="hover:text-blue-600">ℹ️ About &amp; Contact</button>
+        <button onclick="openLegalModal('privacy')" class="hover:text-blue-600">🔒 Privacy</button>
       </nav>
 
       <div class="flex items-center gap-1.5 sm:gap-2 shrink-0">
@@ -481,8 +484,22 @@
     </div>
   </header>
 
-  <!-- DYNAMIC VIEW CONTAINER -->
-  <div id="mainViewContainer" class="flex-grow flex flex-col"></div>
+  <!-- DYNAMIC VIEW CONTAINER (PRE-POPULATED WITH CRAWLABLE SEMANTIC HTML FOR GOOGLE ADSENSE & SEARCH BOTS) -->
+  <div id="mainViewContainer" class="flex-grow flex flex-col">
+    <section class="pt-5 pb-6 bg-gradient-hero border-b border-slate-200">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 text-center space-y-3">
+        <div class="text-xs font-bold text-blue-700 tracking-wide">
+          Tanzania National Examinations (NECTA) &amp; TIE Curriculum · Standard 1–7 &amp; Form 1–6
+        </div>
+        <h1 class="text-2xl sm:text-4xl font-black text-slate-900 tracking-tight leading-snug">
+          Tanzania NECTA Past Papers, Official TIE Textbooks &amp; National Syllabus Portal
+        </h1>
+        <p class="text-xs sm:text-sm text-slate-600 max-w-2xl mx-auto leading-relaxed">
+          Free academic revision repository for Tanzanian Primary (Standard 1–7 SFNA &amp; PSLE), Ordinary Secondary (Form 1–4 FTNA &amp; CSEE), and Advanced Secondary (Form 5–6 ACSEE) students and educators.
+        </p>
+      </div>
+    </section>
+  </div>
 
   <!-- STICKY MOBILE BOTTOM BAR -->
   <div id="mobileStickyBar" class="fixed bottom-0 inset-x-0 z-30 bg-white/95 backdrop-blur-md border-t border-slate-200 px-4 py-2.5 hidden items-center justify-between gap-3 sm:hidden">
@@ -599,8 +616,207 @@
     </div>
   </div>
 
+  <!-- GOOGLE ADSENSE COMPLIANCE & LEGAL MODAL (PRIVACY POLICY, TERMS OF SERVICE, DISCLAIMER, ABOUT & CONTACT) -->
+  <div id="legalModal" class="fixed inset-0 z-50 bg-slate-900/75 backdrop-blur-sm hidden items-center justify-center p-3 sm:p-6" role="dialog" aria-modal="true" onclick="closeLegalModal()">
+    <div class="bg-white rounded-3xl max-w-3xl w-full max-h-[88vh] flex flex-col border border-slate-200 shadow-2xl overflow-hidden" onclick="event.stopPropagation()">
+      <div class="px-5 py-4 bg-slate-50 border-b border-slate-200 flex flex-wrap items-center justify-between gap-2">
+        <div class="flex flex-wrap items-center gap-1.5">
+          <button id="legalTabPrivacy" onclick="openLegalModal('privacy')" class="px-3 py-1.5 rounded-xl text-xs font-bold bg-blue-600 text-white">🔒 Privacy Policy</button>
+          <button id="legalTabTerms" onclick="openLegalModal('terms')" class="px-3 py-1.5 rounded-xl text-xs font-bold bg-white text-slate-700 border border-slate-200">📋 Terms of Service</button>
+          <button id="legalTabDisclaimer" onclick="openLegalModal('disclaimer')" class="px-3 py-1.5 rounded-xl text-xs font-bold bg-white text-slate-700 border border-slate-200">⚖️ Disclaimer</button>
+          <button id="legalTabAbout" onclick="openLegalModal('about')" class="px-3 py-1.5 rounded-xl text-xs font-bold bg-white text-slate-700 border border-slate-200">🏛️ About &amp; Contact</button>
+        </div>
+        <button onclick="closeLegalModal()" class="px-3 py-1.5 rounded-xl bg-slate-200 text-slate-800 font-bold text-xs">✕ Close</button>
+      </div>
+
+      <div class="p-5 sm:p-6 overflow-y-auto space-y-4 text-xs sm:text-sm text-slate-700 leading-relaxed">
+        <!-- PRIVACY POLICY SECTION (REQUIRED BY GOOGLE ADSENSE) -->
+        <div id="legalContentPrivacy" class="space-y-3">
+          <div class="text-[11px] font-extrabold uppercase tracking-wider text-blue-700">Official Privacy &amp; Cookie Policy · Effective January 2026</div>
+          <h2 class="text-lg sm:text-xl font-black text-slate-900">Privacy Policy &amp; Google AdSense Disclosure</h2>
+          <p>At <strong>Elimika Tanzania</strong> (<a href="https://elimika.online" class="text-blue-600 underline">https://elimika.online</a>), accessible from our web portal and Android/iOS progressive web application, protecting the privacy of our students, teachers, and parents across the United Republic of Tanzania and worldwide is one of our highest priorities.</p>
+          <h3 class="text-sm font-black text-slate-900 pt-1">1. Google AdSense &amp; DoubleClick DART Cookie Disclosure</h3>
+          <ul class="list-disc pl-5 space-y-1.5">
+            <li><strong>Third-Party Advertising Vendors:</strong> Third-party vendors, including <strong>Google (Google AdSense, Publisher ID: ca-pub-7502193981138651)</strong>, use cookies to serve advertisements based on a user's prior visits to <a href="https://elimika.online" class="text-blue-600 underline">https://elimika.online</a> or other websites on the internet.</li>
+            <li><strong>Advertising Cookies:</strong> Google's use of advertising cookies (including the DoubleClick DART cookie) enables Google and its partners to serve relevant educational and general advertisements to our users based on their visit to Elimika Tanzania and/or other sites on the Internet.</li>
+            <li><strong>How to Opt Out of Personalized Advertising:</strong> Users may opt out of personalized advertising at any time by visiting <a href="https://www.google.com/settings/ads" target="_blank" rel="noopener noreferrer" class="text-blue-600 font-bold underline">Google Ads Settings (https://www.google.com/settings/ads)</a> or <a href="https://www.aboutads.info/choices/" target="_blank" rel="noopener noreferrer" class="text-blue-600 font-bold underline">www.aboutads.info</a>.</li>
+          </ul>
+          <h3 class="text-sm font-black text-slate-900 pt-1">2. Information We Collect &amp; Local Browser Storage</h3>
+          <p>Elimika Tanzania does not require students to register an account or submit personal financial information to read or download past papers, marking schemes, or TIE textbooks. We use local browser storage (<code>localStorage</code>) strictly to remember your selected theme preference (Light Mode, Dark Mode, or System Default), your offline print basket, and cached subject catalogs for faster loading on 3G/4G mobile networks.</p>
+          <h3 class="text-sm font-black text-slate-900 pt-1">3. Log Files &amp; Analytics</h3>
+          <p>Like standard educational web platforms, Elimika Tanzania follows a standard procedure of using log files (IP address, browser type, ISP, date/time stamp, and referring/exit pages) solely to analyze traffic trends, prevent abuse, and improve mobile download speeds for Tanzanian schools.</p>
+          <h3 class="text-sm font-black text-slate-900 pt-1">4. Children's &amp; Student Privacy</h3>
+          <p>We do not knowingly collect personally identifiable information from children or primary school students. All curriculum textbooks and past examination papers are accessible openly for classroom and home revision under parental or teacher guidance.</p>
+        </div>
+
+        <!-- TERMS OF SERVICE SECTION -->
+        <div id="legalContentTerms" class="space-y-3 hidden">
+          <div class="text-[11px] font-extrabold uppercase tracking-wider text-blue-700">User Agreement · Effective January 2026</div>
+          <h2 class="text-lg sm:text-xl font-black text-slate-900">Terms of Service &amp; Acceptable Use Policy</h2>
+          <p>By accessing <strong>Elimika Tanzania</strong> (<a href="https://elimika.online" class="text-blue-600 underline">https://elimika.online</a>), you agree to abide by these Terms of Service and all applicable laws and educational regulations of the United Republic of Tanzania.</p>
+          <h3 class="text-sm font-black text-slate-900 pt-1">1. Educational Purpose &amp; License</h3>
+          <p>Elimika Tanzania provides organized digital access to past national examination papers (PSLE, SFNA, FTNA, CSEE, ACSEE), marking schemes, syllabuses, and curriculum study guides strictly for personal study, classroom instruction, and academic revision by students and teachers.</p>
+          <h3 class="text-sm font-black text-slate-900 pt-1">2. Prohibited Conduct</h3>
+          <ul class="list-disc pl-5 space-y-1.5">
+            <li>Users may not package, sell, or charge money for free public curriculum documents or TIE textbooks accessed through this platform.</li>
+            <li>Users may not attempt to scrape, disrupt, or overload the portal servers or falsify examination documents.</li>
+          </ul>
+          <h3 class="text-sm font-black text-slate-900 pt-1">3. Modifications</h3>
+          <p>Elimika Tanzania reserves the right to update curriculum syllabuses, examination archives, and these Terms of Service at any time to reflect updates from the Ministry of Education, Science and Technology (MoEST).</p>
+        </div>
+
+        <!-- DISCLAIMER SECTION -->
+        <div id="legalContentDisclaimer" class="space-y-3 hidden">
+          <div class="text-[11px] font-extrabold uppercase tracking-wider text-amber-600">Intellectual Property &amp; Official Affiliation Notice</div>
+          <h2 class="text-lg sm:text-xl font-black text-slate-900">Academic &amp; Copyright Disclaimer</h2>
+          <p><strong>Elimika Tanzania</strong> is an independent educational technology initiative dedicated to expanding free access to revision materials and curriculum study guides for Tanzanian students and teachers.</p>
+          <ul class="list-disc pl-5 space-y-1.5">
+            <li><strong>NECTA Past Examinations:</strong> Past national examination papers and marking schemes referenced on this platform are historical public assessment materials originally administered by the <strong>National Examinations Council of Tanzania (NECTA)</strong>.</li>
+            <li><strong>TIE Textbooks &amp; Syllabuses:</strong> Official curriculum textbooks and syllabuses are the intellectual property of the <strong>Tanzania Institute of Education (TIE)</strong> under the Ministry of Education, Science and Technology. They are cataloged here strictly for free educational and non-commercial classroom reference.</li>
+            <li><strong>Copyright Removal / Attribution Requests:</strong> If you are a copyright holder or school administrator and wish to request attribution updates or removal of any specific document link, please contact our editorial desk at <a href="mailto:support@elimika.online" class="text-blue-600 font-bold underline">support@elimika.online</a> and we will respond within 24 hours.</li>
+          </ul>
+        </div>
+
+        <!-- ABOUT US & CONTACT US SECTION -->
+        <div id="legalContentAbout" class="space-y-3 hidden">
+          <div class="text-[11px] font-extrabold uppercase tracking-wider text-emerald-600">About Our Educational Mission &amp; Editorial Team</div>
+          <h2 class="text-lg sm:text-xl font-black text-slate-900">About Elimika Tanzania &amp; Contact Details</h2>
+          <p><strong>Elimika Tanzania</strong> (<a href="https://elimika.online" class="text-blue-600 underline">https://elimika.online</a>) is Tanzania's dedicated digital learning library built to bridge the educational resource gap for Primary School (Standard 1–7), Ordinary Level Secondary (Form 1–4), and Advanced Level Secondary (Form 5–6) learners across all regions of Tanzania.</p>
+          <p>Our academic editorial team curates competency-based study guides, organizes NECTA past papers alongside verified marking schemes, and provides low-data mobile access to official Tanzania Institute of Education (TIE) textbooks and national syllabuses so every student can excel regardless of location.</p>
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2">
+            <h3 class="text-sm font-black text-slate-900">📬 Official Contact &amp; Editorial Support Desk</h3>
+            <div><strong>Organization:</strong> Elimika Tanzania Educational Portal</div>
+            <div><strong>Location:</strong> Dar es Salaam, United Republic of Tanzania</div>
+            <div><strong>Official Support Email:</strong> <a href="mailto:support@elimika.online" class="text-blue-600 font-bold underline">support@elimika.online</a> / <a href="mailto:info@elimika.online" class="text-blue-600 font-bold underline">info@elimika.online</a></div>
+            <div><strong>Phone &amp; WhatsApp Support:</strong> <a href="https://wa.me/255689511868" target="_blank" rel="noopener noreferrer" class="text-emerald-600 font-bold underline">+255689511868</a></div>
+            <div><strong>Official WhatsApp Channel:</strong> <a href="https://whatsapp.com/channel/0029VbE4Ctl0G0Xbp8kQwu0t" target="_blank" rel="noopener noreferrer" class="text-blue-600 font-bold underline">Elimika Online Tanzania Broadcast</a></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="px-5 py-3 bg-slate-50 border-t border-slate-200 flex items-center justify-between text-xs">
+        <span class="text-slate-500 font-semibold">Google AdSense Publisher ID: ca-pub-7502193981138651</span>
+        <button onclick="closeLegalModal()" class="px-4 py-2 rounded-xl bg-blue-600 text-white font-bold">Done</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- COOKIE & PRIVACY CONSENT BANNER (REQUIRED FOR GOOGLE ADSENSE COMPLIANCE) -->
+  <div id="cookieConsentBanner" class="fixed bottom-4 left-4 right-4 sm:left-auto sm:right-5 sm:max-w-md z-40 bg-white border border-slate-300 rounded-2xl shadow-2xl p-4 hidden">
+    <div class="space-y-2.5">
+      <div class="flex items-center justify-between">
+        <span class="text-xs font-black text-slate-900 flex items-center gap-1.5">🍪 Privacy &amp; Google AdSense Notice</span>
+        <button onclick="acceptCookies()" class="text-xs text-slate-400 font-bold">✕</button>
+      </div>
+      <p class="text-[11px] text-slate-600 leading-relaxed">
+        We use cookies and Google AdSense to keep Elimika Tanzania 100% free for students and teachers, and to remember your Light/Dark theme preferences. See our <button onclick="openLegalModal('privacy')" class="text-blue-600 font-bold underline">Privacy Policy</button> for details.
+      </p>
+      <div class="flex items-center gap-2 pt-1">
+        <button onclick="acceptCookies()" class="flex-1 py-2 px-3 rounded-xl bg-blue-600 text-white font-bold text-xs">Accept &amp; Continue</button>
+        <button onclick="openLegalModal('privacy')" class="py-2 px-3 rounded-xl bg-slate-100 text-slate-700 font-bold text-xs">Learn More</button>
+      </div>
+    </div>
+  </div>
+
   <!-- TOAST NOTIFICATION -->
   <div id="toastBox" class="fixed bottom-5 right-5 z-50 bg-slate-900 text-white px-4 py-2.5 rounded-xl shadow-xl text-xs font-bold hidden"></div>
+
+  <!-- RICH CRAWLABLE EDUCATIONAL STUDY GUIDES & CURRICULUM ARTICLES (ESSENTIAL FOR STUDENTS & GOOGLE ADSENSE HIGH-VALUE CONTENT VERIFICATION) -->
+  <section id="editorial-curriculum-guide" class="py-10 bg-white border-t border-slate-200">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 space-y-8">
+      <div class="text-center max-w-3xl mx-auto space-y-2">
+        <span class="inline-block px-3 py-1 rounded-lg bg-blue-50 text-blue-700 font-extrabold text-[11px] uppercase tracking-wider border border-blue-200">
+          Tanzania National Curriculum &amp; Examination Reference Guide
+        </span>
+        <h2 class="text-xl sm:text-2xl font-black text-slate-900 tracking-tight">
+          Comprehensive Guide to NECTA Examinations, Official TIE Textbooks &amp; Competency-Based Revision
+        </h2>
+        <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+          Understanding the structure of Tanzania's national curriculum and assessment standards is essential for scoring Division I in national examinations. Explore our detailed academic guides below for Primary, Ordinary Secondary, and Advanced Secondary levels.
+        </p>
+      </div>
+
+      <!-- 3-Column Educational Pillar Articles -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+        <article class="p-5 rounded-2xl bg-slate-50 border border-slate-200 space-y-2.5">
+          <div class="text-xs font-extrabold uppercase tracking-wider text-blue-700">Primary Education · Standard 1–7</div>
+          <h3 class="text-base font-black text-slate-900">SFNA (Standard 4) &amp; PSLE (Standard 7) Mastery</h3>
+          <p class="text-xs text-slate-600 leading-relaxed">
+            Primary school education in Tanzania builds foundational literacy, numeracy, and scientific curiosity under the revised Tanzania Institute of Education (TIE) curriculum. In <strong>Standard 4</strong>, pupils sit for the <em>Standard Four National Assessment (SFNA)</em> to evaluate early mastery in Mathematics, English, Kiswahili, Science and Technology, Social Studies, and Civic and Moral Education.
+          </p>
+          <p class="text-xs text-slate-600 leading-relaxed">
+            In <strong>Standard 7</strong>, candidates complete the <em>Primary School Leaving Examination (PSLE)</em>, which determines selection into public and private secondary schools. Regular practice with timed NECTA past papers helps pupils master multiple-choice accuracy and structured problem-solving sections.
+          </p>
+        </article>
+
+        <article class="p-5 rounded-2xl bg-slate-50 border border-slate-200 space-y-2.5">
+          <div class="text-xs font-extrabold uppercase tracking-wider text-blue-700">Ordinary Level · Form 1–4</div>
+          <h3 class="text-base font-black text-slate-900">FTNA (Form 2) &amp; CSEE (Form 4) Examination Guide</h3>
+          <p class="text-xs text-slate-600 leading-relaxed">
+            Ordinary Level secondary education spans four years (Form 1 to Form 4). Students take core subjects including Basic Mathematics, English Language, Kiswahili, Civics, History, Geography, and Biology, alongside elective sciences (Physics, Chemistry, Computer Science) or business studies (Commerce, Book-Keeping).
+          </p>
+          <p class="text-xs text-slate-600 leading-relaxed">
+            The <strong>Form Two National Assessment (FTNA)</strong> diagnoses subject readiness midway through O-Level, while the <strong>Certificate of Secondary Education Examination (CSEE)</strong> at the end of Form 4 evaluates competency-based application, laboratory practicals (Paper 2), and essay reasoning required for Advanced Level placement and technical colleges.
+          </p>
+        </article>
+
+        <article class="p-5 rounded-2xl bg-slate-50 border border-slate-200 space-y-2.5">
+          <div class="text-xs font-extrabold uppercase tracking-wider text-blue-700">Advanced Level · Form 5–6</div>
+          <h3 class="text-base font-black text-slate-900">ACSEE Subject Combinations &amp; University Prep</h3>
+          <p class="text-xs text-slate-600 leading-relaxed">
+            Advanced Level education prepares Form 5 and Form 6 scholars for the <strong>Advanced Certificate of Secondary Education Examination (ACSEE)</strong> and university degree admission via TCU. Students specialize in focused three-subject combinations plus General Studies and Basic Applied Mathematics (BAM).
+          </p>
+          <p class="text-xs text-slate-600 leading-relaxed">
+            Whether studying natural sciences (<strong>PCM, PCB, PGM, CBG</strong>), business and economics (<strong>EGM, ECA</strong>), or humanities and languages (<strong>HGL, HGK, HKL</strong>), combining official TIE Advanced textbooks with NECTA Paper 1, Paper 2, and Paper 3 practical marking schemes is the proven path to top points.
+          </p>
+        </article>
+      </div>
+
+      <!-- Study Methodology & FAQ Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-5 pt-2">
+        <article class="p-5 rounded-2xl bg-slate-50 border border-slate-200 space-y-3">
+          <h3 class="text-base font-black text-slate-900">📌 4-Step Competency-Based Revision Method Using Elimika</h3>
+          <ol class="list-decimal pl-5 space-y-2 text-xs text-slate-600 leading-relaxed">
+            <li><strong>Start with the Official National Syllabus:</strong> Open the <em>Syllabus</em> tab for your class to check specific learning competencies, topic weightings, and practical assessment objectives set by MoEST and TIE.</li>
+            <li><strong>Study Concepts in Official TIE Textbooks:</strong> Read the corresponding chapter in the official Tanzania Institute of Education student textbook and work through the end-of-chapter exercises.</li>
+            <li><strong>Simulate Real Exam Conditions with Past Papers:</strong> Select your class and subject to attempt full NECTA, Mock, or Pre-National examination papers under strict time limits without looking at notes.</li>
+            <li><strong>Verify with Official Marking Schemes:</strong> Compare your written responses against the marking scheme to understand how NECTA examiners award marks for formulas, diagrams, and essay introductions.</li>
+          </ol>
+        </article>
+
+        <article class="p-5 rounded-2xl bg-slate-50 border border-slate-200 space-y-3">
+          <h3 class="text-base font-black text-slate-900">❓ Frequently Asked Questions (FAQ)</h3>
+          <div class="space-y-2.5 text-xs text-slate-600 leading-relaxed">
+            <div>
+              <strong class="text-slate-900 block">Are all past papers and TIE books on Elimika Tanzania free?</strong>
+              Yes. Every NECTA past examination paper, regional mock exam, marking scheme, syllabus, and official TIE textbook cataloged on Elimika Tanzania is 100% free to read online or download for offline revision.
+            </div>
+            <div>
+              <strong class="text-slate-900 block">How do I open PDFs if my Android phone shows a blank preview?</strong>
+              Inside any document preview window, tap the blue <strong>"Open Fullscreen in Drive / Browser ↗"</strong> button in the header to view or download the PDF directly without third-party cookie restrictions.
+            </div>
+            <div>
+              <strong class="text-slate-900 block">How can teachers share a specific class and subject on WhatsApp?</strong>
+              Simply select any class and subject (for example, <em>Form 4 Basic Mathematics</em>) and copy the link or tap Share—Elimika generates a direct deep link (<code>#class=Form-4&amp;subject=Basic-Mathematics</code>) that opens straight to that subject.
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <!-- Quick Transparency & Policy Bar -->
+      <div class="p-4 rounded-2xl bg-slate-100 border border-slate-200 flex flex-wrap items-center justify-between gap-3 text-xs">
+        <div class="font-bold text-slate-800">
+          🏛️ Elimika Tanzania Academic Editorial Standards &amp; Legal Policies
+        </div>
+        <div class="flex flex-wrap items-center gap-2">
+          <button onclick="openLegalModal('privacy')" class="px-3 py-1.5 rounded-xl bg-white border border-slate-300 font-bold text-slate-800 hover:border-blue-600">🔒 Privacy &amp; Cookie Policy</button>
+          <button onclick="openLegalModal('terms')" class="px-3 py-1.5 rounded-xl bg-white border border-slate-300 font-bold text-slate-800 hover:border-blue-600">📋 Terms of Service</button>
+          <button onclick="openLegalModal('disclaimer')" class="px-3 py-1.5 rounded-xl bg-white border border-slate-300 font-bold text-slate-800 hover:border-blue-600">⚖️ Disclaimer</button>
+          <button onclick="openLegalModal('about')" class="px-3 py-1.5 rounded-xl bg-white border border-slate-300 font-bold text-slate-800 hover:border-blue-600">📬 About &amp; Contact Us</button>
+        </div>
+      </div>
+    </div>
+  </section>
 
   <!-- GET ELIMIKA APP SECTION & FOOTER -->
   <section id="get-elimika-app-section" class="bg-slate-900 text-white py-8 border-t border-slate-800">
@@ -622,20 +838,36 @@
   </section>
 
   <footer class="bg-slate-950 text-slate-400 py-8 border-t border-slate-800 text-xs text-center mt-auto">
-    <div class="max-w-5xl mx-auto px-4 space-y-4">
-      <div class="flex flex-col sm:flex-row items-center justify-between gap-3">
-        <div class="text-left">
-          <div class="font-black text-white text-sm tracking-tight">ELIMIKA TANZANIA</div>
-          <p class="text-slate-400 text-xs">Past Papers, Marking Schemes, Official TIE Textbooks &amp; Syllabuses (Standard 1–7 &amp; Form 1–6).</p>
+    <div class="max-w-5xl mx-auto px-4 space-y-5">
+      <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div class="text-center sm:text-left max-w-md">
+          <div class="font-black text-white text-sm tracking-tight">ELIMIKA TANZANIA (WWW.ELIMIKA.ONLINE)</div>
+          <p class="text-slate-400 text-xs mt-1">Free Tanzanian NECTA Past Examination Papers, Marking Schemes, Official TIE Textbooks, Syllabuses &amp; Competency-Based Study Guides (Standard 1–7 &amp; Form 1–6).</p>
         </div>
         <div class="flex flex-wrap items-center justify-center gap-4 text-xs font-bold text-slate-300">
           <button onclick="handleGetAppInstall()" class="text-amber-400 underline underline-offset-4">📲 Get Elimika App</button>
           <a href="https://whatsapp.com/channel/0029VbE4Ctl0G0Xbp8kQwu0t" target="_blank" rel="noopener noreferrer" class="text-emerald-400 underline underline-offset-4">🔔 Follow Elimika Online Channel</a>
           <button onclick="openBooksPage()" class="underline underline-offset-4">📚 TIE Books</button>
           <button onclick="openSyllabusPage()" class="underline underline-offset-4">📜 Syllabus</button>
+          <a href="#editorial-curriculum-guide" class="underline underline-offset-4">📖 Study Guides</a>
         </div>
       </div>
-      <div class="pt-3 border-t border-slate-800 text-[11px] text-slate-500 flex flex-col sm:flex-row items-center justify-between gap-2">
+
+      <!-- Mandatory Google AdSense Policy & Legal Navigation Row -->
+      <div class="pt-4 border-t border-slate-800 flex flex-wrap items-center justify-center sm:justify-between gap-3 text-[11px] text-slate-300">
+        <div class="flex flex-wrap items-center justify-center gap-4 font-semibold">
+          <button onclick="openLegalModal('privacy')" class="hover:text-white underline underline-offset-4">Privacy Policy</button>
+          <button onclick="openLegalModal('terms')" class="hover:text-white underline underline-offset-4">Terms of Service</button>
+          <button onclick="openLegalModal('disclaimer')" class="hover:text-white underline underline-offset-4">Disclaimer &amp; Copyright</button>
+          <button onclick="openLegalModal('about')" class="hover:text-white underline underline-offset-4">About Us &amp; Contact</button>
+          <a href="/ads.txt" target="_blank" rel="noopener noreferrer" class="hover:text-white underline underline-offset-4">ads.txt</a>
+        </div>
+        <div class="text-slate-400">
+          Contact: <a href="mailto:support@elimika.online" class="text-slate-200 underline">support@elimika.online</a> · <a href="https://wa.me/255689511868" target="_blank" rel="noopener noreferrer" class="text-slate-200 underline">+255689511868</a> · Dar es Salaam, Tanzania
+        </div>
+      </div>
+
+      <div class="pt-3 border-t border-slate-800/80 text-[11px] text-slate-500 flex flex-col sm:flex-row items-center justify-between gap-2">
         <span>© 2026 Elimika Tanzania. All rights reserved.</span>
         <span>100% English Interface · TIE &amp; NECTA Curriculum Aligned</span>
       </div>
@@ -648,7 +880,7 @@
       SHEET_ID: '1-7C_G-VAC2ICxuT3XwADzAluRoDvQyd04yS4BtSvXxM',
       ITEMS_PER_PAGE: 12,
       SEARCH_DEBOUNCE_MS: 200,
-      ADMIN_WHATSAPP: '255748404500',
+      ADMIN_WHATSAPP: '255689511868',
       PLAY_STORE_URL: 'https://play.google.com/store/apps/details?id=online.elimika.twa',
       IPHONE_INSTALL_URL: 'https://www.elimika.online/?install=iphone'
     };
@@ -1982,7 +2214,62 @@
       }
     }
 
+    // ==================== GOOGLE ADSENSE LEGAL MODAL & COOKIE CONSENT ====================
+    function openLegalModal(tab) {
+      const modal = document.getElementById('legalModal');
+      if (!modal) return;
+      const activeTab = ['privacy', 'terms', 'disclaimer', 'about'].includes(tab) ? tab : 'privacy';
+      const tabs = {
+        privacy: { btn: 'legalTabPrivacy', content: 'legalContentPrivacy' },
+        terms: { btn: 'legalTabTerms', content: 'legalContentTerms' },
+        disclaimer: { btn: 'legalTabDisclaimer', content: 'legalContentDisclaimer' },
+        about: { btn: 'legalTabAbout', content: 'legalContentAbout' }
+      };
+      Object.keys(tabs).forEach((k) => {
+        const btnEl = document.getElementById(tabs[k].btn);
+        const contentEl = document.getElementById(tabs[k].content);
+        if (btnEl) {
+          btnEl.className = k === activeTab
+            ? 'px-3 py-1.5 rounded-xl text-xs font-bold bg-blue-600 text-white'
+            : 'px-3 py-1.5 rounded-xl text-xs font-bold bg-white text-slate-700 border border-slate-200';
+        }
+        if (contentEl) {
+          if (k === activeTab) contentEl.classList.remove('hidden');
+          else contentEl.classList.add('hidden');
+        }
+      });
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    }
+
+    function closeLegalModal() {
+      const modal = document.getElementById('legalModal');
+      if (!modal) return;
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+    }
+
+    function acceptCookies() {
+      try { localStorage.setItem('elimika_cookie_consent', 'accepted'); } catch (e) {}
+      const banner = document.getElementById('cookieConsentBanner');
+      if (banner) banner.classList.add('hidden');
+    }
+
+    function initCookieConsent() {
+      try {
+        if (localStorage.getItem('elimika_cookie_consent') !== 'accepted') {
+          const banner = document.getElementById('cookieConsentBanner');
+          if (banner) banner.classList.remove('hidden');
+        }
+      } catch (e) {}
+    }
+
     window.addEventListener('hashchange', () => {
+      const h = (window.location.hash || '').replace(/^#/, '').toLowerCase();
+      if (['privacy', 'terms', 'disclaimer', 'about'].includes(h)) {
+        openLegalModal(h);
+        return;
+      }
       if (applyDeepLinkFromHash()) renderApp();
     });
 
@@ -1992,6 +2279,14 @@
     applyDeepLinkFromHash();
     renderApp();
     fetchSheetData();
+    initCookieConsent();
+
+    (function checkInitialLegalHash() {
+      const h = (window.location.hash || '').replace(/^#/, '').toLowerCase();
+      if (['privacy', 'terms', 'disclaimer', 'about'].includes(h)) {
+        openLegalModal(h);
+      }
+    })();
 
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
